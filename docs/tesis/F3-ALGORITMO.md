@@ -1,5 +1,7 @@
 # F3: especificación, aprobación y composición
 
+Identificadores actualizados al 23/09/2026: tres objetivos y 21 resultados. Las evidencias fechadas conservan su numeración original; consulte [equivalencias](renumeracion-20260923/README.md).
+
 ## Alcance ejecutable
 
 La ruta `trp_catalog → trp_prepare → trp_run` está registrada en el agente. Genera dos procesos Nextflow para seleccionar una estructura PDB y calcular geometría con GeomeTRe. Las unidades son entradas explícitas. Los nodos de entrada son canales, no tareas de cómputo adicionales. Las herramientas se retiran al desactivar la especialización (`--bare`); `trp_run` requiere un cliente con preguntas habilitadas.

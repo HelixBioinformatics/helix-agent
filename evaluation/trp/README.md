@@ -1,5 +1,7 @@
 # Evaluación TRP
 
+Identificadores actualizados al 23/09/2026: tres objetivos y 21 resultados. Las evidencias fechadas conservan su numeración original; consulte [equivalencias](../../docs/tesis/renumeracion-20260923/README.md).
+
 La fase F2 deja un catálogo inicial, referencias técnicas y el protocolo de los 21 resultados. **La evaluación empírica sigue pendiente.**
 
 | Artefacto                                                      | Uso                                                                                  |
@@ -7,7 +9,7 @@ La fase F2 deja un catálogo inicial, referencias técnicas y el protocolo de lo
 | [PROTOCOL.md](PROTOCOL.md), [protocol.json](protocol.json)     | Corpus, particiones, metas, denominadores, incertidumbre y enmiendas                 |
 | [ANNOTATION.md](ANNOTATION.md)                                 | Encargo preparado; todavía no existe anotador confirmado                             |
 | [freeze.template.json](freeze.template.json)                   | Campos que deben completarse antes de medir; no es una congelación efectiva          |
-| [Catálogo](../../packages/bioinformatica/src/trp/catalog.json) | Dos operaciones admitidas, tres candidatas y un comparador web                       |
+| [Catálogo](../../packages/helix/src/trp/catalog.json) | Dos operaciones admitidas, tres candidatas y un comparador web                       |
 | [Auditoría](reference/audit.json)                              | Fuentes, versiones, licencia declarada, consultas y alcance de las anclas semánticas |
 | [Referencia GeomeTRe](reference/geometre/reference.json)       | Ejecución real en Docker, aislada de la red, del ejemplo 2xqh/A                      |
 
@@ -21,7 +23,7 @@ bun script/tesis/check_trp_catalog.ts
 
 La resolución comprueba SHA-256 y tamaño de **todos** los insumos, salidas y registro de cada entrada admitida. No ejecuta el modelo ni Docker. Rechaza candidatos, archivos ausentes, alterados y enlaces que salgan de la raíz de evidencia. La coincidencia de hashes presupone que se confía en la copia del catálogo: no autentica al autor ni demuestra corrección biológica.
 
-Desde `packages/bioinformatica`:
+Desde `packages/helix`:
 
 ```bash
 bun test test/trp

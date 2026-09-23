@@ -1,5 +1,7 @@
 > Actualización de cierre: este informe conserva la referencia histórica F4. La cuota, los límites del controlador y el estimador posterior se documentan en [R3.2-RECURSOS.md](R3.2-RECURSOS.md), con sus resultados completos y límites de interpretación.
 
+Identificadores actualizados al 23/09/2026: tres objetivos y 21 resultados. Las evidencias fechadas conservan su numeración original; consulte [equivalencias](renumeracion-20260923/README.md).
+
 # F4: admisión y evidencia de la ruta TRP
 
 Fecha: 15 de septiembre de 2026. Motor: `trp-nextflow/1.1.0`. Especificación científica: `trp-spec/1.0.0`. Catálogo: `trp-catalog/1.1.0`.
@@ -26,7 +28,7 @@ Los rechazos previos a preparar dejan `rejected-UUID.json`. Las propuestas prepa
 
 La fórmula de disco es una **estimación**, sin cuota agregada. Las cuotas/entitlements de cgroups, la exclusividad del anfitrión y la reserva efectiva del controlador no se observan ni garantizan. Pedir `requireHardStorageLimit=true` produce `storage-quota-unavailable`. La ruta restringe cada tarea con Docker, pero no atribuye esos límites al proceso completo. El socket local de Docker se comprueba antes de ejecutar; no se admiten endpoints remotos con inventario del anfitrión local. El espacio consumido por imágenes y distribuciones compartidas está fuera del directorio de trabajo y no se descarga automáticamente.
 
-**R3.2 sigue parcial:** faltan cuota estricta, reserva efectiva y contraste del margen. No se declara alcanzado el umbral mediano ≤25% ni cero sobrepasos garantizados a partir de una referencia. F4 tiene su alcance inicial implementado; estas carencias permanecen dentro de la tesis antes de F6. El protocolo de evaluación F2 no se ha modificado.
+**R2.2 sigue parcial:** faltan cuota estricta, reserva efectiva y contraste del margen. No se declara alcanzado el umbral mediano ≤25% ni cero sobrepasos garantizados a partir de una referencia. F4 tiene su alcance inicial implementado; estas carencias permanecen dentro de la tesis antes de F6. El protocolo de evaluación F2 no se ha modificado.
 
 ## Algoritmo y correspondencia
 

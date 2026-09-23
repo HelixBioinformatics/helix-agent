@@ -1,0 +1,173 @@
+{
+  "version": "2026-09-23",
+  "source": "/home/webiwabou/Projects/Tesis.docx",
+  "source_sha256": "0b48999797d35cd2c620686b7b594893a3e6496c960fa060691ad7daef34be54",
+  "source_section": "1.2.4, tablas de mapeo de objetivos y resultados",
+  "results": {
+    "R1.1": "R1.1",
+    "R1.2": "R1.2",
+    "R1.3": "R1.3",
+    "R2.1": "R1.4",
+    "R2.2": "R1.5",
+    "R2.3": "R1.6",
+    "R2.4": "R1.7",
+    "R2.5": "R1.8",
+    "R2.6": "R1.9",
+    "R3.1": "R2.1",
+    "R3.2": "R2.2",
+    "R3.3": "R2.3",
+    "R3.4": "R2.4",
+    "R4.1": "R3.1",
+    "R4.2": "R3.2",
+    "R4.3": "R3.3",
+    "R4.4": "R3.4",
+    "R5.1": "R3.5",
+    "R5.2": "R3.6",
+    "R5.3": "R3.7",
+    "R5.4": "R3.8"
+  },
+  "objectives": {
+    "OE1": "OE1",
+    "OE2": "OE1",
+    "OE3": "OE2",
+    "OE4": "OE3",
+    "OE5": "OE3"
+  },
+  "causes": {
+    "C1": "C1",
+    "C2": "C1",
+    "C3": "C2",
+    "C4": "C2",
+    "C5": "C3",
+    "C6": "C3"
+  },
+  "canonical_results": [
+    {
+      "id": "R1.1",
+      "titulo_documento": "Catálogo declarativo del dominio",
+      "medio": "Ficheros de descripción, casos de prueba y registro de invocaciones de referencia",
+      "indicador": "100% de las entradas cuentan con invocación de referencia ejecutada, caso de prueba, identificador de revisión y resumen de imagen. 100% declaran los tres atributos de dominio"
+    },
+    {
+      "id": "R1.2",
+      "titulo_documento": "Módulo de elicitación",
+      "medio": "Software y código fuente. Registro de las especificaciones generadas",
+      "indicador": "100% de las especificaciones emitidas registran, parámetro por parámetro, si el valor fue fijado por el usuario o asumido por defecto"
+    },
+    {
+      "id": "R1.3",
+      "titulo_documento": "Corpus de enunciados con patrón de referencia externo",
+      "medio": "Corpus versionado. Criterio de admisibilidad registrado antes de la medición. Juicios del anotador externo",
+      "indicador": "Corpus de al menos 50 enunciados. Admisibilidad de la especificación no inferior al 85%. Estabilidad ante reformulación: al menos el 85% de los pares parafraseados producen especificaciones equivalentes"
+    },
+    {
+      "id": "R1.4",
+      "titulo_documento": "Protocolo de evaluación",
+      "medio": "Protocolo TRP fechado y versionado; definiciones de los indicadores, corpus, particiones, guía de anotación e historial de enmiendas. ",
+      "indicador": "100% de los indicadores tienen medición, denominador y criterio declarados antes de la campaña. "
+    },
+    {
+      "id": "R1.5",
+      "titulo_documento": "Motor de composición",
+      "medio": "Software y código fuente. Flujos emitidos sobre el corpus",
+      "indicador": "Al menos el 95% de las especificaciones admisibles producen un flujo ejecutable sin edición manual"
+    },
+    {
+      "id": "R1.6",
+      "titulo_documento": "Recurso de correspondencia entre identificadores y numeración de residuos",
+      "medio": "Ficheros de origen con su sello de versión. Registro de la validación de la regla propia",
+      "indicador": "La correspondencia declara la versión de las fuentes de las que deriva. 100% de los ficheros sin sello de versión se rechazan. La regla para estructura predicha se valida contra un conjunto de discordancias conocidas"
+    },
+    {
+      "id": "R1.7",
+      "titulo_documento": "Validador estático y recorrido sin datos",
+      "medio": "Registro de validación de cada flujo emitido",
+      "indicador": "100% de los flujos se someten a validación antes de ejecutarse. Cero ejecuciones sin validación previa"
+    },
+    {
+      "id": "R1.8",
+      "titulo_documento": "Informe de validación",
+      "medio": "Informes emitidos, contrastados con el flujo ejecutado",
+      "indicador": "100% de los informes declaran las comprobaciones realizadas y las omitidas"
+    },
+    {
+      "id": "R1.9",
+      "titulo_documento": "Corpus de composiciones inválidas y tasa de aceptación indebida",
+      "medio": "Corpus versionado con la incompatibilidad declarada en cada caso. Registro de veredictos",
+      "indicador": "Al menos 30 composiciones inválidas, con un caso como mínimo por cada modo de incompatibilidad declarado. Tasa de aceptación indebida no superior al 5%"
+    },
+    {
+      "id": "R2.1",
+      "titulo_documento": "Declaración de los recursos disponibles del entorno",
+      "medio": "Inventario legible por máquina, versionado con la ejecución",
+      "indicador": "100% de las decisiones de admisión se resuelven contra el inventario declarado. Cero decisiones tomadas contra un presupuesto no declarado"
+    },
+    {
+      "id": "R2.2",
+      "titulo_documento": "Contador de demanda",
+      "medio": "Manifiesto de cada ejecución y cálculo independiente de la cota",
+      "indicador": "La cota se deriva del manifiesto y se reproduce en frío en el 100% de los casos. Desviación entre demanda contada y consumo observado dentro del margen registrado de antemano (R1.4)"
+    },
+    {
+      "id": "R2.3",
+      "titulo_documento": "Rechazo tipificado",
+      "medio": "Registro de los casos con cota superior a lo disponible",
+      "indicador": "100% de esos casos terminan en rechazo tipificado antes de ejecutar, y no en fallo durante la ejecución. 100% de los rechazos indican qué recurso falta y en qué cantidad"
+    },
+    {
+      "id": "R2.4",
+      "titulo_documento": "Medición del acierto del rechazo",
+      "medio": "Contraste entre la decisión de admisión y el resultado observado al ejecutar",
+      "indicador": "Acierto y tasa de falso rechazo reportados conjuntamente sobre el corpus. Tasa de falso rechazo no superior al umbral registrado de antemano (R1.4)"
+    },
+    {
+      "id": "R3.1",
+      "titulo_documento": "Manifiesto verificable en frío",
+      "medio": "Manifiestos emitidos y verificador independiente",
+      "indicador": "100% de las ejecuciones emiten manifiesto. El verificador valida el 100% de los manifiestos sin modelo, sin red y sin la plataforma"
+    },
+    {
+      "id": "R3.2",
+      "titulo_documento": "Registro de decisiones y rechazos",
+      "medio": "Registro exportable de cada ejecución, con la fuente de cada entrada",
+      "indicador": "100% de las decisiones con efecto sobre el resultado quedan registradas con su origen y su razón"
+    },
+    {
+      "id": "R3.3",
+      "titulo_documento": "Conteo de intervenciones humanas",
+      "medio": "Registro por ejecución. Conjunto reservado etiquetado por persona distinta de quien desarrolla",
+      "indicador": "Conteo reportado en el 100% de las ejecuciones, siempre junto a la corrección del resultado. Coeficiente de acuerdo entre observadores no inferior a 0.70 contra el conjunto reservado"
+    },
+    {
+      "id": "R3.4",
+      "titulo_documento": "Documentación de métodos con versiones fijadas",
+      "medio": "Documento generado automáticamente a partir del manifiesto",
+      "indicador": "100% de los campos del documento se derivan del manifiesto. Cero campos redactados por el modelo"
+    },
+    {
+      "id": "R3.5",
+      "titulo_documento": "Catálogo de modos de fallo",
+      "medio": "Catálogo versionado con la fecha de registro de cada umbral de R1.4",
+      "indicador": "100% de los modos catalogados incluyen referencia, criterio mecánico, umbral registrado antes de medir y veredictos posibles"
+    },
+    {
+      "id": "R3.6",
+      "titulo_documento": "Batería de controles",
+      "medio": "Veredictos emitidos sobre el corpus de evaluación",
+      "indicador": "100% de los veredictos negativos incluyen el valor medido y el umbral aplicado"
+    },
+    {
+      "id": "R3.7",
+      "titulo_documento": "Artefacto de controles legible por máquina",
+      "medio": "Artefacto emitido por ejecución y referenciado desde el manifiesto",
+      "indicador": "Una fila por instancia analizada, con fuente, versión del modelo, métrica de confianza con su escala y veredicto de cada control. 100% de las instancias presentes"
+    },
+    {
+      "id": "R3.8",
+      "titulo_documento": "Sensibilidad y especificidad",
+      "medio": "Medición sobre las secuencias de Pratt et al. (2025) y sobre anotación de referencia de RepeatsDB",
+      "indicador": "Ambas tasas reportadas conjuntamente. Sensibilidad no inferior al umbral registrado en R1.4 sobre los casos de fallo conocido"
+    }
+  ],
+  "historical_policy": "Archived evidence, hashes, execution output, old document generators and frozen drafts retain their original namespace. Resolve with this dated mapping; never infer an old ID without its version."
+}

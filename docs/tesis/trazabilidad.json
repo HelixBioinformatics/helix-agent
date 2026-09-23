@@ -1,7 +1,7 @@
 {
-  "fecha": "2026-09-21",
+  "fecha": "2026-09-23",
   "commit_base": "f37ba272bcf0ae1b2700bf998c3a3495e4b0ba1f",
-  "fuente": "Tesis.docx: secciones 1.2.3 y 1.2.4",
+  "fuente": "Tesis.docx, sección 1.2.4; renumeración 2026-09-23",
   "leyenda": {
     "parcial": "Hay componentes reutilizables; el indicador completo no está demostrado.",
     "sin_evidencia": "La auditoría no encontró el entregable o su medición. No implica que una búsqueda pruebe inexistencia absoluta.",
@@ -14,24 +14,24 @@
       "titulo": "Catálogo declarativo del dominio",
       "estado": "parcial",
       "codigo": [
-        "packages/bioinformatica/src/nfcore/registry.ts",
-        "packages/bioinformatica/src/bio/repeatsdb.ts",
-        "packages/bioinformatica/src/bio/sifts.ts",
-        "packages/bioinformatica/src/trp/catalog.ts",
-        "packages/bioinformatica/src/trp/catalog.json",
-        "packages/bioinformatica/src/tool/trp.ts",
-        "packages/bioinformatica/src/trp/workflow.ts",
-        "packages/bioinformatica/src/tool/trp-detect.ts",
+        "packages/helix/src/nfcore/registry.ts",
+        "packages/helix/src/bio/repeatsdb.ts",
+        "packages/helix/src/bio/sifts.ts",
+        "packages/helix/src/trp/catalog.ts",
+        "packages/helix/src/trp/catalog.json",
+        "packages/helix/src/tool/trp.ts",
+        "packages/helix/src/trp/workflow.ts",
+        "packages/helix/src/tool/trp-detect.ts",
         "script/tesis/strpsearch_guard.py"
       ],
       "pruebas": [
-        "packages/bioinformatica/test/nfcore/registry.test.ts",
-        "packages/bioinformatica/test/bio/repeatsdb.test.ts",
-        "packages/bioinformatica/test/bio/sifts.test.ts",
-        "packages/bioinformatica/test/trp/catalog.test.ts",
+        "packages/helix/test/nfcore/registry.test.ts",
+        "packages/helix/test/bio/repeatsdb.test.ts",
+        "packages/helix/test/bio/sifts.test.ts",
+        "packages/helix/test/trp/catalog.test.ts",
         "script/tesis/test_strpsearch_guard.py",
-        "packages/bioinformatica/test/tool/trp-detect.test.ts",
-        "packages/bioinformatica/test/tool/trp-detect-question.test.ts"
+        "packages/helix/test/tool/trp-detect.test.ts",
+        "packages/helix/test/tool/trp-detect-question.test.ts"
       ],
       "pendiente": "Catálogo 1.2.0: tres operaciones admitidas de seis auditadas. STRPsearch ejecutable mediante trp_detect con aprobación, contrato y propagación de fallos; dos entradas reales producen 7 unidades. ReUPred sin entorno/referencia validada; RepeatsDB con licencia CC BY4.0 declarada en sitio actual, pero alcance específico de API y marco de loci pendientes. No se afirma exactitud reservada.",
       "fase_cierre": "F4-F5, antes de F6",
@@ -41,7 +41,8 @@
         "universo_auditado": 6,
         "referencias_verificadas": 3,
         "evidencia": "evaluation/trp/reference/detector-20260921/execution.json"
-      }
+      },
+      "id_anterior": "R1.1"
     },
     {
       "id": "R1.2",
@@ -49,29 +50,30 @@
       "titulo": "Módulo de elicitación",
       "estado": "implementado",
       "codigo": [
-        "packages/bioinformatica/src/nfcore/objective.ts",
-        "packages/bioinformatica/src/tool/question.ts",
-        "packages/bioinformatica/src/trp/specification.ts",
-        "packages/bioinformatica/src/trp/graph.ts",
-        "packages/bioinformatica/src/trp/nextflow.ts",
-        "packages/bioinformatica/src/trp/workflow.ts",
-        "packages/bioinformatica/src/tool/trp.ts"
+        "packages/helix/src/nfcore/objective.ts",
+        "packages/helix/src/tool/question.ts",
+        "packages/helix/src/trp/specification.ts",
+        "packages/helix/src/trp/graph.ts",
+        "packages/helix/src/trp/nextflow.ts",
+        "packages/helix/src/trp/workflow.ts",
+        "packages/helix/src/tool/trp.ts"
       ],
       "pruebas": [
-        "packages/bioinformatica/test/nfcore/objective.test.ts",
-        "packages/bioinformatica/test/tool/question.test.ts",
-        "packages/bioinformatica/test/trp/graph.test.ts",
-        "packages/bioinformatica/test/trp/workflow.test.ts",
-        "packages/bioinformatica/test/trp/preflight.test.ts",
-        "packages/bioinformatica/test/trp/reference.live.test.ts",
-        "packages/bioinformatica/test/tool/registry.test.ts"
+        "packages/helix/test/nfcore/objective.test.ts",
+        "packages/helix/test/tool/question.test.ts",
+        "packages/helix/test/trp/graph.test.ts",
+        "packages/helix/test/trp/workflow.test.ts",
+        "packages/helix/test/trp/preflight.test.ts",
+        "packages/helix/test/trp/reference.live.test.ts",
+        "packages/helix/test/tool/registry.test.ts"
       ],
       "pendiente": "Implementado para la ruta PDB/GeomeTRe: fuentes declaradas, aprobación por Question.Service y digest del paquete. La autenticación de fuentes y el desempeño lingüístico externo no se deducen de esta implementación; R1.3 se evalúa en F6.",
       "fase_cierre": "F3",
       "medicion": {
         "tipo": "desarrollo_no_reserva",
         "evidencia": "docs/tesis/evidencia/fase3.json"
-      }
+      },
+      "id_anterior": "R1.2"
     },
     {
       "id": "R1.3",
@@ -87,11 +89,12 @@
       ],
       "pendiente": "Guía y plantilla externas preparadas en F2. Construir el corpus reservado de 50 intenciones factibles y dos paráfrasis por intención; conseguir anotador, congelar etiquetas y medir las tres repeticiones. No hay juicios externos obtenidos.",
       "fase_cierre": "F6",
-      "medicion": null
+      "medicion": null,
+      "id_anterior": "R1.3"
     },
     {
-      "id": "R2.1",
-      "objetivo": "OE2",
+      "id": "R1.4",
+      "objetivo": "OE1",
       "titulo": "Protocolo de evaluación",
       "estado": "implementado",
       "codigo": [
@@ -113,68 +116,70 @@
         "indicadores_requeridos": 21,
         "version": "1.0.0",
         "campana_iniciada": false
-      }
+      },
+      "id_anterior": "R2.1"
     },
     {
-      "id": "R2.2",
-      "objetivo": "OE2",
+      "id": "R1.5",
+      "objetivo": "OE1",
       "titulo": "Motor de composición",
       "estado": "implementado",
       "codigo": [
-        "packages/bioinformatica/src/nfcore/command.ts",
-        "packages/bioinformatica/src/nfcore/authoring.ts",
-        "packages/bioinformatica/src/trp/specification.ts",
-        "packages/bioinformatica/src/trp/graph.ts",
-        "packages/bioinformatica/src/trp/nextflow.ts",
-        "packages/bioinformatica/src/trp/workflow.ts",
-        "packages/bioinformatica/src/tool/trp.ts"
+        "packages/helix/src/nfcore/command.ts",
+        "packages/helix/src/nfcore/authoring.ts",
+        "packages/helix/src/trp/specification.ts",
+        "packages/helix/src/trp/graph.ts",
+        "packages/helix/src/trp/nextflow.ts",
+        "packages/helix/src/trp/workflow.ts",
+        "packages/helix/src/tool/trp.ts"
       ],
       "pruebas": [
-        "packages/bioinformatica/test/nfcore/command.test.ts",
-        "packages/bioinformatica/test/nfcore/authoring.test.ts",
-        "packages/bioinformatica/test/trp/graph.test.ts",
-        "packages/bioinformatica/test/trp/workflow.test.ts",
-        "packages/bioinformatica/test/trp/preflight.test.ts",
-        "packages/bioinformatica/test/trp/reference.live.test.ts",
-        "packages/bioinformatica/test/tool/registry.test.ts"
+        "packages/helix/test/nfcore/command.test.ts",
+        "packages/helix/test/nfcore/authoring.test.ts",
+        "packages/helix/test/trp/graph.test.ts",
+        "packages/helix/test/trp/workflow.test.ts",
+        "packages/helix/test/trp/preflight.test.ts",
+        "packages/helix/test/trp/reference.live.test.ts",
+        "packages/helix/test/tool/registry.test.ts"
       ],
       "pendiente": "Emisor DSL2 integrado y referencia real con CSV idéntico al anterior, dos tareas simuladas y dos reales. Falta ampliar más allá de la ruta admitida y medir la reserva de 50 especificaciones en F6.",
       "fase_cierre": "F3",
       "medicion": {
         "tipo": "desarrollo_no_reserva",
         "evidencia": "docs/tesis/evidencia/fase3.json"
-      }
+      },
+      "id_anterior": "R2.2"
     },
     {
-      "id": "R2.3",
-      "objetivo": "OE2",
+      "id": "R1.6",
+      "objetivo": "OE1",
       "titulo": "Correspondencia de identificadores y numeración",
       "estado": "parcial",
       "codigo": [
-        "packages/bioinformatica/src/bio/sifts.ts",
-        "packages/bioinformatica/src/bio/glue.ts",
-        "packages/bioinformatica/src/trp/specification.ts",
-        "packages/bioinformatica/src/trp/graph.ts",
-        "packages/bioinformatica/src/trp/nextflow.ts",
-        "packages/bioinformatica/src/trp/workflow.ts",
-        "packages/bioinformatica/src/tool/trp.ts",
-        "packages/bioinformatica/src/trp/structural.ts",
-        "packages/bioinformatica/src/trp/inspect_structure.py.txt",
-        "packages/bioinformatica/src/trp/coordinates.ts",
-        "packages/bioinformatica/src/trp/sifts_residues.py.txt",
+        "packages/helix/src/bio/sifts.ts",
+        "packages/helix/src/bio/glue.ts",
+        "packages/helix/src/trp/specification.ts",
+        "packages/helix/src/trp/graph.ts",
+        "packages/helix/src/trp/nextflow.ts",
+        "packages/helix/src/trp/workflow.ts",
+        "packages/helix/src/tool/trp.ts",
+        "packages/helix/src/trp/structural.ts",
+        "packages/helix/src/trp/inspect_structure.py.txt",
+        "packages/helix/src/trp/coordinates.ts",
+        "packages/helix/src/trp/sifts_residues.py.txt",
         "script/tesis/predicted_geometry.py"
       ],
       "pruebas": [
-        "packages/bioinformatica/test/bio/sifts.test.ts",
-        "packages/bioinformatica/test/bio/glue.test.ts",
-        "packages/bioinformatica/test/trp/graph.test.ts",
-        "packages/bioinformatica/test/trp/workflow.test.ts",
-        "packages/bioinformatica/test/trp/preflight.test.ts",
-        "packages/bioinformatica/test/trp/reference.live.test.ts",
-        "packages/bioinformatica/test/tool/registry.test.ts",
+        "packages/helix/test/bio/sifts.test.ts",
+        "packages/helix/test/bio/glue.test.ts",
+        "packages/helix/test/trp/graph.test.ts",
+        "packages/helix/test/trp/workflow.test.ts",
+        "packages/helix/test/trp/preflight.test.ts",
+        "packages/helix/test/trp/reference.live.test.ts",
+        "packages/helix/test/tool/registry.test.ts",
         "script/tesis/test_structural_controls.py",
-        "packages/bioinformatica/test/trp/structural.test.ts",
-        "packages/bioinformatica/test/trp/coordinates.test.ts",
+        "packages/helix/test/trp/structural.test.ts",
+        "packages/helix/test/trp/coordinates.test.ts",
         "script/tesis/test_predicted_geometry.py"
       ],
       "pendiente": "Conversión label/autor y UniProt por XML SIFTS integradas en trp_prepare/run; 206 residuos y 12 unidades con CSV idéntico. Modelos predichos ejecutables por CLI separada con identidad/pLDDT preservados; integración de esa ruta al agente y evaluación independiente pendientes. Alcance positivo, una cadena/modelo, sin inserciones ni alternancias ambiguas.",
@@ -184,87 +189,90 @@
         "residuos_mapeados": 206,
         "unidades": 12,
         "evidencia": "evaluation/trp/reference/coordinate-integrated-20260921/summary.json"
-      }
+      },
+      "id_anterior": "R2.3"
     },
     {
-      "id": "R2.4",
-      "objetivo": "OE2",
+      "id": "R1.7",
+      "objetivo": "OE1",
       "titulo": "Validador estático y recorrido sin datos",
       "estado": "implementado",
       "codigo": [
-        "packages/bioinformatica/src/nfcore/authoring.ts",
-        "packages/bioinformatica/src/trp/specification.ts",
-        "packages/bioinformatica/src/trp/graph.ts",
-        "packages/bioinformatica/src/trp/nextflow.ts",
-        "packages/bioinformatica/src/trp/workflow.ts",
-        "packages/bioinformatica/src/tool/trp.ts"
+        "packages/helix/src/nfcore/authoring.ts",
+        "packages/helix/src/trp/specification.ts",
+        "packages/helix/src/trp/graph.ts",
+        "packages/helix/src/trp/nextflow.ts",
+        "packages/helix/src/trp/workflow.ts",
+        "packages/helix/src/tool/trp.ts"
       ],
       "pruebas": [
-        "packages/bioinformatica/test/nfcore/authoring.test.ts",
-        "packages/bioinformatica/test/trp/graph.test.ts",
-        "packages/bioinformatica/test/trp/workflow.test.ts",
-        "packages/bioinformatica/test/trp/preflight.test.ts",
-        "packages/bioinformatica/test/trp/reference.live.test.ts",
-        "packages/bioinformatica/test/tool/registry.test.ts",
-        "packages/bioinformatica/test/trp/coordinates.test.ts"
+        "packages/helix/test/nfcore/authoring.test.ts",
+        "packages/helix/test/trp/graph.test.ts",
+        "packages/helix/test/trp/workflow.test.ts",
+        "packages/helix/test/trp/preflight.test.ts",
+        "packages/helix/test/trp/reference.live.test.ts",
+        "packages/helix/test/tool/registry.test.ts",
+        "packages/helix/test/trp/coordinates.test.ts"
       ],
       "pendiente": "Preparación verifica SIFTS y mapeos antes de aprobación y revalida cambios. GeomeTRe rechaza menos de 3 unidades antes de ejecutar. La evaluación reservada y la ruta predicha integrada al agente permanecen pendientes.",
       "fase_cierre": "F3",
       "medicion": {
         "tipo": "desarrollo_no_reserva",
         "evidencia": "docs/tesis/evidencia/fase3.json"
-      }
+      },
+      "id_anterior": "R2.4"
     },
     {
-      "id": "R2.5",
-      "objetivo": "OE2",
+      "id": "R1.8",
+      "objetivo": "OE1",
       "titulo": "Informe de validación",
       "estado": "implementado",
       "codigo": [
-        "packages/bioinformatica/src/nfcore/validation.ts",
-        "packages/bioinformatica/src/nfcore/authoring.ts",
-        "packages/bioinformatica/src/trp/specification.ts",
-        "packages/bioinformatica/src/trp/graph.ts",
-        "packages/bioinformatica/src/trp/nextflow.ts",
-        "packages/bioinformatica/src/trp/workflow.ts",
-        "packages/bioinformatica/src/tool/trp.ts"
+        "packages/helix/src/nfcore/validation.ts",
+        "packages/helix/src/nfcore/authoring.ts",
+        "packages/helix/src/trp/specification.ts",
+        "packages/helix/src/trp/graph.ts",
+        "packages/helix/src/trp/nextflow.ts",
+        "packages/helix/src/trp/workflow.ts",
+        "packages/helix/src/tool/trp.ts"
       ],
       "pruebas": [
-        "packages/bioinformatica/test/nfcore/validation.test.ts",
-        "packages/bioinformatica/test/nfcore/authoring.test.ts",
-        "packages/bioinformatica/test/trp/graph.test.ts",
-        "packages/bioinformatica/test/trp/workflow.test.ts",
-        "packages/bioinformatica/test/trp/preflight.test.ts",
-        "packages/bioinformatica/test/trp/reference.live.test.ts",
-        "packages/bioinformatica/test/tool/registry.test.ts"
+        "packages/helix/test/nfcore/validation.test.ts",
+        "packages/helix/test/nfcore/authoring.test.ts",
+        "packages/helix/test/trp/graph.test.ts",
+        "packages/helix/test/trp/workflow.test.ts",
+        "packages/helix/test/trp/preflight.test.ts",
+        "packages/helix/test/trp/reference.live.test.ts",
+        "packages/helix/test/tool/registry.test.ts"
       ],
       "pendiente": "Informes y evidencia portable completos para rutas ejecutadas, incluido mapeo/SIFTS con 139 archivos verificados. Falta campaña reservada; controles no evaluables se conservan.",
       "fase_cierre": "F3",
       "medicion": {
         "tipo": "desarrollo_no_reserva",
         "evidencia": "docs/tesis/evidencia/fase3.json"
-      }
+      },
+      "id_anterior": "R2.5"
     },
     {
-      "id": "R2.6",
-      "objetivo": "OE2",
+      "id": "R1.9",
+      "objetivo": "OE1",
       "titulo": "Corpus de composiciones inválidas",
       "estado": "parcial",
       "codigo": [
-        "packages/bioinformatica/src/trp/specification.ts",
-        "packages/bioinformatica/src/trp/graph.ts",
-        "packages/bioinformatica/src/trp/nextflow.ts",
-        "packages/bioinformatica/src/trp/workflow.ts",
-        "packages/bioinformatica/src/tool/trp.ts",
+        "packages/helix/src/trp/specification.ts",
+        "packages/helix/src/trp/graph.ts",
+        "packages/helix/src/trp/nextflow.ts",
+        "packages/helix/src/trp/workflow.ts",
+        "packages/helix/src/tool/trp.ts",
         "script/tesis/check_f6_readiness.py",
         "script/tesis/prepare_f6_draft.py"
       ],
       "pruebas": [
-        "packages/bioinformatica/test/trp/graph.test.ts",
-        "packages/bioinformatica/test/trp/workflow.test.ts",
-        "packages/bioinformatica/test/trp/preflight.test.ts",
-        "packages/bioinformatica/test/trp/reference.live.test.ts",
-        "packages/bioinformatica/test/tool/registry.test.ts",
+        "packages/helix/test/trp/graph.test.ts",
+        "packages/helix/test/trp/workflow.test.ts",
+        "packages/helix/test/trp/preflight.test.ts",
+        "packages/helix/test/trp/reference.live.test.ts",
+        "packages/helix/test/tool/registry.test.ts",
         "script/tesis/test_f6_readiness.py"
       ],
       "pendiente": "Corpus de desarrollo implementado: 33 casos inválidos, 0 aceptados y 33 motivos esperados detectados. La reserva T-GRAPH no está evaluada y permanece para F6.",
@@ -275,21 +283,22 @@
         "invalidas_desarrollo": 33,
         "aceptadas_desarrollo": 0,
         "reserva_evaluada": false
-      }
+      },
+      "id_anterior": "R2.6"
     },
     {
-      "id": "R3.1",
-      "objetivo": "OE3",
+      "id": "R2.1",
+      "objetivo": "OE2",
       "titulo": "Inventario de recursos",
       "estado": "implementado",
       "codigo": [
-        "packages/bioinformatica/src/environment/detect.ts",
-        "packages/bioinformatica/src/trp/resources.ts",
-        "packages/bioinformatica/src/trp/workflow.ts"
+        "packages/helix/src/environment/detect.ts",
+        "packages/helix/src/trp/resources.ts",
+        "packages/helix/src/trp/workflow.ts"
       ],
       "pruebas": [
-        "packages/bioinformatica/test/trp/resources.test.ts",
-        "packages/bioinformatica/test/trp/admission.test.ts"
+        "packages/helix/test/trp/resources.test.ts",
+        "packages/helix/test/trp/admission.test.ts"
       ],
       "pendiente": "Inventario, presupuesto y cuota XFS/cgroup disponibles para ruta trp_run; trp_detect declara límites Docker y almacenamiento sin cuota dura. Campaña reservada pendiente; no se acredita clúster.",
       "fase_cierre": "F6",
@@ -297,21 +306,22 @@
         "tipo": "ingenieria_no_evaluacion_reservada",
         "evidencia": "docs/tesis/evidencia/fase4.json",
         "reserva_evaluada": false
-      }
+      },
+      "id_anterior": "R3.1"
     },
     {
-      "id": "R3.2",
-      "objetivo": "OE3",
+      "id": "R2.2",
+      "objetivo": "OE2",
       "titulo": "Contador de demanda",
       "estado": "implementado",
       "codigo": [
-        "packages/bioinformatica/src/trp/resources.ts",
-        "packages/bioinformatica/src/trp/enforcement.ts",
+        "packages/helix/src/trp/resources.ts",
+        "packages/helix/src/trp/enforcement.ts",
         "script/tesis/trp_sandbox.py"
       ],
       "pruebas": [
-        "packages/bioinformatica/test/trp/resources.test.ts",
-        "packages/bioinformatica/test/trp/enforcement.test.ts",
+        "packages/helix/test/trp/resources.test.ts",
+        "packages/helix/test/trp/enforcement.test.ts",
         "script/tesis/audit_resource_runs.py"
       ],
       "pendiente": "Ingeniería cerrada para la ruta local admitida: cuota XFS, controlador/tareas cgroup v2 y siete contrastes finales. Permanece evaluación reservada T-RESOURCE de F6; no generalizar siete variantes de 2xqh como proteínas independientes.",
@@ -326,25 +336,26 @@
         "evidencia": "docs/tesis/evidencia/r32.json"
       },
       "evidencia": [
-        "packages/bioinformatica/src/trp/resources.ts",
-        "packages/bioinformatica/src/trp/enforcement.ts",
+        "packages/helix/src/trp/resources.ts",
+        "packages/helix/src/trp/enforcement.ts",
         "script/tesis/trp_sandbox.py",
         "docs/tesis/evidencia/r32.json",
         "docs/tesis/R3.2-RECURSOS.md"
-      ]
+      ],
+      "id_anterior": "R3.2"
     },
     {
-      "id": "R3.3",
-      "objetivo": "OE3",
+      "id": "R2.3",
+      "objetivo": "OE2",
       "titulo": "Rechazo tipificado de admisión",
       "estado": "implementado",
       "codigo": [
-        "packages/bioinformatica/src/trp/resources.ts",
-        "packages/bioinformatica/src/trp/workflow.ts"
+        "packages/helix/src/trp/resources.ts",
+        "packages/helix/src/trp/workflow.ts"
       ],
       "pruebas": [
-        "packages/bioinformatica/test/trp/resources.test.ts",
-        "packages/bioinformatica/test/trp/admission.test.ts"
+        "packages/helix/test/trp/resources.test.ts",
+        "packages/helix/test/trp/admission.test.ts"
       ],
       "pendiente": "Negativas previas con recurso, demanda, disponibilidad y código implementadas. Inventario ilegible, presupuesto ausente o insuficiente, pérdida de capacidad y cuota no disponible cubiertos. Contraste empírico independiente de viabilidad en F6.",
       "fase_cierre": "F6",
@@ -352,11 +363,12 @@
         "tipo": "ingenieria_no_evaluacion_reservada",
         "evidencia": "docs/tesis/evidencia/fase4.json",
         "reserva_evaluada": false
-      }
+      },
+      "id_anterior": "R3.3"
     },
     {
-      "id": "R3.4",
-      "objetivo": "OE3",
+      "id": "R2.4",
+      "objetivo": "OE2",
       "titulo": "Acierto y falso rechazo",
       "estado": "sin_evidencia",
       "codigo": [
@@ -368,30 +380,31 @@
       ],
       "pendiente": "F2 fija falso rechazo ≤5% y reporte conjunto de acierto con contraste observado. Falta construir escenarios y ejecutar evaluación; un rechazo sin contraste sigue no evaluado.",
       "fase_cierre": "F6",
-      "medicion": null
+      "medicion": null,
+      "id_anterior": "R3.4"
     },
     {
-      "id": "R4.1",
-      "objetivo": "OE4",
+      "id": "R3.1",
+      "objetivo": "OE3",
       "titulo": "Manifiesto verificable en frío",
       "estado": "implementado",
       "codigo": [
-        "packages/bioinformatica/src/bio/snapshot.ts",
-        "packages/bioinformatica/src/nfcore/manifest.ts",
-        "packages/bioinformatica/src/nfcore/verify.ts",
-        "packages/bioinformatica/src/nfcore/dossier.ts",
-        "packages/bioinformatica/src/trp/evidence.ts",
-        "packages/bioinformatica/src/trp/verify_bundle.py.txt",
-        "packages/bioinformatica/src/trp/nextflow.ts"
+        "packages/helix/src/bio/snapshot.ts",
+        "packages/helix/src/nfcore/manifest.ts",
+        "packages/helix/src/nfcore/verify.ts",
+        "packages/helix/src/nfcore/dossier.ts",
+        "packages/helix/src/trp/evidence.ts",
+        "packages/helix/src/trp/verify_bundle.py.txt",
+        "packages/helix/src/trp/nextflow.ts"
       ],
       "pruebas": [
-        "packages/bioinformatica/test/bio/snapshot.test.ts",
-        "packages/bioinformatica/test/nfcore/manifest.test.ts",
-        "packages/bioinformatica/test/nfcore/verify.test.ts",
-        "packages/bioinformatica/test/nfcore/dossier.test.ts",
-        "packages/bioinformatica/test/bio/independent-verify.test.ts",
-        "packages/bioinformatica/test/trp/preflight.test.ts",
-        "packages/bioinformatica/test/trp/reference.live.test.ts",
+        "packages/helix/test/bio/snapshot.test.ts",
+        "packages/helix/test/nfcore/manifest.test.ts",
+        "packages/helix/test/nfcore/verify.test.ts",
+        "packages/helix/test/nfcore/dossier.test.ts",
+        "packages/helix/test/bio/independent-verify.test.ts",
+        "packages/helix/test/trp/preflight.test.ts",
+        "packages/helix/test/trp/reference.live.test.ts",
         "script/tesis/audit_trp_bundle.py"
       ],
       "pendiente": "Referencia integrada SIFTS: 139 archivos verificados con ancla externa conservada. Identifica imágenes sin empaquetar capas; no acredita autenticidad o reanudación universal. Campaña reservada pendiente.",
@@ -401,25 +414,26 @@
         "archivos_verificados": 139,
         "evidencia": "evaluation/trp/reference/coordinate-integrated-20260921/verification.json",
         "reserva_evaluada": false
-      }
+      },
+      "id_anterior": "R4.1"
     },
     {
-      "id": "R4.2",
-      "objetivo": "OE4",
+      "id": "R3.2",
+      "objetivo": "OE3",
       "titulo": "Registro de decisiones y rechazos",
       "estado": "implementado",
       "codigo": [
-        "packages/bioinformatica/src/nfcore/protocol.ts",
-        "packages/bioinformatica/src/nfcore/record.ts",
-        "packages/bioinformatica/src/trp/workflow.ts",
-        "packages/bioinformatica/src/trp/evidence.ts"
+        "packages/helix/src/nfcore/protocol.ts",
+        "packages/helix/src/nfcore/record.ts",
+        "packages/helix/src/trp/workflow.ts",
+        "packages/helix/src/trp/evidence.ts"
       ],
       "pruebas": [
-        "packages/bioinformatica/test/nfcore/protocol.test.ts",
-        "packages/bioinformatica/test/nfcore/record.test.ts",
-        "packages/bioinformatica/test/trp/admission.test.ts",
-        "packages/bioinformatica/test/trp/preflight.test.ts",
-        "packages/bioinformatica/test/trp/workflow.test.ts"
+        "packages/helix/test/nfcore/protocol.test.ts",
+        "packages/helix/test/nfcore/record.test.ts",
+        "packages/helix/test/trp/admission.test.ts",
+        "packages/helix/test/trp/preflight.test.ts",
+        "packages/helix/test/trp/workflow.test.ts"
       ],
       "pendiente": "Permisos, recursos, protocolo, aprobación y ejecución integrados con secuencia, hash anterior y causas. Se conserva estado y libro del protocolo. Falta contraste independiente de cobertura de eventos por sesión en F6; no se atribuye un permiso automático a una persona.",
       "fase_cierre": "F6",
@@ -427,23 +441,24 @@
         "tipo": "ingenieria_no_evaluacion_reservada",
         "evidencia": "docs/tesis/evidencia/fase4.json",
         "reserva_evaluada": false
-      }
+      },
+      "id_anterior": "R4.2"
     },
     {
-      "id": "R4.3",
-      "objetivo": "OE4",
+      "id": "R3.3",
+      "objetivo": "OE3",
       "titulo": "Conteo de intervenciones",
       "estado": "parcial",
       "codigo": [
-        "packages/bioinformatica/src/nfcore/handcount.ts",
-        "packages/bioinformatica/src/trp/interventions.ts",
-        "packages/bioinformatica/src/trp/workflow.ts",
+        "packages/helix/src/nfcore/handcount.ts",
+        "packages/helix/src/trp/interventions.ts",
+        "packages/helix/src/trp/workflow.ts",
         "script/tesis/check_f6_readiness.py",
         "script/tesis/prepare_f6_draft.py"
       ],
       "pruebas": [
-        "packages/bioinformatica/test/nfcore/handcount.test.ts",
-        "packages/bioinformatica/test/trp/interventions.test.ts",
+        "packages/helix/test/nfcore/handcount.test.ts",
+        "packages/helix/test/trp/interventions.test.ts",
         "script/tesis/test_f6_readiness.py"
       ],
       "pendiente": "Clasificador determinista español/inglés y texto/señales versionados sobre instantánea de mensajes; respuestas de UI separadas. Anotador externo, cobertura de sesión, etiquetas no adjudicadas, kappa y corrección emparejada pendientes.",
@@ -452,24 +467,25 @@
         "tipo": "ingenieria_no_evaluacion_reservada",
         "evidencia": "docs/tesis/evidencia/fase4.json",
         "reserva_evaluada": false
-      }
+      },
+      "id_anterior": "R4.3"
     },
     {
-      "id": "R4.4",
-      "objetivo": "OE4",
+      "id": "R3.4",
+      "objetivo": "OE3",
       "titulo": "Métodos derivados del manifiesto",
       "estado": "implementado",
       "codigo": [
-        "packages/bioinformatica/src/nfcore/manifest.ts",
-        "packages/bioinformatica/src/nfcore/handcount.ts",
-        "packages/bioinformatica/src/trp/evidence.ts",
-        "packages/bioinformatica/src/trp/verify_bundle.py.txt"
+        "packages/helix/src/nfcore/manifest.ts",
+        "packages/helix/src/nfcore/handcount.ts",
+        "packages/helix/src/trp/evidence.ts",
+        "packages/helix/src/trp/verify_bundle.py.txt"
       ],
       "pruebas": [
-        "packages/bioinformatica/test/nfcore/manifest.test.ts",
-        "packages/bioinformatica/test/nfcore/handcount.test.ts",
-        "packages/bioinformatica/test/trp/preflight.test.ts",
-        "packages/bioinformatica/test/trp/reference.live.test.ts"
+        "packages/helix/test/nfcore/manifest.test.ts",
+        "packages/helix/test/nfcore/handcount.test.ts",
+        "packages/helix/test/trp/preflight.test.ts",
+        "packages/helix/test/trp/reference.live.test.ts"
       ],
       "pendiente": "Métodos por plantilla con campos obligatorios enlazados a archivos y claves del paquete; incluye revisión, imagen, parámetros, marco, conteos y versión observada o ausencia explícita. Evaluación sobre la campaña completa pendiente.",
       "fase_cierre": "F6",
@@ -477,23 +493,24 @@
         "tipo": "ingenieria_no_evaluacion_reservada",
         "evidencia": "docs/tesis/evidencia/fase4.json",
         "reserva_evaluada": false
-      }
+      },
+      "id_anterior": "R4.4"
     },
     {
-      "id": "R5.1",
-      "objetivo": "OE5",
+      "id": "R3.5",
+      "objetivo": "OE3",
       "titulo": "Catálogo de fallos silenciosos",
       "estado": "implementado",
       "codigo": [
-        "packages/bioinformatica/src/trp/structural.ts",
-        "packages/bioinformatica/src/trp/inspect_structure.py.txt",
-        "packages/bioinformatica/src/trp/structural_catalog.json",
-        "packages/bioinformatica/src/tool/trp.ts"
+        "packages/helix/src/trp/structural.ts",
+        "packages/helix/src/trp/inspect_structure.py.txt",
+        "packages/helix/src/trp/structural_catalog.json",
+        "packages/helix/src/tool/trp.ts"
       ],
       "pruebas": [
         "script/tesis/test_structural_controls.py",
-        "packages/bioinformatica/test/trp/structural.test.ts",
-        "packages/bioinformatica/test/tool/registry.test.ts"
+        "packages/helix/test/trp/structural.test.ts",
+        "packages/helix/test/tool/registry.test.ts"
       ],
       "pendiente": "Inventario inicial de nueve controles documentado; no implica detección de todos los fallos físicos ni evaluación de sensibilidad.",
       "fase_cierre": "F5",
@@ -502,26 +519,27 @@
         "documentados": 9,
         "inventario": 9,
         "evidencia": "docs/tesis/evidencia/fase5.json"
-      }
+      },
+      "id_anterior": "R5.1"
     },
     {
-      "id": "R5.2",
-      "objetivo": "OE5",
+      "id": "R3.6",
+      "objetivo": "OE3",
       "titulo": "Batería de controles",
       "estado": "parcial",
       "codigo": [
-        "packages/bioinformatica/src/nfcore/census.ts",
-        "packages/bioinformatica/src/trp/structural.ts",
-        "packages/bioinformatica/src/trp/inspect_structure.py.txt",
-        "packages/bioinformatica/src/trp/structural_catalog.json",
-        "packages/bioinformatica/src/tool/trp.ts",
+        "packages/helix/src/nfcore/census.ts",
+        "packages/helix/src/trp/structural.ts",
+        "packages/helix/src/trp/inspect_structure.py.txt",
+        "packages/helix/src/trp/structural_catalog.json",
+        "packages/helix/src/tool/trp.ts",
         "script/tesis/predicted_geometry.py"
       ],
       "pruebas": [
-        "packages/bioinformatica/test/nfcore/census.test.ts",
+        "packages/helix/test/nfcore/census.test.ts",
         "script/tesis/test_structural_controls.py",
-        "packages/bioinformatica/test/trp/structural.test.ts",
-        "packages/bioinformatica/test/tool/registry.test.ts",
+        "packages/helix/test/trp/structural.test.ts",
+        "packages/helix/test/tool/registry.test.ts",
         "script/tesis/test_predicted_geometry.py"
       ],
       "pendiente": "Ruta CLI AFDB verificada con API/PAE/pLDDT y geometría de 3 segmentos artificiales. Primer fallo de 2 unidades conservado; rechazo mínimo 3 corregido. Falta integración predicha al agente, controles completos de constructos y referencias biológicas independientes; no evaluables de ensamblaje/plausibilidad intactos.",
@@ -531,28 +549,29 @@
         "ejecucion_predicha": true,
         "segmentos_artificiales": 3,
         "evidencia": "evaluation/trp/reference/predicted-geometry-20260921-corrected/execution.json"
-      }
+      },
+      "id_anterior": "R5.2"
     },
     {
-      "id": "R5.3",
-      "objetivo": "OE5",
+      "id": "R3.7",
+      "objetivo": "OE3",
       "titulo": "Artefacto de controles por instancia",
       "estado": "implementado",
       "codigo": [
-        "packages/bioinformatica/src/trp/structural.ts",
-        "packages/bioinformatica/src/trp/inspect_structure.py.txt",
-        "packages/bioinformatica/src/trp/structural_catalog.json",
-        "packages/bioinformatica/src/tool/trp.ts",
-        "packages/bioinformatica/src/trp/nextflow.ts",
-        "packages/bioinformatica/src/trp/evidence.ts",
-        "packages/bioinformatica/src/trp/verify_inspection.py.txt",
+        "packages/helix/src/trp/structural.ts",
+        "packages/helix/src/trp/inspect_structure.py.txt",
+        "packages/helix/src/trp/structural_catalog.json",
+        "packages/helix/src/tool/trp.ts",
+        "packages/helix/src/trp/nextflow.ts",
+        "packages/helix/src/trp/evidence.ts",
+        "packages/helix/src/trp/verify_inspection.py.txt",
         "script/tesis/predicted_geometry.py"
       ],
       "pruebas": [
         "script/tesis/test_structural_controls.py",
-        "packages/bioinformatica/test/trp/structural.test.ts",
-        "packages/bioinformatica/test/tool/registry.test.ts",
-        "packages/bioinformatica/test/trp/reference.live.test.ts"
+        "packages/helix/test/trp/structural.test.ts",
+        "packages/helix/test/tool/registry.test.ts",
+        "packages/helix/test/trp/reference.live.test.ts"
       ],
       "pendiente": "Inspección, mapeos y geometría conservan fuentes y hashes; salida AFDB explicita identificador de transporte y validez no establecida. Falta campaña reservada.",
       "fase_cierre": "F5",
@@ -561,11 +580,12 @@
         "inspecciones_reales": 2,
         "ejecuciones_nextflow": 1,
         "evidencia": "docs/tesis/evidencia/fase5.json"
-      }
+      },
+      "id_anterior": "R5.3"
     },
     {
-      "id": "R5.4",
-      "objetivo": "OE5",
+      "id": "R3.8",
+      "objetivo": "OE3",
       "titulo": "Sensibilidad y especificidad",
       "estado": "parcial",
       "codigo": [
@@ -578,8 +598,27 @@
       ],
       "pendiente": "Metas F2 intactas. Reconsulta pública sin coordenadas/PAE originales; suplementos ajenos servidos por BioStudies rechazados y documentados. Cero modelos originales ejecutados; tasas nulas como dato ausente. Requiere referencia independiente y corpus reservado.",
       "fase_cierre": "F6",
-      "medicion": null
+      "medicion": null,
+      "id_anterior": "R5.4"
     }
   ],
-  "actualizacion": "Cierre técnico: rutas integradas y evidencia de desarrollo; evaluación reservada pendiente."
+  "actualizacion": "Cierre técnico: rutas integradas y evidencia de desarrollo; evaluación reservada pendiente.",
+  "agrupacion_objetivos": {
+    "fecha": "2026-09-23",
+    "criterio": "Reorganización editorial; resultados, indicadores y evidencias sin cambios",
+    "objetivos": {
+      "OE1": "Facilitar que un investigador no especializado en computación formule análisis de proteínas de repeticiones en tándem en lenguaje natural y obtenga flujos ejecutables compatibles con su intención aprobada, evaluando la estabilidad de la interpretación y la detección de incompatibilidades antes de ejecutar.",
+      "OE2": "Determinar la viabilidad de los análisis de proteínas de repeticiones en tándem frente a los recursos locales y de servicios externos disponibles, mediante decisiones explícitas de admisión o rechazo cuyo acierto se contraste con el resultado observado.",
+      "OE3": "Permitir la verificación independiente de los análisis de proteínas de repeticiones en tándem mediante evidencia de su ejecución y de los controles de fallo silencioso aplicados, evaluando la sensibilidad y la especificidad de dichos controles."
+    },
+    "correspondencia_anterior": {
+      "OE1": "OE1",
+      "OE2": "OE1",
+      "OE3": "OE2",
+      "OE4": "OE3",
+      "OE5": "OE3"
+    }
+  },
+  "identificadores_version": "2026-09-23",
+  "equivalencias": "docs/tesis/renumeracion-20260923/equivalencias.json"
 }

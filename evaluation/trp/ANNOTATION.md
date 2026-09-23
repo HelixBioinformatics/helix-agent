@@ -1,5 +1,7 @@
 # Encargo de anotación externa — instrumento preparado
 
+Identificadores actualizados al 23/09/2026: tres objetivos y 21 resultados. Las evidencias fechadas conservan su numeración original; consulte [equivalencias](../../docs/tesis/renumeracion-20260923/README.md).
+
 **Estado: pendiente de confirmar anotador.** No se ha enviado este encargo ni se han obtenido juicios externos. El investigador puede preparar datos y etiquetas de desarrollo; no puede presentarlas como un patrón independiente.
 
 ## Perfil y material
@@ -14,7 +16,7 @@ Evaluar cada original y paráfrasis de forma independiente. Una especificación 
 
 Registrar `admissible`, `inadmissible` o `not_evaluable`, campos que sustentan el juicio y una explicación breve. La ausencia de un dato necesario no se resuelve adivinando. Para equivalencia comparar objetivo, entradas, operaciones, parámetros, marcos y producto previsto después de evaluar ambas especificaciones; variaciones de redacción u orden sin efecto no las hacen distintas. Dos especificaciones incompletas no forman un par estable.
 
-## B. Intervenciones humanas (R4.3)
+## B. Intervenciones humanas (R3.3)
 
 Unidad: un turno humano completo, junto a los mensajes previos necesarios. No partir un turno en varias observaciones. Aplicar una clase principal y conservar posibles clases secundarias en la explicación:
 
@@ -35,6 +37,6 @@ Precedencia cuando coexisten clases: corrección factual, rechazo, redirección,
 2. Confirmar disponibilidad y acuerdo de uso de las etiquetas; registrar la asignación del conjunto reservado antes de clasificarlo automáticamente.
 3. Anotar de forma independiente y guardar la primera entrega inmutable con fecha y hash. No mostrar etiquetas del clasificador durante esta tarea.
 4. Calcular acuerdo con la primera entrega. Conservar desacuerdos; cualquier adjudicación posterior tiene otro archivo y no reemplaza retroactivamente el kappa.
-5. Reportar tiempo, omisiones, casos no evaluables y distribución de clases. Si no se cuenta con participante externo, R1.3 y R4.3 siguen pendientes de validación externa.
+5. Reportar tiempo, omisiones, casos no evaluables y distribución de clases. Si no se cuenta con participante externo, R1.3 y R3.3 siguen pendientes de validación externa.
 
 La plantilla JSONL contiene un esquema de fila, no una anotación: todos los campos de participante, fecha y juicio están vacíos. Para intercambio tabular se puede exportar la misma estructura conservando identificadores y hashes.

@@ -1,5 +1,7 @@
 # Plan de cierre técnico y evaluación
 
+Identificadores actualizados al 23/09/2026: tres objetivos y 21 resultados. Las evidencias fechadas conservan su numeración original; consulte [equivalencias](renumeracion-20260923/README.md).
+
 Fecha de inicio: 21 de septiembre de 2026. Continuación del plan F1–F7,
 sin modificar los 21 resultados ni los umbrales fijados en F2.
 
@@ -9,10 +11,10 @@ anexos y trazabilidad de la evidencia. No se reabre el corpus bibliográfico.
 
 | Hito | Resultados | Trabajo y archivos | Criterio de cierre |
 |---|---|---|---|
-| CT1. Correspondencias integradas | R2.3, R2.4, R5.2 | Incorporar el adaptador a `src/trp/` y a preparación; conservar entradas, conversiones, hashes y aprobación; verificar SIFTS por residuo | Referencia real, rechazos por ambigüedad y alteración, ruta antigua conservada, copia portable verificable |
-| CT2. Detector ejecutable | R1.1, R2.2 | Fijar entorno STRPsearch, preparación de entrada y contrato de salida; capturar fallos científicos aunque la CLI devuelva cero | Una referencia real y casos negativos; límites explícitos de licencia, datos y marcos; admisión solo con evidencia completa |
-| CT3. Modelos predichos | R2.3, R5.2–R5.3 | Verificar identidad, productor, cadena, pLDDT y PAE; transportar geometría sin presentar confianza como B-factor experimental | Ejecución delimitada y trazable, rechazo de datos incompatibles; distinguir geometría de validez física |
-| CT4. Preparación de F6 | R1.3, R2.6, R3.4, R4.3, R5.4 | Verificador de congelación y dependencias; localizar originales estructurales públicos; preparar medición sin inventar etiquetas externas | Informe computable de qué campaña puede comenzar, denominadores y valores ausentes explícitos |
+| CT1. Correspondencias integradas | R1.6, R1.7, R3.6 | Incorporar el adaptador a `src/trp/` y a preparación; conservar entradas, conversiones, hashes y aprobación; verificar SIFTS por residuo | Referencia real, rechazos por ambigüedad y alteración, ruta antigua conservada, copia portable verificable |
+| CT2. Detector ejecutable | R1.1, R1.5 | Fijar entorno STRPsearch, preparación de entrada y contrato de salida; capturar fallos científicos aunque la CLI devuelva cero | Una referencia real y casos negativos; límites explícitos de licencia, datos y marcos; admisión solo con evidencia completa |
+| CT3. Modelos predichos | R1.6, R3.6–R3.7 | Verificar identidad, productor, cadena, pLDDT y PAE; transportar geometría sin presentar confianza como B-factor experimental | Ejecución delimitada y trazable, rechazo de datos incompatibles; distinguir geometría de validez física |
+| CT4. Preparación de F6 | R1.3, R1.9, R2.4, R3.3, R3.8 | Verificador de congelación y dependencias; localizar originales estructurales públicos; preparar medición sin inventar etiquetas externas | Informe computable de qué campaña puede comenzar, denominadores y valores ausentes explícitos |
 | CT5. Integración y resultados | Los 21 | Regresión pertinente, ejecuciones científicas, verificación independiente; `trazabilidad.json`, `checkpoint.json`, Word y anexos | Cada afirmación nueva enlaza evidencia; ninguna prueba de desarrollo se presenta como evaluación reservada |
 
 ## Dependencias y ejecución paralela

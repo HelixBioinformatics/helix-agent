@@ -234,7 +234,7 @@ def inspect(request):
     blocking=failed+[c['id'] for c in checks if c['status']=='not_evaluable' and c['id'] in ('confidence-scale','filter-direction','interunit-pae')]
     return {'version':VERSION,'provenance':{'structureSha256':sha(text),'parser':snap['parser'],'python':platform.python_version(),'entry':snap['entry'],'model':snap['model'],'authorChain':options['chain'],'frame':options['frame'],'confidenceScale':scale,'software':snap['software'],'modelGroups':snap['groups'],'confidenceBinding':binding},
             'checks':checks,'mapping':rows,'summary':{'failed':failed,'notEvaluable':unknown,'mechanicalAdmission':not blocking,'blocking':blocking,'biologicalValidity':'not_established'},
-            'limitations':['Development screening, not R5.4 evaluation.','No physical fold classifier, genomic assembly validator, SIFTS/UniProt alignment or repeat detector.','Integrity and declared URLs do not authenticate scientific provenance.']}
+            'limitations':['Development screening, not R3.8 evaluation (identifier scheme 2026-09-23).','No physical fold classifier, genomic assembly validator, SIFTS/UniProt alignment or repeat detector.','Integrity and declared URLs do not authenticate scientific provenance.']}
 
 if __name__=='__main__':
     try:

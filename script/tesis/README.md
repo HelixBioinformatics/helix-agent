@@ -60,3 +60,7 @@ El renderizador usa una sola fuente de encabezados para evitar duplicados en el 
 - `packages/helix/src/trp/verify_bundle.py.txt` es la fuente del verificador que se publica como `verify.py` en cada paquete. Se puede ejecutar directamente con Python 3.
 
 La referencia de F4, sus limitaciones y el pseudocódigo se documentan en `docs/tesis/F4-ADMISION.md`. R3.2 conserva pendientes la cuota agregada y las reservas efectivas; la fórmula de almacenamiento es una estimación declarada.
+
+## Identificadores vigentes y generadores históricos
+
+Desde el 23/09/2026 se usan R1.1–R1.9, R2.1–R2.4 y R3.1–R3.8. Consulte [las equivalencias](../../docs/tesis/renumeracion-20260923/README.md). Los programas `update_*_docx.py`, `audit_phase*_docx.py`, `audit_r32_docx.py` y sus JSON de contenido reproducen versiones históricas: no ejecutarlos sobre el Word vigente sin adaptar sus selectores, numeración y contenido. Los códigos de resultado dentro de archivos de referencia son históricos. El auditor de trazabilidad utiliza la numeración actual.

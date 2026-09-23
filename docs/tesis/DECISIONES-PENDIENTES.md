@@ -1,5 +1,7 @@
 # Qué falta para completar la tesis
 
+Identificadores actualizados al 23/09/2026: tres objetivos y 21 resultados. Las evidencias fechadas conservan su numeración original; consulte [equivalencias](renumeracion-20260923/README.md).
+
 Estado vigente: 21 de septiembre de 2026. Sustentación: julio de 2027; borrador objetivo: 4 de junio de 2027. Problemática, marco conceptual y estado del arte cerrados por el autor.
 
 ## Trabajo técnico pendiente tras CT1–CT5
@@ -19,7 +21,7 @@ SIFTS/UniProt ya está integrado y STRPsearch está admitido: dejaron de ser blo
 | --- | --- | --- |
 | Anotador independiente | Persona con competencia en el dominio, disponibilidad, guía y etiquetas iniciales ciegas; referencia de admisibilidad/equivalencia y al menos 100 turnos para acuerdo. | Colaborador/asesora que pueda asumir el papel independiente, o anotador remunerado. Registrar experiencia y adjudicación separada. Otro modelo no sustituye esta referencia humana. |
 | Archivos de Pratt | Coordenadas originales, PAE cuando proceda y etiquetas justificadas. El suplemento recuperado contiene 78 filas de metadatos, no los modelos. | Buscar otro depósito público; solicitar originales a los autores con autorización expresa para contactar; o aprobar un benchmark recuperable equivalente y documentar la enmienda antes de medir. Regenerar predicciones no reproduce los archivos publicados. |
-| Modelo y gasto de evaluación | Identificador exacto del modelo, parámetros, límites de tokens/llamadas y tope monetario. La preferencia del autor es minimizar el coste; el nombre comunicado no se ha validado como identificador de API. | Piloto con un tope elegido por el autor para medir coste real; después fijar presupuesto de campaña. O fijar directamente un presupuesto total y detenerse al alcanzarlo, informando los casos no ejecutados. No se iniciaron llamadas pagadas para R3.2. |
+| Modelo y gasto de evaluación | Identificador exacto del modelo, parámetros, límites de tokens/llamadas y tope monetario. La preferencia del autor es minimizar el coste; el nombre comunicado no se ha validado como identificador de API. | Piloto con un tope elegido por el autor para medir coste real; después fijar presupuesto de campaña. O fijar directamente un presupuesto total y detenerse al alcanzarlo, informando los casos no ejecutados. No se iniciaron llamadas pagadas para R2.2. |
 | Infraestructura de clúster | Cuenta, planificador/ejecutor, cuota y ventana de acceso si se mantiene esa afirmación. | Conseguir clúster institucional; presupuestar uno en nube; o enmendar prospectivamente la afirmación a ejecución local en dos equipos. Una VM o SSH por sí solos no validan un clúster. |
 | Requisitos administrativos | Documento auténtico de aprobación FCI, título oficial y fecha institucional cuando corresponda. | Incorporar los documentos aprobados; mantener las notas rojas mientras estén pendientes. No inventar aprobaciones. |
 
@@ -43,4 +45,4 @@ dependencia detenga tareas independientes, pero tampoco se declara satisfecha
 la compuerta completa de F5 mientras falten los contratos del dominio.
 
 **Continuidad propuesta:** integrar la ruta predicha, resolver los contratos restantes y completar el corpus reservado con revisión independiente; decidir modelo/gasto antes de un piloto pagado. La
-nube queda como alternativa de infraestructura, no como requisito de R3.2.
+nube queda como alternativa de infraestructura, no como requisito de R2.2.

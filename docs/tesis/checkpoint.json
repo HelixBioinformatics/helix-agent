@@ -1,6 +1,6 @@
 {
   "project": "Bioinformática.org — tesis TRP",
-  "updated": "2026-09-21",
+  "updated": "2026-09-23",
   "phases_completed": [
     "F1",
     "F2",
@@ -43,12 +43,12 @@
     "docx": "/home/webiwabou/Projects/Tesis.docx",
     "pdf": "/home/webiwabou/Projects/Tesis-cierre-tecnico-20260921.pdf",
     "verifier": "script/tesis/verify_snapshot.py",
-    "catalogue": "packages/bioinformatica/src/trp/catalog.json",
+    "catalogue": "packages/helix/src/trp/catalog.json",
     "protocol": "evaluation/trp/PROTOCOL.md",
     "annotation_guide": "evaluation/trp/ANNOTATION.md",
     "algorithm": "docs/tesis/F5-CONTROLES.md",
     "nextflow_reference": "evaluation/trp/reference/nextflow-f5/engineering-reference.json",
-    "execution_verifier": "packages/bioinformatica/src/trp/verify_bundle.py.txt",
+    "execution_verifier": "packages/helix/src/trp/verify_bundle.py.txt",
     "structural_reference": "evaluation/trp/reference/structural-f5/engineering-reference.json",
     "resource_executor": "script/tesis/trp_sandbox.py",
     "resource_audit": "script/tesis/audit_resource_runs.py",
@@ -58,11 +58,12 @@
     "technical_plan": "docs/tesis/PLAN-CIERRE-TECNICO.md",
     "technical_evidence": "docs/tesis/evidencia/cierre-tecnico-20260921.json",
     "traceability_readable": "docs/tesis/trazabilidad.md",
-    "f6_draft": "evaluation/trp/f6-readiness-20260921/technical-draft/freeze.draft.json"
+    "f6_draft": "evaluation/trp/f6-readiness-20260921/technical-draft/freeze.draft.json",
+    "identifier_mapping": "docs/tesis/renumeracion-20260923/equivalencias.json"
   },
   "external_dependencies": [
     "Authentic FCI approval document and official title",
-    "Independent annotator for R1.3 and R4.3",
+    "Independent annotator for R1.3 and R3.3",
     "Confirmed cluster access if the cluster execution claim is retained",
     "Confirmed evaluation model, compute and API budget",
     "Original Pratt et al. model/PAE files and independently justified structural failure labels; downloaded supplements contain metadata only"
@@ -84,28 +85,28 @@
       "logical_cpus": 8,
       "memory_bytes": 16670982144,
       "strict_resource_backend": "private XFS project quota and cgroup v2",
-      "llm_calls_for_R32": 0
+      "llm_calls_for_R22": 0
     }
   },
   "phase2_scope": {
     "admitted": 2,
     "audited": 6,
     "R1.1": "partial; detection tools and RepeatsDB mapping move to F3",
-    "R2.1": "design implemented; empirical campaign not started",
+    "R1.4": "design implemented; empirical campaign not started",
     "document_installed": true
   },
   "phase3_scope": {
     "core_milestones": "H3.1-H3.6 complete for the admitted author-PDB geometry route",
     "R1.1": "partial; detector admission and RepeatsDB mapping pending",
-    "R2.3": "partial; SIFTS/label/author and predicted-model mappings pending",
+    "R1.6": "partial; SIFTS/label/author and predicted-model mappings pending",
     "empirical_evaluation": false,
     "document_installed": true
   },
   "phase4_scope": {
     "core_milestones": "H4.1-H4.6 implemented for admitted local route, including strict operator resource allocation",
     "full_exit_gate_satisfied": true,
-    "R3.2": "implemented and verified on second Linux workstation; seven final development runs, no observed underestimation or budget excess, median overestimate 0.13538732394366204; T-RESOURCE reserved campaign pending",
-    "R4.3": "Spanish/English heuristic implemented; independent annotation and kappa pending",
+    "R2.2": "implemented and verified on second Linux workstation; seven final development runs, no observed underestimation or budget excess, median overestimate 0.13538732394366204; T-RESOURCE reserved campaign pending",
+    "R3.3": "Spanish/English heuristic implemented; independent annotation and kappa pending",
     "empirical_evaluation": false,
     "document_installed": true,
     "next_work": "F5 detector/coordinate/predicted execution contracts; independent annotation and final F6 evaluation",
@@ -121,14 +122,14 @@
     "full_exit_gate_satisfied": false,
     "document_installed": true,
     "empirical_evaluation": false,
-    "R5.1": "Nine controls documented with primary sources and explicit non-automatable modes",
-    "R5.2": "Semantic mmCIF, AFDB confidence/PAE and explicit frames; admitted execution remains experimental PDB. Construct interpretation, genomic and physical validation incomplete or non-evaluable.",
-    "R5.3": "Per-instance reports and offline integrity; experimental report bound to Nextflow approval and methods",
-    "R5.4": "No original Pratt models executed; 78 metadata rows recovered, no coordinates/PAE in downloaded supplements; sensitivity/specificity null",
+    "R3.5": "Nine controls documented with primary sources and explicit non-automatable modes",
+    "R3.6": "Semantic mmCIF, AFDB confidence/PAE and explicit frames; admitted execution remains experimental PDB. Construct interpretation, genomic and physical validation incomplete or non-evaluable.",
+    "R3.7": "Per-instance reports and offline integrity; experimental report bound to Nextflow approval and methods",
+    "R3.8": "No original Pratt models executed; 78 metadata rows recovered, no coordinates/PAE in downloaded supplements; sensitivity/specificity null",
     "next_work": "Predicted main-agent integration, remaining domain contracts and independent reserved corpus",
     "local_parser_environment": ".bioinformatica/trp-python (Gemmi 0.7.5; untracked; requirements in script/tesis/requirements-structural.txt)",
     "coordinate_progress": "Integrated label/author and SIFTS/UniProt mapping; real 206 residues and 12 units; portable verification of 139 files",
-    "R5_2_note": "Predicted AFDB geometry verified through separate CLI on artificial development segments; main-agent integration pending"
+    "R3_6_note": "Predicted AFDB geometry verified through separate CLI on artificial development segments; main-agent integration pending"
   },
   "author_closed_sections": {
     "problem_statement": true,
@@ -146,5 +147,6 @@
     "reserved_evaluation_started": false,
     "document_installed": true,
     "detector_tool_reference": "evaluation/trp/reference/detector-tool-20260921/summary.json"
-  }
+  },
+  "identifier_version": "2026-09-23"
 }

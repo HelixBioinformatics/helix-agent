@@ -1,0 +1,147 @@
+{
+  "version": "1.0.0",
+  "date": "2026-09-15",
+  "status": "design_fixed_before_empirical_evaluation",
+  "independent_annotator": "pending",
+  "cluster": "pending",
+  "model_id": null,
+  "api_budget": null,
+  "replicates": 3,
+  "order_seeds": [20260915, 20260916, 20260917],
+  "thresholds": {
+    "specification_admissibility_min": 0.85,
+    "paraphrase_stability_min": 0.85,
+    "workflow_execution_min": 0.95,
+    "invalid_acceptance_max": 0.05,
+    "kappa_min": 0.7,
+    "false_rejection_max": 0.05,
+    "accepted_budget_exceedance_max": 0,
+    "median_storage_overestimate_max": 0.25,
+    "deterministic_count_difference_max": 0,
+    "sensitivity_min": 0.8,
+    "specificity_min": 0.9,
+    "structural_evaluability_min": 0.9
+  },
+  "sample_minima": {
+    "heldout_feasible_intents": 50,
+    "paraphrases_per_intent": 2,
+    "heldout_out_of_scope": 20,
+    "valid_graphs": 50,
+    "invalid_graphs": 30,
+    "feasible_resource_scenarios": 20,
+    "infeasible_resource_scenarios": 20,
+    "human_turns": 100,
+    "reviewed_structural_controls": 30
+  },
+  "confidence_interval": 0.95,
+  "bootstrap_replicates": 2000,
+  "bootstrap_seed": 20260915,
+  "decision_rule": "point_estimate; R1.3 thresholds apply to each replicate; report intervals and all denominators",
+  "metrics": [
+    {
+      "id": "R1.1",
+      "measurement": "Entradas admitidas con referencia real, prueba, revisión, identidad de ejecución, hashes y contratos completos / todas las entradas admitidas; informar también admitidas / universo auditado",
+      "acceptance": "100% en cobertura documental y referencia (**Word**). En servicios remotos registrar respuesta fechada y hash, y declarar imagen del servidor no observable; no inventar digest remoto"
+    },
+    {
+      "id": "R1.2",
+      "measurement": "Especificaciones con objetivo, datos, operaciones, parámetros, procedencia y aprobación ligada a su hash / todas las especificaciones emitidas",
+      "acceptance": "100% (**Word**). La aprobación no prueba corrección"
+    },
+    {
+      "id": "R1.3",
+      "measurement": "Especificaciones completas y admisibles según referencia externa / 50 originales factibles; pares con especificaciones equivalentes y ambas admisibles / 100 pares",
+      "acceptance": "≥85% en ambas tasas (**Word**), en cada repetición. Equivalencia de objetivo, entradas, identidad/marco, operaciones y parámetros, no igualdad textual. Dos fallos iguales no son estabilidad"
+    },
+    {
+      "id": "R2.1",
+      "measurement": "Indicadores con definiciones y reglas previas / 21; cambios registrados / cambios realizados",
+      "acceptance": "100% (**formalización F2**); para cero cambios reportar “sin enmiendas”, no 0/0=100%"
+    },
+    {
+      "id": "R2.2",
+      "measurement": "Flujos que terminan y producen los artefactos previstos sin edición manual / 50 especificaciones factibles aprobadas",
+      "acceptance": "≥95% (**Word**). Reportar aparte corrección de los artefactos y fallos por fase"
+    },
+    {
+      "id": "R2.3",
+      "measurement": "Correspondencias de proteína, cadena y residuo correctas frente a mapeo de referencia / correspondencias requeridas",
+      "acceptance": "100% (**Word**). No convertir `auth_seq_id` en `label_seq_id` por igualdad numérica"
+    },
+    {
+      "id": "R2.4",
+      "measurement": "Composiciones para las que se ejecutan todos los controles estáticos y recorrido en seco exigibles antes de ejecución / composiciones",
+      "acceptance": "100% (**Word**). Un error de sintaxis no acredita validación semántica"
+    },
+    {
+      "id": "R2.5",
+      "measurement": "Informes con cada control ejecutado, omitido o no evaluable y motivo / composiciones",
+      "acceptance": "100% (**Word**); un control omitido no cuenta como aprobado"
+    },
+    {
+      "id": "R2.6",
+      "measurement": "Composiciones inválidas aceptadas / composiciones inválidas (n≥30)",
+      "acceptance": "≤5% (**Word**). En n=30 se admite como máximo un falso positivo; una excepción del validador sin veredicto tipificado se cuenta como fallo del control y se informa"
+    },
+    {
+      "id": "R3.1",
+      "measurement": "Decisiones con inventario completo, fechado y enlazado por hash / decisiones de admisión",
+      "acceptance": "100% (**Word**)"
+    },
+    {
+      "id": "R3.2",
+      "measurement": "Conteos reproducidos en frío / conteos; diferencia entre cantidades contadas y medidas",
+      "acceptance": "100% reproducibles (**Word**). Tareas y llamadas deterministas: diferencia cero. En bytes presupuestados: ninguna ejecución admitida supera la cota; margen de sobreestimación mediano ≤25% sobre bytes observados positivos (**propuesta F2**). Memoria y duración medidas se reportan separadamente; el tiempo mínimo por tasa no es una cota superior"
+    },
+    {
+      "id": "R3.3",
+      "measurement": "Rechazos previos a ejecutar con recurso, demanda, disponibilidad y código / rechazos",
+      "acceptance": "100% (**Word**). Inventario ausente implica rechazo tipificado"
+    },
+    {
+      "id": "R3.4",
+      "measurement": "Acierto=(aceptaciones factibles+rechazos inviables)/contrastes; falso rechazo=rechazos factibles/todos los factibles contrastados",
+      "acceptance": "Reportar ambos (**Word**); falso rechazo ≤5% y cero aceptaciones que excedan presupuesto (**propuesta F2**). Un rechazo sin contraste no es “correcto” por defecto"
+    },
+    {
+      "id": "R4.1",
+      "measurement": "Manifiestos verificables desde copia sin modelo ni red / ejecuciones; alteraciones o ausencias detectadas / alteraciones inyectadas",
+      "acceptance": "100% en ambas coberturas (**Word**). Comprobar todos los artefactos, no solo corpus"
+    },
+    {
+      "id": "R4.2",
+      "measurement": "Eventos de permisos, admisión y protocolo presentes con su causa / eventos observados independientemente en la sesión",
+      "acceptance": "100% (**Word**) por cada fuente"
+    },
+    {
+      "id": "R4.3",
+      "measurement": "Kappa de Cohen entre clase automática y etiqueta externa no adjudicada; matriz de confusión y conteos por clase",
+      "acceptance": "κ≥0,70 (**Word**). Reportar junto a corrección de la tarea; reducir intervenciones no implica mayor calidad"
+    },
+    {
+      "id": "R4.4",
+      "measurement": "Campos del apartado de métodos respaldados por manifiesto / campos afirmados; campos obligatorios presentes / campos requeridos",
+      "acceptance": "100% (**Word**); no rellenar versiones desconocidas con valores supuestos"
+    },
+    {
+      "id": "R5.1",
+      "measurement": "Modos de fallo con fuente, observable, criterio, umbral y veredicto / modos identificados en el inventario fijado",
+      "acceptance": "100% documentados (**Word**), distinguiendo los no automatizables"
+    },
+    {
+      "id": "R5.2",
+      "measurement": "Controles exigibles ejecutados con valor y umbral / controles exigibles por instancia",
+      "acceptance": "100% (**Word**); conservar los no evaluables por separado"
+    },
+    {
+      "id": "R5.3",
+      "measurement": "Instancias con procedencia, versión, marco, escala y veredictos / instancias analizadas",
+      "acceptance": "100% (**Word**); confianza experimental, pLDDT y PAE no se intercambian"
+    },
+    {
+      "id": "R5.4",
+      "measurement": "Sensibilidad=fallos conocidos detectados/fallos conocidos evaluables; especificidad=controles sin fallo aceptados/controles evaluables",
+      "acceptance": "Reportar ambas (**Word**). Sensibilidad ≥80%, especificidad ≥90% y cobertura evaluable ≥90% en cada grupo (**propuesta F2**). Reportar también sensibilidad conservadora contando no evaluables como fallos de detección"
+    }
+  ]
+}

@@ -1,12 +1,14 @@
 # F5: controles estructurales
 
+Identificadores actualizados al 23/09/2026: tres objetivos y 21 resultados. Las evidencias fechadas conservan su numeración original; consulte [equivalencias](renumeracion-20260923/README.md).
+
 ## Resultado y alcance
 
 Se implementan H5.1–H5.4 en el ámbito mecánico: catálogo, lectura semántica, controles y reporte por instancia. `trp_inspect` inspecciona mmCIF/PDB y PAE de AFDB; `trp_prepare` incorpora automáticamente los controles de la ruta experimental PDB al digest aprobado. El motor pasa a `trp-nextflow/1.2.0`.
 
-**La validez biológica no queda establecida por pasar estos controles.** Los modos sin evidencia o método aplicable se conservan como `not_evaluable`. La ejecución de geometría sobre modelos predichos, SIFTS/UniProt, ampliación del catálogo siguen pendientes antes de la medición dependiente de F6; las garantías operativas de F4 ya se incorporaron en el cierre R3.2. No se declara cerrada la cobertura del dominio completo.
+**La validez biológica no queda establecida por pasar estos controles.** Los modos sin evidencia o método aplicable se conservan como `not_evaluable`. La ejecución de geometría sobre modelos predichos, SIFTS/UniProt, ampliación del catálogo siguen pendientes antes de la medición dependiente de F6; las garantías operativas de F4 ya se incorporaron en el cierre R2.2. No se declara cerrada la cobertura del dominio completo.
 
-### Cierre posterior de R3.2 de F4
+### Cierre posterior de R2.2 de F4
 
 Se incorporó cuota XFS privada y jerarquía cgroup v2 con límites del controlador,
 tareas y grupo agregado. Siete contrastes finales reproducen geometría y conteos,
@@ -16,7 +18,7 @@ de la primera serie permanecen archivados. La reserva T-RESOURCE sigue pendiente
 
 ## Inventario fijo inicial
 
-El [catálogo ejecutable](../../packages/bioinformatica/src/trp/structural_catalog.json) conserva fuentes primarias y criterios. Hay nueve controles; todos emiten valor, umbral y motivo, aunque el valor sea nulo cuando el control no es evaluable.
+El [catálogo ejecutable](../../packages/helix/src/trp/structural_catalog.json) conserva fuentes primarias y criterios. Hay nueve controles; todos emiten valor, umbral y motivo, aunque el valor sea nulo cuando el control no es evaluable.
 
 | Control                   | Observable y criterio                                                                                   | Límite explícito                                                                                  |
 | ------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
@@ -43,7 +45,7 @@ El [algoritmo LaTeX](algoritmo-fase5.tex) formaliza el procedimiento. Su impleme
 5. `summary`: distingue `fail`, `not_evaluable` y `not_applicable`. `mechanicalAdmission` requiere cero fallos y evaluación suficiente de escala/filtro/PAE exigibles. `biologicalValidity` permanece `not_established`.
 6. `inspectFiles`: guarda bytes originales, opciones, reporte, catálogo, programas y manifiesto. `nextflow.prepare`: añade reporte, catálogo y programa al digest para la ruta experimental, revalidada después de aprobar.
 
-Para A observaciones, R posiciones solicitadas y PAE n×n, el costo dominante admisible es O(A+R+n²), con memoria del mismo orden. Los bloques entre unidades disjuntas no aumentan ese orden. Límites operativos: archivo ≤20 MB, solicitud JSON ≤40 MB, salida del parser ≤5 MB, 30 s; hasta 200 000 átomos mmCIF, 10 000 posiciones solicitadas y PAE de hasta 2 000 residuos. Estos límites del parser no equivalen a una cuota del flujo. R3.2 ya incorpora una asignación XFS/cgroup v2 independiente para la ruta de ejecución; véase el informe de cierre.
+Para A observaciones, R posiciones solicitadas y PAE n×n, el costo dominante admisible es O(A+R+n²), con memoria del mismo orden. Los bloques entre unidades disjuntas no aumentan ese orden. Límites operativos: archivo ≤20 MB, solicitud JSON ≤40 MB, salida del parser ≤5 MB, 30 s; hasta 200 000 átomos mmCIF, 10 000 posiciones solicitadas y PAE de hasta 2 000 residuos. Estos límites del parser no equivalen a una cuota del flujo. R2.2 ya incorpora una asignación XFS/cgroup v2 independiente para la ruta de ejecución; véase el informe de cierre.
 
 ```mermaid
 sequenceDiagram

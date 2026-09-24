@@ -34,9 +34,13 @@ Las referencias de ejecución, hashes, catálogos ligados a ejecuciones, informe
 
 La nota `agrupacion-20260923/CAMBIOS.md` registra una etapa editorial anterior que conservaba R1–R5; esta renumeración la sucede.
 
-## Inconsistencias internas del Word fuente
+## Propagación al Word
 
-Las tablas 1.2.4 ya tienen los códigos nuevos. Los métodos, tabla de métodos, capítulos posteriores e índice todavía contienen códigos anteriores, y algunos párrafos conservan referencias a causas C4–C6 y objetivos 4–5. Este trabajo propaga los códigos al repositorio y no sobrescribe el Word actualizado por el autor. Los párrafos «Resultado 1», etc., reinician numeración por bloque; las tablas 1.2.4 resuelven su identidad inequívoca.
+La continuación actualiza las referencias en métodos, marco conceptual, resultados, conclusiones y anexos. Los 21 párrafos de resultados usan códigos únicos y las tablas 1.2.4 del autor se conservan. Se corrige la referencia a la causa C6 como C3, y se conservan los controles estructurales C1–C9 porque pertenecen a un catálogo distinto. Los cuatro efectos E1–E4 y las tres causas de la ilustración se mantienen.
+
+Se retiró una tabla accidental de 16 celdas: cada celda repetía exactamente los 23 607 caracteres del tramo entre el árbol y las tablas de objetivos ya presentes en el documento. Se conservó una copia del archivo de entrada. Se reparó el campo del índice para regenerar títulos y páginas.
+
+El registro `document-edits.json` contiene los 125 párrafos modificados y las comprobaciones de conservación. El programa `script/tesis/update_identifier_docx.py` solo admite el hash de la fuente revisada, para impedir renumerar dos veces los mismos códigos.
 
 ## Verificación
 

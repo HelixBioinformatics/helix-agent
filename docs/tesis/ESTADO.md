@@ -6,6 +6,8 @@ Revisión editorial del 23 de septiembre de 2026: causas agrupadas en tres pares
 
 Renumeración posterior del 23/09/2026: los códigos vigentes se toman de las tablas 1.2.4 del Word. El [mapa de equivalencias](renumeracion-20260923/README.md) sustituye la decisión anterior de conservar los prefijos R1–R5.
 
+Word sincronizado con las tres causas, los tres objetivos y la numeración vigente: métodos, resultados, conclusiones y anexos. Tabla accidental duplicada retirada e índice reconstruido; véase [auditoría documental](renumeracion-20260923/document-checks.json).
+
 ## Cierre técnico — 21 de septiembre de 2026 (estado vigente)
 
 Se ejecutó [el plan CT1–CT5](PLAN-CIERRE-TECNICO.md) con tres agentes y revisión integrada.

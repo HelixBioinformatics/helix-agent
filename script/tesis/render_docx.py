@@ -24,6 +24,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("source", type=Path)
     parser.add_argument("directory", type=Path)
+    parser.add_argument("--rebuild-index", action="store_true", help="Replace the explicit thesis TOC marker with a native content index")
     args = parser.parse_args()
     args.directory.mkdir(parents=True, exist_ok=True)
     target = args.directory.resolve() / args.source.name
@@ -58,6 +59,20 @@ def main():
             ))
             if document is None:
                 raise RuntimeError("LibreOffice did not load the thesis")
+            if args.rebuild_index:
+                search = document.createSearchDescriptor()
+                search.SearchString = "THESIS_TOC_REBUILD_20260923"
+                marker = document.findFirst(search)
+                if marker is None:
+                    raise RuntimeError("Missing explicit TOC reconstruction marker")
+                cursor = document.getText().createTextCursorByRange(marker)
+                index = document.createInstance("com.sun.star.text.ContentIndex")
+                index.Title = ""
+                index.CreateFromOutline = True
+                index.CreateFromLevelParagraphStyles = False
+                index.Level = 3
+                document.getText().insertTextContent(cursor, index, True)
+                index.update()
             # DOCX export can change imported paragraph/layout compatibility.
             # Reopen the intermediate Word so the delivered PDF matches its layout
             # when a reader opens it, including separation from the footer.

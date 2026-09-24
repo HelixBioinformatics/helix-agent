@@ -1,0 +1,636 @@
+{
+  "source_sha256": "0b48999797d35cd2c620686b7b594893a3e6496c960fa060691ad7daef34be54",
+  "target_sha256": "592863e5d6bffd701717dbf7dfde6a873299933bc2db8622392d346d98bba20e",
+  "changes": [
+    {
+      "body_index": 71,
+      "before": "Resultado 1. Catálogo del dominio en formato declarativo legible por máquina, Recoge los recursos identificados en la revisión del Capítulo 3 y describe, para cada uno, la operación que realiza, el tipo de dato y el formato que consume y produce, con anclaje en los vocabularios establecidos de la bioinformática, y tres atributos que esos vocabularios no contemplan y que el dominio exige: espacio de identificadores, marco de numeración de residuos y escala de la métrica de confianza. Un recurso entra en el catálogo únicamente si expone una interfaz invocable por programa, y los que solo ofrecen formulario web se conservan como comparadores declarados. Cada entrada se incorpora tras una invocación de referencia efectivamente ejecutada, acompañada de su caso de prueba y de la identificación de versión de la herramienta y de su entorno de ejecución.",
+      "after": "R1.1. Catálogo del dominio en formato declarativo legible por máquina, Recoge los recursos identificados en la revisión del Capítulo 3 y describe, para cada uno, la operación que realiza, el tipo de dato y el formato que consume y produce, con anclaje en los vocabularios establecidos de la bioinformática, y tres atributos que esos vocabularios no contemplan y que el dominio exige: espacio de identificadores, marco de numeración de residuos y escala de la métrica de confianza. Un recurso entra en el catálogo únicamente si expone una interfaz invocable por programa, y los que solo ofrecen formulario web se conservan como comparadores declarados. Cada entrada se incorpora tras una invocación de referencia efectivamente ejecutada, acompañada de su caso de prueba y de la identificación de versión de la herramienta y de su entorno de ejecución."
+    },
+    {
+      "body_index": 72,
+      "before": "Resultado 2. Módulo de elicitación. Produce una especificación de análisis estructurada a partir de un enunciado en lenguaje natural, distinguiendo en el registro los valores fijados por el usuario de los asumidos por defecto.",
+      "after": "R1.2. Módulo de elicitación. Produce una especificación de análisis estructurada a partir de un enunciado en lenguaje natural, distinguiendo en el registro los valores fijados por el usuario de los asumidos por defecto."
+    },
+    {
+      "body_index": 73,
+      "before": "Resultado 3. Corpus de enunciados con su especificación esperada. El patrón de referencia lo elabora un anotador externo al desarrollo, y la evaluación puntúa la admisibilidad de la especificación producida y no su igualdad literal, con el criterio de admisibilidad registrado antes de conocer los resultados.",
+      "after": "R1.3. Corpus de enunciados con su especificación esperada. El patrón de referencia lo elabora un anotador externo al desarrollo, y la evaluación puntúa la admisibilidad de la especificación producida y no su igualdad literal, con el criterio de admisibilidad registrado antes de conocer los resultados."
+    },
+    {
+      "body_index": 75,
+      "before": "Resultado 1. Protocolo de evaluación. Documento fechado que fija, antes de ejecutar cualquier medición, los umbrales de todos los indicadores para la verificación, el criterio por el cual una especificación se considera admisible y los modos de incompatibilidad que el validador debe rechazar.",
+      "after": "R1.4. Protocolo de evaluación. Documento fechado que fija, antes de ejecutar cualquier medición, los umbrales de todos los indicadores para la verificación, el criterio por el cual una especificación se considera admisible y los modos de incompatibilidad que el validador debe rechazar."
+    },
+    {
+      "body_index": 76,
+      "before": "Resultado 2. Motor de composición. Emite un flujo ejecutable sobre el sustrato de producción a partir de la especificación aprobada.",
+      "after": "R1.5. Motor de composición. Emite un flujo ejecutable sobre el sustrato de producción a partir de la especificación aprobada."
+    },
+    {
+      "body_index": 77,
+      "before": "Resultado 3. Recurso de correspondencia entre espacios de identificadores y marcos de numeración de residuos. Se construye a partir de fuentes públicas de correspondencia, restringido a los residuos con coordenadas resueltas para no reclamar geometría sobre residuos que el modelo no resuelve, y se completa con una regla propia para las estructuras predichas, que esas fuentes no cubren.",
+      "after": "R1.6. Recurso de correspondencia entre espacios de identificadores y marcos de numeración de residuos. Se construye a partir de fuentes públicas de correspondencia, restringido a los residuos con coordenadas resueltas para no reclamar geometría sobre residuos que el modelo no resuelve, y se completa con una regla propia para las estructuras predichas, que esas fuentes no cubren."
+    },
+    {
+      "body_index": 78,
+      "before": "Resultado 4. Validador estático. Comprueba la compatibilidad de tipos y formatos entre pasos consecutivos, con atención específica al espacio de identificadores y al marco de numeración de residuos, y que recorre el grafo de ejecución completo sin datos reales.",
+      "after": "R1.7. Validador estático. Comprueba la compatibilidad de tipos y formatos entre pasos consecutivos, con atención específica al espacio de identificadores y al marco de numeración de residuos, y que recorre el grafo de ejecución completo sin datos reales."
+    },
+    {
+      "body_index": 79,
+      "before": "Resultado 5. Informe de validación legible. Declara de forma explícita qué se comprobó y qué quedó sin comprobar. Es el artefacto que hace auditable la diferencia entre lo verificado y lo supuesto.",
+      "after": "R1.8. Informe de validación legible. Declara de forma explícita qué se comprobó y qué quedó sin comprobar. Es el artefacto que hace auditable la diferencia entre lo verificado y lo supuesto."
+    },
+    {
+      "body_index": 80,
+      "before": "Resultado 6. Corpus de composiciones inválidas y medición de la tasa de aceptación indebida. Instrumento con que se mide el validador estático con al menos un caso por cada modo de incompatibilidad declarado. Depende de los umbrales del Resultado 1 para fijar los modos.",
+      "after": "R1.9. Corpus de composiciones inválidas y medición de la tasa de aceptación indebida. Instrumento con que se mide el validador estático con al menos un caso por cada modo de incompatibilidad declarado. Depende de los umbrales del Resultado 1.4 para fijar los modos."
+    },
+    {
+      "body_index": 83,
+      "before": "Resultado 1. Declaración de los recursos disponibles del entorno. Inventario legible por máquina del presupuesto de cómputo, almacenamiento y llamadas a servicios externos con que cuenta la ejecución.",
+      "after": "R2.1. Declaración de los recursos disponibles del entorno. Inventario legible por máquina del presupuesto de cómputo, almacenamiento y llamadas a servicios externos con que cuenta la ejecución."
+    },
+    {
+      "body_index": 84,
+      "before": "Resultado 2. Contador de demanda. Cuantifica estructuras, llamadas por servicio, espacio en disco, tareas y el tiempo mínimo que impone el límite de tasa declarado de cada servicio de terceros. La cuenta se deriva por aritmética del flujo compuesto antes de ejecutarlo, y el manifiesto de ejecución permite después que un tercero la reproduzca.",
+      "after": "R2.2. Contador de demanda. Cuantifica estructuras, llamadas por servicio, espacio en disco, tareas y el tiempo mínimo que impone el límite de tasa declarado de cada servicio de terceros. La cuenta se deriva por aritmética del flujo compuesto antes de ejecutarlo, y el manifiesto de ejecución permite después que un tercero la reproduzca."
+    },
+    {
+      "body_index": 85,
+      "before": "Resultado 3. Mecanismo de rechazo tipificado y accionable. Informa al usuario antes de ejecutar en lugar de fallar durante la ejecución.",
+      "after": "R2.3. Mecanismo de rechazo tipificado y accionable. Informa al usuario antes de ejecutar en lugar de fallar durante la ejecución."
+    },
+    {
+      "body_index": 86,
+      "before": "Resultado 4. Medición del acierto del rechazo frente al resultado observado, reportando la tasa de falso rechazo con la misma visibilidad que la de acierto.",
+      "after": "R2.4. Medición del acierto del rechazo frente al resultado observado, reportando la tasa de falso rechazo con la misma visibilidad que la de acierto."
+    },
+    {
+      "body_index": 89,
+      "before": "Resultado 1. Manifiesto de ejecución verificable en frío, comprobable sin el modelo, sin conexión de red y sin la plataforma que lo generó. Se emite en un formato de texto estructurado y abierto, con resumen criptográfico, número de filas y tamaño por artefacto, de modo que sea comprobable con utilidades de propósito general ajenas al proyecto. Los formatos estándar de proveniencia de flujo que el sustrato de ejecución ya emita se referencian y se detectan, no se construyen de nuevo.",
+      "after": "R3.1. Manifiesto de ejecución verificable en frío, comprobable sin el modelo, sin conexión de red y sin la plataforma que lo generó. Se emite en un formato de texto estructurado y abierto, con resumen criptográfico, número de filas y tamaño por artefacto, de modo que sea comprobable con utilidades de propósito general ajenas al proyecto. Los formatos estándar de proveniencia de flujo que el sustrato de ejecución ya emita se referencian y se detectan, no se construyen de nuevo."
+    },
+    {
+      "body_index": 90,
+      "before": "Resultado 2. Registro de decisiones y rechazos, alimentado por tres fuentes: las aprobaciones del flujo de permisos, las negativas tipificadas de la capa de admisión y las violaciones de protocolo registradas durante las campañas de evaluación.",
+      "after": "R3.2. Registro de decisiones y rechazos, alimentado por tres fuentes: las aprobaciones del flujo de permisos, las negativas tipificadas de la capa de admisión y las violaciones de protocolo registradas durante las campañas de evaluación."
+    },
+    {
+      "body_index": 91,
+      "before": "Resultado 3. Conteo de intervenciones humanas, reportado siempre junto a la corrección del resultado y contrastado mediante un coeficiente de acuerdo entre observadores. Reportar el conteo de forma aislada premiaría al sistema que evita consultar al usuario incluso cuando debería hacerlo, de modo que la métrica solo es interpretable emparejada con la corrección.",
+      "after": "R3.3. Conteo de intervenciones humanas, reportado siempre junto a la corrección del resultado y contrastado mediante un coeficiente de acuerdo entre observadores. Reportar el conteo de forma aislada premiaría al sistema que evita consultar al usuario incluso cuando debería hacerlo, de modo que la métrica solo es interpretable emparejada con la corrección."
+    },
+    {
+      "body_index": 92,
+      "before": "Resultado 4. Documentación de métodos con identificador de revisión y resumen criptográfico de imagen por cada herramienta invocada, exportable sin edición manual y generada íntegramente a partir del manifiesto, sin campos redactados por el modelo.",
+      "after": "R3.4. Documentación de métodos con identificador de revisión y resumen criptográfico de imagen por cada herramienta invocada, exportable sin edición manual y generada íntegramente a partir del manifiesto, sin campos redactados por el modelo."
+    },
+    {
+      "body_index": 94,
+      "before": "Resultado 1. Catálogo de modos de fallo silencioso del dominio, cada uno con su referencia bibliográfica, su criterio mecánico de detección, su umbral registrado de antemano y sus posibles veredictos. Un modo entra en el catálogo únicamente si admite un criterio mecánico, y el que se reconoce en la literatura pero no se deja reducir a una comprobación automática queda fuera y se declara como tal.",
+      "after": "R3.5. Catálogo de modos de fallo silencioso del dominio, cada uno con su referencia bibliográfica, su criterio mecánico de detección, su umbral registrado de antemano y sus posibles veredictos. Un modo entra en el catálogo únicamente si admite un criterio mecánico, y el que se reconoce en la literatura pero no se deja reducir a una comprobación automática queda fuera y se declara como tal."
+    },
+    {
+      "body_index": 95,
+      "before": "Resultado 2. Batería de controles cuyo veredicto negativo incorpora el valor medido y el umbral aplicado, de modo que sea interpretable por el usuario. Un control debe informar el valor concreto que motivó el rechazo y el umbral contra el que se comparó.",
+      "after": "R3.6. Batería de controles cuyo veredicto negativo incorpora el valor medido y el umbral aplicado, de modo que sea interpretable por el usuario. Un control debe informar el valor concreto que motivó el rechazo y el umbral contra el que se comparó."
+    },
+    {
+      "body_index": 96,
+      "before": "Resultado 3. Artefacto de controles legible por máquina, con una fila por instancia analizada que registra la fuente de la estructura, la versión del modelo empleado, la métrica de confianza con su escala y el veredicto de cada control.",
+      "after": "R3.7. Artefacto de controles legible por máquina, con una fila por instancia analizada que registra la fuente de la estructura, la versión del modelo empleado, la métrica de confianza con su escala y el veredicto de cada control."
+    },
+    {
+      "body_index": 97,
+      "before": "Resultado 4. Sensibilidad y especificidad de los controles, medidas sobre casos publicados de fallo conocido y sobre anotación de referencia del dominio, y reportadas de forma conjunta.",
+      "after": "R3.8. Sensibilidad y especificidad de los controles, medidas sobre casos publicados de fallo conocido y sobre anotación de referencia del dominio, y reportadas de forma conjunta."
+    },
+    {
+      "body_index": 117,
+      "before": "La primera separa la construcción de la medición. El Resultado 2.1 es un protocolo fechado que fija los umbrales de todos los indicadores, el criterio por el cual una especificación se considera admisible y los modos de incompatibilidad que el validador debe rechazar, antes de ejecutar cualquier medición. Ningún umbral se ajusta después de conocer un resultado, y toda modificación posterior queda registrada con su fecha y su motivo. La razón es que la mayor parte de los indicadores se mide sobre corpus construidos durante la propia tesis, y un umbral elegido después del dato no mide nada.",
+      "after": "La primera separa la construcción de la medición. El Resultado 1.4 es un protocolo fechado que fija los umbrales de todos los indicadores, el criterio por el cual una especificación se considera admisible y los modos de incompatibilidad que el validador debe rechazar, antes de ejecutar cualquier medición. Ningún umbral se ajusta después de conocer un resultado, y toda modificación posterior queda registrada con su fecha y su motivo. La razón es que la mayor parte de los indicadores se mide sobre corpus construidos durante la propia tesis, y un umbral elegido después del dato no mide nada."
+    },
+    {
+      "body_index": 124,
+      "before": "El corpus de enunciados (Resultado 1.3) es el instrumento de medida del módulo anterior y su diseño obedece a dos cautelas. El patrón de referencia lo elabora un anotador externo al desarrollo, porque un patrón escrito por quien construye el sistema mide el acuerdo del autor consigo mismo y no la calidad del sistema. Y la puntuación es de admisibilidad y no de igualdad literal, porque la correspondencia entre un enunciado y una especificación no es una función: varias especificaciones distintas pueden ser correctas para la misma pregunta, y una métrica de igualdad contabilizaría como error la variación legítima. El criterio de admisibilidad se registra en el protocolo del Resultado 2.1, antes de conocer los resultados. Sobre el mismo corpus se mide la estabilidad de la especificación ante reformulaciones de una misma pregunta, reformulaciones que produce el anotador externo y no el sistema.",
+      "after": "El corpus de enunciados (Resultado 1.3) es el instrumento de medida del módulo anterior y su diseño obedece a dos cautelas. El patrón de referencia lo elabora un anotador externo al desarrollo, porque un patrón escrito por quien construye el sistema mide el acuerdo del autor consigo mismo y no la calidad del sistema. Y la puntuación es de admisibilidad y no de igualdad literal, porque la correspondencia entre un enunciado y una especificación no es una función: varias especificaciones distintas pueden ser correctas para la misma pregunta, y una métrica de igualdad contabilizaría como error la variación legítima. El criterio de admisibilidad se registra en el protocolo del Resultado 1.4, antes de conocer los resultados. Sobre el mismo corpus se mide la estabilidad de la especificación ante reformulaciones de una misma pregunta, reformulaciones que produce el anotador externo y no el sistema."
+    },
+    {
+      "body_index": 125,
+      "before": "El protocolo de evaluación (Resultado 2.1) se obtiene por registro previo: es un documento fechado, versionado junto al código y congelado antes de la primera medición. Su método de validación es su propia inmutabilidad comprobable, que el sistema de control de versiones garantiza.",
+      "after": "El protocolo de evaluación (Resultado 1.4) se obtiene por registro previo: es un documento fechado, versionado junto al código y congelado antes de la primera medición. Su método de validación es su propia inmutabilidad comprobable, que el sistema de control de versiones garantiza."
+    },
+    {
+      "body_index": 126,
+      "before": "El motor de composición (Resultado 2.2) emite, a partir de la especificación aprobada, un flujo ejecutable sobre el sustrato de producción. El sustrato es Nextflow, que desacopla la lógica del análisis de la plataforma de ejecución y permite reanudar una ejecución fallida sin recalcular lo ya hecho (Di Tommaso et al., 2017), con las convenciones de nf-core para la estructura del flujo, sus pruebas y sus contenedores (Ewels et al., 2020). El motor no sustituye al gestor: compone sobre él. La validación es la proporción de especificaciones admisibles que producen un flujo ejecutable sin edición manual.",
+      "after": "El motor de composición (Resultado 1.5) emite, a partir de la especificación aprobada, un flujo ejecutable sobre el sustrato de producción. El sustrato es Nextflow, que desacopla la lógica del análisis de la plataforma de ejecución y permite reanudar una ejecución fallida sin recalcular lo ya hecho (Di Tommaso et al., 2017), con las convenciones de nf-core para la estructura del flujo, sus pruebas y sus contenedores (Ewels et al., 2020). El motor no sustituye al gestor: compone sobre él. La validación es la proporción de especificaciones admisibles que producen un flujo ejecutable sin edición manual."
+    },
+    {
+      "body_index": 127,
+      "before": "El recurso de correspondencia entre espacios de identificadores y marcos de numeración de residuos (Resultado 2.3) se construye sobre SIFTS, la correspondencia residuo a residuo entre las entradas del Protein Data Bank y las secuencias de UniProt que el European Bioinformatics Institute publica y actualiza (Dana et al., 2019). Se emplean dos de sus ficheros: la correspondencia general de cadena a accesión y la restringida a los residuos efectivamente observados, esta última porque reclamar geometría sobre residuos que la estructura no resuelve es una de las formas del fallo silencioso. Cada fichero conserva su sello de versión, que es el único identificador de edición que estos ficheros llevan, y un fichero sin sello se rechaza en lugar de analizarse. SIFTS no cubre los modelos predichos, de modo que el recurso se completa con una regla propia para la correspondencia entre el fichero de coordenadas y el documento de confianza de la base de datos de estructuras predichas, regla que se valida por contraste exhaustivo sobre estructuras de varias cadenas.",
+      "after": "El recurso de correspondencia entre espacios de identificadores y marcos de numeración de residuos (Resultado 1.6) se construye sobre SIFTS, la correspondencia residuo a residuo entre las entradas del Protein Data Bank y las secuencias de UniProt que el European Bioinformatics Institute publica y actualiza (Dana et al., 2019). Se emplean dos de sus ficheros: la correspondencia general de cadena a accesión y la restringida a los residuos efectivamente observados, esta última porque reclamar geometría sobre residuos que la estructura no resuelve es una de las formas del fallo silencioso. Cada fichero conserva su sello de versión, que es el único identificador de edición que estos ficheros llevan, y un fichero sin sello se rechaza en lugar de analizarse. SIFTS no cubre los modelos predichos, de modo que el recurso se completa con una regla propia para la correspondencia entre el fichero de coordenadas y el documento de confianza de la base de datos de estructuras predichas, regla que se valida por contraste exhaustivo sobre estructuras de varias cadenas."
+    },
+    {
+      "body_index": 128,
+      "before": "El validador estático (Resultado 2.4) recorre el grafo de ejecución completo sin datos reales y comprueba la compatibilidad entre pasos consecutivos en tres planos: tipo y formato, espacio de identificadores y marco de numeración de residuos. A esa comprobación propia se suman las del ecosistema, la resolución de la configuración del flujo y el recorrido en seco que el propio gestor ofrece, y la conformidad del artefacto con los estándares de nf-core mediante su herramienta de análisis estático (Ewels et al., 2020). La validación del resultado es de cobertura: ninguna ejecución se inicia sin validación previa.",
+      "after": "El validador estático (Resultado 1.7) recorre el grafo de ejecución completo sin datos reales y comprueba la compatibilidad entre pasos consecutivos en tres planos: tipo y formato, espacio de identificadores y marco de numeración de residuos. A esa comprobación propia se suman las del ecosistema, la resolución de la configuración del flujo y el recorrido en seco que el propio gestor ofrece, y la conformidad del artefacto con los estándares de nf-core mediante su herramienta de análisis estático (Ewels et al., 2020). La validación del resultado es de cobertura: ninguna ejecución se inicia sin validación previa."
+    },
+    {
+      "body_index": 129,
+      "before": "El informe de validación (Resultado 2.5) se emite en cada composición y declara de forma explícita qué se comprobó y qué quedó sin comprobar. Es legible por una persona y por una máquina, porque se incorpora al paquete de proveniencia del objetivo específico 3. Su validación consiste en contrastar lo declarado en el informe con lo efectivamente ejecutado.",
+      "after": "El informe de validación (Resultado 1.8) se emite en cada composición y declara de forma explícita qué se comprobó y qué quedó sin comprobar. Es legible por una persona y por una máquina, porque se incorpora al paquete de proveniencia del objetivo específico 3. Su validación consiste en contrastar lo declarado en el informe con lo efectivamente ejecutado."
+    },
+    {
+      "body_index": 130,
+      "before": "El corpus de composiciones inválidas (Resultado 2.6) es el instrumento con que se mide el validador, y su construcción sigue la lógica del corpus del Resultado 1.3: cada caso declara la incompatibilidad que contiene, hay al menos un caso por cada modo de incompatibilidad registrado en el protocolo, y la medición reporta la tasa de aceptación indebida, esto es, la proporción de composiciones inválidas que el validador dejó pasar. Este resultado responde a una exigencia que el Capítulo 3 establece: la validación posterior compra cobertura a cambio de tener que demostrar la corrección caso por caso, y esa demostración solo existe si la tasa de error se publica.",
+      "after": "El corpus de composiciones inválidas (Resultado 1.9) es el instrumento con que se mide el validador, y su construcción sigue la lógica del corpus del Resultado 1.3: cada caso declara la incompatibilidad que contiene, hay al menos un caso por cada modo de incompatibilidad registrado en el protocolo, y la medición reporta la tasa de aceptación indebida, esto es, la proporción de composiciones inválidas que el validador dejó pasar. Este resultado responde a una exigencia que el Capítulo 3 establece: la validación posterior compra cobertura a cambio de tener que demostrar la corrección caso por caso, y esa demostración solo existe si la tasa de error se publica."
+    },
+    {
+      "body_index": 132,
+      "before": "La declaración de recursos del entorno (Resultado 3.1) se obtiene por detección del entorno de ejecución y se registra como inventario legible por máquina, versionado junto a la ejecución. Su validación es de trazabilidad: ninguna decisión de admisión se resuelve contra un presupuesto que no esté declarado en ese inventario.",
+      "after": "La declaración de recursos del entorno (Resultado 2.1) se obtiene por detección del entorno de ejecución y se registra como inventario legible por máquina, versionado junto a la ejecución. Su validación es de trazabilidad: ninguna decisión de admisión se resuelve contra un presupuesto que no esté declarado en ese inventario."
+    },
+    {
+      "body_index": 133,
+      "before": "El contador de demanda (Resultado 3.2) se obtiene por aritmética sobre el flujo ya compuesto, antes de ejecutarlo, y no por predicción. La distinción es deliberada y conviene explicitarla porque separa este trabajo de la línea establecida. La gobernanza de recursos en producción predice el consumo: Total Perspective Vortex ajusta dinámicamente procesador, memoria y acelerador por trabajo sobre una base comunitaria de requisitos (Goonasekera et al., 2026) y Sizey aprende en línea la memoria de cada tarea durante la propia ejecución (Bader et al., 2024). Predecir el tiempo y la memoria de un alineamiento estructural iterativo sobre una estructura arbitraria es un problema abierto, y una predicción baja permite arrancar una ejecución condenada, que es exactamente el fallo que este objetivo existe para evitar. Lo que sí es exacto es el conteo: número de estructuras, llamadas por servicio, espacio en disco, número de tareas y el tiempo mínimo que impone el límite de tasa declarado de cada servicio de terceros. Una cota derivada por aritmética se defiende y se reproduce; una predicción, no. La validación es la reproducción en frío de la cota a partir del manifiesto, por un tercero y sin el sistema.",
+      "after": "El contador de demanda (Resultado 2.2) se obtiene por aritmética sobre el flujo ya compuesto, antes de ejecutarlo, y no por predicción. La distinción es deliberada y conviene explicitarla porque separa este trabajo de la línea establecida. La gobernanza de recursos en producción predice el consumo: Total Perspective Vortex ajusta dinámicamente procesador, memoria y acelerador por trabajo sobre una base comunitaria de requisitos (Goonasekera et al., 2026) y Sizey aprende en línea la memoria de cada tarea durante la propia ejecución (Bader et al., 2024). Predecir el tiempo y la memoria de un alineamiento estructural iterativo sobre una estructura arbitraria es un problema abierto, y una predicción baja permite arrancar una ejecución condenada, que es exactamente el fallo que este objetivo existe para evitar. Lo que sí es exacto es el conteo: número de estructuras, llamadas por servicio, espacio en disco, número de tareas y el tiempo mínimo que impone el límite de tasa declarado de cada servicio de terceros. Una cota derivada por aritmética se defiende y se reproduce; una predicción, no. La validación es la reproducción en frío de la cota a partir del manifiesto, por un tercero y sin el sistema."
+    },
+    {
+      "body_index": 134,
+      "before": "El mecanismo de rechazo (Resultado 3.3) se implementa como error tipificado y no como advertencia en el texto de salida, de modo que impida efectivamente la ejecución, y su mensaje nombra el recurso que falta y la cantidad que falta. La medición del acierto (Resultado 3.4) se obtiene contrastando la decisión de admisión con el resultado observado al ejecutar, lo que produce una matriz de dos por dos sobre el corpus de evaluación. La tasa de falso rechazo se reporta con la misma visibilidad que la de acierto, porque un mecanismo que rechaza de más reproduce el efecto E2 del árbol de problemas por otra vía. Este indicador tiene una propiedad que conviene señalar: su patrón de referencia no lo fija un modelo, ni un guion de evaluación, ni el autor, sino el hecho observable de si la ejecución cupo o no cupo en los recursos disponibles.",
+      "after": "El mecanismo de rechazo (Resultado 2.3) se implementa como error tipificado y no como advertencia en el texto de salida, de modo que impida efectivamente la ejecución, y su mensaje nombra el recurso que falta y la cantidad que falta. La medición del acierto (Resultado 2.4) se obtiene contrastando la decisión de admisión con el resultado observado al ejecutar, lo que produce una matriz de dos por dos sobre el corpus de evaluación. La tasa de falso rechazo se reporta con la misma visibilidad que la de acierto, porque un mecanismo que rechaza de más reproduce el efecto E2 del árbol de problemas por otra vía. Este indicador tiene una propiedad que conviene señalar: su patrón de referencia no lo fija un modelo, ni un guion de evaluación, ni el autor, sino el hecho observable de si la ejecución cupo o no cupo en los recursos disponibles."
+    },
+    {
+      "body_index": 136,
+      "before": "El manifiesto verificable en frío (Resultado 4.1) se emite en un formato de texto estructurado y abierto, y registra por artefacto su resumen criptográfico, su número de filas y su tamaño. La comprobación no requiere el modelo, ni conexión de red, ni la plataforma que lo generó: se reduce a releer los ficheros, recalcular los resúmenes y comparar números, de modo que un revisor puede ejecutarla con utilidades de propósito general ajenas al proyecto. Frente a los formatos establecidos de proveniencia de flujo, la posición es de división del trabajo y no de sustitución. RO-Crate describe el empaquetado de artefactos de investigación con sus metadatos (Soiland-Reyes et al., 2022) y el BioCompute Object describe una computación biomédica de forma comunicable y auditable (Simonyan et al., 2017); cuando el sustrato de ejecución los emite, el manifiesto los detecta y los referencia en lugar de reconstruirlos. Lo que ninguno de los dos cubre es la capa propia del agente, el registro de aprobaciones, el de rechazos y el conteo de intervenciones humanas, y es solo esa capa la que se define aquí. La validación del resultado es de cobertura y de independencia: toda ejecución emite manifiesto, y el verificador valida todos los manifiestos sin modelo, sin red y sin la plataforma.",
+      "after": "El manifiesto verificable en frío (Resultado 3.1) se emite en un formato de texto estructurado y abierto, y registra por artefacto su resumen criptográfico, su número de filas y su tamaño. La comprobación no requiere el modelo, ni conexión de red, ni la plataforma que lo generó: se reduce a releer los ficheros, recalcular los resúmenes y comparar números, de modo que un revisor puede ejecutarla con utilidades de propósito general ajenas al proyecto. Frente a los formatos establecidos de proveniencia de flujo, la posición es de división del trabajo y no de sustitución. RO-Crate describe el empaquetado de artefactos de investigación con sus metadatos (Soiland-Reyes et al., 2022) y el BioCompute Object describe una computación biomédica de forma comunicable y auditable (Simonyan et al., 2017); cuando el sustrato de ejecución los emite, el manifiesto los detecta y los referencia en lugar de reconstruirlos. Lo que ninguno de los dos cubre es la capa propia del agente, el registro de aprobaciones, el de rechazos y el conteo de intervenciones humanas, y es solo esa capa la que se define aquí. La validación del resultado es de cobertura y de independencia: toda ejecución emite manifiesto, y el verificador valida todos los manifiestos sin modelo, sin red y sin la plataforma."
+    },
+    {
+      "body_index": 137,
+      "before": "El registro de decisiones y rechazos (Resultado 4.2) no se redacta: se deriva del flujo de eventos del sistema, y cada entrada conserva su fuente. Las tres fuentes son las aprobaciones y denegaciones del flujo de permisos, las negativas tipificadas de la capa de admisión del objetivo específico 3 y las violaciones de protocolo registradas durante las campañas de evaluación. La validación es de completitud: toda decisión con efecto sobre el resultado queda registrada con su origen y su razón.",
+      "after": "El registro de decisiones y rechazos (Resultado 3.2) no se redacta: se deriva del flujo de eventos del sistema, y cada entrada conserva su fuente. Las tres fuentes son las aprobaciones y denegaciones del flujo de permisos, las negativas tipificadas de la capa de admisión del objetivo específico 2 y las violaciones de protocolo registradas durante las campañas de evaluación. La validación es de completitud: toda decisión con efecto sobre el resultado queda registrada con su origen y su razón."
+    },
+    {
+      "body_index": 138,
+      "before": "El conteo de intervenciones humanas (Resultado 4.3) se obtiene mediante un clasificador determinista sobre el texto de cada turno, con una taxonomía congelada y versionada, y no preguntándole a un modelo cuánta ayuda necesitó. La razón es de validez: un modelo que se equivocó en un hecho es el último que debería puntuar con qué frecuencia fue corregido. El clasificador registra las señales que dispararon cada clasificación, de modo que cualquiera puede ver por qué un turno quedó etiquetado como quedó. La validación se apoya en un conjunto reservado etiquetado por una persona distinta de quien desarrolla, sobre el que se calcula el coeficiente kappa de Cohen, que corrige el acuerdo observado por el acuerdo esperado al azar (Cohen, 1960); el umbral de 0.70 fijado en la Tabla 6 se sitúa en el tramo que Landis y Koch (1977) caracterizan como acuerdo sustancial. El conteo se reporta siempre junto a la corrección del resultado, nunca aislado.",
+      "after": "El conteo de intervenciones humanas (Resultado 3.3) se obtiene mediante un clasificador determinista sobre el texto de cada turno, con una taxonomía congelada y versionada, y no preguntándole a un modelo cuánta ayuda necesitó. La razón es de validez: un modelo que se equivocó en un hecho es el último que debería puntuar con qué frecuencia fue corregido. El clasificador registra las señales que dispararon cada clasificación, de modo que cualquiera puede ver por qué un turno quedó etiquetado como quedó. La validación se apoya en un conjunto reservado etiquetado por una persona distinta de quien desarrolla, sobre el que se calcula el coeficiente kappa de Cohen, que corrige el acuerdo observado por el acuerdo esperado al azar (Cohen, 1960); el umbral de 0.70 fijado en la Tabla 1.5 se sitúa en el tramo que Landis y Koch (1977) caracterizan como acuerdo sustancial. El conteo se reporta siempre junto a la corrección del resultado, nunca aislado."
+    },
+    {
+      "body_index": 139,
+      "before": "La documentación de métodos (Resultado 4.4) se genera por sustitución en plantilla a partir del manifiesto, no por redacción. Cada campo del documento procede de un campo del manifiesto, y una comprobación automática rechaza el documento si contiene algún valor numérico que no provenga de un campo. La regla que impone ese diseño es que ningún número y ningún nombre de un artefacto de proveniencia lo escriba el modelo: el modelo puede ordenar las frases, no puede aportar los hechos. Las versiones se fijan por identificador de revisión del repositorio y resumen criptográfico de la imagen del contenedor, y no por número de versión, porque parte del instrumental del dominio se distribuye sin versiones etiquetadas.",
+      "after": "La documentación de métodos (Resultado 3.4) se genera por sustitución en plantilla a partir del manifiesto, no por redacción. Cada campo del documento procede de un campo del manifiesto, y una comprobación automática rechaza el documento si contiene algún valor numérico que no provenga de un campo. La regla que impone ese diseño es que ningún número y ningún nombre de un artefacto de proveniencia lo escriba el modelo: el modelo puede ordenar las frases, no puede aportar los hechos. Las versiones se fijan por identificador de revisión del repositorio y resumen criptográfico de la imagen del contenedor, y no por número de versión, porque parte del instrumental del dominio se distribuye sin versiones etiquetadas."
+    },
+    {
+      "body_index": 140,
+      "before": "El catálogo de modos de fallo (Resultado 5.1) se construye por revisión dirigida de la literatura del dominio y por experimentación propia sobre ficheros reales, y su regla de admisión es estricta: un modo entra solo si admite un criterio mecánico de detección. El modo que la literatura reconoce pero que no se deja reducir a una comprobación automática queda fuera del catálogo y se declara como tal, de modo que el alcance de la batería sea legible. Cada entrada lleva su referencia bibliográfica, su criterio, su umbral registrado antes de medir y sus veredictos posibles.",
+      "after": "El catálogo de modos de fallo (Resultado 3.5) se construye por revisión dirigida de la literatura del dominio y por experimentación propia sobre ficheros reales, y su regla de admisión es estricta: un modo entra solo si admite un criterio mecánico de detección. El modo que la literatura reconoce pero que no se deja reducir a una comprobación automática queda fuera del catálogo y se declara como tal, de modo que el alcance de la batería sea legible. Cada entrada lleva su referencia bibliográfica, su criterio, su umbral registrado antes de medir y sus veredictos posibles."
+    },
+    {
+      "body_index": 141,
+      "before": "La batería de controles (Resultado 5.2) se implementa como código determinista que se ejecuta sin modelo y sin conexión de red, la misma propiedad que hace útil al verificador del Resultado 4.1, porque es lo que permite que los controles formen parte del paquete que un tercero comprueba. Un veredicto negativo incorpora siempre el valor medido y el umbral aplicado. El artefacto de controles (Resultado 5.3) recoge una fila por instancia analizada con la fuente de la estructura, la versión del modelo empleado, la métrica de confianza acompañada de su escala y el veredicto de cada control, y se referencia desde el manifiesto.",
+      "after": "La batería de controles (Resultado 3.6) se implementa como código determinista que se ejecuta sin modelo y sin conexión de red, la misma propiedad que hace útil al verificador del Resultado 3.1, porque es lo que permite que los controles formen parte del paquete que un tercero comprueba. Un veredicto negativo incorpora siempre el valor medido y el umbral aplicado. El artefacto de controles (Resultado 3.7) recoge una fila por instancia analizada con la fuente de la estructura, la versión del modelo empleado, la métrica de confianza acompañada de su escala y el veredicto de cada control, y se referencia desde el manifiesto."
+    },
+    {
+      "body_index": 142,
+      "before": "La medición de sensibilidad y especificidad (Resultado 5.4) emplea dos conjuntos de referencia de naturaleza distinta y complementaria. Para la sensibilidad, los casos de fallo conocido publicados por Pratt et al. (2025), secuencias construidas por repetición de fragmentos aleatorios que el predictor pliega con alta confianza en solenoides inverosímiles: son casos positivos establecidos por terceros, adversariales y ajenos a la elección del autor, lo que evita medir la batería contra ejemplos escogidos por quien la construyó. Para la especificidad, la anotación de referencia del dominio en RepeatsDB (Clementel et al., 2025), donde un veredicto negativo sobre una estructura correctamente anotada es un falso positivo del control. Ambas tasas se reportan de forma conjunta, porque una batería que marca todo alcanza sensibilidad perfecta y es inútil.",
+      "after": "La medición de sensibilidad y especificidad (Resultado 3.8) emplea dos conjuntos de referencia de naturaleza distinta y complementaria. Para la sensibilidad, los casos de fallo conocido publicados por Pratt et al. (2025), secuencias construidas por repetición de fragmentos aleatorios que el predictor pliega con alta confianza en solenoides inverosímiles: son casos positivos establecidos por terceros, adversariales y ajenos a la elección del autor, lo que evita medir la batería contra ejemplos escogidos por quien la construyó. Para la especificidad, la anotación de referencia del dominio en RepeatsDB (Clementel et al., 2025), donde un veredicto negativo sobre una estructura correctamente anotada es un falso positivo del control. Ambas tasas se reportan de forma conjunta, porque una batería que marca todo alcanza sensibilidad perfecta y es inútil."
+    },
+    {
+      "body_index": 145,
+      "before": "Resultado 2.1",
+      "after": "Resultado 1.4"
+    },
+    {
+      "body_index": 145,
+      "before": "R2.1 Protocolo de evaluación",
+      "after": "R1.4 Protocolo de evaluación"
+    },
+    {
+      "body_index": 145,
+      "before": "R2.2 Motor de composición",
+      "after": "R1.5 Motor de composición"
+    },
+    {
+      "body_index": 145,
+      "before": "R2.3 Recurso de correspondencia",
+      "after": "R1.6 Recurso de correspondencia"
+    },
+    {
+      "body_index": 145,
+      "before": "R2.4 Validador estático",
+      "after": "R1.7 Validador estático"
+    },
+    {
+      "body_index": 145,
+      "before": "R2.5 Informe de validación",
+      "after": "R1.8 Informe de validación"
+    },
+    {
+      "body_index": 145,
+      "before": "R2.6 Corpus de composiciones inválidas",
+      "after": "R1.9 Corpus de composiciones inválidas"
+    },
+    {
+      "body_index": 145,
+      "before": "Resultado 2.1",
+      "after": "Resultado 1.4"
+    },
+    {
+      "body_index": 145,
+      "before": "R3.1 Declaración de recursos",
+      "after": "R2.1 Declaración de recursos"
+    },
+    {
+      "body_index": 145,
+      "before": "R3.2 Contador de demanda",
+      "after": "R2.2 Contador de demanda"
+    },
+    {
+      "body_index": 145,
+      "before": "R3.3 Rechazo tipificado",
+      "after": "R2.3 Rechazo tipificado"
+    },
+    {
+      "body_index": 145,
+      "before": "R3.4 Acierto del rechazo",
+      "after": "R2.4 Acierto del rechazo"
+    },
+    {
+      "body_index": 145,
+      "before": "R4.1 Manifiesto verificable en frío",
+      "after": "R3.1 Manifiesto verificable en frío"
+    },
+    {
+      "body_index": 145,
+      "before": "R4.2 Registro de decisiones y rechazos",
+      "after": "R3.2 Registro de decisiones y rechazos"
+    },
+    {
+      "body_index": 145,
+      "before": "R4.3 Conteo de intervenciones humanas",
+      "after": "R3.3 Conteo de intervenciones humanas"
+    },
+    {
+      "body_index": 145,
+      "before": "R4.4 Documentación de métodos",
+      "after": "R3.4 Documentación de métodos"
+    },
+    {
+      "body_index": 145,
+      "before": "R5.1 Catálogo de modos de fallo",
+      "after": "R3.5 Catálogo de modos de fallo"
+    },
+    {
+      "body_index": 145,
+      "before": "R5.2 Batería de controles",
+      "after": "R3.6 Batería de controles"
+    },
+    {
+      "body_index": 145,
+      "before": "R5.3 Artefacto de controles",
+      "after": "R3.7 Artefacto de controles"
+    },
+    {
+      "body_index": 145,
+      "before": "R5.4 Sensibilidad y especificidad",
+      "after": "R3.8 Sensibilidad y especificidad"
+    },
+    {
+      "body_index": 151,
+      "before": "La primera afecta al alcance de la verificación. Los artefactos del objetivo específico 4 establecen qué se ejecutó, que puede reejecutarse de forma idéntica y qué devolvieron los controles aplicados. No establecen que el resultado sea biológicamente correcto, y ningún artefacto de proveniencia puede establecerlo. La contribución frente al fallo silencioso no consiste en garantizar la corrección sino en volver audible, mediante los controles del objetivo específico 5, aquello que el dominio falla en silencio.",
+      "after": "La primera afecta al alcance de la verificación. Los artefactos del objetivo específico 3 establecen qué se ejecutó, que puede reejecutarse de forma idéntica y qué devolvieron los controles aplicados. No establecen que el resultado sea biológicamente correcto, y ningún artefacto de proveniencia puede establecerlo. La contribución frente al fallo silencioso no consiste en garantizar la corrección sino en volver audible, mediante los controles del objetivo específico 3, aquello que el dominio falla en silencio."
+    },
+    {
+      "body_index": 174,
+      "before": "Sobre esta base se entiende el hallazgo que da a la causa C6 su forma más aguda. El predictor pliega con alta confianza secuencias construidas por repetición de fragmentos aleatorios, generando solenoides beta que contienen rasgos fisicoquímicamente inverosímiles, como pilas internas de residuos cargados sin compensar, y que otros métodos predicen como intrínsecamente desordenados (Pratt et al., 2025). La Ilustración 2 del Capítulo 1 muestra uno de esos modelos, con un pLDDT de 90,3. En un dominio cuya señal es la repetición, el modo de error del instrumento está correlacionado con el objeto de estudio, y el fichero resultante no contiene ninguna marca que lo delate: la ocupación es completa y no faltan residuos.",
+      "after": "Sobre esta base se entiende el hallazgo que da a la causa C3 su forma más aguda. El predictor pliega con alta confianza secuencias construidas por repetición de fragmentos aleatorios, generando solenoides beta que contienen rasgos fisicoquímicamente inverosímiles, como pilas internas de residuos cargados sin compensar, y que otros métodos predicen como intrínsecamente desordenados (Pratt et al., 2025). La Ilustración 2 del Capítulo 1 muestra uno de esos modelos, con un pLDDT de 90,3. En un dominio cuya señal es la repetición, el modo de error del instrumento está correlacionado con el objeto de estudio, y el fichero resultante no contiene ninguna marca que lo delate: la ocupación es completa y no faltan residuos."
+    },
+    {
+      "body_index": 182,
+      "before": "La razón por la que este apartado ocupa un lugar central en el marco es la naturaleza del error que previene. Cuando dos pasos de un análisis intercambian datos suponiendo un marco de numeración que no coinciden, la operación no falla: produce un emparejamiento incorrecto entre valores que siguen siendo del tipo esperado y del rango esperado. Un valor de confianza asociado al residuo equivocado sigue siendo un valor de confianza plausible. El programa no se detiene, no emite advertencia y entrega una tabla completa. Esta es la forma más pura de fallo silencioso en el dominio, y es la que justifica que el catálogo del Resultado 1.1 declare el espacio de identificadores y el marco de numeración como atributos de primer orden de cada recurso, y que el validador del Resultado 2.4 los compruebe antes de ejecutar.",
+      "after": "La razón por la que este apartado ocupa un lugar central en el marco es la naturaleza del error que previene. Cuando dos pasos de un análisis intercambian datos suponiendo un marco de numeración que no coinciden, la operación no falla: produce un emparejamiento incorrecto entre valores que siguen siendo del tipo esperado y del rango esperado. Un valor de confianza asociado al residuo equivocado sigue siendo un valor de confianza plausible. El programa no se detiene, no emite advertencia y entrega una tabla completa. Esta es la forma más pura de fallo silencioso en el dominio, y es la que justifica que el catálogo del Resultado 1.1 declare el espacio de identificadores y el marco de numeración como atributos de primer orden de cada recurso, y que el validador del Resultado 1.7 los compruebe antes de ejecutar."
+    },
+    {
+      "body_index": 204,
+      "before": "El acuerdo entre observadores mide en qué medida dos personas que clasifican los mismos casos coinciden. El acuerdo bruto sobreestima esa coincidencia porque parte de ella se produciría por azar, de modo que se emplea el coeficiente kappa, que corrige el acuerdo observado por el acuerdo esperado bajo independencia (Cohen, 1960). Su valor máximo es uno y el cero corresponde al acuerdo que produciría el azar. El umbral de 0.70 que fija la Tabla 6 se sitúa en el tramo que Landis y Koch (1977) caracterizan como acuerdo sustancial.",
+      "after": "El acuerdo entre observadores mide en qué medida dos personas que clasifican los mismos casos coinciden. El acuerdo bruto sobreestima esa coincidencia porque parte de ella se produciría por azar, de modo que se emplea el coeficiente kappa, que corrige el acuerdo observado por el acuerdo esperado bajo independencia (Cohen, 1960). Su valor máximo es uno y el cero corresponde al acuerdo que produciría el azar. El umbral de 0.70 que fija la Tabla 1.5 se sitúa en el tramo que Landis y Koch (1977) caracterizan como acuerdo sustancial."
+    },
+    {
+      "body_index": 205,
+      "before": "El registro previo de umbrales consiste en fijar por escrito, con fecha y de forma inmutable, el valor que separa un resultado aceptable de uno inaceptable, antes de realizar la medición. Su función es impedir que el umbral se ajuste al dato obtenido. En esta tesis cumple esa función el Resultado 2.1, y de él dependen explícitamente los indicadores de los Resultados 1.3, 2.6, 3.2, 3.4 y 5.4.",
+      "after": "El registro previo de umbrales consiste en fijar por escrito, con fecha y de forma inmutable, el valor que separa un resultado aceptable de uno inaceptable, antes de realizar la medición. Su función es impedir que el umbral se ajuste al dato obtenido. En esta tesis cumple esa función el Resultado 1.4, y de él dependen explícitamente los indicadores de los Resultados 1.3, 1.9, 2.2, 2.4 y 3.8."
+    },
+    {
+      "body_index": 209,
+      "before": "El segundo conjunto es el de las condiciones de uso de los servicios de terceros que el sistema consulta. Estas condiciones incluyen, de forma característica, límites sobre la frecuencia de las peticiones y expectativas sobre la identificación del cliente. Su cumplimiento no es solo una obligación contractual sino una condición de sostenibilidad del recurso común: un sistema que automatiza un proceso manual multiplica la carga que un laboratorio puede imponer sobre infraestructura pública mantenida por terceros. Por esa razón el contador de demanda del Resultado 3.2 incluye las llamadas a servicios externos entre las magnitudes que acota, y no solo los recursos de la máquina del usuario.",
+      "after": "El segundo conjunto es el de las condiciones de uso de los servicios de terceros que el sistema consulta. Estas condiciones incluyen, de forma característica, límites sobre la frecuencia de las peticiones y expectativas sobre la identificación del cliente. Su cumplimiento no es solo una obligación contractual sino una condición de sostenibilidad del recurso común: un sistema que automatiza un proceso manual multiplica la carga que un laboratorio puede imponer sobre infraestructura pública mantenida por terceros. Por esa razón el contador de demanda del Resultado 2.2 incluye las llamadas a servicios externos entre las magnitudes que acota, y no solo los recursos de la máquina del usuario."
+    },
+    {
+      "body_index": 297,
+      "before": "La presentación conserva los cinco bloques técnicos y sus códigos de resultado: el objetivo específico 1 comprende los bloques de elicitación y composición; el objetivo específico 2, el de admisión de recursos; y el objetivo específico 3, los de proveniencia y controles de fallo silencioso.",
+      "after": "La presentación conserva los cinco bloques técnicos, organizados bajo tres objetivos y los códigos de resultado actualizados: el objetivo específico 1 comprende los bloques de elicitación y composición; el objetivo específico 2, el de admisión de recursos; y el objetivo específico 3, los de proveniencia y controles de fallo silencioso."
+    },
+    {
+      "body_index": 300,
+      "before": "El armazón del agente procede de opencode y la especialización bioinformática reside principalmente en packages/bioinformatica/src/bio y src/nfcore. El primero contiene clientes y utilidades para datos biológicos; el segundo reúne capacidades de flujos nf-core, registro, verificación y presentación. El tamaño del monorepositorio no mide el aporte propio de la tesis. La contribución se delimita por los contratos, controles e integración específicos del proceso TRP y por su evaluación.",
+      "after": "El armazón del agente procede de opencode y la especialización bioinformática reside principalmente en packages/helix/src/bio y src/nfcore. El primero contiene clientes y utilidades para datos biológicos; el segundo reúne capacidades de flujos nf-core, registro, verificación y presentación. El tamaño del monorepositorio no mide el aporte propio de la tesis. La contribución se delimita por los contratos, controles e integración específicos del proceso TRP y por su evaluación."
+    },
+    {
+      "body_index": 318,
+      "before": "R2.1. Protocolo de evaluación",
+      "after": "R1.4. Protocolo de evaluación"
+    },
+    {
+      "body_index": 323,
+      "before": "R2.2. Motor de composición",
+      "after": "R1.5. Motor de composición"
+    },
+    {
+      "body_index": 327,
+      "before": "R2.3. Correspondencia de identificadores y numeración",
+      "after": "R1.6. Correspondencia de identificadores y numeración"
+    },
+    {
+      "body_index": 332,
+      "before": "R2.4. Validador estático y recorrido sin datos",
+      "after": "R1.7. Validador estático y recorrido sin datos"
+    },
+    {
+      "body_index": 335,
+      "before": "Las comprobaciones del paquete se repiten antes y después de ejecutar. F4 añade inventario, presupuesto revisado y protocolo al contenido protegido; el cierre R3.2 incorpora cuota XFS y límites cgroup v2 comprobados y enlazados a la aprobación. La garantía corresponde a la ruta TRP dentro de una asignación de operador. El agente general conserva herramientas de shell y edición; no se afirma aislamiento absoluto frente a código arbitrario.",
+      "after": "Las comprobaciones del paquete se repiten antes y después de ejecutar. F4 añade inventario, presupuesto revisado y protocolo al contenido protegido; el cierre R2.2 incorpora cuota XFS y límites cgroup v2 comprobados y enlazados a la aprobación. La garantía corresponde a la ruta TRP dentro de una asignación de operador. El agente general conserva herramientas de shell y edición; no se afirma aislamiento absoluto frente a código arbitrario."
+    },
+    {
+      "body_index": 336,
+      "before": "R2.5. Informe de validación",
+      "after": "R1.8. Informe de validación"
+    },
+    {
+      "body_index": 338,
+      "before": "Se mantienen pendientes la autenticación externa de las fuentes, la detección admitida de repeticiones y la anotación independiente. F4 añadió admisión y proveniencia; el cierre R3.2 habilita límites estrictos dentro de una asignación comprobada. F5 añade el reporte estructural de la ruta experimental y la inspección separada mmCIF/AFDB con pLDDT/PAE. Un control no evaluable no cuenta como aprobado. La verificación del CSV exige identidad, límites, cantidad de unidades, valores finitos, escala TM-score, relleno inicial y resúmenes etiquetados.",
+      "after": "Se mantienen pendientes la autenticación externa de las fuentes, la detección admitida de repeticiones y la anotación independiente. F4 añadió admisión y proveniencia; el cierre R2.2 habilita límites estrictos dentro de una asignación comprobada. F5 añade el reporte estructural de la ruta experimental y la inspección separada mmCIF/AFDB con pLDDT/PAE. Un control no evaluable no cuenta como aprobado. La verificación del CSV exige identidad, límites, cantidad de unidades, valores finitos, escala TM-score, relleno inicial y resúmenes etiquetados."
+    },
+    {
+      "body_index": 339,
+      "before": "R2.6. Corpus de composiciones inválidas",
+      "after": "R1.9. Corpus de composiciones inválidas"
+    },
+    {
+      "body_index": 342,
+      "before": "La reserva T-GRAPH de F6 permanece separada y sin evaluar. No se traslada el resultado 0/33 al indicador empírico ni se ajustan retrospectivamente sus metas. R2.6 tiene corpus técnico implementado, con medición reservada pendiente.",
+      "after": "La reserva T-GRAPH de F6 permanece separada y sin evaluar. No se traslada el resultado 0/33 al indicador empírico ni se ajustan retrospectivamente sus metas. R1.9 tiene corpus técnico implementado, con medición reservada pendiente."
+    },
+    {
+      "body_index": 344,
+      "before": "R3.1. Inventario de recursos",
+      "after": "R2.1. Inventario de recursos"
+    },
+    {
+      "body_index": 348,
+      "before": "R3.2. Contador de demanda",
+      "after": "R2.2. Contador de demanda"
+    },
+    {
+      "body_index": 355,
+      "before": "R3.3. Rechazo tipificado de admisión",
+      "after": "R2.3. Rechazo tipificado de admisión"
+    },
+    {
+      "body_index": 357,
+      "before": "Las pruebas de integración comprueban que una disminución del espacio durante la revisión detiene el flujo antes del primer comando. Los protocolos vinculantes con violaciones o restricciones no evaluadas también bloquean la preparación, y modificar el protocolo invalida una propuesta aprobada. Son pruebas de mecanismos; R3.4 aún requiere el contraste reservado con condiciones observadas.",
+      "after": "Las pruebas de integración comprueban que una disminución del espacio durante la revisión detiene el flujo antes del primer comando. Los protocolos vinculantes con violaciones o restricciones no evaluadas también bloquean la preparación, y modificar el protocolo invalida una propuesta aprobada. Son pruebas de mecanismos; R2.4 aún requiere el contraste reservado con condiciones observadas."
+    },
+    {
+      "body_index": 358,
+      "before": "R3.4. Acierto y falso rechazo",
+      "after": "R2.4. Acierto y falso rechazo"
+    },
+    {
+      "body_index": 359,
+      "before": "Relación con el objetivo: OE3. Medir matriz de decisión frente a ejecución observada en condiciones controladas. Un caso rechazado que no se ejecutó para contraste no demuestra un rechazo correcto.",
+      "after": "Relación con el objetivo: OE2. Medir matriz de decisión frente a ejecución observada en condiciones controladas. Un caso rechazado que no se ejecutó para contraste no demuestra un rechazo correcto."
+    },
+    {
+      "body_index": 362,
+      "before": "R4.1. Manifiesto verificable en frío",
+      "after": "R3.1. Manifiesto verificable en frío"
+    },
+    {
+      "body_index": 366,
+      "before": "R4.2. Registro de decisiones y rechazos",
+      "after": "R3.2. Registro de decisiones y rechazos"
+    },
+    {
+      "body_index": 369,
+      "before": "R4.3. Conteo de intervenciones",
+      "after": "R3.3. Conteo de intervenciones"
+    },
+    {
+      "body_index": 372,
+      "before": "R4.4. Métodos derivados del manifiesto",
+      "after": "R3.4. Métodos derivados del manifiesto"
+    },
+    {
+      "body_index": 376,
+      "before": "R5.1. Catálogo de fallos silenciosos",
+      "after": "R3.5. Catálogo de fallos silenciosos"
+    },
+    {
+      "body_index": 380,
+      "before": "R5.2. Batería de controles",
+      "after": "R3.6. Batería de controles"
+    },
+    {
+      "body_index": 386,
+      "before": "R5.3. Artefacto de controles por instancia",
+      "after": "R3.7. Artefacto de controles por instancia"
+    },
+    {
+      "body_index": 389,
+      "before": "R5.3 dispone de evidencia de ingeniería por instancia en las referencias conservadas. El resumen distingue admisión mecánica de validez biológica no establecida. La cobertura en el conjunto completo de la tesis y la calidad de las referencias externas aún deben medirse en F6.",
+      "after": "R3.7 dispone de evidencia de ingeniería por instancia en las referencias conservadas. El resumen distingue admisión mecánica de validez biológica no establecida. La cobertura en el conjunto completo de la tesis y la calidad de las referencias externas aún deben medirse en F6."
+    },
+    {
+      "body_index": 390,
+      "before": "R5.4. Sensibilidad y especificidad",
+      "after": "R3.8. Sensibilidad y especificidad"
+    },
+    {
+      "body_index": 406,
+      "before": "F4 completa una primera implementación de admisión y proveniencia para la ruta geométrica local. Su cierre de ingeniería R3.2 añade cuota agregada y límites del controlador/tareas con siete contrastes posteriores a la corrección del estimador. Permanecen pendientes ampliación del catálogo, mapeos, cobertura estructural del dominio y evaluación reservada. Se mantiene julio de 2027 para la sustentación y el 4 de junio de 2027 como objetivo del borrador completo.",
+      "after": "F4 completa una primera implementación de admisión y proveniencia para la ruta geométrica local. Su cierre de ingeniería R2.2 añade cuota agregada y límites del controlador/tareas con siete contrastes posteriores a la corrección del estimador. Permanecen pendientes ampliación del catálogo, mapeos, cobertura estructural del dominio y evaluación reservada. Se mantiene julio de 2027 para la sustentación y el 4 de junio de 2027 como objetivo del borrador completo."
+    },
+    {
+      "body_index": 410,
+      "before": "Cierre de ingeniería de R3.2",
+      "after": "Cierre de ingeniería de R2.2"
+    },
+    {
+      "body_index": 413,
+      "before": "Continuación de R2.3 y verificación de ejecución",
+      "after": "Continuación de R1.6 y verificación de ejecución"
+    },
+    {
+      "body_index": 426,
+      "before": "Las cinco fases desarrolladas construyen una base verificable, un catálogo inicial, composición aprobada, admisión de recursos y controles estructurales por instancia. La ruta local enlaza entradas, contratos, presupuesto y ejecución con una copia verificable sin el agente. El cierre R3.2 comprueba cuota y límites efectivos en una segunda estación. F5 no certifica plausibilidad física ni cobertura completa del dominio. El cumplimiento empírico de los objetivos sigue sujeto a la campaña reservada.",
+      "after": "Las cinco fases desarrolladas construyen una base verificable, un catálogo inicial, composición aprobada, admisión de recursos y controles estructurales por instancia. La ruta local enlaza entradas, contratos, presupuesto y ejecución con una copia verificable sin el agente. El cierre R2.2 comprueba cuota y límites efectivos en una segunda estación. F5 no certifica plausibilidad física ni cobertura completa del dominio. El cumplimiento empírico de los objetivos sigue sujeto a la campaña reservada."
+    },
+    {
+      "body_index": 427,
+      "before": "Respecto del OE1, se implementaron el catálogo inicial y la especificación con procedencia y aprobación; la cobertura del catálogo y la evaluación externa del lenguaje siguen pendientes. Respecto del OE2, existe composición validada con Nextflow, recorrido en seco e informe de controles. La referencia de geometría reproduce el CSV previo y el corpus técnico rechaza 33 composiciones inválidas; el dominio de conversiones y la reserva empírica aún no están cerrados. El diagnóstico de STRPsearch aporta una ejecución candidata y revela que un código de salida cero puede coexistir con fallos científicos.",
+      "after": "Respecto del OE1, se implementaron el catálogo inicial y la especificación con procedencia y aprobación; la cobertura del catálogo y la evaluación externa del lenguaje siguen pendientes. Respecto del OE1, existe composición validada con Nextflow, recorrido en seco e informe de controles. La referencia de geometría reproduce el CSV previo y el corpus técnico rechaza 33 composiciones inválidas; el dominio de conversiones y la reserva empírica aún no están cerrados. El diagnóstico de STRPsearch aporta una ejecución candidata y revela que un código de salida cero puede coexistir con fallos científicos."
+    },
+    {
+      "body_index": 428,
+      "before": "Respecto del OE3, se implementaron inventarios fechados, conteos, estimaciones, negativas y límites efectivos de almacenamiento, controlador y tareas; su contraste reservado sigue pendiente. Respecto del OE4, el paquete conserva artefactos, eventos, controles y métodos verificables en frío; acuerdo y cobertura externos requieren evaluación independiente. Respecto del OE5, se implementaron lectura semántica y controles de marcos, escalas, cobertura y confianza con referencias de desarrollo. La detección de fallos físicos publicados y el desempeño reservado permanecen sin medir.",
+      "after": "Respecto del OE2, se implementaron inventarios fechados, conteos, estimaciones, negativas y límites efectivos de almacenamiento, controlador y tareas; su contraste reservado sigue pendiente. Respecto del OE3, el paquete conserva artefactos, eventos, controles y métodos verificables en frío; acuerdo y cobertura externos requieren evaluación independiente. Respecto del OE3, se implementaron lectura semántica y controles de marcos, escalas, cobertura y confianza con referencias de desarrollo. La detección de fallos físicos publicados y el desempeño reservado permanecen sin medir."
+    },
+    {
+      "body_index": 430,
+      "before": "NOTA PARA EL AUTOR. Conclusiones provisionales de avance. En F7 sustituir esta síntesis por conclusiones empíricas vinculadas a las tablas del Capítulo 4. No afirmar cumplimiento de OE1–OE5 hasta completar la implementación y su evaluación; mantener visibles la anotación externa y el acceso a infraestructura que sigan pendientes.",
+      "after": "NOTA PARA EL AUTOR. Conclusiones provisionales de avance. En F7 sustituir esta síntesis por conclusiones empíricas vinculadas a las tablas del Capítulo 4. No afirmar cumplimiento de OE1–OE3 hasta completar la implementación y su evaluación; mantener visibles la anotación externa y el acceso a infraestructura que sigan pendientes."
+    },
+    {
+      "body_index": 546,
+      "before": "La segunda fase verificó localmente la recuperación de una estructura PDB y la geometría de unidades conocidas con GeomeTRe. La detección mediante ReUPred o STRPsearch y el mapeo de las anotaciones actuales de RepeatsDB conservan dependencias técnicas explícitas. El usuario confirmó que el agente está conectado con OpenAI y que el anotador externo y el clúster todavía no están disponibles de forma confirmada. La validación externa de R1.3/R4.3 y una eventual afirmación de ejecución en clúster dependen de resolver esos puntos.",
+      "after": "La segunda fase verificó localmente la recuperación de una estructura PDB y la geometría de unidades conocidas con GeomeTRe. La detección mediante ReUPred o STRPsearch y el mapeo de las anotaciones actuales de RepeatsDB conservan dependencias técnicas explícitas. El usuario confirmó que el agente está conectado con OpenAI y que el anotador externo y el clúster todavía no están disponibles de forma confirmada. La validación externa de R1.3/R3.3 y una eventual afirmación de ejecución en clúster dependen de resolver esos puntos."
+    },
+    {
+      "body_index": 557,
+      "before": "R-B. Anotación externa no disponible. Síntoma: no hay persona ni fecha acordadas. Probabilidad: 3. Impacto: 3. Severidad: 9. Mitigación: Preparar instrucciones y corpus temprano. Contingencia: Mantener R1.3/R4.3 sin validación externa; no sustituirla por autoetiquetas.",
+      "after": "R-B. Anotación externa no disponible. Síntoma: no hay persona ni fecha acordadas. Probabilidad: 3. Impacto: 3. Severidad: 9. Mitigación: Preparar instrucciones y corpus temprano. Contingencia: Mantener R1.3/R3.3 sin validación externa; no sustituirla por autoetiquetas."
+    },
+    {
+      "body_index": 598,
+      "before": "Fecha de fijación del diseño: 15 de septiembre de 2026. Este apartado reproduce los criterios operativos de R2.1; la versión ampliada y estructurada se conserva en evaluation/trp/PROTOCOL.md y protocol.json. Los ensayos de instalación, las referencias técnicas y las pruebas de componentes se consideran desarrollo, no evaluación empírica reservada.",
+      "after": "Fecha de fijación del diseño: 15 de septiembre de 2026. Este apartado reproduce los criterios operativos de R1.4; la versión ampliada y estructurada se conserva en evaluation/trp/PROTOCOL.md y protocol.json. Los ensayos de instalación, las referencias técnicas y las pruebas de componentes se consideran desarrollo, no evaluación empírica reservada."
+    },
+    {
+      "body_index": 624,
+      "before": "R2.1. Indicadores con definiciones y reglas previas / 21; cambios registrados / cambios realizados",
+      "after": "R1.4. Indicadores con definiciones y reglas previas / 21; cambios registrados / cambios realizados"
+    },
+    {
+      "body_index": 626,
+      "before": "R2.2. Flujos que terminan y producen los artefactos previstos sin edición manual / 50 especificaciones factibles aprobadas",
+      "after": "R1.5. Flujos que terminan y producen los artefactos previstos sin edición manual / 50 especificaciones factibles aprobadas"
+    },
+    {
+      "body_index": 628,
+      "before": "R2.3. Correspondencias de proteína, cadena y residuo correctas frente a mapeo de referencia / correspondencias requeridas",
+      "after": "R1.6. Correspondencias de proteína, cadena y residuo correctas frente a mapeo de referencia / correspondencias requeridas"
+    },
+    {
+      "body_index": 630,
+      "before": "R2.4. Composiciones para las que se ejecutan todos los controles estáticos y recorrido en seco exigibles antes de ejecución / composiciones",
+      "after": "R1.7. Composiciones para las que se ejecutan todos los controles estáticos y recorrido en seco exigibles antes de ejecución / composiciones"
+    },
+    {
+      "body_index": 632,
+      "before": "R2.5. Informes con cada control ejecutado, omitido o no evaluable y motivo / composiciones",
+      "after": "R1.8. Informes con cada control ejecutado, omitido o no evaluable y motivo / composiciones"
+    },
+    {
+      "body_index": 634,
+      "before": "R2.6. Composiciones inválidas aceptadas / composiciones inválidas (n≥30)",
+      "after": "R1.9. Composiciones inválidas aceptadas / composiciones inválidas (n≥30)"
+    },
+    {
+      "body_index": 636,
+      "before": "R3.1. Decisiones con inventario completo, fechado y enlazado por hash / decisiones de admisión",
+      "after": "R2.1. Decisiones con inventario completo, fechado y enlazado por hash / decisiones de admisión"
+    },
+    {
+      "body_index": 638,
+      "before": "R3.2. Conteos reproducidos en frío / conteos; diferencia entre cantidades contadas y medidas",
+      "after": "R2.2. Conteos reproducidos en frío / conteos; diferencia entre cantidades contadas y medidas"
+    },
+    {
+      "body_index": 640,
+      "before": "R3.3. Rechazos previos a ejecutar con recurso, demanda, disponibilidad y código / rechazos",
+      "after": "R2.3. Rechazos previos a ejecutar con recurso, demanda, disponibilidad y código / rechazos"
+    },
+    {
+      "body_index": 642,
+      "before": "R3.4. Acierto=(aceptaciones factibles+rechazos inviables)/contrastes; falso rechazo=rechazos factibles/todos los factibles contrastados",
+      "after": "R2.4. Acierto=(aceptaciones factibles+rechazos inviables)/contrastes; falso rechazo=rechazos factibles/todos los factibles contrastados"
+    },
+    {
+      "body_index": 644,
+      "before": "R4.1. Manifiestos verificables desde copia sin modelo ni red / ejecuciones; alteraciones o ausencias detectadas / alteraciones inyectadas",
+      "after": "R3.1. Manifiestos verificables desde copia sin modelo ni red / ejecuciones; alteraciones o ausencias detectadas / alteraciones inyectadas"
+    },
+    {
+      "body_index": 646,
+      "before": "R4.2. Eventos de permisos, admisión y protocolo presentes con su causa / eventos observados independientemente en la sesión",
+      "after": "R3.2. Eventos de permisos, admisión y protocolo presentes con su causa / eventos observados independientemente en la sesión"
+    },
+    {
+      "body_index": 648,
+      "before": "R4.3. Kappa de Cohen entre clase automática y etiqueta externa no adjudicada; matriz de confusión y conteos por clase",
+      "after": "R3.3. Kappa de Cohen entre clase automática y etiqueta externa no adjudicada; matriz de confusión y conteos por clase"
+    },
+    {
+      "body_index": 650,
+      "before": "R4.4. Campos del apartado de métodos respaldados por manifiesto / campos afirmados; campos obligatorios presentes / campos requeridos",
+      "after": "R3.4. Campos del apartado de métodos respaldados por manifiesto / campos afirmados; campos obligatorios presentes / campos requeridos"
+    },
+    {
+      "body_index": 652,
+      "before": "R5.1. Modos de fallo con fuente, observable, criterio, umbral y veredicto / modos identificados en el inventario fijado",
+      "after": "R3.5. Modos de fallo con fuente, observable, criterio, umbral y veredicto / modos identificados en el inventario fijado"
+    },
+    {
+      "body_index": 654,
+      "before": "R5.2. Controles exigibles ejecutados con valor y umbral / controles exigibles por instancia",
+      "after": "R3.6. Controles exigibles ejecutados con valor y umbral / controles exigibles por instancia"
+    },
+    {
+      "body_index": 656,
+      "before": "R5.3. Instancias con procedencia, versión, marco, escala y veredictos / instancias analizadas",
+      "after": "R3.7. Instancias con procedencia, versión, marco, escala y veredictos / instancias analizadas"
+    },
+    {
+      "body_index": 658,
+      "before": "R5.4. Sensibilidad=fallos conocidos detectados/fallos conocidos evaluables; especificidad=controles sin fallo aceptados/controles evaluables",
+      "after": "R3.8. Sensibilidad=fallos conocidos detectados/fallos conocidos evaluables; especificidad=controles sin fallo aceptados/controles evaluables"
+    },
+    {
+      "body_index": 690,
+      "before": "Permanecen pendientes ampliación del catálogo, mapeos SIFTS/UniProt, ejecución admitida sobre modelos predichos y evaluación reservada. F4 implementó inventario, presupuesto y copia portable (A.18); F5 incorpora inspección semántica y controles (A.19); el cierre R3.2 implementa límites de recursos y contraste de ingeniería (A.20). STRPsearch continúa candidato: su admisión requiere revisar transformación, contratos y propagación de fallos.",
+      "after": "Permanecen pendientes ampliación del catálogo, mapeos SIFTS/UniProt, ejecución admitida sobre modelos predichos y evaluación reservada. F4 implementó inventario, presupuesto y copia portable (A.18); F5 incorpora inspección semántica y controles (A.19); el cierre R2.2 implementa límites de recursos y contraste de ingeniería (A.20). STRPsearch continúa candidato: su admisión requiere revisar transformación, contratos y propagación de fallos."
+    },
+    {
+      "body_index": 695,
+      "before": "El caso inicial de F4 autorizó tres CPU, 4 GiB, 256 MiB de trabajo y 1080 segundos con requireHardStorageLimit=false. Son valores históricos de esa prueba, no el presupuesto de API de la tesis. El cierre posterior R3.2 añade asignaciones estrictas verificadas y ensayos con cuotas de 24 a 80 MiB; una solicitud estricta sin asignación comprobada continúa produciendo una negativa tipificada.",
+      "after": "El caso inicial de F4 autorizó tres CPU, 4 GiB, 256 MiB de trabajo y 1080 segundos con requireHardStorageLimit=false. Son valores históricos de esa prueba, no el presupuesto de API de la tesis. El cierre posterior R2.2 añade asignaciones estrictas verificadas y ensayos con cuotas de 24 a 80 MiB; una solicitud estricta sin asignación comprobada continúa produciendo una negativa tipificada."
+    },
+    {
+      "body_index": 705,
+      "before": "R3.1 y R3.3 cuentan con mecanismos verificados en la ruta local. R3.2 reproduce conteos y estimaciones, pero conserva pendiente la cota de almacenamiento y la evaluación de su margen. R3.4, la cobertura independiente de R4.2 y el kappa de R4.3 requieren los corpus reservados. El anotador, el clúster y el modelo y presupuesto de evaluación continúan sin confirmación; no se sustituyen por las respuestas sintéticas de los ensayos.",
+      "after": "R2.1 y R2.3 cuentan con mecanismos verificados en la ruta local. R2.2 reproduce conteos y estimaciones, pero conserva pendiente la cota de almacenamiento y la evaluación de su margen. R2.4, la cobertura independiente de R3.2 y el kappa de R3.3 requieren los corpus reservados. El anotador, el clúster y el modelo y presupuesto de evaluación continúan sin confirmación; no se sustituyen por las respuestas sintéticas de los ensayos."
+    },
+    {
+      "body_index": 723,
+      "before": "Para A observaciones atómicas, R residuos solicitados y una matriz PAE de n×n, el costo dominante es O(A + R + n²), con almacenamiento O(A + R + n²). Verificar intervalos no solapados evita contar pares repetidos por sentido. Parser, programas y datos se identifican por versión y hash. Estos límites algorítmicos se distinguen de los límites operativos XFS/cgroup v2 incorporados en R3.2; no predicen por sí solos el consumo de una estructura.",
+      "after": "Para A observaciones atómicas, R residuos solicitados y una matriz PAE de n×n, el costo dominante es O(A + R + n²), con almacenamiento O(A + R + n²). Verificar intervalos no solapados evita contar pares repetidos por sentido. Parser, programas y datos se identifican por versión y hash. Estos límites algorítmicos se distinguen de los límites operativos XFS/cgroup v2 incorporados en R2.2; no predicen por sí solos el consumo de una estructura."
+    },
+    {
+      "body_index": 726,
+      "before": "Los casos 2xqh y P69905 y sus perturbaciones pertenecen a desarrollo. Esto incluye las variaciones de tamaño usadas para recursos: no se mezclan con los conjuntos reservados. Se mantienen sin calcular sensibilidad, especificidad y acuerdo externo. La ampliación del catálogo, los mapeos y la cobertura estructural pendiente siguen siendo requisitos para la medición dependiente de F6. Las garantías operativas de R3.2 se documentan en A.20.",
+      "after": "Los casos 2xqh y P69905 y sus perturbaciones pertenecen a desarrollo. Esto incluye las variaciones de tamaño usadas para recursos: no se mezclan con los conjuntos reservados. Se mantienen sin calcular sensibilidad, especificidad y acuerdo externo. La ampliación del catálogo, los mapeos y la cobertura estructural pendiente siguen siendo requisitos para la medición dependiente de F6. Las garantías operativas de R2.2 se documentan en A.20."
+    },
+    {
+      "body_index": 728,
+      "before": "A.20. Cuotas y verificación de recursos de R3.2",
+      "after": "A.20. Cuotas y verificación de recursos de R2.2"
+    }
+  ],
+  "removed_duplicate_cells": 16,
+  "each_duplicate_characters": 23607,
+  "canonical_tables_unchanged": true,
+  "canonical_result_count": 21,
+  "structural_controls_C1_C9_preserved": true
+}

@@ -64,3 +64,5 @@ La referencia de F4, sus limitaciones y el pseudocódigo se documentan en `docs/
 ## Identificadores vigentes y generadores históricos
 
 Desde el 23/09/2026 se usan R1.1–R1.9, R2.1–R2.4 y R3.1–R3.8. Consulte [las equivalencias](../../docs/tesis/renumeracion-20260923/README.md). Los programas `update_*_docx.py`, `audit_phase*_docx.py`, `audit_r32_docx.py` y sus JSON de contenido reproducen versiones históricas: no ejecutarlos sobre el Word vigente sin adaptar sus selectores, numeración y contenido. Los códigos de resultado dentro de archivos de referencia son históricos. El auditor de trazabilidad utiliza la numeración actual.
+
+`update_identifier_docx.py` aplica exclusivamente la migración editorial de septiembre de 2026 al hash del Word fuente registrado: preserva formato por tramo de texto, comprueba tablas y elimina solo la duplicación exacta detectada. Su salida usa un marcador explícito para reconstruir el índice con `render_docx.py --rebuild-index`; no admite reejecutar la renumeración sobre el documento ya migrado.

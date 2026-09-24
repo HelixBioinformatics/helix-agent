@@ -6,7 +6,7 @@ Fecha de inicio: 15 de septiembre de 2026. Documento rector: `~/Projects/Tesis.d
 
 ## Alcance y regla de cierre
 
-La tesis implementa Bioinformática.org sobre el armazón de agente heredado de opencode. El caso de estudio es el análisis de estructuras de proteínas de repeticiones en tándem (TRP). Se conservan los **tres objetivos y 21 resultados** del Word vigente: OE1 (9), OE2 (4), OE3 (8). Los borradores históricos de nf-core y las listas anteriores de 13 o 19 resultados sirven de contexto; no sustituyen estos compromisos.
+La tesis implementa Helix Agent sobre el armazón de agente heredado de opencode. El caso de estudio es el análisis de estructuras de proteínas de repeticiones en tándem (TRP). Se conservan los **tres objetivos y 21 resultados** del Word vigente: OE1 (9), OE2 (4), OE3 (8). Los borradores históricos de nf-core y las listas anteriores de 13 o 19 resultados sirven de contexto; no sustituyen estos compromisos.
 
 La pregunta operativa es si el agente transforma preguntas del dominio en especificaciones aprobadas, ejecuta composiciones compatibles y admisibles, y entrega evidencia comprobable de lo ejecutado y de los controles aplicados. Se evaluará cada indicador del §1.2.4, incluso si no alcanza su umbral. La proveniencia no demuestra corrección biológica. Pasar pruebas unitarias tampoco sustituye una evaluación experimental ni la anotación externa.
 

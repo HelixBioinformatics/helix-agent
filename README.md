@@ -77,6 +77,28 @@ El instalador acepta `--version <v>` para fijar una versión, `--binary <ruta>` 
 instalar un binario ya compilado y `--no-modify-path` para no tocar la configuración del
 shell; `HELIX_INSTALL_REPO` cambia el repositorio de origen.
 
+### Actualizar sin desinstalar
+
+Vuelve a ejecutar el instalador de arriba: reemplaza el ejecutable en `~/.helix/bin`
+y conserva tu configuración, credenciales y sesiones. No ejecutes `helix uninstall`
+para actualizar. Después, abre una sesión nueva y comprueba `helix --version`.
+
+El código de esta rama también incorpora el comando siguiente (todavía no forma
+parte del binario publicado **0.3.0**):
+
+```bash
+helix upgrade --check       # consultar versión disponible, sin instalar
+helix upgrade               # instalar la última versión estable
+helix upgrade 0.3.0         # elegir una versión publicada
+```
+
+Este comando admite instalaciones oficiales en `~/.helix/bin/helix`, descarga el
+instalador del tag elegido y verifica la versión instalada. No instala paquetes
+homónimos de npm/Homebrew ni actualiza en segundo plano. Para una instalación
+manual o una versión anterior sin `upgrade`, vuelve a ejecutar el instalador.
+En SSH o un shell cuyo `PATH` todavía no se actualizó, usa
+`~/.helix/bin/helix --version` y `export PATH="$HOME/.helix/bin:$PATH"`.
+
 En Windows, desde PowerShell:
 
 ```powershell

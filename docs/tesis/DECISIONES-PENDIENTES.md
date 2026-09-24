@@ -8,12 +8,12 @@ Estado vigente: 21 de septiembre de 2026. Sustentación: julio de 2027; borrador
 
 | Pendiente | Qué se requiere | Opciones |
 | --- | --- | --- |
-| Ruta predicha integrada | Conectar la CLI ya verificada a preparación, aprobación y evidencia del agente | Mantener alcance y completar integración; una reducción de alcance exige enmienda prospectiva |
+| Ruta predicha y gobernanza conjunta | La herramienta del agente ya integra preparación, aprobación y evidencia; falta incorporar la cuota dura y el flujo común de admisión | Reutilizar la asignación estricta XFS/cgroup y conservar rechazos explícitos |
 | ReUPred y RepeatsDB | Entorno ejecutable compatible del primero; contrato inequívoco de loci/API del segundo | Resolver contratos o excluir esas rutas del alcance evaluado con justificación previa |
 | Gobernanza de nuevas rutas | Integrar detector y ruta predicha al control estricto de almacenamiento cuando se afirme esa garantía | Reutilizar el entorno XFS/cgroup validado; mientras tanto documentar límites de las rutas independientes |
 | Corpus reservado de F6 | Casos, particiones, referencias independientes y revisión antes de congelar | Completar cada campaña por separado con el verificador; no reutilizar casos de desarrollo como reserva |
 
-SIFTS/UniProt ya está integrado y STRPsearch está admitido: dejaron de ser bloqueos generales. La CLI predicha funciona en desarrollo; su integración sigue pendiente. [Plan y evidencia](PLAN-CIERRE-TECNICO.md).
+SIFTS/UniProt ya está integrado y STRPsearch está admitido: dejaron de ser bloqueos generales. La ruta predicha ya funciona desde una herramienta del agente; la gobernanza estricta conjunta sigue pendiente. [Plan y evidencia](PLAN-CIERRE-TECNICO.md).
 
 ## Dependencias y decisiones externas
 
@@ -44,5 +44,5 @@ referencias, particiones, modelo y presupuesto. No es necesario que una
 dependencia detenga tareas independientes, pero tampoco se declara satisfecha
 la compuerta completa de F5 mientras falten los contratos del dominio.
 
-**Continuidad propuesta:** integrar la ruta predicha, resolver los contratos restantes y completar el corpus reservado con revisión independiente; decidir modelo/gasto antes de un piloto pagado. La
+**Continuidad propuesta:** unificar la gobernanza de la ruta predicha, resolver los contratos restantes y completar el corpus reservado con revisión independiente; decidir modelo/gasto antes de un piloto pagado. La
 nube queda como alternativa de infraestructura, no como requisito de R2.2.

@@ -5,35 +5,20 @@ import { Effect, Layer, Schema, Context, Stream } from "effect"
 import { serviceUse } from "@helix/core/effect/service-use"
 import { HttpClient, HttpClientRequest, HttpClientResponse } from "effect/unstable/http"
 import { withTransientReadRetry } from "@/util/effect-http-client"
-import { errorMessage } from "@/util/error"
 import { ChildProcess } from "effect/unstable/process"
 import { AppProcess } from "@helix/core/process"
 import path from "path"
+import os from "node:os"
 import { makeRuntime } from "@helix/core/effect/runtime"
 import semver from "semver"
 import { InstallationChannel, InstallationVersion } from "@helix/core/installation/version"
-import { NpmConfig } from "@helix/core/npm-config"
 import { InstallationEvent } from "@helix/schema/installation-event"
 import { Identity } from "@helix/script/identity"
 
 export type Method = "curl" | "npm" | "yarn" | "pnpm" | "bun" | "brew" | "scoop" | "choco" | "unknown"
 
-// There is no hosted release channel for this build; update checks and
-// self-upgrade are disabled until one exists.
-const updatesDisabled: boolean = true
-
-// Where this build looks for its own updates. Derived from identity.ts rather
-// than written out here, so the updater cannot outlive a move of the project:
-// a hardcoded owner that nobody owns turns every update check into a 404.
-//
-// Homebrew names a tap after its repository. The tap this project publishes to
-// is `<owner>/homebrew-tap` (see Identity.homebrewTap, the clone URL used by
-// script/publish.ts); the `brew` CLI addresses it by the shorthand
-// `<owner>/tap`, and a formula inside it as `<owner>/tap/<formula>`. The
-// formula name is spelled out, as the package name is everywhere else in this
-// file, because Identity.name is optional until the project has settled one.
-const BREW_TAP = `${Identity.owner}/tap`
-const BREW_TAP_FORMULA = `${BREW_TAP}/helix`
+// Explicit upgrades use official releases. Background upgrades remain disabled.
+export const automaticUpdatesEnabled: boolean = false
 
 export type ReleaseType = "patch" | "minor" | "major"
 
@@ -78,18 +63,19 @@ export class UpgradeFailedError extends Schema.TaggedErrorClass<UpgradeFailedErr
   }
 }
 
+export function normalizeVersion(value: string) {
+  const version = value.replace(/^v/, "")
+  if (!semver.valid(version) || !/^[0-9]+\.[0-9]+\.[0-9]+(?:-[0-9A-Za-z.-]+)?(?:\+[0-9A-Za-z.-]+)?$/.test(version))
+    throw new UpgradeFailedError({ stderr: "Expected a published version such as 0.3.0." })
+  return version
+}
+
+export function detectMethod(executable: string, home: string): Method {
+  return path.resolve(executable) === path.join(home, ".helix", "bin", "helix") ? "curl" : "unknown"
+}
+
 // Response schemas for external version APIs
 const GitHubRelease = Schema.Struct({ tag_name: Schema.String })
-const NpmPackage = Schema.Struct({ version: Schema.String })
-const BrewFormula = Schema.Struct({ versions: Schema.Struct({ stable: Schema.String }) })
-const BrewInfoV2 = Schema.Struct({
-  formulae: Schema.Array(Schema.Struct({ versions: Schema.Struct({ stable: Schema.String }) })),
-})
-const ChocoPackage = Schema.Struct({
-  d: Schema.Struct({ results: Schema.Array(Schema.Struct({ Version: Schema.String })) }),
-})
-const ScoopManifest = NpmPackage
-
 export interface Interface {
   readonly info: () => Effect.Effect<Info>
   readonly method: () => Effect.Effect<Method>
@@ -108,76 +94,30 @@ const layer: Layer.Layer<Service, never, HttpClient.HttpClient | AppProcess.Serv
     const httpOk = HttpClient.filterStatusOk(withTransientReadRetry(http))
     const appProcess = yield* AppProcess.Service
 
-    const text = Effect.fnUntraced(
-      function* (cmd: string[], opts?: { cwd?: string; env?: Record<string, string> }) {
-        const result = yield* appProcess.run(
-          ChildProcess.make(cmd[0], cmd.slice(1), {
-            cwd: opts?.cwd,
-            env: opts?.env,
-            extendEnv: true,
-          }),
-        )
-        return result.stdout.toString("utf8")
-      },
-      Effect.catch(() => Effect.succeed("")),
-    )
-
-    const run = Effect.fnUntraced(
-      function* (cmd: string[], opts?: { cwd?: string; env?: Record<string, string> }) {
-        const result = yield* appProcess.run(
-          ChildProcess.make(cmd[0], cmd.slice(1), {
-            cwd: opts?.cwd,
-            env: opts?.env,
-            extendEnv: true,
-          }),
-        )
-        return {
-          code: result.exitCode,
-          stdout: result.stdout.toString("utf8"),
-          stderr: result.stderr.toString("utf8"),
-        }
-      },
-      Effect.catch((err) => Effect.succeed({ code: 1, stdout: "", stderr: errorMessage(err) })),
-    )
-
-    const getBrewFormula = Effect.fnUntraced(function* () {
-      const tapFormula = yield* text(["brew", "list", "--formula", BREW_TAP_FORMULA])
-      if (tapFormula.includes("helix")) return BREW_TAP_FORMULA
-      const coreFormula = yield* text(["brew", "list", "--formula", "helix"])
-      if (coreFormula.includes("helix")) return "helix"
-      return "helix"
-    })
-
     const upgradeFailure = (method: Method, result?: { code: number; stdout: string; stderr: string }) => {
       if (method === "choco") return "not running from an elevated command shell"
       if (result) return `Upgrade failed for ${method} (exit code ${result.code}).`
       return `Upgrade failed for ${method}.`
     }
 
-    const upgradeScriptShell = Effect.fnUntraced(function* () {
-      const bashVersion = yield* text(["bash", "--version"])
-      if (bashVersion) return "bash"
-      return "sh"
-    })
-
     // Re-runs the published installer, pinned to the requested version.
     //
-    // Fetch the installer from the same GitHub Pages origin used by the site.
+    // Fetch the installer from the selected release tag, rather than a moving site.
     const upgradeCurl = Effect.fnUntraced(
       function* (target: string) {
-        const url = Identity.installScriptUrl
-        if (!url)
-          return yield* Effect.fail(
-            new UpgradeFailedError({ stderr: "No install script URL is set; see packages/script/src/identity.ts" }),
-          )
+        const url = `https://raw.githubusercontent.com/${Identity.repository}/v${target}/install`
         const response = yield* httpOk.execute(HttpClientRequest.get(url))
         const body = yield* response.text
         const bodyBytes = new TextEncoder().encode(body)
-        const shell = yield* upgradeScriptShell()
+        if (!body.startsWith("#!/usr/bin/env bash\n"))
+          return yield* Effect.fail(
+            new UpgradeFailedError({ stderr: "Release returned an invalid Bash installer; installation unchanged." }),
+          )
+        const shell = "bash"
         const result = yield* appProcess.run(
-          ChildProcess.make(shell, [], {
+          ChildProcess.make(shell, ["-s", "--", "--version", target, "--no-modify-path"], {
             stdin: Stream.make(bodyBytes),
-            env: { VERSION: target },
+            env: { VERSION: target, HELIX_INSTALL_REPO: Identity.repository },
             extendEnv: true,
           }),
         )
@@ -200,148 +140,31 @@ const layer: Layer.Layer<Service, never, HttpClient.HttpClient | AppProcess.Serv
         }
       }),
       method: Effect.fn("Installation.method")(function* () {
-        if (process.execPath.includes(path.join(".helix", "bin"))) return "curl" as Method
-        if (process.execPath.includes(path.join(".local", "bin"))) return "curl" as Method
-        const exec = process.execPath.toLowerCase()
-
-        const checks: Array<{ name: Method; command: () => Effect.Effect<string> }> = [
-          { name: "npm", command: () => text(["npm", "list", "-g", "--depth=0"]) },
-          { name: "yarn", command: () => text(["yarn", "global", "list"]) },
-          { name: "pnpm", command: () => text(["pnpm", "list", "-g", "--depth=0"]) },
-          { name: "bun", command: () => text(["bun", "pm", "ls", "-g"]) },
-          { name: "brew", command: () => text(["brew", "list", "--formula", "helix"]) },
-          { name: "scoop", command: () => text(["scoop", "list", "helix"]) },
-          { name: "choco", command: () => text(["choco", "list", "--limit-output", "helix"]) },
-        ]
-
-        checks.sort((a, b) => {
-          const aMatches = exec.includes(a.name)
-          const bMatches = exec.includes(b.name)
-          if (aMatches && !bMatches) return -1
-          if (!aMatches && bMatches) return 1
-          return 0
-        })
-
-        for (const check of checks) {
-          const output = yield* check.command()
-          const installedName =
-            check.name === "brew" || check.name === "choco" || check.name === "scoop" ? "helix" : "helix"
-          if (output.includes(installedName)) {
-            return check.name
-          }
-        }
-
-        return "unknown" as Method
+        return detectMethod(process.execPath, os.homedir())
       }),
       latest: Effect.fn("Installation.latest")(function* (installMethod?: Method) {
-        // Automatic update checks are disabled: there is no hosted release
-        // channel for this build. Report the running version as the latest.
-        if (updatesDisabled) return InstallationVersion
-        const detectedMethod = installMethod || (yield* result.method())
-
-        if (detectedMethod === "brew") {
-          const formula = yield* getBrewFormula()
-          if (formula.includes("/")) {
-            const infoJson = yield* text(["brew", "info", "--json=v2", formula])
-            const info = yield* Schema.decodeUnknownEffect(Schema.fromJsonString(BrewInfoV2))(infoJson)
-            return info.formulae[0].versions.stable
-          }
-          const response = yield* httpOk.execute(
-            HttpClientRequest.get("https://formulae.brew.sh/api/formula/helix.json").pipe(
-              HttpClientRequest.acceptJson,
-            ),
-          )
-          const data = yield* HttpClientResponse.schemaBodyJson(BrewFormula)(response)
-          return data.versions.stable
-        }
-
-        if (detectedMethod === "npm" || detectedMethod === "bun" || detectedMethod === "pnpm") {
-          const response = yield* httpOk.execute(
-            HttpClientRequest.get(
-              `${yield* NpmConfig.registry(process.cwd())}/helix/${InstallationChannel}`,
-            ).pipe(HttpClientRequest.acceptJson),
-          )
-          const data = yield* HttpClientResponse.schemaBodyJson(NpmPackage)(response)
-          return data.version
-        }
-
-        if (detectedMethod === "choco") {
-          const response = yield* httpOk.execute(
-            HttpClientRequest.get(
-              "https://community.chocolatey.org/api/v2/Packages?$filter=Id%20eq%20%27helix%27%20and%20IsLatestVersion&$select=Version",
-            ).pipe(HttpClientRequest.setHeaders({ Accept: "application/json;odata=verbose" })),
-          )
-          const data = yield* HttpClientResponse.schemaBodyJson(ChocoPackage)(response)
-          return data.d.results[0].Version
-        }
-
-        if (detectedMethod === "scoop") {
-          const response = yield* httpOk.execute(
-            HttpClientRequest.get(
-              "https://raw.githubusercontent.com/ScoopInstaller/Main/master/bucket/helix.json",
-            ).pipe(HttpClientRequest.setHeaders({ Accept: "application/json" })),
-          )
-          const data = yield* HttpClientResponse.schemaBodyJson(ScoopManifest)(response)
-          return data.version
-        }
-
+        if (installMethod !== "curl") return InstallationVersion
         const response = yield* httpOk.execute(
           HttpClientRequest.get(`https://api.github.com/repos/${Identity.repository}/releases/latest`).pipe(
             HttpClientRequest.acceptJson,
           ),
         )
         const data = yield* HttpClientResponse.schemaBodyJson(GitHubRelease)(response)
-        return data.tag_name.replace(/^v/, "")
+        return normalizeVersion(data.tag_name)
       }, Effect.orDie),
       upgrade: Effect.fn("Installation.upgrade")(function* (m: Method, target: string) {
-        if (updatesDisabled) {
-          return yield* Effect.fail(new UpgradeFailedError({ stderr: "Self-upgrade is disabled in this build" }))
-        }
-        let upgradeResult: { code: number; stdout: string; stderr: string } | undefined
-        switch (m) {
-          case "curl":
-            upgradeResult = yield* upgradeCurl(target)
-            break
-          case "npm":
-            upgradeResult = yield* run(["npm", "install", "-g", `helix@${target}`])
-            break
-          case "pnpm":
-            upgradeResult = yield* run(["pnpm", "install", "-g", `helix@${target}`])
-            break
-          case "bun":
-            upgradeResult = yield* run(["bun", "install", "-g", `helix@${target}`])
-            break
-          case "brew": {
-            const formula = yield* getBrewFormula()
-            const env = { HOMEBREW_NO_AUTO_UPDATE: "1" }
-            if (formula.includes("/")) {
-              const tap = yield* run(["brew", "tap", BREW_TAP], { env })
-              if (tap.code !== 0) {
-                upgradeResult = tap
-                break
-              }
-              const repo = yield* text(["brew", "--repo", BREW_TAP])
-              const dir = repo.trim()
-              if (dir) {
-                const pull = yield* run(["git", "pull", "--ff-only"], { cwd: dir, env })
-                if (pull.code !== 0) {
-                  upgradeResult = pull
-                  break
-                }
-              }
-            }
-            upgradeResult = yield* run(["brew", "upgrade", formula], { env })
-            break
-          }
-          case "choco":
-            upgradeResult = yield* run(["choco", "upgrade", "helix", `--version=${target}`, "-y"])
-            break
-          case "scoop":
-            upgradeResult = yield* run(["scoop", "install", `helix@${target}`])
-            break
-          default:
-            return yield* new UpgradeFailedError({ stderr: `Unknown installation method: ${m}` })
-        }
+        if (m !== "curl")
+          return yield* Effect.fail(
+            new UpgradeFailedError({
+              stderr:
+                "Only the official ~/.helix/bin/helix installation supports replacement. Re-run the official installer without uninstalling. Package-manager names may belong to other products.",
+            }),
+          )
+        target = yield* Effect.try({
+          try: () => normalizeVersion(target),
+          catch: (error) => error as UpgradeFailedError,
+        })
+        const upgradeResult = yield* upgradeCurl(target)
         if (!upgradeResult || upgradeResult.code !== 0) {
           return yield* new UpgradeFailedError({ stderr: upgradeFailure(m, upgradeResult) })
         }
@@ -351,7 +174,17 @@ const layer: Layer.Layer<Service, never, HttpClient.HttpClient | AppProcess.Serv
           stdout: upgradeResult.stdout,
           stderr: upgradeResult.stderr,
         })
-        yield* text([process.execPath, "--version"])
+        const installed = yield* appProcess
+          .run(ChildProcess.make(path.join(os.homedir(), ".helix", "bin", "helix"), ["--version"]))
+          .pipe(
+            Effect.mapError(() => new UpgradeFailedError({ stderr: "Installed executable could not be verified." })),
+          )
+        if (installed.exitCode !== 0 || installed.stdout.toString("utf8").trim() !== target)
+          return yield* Effect.fail(
+            new UpgradeFailedError({
+              stderr: `Installer completed but installed version does not match ${target}. Check ~/.helix/bin/helix --version.`,
+            }),
+          )
       }),
     }
 

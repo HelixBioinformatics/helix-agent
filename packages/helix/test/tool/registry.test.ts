@@ -116,14 +116,16 @@ describe("tool.registry", () => {
     Effect.gen(function* () {
       const registry = yield* ToolRegistry.Service
       const ids = yield* registry.ids()
-      for (const id of ["trp_catalog", "trp_inspect", "trp_prepare", "trp_run", "trp_detect"]) expect(ids).toContain(id)
+      for (const id of ["trp_catalog", "trp_inspect", "trp_prepare", "trp_run", "trp_detect", "trp_predicted_geometry"])
+        expect(ids).toContain(id)
     }),
   )
   withoutSpecialization.instance("removes all TRP tools in the bare arm", () =>
     Effect.gen(function* () {
       const registry = yield* ToolRegistry.Service
       const ids = yield* registry.ids()
-      for (const id of ["trp_catalog", "trp_inspect", "trp_prepare", "trp_run", "trp_detect"]) expect(ids).not.toContain(id)
+      for (const id of ["trp_catalog", "trp_inspect", "trp_prepare", "trp_run", "trp_detect", "trp_predicted_geometry"])
+        expect(ids).not.toContain(id)
     }),
   )
   it.instance("does not expose task_status", () =>
@@ -387,14 +389,10 @@ describe("tool.registry", () => {
         yield* Effect.promise(() => fs.mkdir(path.join(plugin, "dist"), { recursive: true }))
         yield* Effect.promise(() => fs.mkdir(customTools, { recursive: true }))
         yield* Effect.promise(() =>
-          fs.cp(
-            path.dirname(fileURLToPath(import.meta.resolve("zod"))),
-            path.join(helix, "node_modules", "zod"),
-            {
-              dereference: true,
-              recursive: true,
-            },
-          ),
+          fs.cp(path.dirname(fileURLToPath(import.meta.resolve("zod"))), path.join(helix, "node_modules", "zod"), {
+            dereference: true,
+            recursive: true,
+          }),
         )
         yield* Effect.promise(() =>
           Bun.write(

@@ -1,0 +1,41 @@
+bun test v1.3.14 (0d9b296a)
+
+test/tool/registry.test.ts:
+(pass) tool.registry > registers the TRP proposal and human approval route in interactive clients [399.15ms]
+(pass) tool.registry > removes all TRP tools in the bare arm [2146.65ms]
+(pass) tool.registry > does not expose task_status [26.78ms]
+(pass) tool.registry > does not expose execute unless code mode is enabled [33.62ms]
+(pass) tool.registry > exposes execute when code mode is enabled [211.55ms]
+(pass) tool.registry > does not expose execute when code mode has no visible tools [41.57ms]
+(pass) tool.registry > hides task background parameter unless experimental background subagents are enabled [34.28ms]
+(pass) tool.registry > loads tools from .helix/tool (singular) [43.61ms]
+(pass) tool.registry > ignores non-tool exports in .helix/tool files [40.54ms]
+(pass) tool.registry > tolerates a custom tool exporting null/undefined args (no-args fallback) [32.52ms]
+(pass) tool.registry > tolerates a plugin tool registered with null/undefined args [29.52ms]
+(pass) tool.registry > loads tools from .helix/tools (plural) [30.97ms]
+(pass) tool.registry > loads Zod-schema custom tools with JSON Schema and validation [42.03ms]
+(pass) tool.registry > preserves Zod arg descriptions from older config-scoped plugin packages [136.65ms]
+(pass) tool.registry > preserves attachments from structured custom tool results [41.32ms]
+(pass) tool.registry > loads legacy JSON-schema-shaped custom tools with wire schema [31.62ms]
+(pass) tool.registry > loads tools with external dependencies without crashing [40.38ms]
+
+test/tool/trp-predicted.test.ts:
+(pass) forged model approvals and escaping files are refused [7.50ms]
+(pass) human rejection never starts scientific process [94.81ms]
+(pass) changed original input.cif invalidates approval [100.62ms]
+(pass) changed original pae.json invalidates approval [92.31ms]
+(pass) changed original api.json invalidates approval [94.02ms]
+(pass) mismatched AFDB identity and insufficient units fail before approval [152.65ms]
+(pass) tampered adapter or proposal cannot execute [89.84ms]
+(pass) cancellation during approval never starts geometry [88.27ms]
+(pass) modified prepared proposal cannot execute [91.15ms]
+(skip) real pinned geometry through agent execution path
+
+1 tests skipped:
+(skip) real pinned geometry through agent execution path
+
+ 26 pass
+ 1 skip
+ 0 fail
+ 56 expect() calls
+Ran 27 tests across 2 files. [5.73s]

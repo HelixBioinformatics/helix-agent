@@ -5,6 +5,7 @@ import { GenerateCommand } from "./cli/cmd/generate"
 import { ProvidersCommand } from "./cli/cmd/providers"
 import { AgentCommand } from "./cli/cmd/agent"
 import { UninstallCommand } from "./cli/cmd/uninstall"
+import { UpgradeCommand } from "./cli/cmd/upgrade"
 import { ModelsCommand } from "./cli/cmd/models"
 import { UI } from "./cli/ui"
 import { InstallationVersion } from "@helix/core/installation/version"
@@ -95,6 +96,7 @@ const cli = yargs(args)
   .command(ProvidersCommand)
   .command(AgentCommand)
   .command(UninstallCommand)
+  .command(UpgradeCommand)
   .command(ServeCommand)
   .command(ModelsCommand)
   .command(StatsCommand)

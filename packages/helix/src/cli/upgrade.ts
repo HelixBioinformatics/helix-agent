@@ -6,6 +6,7 @@ import { InstallationVersion } from "@helix/core/installation/version"
 import { GlobalBus } from "@/bus/global"
 
 export async function upgrade() {
+  if (!Installation.automaticUpdatesEnabled) return
   const config = await AppRuntime.runPromise(Config.Service.use((cfg) => cfg.getGlobal()))
   if (config.autoupdate === false || Flag.HELIX_DISABLE_AUTOUPDATE) return
   const method = await Installation.method()

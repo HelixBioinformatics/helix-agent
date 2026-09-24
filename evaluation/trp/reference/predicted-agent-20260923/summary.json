@@ -1,0 +1,40 @@
+{
+  "date": "2026-09-23",
+  "status": "succeeded",
+  "tool": "trp_predicted_geometry",
+  "results": [
+    "R1.6",
+    "R3.6",
+    "R3.7",
+    "R3.8"
+  ],
+  "entry": "AF-P69905-F1",
+  "confidenceScale": "pLDDT_0_100",
+  "suppliedUnits": 3,
+  "mappedResidues": 21,
+  "geometryExactReference": true,
+  "approval": "Question.Service synthetic engineering reply, not human biological annotation",
+  "manifestSha256": "c92d366954c68c3e2565be8de9dfd1a3ef4ce542f74ec7982e2f7f21f28ffa24",
+  "proposalDigest": "ca0865073baa421aa2aa2bba92308dbf33f9fccb8df6b65d2e889c9d2ebf41e1",
+  "image": "sha256:1dd91e70acb153a0bd9a51346fc001dd5025f851c9598697cdd37f07d9490b0a",
+  "agentLiveTest": {
+    "pass": 1,
+    "fail": 0,
+    "assertions": 6
+  },
+  "targetedTests": {
+    "pass": 26,
+    "skip": 1,
+    "fail": 0,
+    "assertions": 56
+  },
+  "typecheck": "passed",
+  "limits": [
+    "Dedicated agent route; does not inherit trp_prepare/trp_run F4 admission",
+    "Fixed local Docker 2 CPU,2GiB RAM,no extra swap,128pids,tmpfs256MiB,120s",
+    "Observed free host memory/CPU/storage, not reserved cgroup host quota",
+    "Persistent output has no hard aggregate quota",
+    "Supplied units are not detected or independently validated repeats",
+    "No held-out accuracy or physical validity claim"
+  ]
+}

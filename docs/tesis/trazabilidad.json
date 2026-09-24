@@ -167,7 +167,10 @@
         "packages/helix/src/trp/inspect_structure.py.txt",
         "packages/helix/src/trp/coordinates.ts",
         "packages/helix/src/trp/sifts_residues.py.txt",
-        "script/tesis/predicted_geometry.py"
+        "script/tesis/predicted_geometry.py",
+        "packages/helix/src/tool/trp-predicted.ts",
+        "packages/helix/src/trp/predicted_geometry.py.txt",
+        "packages/helix/src/trp/verify_predicted.py.txt"
       ],
       "pruebas": [
         "packages/helix/test/bio/sifts.test.ts",
@@ -180,9 +183,11 @@
         "script/tesis/test_structural_controls.py",
         "packages/helix/test/trp/structural.test.ts",
         "packages/helix/test/trp/coordinates.test.ts",
-        "script/tesis/test_predicted_geometry.py"
+        "script/tesis/test_predicted_geometry.py",
+        "packages/helix/test/tool/trp-predicted.test.ts",
+        "packages/helix/test/trp/predicted.live.test.ts"
       ],
-      "pendiente": "Conversión label/autor y UniProt por XML SIFTS integradas en trp_prepare/run; 206 residuos y 12 unidades con CSV idéntico. Modelos predichos ejecutables por CLI separada con identidad/pLDDT preservados; integración de esa ruta al agente y evaluación independiente pendientes. Alcance positivo, una cadena/modelo, sin inserciones ni alternancias ambiguas.",
+      "pendiente": "Ruta AFDB integrada mediante trp_predicted_geometry, con identidad, PAE, pLDDT, fuentes y aprobación ligada al digest. Referencia real de tres segmentos artificiales reproducida; no son etiquetas de repeticiones ni reserva. Continúan pendientes gobernanza estricta conjunta, contratos de dominio restantes y evaluación independiente de validez física.",
       "fase_cierre": "F5",
       "medicion": {
         "tipo": "desarrollo_no_reserva",
@@ -190,7 +195,10 @@
         "unidades": 12,
         "evidencia": "evaluation/trp/reference/coordinate-integrated-20260921/summary.json"
       },
-      "id_anterior": "R2.3"
+      "id_anterior": "R2.3",
+      "evidencia": [
+        "evaluation/trp/reference/predicted-agent-20260923/summary.json"
+      ]
     },
     {
       "id": "R1.7",
@@ -340,7 +348,8 @@
         "packages/helix/src/trp/enforcement.ts",
         "script/tesis/trp_sandbox.py",
         "docs/tesis/evidencia/r32.json",
-        "docs/tesis/R3.2-RECURSOS.md"
+        "docs/tesis/R3.2-RECURSOS.md",
+        "evaluation/trp/verification-20260923/output/summary.json"
       ],
       "id_anterior": "R3.2"
     },
@@ -533,16 +542,21 @@
         "packages/helix/src/trp/inspect_structure.py.txt",
         "packages/helix/src/trp/structural_catalog.json",
         "packages/helix/src/tool/trp.ts",
-        "script/tesis/predicted_geometry.py"
+        "script/tesis/predicted_geometry.py",
+        "packages/helix/src/tool/trp-predicted.ts",
+        "packages/helix/src/trp/predicted_geometry.py.txt",
+        "packages/helix/src/trp/verify_predicted.py.txt"
       ],
       "pruebas": [
         "packages/helix/test/nfcore/census.test.ts",
         "script/tesis/test_structural_controls.py",
         "packages/helix/test/trp/structural.test.ts",
         "packages/helix/test/tool/registry.test.ts",
-        "script/tesis/test_predicted_geometry.py"
+        "script/tesis/test_predicted_geometry.py",
+        "packages/helix/test/tool/trp-predicted.test.ts",
+        "packages/helix/test/trp/predicted.live.test.ts"
       ],
-      "pendiente": "Ruta CLI AFDB verificada con API/PAE/pLDDT y geometría de 3 segmentos artificiales. Primer fallo de 2 unidades conservado; rechazo mínimo 3 corregido. Falta integración predicha al agente, controles completos de constructos y referencias biológicas independientes; no evaluables de ensamblaje/plausibilidad intactos.",
+      "pendiente": "Ruta AFDB integrada mediante trp_predicted_geometry, con identidad, PAE, pLDDT, fuentes y aprobación ligada al digest. Referencia real de tres segmentos artificiales reproducida; no son etiquetas de repeticiones ni reserva. Continúan pendientes gobernanza estricta conjunta, contratos de dominio restantes y evaluación independiente de validez física.",
       "fase_cierre": "F5",
       "medicion": {
         "tipo": "desarrollo_no_reserva",
@@ -550,7 +564,10 @@
         "segmentos_artificiales": 3,
         "evidencia": "evaluation/trp/reference/predicted-geometry-20260921-corrected/execution.json"
       },
-      "id_anterior": "R5.2"
+      "id_anterior": "R5.2",
+      "evidencia": [
+        "evaluation/trp/reference/predicted-agent-20260923/summary.json"
+      ]
     },
     {
       "id": "R3.7",
@@ -565,15 +582,20 @@
         "packages/helix/src/trp/nextflow.ts",
         "packages/helix/src/trp/evidence.ts",
         "packages/helix/src/trp/verify_inspection.py.txt",
-        "script/tesis/predicted_geometry.py"
+        "script/tesis/predicted_geometry.py",
+        "packages/helix/src/tool/trp-predicted.ts",
+        "packages/helix/src/trp/predicted_geometry.py.txt",
+        "packages/helix/src/trp/verify_predicted.py.txt"
       ],
       "pruebas": [
         "script/tesis/test_structural_controls.py",
         "packages/helix/test/trp/structural.test.ts",
         "packages/helix/test/tool/registry.test.ts",
-        "packages/helix/test/trp/reference.live.test.ts"
+        "packages/helix/test/trp/reference.live.test.ts",
+        "packages/helix/test/tool/trp-predicted.test.ts",
+        "packages/helix/test/trp/predicted.live.test.ts"
       ],
-      "pendiente": "Inspección, mapeos y geometría conservan fuentes y hashes; salida AFDB explicita identificador de transporte y validez no establecida. Falta campaña reservada.",
+      "pendiente": "Ruta AFDB integrada mediante trp_predicted_geometry, con identidad, PAE, pLDDT, fuentes y aprobación ligada al digest. Referencia real de tres segmentos artificiales reproducida; no son etiquetas de repeticiones ni reserva. Continúan pendientes gobernanza estricta conjunta, contratos de dominio restantes y evaluación independiente de validez física.",
       "fase_cierre": "F5",
       "medicion": {
         "tipo": "referencia_tecnica_no_evaluacion_empirica",
@@ -581,7 +603,10 @@
         "ejecuciones_nextflow": 1,
         "evidencia": "docs/tesis/evidencia/fase5.json"
       },
-      "id_anterior": "R5.3"
+      "id_anterior": "R5.3",
+      "evidencia": [
+        "evaluation/trp/reference/predicted-agent-20260923/summary.json"
+      ]
     },
     {
       "id": "R3.8",

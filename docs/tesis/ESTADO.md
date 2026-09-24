@@ -1,5 +1,13 @@
 # Estado del cierre
 
+## Verificación de Helix — 23 de septiembre de 2026
+
+Nombre actual: **Helix Agent**, comando `helix`. Segunda estación: versión publicada 0.3.0, instalación idempotente, 139 archivos verificados y dos alteraciones rechazadas (corpus CLI y paquete portable); geometría de 12 unidades idéntica. Nueva referencia local SIFTS por herramientas del agente también satisfactoria. Cero llamadas LLM.
+
+Ruta predicha integrada mediante `trp_predicted_geometry` y aprobación del servicio de preguntas; mantiene alcance de desarrollo y almacenamiento sin cuota dura. El código incorpora `helix upgrade`; el binario publicado 0.3.0 todavía se actualiza repitiendo el instalador oficial, sin desinstalar. [Plan y límites](VERIFICACION-HELIX-20260923.md), [evidencia](../../evaluation/trp/verification-20260923/README.md).
+
+La regresión inicial detectó el hash de catálogo obsoleto del caso activo tras el cambio de branding. Se actualizó solo la referencia de desarrollo y se ejecutó con `HELIX_TRP_PYTHON` apuntando al entorno Gemmi existente. Las evidencias históricas permanecen intactas.
+
 Identificadores actualizados al 23/09/2026: tres objetivos y 21 resultados. Las evidencias fechadas conservan su numeración original; consulte [equivalencias](renumeracion-20260923/README.md).
 
 Revisión editorial del 23 de septiembre de 2026: causas agrupadas en tres pares y cinco objetivos reorganizados en tres. Se conservan los 21 resultados y sus métricas. [Correspondencia y cambios](agrupacion-20260923/CAMBIOS.md).

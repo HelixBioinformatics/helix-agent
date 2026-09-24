@@ -54,8 +54,8 @@ el contenido de los capítulos que el autor cerró.
 
 - CT1 completado en el alcance definido: integración y referencia SIFTS real, 206 residuos/12 unidades y verificación portable.
 - CT2 completado para STRPsearch: guardia, herramienta interactiva, pruebas negativas y referencias reales; ReUPred y RepeatsDB siguen fuera del catálogo admitido.
-- CT3 completado como CLI de desarrollo verificable; integración al agente pendiente. Los segmentos artificiales no son anotaciones de repeticiones.
+- CT3 completado como CLI de desarrollo verificable; integración al agente completada mediante `trp_predicted_geometry` el 23/09/2026; gobernanza estricta conjunta pendiente. Los segmentos artificiales no son anotaciones de repeticiones.
 - CT4 completado como preparación: verificador y siete artefactos con hashes. Congelación y evaluación reservada pendientes; originales Pratt no recuperados.
 - CT5 completado para esta entrega: regresión 500 pruebas, 78 Python, tipos, trazabilidad de 21 resultados y actualización de Word/anexo A.22.
 
-El cierre de estos hitos delimitados no declara completadas la tesis ni la cobertura total de F5. Próximo trabajo técnico: integrar la ruta predicha al agente y resolver contratos restantes del dominio; después congelar cada campaña con sus referencias y dependencias.
+El cierre de estos hitos delimitados no declara completadas la tesis ni la cobertura total de F5. Próximo trabajo técnico: unificar la gobernanza estricta de recursos en las rutas nuevas y resolver contratos restantes del dominio; después congelar cada campaña con sus referencias y dependencias.

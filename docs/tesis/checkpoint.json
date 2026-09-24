@@ -1,5 +1,5 @@
 {
-  "project": "Bioinformática.org — tesis TRP",
+  "project": "Helix Agent — tesis TRP",
   "updated": "2026-09-23",
   "phases_completed": [
     "F1",
@@ -37,11 +37,11 @@
     "plan": "docs/tesis/PLAN.md",
     "status": "docs/tesis/ESTADO.md",
     "traceability": "docs/tesis/trazabilidad.json",
-    "document_content": "script/tesis/update_identifier_docx.py",
+    "document_content": "script/tesis/update_helix_verification_docx.py",
     "engineering_evidence": "docs/tesis/evidencia/r32.json",
-    "document_evidence": "docs/tesis/renumeracion-20260923/document-checks.json",
+    "document_evidence": "evaluation/trp/verification-20260923/document-checks.json",
     "docx": "/home/webiwabou/Projects/Tesis.docx",
-    "pdf": "/home/webiwabou/Projects/Tesis-identificadores-20260923.pdf",
+    "pdf": "/home/webiwabou/Projects/Tesis-Helix-verificacion-20260923.pdf",
     "verifier": "script/tesis/verify_snapshot.py",
     "catalogue": "packages/helix/src/trp/catalog.json",
     "protocol": "evaluation/trp/PROTOCOL.md",
@@ -59,7 +59,8 @@
     "technical_evidence": "docs/tesis/evidencia/cierre-tecnico-20260921.json",
     "traceability_readable": "docs/tesis/trazabilidad.md",
     "f6_draft": "evaluation/trp/f6-readiness-20260921/technical-draft/freeze.draft.json",
-    "identifier_mapping": "docs/tesis/renumeracion-20260923/equivalencias.json"
+    "identifier_mapping": "docs/tesis/renumeracion-20260923/equivalencias.json",
+    "helix_verification": "evaluation/trp/verification-20260923/README.md"
   },
   "external_dependencies": [
     "Authentic FCI approval document and official title",
@@ -113,7 +114,6 @@
     "gate_scope": "engineering implementation; reserved empirical evaluation remains F6"
   },
   "implementation_dependencies": [
-    "Integrate verified predicted-geometry CLI into main agent approval and execution",
     "Resolve ReUPred runtime and RepeatsDB locus coordinate/API contract for dependent routes",
     "Extend strict resource governance to standalone detector and predicted routes where claimed"
   ],
@@ -126,10 +126,10 @@
     "R3.6": "Semantic mmCIF, AFDB confidence/PAE and explicit frames; admitted execution remains experimental PDB. Construct interpretation, genomic and physical validation incomplete or non-evaluable.",
     "R3.7": "Per-instance reports and offline integrity; experimental report bound to Nextflow approval and methods",
     "R3.8": "No original Pratt models executed; 78 metadata rows recovered, no coordinates/PAE in downloaded supplements; sensitivity/specificity null",
-    "next_work": "Predicted main-agent integration, remaining domain contracts and independent reserved corpus",
+    "next_work": "Strict shared resource governance for dedicated predicted/detector tools; remaining domain contracts and independent reserved corpus",
     "local_parser_environment": ".bioinformatica/trp-python (Gemmi 0.7.5; untracked; requirements in script/tesis/requirements-structural.txt)",
     "coordinate_progress": "Integrated label/author and SIFTS/UniProt mapping; real 206 residues and 12 units; portable verification of 139 files",
-    "R3_6_note": "Predicted AFDB geometry verified through separate CLI on artificial development segments; main-agent integration pending"
+    "R3_6_note": "AFDB geometry integrated through dedicated trp_predicted_geometry agent tool; real Question.Service-driven development reference passed on 3 supplied segments/21 residues; full shared resource admission remains pending"
   },
   "author_closed_sections": {
     "problem_statement": true,
@@ -156,5 +156,14 @@
     "causes": 3,
     "objectives": 3,
     "results": 21
+  },
+  "verification_20260923": {
+    "source_tests_pass": 519,
+    "python_tests_pass": 78,
+    "released_remote_version": "0.3.0",
+    "predicted_tool_integrated": true,
+    "reserved_evaluation_started": false,
+    "llm_calls": 0,
+    "document_installed": true
   }
 }

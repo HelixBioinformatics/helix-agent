@@ -1,0 +1,135 @@
+{
+  "kind": "development and deployment verification; not held-out evaluation",
+  "hostname": "bioinf03",
+  "kernel": "6.8.0-134-generic",
+  "cpu_count": 8,
+  "helix_binary": "/home/marlon.ariza/.helix/bin/helix",
+  "helix_sha256": "29c42bd073581dcc010593ce6a86809a5c634f6d3e2c2dcab8ad6b8e571be44f",
+  "installer_idempotent": true,
+  "geometry_identical": true,
+  "geometry_units": 12,
+  "results": {
+    "version": {
+      "exit_code": 0,
+      "elapsed_seconds": 0.577,
+      "command": [
+        "helix",
+        "--version"
+      ]
+    },
+    "environment": {
+      "exit_code": 0,
+      "elapsed_seconds": 2.321,
+      "command": [
+        "helix",
+        "debug",
+        "env"
+      ]
+    },
+    "nextflow": {
+      "exit_code": 0,
+      "elapsed_seconds": 0.844,
+      "command": [
+        "nextflow",
+        "-version"
+      ]
+    },
+    "reinstall_same_version": {
+      "exit_code": 0,
+      "elapsed_seconds": 0.613,
+      "command": [
+        "bash",
+        "/home/marlon.ariza/helix-thesis-20260923/input/helix-install",
+        "--version",
+        "0.3.0",
+        "--no-modify-path"
+      ]
+    },
+    "portable_intact": {
+      "exit_code": 0,
+      "elapsed_seconds": 0.078,
+      "command": [
+        "python3",
+        "/home/marlon.ariza/helix-thesis-20260923/input/verify_bundle.py",
+        "/home/marlon.ariza/helix-thesis-20260923/input/evidence",
+        "--sha256",
+        "07293b0c40b7dbeac80ea5d6289815cc772c2767fd3dafa22f5fb940e150aaa0"
+      ]
+    },
+    "portable_altered": {
+      "exit_code": 1,
+      "elapsed_seconds": 0.058,
+      "command": [
+        "python3",
+        "/home/marlon.ariza/helix-thesis-20260923/input/verify_bundle.py",
+        "/home/marlon.ariza/helix-thesis-20260923/output/damaged-evidence",
+        "--sha256",
+        "07293b0c40b7dbeac80ea5d6289815cc772c2767fd3dafa22f5fb940e150aaa0"
+      ]
+    },
+    "cli_intact": {
+      "exit_code": 0,
+      "elapsed_seconds": 1.269,
+      "command": [
+        "helix",
+        "verify",
+        "/home/marlon.ariza/helix-thesis-20260923/output/synthetic-corpus",
+        "--no-color"
+      ]
+    },
+    "cli_altered": {
+      "exit_code": 1,
+      "elapsed_seconds": 1.31,
+      "command": [
+        "helix",
+        "verify",
+        "/home/marlon.ariza/helix-thesis-20260923/output/synthetic-corpus",
+        "--no-color"
+      ]
+    },
+    "geometry": {
+      "exit_code": 0,
+      "elapsed_seconds": 3.893,
+      "command": [
+        "docker",
+        "run",
+        "--rm",
+        "--name",
+        "helix-reference-011e7414696f441487357f82d9ab37f8",
+        "--network",
+        "none",
+        "--read-only",
+        "--cap-drop",
+        "ALL",
+        "--security-opt",
+        "no-new-privileges",
+        "--pids-limit",
+        "128",
+        "--cpus",
+        "2",
+        "--memory",
+        "2g",
+        "--tmpfs",
+        "/tmp",
+        "--user",
+        "1003:1003",
+        "--mount",
+        "type=bind,src=/home/marlon.ariza/helix-thesis-20260923/output/geometry,dst=/work",
+        "sha256:1dd91e70acb153a0bd9a51346fc001dd5025f851c9598697cdd37f07d9490b0a",
+        "single",
+        "/work/2xqh.pdb",
+        "A",
+        "/work/geometry.csv",
+        "161_175,176_189,190_203,204_217,218_233,234_249,250_263,264_276,305_326,327_350,373_392,393_416",
+        "-ins_def",
+        "351_372"
+      ]
+    }
+  },
+  "ok": true,
+  "llm_calls": 0,
+  "limitations": [
+    "No hard storage quota for this geometry run.",
+    "Released CLI and pinned scientific container are tested separately; this is not natural-language end-to-end evaluation."
+  ]
+}

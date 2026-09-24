@@ -140,6 +140,7 @@ export const SPECIALIZATION_TOOLS: readonly string[] = [
   "trp_prepare",
   "trp_run",
   "trp_detect",
+  "trp_predicted_geometry",
   // nf-core execution and authoring
   "nfcore_pipeline_search",
   "nfcore_samplesheet_schema",

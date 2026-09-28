@@ -1,5 +1,9 @@
 # Estado del cierre
 
+## Preparación de anotación — 28 de septiembre de 2026
+
+La asesora bioinformática fue propuesta por el tesista para revisar la guía y/o coordinar un investigador externo. Aceptación, independencia respecto del desarrollo y disponibilidad por confirmar. Se prepararon [materiales para la reunión](reunion-asesora-20260928/README.md), PDF, Excel y piloto de 12 solicitudes/12 turnos sin etiquetas humanas. La reserva sigue pendiente; decisiones de modelo/presupuesto y Pratt aplazadas por el autor. AWS se analizó como opción de clúster; no hay acceso, gasto ni provisión autorizados en esta entrega. El adaptador TRP de ejecución local necesita ampliación para un planificador remoto.
+
 ## Verificación de Helix — 23 de septiembre de 2026
 
 Nombre actual: **Helix Agent**, comando `helix`. Segunda estación: versión publicada 0.3.0, instalación idempotente, 139 archivos verificados y dos alteraciones rechazadas (corpus CLI y paquete portable); geometría de 12 unidades idéntica. Nueva referencia local SIFTS por herramientas del agente también satisfactoria. Cero llamadas LLM.

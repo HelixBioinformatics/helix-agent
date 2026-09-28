@@ -2,7 +2,7 @@
 
 Identificadores actualizados al 23/09/2026: tres objetivos y 21 resultados. Las evidencias fechadas conservan su numeración original; consulte [equivalencias](../../docs/tesis/renumeracion-20260923/README.md).
 
-**Estado: pendiente de confirmar anotador.** No se ha enviado este encargo ni se han obtenido juicios externos. El investigador puede preparar datos y etiquetas de desarrollo; no puede presentarlas como un patrón independiente.
+**Estado: persona propuesta, aceptación pendiente (28/09/2026).** El tesista propone a su asesora, bioinformática, como revisora o coordinadora de investigadores. Registrar relación y participación previa; no atribuir independencia plena ni aceptación sin confirmación. [Paquete para la reunión](../../docs/tesis/reunion-asesora-20260928/README.md). No se ha enviado este encargo ni se han obtenido juicios externos. El investigador puede preparar datos y etiquetas de desarrollo; no puede presentarlas como un patrón independiente.
 
 ## Perfil y material
 

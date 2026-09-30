@@ -2,7 +2,7 @@
 
 Identificadores actualizados al 23/09/2026: tres objetivos y 21 resultados. Las evidencias fechadas conservan su numeración original; consulte [equivalencias](../../docs/tesis/renumeracion-20260923/README.md).
 
-**Estado: persona propuesta, aceptación pendiente (28/09/2026).** El tesista propone a su asesora, bioinformática, como revisora o coordinadora de investigadores. Registrar relación y participación previa; no atribuir independencia plena ni aceptación sin confirmación. [Paquete para la reunión](../../docs/tesis/reunion-asesora-20260928/README.md). No se ha enviado este encargo ni se han obtenido juicios externos. El investigador puede preparar datos y etiquetas de desarrollo; no puede presentarlas como un patrón independiente.
+**Actualización operativa del 30/09/2026.** El tesista designa a su asesora como experta responsable. Informa que no participó en el desarrollo y que solo revisó parte del informe; la relación académica y exposición previa se declararán. La asesora consideró comprensible el piloto, según el tesista. La primera entrega de evaluación real está en [evaluacion.xlsx](../../docs/tesis/evaluacion-experta-20260930/para-asesora/evaluacion.xlsx), acompañada de datos públicos. Contiene borradores de solicitudes asistidos por IA y campos vacíos para referencias y paráfrasis humanas. Todavía no hay etiquetas externas recibidas ni consentimiento firmado atribuido a la participante. No se repite la búsqueda de otra persona como condición de inicio; se conserva el registro de su participación.
 
 ## Perfil y material
 

@@ -1,0 +1,3402 @@
+{
+  "source_url": "https://rest.uniprot.org/uniprotkb/search?query=%28reviewed%3Atrue%29+AND+%28ft_repeat%3A%2A%29+AND+%28length%3A%5B150+TO+600%5D%29&format=json&size=500&fields=accession%2Cid%2Cprotein_name%2Corganism_name%2Clength%2Csequence%2Cft_repeat%2Cxref_pfam%2Cxref_pdb",
+  "pool_limit": 500,
+  "returned": 500,
+  "eligible": 387,
+  "development_exclusions": [
+    {
+      "accession": "Q9MCI8",
+      "pfam": [
+        "PF03895",
+        "PF05658"
+      ]
+    },
+    {
+      "accession": "P19148",
+      "pfam": [
+        "PF27526"
+      ]
+    },
+    {
+      "accession": "P69905",
+      "pfam": [
+        "PF00042"
+      ]
+    }
+  ],
+  "excluded_pfam": [
+    "PF00042",
+    "PF03895",
+    "PF05658",
+    "PF27526"
+  ],
+  "rule": "Reviewed UniProt entries, length 150-600, >=3 disjoint exact Repeat features of length >=8, Pfam known and no development-family overlap. Finite first API page; not a census. Group by shared Pfam, reserve whole components. Hash-order components then accession; round-robin for coverage. 10 PDB detection +15 AFDB detection +25 AFDB supplied-unit geometry, unique accessions. All selections before agent inference.",
+  "freeze_status": "pending_expert_review",
+  "eligible_entries": [
+    {
+      "acc": "P78395",
+      "pfam": [
+        "PF27089",
+        "PF27091"
+      ],
+      "family": "F-2855b0c5ea4e",
+      "sort": "bfd22fa59ba4414309a3ec87e90c13f16f0b4ebe2503c483f0d7394bf17d29d9"
+    },
+    {
+      "acc": "Q08752",
+      "pfam": [
+        "PF00160"
+      ],
+      "family": "F-b414c7d1430a",
+      "sort": "0e69bf3648e083ece3786374cbbf65aad914080b91f4b9dc46f0a7a6d80816c7"
+    },
+    {
+      "acc": "Q15291",
+      "pfam": [
+        "PF00400"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "0825fc90fe89b4cf19c611849368211e3139521bab0f5b5643ae74c53ce894eb"
+    },
+    {
+      "acc": "P12429",
+      "pfam": [
+        "PF00191"
+      ],
+      "family": "F-83b45da0c29a",
+      "sort": "0fb7faadfa50ecaa661ce60460cb833fa636fcc2a3108c90522f117f556b759f"
+    },
+    {
+      "acc": "P02647",
+      "pfam": [
+        "PF01442"
+      ],
+      "family": "F-49b610c2ca59",
+      "sort": "044f9ae8e492e6821acf855dced5879a88175fd3515ce9d9079d44747ef4fd38"
+    },
+    {
+      "acc": "P62873",
+      "pfam": [
+        "PF25391"
+      ],
+      "family": "F-2ce30671c4f1",
+      "sort": "70a1c2b607046f971b2c4e63b9cc01951303bbce20afc23393a7b897870240f6"
+    },
+    {
+      "acc": "Q13875",
+      "pfam": [
+        "PF02318"
+      ],
+      "family": "F-4851733e3cc1",
+      "sort": "68737f6c63040b1e25c95ef32488fe37a575a4ffb7c5e895fcf03c89c78a8999"
+    },
+    {
+      "acc": "Q9H977",
+      "pfam": [
+        "PF21031"
+      ],
+      "family": "F-696fd74d5a7c",
+      "sort": "1c369f5d85149fc6e7233755f9aa517bbeba7a30f5017c0f0875371cd59c13ca"
+    },
+    {
+      "acc": "P04280",
+      "pfam": [
+        "PF15240"
+      ],
+      "family": "F-64ed8e66b0a4",
+      "sort": "365dad0e84cca8ce07c67889812768ced60bfe4d9c66595a0db5e75e581313e8"
+    },
+    {
+      "acc": "Q3SY46",
+      "pfam": [
+        "PF05287"
+      ],
+      "family": "F-a16cf2177d5d",
+      "sort": "369715acb3b3c5c8c939a9fdd482254a2bc69db729d67a763324e6e907f7349e"
+    },
+    {
+      "acc": "Q96BR5",
+      "pfam": [
+        "PF08238"
+      ],
+      "family": "F-f87cc7d98e38",
+      "sort": "9f691b3fe492bdaa38b24d1f427fe30da57a2ede16021e6dfe99af43649b6c1f"
+    },
+    {
+      "acc": "Q6VVB1",
+      "pfam": [
+        "PF14634"
+      ],
+      "family": "F-e12a71940eb3",
+      "sort": "a8218981a3a593f8a34aeba9775280c8e68dfbef76a38ce81c3fe9a2eb7963b3"
+    },
+    {
+      "acc": "O43493",
+      "pfam": [
+        "PF17818"
+      ],
+      "family": "F-b328d4eefd77",
+      "sort": "6a4e4ef8caa39485a97e7d077c612803b70b52d23ffc50ffca719ba3120cf347"
+    },
+    {
+      "acc": "P39687",
+      "pfam": [
+        "PF14580"
+      ],
+      "family": "F-f0a9891bf2e0",
+      "sort": "535e3764453fe7a9f9b2caa2c5bda46c2423afb7b483b507ec3c206d206b6874"
+    },
+    {
+      "acc": "Q9Y4P8",
+      "pfam": [
+        "PF21032"
+      ],
+      "family": "F-fe2725170e48",
+      "sort": "0e8e7b5fceb917006895965116818f973e647f8781f05fe1d7579986d8506716"
+    },
+    {
+      "acc": "O00170",
+      "pfam": [
+        "PF23322"
+      ],
+      "family": "F-5dcd310a15db",
+      "sort": "5bc452d45fea69ee8127c6eb9d85f7d8cf8dcd28545ed64f5ee021aba0504988"
+    },
+    {
+      "acc": "Q86Y33",
+      "pfam": [
+        "PF24807"
+      ],
+      "family": "F-206c9d53016e",
+      "sort": "984d8c863d27c6ea2190d49c33582935843b750698f8297b326d347d43cdf245"
+    },
+    {
+      "acc": "Q96J01",
+      "pfam": [
+        "PF25174"
+      ],
+      "family": "F-f6483b0bbffa",
+      "sort": "618b4a6e735da9bc9b42d5638aa630500930652dacf2d98100ed7cde2f52ff81"
+    },
+    {
+      "acc": "Q9NRG9",
+      "pfam": [
+        "PF25460"
+      ],
+      "family": "F-dd0fc635c246",
+      "sort": "76030c6a0f91d791ca5860f7fc3de1c2a68e225f5325638ceb629ec3978ed68b"
+    },
+    {
+      "acc": "Q16629",
+      "pfam": [
+        "PF00076"
+      ],
+      "family": "F-0693afed7a89",
+      "sort": "161130bb02e6523bb6ead1c386cfb87b180997a75c4172efc974d855e1ad6381"
+    },
+    {
+      "acc": "Q13112",
+      "pfam": [
+        "PF15512",
+        "PF24105"
+      ],
+      "family": "F-f6cf6e6f78a3",
+      "sort": "e306aa11200a8550645e669390a11c94f969e054d2127e6dea4cc84b50f5c7c5"
+    },
+    {
+      "acc": "P27797",
+      "pfam": [
+        "PF00262"
+      ],
+      "family": "F-7a7db4b73a0c",
+      "sort": "264a7b1459642cb8ea278cfe447a410b16b0b5432ab77afdc87e6dc3d3b3121c"
+    },
+    {
+      "acc": "P49356",
+      "pfam": [
+        "PF00432"
+      ],
+      "family": "F-f98854d49f53",
+      "sort": "5d3bb06d97593342e333324e2d26f5df7b5d962d0f1cf45fc53b0eab039cde0a"
+    },
+    {
+      "acc": "P19971",
+      "pfam": [
+        "PF00591",
+        "PF02885",
+        "PF07831"
+      ],
+      "family": "F-fcf57cdc47d5",
+      "sort": "5956fc1fd25d968ed257ee2445a13ab268eabaf5622693bff63feb23a1fd4a74"
+    },
+    {
+      "acc": "P56159",
+      "pfam": [
+        "PF02351"
+      ],
+      "family": "F-02ce4fd6463d",
+      "sort": "3871415d4e0bb1378ae2cb781804abc67c77293fdb14b309dee52e4791d1d22f"
+    },
+    {
+      "acc": "Q8N693",
+      "pfam": [
+        "PF00046"
+      ],
+      "family": "F-b983c441df36",
+      "sort": "89571a7b8ddd1b2ef52678f3fee5184e748c777e689e22e106430abdf8d5c953"
+    },
+    {
+      "acc": "P07476",
+      "pfam": [
+        "PF00904",
+        "PF10583"
+      ],
+      "family": "F-0adb490fb771",
+      "sort": "1db8f06e5d49248a42238b9150c88af53c7f785fc1e8133fd6faa5885f3b865a"
+    },
+    {
+      "acc": "P50281",
+      "pfam": [
+        "PF00045",
+        "PF00413",
+        "PF01471",
+        "PF11857"
+      ],
+      "family": "F-44dca6406d9a",
+      "sort": "381898e0299a1dee958bfc8aaa9dd63d9330fea03eda7208ada9eace5bd9c99c"
+    },
+    {
+      "acc": "Q6PF18",
+      "pfam": [
+        "PF02493"
+      ],
+      "family": "F-66270ba76e61",
+      "sort": "55d71385426ee13af4f3b7565a24f52b2c318db97cddc3e43cd3134cbc86af69"
+    },
+    {
+      "acc": "Q3SX64",
+      "pfam": [
+        "PF07004"
+      ],
+      "family": "F-042b41a0436a",
+      "sort": "2d190f8a58ed3235f2df7f90bde15ead9c2ca9a4a08f9d301874e1209b0b44e2"
+    },
+    {
+      "acc": "A0AVF1",
+      "pfam": [
+        "PF30475"
+      ],
+      "family": "F-114ae437b015",
+      "sort": "228c439a4a9d09d00af82833660f2257cd40aa374054c73e2b9c7a5178e26e7c"
+    },
+    {
+      "acc": "Q96G42",
+      "pfam": [
+        "PF01344"
+      ],
+      "family": "F-06ab43d356b5",
+      "sort": "27510cd742e668538fc45c0e673aaa8c44b9f580fb63392922e3bb35b2320327"
+    },
+    {
+      "acc": "Q16204",
+      "pfam": [
+        "PF09755"
+      ],
+      "family": "F-e4eb265d4d0f",
+      "sort": "5204fec8561df97c5f47a7d5b42fcf5cf1d428980dc0623ac65277012a509502"
+    },
+    {
+      "acc": "P36941",
+      "pfam": [
+        "PF00020"
+      ],
+      "family": "F-0ffe0e8c711d",
+      "sort": "025be880642b5ff24815abffd311e338694e6d4a6bd19ac288ef4ae1bf401754"
+    },
+    {
+      "acc": "Q86VQ3",
+      "pfam": [
+        "PF00085"
+      ],
+      "family": "F-f30267fa2545",
+      "sort": "70ee9e8c3770423adfcc28f675686695275b3e69287dc1af3a2ffc20b1d246cc"
+    },
+    {
+      "acc": "Q9UBV8",
+      "pfam": [
+        "PF13405",
+        "PF13499"
+      ],
+      "family": "F-88ced305f7f9",
+      "sort": "04a012b3abaa44e8cfc8bb74a35c1339e3a10a7aef7949e4f88bdefe460e48e0"
+    },
+    {
+      "acc": "Q9HAD4",
+      "pfam": [
+        "PF25178"
+      ],
+      "family": "F-434029769058",
+      "sort": "af377366a9976a2f76d39de4ab728336367efb3e162e366e25518076ad6a6afd"
+    },
+    {
+      "acc": "Q9BU89",
+      "pfam": [
+        "PF13646"
+      ],
+      "family": "F-857ac9c94255",
+      "sort": "34ee536e66b64732b3bdbe77474de1a722e9d2880b3a1811f68ee60ae7e2c60e"
+    },
+    {
+      "acc": "P36508",
+      "pfam": [
+        "PF00096"
+      ],
+      "family": "F-3cce12e55588",
+      "sort": "7d4da3d2a9775fafa17de9d5c950f783c0d2ff00f05702252f264fb7c3226faf"
+    },
+    {
+      "acc": "Q02383",
+      "pfam": [
+        "PF05474"
+      ],
+      "family": "F-959ecd4d3b03",
+      "sort": "686f013ddd354f4fddbc0891f9fc518d9a8e7a6d2b01f800a90b1b81ddad4e2a"
+    },
+    {
+      "acc": "P09564",
+      "pfam": [
+        "PF07686"
+      ],
+      "family": "F-956fde3cf78a",
+      "sort": "0ba5ae0dd5f8b87889f32dcfff4e2d22108520dcb29e74d1ba4cc66bdf0bd76c"
+    },
+    {
+      "acc": "Q5T124",
+      "pfam": [
+        "PF00789",
+        "PF08059"
+      ],
+      "family": "F-dcf15e21cfb1",
+      "sort": "fcdbc27ccd61a231744092f47ae8fc528e441f7f7c626d991359ee28ac0508d6"
+    },
+    {
+      "acc": "P21917",
+      "pfam": [
+        "PF00001"
+      ],
+      "family": "F-b56d3f315097",
+      "sort": "99c48092250e6be230ab95bd42bc8d236a5c74d4f02a0797c8447275fc72534a"
+    },
+    {
+      "acc": "P98170",
+      "pfam": [
+        "PF00653",
+        "PF13920",
+        "PF21290"
+      ],
+      "family": "F-9e795207763d",
+      "sort": "1af1174c5a8687e8746548229a953f30f28ef2beb07f225aa0e848ae38226c1d"
+    },
+    {
+      "acc": "Q5SSG8",
+      "pfam": [
+        "PF05647",
+        "PF14654"
+      ],
+      "family": "F-c8513925b11c",
+      "sort": "5ea860e070ab279854edcb60e73ff4c52380069186b95d29d32ae53b4cf13a5d"
+    },
+    {
+      "acc": "Q9H320",
+      "pfam": [
+        "PF15231"
+      ],
+      "family": "F-3b87dfb15402",
+      "sort": "68fe3edd0aa83c961248c3c5d9d529f53215540cb2d8d4a8201e0fcf98af6ff8"
+    },
+    {
+      "acc": "O00505",
+      "pfam": [
+        "PF00514",
+        "PF01749",
+        "PF16186"
+      ],
+      "family": "F-7b3b73e3f48c",
+      "sort": "261e07f8e96236f1a8a3d7ede12b96642bc411185f9fca8952647a3e7cb4eb8d"
+    },
+    {
+      "acc": "Q9C0D0",
+      "pfam": [
+        "PF02755"
+      ],
+      "family": "F-45d0d199f69d",
+      "sort": "4560a56b1641ec15bc46cc7df6ba6ceee94cf12651acfbc338f73db8544f3906"
+    },
+    {
+      "acc": "P01860",
+      "pfam": [
+        "PF07654"
+      ],
+      "family": "F-2b8e618dd3d7",
+      "sort": "d1d93dbab1056fb60dea8ec6d5542435a9b7dd8b23465a3975a8584461c5b77a"
+    },
+    {
+      "acc": "Q9UMS4",
+      "pfam": [
+        "PF04564",
+        "PF08606",
+        "PF24814"
+      ],
+      "family": "F-6533ae4d9d9b",
+      "sort": "f07eca3959ffdac9d6b20ab1878714dc6a307315cd29583d441817f51ea8e392"
+    },
+    {
+      "acc": "P55795",
+      "pfam": [
+        "PF08080",
+        "PF28441"
+      ],
+      "family": "F-b8020d96e875",
+      "sort": "39804665dcc41f11c0afa4a81c7c19fe4e721bf9ee464808d680db3defcd8f9f"
+    },
+    {
+      "acc": "Q9UNE0",
+      "pfam": [
+        "PF24979"
+      ],
+      "family": "F-ae6fbf26a2f0",
+      "sort": "1aa16967bc533f966df2019bcc3031f843f79bcff28b0c18e0b230f051c1c3d3"
+    },
+    {
+      "acc": "P18124",
+      "pfam": [
+        "PF00327",
+        "PF08079"
+      ],
+      "family": "F-02c2bd07884a",
+      "sort": "69c04600471be70c93400bd879c1db8f3c3c3b42dd0da8ce984f1f2e9fab82f6"
+    },
+    {
+      "acc": "Q13347",
+      "pfam": [
+        "PF24805"
+      ],
+      "family": "F-a538ad8ce552",
+      "sort": "786d73958b7ee803dfeba546df8f22d206b87a10bcabc17c51264444f29c44bb"
+    },
+    {
+      "acc": "P29536",
+      "pfam": [
+        "PF02205",
+        "PF03250",
+        "PF27087"
+      ],
+      "family": "F-20117318e6d0",
+      "sort": "0b2e65dfa70af561f71c36db97e726519b5a7fe62c238d017ad0275f33ed1fa9"
+    },
+    {
+      "acc": "P40121",
+      "pfam": [
+        "PF00626"
+      ],
+      "family": "F-bece44d0dd36",
+      "sort": "c9ceb11fe729f8b6b5166990d58ac48ab0ee3c028361320161acc2fe9532fd15"
+    },
+    {
+      "acc": "Q9BY44",
+      "pfam": [
+        "PF08662",
+        "PF31025"
+      ],
+      "family": "F-94f1f44f4147",
+      "sort": "6657e9b08697c0c201c68f91278569bfe6540ceaa3f917da09cb2f2d8ca944b3"
+    },
+    {
+      "acc": "O95801",
+      "pfam": [
+        "PF18972"
+      ],
+      "family": "F-0c273941fada",
+      "sort": "fbea6b7ca10d42edf62b27de91475ff0bf53386d1f9633682d236d15437c5727"
+    },
+    {
+      "acc": "Q8WWR8",
+      "pfam": [
+        "PF13088"
+      ],
+      "family": "F-d136d6d96138",
+      "sort": "4b055895880cbec2364ef2837ddd4e718e4549b92fa8d8c345ef010530af8d02"
+    },
+    {
+      "acc": "O95965",
+      "pfam": [
+        "PF07974",
+        "PF23105"
+      ],
+      "family": "F-2aba1e85128e",
+      "sort": "6a7a518bb708635b82cc90f2a0ae70b2133f40086ede2317946f2c4fa1f45068"
+    },
+    {
+      "acc": "Q9H2X3",
+      "pfam": [
+        "PF00059"
+      ],
+      "family": "F-ccfd8d681305",
+      "sort": "8916d3045e2be8fd374dc86b78b7fa941d12bd961ded3d5c6873f7ca1b0d4393"
+    },
+    {
+      "acc": "P51843",
+      "pfam": [
+        "PF00104",
+        "PF14046"
+      ],
+      "family": "F-36ade3e4fc53",
+      "sort": "e7fef48a79d78ed17359b32ff428a69ecc66ebd6ab40c9a262dabddc4bdc0405"
+    },
+    {
+      "acc": "Q13508",
+      "pfam": [
+        "PF01129"
+      ],
+      "family": "F-5d0229528dc7",
+      "sort": "33bcbcb7052d1c61b0e2f6a0400f3acfdd4039b0ae7fd6c3d1a711878971416f"
+    },
+    {
+      "acc": "Q9P2T0",
+      "pfam": [
+        "PF14912"
+      ],
+      "family": "F-c4845e107540",
+      "sort": "37df6dd18b75d1b2663bf0d367b0e46e90f4ff1ae7c20c30c40d6d300a15f68a"
+    },
+    {
+      "acc": "Q9Y5U5",
+      "pfam": [
+        "PF28896"
+      ],
+      "family": "F-757c9a91d90b",
+      "sort": "0ff243374f3cf70d933871a3ad4c75dc56c920bd7d4bdd1f23bd95847159515f"
+    },
+    {
+      "acc": "P49767",
+      "pfam": [
+        "PF00341",
+        "PF03128"
+      ],
+      "family": "F-19b2211fbb45",
+      "sort": "7abe0dbfd94c0b960e87c857493016d49d6747548f24c4ea81cb0fd2c7daeb45"
+    },
+    {
+      "acc": "P04156",
+      "pfam": [
+        "PF00377",
+        "PF03991",
+        "PF11587"
+      ],
+      "family": "F-863b59b6249c",
+      "sort": "92422983a5dd81893140da57357d1de41747878033038ea058ef8a7054beb122"
+    },
+    {
+      "acc": "Q5T6F0",
+      "pfam": [
+        "PF23760"
+      ],
+      "family": "F-43a1cda65fac",
+      "sort": "dae2b58f046253b8d2417cc485f5b83092c974548e84466e6b7314567096e764"
+    },
+    {
+      "acc": "Q9NZL4",
+      "pfam": [
+        "PF28415"
+      ],
+      "family": "F-97067e5972d1",
+      "sort": "7d66581775293d6ef1ce66793146eca7f12c7285c1c6a4b2a4ff37bbcfb6fd10"
+    },
+    {
+      "acc": "P61964",
+      "pfam": [
+        "PF25175"
+      ],
+      "family": "F-83da45d1b789",
+      "sort": "7047570df5082610ab6e2b3a5da48d1892e2263fb5549a3b79f742d558710a7e"
+    },
+    {
+      "acc": "Q7Z6M4",
+      "pfam": [
+        "PF02536"
+      ],
+      "family": "F-21598905c748",
+      "sort": "0545bd4cee5f4f1dfdafafeed19acf8efa090a8975384bc15790fb60629c24d3"
+    },
+    {
+      "acc": "Q9H1B4",
+      "pfam": [
+        "PF09162",
+        "PF22602",
+        "PF24048"
+      ],
+      "family": "F-972cad9d3dc6",
+      "sort": "f46e163d3c7c0bd685289f2e70dc1db710079dd0afde41fe7e4cef6da426f899"
+    },
+    {
+      "acc": "A6NED2",
+      "pfam": [
+        "PF00415"
+      ],
+      "family": "F-8fc2c9fc63c2",
+      "sort": "92f7172758dc7c788f2872ad1bb9bacc1ea5eba4cb38abbc29e0a5623229694f"
+    },
+    {
+      "acc": "Q99439",
+      "pfam": [
+        "PF00307",
+        "PF00402"
+      ],
+      "family": "F-3dc083e7ee8e",
+      "sort": "3ab3ab8feecb9570bf34febc465349cfe6cf6472afa32edd04d5fa1cd8a1f44e"
+    },
+    {
+      "acc": "Q5T9G4",
+      "pfam": [
+        "PF04826"
+      ],
+      "family": "F-42028e6482e7",
+      "sort": "a59720dca14e25154d2a5bf00578c50dfecdf179d5e31c54680e1ec9379c12bb"
+    },
+    {
+      "acc": "Q92597",
+      "pfam": [
+        "PF03096"
+      ],
+      "family": "F-c0eca4d956e0",
+      "sort": "49209605605c0dacfe75d521f1fedc96236d3a51966d554d5046218506b95b2b"
+    },
+    {
+      "acc": "P0DI83",
+      "pfam": [
+        "PF27509"
+      ],
+      "family": "F-24c3a3b4f24d",
+      "sort": "c92e1d63425a4e8a4525f3df2aedf68daf3da20d591fb3c6de58c485eac4519b"
+    },
+    {
+      "acc": "P46060",
+      "pfam": [
+        "PF07834",
+        "PF13516"
+      ],
+      "family": "F-918eef991a81",
+      "sort": "0290a18f815308da14388b0dcc6203b507d21d600147ccbb5de12ccf34f33f20"
+    },
+    {
+      "acc": "Q86UR1",
+      "pfam": [
+        "PF00018",
+        "PF00564"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "0d83b95e603dec6ad4b62fac7df19183fc76fefc7eaea4db9cb54255bbe86e67"
+    },
+    {
+      "acc": "P20073",
+      "pfam": [
+        "PF00191"
+      ],
+      "family": "F-83b45da0c29a",
+      "sort": "323dba4da0857d19d7cc1b2a36f655dcefbe68495ff0937416ae8f190ac69f2e"
+    },
+    {
+      "acc": "P02649",
+      "pfam": [
+        "PF01442"
+      ],
+      "family": "F-49b610c2ca59",
+      "sort": "4e18f8938184616f1326b48ebff52c077e9ada7914b0bb98fb17efe3b369e32b"
+    },
+    {
+      "acc": "O14775",
+      "pfam": [
+        "PF25391"
+      ],
+      "family": "F-2ce30671c4f1",
+      "sort": "87b1e806ff698cddfbec3ba7139cfe7406f012be76b2853ea10f267c26d4d08f"
+    },
+    {
+      "acc": "P10163",
+      "pfam": [
+        "PF15240"
+      ],
+      "family": "F-64ed8e66b0a4",
+      "sort": "8cae007106654bf9302915260aa418f76fea44f4012c3996768c1bf402a1854e"
+    },
+    {
+      "acc": "Q8IUC1",
+      "pfam": [
+        "PF05287"
+      ],
+      "family": "F-a16cf2177d5d",
+      "sort": "98e550aeda090d0b88869fccc17c52675f35c9b0f911eb70f0af5657ed8a6d14"
+    },
+    {
+      "acc": "Q14154",
+      "pfam": [
+        "PF08238"
+      ],
+      "family": "F-f87cc7d98e38",
+      "sort": "ec030193ad100666cf864397f2a872d7c856d6c5209b5a690cceff41f295e594"
+    },
+    {
+      "acc": "Q15435",
+      "pfam": [
+        "PF12799",
+        "PF14580"
+      ],
+      "family": "F-f0a9891bf2e0",
+      "sort": "801e410c06e91b6dc3a3250a3d0085a14718a38656c5693e51e89abaecfca49b"
+    },
+    {
+      "acc": "Q9Y484",
+      "pfam": [
+        "PF21032"
+      ],
+      "family": "F-fe2725170e48",
+      "sort": "c3f3be9bb5e13aabb8f6094157402dcdbd3f13fd2c7f1f4925cf109063ed81d4"
+    },
+    {
+      "acc": "Q9NZN9",
+      "pfam": [
+        "PF23322"
+      ],
+      "family": "F-5dcd310a15db",
+      "sort": "cdfb79488e305d26a752a74597d97d959512b60c0f590fcd521cb412d69104e2"
+    },
+    {
+      "acc": "Q12834",
+      "pfam": [
+        "PF24807"
+      ],
+      "family": "F-206c9d53016e",
+      "sort": "ea7a62ae79a1811e503a12fe4f3d5c90b61fd4f4fced2009cd2ac91fba32d230"
+    },
+    {
+      "acc": "Q92804",
+      "pfam": [
+        "PF00076"
+      ],
+      "family": "F-0693afed7a89",
+      "sort": "eaca7c2b7ce91aad87c12aba669b0e585ce0ad108b71f84efec5719f634197cc"
+    },
+    {
+      "acc": "P27824",
+      "pfam": [
+        "PF00262"
+      ],
+      "family": "F-7a7db4b73a0c",
+      "sort": "685084b41f675aa5c2291a047d19e394c380912b23c7c77afb4711f89477094d"
+    },
+    {
+      "acc": "P02790",
+      "pfam": [
+        "PF00045"
+      ],
+      "family": "F-44dca6406d9a",
+      "sort": "45d6a871becca88761b7b78b87681f86e68109178c98a5d4a86e8956aa52689e"
+    },
+    {
+      "acc": "Q8WTS6",
+      "pfam": [
+        "PF00856",
+        "PF02493",
+        "PF22648"
+      ],
+      "family": "F-66270ba76e61",
+      "sort": "7d2775ad637ac697d8fb32a3e7080c564286abc217eefbe9cf2c91a1dfea9acb"
+    },
+    {
+      "acc": "Q6TFL4",
+      "pfam": [
+        "PF00651",
+        "PF01344",
+        "PF07707",
+        "PF24681"
+      ],
+      "family": "F-06ab43d356b5",
+      "sort": "29e80a15dda96efd5cbd130b08540bd5c7577c16123988dc0f09475adf39d2b5"
+    },
+    {
+      "acc": "O95407",
+      "pfam": [
+        "PF00020"
+      ],
+      "family": "F-0ffe0e8c711d",
+      "sort": "026267201521c4eb2e2531a9457e05651b823f5df625126c1245f5a48203a299"
+    },
+    {
+      "acc": "P16260",
+      "pfam": [
+        "PF00153"
+      ],
+      "family": "F-88ced305f7f9",
+      "sort": "098a30fe27469a214fc000e5450aa312aefd1cf526369bdbb89e235d810cd9e9"
+    },
+    {
+      "acc": "P30153",
+      "pfam": [
+        "PF02985",
+        "PF13646",
+        "PF22646",
+        "PF22956"
+      ],
+      "family": "F-857ac9c94255",
+      "sort": "d2cfcf28a54d514d26236a355bef3cc3239a79787dfc1ce8f42ab11053a60314"
+    },
+    {
+      "acc": "P04279",
+      "pfam": [
+        "PF05474"
+      ],
+      "family": "F-959ecd4d3b03",
+      "sort": "e5117f92be8673029aee4c2e13becd72708c539d325f7aaf4ee7e3529cf0fcad"
+    },
+    {
+      "acc": "O75602",
+      "pfam": [
+        "PF00514"
+      ],
+      "family": "F-7b3b73e3f48c",
+      "sort": "427a81706b11bb53fa83a8ebd7628aefffb7749a93cb52c0dff998a8b0c86dd2"
+    },
+    {
+      "acc": "Q96KR7",
+      "pfam": [
+        "PF02755"
+      ],
+      "family": "F-45d0d199f69d",
+      "sort": "ef99072ada2e24980a8c3394e5e8e5a55988770b72fa3f6b38c74c52dd84685e"
+    },
+    {
+      "acc": "Q9UNE7",
+      "pfam": [
+        "PF04564",
+        "PF12895",
+        "PF18391"
+      ],
+      "family": "F-6533ae4d9d9b",
+      "sort": "fca260091ca36d54b10351539e663c7209221141d16bde834f95dee0069031a9"
+    },
+    {
+      "acc": "P31943",
+      "pfam": [
+        "PF08080",
+        "PF28441"
+      ],
+      "family": "F-b8020d96e875",
+      "sort": "49c36e15a6c0e6435f51496cbab4e885b9010de854ff32b5f342ebd115cfb640"
+    },
+    {
+      "acc": "O43516",
+      "pfam": [
+        "PF02205"
+      ],
+      "family": "F-20117318e6d0",
+      "sort": "6b870e665a838b0474f06e8b4da96e8359d0ccc04685785137365f42f69729d4"
+    },
+    {
+      "acc": "Q9UQ49",
+      "pfam": [
+        "PF13088"
+      ],
+      "family": "F-d136d6d96138",
+      "sort": "7dbc9aea589882ef44360aaf222c2e0c9ffdfa16d983cb0f7a6225ef22ad43e0"
+    },
+    {
+      "acc": "Q9NNX6",
+      "pfam": [
+        "PF00059"
+      ],
+      "family": "F-ccfd8d681305",
+      "sort": "89b101115382963182fa38a45664708c0aa4bfa2520640a70da111c8e437d754"
+    },
+    {
+      "acc": "O43915",
+      "pfam": [
+        "PF00341",
+        "PF03128"
+      ],
+      "family": "F-19b2211fbb45",
+      "sort": "de15ea6851bc22baa5b1da0179d3175082ccc3dce4e3b1b7e2fedaf0e3789697"
+    },
+    {
+      "acc": "Q15417",
+      "pfam": [
+        "PF00307",
+        "PF00402"
+      ],
+      "family": "F-3dc083e7ee8e",
+      "sort": "522100451a90268ab0f35e722b33c8367d5527f4d3b741b8d8091c4f2684b58e"
+    },
+    {
+      "acc": "Q92696",
+      "pfam": [
+        "PF00560",
+        "PF01239",
+        "PF07711"
+      ],
+      "family": "F-918eef991a81",
+      "sort": "04c4e168cead807732ea929b5e3c79f7f835a47ff8a9517c2910f5e7c6f0eb3b"
+    },
+    {
+      "acc": "Q5QP82",
+      "pfam": [
+        "PF00400"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "0f612a9bb1ec044ac611088ba2a444c54169a584fd06c9791671b9873750dbfe"
+    },
+    {
+      "acc": "P04083",
+      "pfam": [
+        "PF00191"
+      ],
+      "family": "F-83b45da0c29a",
+      "sort": "365c2f83e9dde66734562f249392cbe6f5e020d5e16bf95b506e1f9c16e80697"
+    },
+    {
+      "acc": "P06727",
+      "pfam": [
+        "PF01442"
+      ],
+      "family": "F-49b610c2ca59",
+      "sort": "98c4b3b514c8a60dca24d33215e956c5c612644d5fc15b3601d3a0c058cebe38"
+    },
+    {
+      "acc": "P16520",
+      "pfam": [
+        "PF25391"
+      ],
+      "family": "F-2ce30671c4f1",
+      "sort": "8a920e71ba85d0a284adde8a62d31057d209c306420ecf4e6c25c298e15f6612"
+    },
+    {
+      "acc": "P02812",
+      "pfam": [
+        "PF15240"
+      ],
+      "family": "F-64ed8e66b0a4",
+      "sort": "b6ca6f8a1e878b66f0f94e0fca091829a8a17a32f4d5c45d3ad1c4642a6cbc88"
+    },
+    {
+      "acc": "Q9P2M1",
+      "pfam": [
+        "PF08238"
+      ],
+      "family": "F-f87cc7d98e38",
+      "sort": "fb6f9b76191394c6b93835b9902f97489da6e977aa4222a56de65dbaf1f6955b"
+    },
+    {
+      "acc": "Q9BTT0",
+      "pfam": [
+        "PF14580"
+      ],
+      "family": "F-f0a9891bf2e0",
+      "sort": "885e9ef74c81a2b6d125779727bde32fd2de71e43f592fd183be555f929faa18"
+    },
+    {
+      "acc": "Q5MNZ6",
+      "pfam": [
+        "PF21032"
+      ],
+      "family": "F-fe2725170e48",
+      "sort": "d369c867d86852875237eb69bc9c84e2ee7505f010d4e79de9a51694a82351b3"
+    },
+    {
+      "acc": "Q96L12",
+      "pfam": [
+        "PF00262"
+      ],
+      "family": "F-7a7db4b73a0c",
+      "sort": "b528bf18225b5f030416647a3cf1bf36f772fea069e5559678d727007c291544"
+    },
+    {
+      "acc": "P03956",
+      "pfam": [
+        "PF00045",
+        "PF00413",
+        "PF01471"
+      ],
+      "family": "F-44dca6406d9a",
+      "sort": "4eb191ff5f53a2b150f13a2a763e869e3e80f9480ac5cac2a68c25522b36c09a"
+    },
+    {
+      "acc": "Q8WYR4",
+      "pfam": [
+        "PF02493"
+      ],
+      "family": "F-66270ba76e61",
+      "sort": "f3edf574282df0355fb5d1fafda11a8c48b64d8d8f07fb697bc420414eebc268"
+    },
+    {
+      "acc": "Q9UJP4",
+      "pfam": [
+        "PF00651",
+        "PF01344",
+        "PF07707"
+      ],
+      "family": "F-06ab43d356b5",
+      "sort": "2e310f51c046fd6235f8caa4c0492458ef40afebbf2dd49f3a04b8600d78dd2b"
+    },
+    {
+      "acc": "Q9UBN6",
+      "pfam": [
+        "PF00020"
+      ],
+      "family": "F-0ffe0e8c711d",
+      "sort": "15bf576488abbb452e98c2c63c5e7cc3ef11f108a804ff91d2c96891f5d1abcf"
+    },
+    {
+      "acc": "P53007",
+      "pfam": [
+        "PF00153"
+      ],
+      "family": "F-88ced305f7f9",
+      "sort": "1f7885713763f748f1c1eb206bdc98972134c465c73442300da9a7bc868609ea"
+    },
+    {
+      "acc": "O00629",
+      "pfam": [
+        "PF00514",
+        "PF01749",
+        "PF16186"
+      ],
+      "family": "F-7b3b73e3f48c",
+      "sort": "733bf3906cf82b147e03b55ad0a516ca3966f4de9ca31dd7a9bb9a761009e03d"
+    },
+    {
+      "acc": "P06734",
+      "pfam": [
+        "PF00059"
+      ],
+      "family": "F-ccfd8d681305",
+      "sort": "e07c3311cdcd72cbc13f78dbbc0ea145c0817176d316aff60713c34632a14674"
+    },
+    {
+      "acc": "Q8N145",
+      "pfam": [
+        "PF03736",
+        "PF13855"
+      ],
+      "family": "F-918eef991a81",
+      "sort": "092cbb1abfdbe230ac99ab536daa51b3d11d629b43cdbd3749cf48a3face5279"
+    },
+    {
+      "acc": "Q13685",
+      "pfam": [
+        "PF00400",
+        "PF23098"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "115a6469334f7c7cdb238f1ce3d25f22a7b5b5b26938962c96a5ef9491ccd31e"
+    },
+    {
+      "acc": "A6NMY6",
+      "pfam": [
+        "PF00191"
+      ],
+      "family": "F-83b45da0c29a",
+      "sort": "5ab58dde8946e0492b99dcf05b63344eda9a88be18d9d647993727b41eccf644"
+    },
+    {
+      "acc": "Q9HAV0",
+      "pfam": [
+        "PF25391"
+      ],
+      "family": "F-2ce30671c4f1",
+      "sort": "e32264a54d48c8802410bc0c04570697841a395d3e7750348b0f671234601d49"
+    },
+    {
+      "acc": "P09661",
+      "pfam": [
+        "PF14580"
+      ],
+      "family": "F-f0a9891bf2e0",
+      "sort": "97531ab44b6e1a87bf1f23eb37a4f317b57b423943b588eccdbc37e2995232d1"
+    },
+    {
+      "acc": "P45452",
+      "pfam": [
+        "PF00045",
+        "PF00413",
+        "PF01471"
+      ],
+      "family": "F-44dca6406d9a",
+      "sort": "540bcc309f9a62d212512b3310a8a5e270107e92f2a51615391b09605c60aae8"
+    },
+    {
+      "acc": "Q53G59",
+      "pfam": [
+        "PF00651",
+        "PF01344",
+        "PF07707",
+        "PF24681"
+      ],
+      "family": "F-06ab43d356b5",
+      "sort": "39050bc538e4a1bb150204bb21105c6dbd9add992372129aed3bccb4b0018dd2"
+    },
+    {
+      "acc": "Q9HAV5",
+      "pfam": [
+        "PF00020",
+        "PF27736"
+      ],
+      "family": "F-0ffe0e8c711d",
+      "sort": "291a60b98f5ce810d088a4b4a056663aa7261ddac090fc832f17f9d67570c931"
+    },
+    {
+      "acc": "Q00325",
+      "pfam": [
+        "PF00153"
+      ],
+      "family": "F-88ced305f7f9",
+      "sort": "1f8b02277a9138b0706c3fec536a85d090dadec50e72ba824455a6b70c386672"
+    },
+    {
+      "acc": "O15131",
+      "pfam": [
+        "PF00514",
+        "PF01749",
+        "PF16186"
+      ],
+      "family": "F-7b3b73e3f48c",
+      "sort": "86a8c6749186dc0d377711cf0e17800d85a13f81d93323831199bc4094a7b101"
+    },
+    {
+      "acc": "Q06828",
+      "pfam": [
+        "PF00560",
+        "PF01462",
+        "PF13516",
+        "PF13855"
+      ],
+      "family": "F-918eef991a81",
+      "sort": "0debbf59656a5054ca8939edaa5edff7afb07f3289f5709becec069fac2bf3c2"
+    },
+    {
+      "acc": "Q96EQ0",
+      "pfam": [
+        "PF00515",
+        "PF13414",
+        "PF16546"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "137a92a1c4c359ce7a1696e1da7dcdc8df45ddf4b065cc224ebf7d1557c61190"
+    },
+    {
+      "acc": "O76027",
+      "pfam": [
+        "PF00191"
+      ],
+      "family": "F-83b45da0c29a",
+      "sort": "605398430a52abe9ecd50d005681254538201d30910ce12d82b162a54518d95d"
+    },
+    {
+      "acc": "Q86X45",
+      "pfam": [
+        "PF14580",
+        "PF23602"
+      ],
+      "family": "F-f0a9891bf2e0",
+      "sort": "b708b5ed65706a480dbdebfd3ec03ead9f9d64c97934f70cda4d3500eb3dc92d"
+    },
+    {
+      "acc": "P39900",
+      "pfam": [
+        "PF00045",
+        "PF00413",
+        "PF01471"
+      ],
+      "family": "F-44dca6406d9a",
+      "sort": "645ac736733faca321e3f6c8798d2d87aa55c9d3df7dd04798f4e55519e439b6"
+    },
+    {
+      "acc": "Q2WGJ6",
+      "pfam": [
+        "PF00651",
+        "PF01344",
+        "PF07707",
+        "PF24981"
+      ],
+      "family": "F-06ab43d356b5",
+      "sort": "43fe7c7ccd16cd21a076c4d82fd747cd15a34925292fe3018df71de7d8642e08"
+    },
+    {
+      "acc": "P26842",
+      "pfam": [
+        "PF00020"
+      ],
+      "family": "F-0ffe0e8c711d",
+      "sort": "2f269312c7f1f37c45236c6be5d161b5ab28ef9deab1c6f6b3eac71150fa9222"
+    },
+    {
+      "acc": "Q9H0C2",
+      "pfam": [
+        "PF00153"
+      ],
+      "family": "F-88ced305f7f9",
+      "sort": "23d49fde4489096085666e1ff354cddfe488a392caee5371718d571d38b6e2b0"
+    },
+    {
+      "acc": "O60684",
+      "pfam": [
+        "PF00514",
+        "PF01749",
+        "PF16186"
+      ],
+      "family": "F-7b3b73e3f48c",
+      "sort": "af0850828ab63920d107419bf3f11627f0e163036d0bbc568aac955709ed8841"
+    },
+    {
+      "acc": "Q9BXN1",
+      "pfam": [
+        "PF01462",
+        "PF13855"
+      ],
+      "family": "F-918eef991a81",
+      "sort": "1bb1cfef63c4669be49c9a952f20e140a5a28551a845ac8a713a2ce88316a314"
+    },
+    {
+      "acc": "P14317",
+      "pfam": [
+        "PF00018",
+        "PF02218"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "13f05784e86b792b951441c7deee2c52baed88058c4c1fb569f19094c84d87f6"
+    },
+    {
+      "acc": "P27216",
+      "pfam": [
+        "PF00191"
+      ],
+      "family": "F-83b45da0c29a",
+      "sort": "9ef7c18bd612f8e614a34d8890c839b38053e6a9b54868574c293db5be589777"
+    },
+    {
+      "acc": "Q8IYG6",
+      "pfam": [
+        "PF12799"
+      ],
+      "family": "F-f0a9891bf2e0",
+      "sort": "c81c1bf1d56861016680b0b7ab98e4b07b22f3d1635d4105585d4544b909cc1c"
+    },
+    {
+      "acc": "Q9H306",
+      "pfam": [
+        "PF00045",
+        "PF00413",
+        "PF01471"
+      ],
+      "family": "F-44dca6406d9a",
+      "sort": "7c64f292f5eba07a7babf1d02216ec4593af90a888c0c7fc5258f8aeab385c25"
+    },
+    {
+      "acc": "Q9UH77",
+      "pfam": [
+        "PF00651",
+        "PF01344",
+        "PF07707"
+      ],
+      "family": "F-06ab43d356b5",
+      "sort": "4f543d8208e91b8a7d10adc7d55fac2370b14784c242d8b2dc14026641b8de57"
+    },
+    {
+      "acc": "P25445",
+      "pfam": [
+        "PF00020",
+        "PF00531"
+      ],
+      "family": "F-0ffe0e8c711d",
+      "sort": "3022e06d71bb12053fa24881e0f13a15ce51e9fb604894f4c2ec9b6e12de5bb6"
+    },
+    {
+      "acc": "Q9Y619",
+      "pfam": [
+        "PF00153"
+      ],
+      "family": "F-88ced305f7f9",
+      "sort": "34ee763126a3e9766a8250f17ce518d5c2a8703adba15287772e7b470bcd5ff2"
+    },
+    {
+      "acc": "P52294",
+      "pfam": [
+        "PF00514",
+        "PF01749",
+        "PF16186"
+      ],
+      "family": "F-7b3b73e3f48c",
+      "sort": "af52112d139a1690be85b8c15478383187671d290ea641bc8d463d3c787f7756"
+    },
+    {
+      "acc": "P07585",
+      "pfam": [
+        "PF01462",
+        "PF13855"
+      ],
+      "family": "F-918eef991a81",
+      "sort": "1d5ee028f6b994bfb147c429ca0124de94c7aa43cd7513fa10f2a8e48ad9f159"
+    },
+    {
+      "acc": "P25963",
+      "pfam": [
+        "PF12796"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "14a34c69540249e884d33fc809f341fd2497634f12d00207c8920f070faaaee6"
+    },
+    {
+      "acc": "P09525",
+      "pfam": [
+        "PF00191"
+      ],
+      "family": "F-83b45da0c29a",
+      "sort": "ad36d956e6aa6f593ff481dab8184aba389da496165c9c7b23ae43b504cb3e62"
+    },
+    {
+      "acc": "Q9H069",
+      "pfam": [
+        "PF14580"
+      ],
+      "family": "F-f0a9891bf2e0",
+      "sort": "cda14a917277f4b3f64a3327a9bbc5b6a0bb489fb700dbdf4e363a8f6c09029c"
+    },
+    {
+      "acc": "O60882",
+      "pfam": [
+        "PF00045",
+        "PF00413",
+        "PF01471"
+      ],
+      "family": "F-44dca6406d9a",
+      "sort": "8c65f81ebcb26be1c678c2ce0a5850673e7d5ef4c3cd22e946549b0e97b77fae"
+    },
+    {
+      "acc": "Q8NDN9",
+      "pfam": [
+        "PF00651",
+        "PF25390"
+      ],
+      "family": "F-06ab43d356b5",
+      "sort": "5648afc0239bfb5979a44d1d9e2d49d052a616ea5e6312ef17e6f9adc6aa79b8"
+    },
+    {
+      "acc": "O14763",
+      "pfam": [
+        "PF00020",
+        "PF00531"
+      ],
+      "family": "F-0ffe0e8c711d",
+      "sort": "34b5c37b3bdfcc57faf29fb13405045b17cbcfa1cddff8f0af312691c711276d"
+    },
+    {
+      "acc": "Q9H1K4",
+      "pfam": [
+        "PF00153"
+      ],
+      "family": "F-88ced305f7f9",
+      "sort": "3c13bb3fc7af90ce051200f77522a23355f4e1f8bb8ad0af0fe0acac8107839a"
+    },
+    {
+      "acc": "A9QM74",
+      "pfam": [
+        "PF00514",
+        "PF01749",
+        "PF16186"
+      ],
+      "family": "F-7b3b73e3f48c",
+      "sort": "b1880c867b3375e4a6dafd39198d72899cbea7ad70df1345ce281f2ab056774c"
+    },
+    {
+      "acc": "Q6ZSA7",
+      "pfam": [
+        "PF13855"
+      ],
+      "family": "F-918eef991a81",
+      "sort": "29106a45bc8832887d2ad15e89d23a63b0c3b3ed2a5b28db72df120f4c821bdd"
+    },
+    {
+      "acc": "Q53HC9",
+      "pfam": [
+        "PF00400",
+        "PF23609"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "14ff354f7e671e006ed67e3ece973dc16f2344071e224c8767abe0f1ae14a1ce"
+    },
+    {
+      "acc": "P13928",
+      "pfam": [
+        "PF00191"
+      ],
+      "family": "F-83b45da0c29a",
+      "sort": "c25d10803c592777f296dfc8992df16b5d470aff1a7c0c745b28a8db72ddfda0"
+    },
+    {
+      "acc": "Q53EV4",
+      "pfam": [
+        "PF14580"
+      ],
+      "family": "F-f0a9891bf2e0",
+      "sort": "e909d3b578f3ec21b544dad2acfcae2f98a66927e9bff5025888fe6386470607"
+    },
+    {
+      "acc": "Q9H239",
+      "pfam": [
+        "PF00045",
+        "PF00413",
+        "PF01471"
+      ],
+      "family": "F-44dca6406d9a",
+      "sort": "8d3d26266591367446967ee7525b529a761400578ffdcef2c2ef451a378a6fad"
+    },
+    {
+      "acc": "Q6PID8",
+      "pfam": [
+        "PF01344",
+        "PF24681"
+      ],
+      "family": "F-06ab43d356b5",
+      "sort": "672595c993c4c9c76c5ce082c3b2f8013cd56a1d7c917135f31ca904d393e692"
+    },
+    {
+      "acc": "O00300",
+      "pfam": [
+        "PF00020",
+        "PF23630"
+      ],
+      "family": "F-0ffe0e8c711d",
+      "sort": "41d105046c10c6174ff923c0b1593f4ad0fbf0bfaa5f7b35e2f06352abc8d2eb"
+    },
+    {
+      "acc": "Q8N413",
+      "pfam": [
+        "PF00153"
+      ],
+      "family": "F-88ced305f7f9",
+      "sort": "4e3aa51df0349895a2be5f07e2c7e3e67c5eb642b16fdafbb47fc56ace4e07b8"
+    },
+    {
+      "acc": "P52292",
+      "pfam": [
+        "PF00514",
+        "PF01749",
+        "PF16186"
+      ],
+      "family": "F-7b3b73e3f48c",
+      "sort": "dc24ad9d6ae6d2b9614c652f13df83c18dd1bdb3e6c2cc8a61dd6719c86defcc"
+    },
+    {
+      "acc": "Q9GZU5",
+      "pfam": [
+        "PF13855"
+      ],
+      "family": "F-918eef991a81",
+      "sort": "2b84009533b1c8e6767bd570b1ded5d4f42cbeebe15ca87e739fae470aaa0a6b"
+    },
+    {
+      "acc": "Q8TAM2",
+      "pfam": [
+        "PF13181",
+        "PF13432"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "18ac08da008e7c2edde8ab877d6e403bfc6e2a9af4d49c13f412d3ff14b04483"
+    },
+    {
+      "acc": "P08758",
+      "pfam": [
+        "PF00191"
+      ],
+      "family": "F-83b45da0c29a",
+      "sort": "daf6efcf9da08bbb50a1f814f7f369fa9cfeb4b24b0b9ed3cfd9ab9e6c68d260"
+    },
+    {
+      "acc": "P04004",
+      "pfam": [
+        "PF00045",
+        "PF01033"
+      ],
+      "family": "F-44dca6406d9a",
+      "sort": "b7f4026a7422b09f3ab345ff23bee6b1a21d2aa6dc28166a7405285a2bbedb12"
+    },
+    {
+      "acc": "Q7Z6M1",
+      "pfam": [
+        "PF24681"
+      ],
+      "family": "F-06ab43d356b5",
+      "sort": "6aaffec58a9b36b0d300a891f08c9775622c3a29038a6691ac07e20f3bdd4712"
+    },
+    {
+      "acc": "P25942",
+      "pfam": [
+        "PF00020"
+      ],
+      "family": "F-0ffe0e8c711d",
+      "sort": "69513d47a2e5d8502463c1d58da328c0ea329ac12795d02b569120778fb9421d"
+    },
+    {
+      "acc": "Q6ZT89",
+      "pfam": [
+        "PF00153"
+      ],
+      "family": "F-88ced305f7f9",
+      "sort": "51bde9a5d1e8ea78fcaa8c7ab910af4ddc2b2dca239a0cc6d6438162a7379d73"
+    },
+    {
+      "acc": "P22792",
+      "pfam": [
+        "PF13855"
+      ],
+      "family": "F-918eef991a81",
+      "sort": "314ab5f2302a30b4b83df1a5c5ac234bfd4d842695b7840c513120df14011126"
+    },
+    {
+      "acc": "P31948",
+      "pfam": [
+        "PF07719",
+        "PF13181",
+        "PF13414",
+        "PF13424",
+        "PF17830"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "199f0bf93501fa7fca75b8e85db0dd29bac198a2fa01ffdfaf11dfa1f7fd9d81"
+    },
+    {
+      "acc": "P07355",
+      "pfam": [
+        "PF00191"
+      ],
+      "family": "F-83b45da0c29a",
+      "sort": "fa68d2637f625fab9ae44f9ed56545874962deeb37f40a93e54b3c44156abcad"
+    },
+    {
+      "acc": "P08254",
+      "pfam": [
+        "PF00045",
+        "PF00413",
+        "PF01471"
+      ],
+      "family": "F-44dca6406d9a",
+      "sort": "c0dfc0e9200cc5c25510b703343db24ee8b8bc60eb01db4f3db2fab09856b3ff"
+    },
+    {
+      "acc": "Q9H0H3",
+      "pfam": [
+        "PF00651",
+        "PF07707",
+        "PF24981"
+      ],
+      "family": "F-06ab43d356b5",
+      "sort": "72d32ca3b49f4ac027382a7cfcfe89fbf053d607c14d5df9e7bf7e678a8629c3"
+    },
+    {
+      "acc": "P43489",
+      "pfam": [
+        "PF00020"
+      ],
+      "family": "F-0ffe0e8c711d",
+      "sort": "7b8a94a39425e0412fe407e2e830154ae4b3b14b6b040e9192ac55bbd988beae"
+    },
+    {
+      "acc": "P55851",
+      "pfam": [
+        "PF00153"
+      ],
+      "family": "F-88ced305f7f9",
+      "sort": "6b1e5cecbda36ae5dbed7c5b5ab9f21be9690f75466c6cfb81a69d0cce33768a"
+    },
+    {
+      "acc": "Q86SJ2",
+      "pfam": [
+        "PF13855",
+        "PF13927"
+      ],
+      "family": "F-918eef991a81",
+      "sort": "42651bd3420d6b725e1780ec8d7e181dda6947fcf325cd1d4e75bfc130265605"
+    },
+    {
+      "acc": "Q9NVX2",
+      "pfam": [
+        "PF00400",
+        "PF08154"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "1aeb5024e220194451f36b5704af0d0906b19f1dbaba94acbc8292b097f8e59c"
+    },
+    {
+      "acc": "P09238",
+      "pfam": [
+        "PF00045",
+        "PF00413",
+        "PF01471"
+      ],
+      "family": "F-44dca6406d9a",
+      "sort": "cf214352d47954cbde42478acd845a49e45dbeef61408c4a71a45ab0feb7315b"
+    },
+    {
+      "acc": "Q8IXV7",
+      "pfam": [
+        "PF01344",
+        "PF24681"
+      ],
+      "family": "F-06ab43d356b5",
+      "sort": "75f738ee309762a6e5185bba25b0ae5516d6dd5f1f74bf8892529977098dd514"
+    },
+    {
+      "acc": "P19438",
+      "pfam": [
+        "PF00020",
+        "PF00531"
+      ],
+      "family": "F-0ffe0e8c711d",
+      "sort": "8b5eeaf73ec3c0db4944371b98d8b3acb665be822a278c8b41865cec99507ad7"
+    },
+    {
+      "acc": "Q6NUK1",
+      "pfam": [
+        "PF00153",
+        "PF13499"
+      ],
+      "family": "F-88ced305f7f9",
+      "sort": "6fd2083f4545d5f451a9eaaa9a29b368fb3ed60e8010004c1e522fe65db471e1"
+    },
+    {
+      "acc": "O95970",
+      "pfam": [
+        "PF03736",
+        "PF13855"
+      ],
+      "family": "F-918eef991a81",
+      "sort": "44533761b8029cdd2a5887a038ca53260abfe39c383d34a36ea24ec7267d3418"
+    },
+    {
+      "acc": "Q9Y3F4",
+      "pfam": [
+        "PF00400",
+        "PF23098"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "1bbfbf20dfc80624b54951654859e9bbba34bce337d21355c70ba554c6543655"
+    },
+    {
+      "acc": "Q9NPA2",
+      "pfam": [
+        "PF00045",
+        "PF00413",
+        "PF01471"
+      ],
+      "family": "F-44dca6406d9a",
+      "sort": "df9d3ab5a2d6f86421f9788c485437fed86b43c0f16f1ba39209562ea404d1d9"
+    },
+    {
+      "acc": "C9JR72",
+      "pfam": [
+        "PF00651",
+        "PF01344"
+      ],
+      "family": "F-06ab43d356b5",
+      "sort": "916f57c9e133ced31df767126b3da323773b65791ec3a790e216bb6e5e930243"
+    },
+    {
+      "acc": "Q93038",
+      "pfam": [
+        "PF00020",
+        "PF00531"
+      ],
+      "family": "F-0ffe0e8c711d",
+      "sort": "9c691d1dbfd88887666f94df4567613e0bb8075fe75bf0c6d8ee422b5d9a355f"
+    },
+    {
+      "acc": "Q9HC21",
+      "pfam": [
+        "PF00153"
+      ],
+      "family": "F-88ced305f7f9",
+      "sort": "8ae2deaa8591d5c8384b4a2979b6065944a610c08880ac82ee6a6bd87f52c158"
+    },
+    {
+      "acc": "Q99645",
+      "pfam": [
+        "PF00560",
+        "PF01462",
+        "PF13855"
+      ],
+      "family": "F-918eef991a81",
+      "sort": "48f62428aced80b5109e7977a92ff8873571a1d07a3448f892134aecc7d971a5"
+    },
+    {
+      "acc": "Q5TAQ9",
+      "pfam": [
+        "PF00400"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "1c1b3e1eeb758681d4d0269eec3760e4bc7d09b1bf16b7a468b5139b19b8ab07"
+    },
+    {
+      "acc": "Q8N119",
+      "pfam": [
+        "PF00045",
+        "PF00413",
+        "PF01471"
+      ],
+      "family": "F-44dca6406d9a",
+      "sort": "e5c866b32a818518eefea07f96ca8609ad51b7cc198f1269a3e601e208ef932e"
+    },
+    {
+      "acc": "Q9BQ90",
+      "pfam": [
+        "PF01344",
+        "PF24681"
+      ],
+      "family": "F-06ab43d356b5",
+      "sort": "950192861d08b14392aebd80f89c7b6dcff9fea8ee8460d007e739f509c8e443"
+    },
+    {
+      "acc": "P08138",
+      "pfam": [
+        "PF00020",
+        "PF00531",
+        "PF18422"
+      ],
+      "family": "F-0ffe0e8c711d",
+      "sort": "b26729cd47fb18c12d363a0dbcb51eb87e262106c16bb9277b8c5572c162565f"
+    },
+    {
+      "acc": "O95258",
+      "pfam": [
+        "PF00153"
+      ],
+      "family": "F-88ced305f7f9",
+      "sort": "91081f2d06ebd85b2ac610d6f217cb8601798eb3f820c6b774288e5df49560a1"
+    },
+    {
+      "acc": "Q8WUA8",
+      "pfam": [
+        "PF00560",
+        "PF13855"
+      ],
+      "family": "F-918eef991a81",
+      "sort": "60ee6ab28c106dc4a173d56c34e0033248de34e251924e7db9bc906b140dc6f5"
+    },
+    {
+      "acc": "Q9GZV1",
+      "pfam": [
+        "PF00023",
+        "PF12796"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "1e3d00c6e8bb421c91951824775ca856cf89e5ebb14ecc5cd425c2b13ddf1922"
+    },
+    {
+      "acc": "Q9P258",
+      "pfam": [
+        "PF25390"
+      ],
+      "family": "F-06ab43d356b5",
+      "sort": "9b430f4e6323a87d5575239cd754971f2a02bb44ab847c06ff25ed48fa930384"
+    },
+    {
+      "acc": "Q9NS68",
+      "pfam": [
+        "PF27736"
+      ],
+      "family": "F-0ffe0e8c711d",
+      "sort": "b4db8eed761e6d4ea3cad2462156e896055da8beea1be697c5222994e17b7cde"
+    },
+    {
+      "acc": "Q9H936",
+      "pfam": [
+        "PF00153"
+      ],
+      "family": "F-88ced305f7f9",
+      "sort": "9e9fec38e62a15ea64b5ac58a78840c41a9f75cad9bdf34275551553645f63a3"
+    },
+    {
+      "acc": "Q9UQ13",
+      "pfam": [
+        "PF13855",
+        "PF23598"
+      ],
+      "family": "F-918eef991a81",
+      "sort": "60f80a116a8e69b8fd92982c09721f6400772c81fd6b8d2a48f153d2b9d3530f"
+    },
+    {
+      "acc": "Q96EE3",
+      "pfam": [
+        "PF00400"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "1e67fd961dd0a19fd6f7417913b31ea06b92906262b602f5f4d3278966250ae5"
+    },
+    {
+      "acc": "O14682",
+      "pfam": [
+        "PF00651",
+        "PF01344",
+        "PF07707",
+        "PF24681"
+      ],
+      "family": "F-06ab43d356b5",
+      "sort": "9c8cb69ddd594c19b2fe549bdbd50baeea388392926b12e64c104ef389bab2cb"
+    },
+    {
+      "acc": "Q92956",
+      "pfam": [
+        "PF00020"
+      ],
+      "family": "F-0ffe0e8c711d",
+      "sort": "c238b69265d5a5b10f52a94864027d3e1292314282afe708cb5a50edb864f6ab"
+    },
+    {
+      "acc": "Q9BQT8",
+      "pfam": [
+        "PF00153"
+      ],
+      "family": "F-88ced305f7f9",
+      "sort": "aa2c3fecf8bbaa18900f4294118aa22481ce64facd4f2bf1fba54e4de8124777"
+    },
+    {
+      "acc": "Q2I0M4",
+      "pfam": [
+        "PF13855"
+      ],
+      "family": "F-918eef991a81",
+      "sort": "720969afd14742541ed820db99ec2b3e06b21d441186200f4aa60ae1a83fdf83"
+    },
+    {
+      "acc": "Q9GZL7",
+      "pfam": [
+        "PF00400",
+        "PF08154"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "23443ec62048748a13289d4c5c4bbbde3a40bce44cbc944ce1cf472accceb63c"
+    },
+    {
+      "acc": "O95198",
+      "pfam": [
+        "PF00651",
+        "PF01344",
+        "PF07707"
+      ],
+      "family": "F-06ab43d356b5",
+      "sort": "9ec407f08a918ab2fa39793e50c226259caabea95ad6664f134f3db8785eabaf"
+    },
+    {
+      "acc": "O00220",
+      "pfam": [
+        "PF00020",
+        "PF00531"
+      ],
+      "family": "F-0ffe0e8c711d",
+      "sort": "deca2741ce5ebfbbfc370c55aa14e6be31f91d7e58b7837708cb57bf28be39dd"
+    },
+    {
+      "acc": "Q9H1U9",
+      "pfam": [
+        "PF00153"
+      ],
+      "family": "F-88ced305f7f9",
+      "sort": "ae4b38b32ab70f9ad335e226b07673669e89d25be41ff4e35b4a106251a5a943"
+    },
+    {
+      "acc": "Q96LI5",
+      "pfam": [
+        "PF03372",
+        "PF13855"
+      ],
+      "family": "F-918eef991a81",
+      "sort": "75b057f629ba9f3e2eb517e6cbde42b6f613d541022feadf3b579e8504e3c49c"
+    },
+    {
+      "acc": "Q05048",
+      "pfam": [
+        "PF00400",
+        "PF16699"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "24fcaec4796d9791461dec23922774c9bcd28e3bfeca10cef39bb14e0cc8df25"
+    },
+    {
+      "acc": "P18754",
+      "pfam": [
+        "PF25390"
+      ],
+      "family": "F-06ab43d356b5",
+      "sort": "a2c92c479a3ee1af5b9fafc3933cbacb6a0a26ced4e7898b987bbc7b5a500d12"
+    },
+    {
+      "acc": "O14798",
+      "pfam": [
+        "PF00020"
+      ],
+      "family": "F-0ffe0e8c711d",
+      "sort": "eefd6c100186749725731ca017ed433967cea0f96c3852e4b7c446143b9c6231"
+    },
+    {
+      "acc": "Q96DW6",
+      "pfam": [
+        "PF00153"
+      ],
+      "family": "F-88ced305f7f9",
+      "sort": "ae973ca3a39fcb57bf5c170a5e355908d804c4852e10cdef92ccda7ea7c98404"
+    },
+    {
+      "acc": "Q86UE6",
+      "pfam": [
+        "PF13855"
+      ],
+      "family": "F-918eef991a81",
+      "sort": "76376b3217fbe8c38424700a6a6a577f2e0e43125e9813a808a996fdccd0455b"
+    },
+    {
+      "acc": "O00628",
+      "pfam": [
+        "PF00400"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "279c9bcafa22d3259582aa14abee31f5a96cbf2b0381982719d7473710c5b909"
+    },
+    {
+      "acc": "Q8IXQ5",
+      "pfam": [
+        "PF00651",
+        "PF07707",
+        "PF24681"
+      ],
+      "family": "F-06ab43d356b5",
+      "sort": "a5aeb044352129d2da5b0629e49bdd68f47cce36cac427c16d0c1570ab9547df"
+    },
+    {
+      "acc": "P05141",
+      "pfam": [
+        "PF00153"
+      ],
+      "family": "F-88ced305f7f9",
+      "sort": "b1b34151882f17ff4c309f5b3cbd14e188964ebed6e1fee4c5ad68c1da347093"
+    },
+    {
+      "acc": "O60938",
+      "pfam": [
+        "PF01462",
+        "PF13516",
+        "PF13855"
+      ],
+      "family": "F-918eef991a81",
+      "sort": "7da97ad1deb36fe93c9eede4c538ebc28d0f3fc792715394126b9da59d960514"
+    },
+    {
+      "acc": "Q13216",
+      "pfam": [
+        "PF00400"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "291f7b023dca8a935dc1e91501ad87ffa33fc66436e84f1ca80f969391106b22"
+    },
+    {
+      "acc": "Q9P2K6",
+      "pfam": [
+        "PF07707",
+        "PF24981"
+      ],
+      "family": "F-06ab43d356b5",
+      "sort": "c0e413677d9faed415562457bd0eb1d2493c44f7ab58ffa5a9a526be1d241158"
+    },
+    {
+      "acc": "Q9BXI2",
+      "pfam": [
+        "PF00153"
+      ],
+      "family": "F-88ced305f7f9",
+      "sort": "b2bd89bda347a5c1ff176b59ad3265cbab66172d139858bf8cf6c1d97df5cb00"
+    },
+    {
+      "acc": "Q86UN3",
+      "pfam": [
+        "PF13855"
+      ],
+      "family": "F-918eef991a81",
+      "sort": "808b22374d0d412abf74521fbf63536ac93d4f603704f68c7cf864dcae87bc9a"
+    },
+    {
+      "acc": "Q8TC44",
+      "pfam": [
+        "PF00400"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "2965e9f718260cab41e2fb823e1083c2dc3ae022e2359e7b7c35c4af9e18a0a4"
+    },
+    {
+      "acc": "O94889",
+      "pfam": [
+        "PF00651",
+        "PF01344",
+        "PF07707",
+        "PF24681"
+      ],
+      "family": "F-06ab43d356b5",
+      "sort": "caf56f325bc7c15374d13e97a530aab51ae7c737588569ee1f6d25a0d1085226"
+    },
+    {
+      "acc": "Q02978",
+      "pfam": [
+        "PF00153"
+      ],
+      "family": "F-88ced305f7f9",
+      "sort": "b45b4addc87782f3f48a2825215fba96d269e30ca11a757671f63bb355c8f757"
+    },
+    {
+      "acc": "Q9ULM6",
+      "pfam": [
+        "PF03372",
+        "PF13855"
+      ],
+      "family": "F-918eef991a81",
+      "sort": "980a6607c0625f7ad901d28adef754314f8a3e8dae2d0801e26dd175c7c9b0fb"
+    },
+    {
+      "acc": "Q9HCU5",
+      "pfam": [
+        "PF00400"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "29a1f2f8c225b964672c904b7035a5bc65c0ab316d5c8a8342d3259d561da0b9"
+    },
+    {
+      "acc": "Q9Y2U9",
+      "pfam": [
+        "PF24681"
+      ],
+      "family": "F-06ab43d356b5",
+      "sort": "f5215d48e6c9f398b011cbce9a2295aca3d2f7277b7ee1be4cc9d298cc6f25a6"
+    },
+    {
+      "acc": "P12235",
+      "pfam": [
+        "PF00153"
+      ],
+      "family": "F-88ced305f7f9",
+      "sort": "bc5e8e7226fd8d48759df71206cfe93e947c6145475f639663449f1cef797c3b"
+    },
+    {
+      "acc": "Q8N7C0",
+      "pfam": [
+        "PF13855"
+      ],
+      "family": "F-918eef991a81",
+      "sort": "9818706975eab5dc946dda4e89b22cafbba1c7e1ae6b66cec096c8720c6ad409"
+    },
+    {
+      "acc": "P42773",
+      "pfam": [
+        "PF12796",
+        "PF13637"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "29c7542cb2f60398d5fe7cc9bbcd682dd7c565bf4582036b982f8a1d191915f1"
+    },
+    {
+      "acc": "Q9UGK8",
+      "pfam": [
+        "PF25390"
+      ],
+      "family": "F-06ab43d356b5",
+      "sort": "fe0277ee9751cb0196fa6c268d7c03bde748f9011ff8a39b5f875e7d2809ba96"
+    },
+    {
+      "acc": "O43772",
+      "pfam": [
+        "PF00153"
+      ],
+      "family": "F-88ced305f7f9",
+      "sort": "bdf09d1170c1926fd3bb9a6cfd067e4c548fd542ba97ed8adf5bdc54be7a94ec"
+    },
+    {
+      "acc": "Q5VT99",
+      "pfam": [
+        "PF13855"
+      ],
+      "family": "F-918eef991a81",
+      "sort": "9d1983cac3317ea188d766468025b67ce315434783d310cf6eaaadc94c65abb2"
+    },
+    {
+      "acc": "Q8TAK5",
+      "pfam": [
+        "PF12796"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "2a896c48a5d9a5ed3fbe1baaccc9168d110e7abfc9f133c5d2a8e89e85c95b92"
+    },
+    {
+      "acc": "P12236",
+      "pfam": [
+        "PF00153"
+      ],
+      "family": "F-88ced305f7f9",
+      "sort": "c6a70582a16f39bf7f4676a5eab792cc0c3a8ed5dc51d17e36629032f9371380"
+    },
+    {
+      "acc": "P20774",
+      "pfam": [
+        "PF13855"
+      ],
+      "family": "F-918eef991a81",
+      "sort": "9fdd2f5eea6d2d4f8868f8740dfb802fc884211f25afc372ea65323286a287b2"
+    },
+    {
+      "acc": "O60884",
+      "pfam": [
+        "PF00226",
+        "PF00684",
+        "PF01556"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "2a9d31d53d68ad122e8e4219634140d420b37778f3e777b51346a3b107d345ea"
+    },
+    {
+      "acc": "Q9BV35",
+      "pfam": [
+        "PF00153",
+        "PF13499"
+      ],
+      "family": "F-88ced305f7f9",
+      "sort": "c950ea1b6c3fd4ba22daf219b3f2b8e5c844cdb75d373f3af653199de99f4075"
+    },
+    {
+      "acc": "P02750",
+      "pfam": [
+        "PF00560",
+        "PF13855"
+      ],
+      "family": "F-918eef991a81",
+      "sort": "ab85844a12726de08e657ecc381973f04522cb72fb6d7c321fb8167256962507"
+    },
+    {
+      "acc": "Q8TBZ3",
+      "pfam": [
+        "PF00400"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "2ce46de6e46641a0a02b9112231dd4e2c13c491aa45fa12e881ab040129160b1"
+    },
+    {
+      "acc": "Q9BSK2",
+      "pfam": [
+        "PF00153"
+      ],
+      "family": "F-88ced305f7f9",
+      "sort": "cd64f78936e7175e7f00ee831b344e138cd615bdf9748780fd6dc5e17d0abb01"
+    },
+    {
+      "acc": "P08571",
+      "pfam": [
+        "PF13516"
+      ],
+      "family": "F-918eef991a81",
+      "sort": "b24d5c115270b98facdc6f1b6d89c57bb65b00c45ca253a9e4ef037c61ca3d12"
+    },
+    {
+      "acc": "Q8NBT0",
+      "pfam": [
+        "PF00400"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "32823b4b31fc5f1c9fbdbe158b1f56698de0d14a4609b3fcb7b477fb3b892f73"
+    },
+    {
+      "acc": "Q5SVS4",
+      "pfam": [
+        "PF00153"
+      ],
+      "family": "F-88ced305f7f9",
+      "sort": "d3e64b28c5e95e94facf6a2a3ec6b7fd5d405d86847f28cfcac77b20c097322e"
+    },
+    {
+      "acc": "Q8TF66",
+      "pfam": [
+        "PF00560",
+        "PF13855"
+      ],
+      "family": "F-918eef991a81",
+      "sort": "b5b778e5e400afb603e94990ef11264ba406a8977f73d62925502f6752f7bb90"
+    },
+    {
+      "acc": "Q9H765",
+      "pfam": [
+        "PF07525",
+        "PF12796",
+        "PF13637"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "3413cbd21b1d31e5d296805c74e9e63adf192b371066bf3f4d7b09cb1e3aae78"
+    },
+    {
+      "acc": "Q86VD7",
+      "pfam": [
+        "PF00153"
+      ],
+      "family": "F-88ced305f7f9",
+      "sort": "dfc9a7fc46c0103464dc0032efd1f40bd02695cd8b3346557c72a84e4e5f26e4"
+    },
+    {
+      "acc": "Q86VH5",
+      "pfam": [
+        "PF00560",
+        "PF13855"
+      ],
+      "family": "F-918eef991a81",
+      "sort": "b661ebe681dcbf45d3caa0e28efd7b16f41d9cc8a3e33673186bd6f3e8341d3a"
+    },
+    {
+      "acc": "Q9H672",
+      "pfam": [
+        "PF07525",
+        "PF12796"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "35d036a5e3b9453510a7ee3f6de27e93441dfb18076f1d39ae5465f0658af8a0"
+    },
+    {
+      "acc": "O95847",
+      "pfam": [
+        "PF00153"
+      ],
+      "family": "F-88ced305f7f9",
+      "sort": "e4b0d1d09329cecd98466dc5b6c4fd7d0ccc1300295f0c01fd7ed37000f1e414"
+    },
+    {
+      "acc": "O43300",
+      "pfam": [
+        "PF13855"
+      ],
+      "family": "F-918eef991a81",
+      "sort": "c1fd99df2bc1a4b50182388756d967966a67bf8bdf8cb263c2e438b7774dc6eb"
+    },
+    {
+      "acc": "Q6P050",
+      "pfam": [
+        "PF12937"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "38b94cf9c020b636de69890001bd2d9ca3194c2b3c1bb244c38d3370b6c13f8e"
+    },
+    {
+      "acc": "P25874",
+      "pfam": [
+        "PF00153"
+      ],
+      "family": "F-88ced305f7f9",
+      "sort": "f0c8e954d34e895928bab0551941892e0e067d576d0e62ab23e0b5cb3f559dd3"
+    },
+    {
+      "acc": "P13489",
+      "pfam": [
+        "PF13516",
+        "PF18779"
+      ],
+      "family": "F-918eef991a81",
+      "sort": "d0ee493bf0ae4e42fe2579273c32e1d658a8f7e406aa649eab972fc483a3c400"
+    },
+    {
+      "acc": "Q8N3Y1",
+      "pfam": [
+        "PF12937"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "3945df24985d12515bc35e7386b308fc13a27638d5458831f53eebef5716286b"
+    },
+    {
+      "acc": "Q8N8R3",
+      "pfam": [
+        "PF00153"
+      ],
+      "family": "F-88ced305f7f9",
+      "sort": "f176b804c569b199d99a9001cbacea4dadd02b3627e4eceee654041e203f56ee"
+    },
+    {
+      "acc": "P49354",
+      "pfam": [
+        "PF01239"
+      ],
+      "family": "F-918eef991a81",
+      "sort": "e3d19892dcd4ff58eff4bf378b6fc903c5d954733c33da4c1c5d1a8b611cb754"
+    },
+    {
+      "acc": "Q8WXI3",
+      "pfam": [
+        "PF00023",
+        "PF07525",
+        "PF12796"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "395cdacac654d5705ba08936bc97278d38024aed23e731a292c60ed2c81afb63"
+    },
+    {
+      "acc": "Q6Q0C1",
+      "pfam": [
+        "PF00153"
+      ],
+      "family": "F-88ced305f7f9",
+      "sort": "f698fe6728e1216b35b45a93f78a5790da330d819fbcfd5d33d822b9c49b8f03"
+    },
+    {
+      "acc": "P51888",
+      "pfam": [
+        "PF13855"
+      ],
+      "family": "F-918eef991a81",
+      "sort": "f3cad9859045117f184be2bd8a957834c8b7227cdea477cc2a87359879fd2413"
+    },
+    {
+      "acc": "Q6X9E4",
+      "pfam": [
+        "PF12937"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "3b30b25e10e81389dbe342a04dd25885c73646eb2a847accbdd372fe7b2ab581"
+    },
+    {
+      "acc": "O43808",
+      "pfam": [
+        "PF00153"
+      ],
+      "family": "F-88ced305f7f9",
+      "sort": "f6e34f8942e95af9299d1d82ec86beff2bc93e71890fa13e8c4574001a9f2f88"
+    },
+    {
+      "acc": "P21810",
+      "pfam": [
+        "PF01462",
+        "PF13855"
+      ],
+      "family": "F-918eef991a81",
+      "sort": "f5d7f52ef54f5afb95fda5566c20669d4eb0fb4fb227d9a42f8091760d23dc5b"
+    },
+    {
+      "acc": "Q92624",
+      "pfam": [
+        "PF13374"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "3b333df7e78eda4c514dcd862c6500725340084fe3acc0406560ffe3fab768ad"
+    },
+    {
+      "acc": "P40197",
+      "pfam": [
+        "PF01463",
+        "PF13855"
+      ],
+      "family": "F-918eef991a81",
+      "sort": "f924482c1d29680c701e917901293b287de17424bee74297084ace5d0c2c6d24"
+    },
+    {
+      "acc": "Q9P2S5",
+      "pfam": [
+        "PF00400"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "3c9707d77dffdd7425e4c86314d645c0404d4252c81477f63c54cb97d8273e16"
+    },
+    {
+      "acc": "P51884",
+      "pfam": [
+        "PF13516",
+        "PF13855"
+      ],
+      "family": "F-918eef991a81",
+      "sort": "fdbf031f8a4ddf79889c825e46b1ceae67df8272957b69b0a1ee687d38c7e67a"
+    },
+    {
+      "acc": "O43765",
+      "pfam": [
+        "PF00515",
+        "PF13181",
+        "PF16546"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "3f47cb2ca11d2d8a21b6b440ca1b8b651edc3732bccc394ba211a1364e22b61a"
+    },
+    {
+      "acc": "P09914",
+      "pfam": [
+        "PF07719",
+        "PF13181",
+        "PF13424"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "40856a12f98125a15925a2bd00f2ff231e67575f90d72f680903342496d691ef"
+    },
+    {
+      "acc": "Q9UJT9",
+      "pfam": [
+        "PF12937",
+        "PF25372"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "42890e8a3533c8ce454a5d040880c60740cb482ac76fc28f311404339214d79f"
+    },
+    {
+      "acc": "O43660",
+      "pfam": [
+        "PF00400"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "42e0a1171ae0c6947cd11f1bf15c3b81d6153c1e9f545b1f09cbc69fec9ac1f3"
+    },
+    {
+      "acc": "P09913",
+      "pfam": [
+        "PF13181",
+        "PF31234"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "4343a616d53342ee58fa70db9650f478731452491d950120297b779908ded1d1"
+    },
+    {
+      "acc": "Q7Z3H0",
+      "pfam": [
+        "PF12796"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "45335f840bf94714145cb0ef3921f7e8634256f5027ce9f05985443c09979044"
+    },
+    {
+      "acc": "P63244",
+      "pfam": [
+        "PF00400"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "46dfa8194585bec70ba8a912072076919db87c6ca60161f58895f26f18dfe1b6"
+    },
+    {
+      "acc": "O76071",
+      "pfam": [
+        "PF00400"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "473243a3536a4c504c3d7459296612c9f6507ca341adc22f77925d2df8b23197"
+    },
+    {
+      "acc": "O14593",
+      "pfam": [
+        "PF00023",
+        "PF12796"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "4b826fb8abb531d79296439284cf11844dc915a827039ba617c83656696addab"
+    },
+    {
+      "acc": "Q9H808",
+      "pfam": [
+        "PF00400"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "4ba4c05e28901cf2b580e1a3733fdd340fb5fb71b2c008929046039576de3c91"
+    },
+    {
+      "acc": "Q8NFH3",
+      "pfam": [
+        "PF00400"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "53b9b075e03299a99ca6b07693823730ae7630b25502d46d072a0fdd96ff8d95"
+    },
+    {
+      "acc": "Q9NWX5",
+      "pfam": [
+        "PF07525",
+        "PF12796",
+        "PF13637"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "55b498ca69b5b4da124ebb84965180ba643e516f6950826abc08fbb002f4fd95"
+    },
+    {
+      "acc": "Q99614",
+      "pfam": [
+        "PF00515",
+        "PF13181"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "56d42349181038f373a6cd491bef0edbe313ffd701909f1eadc8bd34ff1ae2ac"
+    },
+    {
+      "acc": "Q2TAY7",
+      "pfam": [
+        "PF00400",
+        "PF17814",
+        "PF23381"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "59d743e396fb251e79392734dad8f23eb605d24e34254c88c0583315697a2958"
+    },
+    {
+      "acc": "Q8TC84",
+      "pfam": [
+        "PF12796"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "5bcf5fafe81d28db55977d23260aff9b9a4f0b386783371dc63e567bc32cdee5"
+    },
+    {
+      "acc": "Q9BUR4",
+      "pfam": [
+        "PF00400"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "5ca6668416ce203aee13fd067b3942b4562ac1994964bdd6d3289941ecc2372b"
+    },
+    {
+      "acc": "Q9ULV4",
+      "pfam": [
+        "PF00400",
+        "PF08953",
+        "PF16300"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "5ef8247f00ec6dd3002c0eb9c81ccff0f05086f3444e4a1ea64e0a03b3f19364"
+    },
+    {
+      "acc": "Q6RFH5",
+      "pfam": [
+        "PF00400"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "5fab972bbcbdf3f60bb527d3e43dc8c2c77d0c616adcb7d70c1a40038795fd96"
+    },
+    {
+      "acc": "O14879",
+      "pfam": [
+        "PF13181",
+        "PF13424",
+        "PF31234"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "6072513dbd25e11d5cbe95f34829fecf20b475241856dbc604b09fff7c2f8aa3"
+    },
+    {
+      "acc": "Q9Y576",
+      "pfam": [
+        "PF07525",
+        "PF12796",
+        "PF13606"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "62adca112d4e3fe031b3378ebe5de24446ce0d19d816332a96b0b5804f9701b0"
+    },
+    {
+      "acc": "Q495M9",
+      "pfam": [
+        "PF00536",
+        "PF12796"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "64f7bdfd8b0c9e10277552548ce3dc8142dd65d7c616256e78df49b5bd3c25a8"
+    },
+    {
+      "acc": "Q9UJX3",
+      "pfam": [
+        "PF13181",
+        "PF13432"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "669cc1ecdc458c39aad8567d0afa23902e4df2b268425830841e846e96c85ef0"
+    },
+    {
+      "acc": "Q9Y2Z0",
+      "pfam": [
+        "PF04969",
+        "PF05002",
+        "PF13432"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "6894e97d9bb1d96a7d3804c959a4c30ef1f6204e040c49152e0aeb90e408d806"
+    },
+    {
+      "acc": "P20749",
+      "pfam": [
+        "PF00023",
+        "PF12796"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "68bba3724d531e24f759073a23f73357b849e092686352ac005718e209da44d0"
+    },
+    {
+      "acc": "Q86W42",
+      "pfam": [
+        "PF00400",
+        "PF23098"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "6b23c7d34368418fda722a2115167387dc0c8c978c1f5139e1006ad2f79c5c83"
+    },
+    {
+      "acc": "O75530",
+      "pfam": [
+        "PF00400"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "6c780fae15aad5cb6d2bbb3a5d6c5973a5c8a435661a389687385d24512b7537"
+    },
+    {
+      "acc": "A0JP26",
+      "pfam": [
+        "PF12796",
+        "PF14915"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "6cd7efd2a1b047ca03f915f1977f6341bc84139c5000f9a9c21abd3622af11c2"
+    },
+    {
+      "acc": "Q13610",
+      "pfam": [
+        "PF00400"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "6e15c51e862235521329f02e5bf27005a7b32363f8f916ab5fe04c30d613ad7d"
+    },
+    {
+      "acc": "Q96DX5",
+      "pfam": [
+        "PF07525",
+        "PF12796"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "6f28f3830e3e23c22402e23a673e470f4692a9a81448138cca578c4bc2ab5b41"
+    },
+    {
+      "acc": "Q6DKK2",
+      "pfam": [
+        "PF13374",
+        "PF13424"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "712782d9a90685c79c476e8addcb768793f0efb2457997ad2b87e783c2e61d9a"
+    },
+    {
+      "acc": "Q8WXK4",
+      "pfam": [
+        "PF07525",
+        "PF12796"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "7158c54e01353b6798ab951b467f7de188e16bb4be4c600ea39a09ae1b725f73"
+    },
+    {
+      "acc": "O43818",
+      "pfam": [
+        "PF00400"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "73569e700f9e0658145ceea0f677a31e6a7ada245499b7f91652fa8faace6f30"
+    },
+    {
+      "acc": "Q9BQA1",
+      "pfam": [
+        "PF00400"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "74fcf62539a6f0979b4ba015391477f11b86d23e09130d757165bcd5822284a2"
+    },
+    {
+      "acc": "Q96EX3",
+      "pfam": [
+        "PF00400",
+        "PF28639"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "752c1a8af5cdef08cf42ed7c02f56145a775de1c018079cb4c972c847e7143d0"
+    },
+    {
+      "acc": "Q9H469",
+      "pfam": [
+        "PF00646",
+        "PF25372"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "7574a3190e1cd45d0f626847f9f0ba62e7d8d6819aa041e21c3ce585a8ec6f57"
+    },
+    {
+      "acc": "P31689",
+      "pfam": [
+        "PF00226",
+        "PF00684",
+        "PF01556"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "7767eb8cf294f2dfc4a5c0b7129a8b64f6d72c5f94d12fe93b3f4d347890bf0e"
+    },
+    {
+      "acc": "Q9UKB1",
+      "pfam": [
+        "PF00400",
+        "PF12125",
+        "PF12937"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "785c4cbc95e63b67bc98975dcbb5864e9151e04911caaeaa2c9532dd0a32873f"
+    },
+    {
+      "acc": "Q06547",
+      "pfam": [
+        "PF00023",
+        "PF12796"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "7d631b82c5725ab5902c4c80fda5705cedc46cb13098662d7aca285fdd001ffc"
+    },
+    {
+      "acc": "O43172",
+      "pfam": [
+        "PF00400",
+        "PF08799"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "7fa7f0d429e8b49a8a04a1b16d8ce27f8441becf7f42829951a8513d6c4b8de4"
+    },
+    {
+      "acc": "Q9UJX2",
+      "pfam": [
+        "PF04049",
+        "PF13181",
+        "PF13414"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "815935d8ab09ad8f514d2987645f39c06a35446c0f412c35654366a8d9c83f38"
+    },
+    {
+      "acc": "O60508",
+      "pfam": [
+        "PF00400"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "874026ca8fdf92da6812cffd8415fd44e4a3c4c6e9d18ce5afa63a11f1845468"
+    },
+    {
+      "acc": "Q9NV06",
+      "pfam": [
+        "PF00400",
+        "PF04158"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "88d35674297ba2c94ab8245f8ff69ac881cec0c27d91f8f5f30aee6130674424"
+    },
+    {
+      "acc": "Q92466",
+      "pfam": [
+        "PF00400"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "8ae35fd6f1be6582c386e2db810cb6f80ef6d177c8fa83baf3e35f7cbd038184"
+    },
+    {
+      "acc": "Q8NFH4",
+      "pfam": [
+        "PF00400"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "8bb64c651105ea2c0040825940a589bd196808a4b96ad0cf0140f117f15d3c43"
+    },
+    {
+      "acc": "Q92882",
+      "pfam": [
+        "PF00018",
+        "PF12796"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "8e1435dc620f6f663f545a74a85bbed5faed700a9113a2f92c7b13d591ea341b"
+    },
+    {
+      "acc": "Q96I34",
+      "pfam": [
+        "PF12796"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "9090d97773360ced9eb77b2690c50c0b7d6fc3190c17b1b69f93cbb0c197aced"
+    },
+    {
+      "acc": "O15143",
+      "pfam": [
+        "PF00400"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "90fd6e598c1112a3cf9e68125daa0acd5d4d3117436bbe4a97649ced99e8038b"
+    },
+    {
+      "acc": "Q8WXK3",
+      "pfam": [
+        "PF07525",
+        "PF12796",
+        "PF13637"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "92b48de6dc780234d9fe796b3d4c1d806e6f74d694374d0f3c4a681b40438cf0"
+    },
+    {
+      "acc": "O75529",
+      "pfam": [
+        "PF00400",
+        "PF04494"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "93383fed3e1e3d359821fd8901674bda8fa56ffa75c79575646f61cd4a52c395"
+    },
+    {
+      "acc": "O75832",
+      "pfam": [
+        "PF00023",
+        "PF12796"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "97648165c1a2379d1fbf4fb1910e003989e669ad5487ce18f6fa712fcb8e3195"
+    },
+    {
+      "acc": "Q13325",
+      "pfam": [
+        "PF07719",
+        "PF13181",
+        "PF13374",
+        "PF13424"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "9772960c184dc621d20270ca871cd1df59d3613efc7f15b1d201bc4fa883c0ec"
+    },
+    {
+      "acc": "P55273",
+      "pfam": [
+        "PF12796"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "98f25816ad3d5449eb9304d7ce3866fecc5944ad44fde55df9e3a542305ac5b0"
+    },
+    {
+      "acc": "Q86U10",
+      "pfam": [
+        "PF00710",
+        "PF12796",
+        "PF17763"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "9b1691fa055c86775ff4aeb7454449411a9ee1d5cbad6c81931162e5ea547b1b"
+    },
+    {
+      "acc": "Q8WXH4",
+      "pfam": [
+        "PF07525",
+        "PF12796"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "9bbbf6b40d863ee6eae8db4d2a29329426674c6fd6b727c55a5c4347b70b8627"
+    },
+    {
+      "acc": "Q9BQ67",
+      "pfam": [
+        "PF00400",
+        "PF12265"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "9bfe4615cb485142ca2972036043afad26b536a69721f1359b859c1979af15c0"
+    },
+    {
+      "acc": "P50502",
+      "pfam": [
+        "PF13181",
+        "PF17830",
+        "PF18253"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "9c15729b443d16767c843e2c07446e2da152d13514b7cac48ede4eb5d4953cd8"
+    },
+    {
+      "acc": "Q96DZ5",
+      "pfam": [
+        "PF01302",
+        "PF12796"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "9c6a25065bbb705a9bd4a4e76c04df2639ebabccbe45bfbf5c3b1714a7f09e8a"
+    },
+    {
+      "acc": "Q92747",
+      "pfam": [
+        "PF00400"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "9fe7eccbe9ed55e46b831389c590382e90488f68d812e111c5f881b8923230c4"
+    },
+    {
+      "acc": "Q6UXN9",
+      "pfam": [
+        "PF00400",
+        "PF23098"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "a244bcea1f3882db315cbeb72c41da72ebeb1a66cb8515405179b1abbbb2a093"
+    },
+    {
+      "acc": "Q8TEB1",
+      "pfam": [
+        "PF00400"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "a288cda896d6d3a870e68771a1c9bb02132d245f9bcf1ef31258b794693c7847"
+    },
+    {
+      "acc": "O75344",
+      "pfam": [
+        "PF00254"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "a55b96bee7d80daea8487ff86f38b44adc1a51d6ed736c1bfd9139300f323253"
+    },
+    {
+      "acc": "Q96P53",
+      "pfam": [
+        "PF00400",
+        "PF01363"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "a7fec8de820fed72cb376fe27bd3a20b30f03733e6c9be79635551171e890adb"
+    },
+    {
+      "acc": "P43034",
+      "pfam": [
+        "PF00400",
+        "PF24951"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "a916513649382ce0091d71138df4bc0edad4ebfdd381843910cef399d72b0411"
+    },
+    {
+      "acc": "Q969U6",
+      "pfam": [
+        "PF00400",
+        "PF12937"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "a9d29cdf17ee137f11ee8e0f14002a7a3b954442d884b07f3f5cab943ba624dc"
+    },
+    {
+      "acc": "O43684",
+      "pfam": [
+        "PF00400"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "ad5af6f1641fc86e2e2bbe934a48dc60582fb884d8440836dd6af7de6a28d44f"
+    },
+    {
+      "acc": "O60907",
+      "pfam": [
+        "PF00400",
+        "PF08513"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "b1a87a3a1477724406c43382fa4d7bdd69c8ea752ecd0a41c03326e88b8ef35a"
+    },
+    {
+      "acc": "Q16576",
+      "pfam": [
+        "PF00400",
+        "PF12265"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "b1d75dde6e144e1f93ef06ce291898bc87c514ed6710bda1f69c7e30258c43e0"
+    },
+    {
+      "acc": "Q13309",
+      "pfam": [
+        "PF12937",
+        "PF29594"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "b357262e067f7aee9daf1313d19c584dd24ce846e08c82f93c7d51def30462b7"
+    },
+    {
+      "acc": "Q9NWT1",
+      "pfam": [
+        "PF00400"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "b3ccd06a0ff21dbb4422ef5aa2e43d8cfc45ceecb2d5991e138aec34d944f9c8"
+    },
+    {
+      "acc": "Q9BV38",
+      "pfam": [
+        "PF00400",
+        "PF14077"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "b53dc9c2ac107a1aca027fbfcd504c1cdbf0c8c89d9908ff952ef9e0ab87b555"
+    },
+    {
+      "acc": "Q09028",
+      "pfam": [
+        "PF00400",
+        "PF12265"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "bc5a64e912281f7fa76de01e63162986d8b81147b14e7a4a53447658ed4badda"
+    },
+    {
+      "acc": "Q9UKT7",
+      "pfam": [
+        "PF12937"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "bd3fd37801ffb013bd978ab5d3811084de74b7290d4df6872f9f823db9f9aa01"
+    },
+    {
+      "acc": "Q9GZS3",
+      "pfam": [
+        "PF00400"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "bf14b670057f1c5d8bc506b0262332020381fb3bb2499b14192eb5d19f9aae6b"
+    },
+    {
+      "acc": "Q8WXU2",
+      "pfam": [
+        "PF04969"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "bff7a37bc010e22b3a684911626937345bfecaef60902651325dbce750f17123"
+    },
+    {
+      "acc": "Q9BRX9",
+      "pfam": [
+        "PF00400"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "c1a7c6fc192df0b4dcad45f4511d060bb9cf7c5f65e6da03dfc8791dff30bd6e"
+    },
+    {
+      "acc": "Q9BYB4",
+      "pfam": [
+        "PF00400"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "c220f68c8ee97a51a4de4546d11ba9c19c193e07d167bf33388e971b7e34120c"
+    },
+    {
+      "acc": "Q9UKT8",
+      "pfam": [
+        "PF00400",
+        "PF12937"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "c230c23fac899b64158a9a8e4570f3a67fc5d25b5901d9acd886f2699d0aef24"
+    },
+    {
+      "acc": "Q9Y4P3",
+      "pfam": [
+        "PF00400"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "c62220ef0abf2f5033496331dc02d310987edd6843aec8245319bd0952e5ac1f"
+    },
+    {
+      "acc": "Q8NI38",
+      "pfam": [
+        "PF12796",
+        "PF13857"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "c6b57441495340f6c7f282edc4f5c14727e24a2a8d154f5bd91646ba9072c2b3"
+    },
+    {
+      "acc": "Q15785",
+      "pfam": [
+        "PF00515"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "c6ce40d52dde6fd93bf5265da3a9a835de2a4d2d92d385201de4084b88aa6ec7"
+    },
+    {
+      "acc": "Q86W74",
+      "pfam": [
+        "PF12796"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "c7ba758e8eab77f838f19c14966c082d8c307c2a36ca2aa20240d83700e56eb2"
+    },
+    {
+      "acc": "Q14247",
+      "pfam": [
+        "PF02218",
+        "PF14604"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "c83e3be332ea95ec19c36f33ff9c0dd56c07b7781dfc67120f29d377e24802f5"
+    },
+    {
+      "acc": "Q9Y574",
+      "pfam": [
+        "PF07525",
+        "PF12796"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "c937ba0955bfa68525be7cd388ca1863b4bcd4d9447645263c486892bbd43d5c"
+    },
+    {
+      "acc": "Q6P597",
+      "pfam": [
+        "PF13374",
+        "PF13424"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "ca7056b6a813175420a428ec69065f479b1ec90d34e9aef0ce74a79f370f5134"
+    },
+    {
+      "acc": "Q9NXR5",
+      "pfam": [
+        "PF00023",
+        "PF12796"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "cb54905dc85487e2f78bcea61996a5ff616d00a4ae6d953b6e41c5d85c5908a5"
+    },
+    {
+      "acc": "P61962",
+      "pfam": [
+        "PF00400"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "db27b6cbc0c9a87f8648b0b245342959835ff610fc807e90905702dd79c366ca"
+    },
+    {
+      "acc": "Q96DI7",
+      "pfam": [
+        "PF00400",
+        "PF23098"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "dcb574a61ff030bba6b9c6d71b3566426f45311263df4ede70d5389f03f21cbf"
+    },
+    {
+      "acc": "Q9BQG2",
+      "pfam": [
+        "PF00293",
+        "PF09296",
+        "PF09297",
+        "PF12796"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "df00f4474cf7ee876c650b54b34abf19b2e376ea46ac7816bca735cb8636aa45"
+    },
+    {
+      "acc": "Q8N9V6",
+      "pfam": [
+        "PF00023",
+        "PF12796"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "df8e387fb286fb5e069735d8a1b323e8ed0f367b913ef4fcb7a6305b893b738a"
+    },
+    {
+      "acc": "Q9Y2I8",
+      "pfam": [
+        "PF00400"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "e525a4840ee67ea4a60df3837aefb4a39ad12d9289b95a0776861328d4d91c4c"
+    },
+    {
+      "acc": "Q9NXK8",
+      "pfam": [
+        "PF12937"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "e5c19320051148bb11b490e565d44579086d2204c385c5d9ecf413f4881fde45"
+    },
+    {
+      "acc": "Q8WW22",
+      "pfam": [
+        "PF00226",
+        "PF00684",
+        "PF01556"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "e62d103511090f6964d19bc3bc673605c3f05c52802bc774b1228d182d09b06b"
+    },
+    {
+      "acc": "Q13451",
+      "pfam": [
+        "PF00254",
+        "PF00515",
+        "PF13181"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "e98cbc96f60bb95804869ae45641679bd04fc8127c91e2ef06b35b98857909b2"
+    },
+    {
+      "acc": "Q8WWH4",
+      "pfam": [
+        "PF00023",
+        "PF07647",
+        "PF12796"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "e9c0cbbda20e80a5662a3c68a54a2008e2eb2446891474647c755964361cefa8"
+    },
+    {
+      "acc": "P19878",
+      "pfam": [
+        "PF00018",
+        "PF00564",
+        "PF13181"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "ead4fd7b882bcc06add7cbfe362800877cb7a23561aa6597f57a674d139f3035"
+    },
+    {
+      "acc": "Q9Y6I7",
+      "pfam": [
+        "PF00400",
+        "PF07525"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "ec408aeff42bf56d5b5e4def9f6381929df7767678d3af9f5218f68cda1c800e"
+    },
+    {
+      "acc": "Q8WXK1",
+      "pfam": [
+        "PF07525",
+        "PF12796",
+        "PF13606"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "ed26e8d3e9253021b8035adbe153cdab9dc23f8aa4d0749856617fc1bb136bb6"
+    },
+    {
+      "acc": "Q8N6S4",
+      "pfam": [
+        "PF11904",
+        "PF12796"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "edf32f3cbebd5333e449a3fdfc449699228eb6e6fa02b19b544f201d8b85fb03"
+    },
+    {
+      "acc": "Q96EY1",
+      "pfam": [
+        "PF00226",
+        "PF00684",
+        "PF01556"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "ee1cee2bc8cb3d0e6da25267a0bf1649522769dd46557bcbe04e9860248279eb"
+    },
+    {
+      "acc": "Q86SG2",
+      "pfam": [
+        "PF00023",
+        "PF12796"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "f02d4d9cb439f3ad76047350b1decb3f808f83ea64d84f299a4b63a5ed403736"
+    },
+    {
+      "acc": "P78406",
+      "pfam": [
+        "PF00400"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "f13b635b66ad4e12daf10174d1fedd48f91fbd7c34210567e2e6252814f61007"
+    },
+    {
+      "acc": "Q99615",
+      "pfam": [
+        "PF00226",
+        "PF13181",
+        "PF13414",
+        "PF13432"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "f3d7845ac95999c25a987874919e9e1e755436aea35f9564864005230d010812"
+    },
+    {
+      "acc": "Q8TED0",
+      "pfam": [
+        "PF00400",
+        "PF09384"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "f618046310799da3f5e1ab1ab4892c493315bae765fc2314130c4fa8523833da"
+    },
+    {
+      "acc": "Q15813",
+      "pfam": [
+        "PF01302",
+        "PF14560"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "f64a7497a475a9b570b660a2cc9de1d4396e7dbe3d548646a55874ca403acd05"
+    },
+    {
+      "acc": "Q8NA56",
+      "pfam": [
+        "PF13424",
+        "PF13432"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "f809ae40f9878b9b355e081b9faf8f5eded6bd1b51a402abb84cf52367ab59bf"
+    },
+    {
+      "acc": "P55735",
+      "pfam": [
+        "PF00400"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "f962bb48b3a61d22d85efd35593fbf3100f438e4498124d7d5836e8651ea66c2"
+    },
+    {
+      "acc": "Q9BZK7",
+      "pfam": [
+        "PF00400",
+        "PF08513"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "fa32f547521668a1462991abc182b5ea40f569d81ab43036f396763f905e4d6b"
+    },
+    {
+      "acc": "Q13217",
+      "pfam": [
+        "PF00226",
+        "PF00515",
+        "PF13181",
+        "PF13432",
+        "PF14559"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "fb5f15294808ea4efcaccd0a342f2f517d171f09ff0a16d497bd19befb6f7e88"
+    },
+    {
+      "acc": "P53041",
+      "pfam": [
+        "PF00149",
+        "PF00515",
+        "PF08321"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "fc589471a23fbbdf86e33dd2b385efb4d679c4b47a7ef65ac46d464450303889"
+    },
+    {
+      "acc": "O00221",
+      "pfam": [
+        "PF12796"
+      ],
+      "family": "F-0c85870573f8",
+      "sort": "fd769a50c3e390df30fed08936e48fd4538ef9b0a96a1c3d504e41c96ef2dc3a"
+    }
+  ]
+}

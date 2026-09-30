@@ -6,6 +6,12 @@ Identificadores actualizados al 23/09/2026: tres objetivos y 21 resultados. Las 
 
 Este protocolo cubre los tres objetivos y 21 resultados del Word. Los ensayos de instalación, las pruebas de software y el ejemplo 2xqh/A pertenecen al desarrollo. No son resultados del conjunto reservado. El registro es local, mediante Git y SHA-256; no se afirma una prerregistración en una plataforma externa.
 
+## Actualización operativa del 30/09/2026
+
+La asesora ha sido designada por el tesista para la anotación; no participó en el desarrollo y revisó parte del informe, según lo declarado por él. Se aprobó OpenAI `gpt-6-sol`, razonamiento medio, con US$100 en total y hasta US$10 incluidos para el piloto técnico. El acceso configurado en la oficina está informado, pendiente de verificar la configuración efectiva. Se informó disponibilidad de US$250–300 para AWS; ello no equivale a una ejecución de clúster verificada. Véase [registro de decisiones](corpus-20260930/decisions.json). Estos datos actualizan los pendientes administrativos del texto histórico siguiente; no alteran umbrales, mínimos ni constituyen congelación de una campaña.
+
+El [conjunto para revisión experta](../../docs/tesis/evaluacion-experta-20260930/para-asesora/evaluacion.xlsx) prepara T-LANG. Las referencias y las paráfrasis deben completarse por la experta antes de generar salidas reservadas. La selección técnica de entradas no es una validación de sus anotaciones biológicas. El catálogo actual es `trp-catalog/1.2.0`, con STRPsearch admitido; el inventario 1.0.1 del diseño original se conserva abajo como antecedente.
+
 ## 1. Alcance, decisiones y condiciones de inicio
 
 Se evalúa la transformación de preguntas TRP en especificaciones aprobadas, composiciones compatibles, decisiones de admisión y evidencia comprobable. La exactitud biológica se contrasta separadamente. La conexión con OpenAI está confirmada por el usuario. **No están confirmados el anotador externo ni el acceso al clúster**; tampoco están fijados el identificador exacto del modelo y el presupuesto de llamadas. Esta fase no inicia una campaña de inferencia pagada.

@@ -12,7 +12,7 @@ import VERIFIER from "./verify_inspection.py.txt"
 import catalog from "./structural_catalog.json"
 
 export { SCRIPT, catalog }
-export const VERSION = "trp-structural/1.0.0"
+export const VERSION = "trp-structural/1.1.0"
 const Range = Schema.Struct({ start: Schema.Number, end: Schema.Number })
 export const Options = Schema.Struct({
   format: Schema.Literals(["mmcif", "pdb"]),
@@ -169,7 +169,13 @@ export async function runParser(
 }
 
 export async function inspect(
-  request: { structure: string; options: Options; pae?: unknown; api?: unknown },
+  request: {
+    structure: string
+    options: Options
+    pae?: unknown
+    api?: unknown
+    colabfold?: { metadata: unknown; scores: string; pae: string }
+  },
   signal?: AbortSignal,
   python = process.env.HELIX_TRP_PYTHON ?? "python3",
 ): Promise<Report> {
@@ -208,6 +214,17 @@ export const Parameters = Schema.Struct({
       description: "Path to archived AFDB API response; entry, chain, sequence and versioned URLs must match",
     }),
   ),
+  colabfold: Schema.optional(
+    Schema.Struct({
+      metadata: Schema.String.annotate({
+        description: "Path to colabfold-local/1.0.0 identity, sequence and SHA-256 manifest",
+      }),
+      scores: Schema.String.annotate({ description: "Path to original ColabFold scores JSON, paired with the PDB" }),
+      pae: Schema.String.annotate({
+        description: "Path to original local predicted_aligned_error JSON; not AFDB metadata",
+      }),
+    }),
+  ),
 })
 export type Parameters = typeof Parameters.Type
 
@@ -233,6 +250,15 @@ export async function inspectFiles(args: Parameters, workspace: string, signal?:
     options: args.options,
     ...(args.pae ? { pae: JSON.parse(await read(args.pae, "pae.json")) } : {}),
     ...(args.api ? { api: JSON.parse(await read(args.api, "api.json")) } : {}),
+    ...(args.colabfold
+      ? {
+          colabfold: {
+            metadata: JSON.parse(await read(args.colabfold.metadata, "colabfold-metadata.json")),
+            scores: await read(args.colabfold.scores, "colabfold-scores.json"),
+            pae: await read(args.colabfold.pae, "colabfold-pae.json"),
+          },
+        }
+      : {}),
   }
   const localPython = path.join(root, ".helix", "trp-python", "bin", "python")
   const python =

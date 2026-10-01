@@ -11,7 +11,7 @@ import platform
 import re
 import sys
 
-VERSION = 'trp-structural/1.0.0'
+VERSION = 'trp-structural/1.1.0'
 GEMMI = '0.7.5'
 LIMIT = 20_000_000
 
@@ -30,6 +30,70 @@ def number(text):
 
 def integer(value):
     return isinstance(value, int) and not isinstance(value, bool)
+
+def colabfold_binding(request, snap):
+    """Bind a local monomer PDB to original score/PAE bytes, never to AFDB URLs.
+
+    The operator declares the source. Hashes and matching sequence/confidence
+    verify the pairing, not authorship or biological validity.
+    """
+    bundle = request['colabfold']
+    if request.get('api') is not None or request.get('pae') is not None:
+        raise ValueError('mixed-confidence-producers')
+    if not isinstance(bundle, dict): raise ValueError('colabfold-bundle')
+    meta = bundle.get('metadata')
+    if not isinstance(meta, dict): raise ValueError('colabfold-metadata')
+    raw_scores, raw_pae = bundle.get('scores'), bundle.get('pae')
+    if any(not isinstance(x, str) or len(x.encode()) > LIMIT for x in (raw_scores, raw_pae)):
+        raise ValueError('colabfold-sidecar-size')
+    def decode(raw):
+        return json.loads(raw, parse_constant=lambda s: (_ for _ in ()).throw(ValueError('nonfinite-json')))
+    scores, pae = decode(raw_scores), decode(raw_pae)
+    if not isinstance(scores, dict) or not isinstance(pae, dict): raise ValueError('colabfold-sidecar')
+    rows, errors = snap['rows'], []
+    seq = meta.get('sequence')
+    letters = dict(zip(('ALA','ARG','ASN','ASP','CYS','GLN','GLU','GLY','HIS','ILE','LEU','LYS','MET','PHE','PRO','SER','THR','TRP','TYR','VAL'), 'ARNDCQEGHILKMFPSTWYV'))
+    observed = ''.join(letters.get(r['name'], '?') for r in rows)
+    if meta.get('version') != 'colabfold-local/1.0.0' or meta.get('producer') != 'ColabFold' or meta.get('modelType') != 'alphafold2_ptm':
+        errors.append('producer-contract')
+    identifier, rank, seed, parameter = (meta.get(k) for k in ('caseId','rank','seed','parameterModel'))
+    if not isinstance(identifier,str) or not re.fullmatch(r'[A-Za-z0-9_-]+',identifier) or not integer(rank) or not 1<=rank<=5 or not integer(seed) or seed<0 or not integer(parameter) or not 1<=parameter<=5:
+        errors.append('run-identity')
+    else:
+        suffix = f'rank_{rank:03d}_alphafold2_ptm_model_{parameter}_seed_{seed:03d}'
+        if meta.get('structureFile') != f'{identifier}_unrelaxed_{suffix}.pdb' or meta.get('scoresFile') != f'{identifier}_scores_{suffix}.json' or meta.get('paeFile') != f'{identifier}_predicted_aligned_error_v1.json':
+            errors.append('paired-filenames')
+    options = request['options']
+    atoms = [l for l in request['structure'].splitlines() if l[:6] in ('ATOM  ','HETATM')]
+    if options['format'] != 'pdb' or options['model'] != 1 or options['frame'] != 'auth_seq_id' or snap['methods'] or len([l for l in request['structure'].splitlines() if l.startswith('MODEL ')]) > 1:
+        errors.append('monomer-pdb-contract')
+    if not atoms or {l[21:22] for l in atoms} != {options['chain']} or meta.get('chain') != options['chain']:
+        errors.append('single-chain')
+    if not rows or len(rows)>2000 or any(r['auth'] != str(i+1) or r['insertion'] or r['alt'] or any(v is None for v in r['xyz']) for i,r in enumerate(rows)) or not isinstance(seq,str) or not seq or observed != seq:
+        errors.append('complete-sequence-axes')
+    for key, raw in (('structureSha256',request['structure']),('scoresSha256',raw_scores),('paeSha256',raw_pae)):
+        if meta.get(key) != sha(raw): errors.append(key+'-mismatch')
+    plddt = scores.get('plddt')
+    if not isinstance(plddt,list) or len(plddt)!=len(rows) or any(not finite(v) or not 0<=v<=100 for v in plddt):
+        errors.append('score-plddt-domain')
+    else:
+        if any(r['b'] is None or abs(r['b']-v)>0.011 for r,v in zip(rows,plddt)):
+            errors.append('score-plddt-disagreement')
+    n = len(rows)
+    matrix, maximum = pae.get('predicted_aligned_error'), pae.get('max_predicted_aligned_error')
+    # ColabFold rounds matrix cells to two decimals but keeps max_pae at full
+    # precision (batch.py v1.5.2). Allow only that serialization half-step;
+    # engineering PAE thresholds below remain unchanged.
+    cap = maximum + 0.005000001 if finite(maximum) else -1
+    matrix_valid = isinstance(matrix,list) and len(matrix)==n and finite(maximum) and maximum>=0 and all(isinstance(row,list) and len(row)==n and all(finite(v) and 0<=v<=cap for v in row) for row in matrix)
+    score_matrix = scores.get('pae')
+    matrix_valid = matrix_valid and isinstance(score_matrix,list) and len(score_matrix)==n and all(isinstance(row,list) and len(row)==n and all(finite(v) and 0<=v<=cap for v in row) for row in score_matrix)
+    matrix_valid = matrix_valid and finite(scores.get('max_pae')) and score_matrix == matrix and scores.get('max_pae') == maximum
+    binding = {'producer':'ColabFold','caseId':identifier,'rank':rank,'seed':seed,'parameterModel':parameter,
+               'structureSha256':meta.get('structureSha256'),'scoresSha256':meta.get('scoresSha256'),'paeSha256':meta.get('paeSha256'),
+               'metadataMatchesStructure':not errors,'errors':sorted(set(errors)),'paeSerializationTolerance':0.005000001,
+               'attribution':'operator-declared local source; byte/sequence pairing verified, authorship not authenticated'}
+    return binding, matrix, bool(matrix_valid)
 
 def cif_snapshot(text, options):
     import gemmi
@@ -111,11 +175,15 @@ def inspect(request):
     plddt_min, pae_max = options.get('plddtMin',70), options.get('paeMax',5)
     if not finite(plddt_min) or not 0<=plddt_min<=100 or not finite(pae_max) or not 0<=pae_max<=100: raise ValueError('threshold-domain')
     snap = cif_snapshot(text, options) if options['format']=='mmcif' else pdb_snapshot(text, options)
+    colabfold = colabfold_binding(request, snap) if 'colabfold' in request else None
     rows, checks = snap['rows'], []
     def check(code, status, value, threshold, reason):
         checks.append({'id':code,'status':status,'value':value,'threshold':threshold,'reason':reason})
     experimental = bool(snap['methods']) and all(m.upper() in ('X-RAY DIFFRACTION','ELECTRON MICROSCOPY','NEUTRON DIFFRACTION','ELECTRON CRYSTALLOGRAPHY') for m in snap['methods'])
     scale = 'pLDDT_0_100' if snap['af2'] and not snap['methods'] and snap['local'] else 'Bfactor_A2' if experimental and not snap['af2'] and not snap['local'] else 'Unset'
+    if colabfold and colabfold[0]['metadataMatchesStructure']:
+        scale = 'pLDDT_0_100'
+        snap['software'] = [{'name':'ColabFold','modelType':'alphafold2_ptm','version':None,'source':'declared local bundle'}]
     local = {}
     duplicated_local = False
     for item in snap['local']:
@@ -126,11 +194,12 @@ def inspect(request):
     for row in rows:
         b=row['b']
         if b is None or b<0 or scale=='pLDDT_0_100' and b>100: errors.append('value-domain')
-        if scale=='pLDDT_0_100':
+        if scale=='pLDDT_0_100' and not colabfold:
             value=local.get((row['labelChain'],row['label']))
             if value is None or not 0<=value<=100 or b is None or abs(value-b)>0.011: errors.append('local-metric-disagreement')
     if duplicated_local: errors.append('duplicate-local-metric')
-    check('confidence-scale','not_evaluable' if scale=='Unset' else 'fail' if errors or not rows else 'pass',
+    if colabfold: errors.extend(colabfold[0]['errors'])
+    check('confidence-scale','fail' if errors else 'not_evaluable' if scale=='Unset' else 'fail' if not rows else 'pass',
           {'scale':scale,'methods':snap['methods'],'producer':snap['software'],'errors':sorted(set(errors))},
           {'Bfactor_A2':[0,None],'pLDDT_0_100':[0,100],'localTolerance':0.011},
           'Scale comes from method/producer and local metrics, never from numeric magnitude alone.')
@@ -173,6 +242,22 @@ def inspect(request):
                'attribution':'declared URLs; not authenticated by inspection'} if metadata else None
     if scale=='Bfactor_A2':
         check('interunit-pae','not_applicable',None,{'angstromMax':pae_max},'Experimental coordinates: AFDB PAE is not applicable; this does not certify orientation accuracy.')
+    elif colabfold:
+        binding, matrix, matrix_ok = colabfold
+        axes = binding['metadataMatchesStructure'] and coverage_ok and not frame_bad
+        if not axes or not matrix_ok:
+            check('interunit-pae','fail',{'axesMatch':bool(axes),'matrixValid':matrix_ok,'residues':len(rows)}, {'axesMatch':True,'matrixValid':True,'angstromMax':pae_max},'Local ColabFold requires hash-bound score/PAE bytes, identical matrices, full sequence and unambiguous monomer axes. No AFDB provenance is inferred.')
+        else:
+            indices=[[lookup[k][0] for k in unit] for unit in units]
+            pairs=[]
+            for i in range(len(indices)):
+                for j in range(i+1,len(indices)):
+                    forward=max(matrix[a][b] for a in indices[i] for b in indices[j])
+                    reverse=max(matrix[b][a] for a in indices[i] for b in indices[j])
+                    pairs.append({'units':[i+1,j+1],'forwardMax':forward,'reverseMax':reverse})
+            worst=max(max(p['forwardMax'],p['reverseMax']) for p in pairs)
+            ok=worst<=pae_max and len(selected_plddt)==len(requested) and min(selected_plddt)>=plddt_min
+            check('interunit-pae','pass' if ok else 'fail',{'maximum':worst,'pairs':pairs,**confidence_summary}, {'angstromMax':pae_max,'plddtMin':plddt_min,'reducer':'max of both directed cross-unit blocks'},'Same previously fixed engineering profile as AFDB; neither local confidence nor PAE establishes physical plausibility.')
     elif scale!='pLDDT_0_100' or pae is None or api is None:
         check('interunit-pae','not_evaluable',{'paePresent':pae is not None,'apiPresent':api is not None}, {'angstromMax':pae_max,'plddtMin':plddt_min},'Predicted geometry needs bound PAE axes and producer/sequence metadata; local confidence alone is insufficient.')
     else:
@@ -234,7 +319,7 @@ def inspect(request):
     blocking=failed+[c['id'] for c in checks if c['status']=='not_evaluable' and c['id'] in ('confidence-scale','filter-direction','interunit-pae')]
     return {'version':VERSION,'provenance':{'structureSha256':sha(text),'parser':snap['parser'],'python':platform.python_version(),'entry':snap['entry'],'model':snap['model'],'authorChain':options['chain'],'frame':options['frame'],'confidenceScale':scale,'software':snap['software'],'modelGroups':snap['groups'],'confidenceBinding':binding},
             'checks':checks,'mapping':rows,'summary':{'failed':failed,'notEvaluable':unknown,'mechanicalAdmission':not blocking,'blocking':blocking,'biologicalValidity':'not_established'},
-            'limitations':['Development screening, not R3.8 evaluation (identifier scheme 2026-09-23).','No physical fold classifier, genomic assembly validator, SIFTS/UniProt alignment or repeat detector.','Integrity and declared URLs do not authenticate scientific provenance.']}
+            'limitations':['Mechanical screening; a complete R3.8 evaluation needs independent labels and pertinent controls.','No physical fold classifier, genomic assembly validator, SIFTS/UniProt alignment or repeat detector.','Integrity and declared sources do not authenticate scientific provenance.']}
 
 if __name__=='__main__':
     try:

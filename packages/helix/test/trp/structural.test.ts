@@ -69,6 +69,58 @@ test("input symlinks cannot escape workspace", async () => {
   }
 })
 
+test("local ColabFold inspection archives original sidecars and verifies their hashes", async () => {
+  const python = process.env.HELIX_TRP_PYTHON ?? "python3"
+  const fixture = Bun.spawn(
+    [
+      python,
+      "-I",
+      "-c",
+      "import json,runpy,sys;print(json.dumps(runpy.run_path(sys.argv[1])['fixture']()))",
+      path.join(root, "script/tesis/test_colabfold_binding.py"),
+    ],
+    { stdout: "pipe", stderr: "pipe" },
+  )
+  const request = JSON.parse(await new Response(fixture.stdout).text())
+  expect(await fixture.exited).toBe(0)
+  const workspace = await fs.mkdtemp(path.join(os.tmpdir(), "helix-colabfold-"))
+  try {
+    const meta = request.colabfold.metadata
+    await fs.writeFile(path.join(workspace, meta.structureFile), request.structure)
+    await fs.writeFile(path.join(workspace, meta.scoresFile), request.colabfold.scores)
+    await fs.writeFile(path.join(workspace, meta.paeFile), request.colabfold.pae)
+    await fs.writeFile(path.join(workspace, "metadata.json"), JSON.stringify(meta))
+    const evidence = await C.inspectFiles(
+      {
+        structure: meta.structureFile,
+        options: request.options,
+        colabfold: { metadata: "metadata.json", scores: meta.scoresFile, pae: meta.paeFile },
+      },
+      workspace,
+    )
+    expect(evidence.report.provenance.confidenceScale).toBe("pLDDT_0_100")
+    expect(evidence.report.summary.mechanicalAdmission).toBe(true)
+    expect(evidence.report.summary.biologicalValidity).toBe("not_established")
+    const verify = () =>
+      Bun.spawn(
+        [
+          python,
+          path.join(root, "packages/helix/src/trp/verify_inspection.py.txt"),
+          evidence.directory,
+          "--sha256",
+          evidence.manifestSha256,
+        ],
+        { stdout: "ignore", stderr: "ignore" },
+      ).exited
+    expect(await verify()).toBe(0)
+    await fs.appendFile(path.join(evidence.directory, "colabfold-scores.json"), "\n")
+    expect(await verify()).not.toBe(0)
+    await rejects(() => C.inspect({ ...request, api: [{}] }), /mixed-confidence-producers/)
+  } finally {
+    await fs.rm(workspace, { recursive: true, force: true })
+  }
+})
+
 const it = testEffect(LayerNode.compile(LayerNode.group([Agent.node, Truncate.node])))
 it.instance("agent inspection writes portable evidence that detects every changed or missing artifact", () =>
   Effect.gen(function* () {

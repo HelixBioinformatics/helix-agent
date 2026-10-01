@@ -25,7 +25,13 @@ def verify(directory, expected=None):
     if {p.name for p in root.iterdir()}!=listed|{'manifest.json'}: raise ValueError('unlisted or missing file')
     if not {'structure.txt','options.json','report.json','catalogue.json','trp_inspect.py','verify.py'}<=listed: raise ValueError('required artifacts missing')
     r=json.loads((root/'report.json').read_bytes()); o=json.loads((root/'options.json').read_bytes())
-    if r['version']!='trp-structural/1.0.0' or r['provenance']['structureSha256']!=digest((root/'structure.txt').read_bytes()): raise ValueError('report source mismatch')
+    if r['version'] not in ('trp-structural/1.0.0','trp-structural/1.1.0') or r['provenance']['structureSha256']!=digest((root/'structure.txt').read_bytes()): raise ValueError('report source mismatch')
+    if r['provenance']['confidenceBinding'] and r['provenance']['confidenceBinding'].get('producer')=='ColabFold':
+        required={'colabfold-metadata.json','colabfold-scores.json','colabfold-pae.json'}
+        if not required<=listed: raise ValueError('missing local producer sidecars')
+        meta=json.loads((root/'colabfold-metadata.json').read_bytes())
+        for key,name in (('structureSha256','structure.txt'),('scoresSha256','colabfold-scores.json'),('paeSha256','colabfold-pae.json')):
+            if meta.get(key)!=digest((root/name).read_bytes()) or r['provenance']['confidenceBinding'].get(key)!=meta[key]: raise ValueError('local producer hash mismatch')
     if r['provenance']['authorChain']!=o['chain'] or r['provenance']['frame']!=o['frame']: raise ValueError('report selection differs')
     ids={c['id'] for c in json.loads((root/'catalogue.json').read_bytes())['controls']}
     if len(r['checks'])!=len(ids) or {c['id'] for c in r['checks']}!=ids: raise ValueError('control inventory differs')

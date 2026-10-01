@@ -1,0 +1,4613 @@
+{
+  "version": "trp-structural/1.1.0",
+  "provenance": {
+    "structureSha256": "e228b1e792a1924d66e067e2b9e936f2c969e244b0005e50faf04b8cff302fc1",
+    "parser": "legacy-pdb-ca/1.0.0",
+    "python": "3.14.7",
+    "entry": null,
+    "model": "1",
+    "authorChain": "A",
+    "frame": "auth_seq_id",
+    "confidenceScale": "pLDDT_0_100",
+    "software": [
+      {
+        "name": "ColabFold",
+        "modelType": "alphafold2_ptm",
+        "version": null,
+        "source": "declared local bundle"
+      }
+    ],
+    "modelGroups": [],
+    "confidenceBinding": {
+      "producer": "ColabFold",
+      "caseId": "29ab",
+      "rank": 1,
+      "seed": 0,
+      "parameterModel": 2,
+      "structureSha256": "e228b1e792a1924d66e067e2b9e936f2c969e244b0005e50faf04b8cff302fc1",
+      "scoresSha256": "58f4329aa19c74d768d14de645329431071f85045d11cfb6126fd250f7c8b3c2",
+      "paeSha256": "a7a7a3f3897c0fe4cdc77e979d528d6c75c5a8c9c3c1642d9f733280dcf3add1",
+      "metadataMatchesStructure": true,
+      "errors": [],
+      "paeSerializationTolerance": 0.005000001,
+      "attribution": "operator-declared local source; byte/sequence pairing verified, authorship not authenticated"
+    }
+  },
+  "checks": [
+    {
+      "id": "confidence-scale",
+      "status": "pass",
+      "value": {
+        "scale": "pLDDT_0_100",
+        "methods": [],
+        "producer": [
+          {
+            "name": "ColabFold",
+            "modelType": "alphafold2_ptm",
+            "version": null,
+            "source": "declared local bundle"
+          }
+        ],
+        "errors": []
+      },
+      "threshold": {
+        "Bfactor_A2": [
+          0,
+          null
+        ],
+        "pLDDT_0_100": [
+          0,
+          100
+        ],
+        "localTolerance": 0.011
+      },
+      "reason": "Scale comes from method/producer and local metrics, never from numeric magnitude alone."
+    },
+    {
+      "id": "filter-direction",
+      "status": "not_applicable",
+      "value": null,
+      "threshold": null,
+      "reason": "No confidence filter requested; no residues are removed."
+    },
+    {
+      "id": "residue-frame",
+      "status": "pass",
+      "value": {
+        "frame": "auth_seq_id",
+        "ambiguous": [],
+        "duplicateMap": false,
+        "mapped": 290
+      },
+      "threshold": {
+        "ambiguous": 0,
+        "duplicateMap": false
+      },
+      "reason": "Mapping uses atom-site keys. Author insertion codes and ambiguous alternate observations are refused; no UniProt/SIFTS offset is inferred."
+    },
+    {
+      "id": "element-coverage",
+      "status": "pass",
+      "value": {
+        "requested": 290,
+        "observedUnique": 290,
+        "missing": [],
+        "ambiguous": [],
+        "invalidCoordinates": [],
+        "overlap": 0
+      },
+      "threshold": {
+        "missing": 0,
+        "ambiguous": 0,
+        "invalidCoordinates": 0,
+        "overlap": 0,
+        "coverageFraction": 1
+      },
+      "reason": "Every requested position requires one finite CA; no automatic dropping of units or residues."
+    },
+    {
+      "id": "interunit-pae",
+      "status": "fail",
+      "value": {
+        "maximum": 29.8,
+        "pairs": [
+          {
+            "units": [
+              1,
+              2
+            ],
+            "forwardMax": 24.39,
+            "reverseMax": 24.59
+          },
+          {
+            "units": [
+              1,
+              3
+            ],
+            "forwardMax": 27.06,
+            "reverseMax": 25.84
+          },
+          {
+            "units": [
+              1,
+              4
+            ],
+            "forwardMax": 26.83,
+            "reverseMax": 27.98
+          },
+          {
+            "units": [
+              1,
+              5
+            ],
+            "forwardMax": 27.17,
+            "reverseMax": 26.92
+          },
+          {
+            "units": [
+              1,
+              6
+            ],
+            "forwardMax": 27.19,
+            "reverseMax": 26.61
+          },
+          {
+            "units": [
+              1,
+              7
+            ],
+            "forwardMax": 26.94,
+            "reverseMax": 28.02
+          },
+          {
+            "units": [
+              1,
+              8
+            ],
+            "forwardMax": 28.09,
+            "reverseMax": 28.08
+          },
+          {
+            "units": [
+              1,
+              9
+            ],
+            "forwardMax": 28.16,
+            "reverseMax": 28.55
+          },
+          {
+            "units": [
+              1,
+              10
+            ],
+            "forwardMax": 28.89,
+            "reverseMax": 29.8
+          },
+          {
+            "units": [
+              2,
+              3
+            ],
+            "forwardMax": 24.8,
+            "reverseMax": 25.31
+          },
+          {
+            "units": [
+              2,
+              4
+            ],
+            "forwardMax": 25.83,
+            "reverseMax": 27.61
+          },
+          {
+            "units": [
+              2,
+              5
+            ],
+            "forwardMax": 26.61,
+            "reverseMax": 26.5
+          },
+          {
+            "units": [
+              2,
+              6
+            ],
+            "forwardMax": 26.53,
+            "reverseMax": 26.08
+          },
+          {
+            "units": [
+              2,
+              7
+            ],
+            "forwardMax": 27.39,
+            "reverseMax": 27.58
+          },
+          {
+            "units": [
+              2,
+              8
+            ],
+            "forwardMax": 28.12,
+            "reverseMax": 26.83
+          },
+          {
+            "units": [
+              2,
+              9
+            ],
+            "forwardMax": 28.31,
+            "reverseMax": 27.27
+          },
+          {
+            "units": [
+              2,
+              10
+            ],
+            "forwardMax": 28.69,
+            "reverseMax": 29.64
+          },
+          {
+            "units": [
+              3,
+              4
+            ],
+            "forwardMax": 25.52,
+            "reverseMax": 26.84
+          },
+          {
+            "units": [
+              3,
+              5
+            ],
+            "forwardMax": 26.38,
+            "reverseMax": 25.89
+          },
+          {
+            "units": [
+              3,
+              6
+            ],
+            "forwardMax": 26.97,
+            "reverseMax": 26.33
+          },
+          {
+            "units": [
+              3,
+              7
+            ],
+            "forwardMax": 27.36,
+            "reverseMax": 27.02
+          },
+          {
+            "units": [
+              3,
+              8
+            ],
+            "forwardMax": 27.84,
+            "reverseMax": 26.66
+          },
+          {
+            "units": [
+              3,
+              9
+            ],
+            "forwardMax": 27.95,
+            "reverseMax": 26.72
+          },
+          {
+            "units": [
+              3,
+              10
+            ],
+            "forwardMax": 28.64,
+            "reverseMax": 29.09
+          },
+          {
+            "units": [
+              4,
+              5
+            ],
+            "forwardMax": 26.25,
+            "reverseMax": 25.45
+          },
+          {
+            "units": [
+              4,
+              6
+            ],
+            "forwardMax": 26.05,
+            "reverseMax": 25.86
+          },
+          {
+            "units": [
+              4,
+              7
+            ],
+            "forwardMax": 27.14,
+            "reverseMax": 27.14
+          },
+          {
+            "units": [
+              4,
+              8
+            ],
+            "forwardMax": 27.5,
+            "reverseMax": 26.14
+          },
+          {
+            "units": [
+              4,
+              9
+            ],
+            "forwardMax": 27.7,
+            "reverseMax": 26.02
+          },
+          {
+            "units": [
+              4,
+              10
+            ],
+            "forwardMax": 28.36,
+            "reverseMax": 28.67
+          },
+          {
+            "units": [
+              5,
+              6
+            ],
+            "forwardMax": 26.12,
+            "reverseMax": 25.5
+          },
+          {
+            "units": [
+              5,
+              7
+            ],
+            "forwardMax": 26.27,
+            "reverseMax": 26.88
+          },
+          {
+            "units": [
+              5,
+              8
+            ],
+            "forwardMax": 27.36,
+            "reverseMax": 26.7
+          },
+          {
+            "units": [
+              5,
+              9
+            ],
+            "forwardMax": 27.62,
+            "reverseMax": 25.17
+          },
+          {
+            "units": [
+              5,
+              10
+            ],
+            "forwardMax": 28.39,
+            "reverseMax": 28.33
+          },
+          {
+            "units": [
+              6,
+              7
+            ],
+            "forwardMax": 25.77,
+            "reverseMax": 25.91
+          },
+          {
+            "units": [
+              6,
+              8
+            ],
+            "forwardMax": 26.22,
+            "reverseMax": 26.36
+          },
+          {
+            "units": [
+              6,
+              9
+            ],
+            "forwardMax": 27.11,
+            "reverseMax": 25.55
+          },
+          {
+            "units": [
+              6,
+              10
+            ],
+            "forwardMax": 27.59,
+            "reverseMax": 28.14
+          },
+          {
+            "units": [
+              7,
+              8
+            ],
+            "forwardMax": 25.8,
+            "reverseMax": 25.31
+          },
+          {
+            "units": [
+              7,
+              9
+            ],
+            "forwardMax": 26.14,
+            "reverseMax": 25.17
+          },
+          {
+            "units": [
+              7,
+              10
+            ],
+            "forwardMax": 27.22,
+            "reverseMax": 28.55
+          },
+          {
+            "units": [
+              8,
+              9
+            ],
+            "forwardMax": 25.38,
+            "reverseMax": 24.34
+          },
+          {
+            "units": [
+              8,
+              10
+            ],
+            "forwardMax": 26.16,
+            "reverseMax": 28.11
+          },
+          {
+            "units": [
+              9,
+              10
+            ],
+            "forwardMax": 24.83,
+            "reverseMax": 27.62
+          }
+        ],
+        "selectedMinimum": 43.34,
+        "plddtMinimumThreshold": 70
+      },
+      "threshold": {
+        "angstromMax": 5,
+        "plddtMin": 70,
+        "reducer": "max of both directed cross-unit blocks"
+      },
+      "reason": "Same previously fixed engineering profile as AFDB; neither local confidence nor PAE establishes physical plausibility."
+    },
+    {
+      "id": "construct-tags",
+      "status": "not_evaluable",
+      "value": {
+        "selectedTerminalPolyHis": [],
+        "syntheticSource": [],
+        "sequenceDifferences": []
+      },
+      "threshold": {
+        "selectedTerminalPolyHis": 0
+      },
+      "reason": "Poly-His is a review signal, not proof of an engineered tag. No automatic trimming. Other construct metadata require sequence/source interpretation; absence of a motif does not prove a native construct."
+    },
+    {
+      "id": "assembly-annotation",
+      "status": "not_evaluable",
+      "value": null,
+      "threshold": {
+        "needed": [
+          "genomic assembly",
+          "reads",
+          "independent gene annotation"
+        ]
+      },
+      "reason": "No assembly or annotation diagnosis can be made from this coordinate file alone."
+    },
+    {
+      "id": "unit-boundaries",
+      "status": "not_evaluable",
+      "value": null,
+      "threshold": {
+        "needed": "independently reviewed units in the same frame"
+      },
+      "reason": "Supplied units are not their own validation reference."
+    },
+    {
+      "id": "fold-plausibility",
+      "status": "not_evaluable",
+      "value": null,
+      "threshold": {
+        "needed": "independent physical or experimental evidence"
+      },
+      "reason": "Pratt et al. report confident but implausible repeat models. Passing pLDDT/PAE does not establish a physically plausible fold; these controls do not detect all published failures."
+    }
+  ],
+  "mapping": [
+    {
+      "label": null,
+      "auth": "1",
+      "insertion": "",
+      "labelChain": null,
+      "name": "THR",
+      "alt": "",
+      "b": 47.06,
+      "xyz": [
+        -21.062,
+        -16.469,
+        -10.734
+      ]
+    },
+    {
+      "label": null,
+      "auth": "2",
+      "insertion": "",
+      "labelChain": null,
+      "name": "TYR",
+      "alt": "",
+      "b": 43.34,
+      "xyz": [
+        -23.594,
+        -13.727,
+        -10.352
+      ]
+    },
+    {
+      "label": null,
+      "auth": "3",
+      "insertion": "",
+      "labelChain": null,
+      "name": "ARG",
+      "alt": "",
+      "b": 48.78,
+      "xyz": [
+        -24.094,
+        -10.438,
+        -12.367
+      ]
+    },
+    {
+      "label": null,
+      "auth": "4",
+      "insertion": "",
+      "labelChain": null,
+      "name": "ARG",
+      "alt": "",
+      "b": 53.53,
+      "xyz": [
+        -24.547,
+        -8.109,
+        -9.203
+      ]
+    },
+    {
+      "label": null,
+      "auth": "5",
+      "insertion": "",
+      "labelChain": null,
+      "name": "TYR",
+      "alt": "",
+      "b": 55.09,
+      "xyz": [
+        -23.969,
+        -8.93,
+        -5.551
+      ]
+    },
+    {
+      "label": null,
+      "auth": "6",
+      "insertion": "",
+      "labelChain": null,
+      "name": "MET",
+      "alt": "",
+      "b": 54.88,
+      "xyz": [
+        -23.844,
+        -6.887,
+        -2.338
+      ]
+    },
+    {
+      "label": null,
+      "auth": "7",
+      "insertion": "",
+      "labelChain": null,
+      "name": "PHE",
+      "alt": "",
+      "b": 57.22,
+      "xyz": [
+        -22.422,
+        -9.086,
+        0.362
+      ]
+    },
+    {
+      "label": null,
+      "auth": "8",
+      "insertion": "",
+      "labelChain": null,
+      "name": "GLN",
+      "alt": "",
+      "b": 58.12,
+      "xyz": [
+        -22.719,
+        -7.613,
+        3.904
+      ]
+    },
+    {
+      "label": null,
+      "auth": "9",
+      "insertion": "",
+      "labelChain": null,
+      "name": "GLU",
+      "alt": "",
+      "b": 57.88,
+      "xyz": [
+        -21.219,
+        -9.648,
+        6.738
+      ]
+    },
+    {
+      "label": null,
+      "auth": "10",
+      "insertion": "",
+      "labelChain": null,
+      "name": "LEU",
+      "alt": "",
+      "b": 55.44,
+      "xyz": [
+        -21.938,
+        -8.555,
+        10.234
+      ]
+    },
+    {
+      "label": null,
+      "auth": "11",
+      "insertion": "",
+      "labelChain": null,
+      "name": "CYS",
+      "alt": "",
+      "b": 62.53,
+      "xyz": [
+        -19.734,
+        -10.227,
+        12.93
+      ]
+    },
+    {
+      "label": null,
+      "auth": "12",
+      "insertion": "",
+      "labelChain": null,
+      "name": "MET",
+      "alt": "",
+      "b": 59.53,
+      "xyz": [
+        -20.359,
+        -9.438,
+        16.578
+      ]
+    },
+    {
+      "label": null,
+      "auth": "13",
+      "insertion": "",
+      "labelChain": null,
+      "name": "MET",
+      "alt": "",
+      "b": 63.56,
+      "xyz": [
+        -18.016,
+        -10.711,
+        19.109
+      ]
+    },
+    {
+      "label": null,
+      "auth": "14",
+      "insertion": "",
+      "labelChain": null,
+      "name": "GLN",
+      "alt": "",
+      "b": 59.84,
+      "xyz": [
+        -19.062,
+        -9.891,
+        22.766
+      ]
+    },
+    {
+      "label": null,
+      "auth": "15",
+      "insertion": "",
+      "labelChain": null,
+      "name": "ARG",
+      "alt": "",
+      "b": 57.66,
+      "xyz": [
+        -16.5,
+        -11.844,
+        24.797
+      ]
+    },
+    {
+      "label": null,
+      "auth": "16",
+      "insertion": "",
+      "labelChain": null,
+      "name": "ARG",
+      "alt": "",
+      "b": 60.75,
+      "xyz": [
+        -13.969,
+        -10.281,
+        27.391
+      ]
+    },
+    {
+      "label": null,
+      "auth": "17",
+      "insertion": "",
+      "labelChain": null,
+      "name": "GLU",
+      "alt": "",
+      "b": 71.62,
+      "xyz": [
+        -10.898,
+        -11.984,
+        25.625
+      ]
+    },
+    {
+      "label": null,
+      "auth": "18",
+      "insertion": "",
+      "labelChain": null,
+      "name": "VAL",
+      "alt": "",
+      "b": 69.5,
+      "xyz": [
+        -10.953,
+        -13.289,
+        22.125
+      ]
+    },
+    {
+      "label": null,
+      "auth": "19",
+      "insertion": "",
+      "labelChain": null,
+      "name": "THR",
+      "alt": "",
+      "b": 77.44,
+      "xyz": [
+        -8.078,
+        -15.18,
+        20.656
+      ]
+    },
+    {
+      "label": null,
+      "auth": "20",
+      "insertion": "",
+      "labelChain": null,
+      "name": "VAL",
+      "alt": "",
+      "b": 76.56,
+      "xyz": [
+        -8.531,
+        -16.0,
+        17.047
+      ]
+    },
+    {
+      "label": null,
+      "auth": "21",
+      "insertion": "",
+      "labelChain": null,
+      "name": "GLU",
+      "alt": "",
+      "b": 83.5,
+      "xyz": [
+        -6.02,
+        -18.281,
+        15.453
+      ]
+    },
+    {
+      "label": null,
+      "auth": "22",
+      "insertion": "",
+      "labelChain": null,
+      "name": "LYS",
+      "alt": "",
+      "b": 82.44,
+      "xyz": [
+        -7.16,
+        -17.594,
+        11.898
+      ]
+    },
+    {
+      "label": null,
+      "auth": "23",
+      "insertion": "",
+      "labelChain": null,
+      "name": "TRP",
+      "alt": "",
+      "b": 78.62,
+      "xyz": [
+        -9.664,
+        -15.289,
+        10.43
+      ]
+    },
+    {
+      "label": null,
+      "auth": "24",
+      "insertion": "",
+      "labelChain": null,
+      "name": "GLN",
+      "alt": "",
+      "b": 75.75,
+      "xyz": [
+        -9.891,
+        -15.891,
+        6.688
+      ]
+    },
+    {
+      "label": null,
+      "auth": "25",
+      "insertion": "",
+      "labelChain": null,
+      "name": "TRP",
+      "alt": "",
+      "b": 73.25,
+      "xyz": [
+        -12.078,
+        -14.891,
+        3.914
+      ]
+    },
+    {
+      "label": null,
+      "auth": "26",
+      "insertion": "",
+      "labelChain": null,
+      "name": "CYS",
+      "alt": "",
+      "b": 71.62,
+      "xyz": [
+        -11.594,
+        -16.344,
+        0.43
+      ]
+    },
+    {
+      "label": null,
+      "auth": "27",
+      "insertion": "",
+      "labelChain": null,
+      "name": "PHE",
+      "alt": "",
+      "b": 65.88,
+      "xyz": [
+        -13.555,
+        -15.242,
+        -2.428
+      ]
+    },
+    {
+      "label": null,
+      "auth": "28",
+      "insertion": "",
+      "labelChain": null,
+      "name": "MET",
+      "alt": "",
+      "b": 67.44,
+      "xyz": [
+        -13.555,
+        -16.328,
+        -6.039
+      ]
+    },
+    {
+      "label": null,
+      "auth": "29",
+      "insertion": "",
+      "labelChain": null,
+      "name": "PHE",
+      "alt": "",
+      "b": 64.44,
+      "xyz": [
+        -15.219,
+        -13.93,
+        -8.422
+      ]
+    },
+    {
+      "label": null,
+      "auth": "30",
+      "insertion": "",
+      "labelChain": null,
+      "name": "THR",
+      "alt": "",
+      "b": 59.62,
+      "xyz": [
+        -15.625,
+        -14.453,
+        -12.164
+      ]
+    },
+    {
+      "label": null,
+      "auth": "31",
+      "insertion": "",
+      "labelChain": null,
+      "name": "TYR",
+      "alt": "",
+      "b": 54.91,
+      "xyz": [
+        -17.906,
+        -11.43,
+        -13.188
+      ]
+    },
+    {
+      "label": null,
+      "auth": "32",
+      "insertion": "",
+      "labelChain": null,
+      "name": "ARG",
+      "alt": "",
+      "b": 54.72,
+      "xyz": [
+        -18.328,
+        -7.512,
+        -13.867
+      ]
+    },
+    {
+      "label": null,
+      "auth": "33",
+      "insertion": "",
+      "labelChain": null,
+      "name": "ARG",
+      "alt": "",
+      "b": 54.84,
+      "xyz": [
+        -19.5,
+        -5.695,
+        -10.562
+      ]
+    },
+    {
+      "label": null,
+      "auth": "34",
+      "insertion": "",
+      "labelChain": null,
+      "name": "TYR",
+      "alt": "",
+      "b": 55.69,
+      "xyz": [
+        -19.172,
+        -6.531,
+        -6.762
+      ]
+    },
+    {
+      "label": null,
+      "auth": "35",
+      "insertion": "",
+      "labelChain": null,
+      "name": "MET",
+      "alt": "",
+      "b": 55.34,
+      "xyz": [
+        -19.531,
+        -4.441,
+        -3.674
+      ]
+    },
+    {
+      "label": null,
+      "auth": "36",
+      "insertion": "",
+      "labelChain": null,
+      "name": "PHE",
+      "alt": "",
+      "b": 57.19,
+      "xyz": [
+        -18.359,
+        -6.344,
+        -0.608
+      ]
+    },
+    {
+      "label": null,
+      "auth": "37",
+      "insertion": "",
+      "labelChain": null,
+      "name": "GLN",
+      "alt": "",
+      "b": 54.88,
+      "xyz": [
+        -18.984,
+        -4.672,
+        2.666
+      ]
+    },
+    {
+      "label": null,
+      "auth": "38",
+      "insertion": "",
+      "labelChain": null,
+      "name": "GLU",
+      "alt": "",
+      "b": 56.28,
+      "xyz": [
+        -17.781,
+        -6.379,
+        5.836
+      ]
+    },
+    {
+      "label": null,
+      "auth": "39",
+      "insertion": "",
+      "labelChain": null,
+      "name": "LEU",
+      "alt": "",
+      "b": 54.66,
+      "xyz": [
+        -18.812,
+        -4.836,
+        9.047
+      ]
+    },
+    {
+      "label": null,
+      "auth": "40",
+      "insertion": "",
+      "labelChain": null,
+      "name": "CYS",
+      "alt": "",
+      "b": 58.59,
+      "xyz": [
+        -17.047,
+        -6.594,
+        11.984
+      ]
+    },
+    {
+      "label": null,
+      "auth": "41",
+      "insertion": "",
+      "labelChain": null,
+      "name": "MET",
+      "alt": "",
+      "b": 57.34,
+      "xyz": [
+        -17.938,
+        -5.184,
+        15.297
+      ]
+    },
+    {
+      "label": null,
+      "auth": "42",
+      "insertion": "",
+      "labelChain": null,
+      "name": "MET",
+      "alt": "",
+      "b": 60.19,
+      "xyz": [
+        -15.727,
+        -6.277,
+        18.047
+      ]
+    },
+    {
+      "label": null,
+      "auth": "43",
+      "insertion": "",
+      "labelChain": null,
+      "name": "GLN",
+      "alt": "",
+      "b": 54.31,
+      "xyz": [
+        -17.125,
+        -4.707,
+        21.266
+      ]
+    },
+    {
+      "label": null,
+      "auth": "44",
+      "insertion": "",
+      "labelChain": null,
+      "name": "ARG",
+      "alt": "",
+      "b": 57.03,
+      "xyz": [
+        -14.672,
+        -5.918,
+        24.125
+      ]
+    },
+    {
+      "label": null,
+      "auth": "45",
+      "insertion": "",
+      "labelChain": null,
+      "name": "ARG",
+      "alt": "",
+      "b": 59.81,
+      "xyz": [
+        -11.133,
+        -5.441,
+        26.188
+      ]
+    },
+    {
+      "label": null,
+      "auth": "46",
+      "insertion": "",
+      "labelChain": null,
+      "name": "GLU",
+      "alt": "",
+      "b": 68.5,
+      "xyz": [
+        -8.391,
+        -7.594,
+        24.203
+      ]
+    },
+    {
+      "label": null,
+      "auth": "47",
+      "insertion": "",
+      "labelChain": null,
+      "name": "VAL",
+      "alt": "",
+      "b": 69.56,
+      "xyz": [
+        -8.484,
+        -9.141,
+        20.75
+      ]
+    },
+    {
+      "label": null,
+      "auth": "48",
+      "insertion": "",
+      "labelChain": null,
+      "name": "THR",
+      "alt": "",
+      "b": 75.0,
+      "xyz": [
+        -5.582,
+        -11.164,
+        19.609
+      ]
+    },
+    {
+      "label": null,
+      "auth": "49",
+      "insertion": "",
+      "labelChain": null,
+      "name": "VAL",
+      "alt": "",
+      "b": 76.56,
+      "xyz": [
+        -5.688,
+        -12.312,
+        16.031
+      ]
+    },
+    {
+      "label": null,
+      "auth": "50",
+      "insertion": "",
+      "labelChain": null,
+      "name": "GLU",
+      "alt": "",
+      "b": 82.69,
+      "xyz": [
+        -2.881,
+        -14.516,
+        14.828
+      ]
+    },
+    {
+      "label": null,
+      "auth": "51",
+      "insertion": "",
+      "labelChain": null,
+      "name": "LYS",
+      "alt": "",
+      "b": 82.56,
+      "xyz": [
+        -3.824,
+        -14.305,
+        11.141
+      ]
+    },
+    {
+      "label": null,
+      "auth": "52",
+      "insertion": "",
+      "labelChain": null,
+      "name": "TRP",
+      "alt": "",
+      "b": 79.44,
+      "xyz": [
+        -6.242,
+        -12.078,
+        9.469
+      ]
+    },
+    {
+      "label": null,
+      "auth": "53",
+      "insertion": "",
+      "labelChain": null,
+      "name": "GLN",
+      "alt": "",
+      "b": 77.31,
+      "xyz": [
+        -6.41,
+        -12.992,
+        5.812
+      ]
+    },
+    {
+      "label": null,
+      "auth": "54",
+      "insertion": "",
+      "labelChain": null,
+      "name": "TRP",
+      "alt": "",
+      "b": 74.44,
+      "xyz": [
+        -8.328,
+        -11.984,
+        2.844
+      ]
+    },
+    {
+      "label": null,
+      "auth": "55",
+      "insertion": "",
+      "labelChain": null,
+      "name": "CYS",
+      "alt": "",
+      "b": 71.44,
+      "xyz": [
+        -8.023,
+        -13.922,
+        -0.411
+      ]
+    },
+    {
+      "label": null,
+      "auth": "56",
+      "insertion": "",
+      "labelChain": null,
+      "name": "PHE",
+      "alt": "",
+      "b": 67.0,
+      "xyz": [
+        -9.5,
+        -12.625,
+        -3.555
+      ]
+    },
+    {
+      "label": null,
+      "auth": "57",
+      "insertion": "",
+      "labelChain": null,
+      "name": "MET",
+      "alt": "",
+      "b": 68.31,
+      "xyz": [
+        -9.406,
+        -14.156,
+        -6.957
+      ]
+    },
+    {
+      "label": null,
+      "auth": "58",
+      "insertion": "",
+      "labelChain": null,
+      "name": "PHE",
+      "alt": "",
+      "b": 66.5,
+      "xyz": [
+        -10.719,
+        -11.883,
+        -9.742
+      ]
+    },
+    {
+      "label": null,
+      "auth": "59",
+      "insertion": "",
+      "labelChain": null,
+      "name": "THR",
+      "alt": "",
+      "b": 59.94,
+      "xyz": [
+        -11.164,
+        -12.789,
+        -13.422
+      ]
+    },
+    {
+      "label": null,
+      "auth": "60",
+      "insertion": "",
+      "labelChain": null,
+      "name": "TYR",
+      "alt": "",
+      "b": 55.94,
+      "xyz": [
+        -13.0,
+        -9.594,
+        -14.891
+      ]
+    },
+    {
+      "label": null,
+      "auth": "61",
+      "insertion": "",
+      "labelChain": null,
+      "name": "ARG",
+      "alt": "",
+      "b": 55.34,
+      "xyz": [
+        -13.406,
+        -5.641,
+        -15.805
+      ]
+    },
+    {
+      "label": null,
+      "auth": "62",
+      "insertion": "",
+      "labelChain": null,
+      "name": "ARG",
+      "alt": "",
+      "b": 53.69,
+      "xyz": [
+        -14.492,
+        -3.557,
+        -12.656
+      ]
+    },
+    {
+      "label": null,
+      "auth": "63",
+      "insertion": "",
+      "labelChain": null,
+      "name": "TYR",
+      "alt": "",
+      "b": 53.28,
+      "xyz": [
+        -14.57,
+        -4.102,
+        -8.852
+      ]
+    },
+    {
+      "label": null,
+      "auth": "64",
+      "insertion": "",
+      "labelChain": null,
+      "name": "MET",
+      "alt": "",
+      "b": 52.75,
+      "xyz": [
+        -15.164,
+        -1.818,
+        -5.891
+      ]
+    },
+    {
+      "label": null,
+      "auth": "65",
+      "insertion": "",
+      "labelChain": null,
+      "name": "PHE",
+      "alt": "",
+      "b": 53.62,
+      "xyz": [
+        -14.258,
+        -3.578,
+        -2.715
+      ]
+    },
+    {
+      "label": null,
+      "auth": "66",
+      "insertion": "",
+      "labelChain": null,
+      "name": "GLN",
+      "alt": "",
+      "b": 52.25,
+      "xyz": [
+        -15.125,
+        -1.592,
+        0.369
+      ]
+    },
+    {
+      "label": null,
+      "auth": "67",
+      "insertion": "",
+      "labelChain": null,
+      "name": "GLU",
+      "alt": "",
+      "b": 53.91,
+      "xyz": [
+        -14.141,
+        -3.137,
+        3.734
+      ]
+    },
+    {
+      "label": null,
+      "auth": "68",
+      "insertion": "",
+      "labelChain": null,
+      "name": "LEU",
+      "alt": "",
+      "b": 50.84,
+      "xyz": [
+        -15.484,
+        -1.303,
+        6.715
+      ]
+    },
+    {
+      "label": null,
+      "auth": "69",
+      "insertion": "",
+      "labelChain": null,
+      "name": "CYS",
+      "alt": "",
+      "b": 54.16,
+      "xyz": [
+        -13.945,
+        -2.867,
+        9.867
+      ]
+    },
+    {
+      "label": null,
+      "auth": "70",
+      "insertion": "",
+      "labelChain": null,
+      "name": "MET",
+      "alt": "",
+      "b": 52.94,
+      "xyz": [
+        -15.312,
+        -1.155,
+        12.945
+      ]
+    },
+    {
+      "label": null,
+      "auth": "71",
+      "insertion": "",
+      "labelChain": null,
+      "name": "MET",
+      "alt": "",
+      "b": 54.88,
+      "xyz": [
+        -13.391,
+        -2.191,
+        15.984
+      ]
+    },
+    {
+      "label": null,
+      "auth": "72",
+      "insertion": "",
+      "labelChain": null,
+      "name": "GLN",
+      "alt": "",
+      "b": 49.5,
+      "xyz": [
+        -14.938,
+        -0.558,
+        19.109
+      ]
+    },
+    {
+      "label": null,
+      "auth": "73",
+      "insertion": "",
+      "labelChain": null,
+      "name": "ARG",
+      "alt": "",
+      "b": 53.53,
+      "xyz": [
+        -12.242,
+        -0.7,
+        22.125
+      ]
+    },
+    {
+      "label": null,
+      "auth": "74",
+      "insertion": "",
+      "labelChain": null,
+      "name": "ARG",
+      "alt": "",
+      "b": 58.44,
+      "xyz": [
+        -8.758,
+        -0.978,
+        24.344
+      ]
+    },
+    {
+      "label": null,
+      "auth": "75",
+      "insertion": "",
+      "labelChain": null,
+      "name": "GLU",
+      "alt": "",
+      "b": 65.81,
+      "xyz": [
+        -6.02,
+        -3.225,
+        22.453
+      ]
+    },
+    {
+      "label": null,
+      "auth": "76",
+      "insertion": "",
+      "labelChain": null,
+      "name": "VAL",
+      "alt": "",
+      "b": 66.31,
+      "xyz": [
+        -5.988,
+        -5.109,
+        19.156
+      ]
+    },
+    {
+      "label": null,
+      "auth": "77",
+      "insertion": "",
+      "labelChain": null,
+      "name": "THR",
+      "alt": "",
+      "b": 72.75,
+      "xyz": [
+        -2.986,
+        -7.137,
+        18.453
+      ]
+    },
+    {
+      "label": null,
+      "auth": "78",
+      "insertion": "",
+      "labelChain": null,
+      "name": "VAL",
+      "alt": "",
+      "b": 74.88,
+      "xyz": [
+        -2.773,
+        -8.57,
+        15.0
+      ]
+    },
+    {
+      "label": null,
+      "auth": "79",
+      "insertion": "",
+      "labelChain": null,
+      "name": "GLU",
+      "alt": "",
+      "b": 83.19,
+      "xyz": [
+        0.168,
+        -10.781,
+        14.234
+      ]
+    },
+    {
+      "label": null,
+      "auth": "80",
+      "insertion": "",
+      "labelChain": null,
+      "name": "LYS",
+      "alt": "",
+      "b": 82.75,
+      "xyz": [
+        -0.494,
+        -10.93,
+        10.484
+      ]
+    },
+    {
+      "label": null,
+      "auth": "81",
+      "insertion": "",
+      "labelChain": null,
+      "name": "TRP",
+      "alt": "",
+      "b": 79.56,
+      "xyz": [
+        -2.82,
+        -8.867,
+        8.492
+      ]
+    },
+    {
+      "label": null,
+      "auth": "82",
+      "insertion": "",
+      "labelChain": null,
+      "name": "GLN",
+      "alt": "",
+      "b": 78.12,
+      "xyz": [
+        -2.809,
+        -10.141,
+        4.945
+      ]
+    },
+    {
+      "label": null,
+      "auth": "83",
+      "insertion": "",
+      "labelChain": null,
+      "name": "TRP",
+      "alt": "",
+      "b": 74.12,
+      "xyz": [
+        -4.496,
+        -9.273,
+        1.762
+      ]
+    },
+    {
+      "label": null,
+      "auth": "84",
+      "insertion": "",
+      "labelChain": null,
+      "name": "CYS",
+      "alt": "",
+      "b": 72.75,
+      "xyz": [
+        -4.012,
+        -11.469,
+        -1.206
+      ]
+    },
+    {
+      "label": null,
+      "auth": "85",
+      "insertion": "",
+      "labelChain": null,
+      "name": "PHE",
+      "alt": "",
+      "b": 67.75,
+      "xyz": [
+        -5.242,
+        -10.43,
+        -4.559
+      ]
+    },
+    {
+      "label": null,
+      "auth": "86",
+      "insertion": "",
+      "labelChain": null,
+      "name": "MET",
+      "alt": "",
+      "b": 69.31,
+      "xyz": [
+        -5.051,
+        -12.336,
+        -7.758
+      ]
+    },
+    {
+      "label": null,
+      "auth": "87",
+      "insertion": "",
+      "labelChain": null,
+      "name": "PHE",
+      "alt": "",
+      "b": 66.81,
+      "xyz": [
+        -6.0,
+        -10.289,
+        -10.844
+      ]
+    },
+    {
+      "label": null,
+      "auth": "88",
+      "insertion": "",
+      "labelChain": null,
+      "name": "THR",
+      "alt": "",
+      "b": 61.31,
+      "xyz": [
+        -6.422,
+        -11.445,
+        -14.461
+      ]
+    },
+    {
+      "label": null,
+      "auth": "89",
+      "insertion": "",
+      "labelChain": null,
+      "name": "TYR",
+      "alt": "",
+      "b": 56.56,
+      "xyz": [
+        -7.957,
+        -8.188,
+        -16.312
+      ]
+    },
+    {
+      "label": null,
+      "auth": "90",
+      "insertion": "",
+      "labelChain": null,
+      "name": "ARG",
+      "alt": "",
+      "b": 56.09,
+      "xyz": [
+        -8.242,
+        -4.242,
+        -17.531
+      ]
+    },
+    {
+      "label": null,
+      "auth": "91",
+      "insertion": "",
+      "labelChain": null,
+      "name": "ARG",
+      "alt": "",
+      "b": 53.06,
+      "xyz": [
+        -9.273,
+        -1.921,
+        -14.547
+      ]
+    },
+    {
+      "label": null,
+      "auth": "92",
+      "insertion": "",
+      "labelChain": null,
+      "name": "TYR",
+      "alt": "",
+      "b": 51.91,
+      "xyz": [
+        -9.656,
+        -2.125,
+        -10.711
+      ]
+    },
+    {
+      "label": null,
+      "auth": "93",
+      "insertion": "",
+      "labelChain": null,
+      "name": "MET",
+      "alt": "",
+      "b": 50.88,
+      "xyz": [
+        -10.469,
+        0.324,
+        -7.98
+      ]
+    },
+    {
+      "label": null,
+      "auth": "94",
+      "insertion": "",
+      "labelChain": null,
+      "name": "PHE",
+      "alt": "",
+      "b": 52.5,
+      "xyz": [
+        -9.859,
+        -1.221,
+        -4.664
+      ]
+    },
+    {
+      "label": null,
+      "auth": "95",
+      "insertion": "",
+      "labelChain": null,
+      "name": "GLN",
+      "alt": "",
+      "b": 51.0,
+      "xyz": [
+        -10.977,
+        0.996,
+        -1.832
+      ]
+    },
+    {
+      "label": null,
+      "auth": "96",
+      "insertion": "",
+      "labelChain": null,
+      "name": "GLU",
+      "alt": "",
+      "b": 52.59,
+      "xyz": [
+        -10.266,
+        -0.307,
+        1.72
+      ]
+    },
+    {
+      "label": null,
+      "auth": "97",
+      "insertion": "",
+      "labelChain": null,
+      "name": "LEU",
+      "alt": "",
+      "b": 49.91,
+      "xyz": [
+        -11.906,
+        1.833,
+        4.398
+      ]
+    },
+    {
+      "label": null,
+      "auth": "98",
+      "insertion": "",
+      "labelChain": null,
+      "name": "CYS",
+      "alt": "",
+      "b": 51.62,
+      "xyz": [
+        -10.789,
+        0.436,
+        7.789
+      ]
+    },
+    {
+      "label": null,
+      "auth": "99",
+      "insertion": "",
+      "labelChain": null,
+      "name": "MET",
+      "alt": "",
+      "b": 48.84,
+      "xyz": [
+        -12.555,
+        2.523,
+        10.438
+      ]
+    },
+    {
+      "label": null,
+      "auth": "100",
+      "insertion": "",
+      "labelChain": null,
+      "name": "MET",
+      "alt": "",
+      "b": 50.34,
+      "xyz": [
+        -11.055,
+        1.616,
+        13.703
+      ]
+    },
+    {
+      "label": null,
+      "auth": "101",
+      "insertion": "",
+      "labelChain": null,
+      "name": "GLN",
+      "alt": "",
+      "b": 43.69,
+      "xyz": [
+        -12.891,
+        3.363,
+        16.625
+      ]
+    },
+    {
+      "label": null,
+      "auth": "102",
+      "insertion": "",
+      "labelChain": null,
+      "name": "ARG",
+      "alt": "",
+      "b": 49.69,
+      "xyz": [
+        -10.672,
+        3.643,
+        20.031
+      ]
+    },
+    {
+      "label": null,
+      "auth": "103",
+      "insertion": "",
+      "labelChain": null,
+      "name": "ARG",
+      "alt": "",
+      "b": 60.97,
+      "xyz": [
+        -6.922,
+        2.625,
+        21.703
+      ]
+    },
+    {
+      "label": null,
+      "auth": "104",
+      "insertion": "",
+      "labelChain": null,
+      "name": "GLU",
+      "alt": "",
+      "b": 60.38,
+      "xyz": [
+        -3.338,
+        1.146,
+        20.516
+      ]
+    },
+    {
+      "label": null,
+      "auth": "105",
+      "insertion": "",
+      "labelChain": null,
+      "name": "VAL",
+      "alt": "",
+      "b": 63.81,
+      "xyz": [
+        -3.324,
+        -1.153,
+        17.438
+      ]
+    },
+    {
+      "label": null,
+      "auth": "106",
+      "insertion": "",
+      "labelChain": null,
+      "name": "THR",
+      "alt": "",
+      "b": 71.44,
+      "xyz": [
+        -0.278,
+        -3.135,
+        17.156
+      ]
+    },
+    {
+      "label": null,
+      "auth": "107",
+      "insertion": "",
+      "labelChain": null,
+      "name": "VAL",
+      "alt": "",
+      "b": 73.94,
+      "xyz": [
+        0.157,
+        -4.863,
+        13.898
+      ]
+    },
+    {
+      "label": null,
+      "auth": "108",
+      "insertion": "",
+      "labelChain": null,
+      "name": "GLU",
+      "alt": "",
+      "b": 83.5,
+      "xyz": [
+        3.168,
+        -7.039,
+        13.586
+      ]
+    },
+    {
+      "label": null,
+      "auth": "109",
+      "insertion": "",
+      "labelChain": null,
+      "name": "LYS",
+      "alt": "",
+      "b": 83.06,
+      "xyz": [
+        2.842,
+        -7.582,
+        9.828
+      ]
+    },
+    {
+      "label": null,
+      "auth": "110",
+      "insertion": "",
+      "labelChain": null,
+      "name": "TRP",
+      "alt": "",
+      "b": 80.06,
+      "xyz": [
+        0.631,
+        -5.789,
+        7.473
+      ]
+    },
+    {
+      "label": null,
+      "auth": "111",
+      "insertion": "",
+      "labelChain": null,
+      "name": "GLN",
+      "alt": "",
+      "b": 78.69,
+      "xyz": [
+        0.891,
+        -7.395,
+        4.066
+      ]
+    },
+    {
+      "label": null,
+      "auth": "112",
+      "insertion": "",
+      "labelChain": null,
+      "name": "TRP",
+      "alt": "",
+      "b": 74.75,
+      "xyz": [
+        -0.584,
+        -6.84,
+        0.736
+      ]
+    },
+    {
+      "label": null,
+      "auth": "113",
+      "insertion": "",
+      "labelChain": null,
+      "name": "CYS",
+      "alt": "",
+      "b": 72.69,
+      "xyz": [
+        -0.001,
+        -9.406,
+        -1.945
+      ]
+    },
+    {
+      "label": null,
+      "auth": "114",
+      "insertion": "",
+      "labelChain": null,
+      "name": "PHE",
+      "alt": "",
+      "b": 68.06,
+      "xyz": [
+        -0.859,
+        -8.633,
+        -5.465
+      ]
+    },
+    {
+      "label": null,
+      "auth": "115",
+      "insertion": "",
+      "labelChain": null,
+      "name": "MET",
+      "alt": "",
+      "b": 70.12,
+      "xyz": [
+        -0.554,
+        -10.875,
+        -8.406
+      ]
+    },
+    {
+      "label": null,
+      "auth": "116",
+      "insertion": "",
+      "labelChain": null,
+      "name": "PHE",
+      "alt": "",
+      "b": 67.62,
+      "xyz": [
+        -1.13,
+        -9.18,
+        -11.805
+      ]
+    },
+    {
+      "label": null,
+      "auth": "117",
+      "insertion": "",
+      "labelChain": null,
+      "name": "THR",
+      "alt": "",
+      "b": 60.94,
+      "xyz": [
+        -1.359,
+        -11.023,
+        -15.109
+      ]
+    },
+    {
+      "label": null,
+      "auth": "118",
+      "insertion": "",
+      "labelChain": null,
+      "name": "TYR",
+      "alt": "",
+      "b": 55.91,
+      "xyz": [
+        -2.438,
+        -8.156,
+        -17.703
+      ]
+    },
+    {
+      "label": null,
+      "auth": "119",
+      "insertion": "",
+      "labelChain": null,
+      "name": "ARG",
+      "alt": "",
+      "b": 54.28,
+      "xyz": [
+        -2.203,
+        -4.516,
+        -19.672
+      ]
+    },
+    {
+      "label": null,
+      "auth": "120",
+      "insertion": "",
+      "labelChain": null,
+      "name": "ARG",
+      "alt": "",
+      "b": 52.53,
+      "xyz": [
+        -3.467,
+        -1.643,
+        -17.234
+      ]
+    },
+    {
+      "label": null,
+      "auth": "121",
+      "insertion": "",
+      "labelChain": null,
+      "name": "TYR",
+      "alt": "",
+      "b": 51.28,
+      "xyz": [
+        -4.117,
+        -1.305,
+        -13.406
+      ]
+    },
+    {
+      "label": null,
+      "auth": "122",
+      "insertion": "",
+      "labelChain": null,
+      "name": "MET",
+      "alt": "",
+      "b": 49.22,
+      "xyz": [
+        -5.191,
+        1.667,
+        -11.336
+      ]
+    },
+    {
+      "label": null,
+      "auth": "123",
+      "insertion": "",
+      "labelChain": null,
+      "name": "PHE",
+      "alt": "",
+      "b": 51.53,
+      "xyz": [
+        -4.949,
+        0.524,
+        -7.805
+      ]
+    },
+    {
+      "label": null,
+      "auth": "124",
+      "insertion": "",
+      "labelChain": null,
+      "name": "GLN",
+      "alt": "",
+      "b": 49.69,
+      "xyz": [
+        -6.34,
+        3.088,
+        -5.383
+      ]
+    },
+    {
+      "label": null,
+      "auth": "125",
+      "insertion": "",
+      "labelChain": null,
+      "name": "GLU",
+      "alt": "",
+      "b": 52.41,
+      "xyz": [
+        -6.043,
+        2.07,
+        -1.684
+      ]
+    },
+    {
+      "label": null,
+      "auth": "126",
+      "insertion": "",
+      "labelChain": null,
+      "name": "LEU",
+      "alt": "",
+      "b": 49.25,
+      "xyz": [
+        -7.887,
+        4.414,
+        0.669
+      ]
+    },
+    {
+      "label": null,
+      "auth": "127",
+      "insertion": "",
+      "labelChain": null,
+      "name": "CYS",
+      "alt": "",
+      "b": 51.53,
+      "xyz": [
+        -6.875,
+        3.324,
+        4.211
+      ]
+    },
+    {
+      "label": null,
+      "auth": "128",
+      "insertion": "",
+      "labelChain": null,
+      "name": "MET",
+      "alt": "",
+      "b": 49.5,
+      "xyz": [
+        -8.711,
+        5.523,
+        6.699
+      ]
+    },
+    {
+      "label": null,
+      "auth": "129",
+      "insertion": "",
+      "labelChain": null,
+      "name": "MET",
+      "alt": "",
+      "b": 52.0,
+      "xyz": [
+        -7.414,
+        4.84,
+        10.164
+      ]
+    },
+    {
+      "label": null,
+      "auth": "130",
+      "insertion": "",
+      "labelChain": null,
+      "name": "GLN",
+      "alt": "",
+      "b": 47.22,
+      "xyz": [
+        -9.383,
+        6.941,
+        12.695
+      ]
+    },
+    {
+      "label": null,
+      "auth": "131",
+      "insertion": "",
+      "labelChain": null,
+      "name": "ARG",
+      "alt": "",
+      "b": 58.03,
+      "xyz": [
+        -7.355,
+        7.555,
+        16.172
+      ]
+    },
+    {
+      "label": null,
+      "auth": "132",
+      "insertion": "",
+      "labelChain": null,
+      "name": "ARG",
+      "alt": "",
+      "b": 54.81,
+      "xyz": [
+        -4.379,
+        7.5,
+        19.188
+      ]
+    },
+    {
+      "label": null,
+      "auth": "133",
+      "insertion": "",
+      "labelChain": null,
+      "name": "GLU",
+      "alt": "",
+      "b": 63.03,
+      "xyz": [
+        -1.263,
+        5.301,
+        18.0
+      ]
+    },
+    {
+      "label": null,
+      "auth": "134",
+      "insertion": "",
+      "labelChain": null,
+      "name": "VAL",
+      "alt": "",
+      "b": 63.56,
+      "xyz": [
+        -0.843,
+        2.73,
+        15.289
+      ]
+    },
+    {
+      "label": null,
+      "auth": "135",
+      "insertion": "",
+      "labelChain": null,
+      "name": "THR",
+      "alt": "",
+      "b": 70.94,
+      "xyz": [
+        2.346,
+        0.864,
+        15.547
+      ]
+    },
+    {
+      "label": null,
+      "auth": "136",
+      "insertion": "",
+      "labelChain": null,
+      "name": "VAL",
+      "alt": "",
+      "b": 73.5,
+      "xyz": [
+        3.119,
+        -1.203,
+        12.578
+      ]
+    },
+    {
+      "label": null,
+      "auth": "137",
+      "insertion": "",
+      "labelChain": null,
+      "name": "GLU",
+      "alt": "",
+      "b": 83.81,
+      "xyz": [
+        6.215,
+        -3.346,
+        12.75
+      ]
+    },
+    {
+      "label": null,
+      "auth": "138",
+      "insertion": "",
+      "labelChain": null,
+      "name": "LYS",
+      "alt": "",
+      "b": 82.94,
+      "xyz": [
+        6.188,
+        -4.277,
+        9.086
+      ]
+    },
+    {
+      "label": null,
+      "auth": "139",
+      "insertion": "",
+      "labelChain": null,
+      "name": "TRP",
+      "alt": "",
+      "b": 80.0,
+      "xyz": [
+        4.141,
+        -2.762,
+        6.395
+      ]
+    },
+    {
+      "label": null,
+      "auth": "140",
+      "insertion": "",
+      "labelChain": null,
+      "name": "GLN",
+      "alt": "",
+      "b": 78.31,
+      "xyz": [
+        4.652,
+        -4.742,
+        3.225
+      ]
+    },
+    {
+      "label": null,
+      "auth": "141",
+      "insertion": "",
+      "labelChain": null,
+      "name": "TRP",
+      "alt": "",
+      "b": 75.5,
+      "xyz": [
+        3.42,
+        -4.547,
+        -0.266
+      ]
+    },
+    {
+      "label": null,
+      "auth": "142",
+      "insertion": "",
+      "labelChain": null,
+      "name": "CYS",
+      "alt": "",
+      "b": 73.19,
+      "xyz": [
+        4.207,
+        -7.398,
+        -2.566
+      ]
+    },
+    {
+      "label": null,
+      "auth": "143",
+      "insertion": "",
+      "labelChain": null,
+      "name": "PHE",
+      "alt": "",
+      "b": 68.94,
+      "xyz": [
+        3.584,
+        -7.047,
+        -6.203
+      ]
+    },
+    {
+      "label": null,
+      "auth": "144",
+      "insertion": "",
+      "labelChain": null,
+      "name": "MET",
+      "alt": "",
+      "b": 71.0,
+      "xyz": [
+        4.047,
+        -9.641,
+        -8.805
+      ]
+    },
+    {
+      "label": null,
+      "auth": "145",
+      "insertion": "",
+      "labelChain": null,
+      "name": "PHE",
+      "alt": "",
+      "b": 67.81,
+      "xyz": [
+        3.805,
+        -8.398,
+        -12.414
+      ]
+    },
+    {
+      "label": null,
+      "auth": "146",
+      "insertion": "",
+      "labelChain": null,
+      "name": "THR",
+      "alt": "",
+      "b": 62.16,
+      "xyz": [
+        3.729,
+        -10.648,
+        -15.438
+      ]
+    },
+    {
+      "label": null,
+      "auth": "147",
+      "insertion": "",
+      "labelChain": null,
+      "name": "TYR",
+      "alt": "",
+      "b": 56.53,
+      "xyz": [
+        2.943,
+        -8.117,
+        -18.484
+      ]
+    },
+    {
+      "label": null,
+      "auth": "148",
+      "insertion": "",
+      "labelChain": null,
+      "name": "ARG",
+      "alt": "",
+      "b": 54.59,
+      "xyz": [
+        3.662,
+        -4.785,
+        -20.844
+      ]
+    },
+    {
+      "label": null,
+      "auth": "149",
+      "insertion": "",
+      "labelChain": null,
+      "name": "ARG",
+      "alt": "",
+      "b": 52.75,
+      "xyz": [
+        2.303,
+        -1.558,
+        -18.906
+      ]
+    },
+    {
+      "label": null,
+      "auth": "150",
+      "insertion": "",
+      "labelChain": null,
+      "name": "TYR",
+      "alt": "",
+      "b": 51.31,
+      "xyz": [
+        1.416,
+        -0.651,
+        -15.219
+      ]
+    },
+    {
+      "label": null,
+      "auth": "151",
+      "insertion": "",
+      "labelChain": null,
+      "name": "MET",
+      "alt": "",
+      "b": 49.75,
+      "xyz": [
+        0.279,
+        2.564,
+        -13.633
+      ]
+    },
+    {
+      "label": null,
+      "auth": "152",
+      "insertion": "",
+      "labelChain": null,
+      "name": "PHE",
+      "alt": "",
+      "b": 51.94,
+      "xyz": [
+        0.184,
+        1.878,
+        -9.984
+      ]
+    },
+    {
+      "label": null,
+      "auth": "153",
+      "insertion": "",
+      "labelChain": null,
+      "name": "GLN",
+      "alt": "",
+      "b": 50.06,
+      "xyz": [
+        -1.412,
+        4.738,
+        -8.047
+      ]
+    },
+    {
+      "label": null,
+      "auth": "154",
+      "insertion": "",
+      "labelChain": null,
+      "name": "GLU",
+      "alt": "",
+      "b": 52.72,
+      "xyz": [
+        -1.504,
+        4.191,
+        -4.254
+      ]
+    },
+    {
+      "label": null,
+      "auth": "155",
+      "insertion": "",
+      "labelChain": null,
+      "name": "LEU",
+      "alt": "",
+      "b": 49.47,
+      "xyz": [
+        -3.629,
+        6.766,
+        -2.404
+      ]
+    },
+    {
+      "label": null,
+      "auth": "156",
+      "insertion": "",
+      "labelChain": null,
+      "name": "CYS",
+      "alt": "",
+      "b": 51.34,
+      "xyz": [
+        -3.004,
+        6.062,
+        1.311
+      ]
+    },
+    {
+      "label": null,
+      "auth": "157",
+      "insertion": "",
+      "labelChain": null,
+      "name": "MET",
+      "alt": "",
+      "b": 48.88,
+      "xyz": [
+        -5.086,
+        8.516,
+        3.344
+      ]
+    },
+    {
+      "label": null,
+      "auth": "158",
+      "insertion": "",
+      "labelChain": null,
+      "name": "MET",
+      "alt": "",
+      "b": 51.12,
+      "xyz": [
+        -4.09,
+        8.289,
+        6.953
+      ]
+    },
+    {
+      "label": null,
+      "auth": "159",
+      "insertion": "",
+      "labelChain": null,
+      "name": "GLN",
+      "alt": "",
+      "b": 46.66,
+      "xyz": [
+        -6.266,
+        10.633,
+        9.031
+      ]
+    },
+    {
+      "label": null,
+      "auth": "160",
+      "insertion": "",
+      "labelChain": null,
+      "name": "ARG",
+      "alt": "",
+      "b": 55.09,
+      "xyz": [
+        -4.473,
+        11.68,
+        12.562
+      ]
+    },
+    {
+      "label": null,
+      "auth": "161",
+      "insertion": "",
+      "labelChain": null,
+      "name": "ARG",
+      "alt": "",
+      "b": 55.38,
+      "xyz": [
+        -1.738,
+        12.055,
+        15.781
+      ]
+    },
+    {
+      "label": null,
+      "auth": "162",
+      "insertion": "",
+      "labelChain": null,
+      "name": "GLU",
+      "alt": "",
+      "b": 61.47,
+      "xyz": [
+        1.348,
+        9.469,
+        15.203
+      ]
+    },
+    {
+      "label": null,
+      "auth": "163",
+      "insertion": "",
+      "labelChain": null,
+      "name": "VAL",
+      "alt": "",
+      "b": 62.78,
+      "xyz": [
+        1.95,
+        6.508,
+        12.93
+      ]
+    },
+    {
+      "label": null,
+      "auth": "164",
+      "insertion": "",
+      "labelChain": null,
+      "name": "THR",
+      "alt": "",
+      "b": 70.06,
+      "xyz": [
+        5.148,
+        4.738,
+        13.68
+      ]
+    },
+    {
+      "label": null,
+      "auth": "165",
+      "insertion": "",
+      "labelChain": null,
+      "name": "VAL",
+      "alt": "",
+      "b": 73.06,
+      "xyz": [
+        6.195,
+        2.354,
+        11.062
+      ]
+    },
+    {
+      "label": null,
+      "auth": "166",
+      "insertion": "",
+      "labelChain": null,
+      "name": "GLU",
+      "alt": "",
+      "b": 83.75,
+      "xyz": [
+        9.312,
+        0.309,
+        11.742
+      ]
+    },
+    {
+      "label": null,
+      "auth": "167",
+      "insertion": "",
+      "labelChain": null,
+      "name": "LYS",
+      "alt": "",
+      "b": 82.62,
+      "xyz": [
+        9.594,
+        -1.026,
+        8.234
+      ]
+    },
+    {
+      "label": null,
+      "auth": "168",
+      "insertion": "",
+      "labelChain": null,
+      "name": "TRP",
+      "alt": "",
+      "b": 80.0,
+      "xyz": [
+        7.762,
+        0.126,
+        5.234
+      ]
+    },
+    {
+      "label": null,
+      "auth": "169",
+      "insertion": "",
+      "labelChain": null,
+      "name": "GLN",
+      "alt": "",
+      "b": 78.12,
+      "xyz": [
+        8.508,
+        -2.209,
+        2.369
+      ]
+    },
+    {
+      "label": null,
+      "auth": "170",
+      "insertion": "",
+      "labelChain": null,
+      "name": "TRP",
+      "alt": "",
+      "b": 75.94,
+      "xyz": [
+        7.555,
+        -2.445,
+        -1.199
+      ]
+    },
+    {
+      "label": null,
+      "auth": "171",
+      "insertion": "",
+      "labelChain": null,
+      "name": "CYS",
+      "alt": "",
+      "b": 73.25,
+      "xyz": [
+        8.438,
+        -5.598,
+        -3.076
+      ]
+    },
+    {
+      "label": null,
+      "auth": "172",
+      "insertion": "",
+      "labelChain": null,
+      "name": "PHE",
+      "alt": "",
+      "b": 68.81,
+      "xyz": [
+        8.164,
+        -5.652,
+        -6.762
+      ]
+    },
+    {
+      "label": null,
+      "auth": "173",
+      "insertion": "",
+      "labelChain": null,
+      "name": "MET",
+      "alt": "",
+      "b": 71.81,
+      "xyz": [
+        8.727,
+        -8.578,
+        -8.945
+      ]
+    },
+    {
+      "label": null,
+      "auth": "174",
+      "insertion": "",
+      "labelChain": null,
+      "name": "PHE",
+      "alt": "",
+      "b": 67.94,
+      "xyz": [
+        8.82,
+        -7.84,
+        -12.703
+      ]
+    },
+    {
+      "label": null,
+      "auth": "175",
+      "insertion": "",
+      "labelChain": null,
+      "name": "THR",
+      "alt": "",
+      "b": 63.38,
+      "xyz": [
+        8.852,
+        -10.5,
+        -15.359
+      ]
+    },
+    {
+      "label": null,
+      "auth": "176",
+      "insertion": "",
+      "labelChain": null,
+      "name": "TYR",
+      "alt": "",
+      "b": 56.81,
+      "xyz": [
+        8.422,
+        -8.359,
+        -18.781
+      ]
+    },
+    {
+      "label": null,
+      "auth": "177",
+      "insertion": "",
+      "labelChain": null,
+      "name": "ARG",
+      "alt": "",
+      "b": 54.84,
+      "xyz": [
+        9.555,
+        -5.391,
+        -21.484
+      ]
+    },
+    {
+      "label": null,
+      "auth": "178",
+      "insertion": "",
+      "labelChain": null,
+      "name": "ARG",
+      "alt": "",
+      "b": 52.75,
+      "xyz": [
+        8.273,
+        -1.877,
+        -20.047
+      ]
+    },
+    {
+      "label": null,
+      "auth": "179",
+      "insertion": "",
+      "labelChain": null,
+      "name": "TYR",
+      "alt": "",
+      "b": 51.75,
+      "xyz": [
+        7.125,
+        -0.485,
+        -16.594
+      ]
+    },
+    {
+      "label": null,
+      "auth": "180",
+      "insertion": "",
+      "labelChain": null,
+      "name": "MET",
+      "alt": "",
+      "b": 49.88,
+      "xyz": [
+        6.008,
+        2.947,
+        -15.586
+      ]
+    },
+    {
+      "label": null,
+      "auth": "181",
+      "insertion": "",
+      "labelChain": null,
+      "name": "PHE",
+      "alt": "",
+      "b": 52.19,
+      "xyz": [
+        5.609,
+        2.811,
+        -11.898
+      ]
+    },
+    {
+      "label": null,
+      "auth": "182",
+      "insertion": "",
+      "labelChain": null,
+      "name": "GLN",
+      "alt": "",
+      "b": 49.62,
+      "xyz": [
+        3.889,
+        5.895,
+        -10.539
+      ]
+    },
+    {
+      "label": null,
+      "auth": "183",
+      "insertion": "",
+      "labelChain": null,
+      "name": "GLU",
+      "alt": "",
+      "b": 51.72,
+      "xyz": [
+        3.371,
+        5.891,
+        -6.738
+      ]
+    },
+    {
+      "label": null,
+      "auth": "184",
+      "insertion": "",
+      "labelChain": null,
+      "name": "LEU",
+      "alt": "",
+      "b": 48.72,
+      "xyz": [
+        0.995,
+        8.602,
+        -5.5
+      ]
+    },
+    {
+      "label": null,
+      "auth": "185",
+      "insertion": "",
+      "labelChain": null,
+      "name": "CYS",
+      "alt": "",
+      "b": 50.62,
+      "xyz": [
+        1.172,
+        8.367,
+        -1.686
+      ]
+    },
+    {
+      "label": null,
+      "auth": "186",
+      "insertion": "",
+      "labelChain": null,
+      "name": "MET",
+      "alt": "",
+      "b": 47.59,
+      "xyz": [
+        -1.254,
+        10.961,
+        -0.275
+      ]
+    },
+    {
+      "label": null,
+      "auth": "187",
+      "insertion": "",
+      "labelChain": null,
+      "name": "MET",
+      "alt": "",
+      "b": 50.91,
+      "xyz": [
+        -0.801,
+        11.18,
+        3.439
+      ]
+    },
+    {
+      "label": null,
+      "auth": "188",
+      "insertion": "",
+      "labelChain": null,
+      "name": "GLN",
+      "alt": "",
+      "b": 43.66,
+      "xyz": [
+        -3.393,
+        13.625,
+        4.766
+      ]
+    },
+    {
+      "label": null,
+      "auth": "189",
+      "insertion": "",
+      "labelChain": null,
+      "name": "ARG",
+      "alt": "",
+      "b": 50.34,
+      "xyz": [
+        -2.398,
+        15.258,
+        8.328
+      ]
+    },
+    {
+      "label": null,
+      "auth": "190",
+      "insertion": "",
+      "labelChain": null,
+      "name": "ARG",
+      "alt": "",
+      "b": 58.66,
+      "xyz": [
+        0.532,
+        15.031,
+        11.352
+      ]
+    },
+    {
+      "label": null,
+      "auth": "191",
+      "insertion": "",
+      "labelChain": null,
+      "name": "GLU",
+      "alt": "",
+      "b": 58.84,
+      "xyz": [
+        4.336,
+        13.406,
+        12.211
+      ]
+    },
+    {
+      "label": null,
+      "auth": "192",
+      "insertion": "",
+      "labelChain": null,
+      "name": "VAL",
+      "alt": "",
+      "b": 62.38,
+      "xyz": [
+        4.957,
+        10.055,
+        10.414
+      ]
+    },
+    {
+      "label": null,
+      "auth": "193",
+      "insertion": "",
+      "labelChain": null,
+      "name": "THR",
+      "alt": "",
+      "b": 69.31,
+      "xyz": [
+        8.086,
+        8.43,
+        11.594
+      ]
+    },
+    {
+      "label": null,
+      "auth": "194",
+      "insertion": "",
+      "labelChain": null,
+      "name": "VAL",
+      "alt": "",
+      "b": 72.62,
+      "xyz": [
+        9.383,
+        5.734,
+        9.375
+      ]
+    },
+    {
+      "label": null,
+      "auth": "195",
+      "insertion": "",
+      "labelChain": null,
+      "name": "GLU",
+      "alt": "",
+      "b": 83.62,
+      "xyz": [
+        12.438,
+        3.877,
+        10.562
+      ]
+    },
+    {
+      "label": null,
+      "auth": "196",
+      "insertion": "",
+      "labelChain": null,
+      "name": "LYS",
+      "alt": "",
+      "b": 82.25,
+      "xyz": [
+        13.047,
+        2.111,
+        7.301
+      ]
+    },
+    {
+      "label": null,
+      "auth": "197",
+      "insertion": "",
+      "labelChain": null,
+      "name": "TRP",
+      "alt": "",
+      "b": 79.62,
+      "xyz": [
+        11.453,
+        2.857,
+        4.031
+      ]
+    },
+    {
+      "label": null,
+      "auth": "198",
+      "insertion": "",
+      "labelChain": null,
+      "name": "GLN",
+      "alt": "",
+      "b": 78.06,
+      "xyz": [
+        12.422,
+        0.18,
+        1.555
+      ]
+    },
+    {
+      "label": null,
+      "auth": "199",
+      "insertion": "",
+      "labelChain": null,
+      "name": "TRP",
+      "alt": "",
+      "b": 75.5,
+      "xyz": [
+        11.773,
+        -0.504,
+        -2.041
+      ]
+    },
+    {
+      "label": null,
+      "auth": "200",
+      "insertion": "",
+      "labelChain": null,
+      "name": "CYS",
+      "alt": "",
+      "b": 72.88,
+      "xyz": [
+        12.766,
+        -3.84,
+        -3.426
+      ]
+    },
+    {
+      "label": null,
+      "auth": "201",
+      "insertion": "",
+      "labelChain": null,
+      "name": "PHE",
+      "alt": "",
+      "b": 70.12,
+      "xyz": [
+        12.773,
+        -4.438,
+        -7.086
+      ]
+    },
+    {
+      "label": null,
+      "auth": "202",
+      "insertion": "",
+      "labelChain": null,
+      "name": "MET",
+      "alt": "",
+      "b": 72.75,
+      "xyz": [
+        13.438,
+        -7.648,
+        -8.758
+      ]
+    },
+    {
+      "label": null,
+      "auth": "203",
+      "insertion": "",
+      "labelChain": null,
+      "name": "PHE",
+      "alt": "",
+      "b": 68.88,
+      "xyz": [
+        13.883,
+        -7.492,
+        -12.562
+      ]
+    },
+    {
+      "label": null,
+      "auth": "204",
+      "insertion": "",
+      "labelChain": null,
+      "name": "THR",
+      "alt": "",
+      "b": 64.81,
+      "xyz": [
+        13.984,
+        -10.539,
+        -14.758
+      ]
+    },
+    {
+      "label": null,
+      "auth": "205",
+      "insertion": "",
+      "labelChain": null,
+      "name": "TYR",
+      "alt": "",
+      "b": 58.09,
+      "xyz": [
+        14.023,
+        -8.906,
+        -18.484
+      ]
+    },
+    {
+      "label": null,
+      "auth": "206",
+      "insertion": "",
+      "labelChain": null,
+      "name": "ARG",
+      "alt": "",
+      "b": 55.0,
+      "xyz": [
+        15.648,
+        -6.426,
+        -21.406
+      ]
+    },
+    {
+      "label": null,
+      "auth": "207",
+      "insertion": "",
+      "labelChain": null,
+      "name": "ARG",
+      "alt": "",
+      "b": 53.19,
+      "xyz": [
+        14.391,
+        -2.719,
+        -20.656
+      ]
+    },
+    {
+      "label": null,
+      "auth": "208",
+      "insertion": "",
+      "labelChain": null,
+      "name": "TYR",
+      "alt": "",
+      "b": 52.0,
+      "xyz": [
+        13.047,
+        -0.772,
+        -17.547
+      ]
+    },
+    {
+      "label": null,
+      "auth": "209",
+      "insertion": "",
+      "labelChain": null,
+      "name": "MET",
+      "alt": "",
+      "b": 50.06,
+      "xyz": [
+        12.0,
+        2.82,
+        -17.156
+      ]
+    },
+    {
+      "label": null,
+      "auth": "210",
+      "insertion": "",
+      "labelChain": null,
+      "name": "PHE",
+      "alt": "",
+      "b": 52.5,
+      "xyz": [
+        11.242,
+        3.33,
+        -13.531
+      ]
+    },
+    {
+      "label": null,
+      "auth": "211",
+      "insertion": "",
+      "labelChain": null,
+      "name": "GLN",
+      "alt": "",
+      "b": 50.19,
+      "xyz": [
+        9.539,
+        6.605,
+        -12.828
+      ]
+    },
+    {
+      "label": null,
+      "auth": "212",
+      "insertion": "",
+      "labelChain": null,
+      "name": "GLU",
+      "alt": "",
+      "b": 52.28,
+      "xyz": [
+        8.617,
+        7.234,
+        -9.133
+      ]
+    },
+    {
+      "label": null,
+      "auth": "213",
+      "insertion": "",
+      "labelChain": null,
+      "name": "LEU",
+      "alt": "",
+      "b": 48.53,
+      "xyz": [
+        6.207,
+        10.148,
+        -8.531
+      ]
+    },
+    {
+      "label": null,
+      "auth": "214",
+      "insertion": "",
+      "labelChain": null,
+      "name": "CYS",
+      "alt": "",
+      "b": 50.34,
+      "xyz": [
+        5.844,
+        10.438,
+        -4.715
+      ]
+    },
+    {
+      "label": null,
+      "auth": "215",
+      "insertion": "",
+      "labelChain": null,
+      "name": "MET",
+      "alt": "",
+      "b": 46.62,
+      "xyz": [
+        3.295,
+        13.188,
+        -4.043
+      ]
+    },
+    {
+      "label": null,
+      "auth": "216",
+      "insertion": "",
+      "labelChain": null,
+      "name": "MET",
+      "alt": "",
+      "b": 50.06,
+      "xyz": [
+        3.201,
+        13.789,
+        -0.373
+      ]
+    },
+    {
+      "label": null,
+      "auth": "217",
+      "insertion": "",
+      "labelChain": null,
+      "name": "GLN",
+      "alt": "",
+      "b": 43.44,
+      "xyz": [
+        0.441,
+        16.359,
+        0.26
+      ]
+    },
+    {
+      "label": null,
+      "auth": "218",
+      "insertion": "",
+      "labelChain": null,
+      "name": "ARG",
+      "alt": "",
+      "b": 48.25,
+      "xyz": [
+        0.957,
+        18.5,
+        3.645
+      ]
+    },
+    {
+      "label": null,
+      "auth": "219",
+      "insertion": "",
+      "labelChain": null,
+      "name": "ARG",
+      "alt": "",
+      "b": 57.28,
+      "xyz": [
+        3.34,
+        17.641,
+        6.801
+      ]
+    },
+    {
+      "label": null,
+      "auth": "220",
+      "insertion": "",
+      "labelChain": null,
+      "name": "GLU",
+      "alt": "",
+      "b": 58.0,
+      "xyz": [
+        7.008,
+        16.75,
+        8.688
+      ]
+    },
+    {
+      "label": null,
+      "auth": "221",
+      "insertion": "",
+      "labelChain": null,
+      "name": "VAL",
+      "alt": "",
+      "b": 63.22,
+      "xyz": [
+        7.953,
+        13.133,
+        7.531
+      ]
+    },
+    {
+      "label": null,
+      "auth": "222",
+      "insertion": "",
+      "labelChain": null,
+      "name": "THR",
+      "alt": "",
+      "b": 69.12,
+      "xyz": [
+        11.016,
+        11.828,
+        9.258
+      ]
+    },
+    {
+      "label": null,
+      "auth": "223",
+      "insertion": "",
+      "labelChain": null,
+      "name": "VAL",
+      "alt": "",
+      "b": 71.62,
+      "xyz": [
+        12.594,
+        8.914,
+        7.535
+      ]
+    },
+    {
+      "label": null,
+      "auth": "224",
+      "insertion": "",
+      "labelChain": null,
+      "name": "GLU",
+      "alt": "",
+      "b": 82.56,
+      "xyz": [
+        15.594,
+        7.363,
+        9.219
+      ]
+    },
+    {
+      "label": null,
+      "auth": "225",
+      "insertion": "",
+      "labelChain": null,
+      "name": "LYS",
+      "alt": "",
+      "b": 81.81,
+      "xyz": [
+        16.531,
+        5.223,
+        6.27
+      ]
+    },
+    {
+      "label": null,
+      "auth": "226",
+      "insertion": "",
+      "labelChain": null,
+      "name": "TRP",
+      "alt": "",
+      "b": 79.81,
+      "xyz": [
+        15.258,
+        5.41,
+        2.789
+      ]
+    },
+    {
+      "label": null,
+      "auth": "227",
+      "insertion": "",
+      "labelChain": null,
+      "name": "GLN",
+      "alt": "",
+      "b": 77.62,
+      "xyz": [
+        16.453,
+        2.414,
+        0.785
+      ]
+    },
+    {
+      "label": null,
+      "auth": "228",
+      "insertion": "",
+      "labelChain": null,
+      "name": "TRP",
+      "alt": "",
+      "b": 75.31,
+      "xyz": [
+        16.125,
+        1.202,
+        -2.717
+      ]
+    },
+    {
+      "label": null,
+      "auth": "229",
+      "insertion": "",
+      "labelChain": null,
+      "name": "CYS",
+      "alt": "",
+      "b": 73.56,
+      "xyz": [
+        17.094,
+        -2.346,
+        -3.559
+      ]
+    },
+    {
+      "label": null,
+      "auth": "230",
+      "insertion": "",
+      "labelChain": null,
+      "name": "PHE",
+      "alt": "",
+      "b": 70.31,
+      "xyz": [
+        17.469,
+        -3.361,
+        -7.105
+      ]
+    },
+    {
+      "label": null,
+      "auth": "231",
+      "insertion": "",
+      "labelChain": null,
+      "name": "MET",
+      "alt": "",
+      "b": 73.0,
+      "xyz": [
+        18.125,
+        -6.832,
+        -8.219
+      ]
+    },
+    {
+      "label": null,
+      "auth": "232",
+      "insertion": "",
+      "labelChain": null,
+      "name": "PHE",
+      "alt": "",
+      "b": 69.38,
+      "xyz": [
+        18.969,
+        -7.242,
+        -11.93
+      ]
+    },
+    {
+      "label": null,
+      "auth": "233",
+      "insertion": "",
+      "labelChain": null,
+      "name": "THR",
+      "alt": "",
+      "b": 64.5,
+      "xyz": [
+        19.141,
+        -10.672,
+        -13.523
+      ]
+    },
+    {
+      "label": null,
+      "auth": "234",
+      "insertion": "",
+      "labelChain": null,
+      "name": "TYR",
+      "alt": "",
+      "b": 58.62,
+      "xyz": [
+        19.594,
+        -9.633,
+        -17.391
+      ]
+    },
+    {
+      "label": null,
+      "auth": "235",
+      "insertion": "",
+      "labelChain": null,
+      "name": "ARG",
+      "alt": "",
+      "b": 54.28,
+      "xyz": [
+        21.859,
+        -7.648,
+        -20.203
+      ]
+    },
+    {
+      "label": null,
+      "auth": "236",
+      "insertion": "",
+      "labelChain": null,
+      "name": "ARG",
+      "alt": "",
+      "b": 53.31,
+      "xyz": [
+        20.484,
+        -3.926,
+        -20.578
+      ]
+    },
+    {
+      "label": null,
+      "auth": "237",
+      "insertion": "",
+      "labelChain": null,
+      "name": "TYR",
+      "alt": "",
+      "b": 53.91,
+      "xyz": [
+        19.016,
+        -1.53,
+        -17.875
+      ]
+    },
+    {
+      "label": null,
+      "auth": "238",
+      "insertion": "",
+      "labelChain": null,
+      "name": "MET",
+      "alt": "",
+      "b": 50.59,
+      "xyz": [
+        18.188,
+        2.168,
+        -18.203
+      ]
+    },
+    {
+      "label": null,
+      "auth": "239",
+      "insertion": "",
+      "labelChain": null,
+      "name": "PHE",
+      "alt": "",
+      "b": 53.31,
+      "xyz": [
+        17.094,
+        3.217,
+        -14.734
+      ]
+    },
+    {
+      "label": null,
+      "auth": "240",
+      "insertion": "",
+      "labelChain": null,
+      "name": "GLN",
+      "alt": "",
+      "b": 48.78,
+      "xyz": [
+        15.508,
+        6.68,
+        -14.75
+      ]
+    },
+    {
+      "label": null,
+      "auth": "241",
+      "insertion": "",
+      "labelChain": null,
+      "name": "GLU",
+      "alt": "",
+      "b": 51.88,
+      "xyz": [
+        14.219,
+        7.82,
+        -11.297
+      ]
+    },
+    {
+      "label": null,
+      "auth": "242",
+      "insertion": "",
+      "labelChain": null,
+      "name": "LEU",
+      "alt": "",
+      "b": 48.78,
+      "xyz": [
+        12.0,
+        10.906,
+        -11.438
+      ]
+    },
+    {
+      "label": null,
+      "auth": "243",
+      "insertion": "",
+      "labelChain": null,
+      "name": "CYS",
+      "alt": "",
+      "b": 51.81,
+      "xyz": [
+        11.305,
+        11.852,
+        -7.773
+      ]
+    },
+    {
+      "label": null,
+      "auth": "244",
+      "insertion": "",
+      "labelChain": null,
+      "name": "MET",
+      "alt": "",
+      "b": 50.09,
+      "xyz": [
+        8.898,
+        14.711,
+        -7.691
+      ]
+    },
+    {
+      "label": null,
+      "auth": "245",
+      "insertion": "",
+      "labelChain": null,
+      "name": "MET",
+      "alt": "",
+      "b": 52.81,
+      "xyz": [
+        8.336,
+        15.93,
+        -4.191
+      ]
+    },
+    {
+      "label": null,
+      "auth": "246",
+      "insertion": "",
+      "labelChain": null,
+      "name": "GLN",
+      "alt": "",
+      "b": 46.25,
+      "xyz": [
+        5.625,
+        18.516,
+        -4.309
+      ]
+    },
+    {
+      "label": null,
+      "auth": "247",
+      "insertion": "",
+      "labelChain": null,
+      "name": "ARG",
+      "alt": "",
+      "b": 48.72,
+      "xyz": [
+        5.383,
+        21.031,
+        -1.159
+      ]
+    },
+    {
+      "label": null,
+      "auth": "248",
+      "insertion": "",
+      "labelChain": null,
+      "name": "ARG",
+      "alt": "",
+      "b": 56.72,
+      "xyz": [
+        6.895,
+        19.859,
+        2.381
+      ]
+    },
+    {
+      "label": null,
+      "auth": "249",
+      "insertion": "",
+      "labelChain": null,
+      "name": "GLU",
+      "alt": "",
+      "b": 57.97,
+      "xyz": [
+        9.805,
+        19.453,
+        5.223
+      ]
+    },
+    {
+      "label": null,
+      "auth": "250",
+      "insertion": "",
+      "labelChain": null,
+      "name": "VAL",
+      "alt": "",
+      "b": 63.0,
+      "xyz": [
+        11.008,
+        15.781,
+        4.559
+      ]
+    },
+    {
+      "label": null,
+      "auth": "251",
+      "insertion": "",
+      "labelChain": null,
+      "name": "THR",
+      "alt": "",
+      "b": 68.38,
+      "xyz": [
+        13.969,
+        14.875,
+        6.727
+      ]
+    },
+    {
+      "label": null,
+      "auth": "252",
+      "insertion": "",
+      "labelChain": null,
+      "name": "VAL",
+      "alt": "",
+      "b": 70.81,
+      "xyz": [
+        15.797,
+        11.859,
+        5.48
+      ]
+    },
+    {
+      "label": null,
+      "auth": "253",
+      "insertion": "",
+      "labelChain": null,
+      "name": "GLU",
+      "alt": "",
+      "b": 80.94,
+      "xyz": [
+        18.688,
+        10.727,
+        7.617
+      ]
+    },
+    {
+      "label": null,
+      "auth": "254",
+      "insertion": "",
+      "labelChain": null,
+      "name": "LYS",
+      "alt": "",
+      "b": 81.5,
+      "xyz": [
+        19.984,
+        8.195,
+        5.164
+      ]
+    },
+    {
+      "label": null,
+      "auth": "255",
+      "insertion": "",
+      "labelChain": null,
+      "name": "TRP",
+      "alt": "",
+      "b": 80.0,
+      "xyz": [
+        19.188,
+        7.797,
+        1.564
+      ]
+    },
+    {
+      "label": null,
+      "auth": "256",
+      "insertion": "",
+      "labelChain": null,
+      "name": "GLN",
+      "alt": "",
+      "b": 77.0,
+      "xyz": [
+        20.484,
+        4.527,
+        0.115
+      ]
+    },
+    {
+      "label": null,
+      "auth": "257",
+      "insertion": "",
+      "labelChain": null,
+      "name": "TRP",
+      "alt": "",
+      "b": 76.0,
+      "xyz": [
+        20.578,
+        2.809,
+        -3.191
+      ]
+    },
+    {
+      "label": null,
+      "auth": "258",
+      "insertion": "",
+      "labelChain": null,
+      "name": "CYS",
+      "alt": "",
+      "b": 75.25,
+      "xyz": [
+        21.594,
+        -0.805,
+        -3.422
+      ]
+    },
+    {
+      "label": null,
+      "auth": "259",
+      "insertion": "",
+      "labelChain": null,
+      "name": "PHE",
+      "alt": "",
+      "b": 70.56,
+      "xyz": [
+        22.219,
+        -2.438,
+        -6.719
+      ]
+    },
+    {
+      "label": null,
+      "auth": "260",
+      "insertion": "",
+      "labelChain": null,
+      "name": "MET",
+      "alt": "",
+      "b": 74.75,
+      "xyz": [
+        22.797,
+        -6.113,
+        -7.238
+      ]
+    },
+    {
+      "label": null,
+      "auth": "261",
+      "insertion": "",
+      "labelChain": null,
+      "name": "PHE",
+      "alt": "",
+      "b": 68.25,
+      "xyz": [
+        24.016,
+        -7.043,
+        -10.727
+      ]
+    },
+    {
+      "label": null,
+      "auth": "262",
+      "insertion": "",
+      "labelChain": null,
+      "name": "THR",
+      "alt": "",
+      "b": 66.12,
+      "xyz": [
+        24.281,
+        -10.492,
+        -12.188
+      ]
+    },
+    {
+      "label": null,
+      "auth": "263",
+      "insertion": "",
+      "labelChain": null,
+      "name": "TYR",
+      "alt": "",
+      "b": 60.56,
+      "xyz": [
+        25.516,
+        -9.266,
+        -15.797
+      ]
+    },
+    {
+      "label": null,
+      "auth": "264",
+      "insertion": "",
+      "labelChain": null,
+      "name": "ARG",
+      "alt": "",
+      "b": 54.59,
+      "xyz": [
+        28.375,
+        -6.938,
+        -17.484
+      ]
+    },
+    {
+      "label": null,
+      "auth": "265",
+      "insertion": "",
+      "labelChain": null,
+      "name": "ARG",
+      "alt": "",
+      "b": 56.81,
+      "xyz": [
+        26.453,
+        -3.992,
+        -19.344
+      ]
+    },
+    {
+      "label": null,
+      "auth": "266",
+      "insertion": "",
+      "labelChain": null,
+      "name": "TYR",
+      "alt": "",
+      "b": 55.19,
+      "xyz": [
+        24.734,
+        -1.261,
+        -17.094
+      ]
+    },
+    {
+      "label": null,
+      "auth": "267",
+      "insertion": "",
+      "labelChain": null,
+      "name": "MET",
+      "alt": "",
+      "b": 52.47,
+      "xyz": [
+        23.672,
+        2.236,
+        -17.812
+      ]
+    },
+    {
+      "label": null,
+      "auth": "268",
+      "insertion": "",
+      "labelChain": null,
+      "name": "PHE",
+      "alt": "",
+      "b": 56.34,
+      "xyz": [
+        22.375,
+        3.988,
+        -14.664
+      ]
+    },
+    {
+      "label": null,
+      "auth": "269",
+      "insertion": "",
+      "labelChain": null,
+      "name": "GLN",
+      "alt": "",
+      "b": 51.97,
+      "xyz": [
+        20.891,
+        7.352,
+        -15.188
+      ]
+    },
+    {
+      "label": null,
+      "auth": "270",
+      "insertion": "",
+      "labelChain": null,
+      "name": "GLU",
+      "alt": "",
+      "b": 53.88,
+      "xyz": [
+        19.5,
+        9.023,
+        -11.984
+      ]
+    },
+    {
+      "label": null,
+      "auth": "271",
+      "insertion": "",
+      "labelChain": null,
+      "name": "LEU",
+      "alt": "",
+      "b": 52.06,
+      "xyz": [
+        17.406,
+        12.133,
+        -12.742
+      ]
+    },
+    {
+      "label": null,
+      "auth": "272",
+      "insertion": "",
+      "labelChain": null,
+      "name": "CYS",
+      "alt": "",
+      "b": 53.5,
+      "xyz": [
+        16.172,
+        13.539,
+        -9.336
+      ]
+    },
+    {
+      "label": null,
+      "auth": "273",
+      "insertion": "",
+      "labelChain": null,
+      "name": "MET",
+      "alt": "",
+      "b": 50.59,
+      "xyz": [
+        14.172,
+        16.641,
+        -10.023
+      ]
+    },
+    {
+      "label": null,
+      "auth": "274",
+      "insertion": "",
+      "labelChain": null,
+      "name": "MET",
+      "alt": "",
+      "b": 53.72,
+      "xyz": [
+        13.258,
+        18.422,
+        -6.812
+      ]
+    },
+    {
+      "label": null,
+      "auth": "275",
+      "insertion": "",
+      "labelChain": null,
+      "name": "GLN",
+      "alt": "",
+      "b": 44.03,
+      "xyz": [
+        10.562,
+        20.812,
+        -7.75
+      ]
+    },
+    {
+      "label": null,
+      "auth": "276",
+      "insertion": "",
+      "labelChain": null,
+      "name": "ARG",
+      "alt": "",
+      "b": 47.97,
+      "xyz": [
+        10.016,
+        23.531,
+        -4.859
+      ]
+    },
+    {
+      "label": null,
+      "auth": "277",
+      "insertion": "",
+      "labelChain": null,
+      "name": "ARG",
+      "alt": "",
+      "b": 52.25,
+      "xyz": [
+        10.555,
+        23.203,
+        -0.805
+      ]
+    },
+    {
+      "label": null,
+      "auth": "278",
+      "insertion": "",
+      "labelChain": null,
+      "name": "GLU",
+      "alt": "",
+      "b": 54.97,
+      "xyz": [
+        13.305,
+        21.969,
+        2.248
+      ]
+    },
+    {
+      "label": null,
+      "auth": "279",
+      "insertion": "",
+      "labelChain": null,
+      "name": "VAL",
+      "alt": "",
+      "b": 59.44,
+      "xyz": [
+        14.281,
+        18.219,
+        1.669
+      ]
+    },
+    {
+      "label": null,
+      "auth": "280",
+      "insertion": "",
+      "labelChain": null,
+      "name": "THR",
+      "alt": "",
+      "b": 65.0,
+      "xyz": [
+        17.094,
+        17.641,
+        4.105
+      ]
+    },
+    {
+      "label": null,
+      "auth": "281",
+      "insertion": "",
+      "labelChain": null,
+      "name": "VAL",
+      "alt": "",
+      "b": 68.06,
+      "xyz": [
+        19.078,
+        14.586,
+        3.268
+      ]
+    },
+    {
+      "label": null,
+      "auth": "282",
+      "insertion": "",
+      "labelChain": null,
+      "name": "GLU",
+      "alt": "",
+      "b": 79.56,
+      "xyz": [
+        21.875,
+        13.977,
+        5.719
+      ]
+    },
+    {
+      "label": null,
+      "auth": "283",
+      "insertion": "",
+      "labelChain": null,
+      "name": "LYS",
+      "alt": "",
+      "b": 80.75,
+      "xyz": [
+        23.516,
+        11.078,
+        3.975
+      ]
+    },
+    {
+      "label": null,
+      "auth": "284",
+      "insertion": "",
+      "labelChain": null,
+      "name": "TRP",
+      "alt": "",
+      "b": 79.19,
+      "xyz": [
+        23.5,
+        9.875,
+        0.461
+      ]
+    },
+    {
+      "label": null,
+      "auth": "285",
+      "insertion": "",
+      "labelChain": null,
+      "name": "GLN",
+      "alt": "",
+      "b": 75.06,
+      "xyz": [
+        24.781,
+        6.297,
+        -0.295
+      ]
+    },
+    {
+      "label": null,
+      "auth": "286",
+      "insertion": "",
+      "labelChain": null,
+      "name": "TRP",
+      "alt": "",
+      "b": 76.0,
+      "xyz": [
+        25.203,
+        3.969,
+        -3.184
+      ]
+    },
+    {
+      "label": null,
+      "auth": "287",
+      "insertion": "",
+      "labelChain": null,
+      "name": "CYS",
+      "alt": "",
+      "b": 76.06,
+      "xyz": [
+        25.812,
+        0.223,
+        -2.816
+      ]
+    },
+    {
+      "label": null,
+      "auth": "288",
+      "insertion": "",
+      "labelChain": null,
+      "name": "PHE",
+      "alt": "",
+      "b": 69.06,
+      "xyz": [
+        26.984,
+        -1.877,
+        -5.707
+      ]
+    },
+    {
+      "label": null,
+      "auth": "289",
+      "insertion": "",
+      "labelChain": null,
+      "name": "MET",
+      "alt": "",
+      "b": 67.94,
+      "xyz": [
+        27.156,
+        -5.613,
+        -5.387
+      ]
+    },
+    {
+      "label": null,
+      "auth": "290",
+      "insertion": "",
+      "labelChain": null,
+      "name": "PHE",
+      "alt": "",
+      "b": 62.12,
+      "xyz": [
+        28.516,
+        -7.418,
+        -8.578
+      ]
+    }
+  ],
+  "summary": {
+    "failed": [
+      "interunit-pae"
+    ],
+    "notEvaluable": [
+      "construct-tags",
+      "assembly-annotation",
+      "unit-boundaries",
+      "fold-plausibility"
+    ],
+    "mechanicalAdmission": false,
+    "blocking": [
+      "interunit-pae"
+    ],
+    "biologicalValidity": "not_established"
+  },
+  "limitations": [
+    "Mechanical screening; a complete R3.8 evaluation needs independent labels and pertinent controls.",
+    "No physical fold classifier, genomic assembly validator, SIFTS/UniProt alignment or repeat detector.",
+    "Integrity and declared sources do not authenticate scientific provenance."
+  ]
+}

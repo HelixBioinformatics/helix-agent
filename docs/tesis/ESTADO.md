@@ -1,5 +1,9 @@
 # Estado del cierre
 
+## Actualización de originales Pratt, 1 de octubre de 2026
+
+Se recuperaron del envío de los autores 78 modelos AF2 de rango 1, sus puntuaciones y sus PAE, correspondientes a toda la Tabla S1. Helix incorporó el contrato local ColabFold y ejecutó dos perfiles fijados antes de sus veredictos. El principal produce 78/78 alarmas mecánicas y marca los cinco ejemplos explícitamente problemáticos de las figuras 3, 6 y 7; esto no valida discriminación ni plausibilidad física. El control físico sigue no evaluable, con cobertura 0%, sensibilidad física y especificidad sin calcular. Faltan un control físico validado y al menos 30 negativos pertinentes revisados. Los originales de la Tabla S1 dejan de ser dependencia pendiente; los de las figuras 1/S1 y 14 no están en este envío. No se usó el modelo ni AWS. [Informe y evidencia](../../evaluation/trp/reference/pratt-author-20261001/README.md).
+
 ## Preparación de anotación — 28 de septiembre de 2026
 
 La asesora bioinformática fue propuesta por el tesista para revisar la guía y/o coordinar un investigador externo. Aceptación, independencia respecto del desarrollo y disponibilidad por confirmar. Se prepararon [materiales para la reunión](reunion-asesora-20260928/README.md), PDF, Excel y piloto de 12 solicitudes/12 turnos sin etiquetas humanas. La reserva sigue pendiente; decisiones de modelo/presupuesto y Pratt aplazadas por el autor. AWS se analizó como opción de clúster; no hay acceso, gasto ni provisión autorizados en esta entrega. El adaptador TRP de ejecución local necesita ampliación para un planificador remoto.

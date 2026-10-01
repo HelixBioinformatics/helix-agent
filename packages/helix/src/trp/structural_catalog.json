@@ -1,12 +1,12 @@
 {
-  "version": "trp-structural-catalog/1.0.0",
+  "version": "trp-structural-catalog/1.1.0",
   "scope": "Mechanical screening, not certification of a fold or a repeat annotation",
   "controls": [
     {
       "id": "confidence-scale",
       "failure": "B-factor and pLDDT confused, or inconsistent local confidence metadata",
       "source": "https://alphafold.ebi.ac.uk/faq",
-      "criterion": "Experimental method or AlphaFold monomer producer plus local pLDDT metadata; values in domain; B/local agreement within 0.011"
+      "criterion": "Experimental method, AFDB AlphaFold monomer metadata, or explicit local ColabFold monomer hash/sequence/score contract; values in domain; B/local agreement within 0.011"
     },
     {
       "id": "filter-direction",
@@ -18,7 +18,7 @@
       "id": "interunit-pae",
       "failure": "Relative unit orientation inferred from local confidence alone",
       "source": "https://alphafold.ebi.ac.uk/faq",
-      "criterion": "AFDB API, sequence, chain, model and full PAE axes agree; both directed interunit blocks <= declared angstrom threshold"
+      "criterion": "AFDB API binding or explicit local ColabFold contract with original score/PAE hashes and identical matrices; full sequence and unambiguous monomer axes agree; both directed interunit blocks <= declared angstrom threshold"
     },
     {
       "id": "residue-frame",

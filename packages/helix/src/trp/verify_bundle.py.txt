@@ -118,7 +118,7 @@ def verify(root, expected=None):
         controls = structural['checks']
         if len(controls) != len(expected_ids) or {c['id'] for c in controls} != expected_ids:
             raise ValueError('structural inventory differs')
-        if structural['version'] != 'trp-structural/1.0.0' or structural['provenance']['structureSha256'] != digest((root / 'run/source.pdb').read_bytes()):
+        if structural['version'] not in ('trp-structural/1.0.0', 'trp-structural/1.1.0') or structural['provenance']['structureSha256'] != digest((root / 'run/source.pdb').read_bytes()):
             raise ValueError('structural input differs')
         if not structural['summary']['mechanicalAdmission'] or structural['summary']['biologicalValidity'] != 'not_established':
             raise ValueError('structural admission differs')

@@ -554,9 +554,10 @@
         "packages/helix/test/tool/registry.test.ts",
         "script/tesis/test_predicted_geometry.py",
         "packages/helix/test/tool/trp-predicted.test.ts",
-        "packages/helix/test/trp/predicted.live.test.ts"
+        "packages/helix/test/trp/predicted.live.test.ts",
+        "script/tesis/test_colabfold_binding.py"
       ],
-      "pendiente": "Ruta AFDB integrada mediante trp_predicted_geometry, con identidad, PAE, pLDDT, fuentes y aprobación ligada al digest. Referencia real de tres segmentos artificiales reproducida; no son etiquetas de repeticiones ni reserva. Continúan pendientes gobernanza estricta conjunta, contratos de dominio restantes y evaluación independiente de validez física.",
+      "pendiente": "Ruta AFDB integrada mediante trp_predicted_geometry, con identidad, PAE, pLDDT, fuentes y aprobación ligada al digest. Referencia real de tres segmentos artificiales reproducida; no son etiquetas de repeticiones ni reserva. Continúan pendientes gobernanza estricta conjunta, contratos de dominio restantes y evaluación independiente de validez física. Originales locales ColabFold admitidos para inspección mediante contrato de hashes, secuencia, pLDDT y PAE; 78 modelos de Pratt inspeccionados, sin establecer validez física.",
       "fase_cierre": "F5",
       "medicion": {
         "tipo": "desarrollo_no_reserva",
@@ -566,7 +567,8 @@
       },
       "id_anterior": "R5.2",
       "evidencia": [
-        "evaluation/trp/reference/predicted-agent-20260923/summary.json"
+        "evaluation/trp/reference/predicted-agent-20260923/summary.json",
+        "evaluation/trp/reference/pratt-author-20261001/summary.json"
       ]
     },
     {
@@ -593,7 +595,8 @@
         "packages/helix/test/tool/registry.test.ts",
         "packages/helix/test/trp/reference.live.test.ts",
         "packages/helix/test/tool/trp-predicted.test.ts",
-        "packages/helix/test/trp/predicted.live.test.ts"
+        "packages/helix/test/trp/predicted.live.test.ts",
+        "script/tesis/test_colabfold_binding.py"
       ],
       "pendiente": "Ruta AFDB integrada mediante trp_predicted_geometry, con identidad, PAE, pLDDT, fuentes y aprobación ligada al digest. Referencia real de tres segmentos artificiales reproducida; no son etiquetas de repeticiones ni reserva. Continúan pendientes gobernanza estricta conjunta, contratos de dominio restantes y evaluación independiente de validez física.",
       "fase_cierre": "F5",
@@ -601,11 +604,15 @@
         "tipo": "referencia_tecnica_no_evaluacion_empirica",
         "inspecciones_reales": 2,
         "ejecuciones_nextflow": 1,
-        "evidencia": "docs/tesis/evidencia/fase5.json"
+        "evidencia": "docs/tesis/evidencia/fase5.json",
+        "pratt_original_models": 78,
+        "pratt_profiles": 2,
+        "portable_original_examples": 5
       },
       "id_anterior": "R5.3",
       "evidencia": [
-        "evaluation/trp/reference/predicted-agent-20260923/summary.json"
+        "evaluation/trp/reference/predicted-agent-20260923/summary.json",
+        "evaluation/trp/reference/pratt-author-20261001/summary.json"
       ]
     },
     {
@@ -616,18 +623,39 @@
       "codigo": [
         "script/tesis/audit_pratt_recoverability.py",
         "script/tesis/check_f6_readiness.py",
-        "script/tesis/prepare_f6_draft.py"
+        "script/tesis/prepare_f6_draft.py",
+        "script/tesis/evaluate_pratt_originals.py",
+        "script/tesis/run_pratt_inspection.ts"
       ],
       "pruebas": [
-        "script/tesis/test_f6_readiness.py"
+        "script/tesis/test_f6_readiness.py",
+        "script/tesis/test_colabfold_binding.py"
       ],
-      "pendiente": "Metas F2 intactas. Reconsulta pública sin coordenadas/PAE originales; suplementos ajenos servidos por BioStudies rechazados y documentados. Cero modelos originales ejecutados; tasas nulas como dato ausente. Requiere referencia independiente y corpus reservado.",
+      "pendiente": "Originales de rango 1 de las 78 filas de Tabla S1 recuperados, emparejados e inspeccionados. Alarmas mecánicas 78/78 y 5/5 ejemplos problemáticos explícitos; no identifican la causa física. Cobertura física 0%; sensibilidad física y especificidad sin calcular. Requiere control físico validado, al menos 30 negativos pertinentes revisados y evaluación independiente; los modelos de figuras 1/S1 y 14 y los rangos 2–5 no están en este envío. Metas F2 intactas.",
       "fase_cierre": "F6",
-      "medicion": null,
-      "id_anterior": "R5.4"
+      "medicion": {
+        "tipo": "diagnostico_acotado_no_evaluacion_fisica_completa",
+        "originales": 78,
+        "ejemplos_problematicos_publicados": 5,
+        "alarmas_mecanicas": 78,
+        "alarmas_en_ejemplos": 5,
+        "intervalo_wilson95_alarmas_ejemplos": [
+          0.5655175352168251,
+          1.0
+        ],
+        "cobertura_fisica": 0,
+        "sensibilidad_fisica": null,
+        "especificidad": null,
+        "negativos_confirmados": 0,
+        "evidencia": "evaluation/trp/reference/pratt-author-20261001/summary.json"
+      },
+      "id_anterior": "R5.4",
+      "evidencia": [
+        "evaluation/trp/reference/pratt-author-20261001/summary.json"
+      ]
     }
   ],
-  "actualizacion": "Cierre técnico: rutas integradas y evidencia de desarrollo; evaluación reservada pendiente.",
+  "actualizacion": "2026-10-01",
   "agrupacion_objetivos": {
     "fecha": "2026-09-23",
     "criterio": "Reorganización editorial; resultados, indicadores y evidencias sin cambios",

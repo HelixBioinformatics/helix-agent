@@ -1,0 +1,68 @@
+{
+  "sourceSha256": "48b73e689c713052afa05735a35c7c2fe301f8f524ada4c4239faeeaf98e0729",
+  "targetSha256": "0b5e1e0c7a74f4dd3468656b6f9abef945bfeaf19b791c033bdc0c8cc573b28d",
+  "closedBodyElementsPreserved": 350,
+  "changedParagraphs": [
+    {
+      "before": "La escala se establece desde el método experimental o desde el productor AlphaFold Monomer y las métricas locales de mmCIF, con contraste entre pLDDT y el campo B. Para PAE se exige la correspondencia de entrada, versión, cadena, secuencia completa, dimensiones y URLs declaradas con la respuesta de AFDB archivada. La matriz no se vincula únicamente por su longitud. Se evalúan ambos bloques dirigidos entre cada par de unidades, porque PAE puede ser asimétrica.",
+      "after": "La escala se establece desde el método experimental o desde el productor AlphaFold Monomer y las métricas locales de mmCIF, con contraste entre pLDDT y el campo B. Para AFDB se exige correspondencia de entrada, versión, cadena, secuencia completa, dimensiones y URLs declaradas con la respuesta API archivada. Desde el 1 de octubre de 2026 se admite también el contrato local ColabFold para PDB monoméricos: identidad de rango y semilla, hashes de coordenadas y archivos originales de puntuación y PAE, secuencia completa y numeración continua, acuerdo de pLDDT y matrices PAE idénticas. No se atribuyen esos archivos a AFDB. Se evalúan ambos bloques dirigidos entre cada par de unidades, porque PAE puede ser asimétrica."
+    },
+    {
+      "before": "Cada inspección conserva estructura, opciones, API y PAE cuando existen, catálogo, programa y reporte, con tamaños y SHA-256 en un manifiesto verificable sin red. El reporte identifica parser y versión de Python, estructura, modelo, productor, versión de AFDB cuando está disponible, marco, escala, correspondencias y veredicto por control. Las URLs y referencias de anotación son procedencia declarada; la verificación de integridad no autentica a sus autores.",
+      "after": "Cada inspección conserva estructura, opciones, API y PAE cuando existen o los metadatos y archivos originales de puntuación y PAE de ColabFold, catálogo, programa y reporte, con tamaños y SHA-256 en un manifiesto verificable sin red. El reporte identifica parser y versión de Python, estructura, modelo, productor, marco, escala, correspondencias y veredicto por control. La procedencia declarada y la verificación de integridad no autentican a los autores ni establecen validez biológica. El adaptador real de Helix reprodujo los reportes offline de los cinco ejemplos problemáticos de Pratt y sus copias portables superaron la verificación independiente."
+    },
+    {
+      "before": "La auditoría de recuperación del artículo de Pratt et al. (2025) y de sus suplementos públicos identificó 78 filas de predicciones en la tabla adicional, además de figuras. En el paquete descargado no se encontraron archivos de coordenadas ni matrices PAE de esos modelos. Las 78 filas no se reinterpretan como 78 fallos independientes confirmados. Se conserva la tabla original, el inventario de archivos, el artículo, sus hashes y un reporte reproducible de recuperación.",
+      "after": "El 1 de octubre de 2026 se incorporó un envío de los autores de Pratt et al. (2025), remitido por Daniel Rigden y recuperado por Dr Price. Contiene 78 modelos AF2 de rango 1, 78 archivos JSON de puntuación y 78 matrices PAE. Las secuencias coinciden exactamente con los 78 motivos de la Tabla S1 repetidos diez veces; todos los modelos superaron las comprobaciones de emparejamiento, confianza y ejes. Se conservaron los archivos originales y sus hashes. Los nombres model_1 a model_5 indican conjuntos de parámetros, no rangos adicionales: el envío solo incluye rank_001 y seed_000. No se sustituyeron originales por predicciones regeneradas."
+    },
+    {
+      "before": "Se evaluaron cero modelos originales de ese estudio con la batería implementada; sensibilidad y especificidad permanecen sin calcular. Esta observación no demuestra que los autores carezcan de los archivos. Recuperarlos y disponer de etiquetas independientes sigue siendo necesario para T-STRUCT; generar predicciones nuevas no sustituiría los modelos publicados. Los ensayos adversariales de desarrollo tampoco sustituyen esa reserva.",
+      "after": "Se vincularon cinco ejemplos problemáticos por coincidencia exacta de secuencia con las figuras 3, 6 y 7: 8b, 12ab, 19r, 21r y 22r. La referencia publicada describe hidrofobicidad expuesta, cargas internas apiladas, choques entre residuos o problemas identificados por Verify3D. Las otras 73 predicciones permanecen sin etiqueta de fallo o corrección; la clasificación de 32 modelos como β-solenoides no constituye por sí sola una etiqueta de fallo. No están en este envío los dos modelos preliminares sometidos a dinámica molecular en la figura 14 ni el ejemplo de mucina de la figura 1/S1."
+    },
+    {
+      "before": "El protocolo F2 mantiene sensibilidad ≥80%, especificidad ≥90% y cobertura evaluable ≥90%, con reporte conservador de no evaluables. No se modificaron estas metas para adaptar la evaluación a los datos disponibles. También siguen pendientes el anotador, el modelo y presupuesto de evaluación, y el clúster si se mantiene esa afirmación de ejecución.",
+      "after": "El perfil principal, fijado antes de obtener los veredictos, conservó pLDDT mínimo de 70 y PAE máximo dirigido entre motivos de 5 Å sobre los diez motivos completos. Produjo 78 alarmas en 78 modelos: todos excedieron el límite PAE y 68 presentaron además algún residuo con pLDDT inferior a 70. Los cinco ejemplos problemáticos generaron alarma, 5/5, con intervalo Wilson de 95% de 56,6% a 100%. Esta tasa describe alarmas mecánicas sobre ejemplos ilustrados; no es una sensibilidad física validada ni prueba discriminación, porque también se marcaron todas las predicciones sin etiqueta. No se ajustaron retrospectivamente los umbrales."
+    },
+    {
+      "before": "NOTA PARA EL AUTOR. Conservar explícita la diferencia entre confianza y plausibilidad. Pratt et al. muestran errores que pueden persistir con confianza alta; no afirmar que una alarma PAE/pLDDT detecta sus casos sin datos originales y contraste independiente. Si la recuperación no es posible, documentar la limitación y decidir una enmienda prospectiva antes de abrir la reserva.",
+      "after": "NOTA PARA EL AUTOR. Los originales de la Tabla S1 ya fueron recuperados y ejecutados. El resultado observado exige mantener la diferencia entre alarma mecánica y detección física: marcar 78/78 no demuestra discriminación. Para cerrar R3.8 se requiere un control físico validado y al menos 30 controles negativos pertinentes revisados, con evaluación independiente. Si estos resultados se emplean para diseñar o calibrar ese control, deben conservarse como desarrollo y no reutilizarse como una reserva intacta."
+    },
+    {
+      "before": "El cierre elimina la deuda de implementación de cuota y controlador. No sustituye la evaluación reservada, el anotador, los datos originales de Pratt ni los contratos pendientes de F5. La segunda estación es un anfitrión local accesible por SSH; no se declara como clúster.",
+      "after": "El cierre elimina la deuda de implementación de cuota y controlador. No sustituye la evaluación reservada, las referencias externas ni los contratos pendientes de F5. Los originales de rango 1 de la Tabla S1 de Pratt fueron recuperados e inspeccionados posteriormente, el 1 de octubre de 2026; su validación física y los controles negativos siguen pendientes. La segunda estación es un anfitrión local accesible por SSH; no se declara como clúster."
+    },
+    {
+      "before": "La recuperación pública de Pratt no proporcionó coordenadas ni PAE originales. Una descarga de suplementos desde BioStudies presentó contenidos ajenos al artículo pese al identificador del registro; se descartó y se conservaron URL, hashes e indicios de la discrepancia. Los suplementos anteriormente verificados se mantienen. Se siguen reportando cero modelos originales ejecutados y sensibilidad/especificidad sin calcular.",
+      "after": "La recuperación pública de Pratt no proporcionó coordenadas ni PAE originales. Una descarga de suplementos desde BioStudies presentó contenidos ajenos al artículo pese al identificador del registro; se descartó y se conservó evidencia de la discrepancia. Esa auditoría histórica no describe el envío posterior de los autores, incorporado el 1 de octubre de 2026: se inspeccionaron los 78 modelos originales de rango 1 de la Tabla S1. Sensibilidad física y especificidad permanecen sin calcular por falta de un control físico validado y de controles negativos pertinentes."
+    },
+    {
+      "before": "La continuación técnica amplía el alcance verificable: incorpora detección STRPsearch con control explícito de aprobación y errores científicos, mapeo SIFTS por residuo integrado a Nextflow y una demostración acotada de geometría sobre modelos predichos. Estos resultados sustentan la implementación de las rutas descritas; la comparación reservada, el acuerdo humano y la sensibilidad estructural permanecen pendientes.",
+      "after": "La continuación técnica amplía el alcance verificable: incorpora detección STRPsearch, mapeo SIFTS por residuo integrado a Nextflow, geometría acotada sobre modelos predichos y lectura verificada de los originales locales de ColabFold proporcionados por los autores de Pratt et al. (2025). El diagnóstico de 78 modelos conserva procedencia, valores y veredictos. Que todos generen alarma bajo el perfil inicial muestra su límite para discriminar fallos físicos; no demuestra cumplimiento de R3.8. La comparación reservada, el acuerdo humano y la validación física permanecen pendientes."
+    },
+    {
+      "before": "C9. Plausibilidad física. Pratt et al. (2025) muestran modelos repetitivos de confianza alta y conformación poco plausible. La batería no implementa un clasificador físico validado: este control permanece no evaluable y exige evidencia independiente. Aprobar C1–C3 nunca cambia esa conclusión. Su capacidad de detectar los fallos publicados se evaluará separadamente cuando se recuperen los modelos originales.",
+      "after": "C9. Plausibilidad física. Pratt et al. (2025) muestran modelos repetitivos de confianza alta y conformación poco plausible. La batería no implementa un clasificador físico validado: el control permanece no evaluable en los 78 originales inspeccionados. Las alarmas PAE y pLDDT no identifican cargas internas, hidrofobicidad expuesta ni choques. Aprobar C1–C3 tampoco certificaría plausibilidad. El diagnóstico conserva esa cobertura física de 0% y separa las cinco referencias de problema publicadas de las predicciones sin etiqueta."
+    },
+    {
+      "before": "Se conserva el artículo y los suplementos de Pratt bajo CC BY 4.0. La tabla contiene 78 predicciones, pero el paquete descargado no contiene sus coordenadas ni PAE; el reporte de recuperación no declara que esos datos sean inexistentes fuera del paquete. No se enviaron solicitudes a autores ni se generaron modelos sustitutos. La evaluación estructural final requiere las entradas originales y etiquetas justificadas, además de controles pertinentes e independientes.",
+      "after": "Se conserva el artículo y los suplementos públicos de Pratt bajo su licencia CC BY 4.0 y la auditoría histórica de septiembre. El envío posterior de los autores proporciona las coordenadas y PAE de los 78 modelos AF2 de rango 1 de la Tabla S1. Se archivó localmente sin modificar sus bytes, con un manifiesto de hashes; no se supone que la licencia del artículo cubra automáticamente este envío separado. Las condiciones de redistribución no se especificaron en el correo compartido. No se generaron predicciones sustitutas."
+    },
+    {
+      "before": "La evaluación reservada de F6 conserva el protocolo, las particiones y las referencias independientes exigidas. Siguen pendientes el anotador, el modelo y presupuesto de campaña y los originales estructurales o la enmienda prospectiva de su corpus. Los casos 2xqh y P69905 de esta entrega continúan excluidos de la reserva.",
+      "after": "La evaluación reservada de F6 conserva el protocolo, las particiones y las referencias independientes exigidas. La asesora ha sido designada para la anotación y el modelo y presupuesto fueron elegidos por el autor; estas decisiones no equivalen a anotaciones terminadas ni a una configuración efectiva verificada. Los originales de rango 1 de la Tabla S1 de Pratt se recuperaron el 1 de octubre de 2026 y se inspeccionaron; faltan la validación física y los controles negativos pertinentes para R3.8. Los casos 2xqh y P69905 continúan excluidos de la reserva."
+    }
+  ],
+  "addedResultParagraphs": 3,
+  "addedAnnexParagraphs": 5,
+  "summarySha256": "060f9d9f7de4ca858fddac941359d54c98d72c4dfd8d002d63922831f8f84357",
+  "chapters1to3Unchanged": true,
+  "originalFilesReplaced": false,
+  "stagedXmlSha256": "0f46ac9a0a69bd8baf43ab0a113e0f23845f064cdcd6126035378d578d57638f",
+  "pdfPath": "/home/webiwabou/Projects/Tesis-Pratt-20261001.pdf",
+  "pdfSha256": "b5d3b2b0b181a3d5279b57a175ef4a41a708a3709202a8a8f32cc9cde9170d34",
+  "chapters1to3ContentPreservedAfterRendering": true,
+  "allFourIllustrationsByteIdentical": true,
+  "tableOfContentsRefreshed": true,
+  "installedAt": "/home/webiwabou/Projects/Tesis.docx",
+  "backup": "/home/webiwabou/Projects/Tesis-antes-Pratt-20261001.docx"
+}

@@ -1,0 +1,179 @@
+{
+  "date": "2026-10-12",
+  "scope": "Small CPU cluster and a fixed workflow smoke test. This is not completion of the integrated Helix cluster evaluation.",
+  "topology": [
+    {
+      "name": "helix-head",
+      "instance_type": "t3.medium",
+      "vcpu": 2,
+      "memory_gib": 4,
+      "root_disk_gib": 50
+    },
+    {
+      "name": "helix-worker1",
+      "instance_type": "m5.large",
+      "vcpu": 2,
+      "memory_gib": 8,
+      "root_disk_gib": 20
+    },
+    {
+      "name": "helix-worker2",
+      "instance_type": "m5.large",
+      "vcpu": 2,
+      "memory_gib": 8,
+      "root_disk_gib": 20
+    }
+  ],
+  "shared_storage": "NFS on the head node root disk; /shared/helix on all nodes. The 50 GiB include the operating system and caches.",
+  "software": {
+    "os": "Ubuntu 24.04 amd64, Canonical image dated 2026-10-04",
+    "slurm": "23.11.4",
+    "nextflow": "25.10.4 build 11177",
+    "container": "sha256:1dd91e70acb153a0bd9a51346fc001dd5025f851c9598697cdd37f07d9490b0a"
+  },
+  "session": {
+    "documented_hours": 4,
+    "renewal_verified": true,
+    "node_shutdown_timer_minutes_per_boot": 180,
+    "partition_max_job_minutes": 20,
+    "resume_preserved_files_and_services": true,
+    "nextflow_resume_observed": "SELECT was reused; GEOMETRY was resubmitted. Complete cache reuse is not claimed."
+  },
+  "scientific_check": {
+    "case": "2XQH, chain A, frozen supplied unit boundaries",
+    "reference": "evaluation/trp/reference/nextflow-f5/evidence/run/results/geometry.csv",
+    "reference_sha256": "7e8393ba3d8cd1035b2e7b8a790fd896f3e8748038c52233e3ae4fc7aff41e0f",
+    "initial_equivalent": false,
+    "initial_differences": [
+      {
+        "unit_start": "264",
+        "unit_end": "276",
+        "differences": {
+          "curvature": {
+            "local": "0.0198",
+            "initial_cloud": "0.1445"
+          },
+          "twist": {
+            "local": "0.0148",
+            "initial_cloud": "0.0094"
+          },
+          "twist_hand": {
+            "local": "1.0000",
+            "initial_cloud": "-1.0000"
+          },
+          "pitch": {
+            "local": "0.0843",
+            "initial_cloud": "0.0754"
+          },
+          "yaw": {
+            "local": "0.1482",
+            "initial_cloud": "0.0289"
+          }
+        }
+      },
+      {
+        "unit_start": "305",
+        "unit_end": "326",
+        "differences": {
+          "curvature": {
+            "local": "0.1698",
+            "initial_cloud": "0.9144"
+          },
+          "twist": {
+            "local": "1.2504",
+            "initial_cloud": "1.3342"
+          },
+          "twist_hand": {
+            "local": "1.0000",
+            "initial_cloud": "-1.0000"
+          },
+          "pitch": {
+            "local": "1.2931",
+            "initial_cloud": "1.4889"
+          },
+          "yaw": {
+            "local": "2.1193",
+            "initial_cloud": "0.4763"
+          }
+        }
+      },
+      {
+        "unit_start": "mean",
+        "unit_end": "-",
+        "differences": {
+          "curvature": {
+            "local": "0.1589",
+            "initial_cloud": "0.2379"
+          },
+          "twist": {
+            "local": "0.6635",
+            "initial_cloud": "0.6707"
+          },
+          "twist_hand": {
+            "local": "0.6364",
+            "initial_cloud": "0.2727"
+          },
+          "pitch": {
+            "local": "0.1904",
+            "initial_cloud": "0.2074"
+          },
+          "yaw": {
+            "local": "0.4186",
+            "initial_cloud": "0.2584"
+          }
+        }
+      },
+      {
+        "unit_start": "std",
+        "unit_end": "-",
+        "differences": {
+          "curvature": {
+            "local": "0.0996",
+            "initial_cloud": "0.2320"
+          },
+          "twist": {
+            "local": "1.0158",
+            "initial_cloud": "1.0208"
+          },
+          "twist_hand": {
+            "local": "0.7714",
+            "initial_cloud": "0.9621"
+          },
+          "pitch": {
+            "local": "0.3653",
+            "initial_cloud": "0.4196"
+          },
+          "yaw": {
+            "local": "0.5918",
+            "initial_cloud": "0.2628"
+          }
+        }
+      }
+    ],
+    "controlled_profile": {
+      "OPENBLAS_CORETYPE": "Haswell",
+      "OPENBLAS_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1"
+    },
+    "controlled_byte_identical_to_reference": true,
+    "csv_rows": 14,
+    "columns": 11,
+    "limitation": "The result covers this fixed case and tested x86_64 nodes. It is not a claim of equivalence for every scientific tool or architecture."
+  },
+  "runtime_limits": {
+    "verified_on_both_workers": true,
+    "docker_cpu_quota": 2,
+    "docker_memory_bytes": 2147483648,
+    "docker_swap_bytes": 0,
+    "cpu_quota_is_not_exclusive_cores": true
+  },
+  "cancellation": "A running job was cancelled and recorded as CANCELLED.",
+  "second_lab_cleanup": {
+    "previous_t3_small": "terminated by explicit user authorization",
+    "remaining_ebs_volumes": 0
+  },
+  "cost": "Academy budget display is delayed 8-12 hours. No exact expenditure is claimed. Stopped instances retain chargeable EBS volumes.",
+  "helix_integration": "packages/helix/src/trp/nextflow.ts still generates a local executor. The approved remote execution adapter and campaign validation are outstanding.",
+  "final_state": "All three nodes stopped; verified by the EC2 API. Guest shutdown behavior is stop."
+}

@@ -44,3 +44,11 @@ Fuentes oficiales consultadas el 28/09/2026:
 - Requisitos de cuenta/permisos/región: https://docs.aws.amazon.com/parallelcluster/latest/ug/install-v3-configuring.html
 - Nextflow y AWS Batch (cola, entorno, S3 e imágenes): https://docs.seqera.io/nextflow/aws
 - Ejecutores de Nextflow: https://docs.seqera.io/nextflow/executor
+
+## Actualización del 12/10/2026: infraestructura preparada
+
+Se obtuvo acceso a dos Learner Labs con presupuesto de US$50 por entorno. En el primero se desplegaron un controlador y dos trabajadores EC2 con Slurm, Docker y NFS. Se verificaron ejecución en ambos nodos, renovación de la sesión de cuatro horas, apagado/reanudación, persistencia, cancelación y límites efectivos de contenedores. Se dejó el cómputo detenido; los discos se conservan y mantienen coste de almacenamiento.
+
+El flujo fijo de GeomeTRe produjo resultados idénticos a la referencia local al fijar el perfil numérico de OpenBLAS. La primera ejecución con selección automática del perfil numérico presentó una discrepancia que se conserva en la evidencia. El informe está en `evaluation/trp/aws-academy-cluster-20261012/README.md` y `report.json`.
+
+Queda pendiente implementar y validar la integración de Helix con Slurm y ejecutar la campaña prevista. Esta prueba de infraestructura y de un caso fijo no marca como completa la evaluación del resultado esperado de ejecución local y en agrupación de cómputo.

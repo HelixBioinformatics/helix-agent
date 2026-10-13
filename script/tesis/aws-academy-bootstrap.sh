@@ -107,6 +107,8 @@ else
 [Unit]
 After=network-online.target munge.service
 Wants=network-online.target
+Requires=shared-helix.mount
+After=shared-helix.mount
 RequiresMountsFor=/shared/helix
 [Service]
 Delegate=yes
@@ -115,7 +117,22 @@ RestartSec=15
 EOF
     systemctl disable slurmctld nfs-server
     systemctl daemon-reload
+    # The head may still be installing packages when workers first mount NFS.
+    # A directory or an active daemon does not prove the shared mount exists.
+    systemctl start shared-helix.automount
+    for attempt in {1..12}; do
+        if mountpoint -q /shared/helix || mount /shared/helix; then break; fi
+        sleep 5
+    done
+    mountpoint -q /shared/helix
     systemctl enable --now munge docker slurmd
+fi
+for service in munge docker; do systemctl is-active --quiet "$service"; done
+if [[ "$ROLE" == head ]]; then
+    systemctl is-active --quiet slurmctld
+else
+    systemctl is-active --quiet slurmd
+    [[ "$(findmnt -n -t nfs4 -T /shared/helix -o FSTYPE)" == nfs4 ]]
 fi
 dpkg-query -W > /var/log/helix-installed-packages.tsv
 touch /var/lib/helix-bootstrap-ready

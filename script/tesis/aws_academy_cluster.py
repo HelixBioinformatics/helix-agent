@@ -24,9 +24,20 @@ import boto3
 from botocore.config import Config
 
 ROOT = Path(__file__).resolve().parents[2]
+LAB = "183928"
 PRIVATE = Path.home() / ".local/state/helix/aws-academy/cluster"
 STATE = PRIVATE / "state.json"
 DEPLOYMENT = "helix-academy-20261012"
+
+
+def configure_lab(lab):
+    """Keep account credentials, keys and resource state strictly separate."""
+    global LAB, PRIVATE, STATE, DEPLOYMENT
+    LAB = lab
+    suffix = "cluster" if lab == "183928" else "cluster-185395"
+    PRIVATE = Path.home() / ".local/state/helix/aws-academy" / suffix
+    STATE = PRIVATE / "state.json"
+    DEPLOYMENT = "helix-academy-20261012" + ("" if lab == "183928" else "-lab2")
 
 
 def private_write(path, content):
@@ -44,7 +55,8 @@ def private_write(path, content):
 
 def session():
     parser = configparser.ConfigParser()
-    parser.read(Path.home() / ".aws/helix-academy-1.credentials")
+    number = 1 if LAB == "183928" else 2
+    parser.read(Path.home() / f".aws/helix-academy-{number}.credentials")
     values = parser["default"]
     value = boto3.Session(
         aws_access_key_id=values["aws_access_key_id"],
@@ -53,18 +65,18 @@ def session():
         region_name=values.get("region", "us-east-1"),
     )
     identity = value.client("sts").get_caller_identity()
-    session_report = Path.home() / ".local/state/helix/aws-academy/session-183928.json"
+    session_report = Path.home() / f".local/state/helix/aws-academy/session-{LAB}.json"
     expected = json.loads(session_report.read_text())["after"]["AWSAccountId"]
     if identity["Account"] != expected:
         raise RuntimeError(
-            "The first Academy account does not match the inspected account"
+            "The selected Academy account does not match the inspected account"
         )
     return value
 
 
 def require_session_window():
     report = json.loads(
-        (Path.home() / ".local/state/helix/aws-academy/session-183928.json").read_text()
+        (Path.home() / f".local/state/helix/aws-academy/session-{LAB}.json").read_text()
     )
     raw = report["after"]["Session to end"]
     timestamp = re.search(r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}[+-]\d{4}", raw)
@@ -78,6 +90,12 @@ def require_session_window():
         raise RuntimeError(
             "Less than 30 minutes remain; use aws_academy_access.py --renew before starting nodes"
         )
+    used = report["after"].get("reported_used_usd")
+    budget = report["after"].get("reported_budget_usd")
+    if used is None or budget is None:
+        raise RuntimeError("Academy budget unavailable; refresh portal details before starting compute")
+    if budget - used < 10:
+        raise RuntimeError("Less than US$10 reported reserve remains; inspect delayed usage before new compute")
     print("Academy session minutes remaining:", int(remaining / 60), flush=True)
 
 
@@ -181,6 +199,7 @@ def deploy():
     )["NetworkInterfaces"]:
         raise RuntimeError("The proposed private addresses are already in use")
     state = {
+        "lab": LAB,
         "deployment": DEPLOYMENT,
         "created_at": datetime.now(timezone.utc).isoformat(),
         "region": "us-east-1",
@@ -335,12 +354,14 @@ def ssh_options(node):
 
 def main():
     parser = argparse.ArgumentParser()
+    parser.add_argument("--lab", choices=["183928", "185395"], default="183928")
     parser.add_argument(
         "action", choices=["deploy", "status", "start", "stop", "exec", "put", "get"]
     )
     parser.add_argument("--node", default="helix-head")
     parser.add_argument("args", nargs="*")
     args = parser.parse_args()
+    configure_lab(args.lab)
     if args.action == "deploy":
         deploy()
         return

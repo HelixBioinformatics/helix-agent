@@ -1,23 +1,29 @@
 # Qué falta para completar la tesis
 
-## Decisiones y dependencias vigentes, 12 de octubre de 2026
+## Decisiones y dependencias vigentes, 13 de octubre de 2026
 
-Modelo, acceso a AWS y recuperación de los originales principales de Pratt ya no son decisiones pendientes. Se eligió `openai/gpt-6-sol`, razonamiento `medium`, con OAuth existente y cuatro pilotos reales de preparación/alcance. Se probaron dos clústeres Academy de tres nodos, y se recibieron las 78 coordenadas/PAE originales de rango 1 de la Tabla S1. No se vuelve a pedir elegir modelo, conseguir clúster o recuperar esos archivos. [Evidencia y hashes](RESULTADOS-AWS-20261012.md).
-
-La asesora Layla Hirsh fue seleccionada como experta independiente según declaración del autor; el material real de 70 solicitudes está preparado. Seleccionar a la experta no equivale a recibir sus etiquetas.
+El modelo está elegido y probado, dos cuentas AWS Academy ya permitieron ejecutar los clústeres y los 78 originales principales de Pratt están recuperados. La matriz agregada de recursos terminó; no hay que pedir más cuentas para completar sus casos. Los capítulos 1 a 3 permanecen cerrados. [Evidencia final](RESULTADOS-AWS-20261012.md).
 
 | Pendiente vigente | Qué se requiere | Cómo completarlo |
-|---|---|---|
-| Referencia humana de solicitudes, R1.3 | Factibilidad definitiva, flujo esperado, campos de referencia y dos paráfrasis humanas por intención factible | La experta completa la entrega real; conservar respuestas iniciales y congelar el conjunto/particiones antes de la evaluación |
-| Turnos e intervenciones, R3.3 | Conversaciones reales y anotación independiente de turnos, sin adjudicación previa; cobertura de sesión y kappa | Ejecutar las sesiones pertinentes, preparar sus turnos y recoger juicios ciegos; las aprobaciones sintéticas del conductor no sustituyen esas conversaciones |
-| Regla física y etiquetas, R3.8 | Criterio externo, clasificador/umbral validado y positivos/negativos físicos pertinentes | Usar originales y observables CCTBX/FreeSASA como evidencia, sin etiquetar todas las predicciones como fallos ni las 30 referencias experimentales como negativos físicos certificados |
-| Gobernanza conjunta, R2.2 | Demostrar o delimitar el scope agregado real cliente/controlador/remoto, con picos y límites cuando se afirmen | Conservar la ingeniería local y el alcance de tareas Docker remotas; rechazar cuota remota dura ausente. R2.4 sigue en curso y no reemplaza esta prueba agregada |
+| --- | --- | --- |
+| Referencia humana, R1.3 y R1.5 | Factibilidad definitiva, flujo esperado, campos de referencia y dos paráfrasis humanas por intención factible | La asesora completa el material real de 70 solicitudes; conservar sus primeras respuestas y congelar reserva/particiones antes de ejecutar el modelo |
+| Turnos e intervenciones, R3.3 | Conversaciones reales y juicios independientes sin adjudicación previa | Capturar las sesiones pertinentes y entregar los turnos a la experta; calcular cobertura y kappa con esas etiquetas. Los callbacks sintéticos no sirven como anotación humana |
+| Criterio físico, R3.8 | Definición externa, clasificador validado y controles físicos pertinentes | Usar Pratt y los observables como datos, sin convertir toda predicción en fallo ni toda estructura experimental en negativo físico certificado |
 
-Las facturas OAuth y el cap duro 8192 siguen sin demostrar y se declaran como limitaciones observadas; no se presenta una estimación tarifaria como gasto efectivo. El cierre del dominio conserva sus contratos pendientes, mientras los componentes y campañas independientes pueden avanzar. La documentación inicial queda a cargo del autor, fuera de los pendientes del agente.
+**Integración técnica ya verificada:** producción `9ada336`, helper `0dcb38a`, regresión 543/63/0 y tipos correctos. [integración final](../../evaluation/trp/campaign-20261012/checks/post-campaign-production-20261013/cloud/summary.json) con 89 controles, cuatro tareas y CSV correctos en el positivo de 152 archivos; trabajo propio 384 CANCELLED 0:9 y paquete automático de fallo de 151 archivos. Los dos usan el verificador por defecto sin legacy. No añade casos a las cohortes ni sustituye las referencias humanas.
 
-La revisión `a951d73` deja reproducibles ejecutores/verificadores y vincula la ventana de acceso a la mínima fecha de Academy y de los temporizadores observados en los tres huéspedes. Lab1 ya consta detenido en [stop-state.json](../../evaluation/trp/campaign-20261012/cloud/lab1/stop-state.json). R2.4 continúa ejecutándose en Lab2: no se publica todavía acierto ni falso rechazo final.
+**Recursos, resultado ya obtenido:** originales 40 con 18 factibles, 18 inviables y cuatro desconocidos; frontera seis factibles y tres falsos rechazos, 50 %, que incumple 5 %; suplemento posterior con dos factibles y dos inviables. Sólo la unión de 44 alcanza veinte por clase y mantiene cuatro desconocidos. No se precisa otra cuenta para observar esos resultados; tampoco corresponde sustituirlos por más casos hasta que el porcentaje parezca favorable. Las rutas del dominio que no usan el perfil estricto conservan sus límites.
 
-**Nota de supersesión:** los escenarios y tablas que siguen se conservan con su fecha histórica y no son el estado actual. Sustentación julio de 2027 y borrador objetivo 4 de junio de 2027 se mantienen. No se reabren capítulos 1 a 3 ni se declara satisfecha R1.5 científica, kappa o sensibilidad/especificidad física.
+**Qué debe aportar el autor:** las referencias y paráfrasis de la experta, y después sus etiquetas de turnos reales; coordinación de una referencia física válida cuando se defina el clasificador. La documentación inicial es responsabilidad del autor y queda fuera de los pendientes del agente. El modelo/API y AWS no se registran como nuevas dependencias para las tareas técnicas actuales.
+
+Las respuestas frescas de EC2 DescribeInstances confirman las tres instancias propias de Lab1 detenidas a las 17:06:16 UTC y las tres de Lab2 a las 17:50:26 UTC. En Lab2, la parada siguió a la recuperación de la integración y la comprobación de quiescencia de las 17:43:06 UTC. Los volúmenes permanecen; la parada de cómputo no significa coste de almacenamiento cero ni factura final. Los USD 48,6 restantes de Lab2 fueron un reporte del portal, con demora de facturación. [Lab1](../../evaluation/trp/campaign-20261012/cloud/lab1/final-stopped-post-corrections-20261013.json), [Lab2](../../evaluation/trp/campaign-20261012/cloud/lab2/final-stopped-post-corrections-20261013.json).
+
+El OAuth existente funciona. No se atribuye su estimación tarifaria a una factura efectiva ni se afirma un tope duro de 8192 tokens. Tampoco hay P95 de latencia medido. Son límites explícitos, no solicitudes de otra cuenta. Sustentación julio de 2027 y borrador objetivo 4 de junio de 2027 se mantienen.
+
+**Nota de supersesión:** los escenarios siguientes son históricos. Se conservan sus fechas, métricas y decisiones; no representan el estado operativo actual ni acreditan R1.5 científico, kappa o sensibilidad/especificidad física.
+
+
+Word y PDF instalados el 13 de octubre a las 18:02 UTC: **155 páginas, 261 comprobaciones de render y diez notas rojas nuevas**. Los capítulos 1 a 3, bibliografía, imágenes originales y 21 IDs se conservaron. La revisión visual aceptó el candidato; los hashes instalados y el backup exacto del archivo del autor se verificaron. [Instalación y hashes](../../evaluation/trp/campaign-20261012/document/installation.json). La tesis sigue incompleta en sus validaciones científicas obligatorias.
 
 ## Registro histórico conservado hasta el 1 de octubre de 2026
 

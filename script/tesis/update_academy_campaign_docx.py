@@ -2,7 +2,8 @@
 """Write a results/conclusions/annex candidate from actual Academy evidence.
 
 Never overwrites the author's Word. All body elements before Chapter 4 and
-every ZIP part except document.xml are preserved. The last evidence summaries
+all original media are preserved. Drawing relationships may be extended for
+figures generated from retained results. The last evidence summaries
 are read at each invocation, so a final regeneration uses measured results,
 never a projected number of completed executions.
 
@@ -17,6 +18,8 @@ import json
 import math
 from pathlib import Path
 import runpy
+import statistics
+import struct
 from zipfile import ZipFile, ZIP_DEFLATED
 
 from lxml import etree as E
@@ -52,11 +55,73 @@ def result_of(audit, name):
 
 
 class Writer:
-    def __init__(self, body):
+    def __init__(self, body, relationships):
         self.body = body
+        self.relationships = relationships
+        self.media_parts = {}
+        self.figure_records = []
         self.normal = next(p for p in body if text(p).startswith("Este capítulo presenta los 21 resultados"))
         self.heading = next(p for p in body if text(p) == "Verificación de Helix en la segunda estación")
         self.table_template = next(t for t in body if t.tag == q("tbl") and text(t).startswith("ResultadoMétodo o herramientaReferencia del método"))
+
+    def figure(self, path, description, width_cm=14):
+        """Embed an already generated scientific plot without altering its pixels."""
+        raw = path.read_bytes()
+        if raw[:8] != b"\x89PNG\r\n\x1a\n":
+            raise ValueError("Expected a frozen PNG figure")
+        width_px, height_px = struct.unpack(">II", raw[16:24])
+        cx, cy = round(width_cm * 360000), round(width_cm * 360000 * height_px / width_px)
+        drawing = deepcopy(next(p for p in self.body.iter(q("p")) if p.find(".//" + q("drawing")) is not None))
+        wp = "{http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing}"
+        a = "{http://schemas.openxmlformats.org/drawingml/2006/main}"
+        pic = "{http://schemas.openxmlformats.org/drawingml/2006/picture}"
+        rel = "{http://schemas.openxmlformats.org/officeDocument/2006/relationships}"
+        opc = "{http://schemas.openxmlformats.org/package/2006/relationships}"
+        used_ids = {item.get("Id") for item in self.relationships}
+        next_id = 1
+        while "rId" + str(next_id) in used_ids:
+            next_id += 1
+        relationship_id = "rId" + str(next_id)
+        media_name = "helix-results-" + str(len(self.media_parts) + 1) + ".png"
+        E.SubElement(self.relationships, opc + "Relationship", {"Id": relationship_id,
+                     "Type": rel[1:-1] + "/image", "Target": "media/" + media_name})
+        drawing.find(".//" + a + "blip").set(rel + "embed", relationship_id)
+        for extent in drawing.findall(".//" + wp + "extent") + drawing.findall(".//" + a + "ext"):
+            extent.set("cx", str(cx)); extent.set("cy", str(cy))
+        doc_ids = [int(node.get("id")) for node in self.body.iter(wp + "docPr")]
+        image_id = str(max(doc_ids, default=0) + len(self.media_parts) + 1)
+        for node in drawing.findall(".//" + wp + "docPr") + drawing.findall(".//" + pic + "cNvPr"):
+            node.set("id", image_id); node.set("name", media_name); node.set("descr", description)
+        ppr = drawing.find(q("pPr"))
+        keep = ppr.find(q("keepNext"))
+        if keep is None:
+            keep = E.SubElement(ppr, q("keepNext"))
+        keep.set(q("val"), "1")
+        self.media_parts["word/media/" + media_name] = raw
+        self.figure_records.append({"source": path.relative_to(ROOT).as_posix(),
+                                    "sha256": hashlib.sha256(raw).hexdigest(),
+                                    "package_part": "word/media/" + media_name,
+                                    "width_cm": width_cm, "height_cm": cy / 360000})
+        return drawing
+
+    def caption(self, value):
+        p = self.paragraph(value)
+        ppr = p.find(q("pPr"))
+        spacing = ppr.find(q("spacing"))
+        if spacing is None:
+            spacing = E.SubElement(ppr, q("spacing"))
+        spacing.set(q("line"), "240"); spacing.set(q("lineRule"), "auto")
+        spacing.set(q("before"), "80"); spacing.set(q("after"), "120")
+        keep = ppr.find(q("keepNext"))
+        if keep is not None:
+            ppr.remove(keep)
+        keep_lines = ppr.find(q("keepLines"))
+        if keep_lines is None:
+            keep_lines = E.SubElement(ppr, q("keepLines"))
+        keep_lines.set(q("val"), "1")
+        for size in p.findall(".//" + q("sz")):
+            size.set(q("val"), "20")
+        return p
 
     def paragraph(self, value, heading=False, note=False):
         if "\u2014" in value:
@@ -170,7 +235,8 @@ def evidence():
         "public_mapping_protocol": BASE / "mapping-public-contrasts/protocol.json",
         "public_mapping_freeze": BASE / "mapping-public-contrasts/oracle-freeze.json",
         "public_mapping_manifest": BASE / "mapping-public-contrasts/manifest.json",
-        "regression": BASE / "checks/final-regression/summary.json",
+        "regression": BASE / "checks/strict-profile-integration/root-regression-pinned-environment/summary.json",
+        "strict_probe_regression": BASE / "checks/strict-profile-integration/early-nextflow-temporary-scope/summary.json",
         "workflow": BASE / "cloud/workflow-summary.json",
         "r24_head": BASE / "cloud/lab2/r24-summary.json",
         "r24_original": BASE / "cloud/lab2/r24-campaign/all-original-attempts.json",
@@ -178,10 +244,35 @@ def evidence():
         "negative_events": BASE / "event-negative-contrasts/audit.json",
         "negative_events_protocol": BASE / "event-negative-contrasts/protocol.json",
         "negative_events_sources": BASE / "event-negative-contrasts/source-snapshot.json",
+        "strict_pilot_before": BASE / "aggregate-resource-contrasts/smoke-outcomes-r4/summary.json",
+        "strict_pilot_after": BASE / "aggregate-resource-contrasts/smoke-outcomes-r5/summary.json",
+        "strict_calibration": BASE / "aggregate-resource-contrasts/calibration-before-final-campaign.json",
+        "strict_copy_control": BASE / "aggregate-resource-contrasts/copy-causal-controls/summary.json",
+        "strict_copy_review": BASE / "aggregate-resource-contrasts/copy-causal-controls/mechanism-review.json",
+        "aggregate": BASE / "aggregate-resource-contrasts/summary.json",
+        "aggregate_freeze": BASE / "aggregate-resource-contrasts/campaign-inputs/freeze.json",
+        "boundary_freeze": BASE / "aggregate-resource-contrasts/boundary-inputs/freeze.json",
+        "extension_freeze": BASE / "aggregate-resource-contrasts/extension-inputs/freeze.json",
+        "aggregate_final_audit": BASE / "aggregate-resource-contrasts/final-package-verification.json",
+        "aggregate_quiescence": BASE / "aggregate-resource-contrasts/final-quiescence.json",
+        "continuation_plan": BASE / "aggregate-resource-contrasts/continuation-1-plan.json",
+        "continuation_preflight": BASE / "aggregate-resource-contrasts/continuation-1-preflight-r3/summary.json",
+        "post_campaign_amendment": BASE / "checks/post-campaign-production-20261013/source-amendment.json",
+        "post_campaign_validation": BASE / "checks/post-campaign-production-20261013/summary.json",
+        "post_campaign_cloud": BASE / "checks/post-campaign-production-20261013/cloud/summary.json",
+        "post_campaign_cloud_quiescence": BASE / "checks/post-campaign-production-20261013/cloud/post-quiescence.json",
+        "strict_offline": BASE / "checks/strict-full-client-final-offline/attempt-2/audit.json",
+        "strict_offline_faults": BASE / "checks/strict-full-client-final-offline/attempt-2/fault-injection.json",
     }
-    data = {key: ([json.loads(line) for line in path.read_text().splitlines() if line.strip()]
-                  if path.suffix == ".jsonl" else load(path, optional=key.startswith("structural") or key == "workflow"))
-            for key, path in paths.items()}
+    data, read_hashes = {}, {}
+    for key, path in paths.items():
+        if not path.exists() and (key.startswith("structural") or key.startswith("post_campaign_") or key == "workflow"):
+            data[key] = None
+            continue
+        raw = path.read_bytes()
+        read_hashes[key] = hashlib.sha256(raw).hexdigest()
+        data[key] = ([json.loads(line) for line in raw.decode().splitlines() if line.strip()]
+                     if path.suffix == ".jsonl" else json.loads(raw))
     data["expert"] = runpy.run_path(str(BASE / "audit_campaign.py"))["expert_workbook_snapshot"]()
     if any(data["expert"]["nonempty_response_fields"].values()):
         raise ValueError("Human response cells are now populated; review dependent prose before regeneration")
@@ -200,6 +291,10 @@ def evidence():
     validate_mapped_reference(data, paths)
     validate_public_mapping(data, paths)
     validate_resource_and_refusal_contrasts(data, paths)
+    validate_strict_development_pilots(data, paths)
+    validate_aggregate_campaign(data, paths)
+    validate_strict_offline(data, paths)
+    validate_post_campaign_checks(data, paths)
     # Saved case outcomes count only when their completed artifact and
     # input-specific CSV hashes remain available. Unfinished cases are absent.
     cases = []
@@ -240,8 +335,10 @@ def evidence():
     data["additional_cloud_summaries"] = list(unique.values())
     data["successful_cloud_attempts"] = all_successful_attempts
     data["failed_cloud_cases"] = failed_cases
-    data["source_records"] = [{"path": path.relative_to(ROOT).as_posix(), "sha256": sha(path)}
-                              for path in paths.values() if path.exists()]
+    if any(sha(paths[key]) != digest for key, digest in read_hashes.items()):
+        raise ValueError("A campaign source changed during generation; retry after its writer is quiescent")
+    data["source_records"] = [{"path": paths[key].relative_to(ROOT).as_posix(), "sha256": digest}
+                              for key, digest in read_hashes.items()]
     data["source_records"].append({"path": data["expert"]["path"], "sha256": data["expert"]["sha256"]})
     data["source_records"].extend({"path": item["path"], "sha256": item["sha256"]} for item in all_successful_attempts + failed_cases)
     data["source_records"].extend(data.pop("additional_source_records"))
@@ -315,6 +412,226 @@ def validate_resource_and_refusal_contrasts(data, paths):
         for row in case["records"]:
             if sha(ROOT / row["path"]) != row["sha256"]:
                 raise ValueError("Negative action source changed: " + row["path"])
+
+
+def validate_strict_development_pilots(data, paths):
+    """Bind calibration prose to retained full-client runs, not target budgets."""
+    before, after = data["strict_pilot_before"], data["strict_pilot_after"]
+    calibration = data["strict_calibration"]
+    old = next(row for row in before["rows"] if row["case"] == "SMOKE-01-generous")
+    new = next(row for row in after["rows"] if row["case"] == "SMOKE-01-generous")
+    for row in (old, new):
+        if row["physicalFeasibilityLabel"] is not True or row["actualExitCode"] != 0 or row["checksPassed"] != row["checksTotal"] or not row["persistentSqlite"]:
+            raise ValueError("Full-client development pilot is not established")
+        if not row["defaultPortableVerifier"]["ok"] or not row["defaultPortableVerifier"]["externallyAnchored"] or row["scientificR24Rate"] is not None:
+            raise ValueError("Strict pilot portable or scientific scope changed")
+    if calibration["oldModelObserved"]["predictedBytes"] != old["predictedWorkBytes"] or calibration["oldModelObserved"]["sampledObservedPeakBytes"] != old["allocatedBlockBytesObservedPeak"]:
+        raise ValueError("Calibration no longer refers to the original observation")
+    if calibration["candidateProfile"]["overheadBytes"] != 32 * 1048576 or calibration["ordinaryRoutesOverheadUnchangedBytes"] != 12 * 1048576 or calibration["reservedCasesUsed"] or not calibration["developmentOnly"]:
+        raise ValueError("Prospective calibrated storage profile changed")
+    if new["actualDecision"]["demand"]["storage"]["profile"] != calibration["candidateProfile"]["id"] or new["predictedWorkBytes"] != calibration["candidateProfile"]["recalculatedCandidateBytesOnCalibrationData"]:
+        raise ValueError("Calibration check used a different reservation profile")
+    for record in calibration["sources"]:
+        if sha(ROOT / record["path"]) != record["sha256"]:
+            raise ValueError("Calibration source changed: " + record["path"])
+    review, control = data["strict_copy_review"], data["strict_copy_control"]
+    if not review["mechanismQualified"] or not review["originalSummaryPreserved"] or review["originalSummarySha256"] != sha(paths["strict_copy_control"]):
+        raise ValueError("Quota copy causal interpretation is not anchored")
+    low, generous = control["rows"]
+    if low["exit"] != 1 or low["markers"]["HELIX_COPY_CONTROL_THROW"]["code"] != "ENOSPC" or generous["exit"] != 0 or not generous["markers"]["HELIX_COPY_CONTROL_RESULT"]["equalsSource"]:
+        raise ValueError("Matched copy mechanism control did not produce its contrast")
+    if low["markers"]["HELIX_COPY_CONTROL"]["sourceSha256"] != generous["markers"]["HELIX_COPY_CONTROL"]["sourceSha256"] or not review["rowDevicesMatchGlobal"] or review["actualGlobalHealth"]["globalFreeBytes"] <= generous["before"]["sourceBytes"]:
+        raise ValueError("Copy controls or global filesystem health are not comparable")
+    data["strict_pilot_comparison"] = {"before": old, "after": new}
+
+
+def validate_aggregate_campaign(data, paths):
+    summary = data["aggregate"]
+    if summary["schema"] != "helix-aggregate-resource-original40-plus-boundary6/1.0" or summary["scientificR24Rate"] is not None or summary["uniqueProteins"] != 1:
+        raise ValueError("Aggregate campaign has a different or overstated scope")
+    if summary["copyMechanismReviewSha256"] != sha(paths["strict_copy_review"]) or not summary["copyMechanismQualified"]:
+        raise ValueError("Aggregate ENOSPC interpretation lost its causal source")
+    helper = BASE / "aggregate-resource-contrasts/summarize_campaign.py"
+    if summary["summarySourceSha256"] != sha(helper):
+        raise ValueError("Aggregate summary code changed")
+    for group, key, size, outcomes in (("original", "aggregate_freeze", 40, "campaign-outcomes"),
+                                       ("boundary", "boundary_freeze", 6, "boundary-outcomes"),
+                                       ("extension", "extension_freeze", 4, "extension-outcomes")):
+        plan, part = data[key], summary[group]
+        if len(plan["cases"]) != size or part["freezeSha256"] != sha(paths[key]) or plan["physicalLabelsObservedBeforeFreeze"]:
+            raise ValueError("Resource cases are not the prospective original/boundary cohorts")
+        if plan["qualifiedEnospcMechanismReviewSha256"] != summary["copyMechanismReviewSha256"] or plan["uniqueProteins"] != 1:
+            raise ValueError("Resource case causal or biological scope changed")
+        for path, digest in plan["sourceHashes"].items():
+            if sha(ROOT / path) != digest:
+                validate_post_campaign_source(data, path, digest)
+        if [r["case"] for r in part["rows"]] != [r["id"] for r in plan["cases"]]:
+            raise ValueError("Resource summary lost planned IDs or their order")
+        for row, planned in zip(part["rows"], plan["cases"], strict=True):
+            if row["graphId"] != planned["graphId"] or row["budgetWorkBytes"] != planned["budget"]["workBytes"]:
+                raise ValueError("Resource row changed its frozen inputs")
+            if row.get("observationStatus") == "not-observed":
+                if row["physicalFeasibilityLabel"] is not None or row["actualDecision"] is not None:
+                    raise ValueError("Unobserved resource row has a result")
+                continue
+            folder = BASE / "aggregate-resource-contrasts" / outcomes / row["case"]
+            audit = ROOT / row["auditPath"] if row.get("auditPath") else folder / "independent-audit.json"
+            if sha(audit) != row["auditSha256"]:
+                raise ValueError("Resource row audit changed")
+            if any(row.get(k) != value for k, value in load(audit).items()):
+                raise ValueError("Resource summary differs from its case audit")
+            if row.get("firstAuditPath") and sha(ROOT / row["firstAuditPath"]) != row["firstAuditSha256"]:
+                raise ValueError("First resource interpretation is not retained")
+            if row.get("resolutionReviewPath") and sha(ROOT / row["resolutionReviewPath"]) != row["resolutionReviewSha256"]:
+                raise ValueError("Resource observation amendment is not retained")
+            if row.get("fdReviewPath") and sha(ROOT / row["fdReviewPath"]) != row["fdReviewSha256"]:
+                raise ValueError("Resource descriptor interpretation is not retained")
+            if "actualExitCode" not in row:
+                continue
+            if sha(folder / "actual-allocation-and-supervisor.tar") != row["retainedArchiveSha256"]:
+                raise ValueError("Retained actual allocation changed")
+            supervisor = list((folder / "recovered").glob("*/supervision.json"))
+            if len(supervisor) != 1 or sha(supervisor[0]) != row["supervisionSha256"]:
+                raise ValueError("Resource supervision is not retained exactly once")
+        # Recompute the consumer's counts/rates from the independently stored
+        # case records. This helper performs no launch, mutation or re-audit.
+        recomputed = runpy.run_path(str(helper))["cohort"](paths[key].parent,
+                        BASE / "aggregate-resource-contrasts" / outcomes)
+        if recomputed != part or part["counts"] != summary[group + "Counts"] or part["rates"] != summary[group + "Rates"]:
+            raise ValueError("Aggregate counts or rates differ from retained case records")
+        labeled = [r for r in part["rows"] if r["physicalFeasibilityLabel"] is not None and r["actualDecision"] is not None]
+        feasible = [r for r in labeled if r["physicalFeasibilityLabel"] is True]
+        infeasible = [r for r in labeled if r["physicalFeasibilityLabel"] is False]
+        false_rejections = sum(not r["actualDecision"]["accepted"] for r in feasible)
+        false_admissions = sum(r["actualDecision"]["accepted"] for r in infeasible)
+        counts, rates = part["counts"], part["rates"]
+        if (counts["feasible"], counts["infeasible"], counts["unknown"], counts["correct"]) != (
+                len(feasible), len(infeasible), size-len(labeled), len(labeled)-false_rejections-false_admissions):
+            raise ValueError("Independent resource label denominator differs")
+        margins = [(r["predictedWorkBytes"]-r["allocatedBlockBytesObservedPeak"])/r["allocatedBlockBytesObservedPeak"] for r in feasible]
+        independent_rates = {
+            "classificationAccuracy": (len(labeled)-false_rejections-false_admissions)/len(labeled) if labeled else None,
+            "falseRejectionRate": false_rejections/len(feasible) if feasible else None,
+            "falseAdmissionRate": false_admissions/len(infeasible) if infeasible else None,
+            "medianSignedStorageOverestimation": statistics.median(margins) if margins else None,
+            "medianPositiveOnlyStorageOverestimation": statistics.median(max(0, value) for value in margins) if margins else None,
+        }
+        if any(rates[name] != value for name, value in independent_rates.items()):
+            raise ValueError("Independent resource rates differ")
+        if part["rates"]["falseRejectionThreshold"] != 0.05 or part["rates"]["storageOverestimationThreshold"] != 0.25:
+            raise ValueError("Resource thresholds changed")
+    if summary["all46Observed"] != (summary["original"]["allPlannedObserved"] and summary["boundary"]["allPlannedObserved"]):
+        raise ValueError("Aggregate completion flag differs from actual observations")
+    if summary["allRequiredCloudCasesObserved"] != (summary["all46Observed"] and summary["extension"]["allPlannedObserved"]):
+        raise ValueError("Supplement completion flag differs from actual observations")
+    for name, groups in (("originalPlusSupplement", ("original", "extension")),
+                         ("allEngineeringIncludingBoundary", ("original", "boundary", "extension"))):
+        combined = summary[name]
+        expected_counts = {key: sum(summary[group]["counts"][key] for group in groups)
+                           for key in summary["originalCounts"]}
+        if combined["counts"] != expected_counts or combined["scientificPopulationEstimate"]:
+            raise ValueError("Resource cohorts or their denominators were merged incorrectly")
+        if combined["minimaTwentyFeasibleTwentyInfeasibleMet"] != (expected_counts["feasible"] >= 20 and expected_counts["infeasible"] >= 20):
+            raise ValueError("Resource minimum is not based on actual demonstrated classes")
+    final_audit, quiescence = data["aggregate_final_audit"], data["aggregate_quiescence"]
+    if not final_audit["verified"] or not quiescence["readyForParentSourceChangesAndLifecycle"] or quiescence["observedCases"] != 50:
+        raise ValueError("Final cold audit or fifty-case quiescence does not pass")
+    for prefix in ("auditorAmendment", "auditorSourceOverlay", "auditorFdAmendment"):
+        if summary.get(prefix + "Path") and sha(ROOT / summary[prefix + "Path"]) != summary[prefix + "Sha256"]:
+            raise ValueError("Resource audit amendment source changed")
+
+
+def validate_post_campaign_source(data, path, frozen_digest):
+    """New implementation cannot silently redefine the frozen experimental code."""
+    amendment = data.get("post_campaign_amendment")
+    if amendment is None or amendment["schema"] != "helix-post-campaign-producer-amendment/1.0":
+        raise ValueError("Changed source lacks a post-campaign amendment: " + path)
+    if (amendment["frozenScientificEvidenceRewritten"] or amendment["thresholdsChanged"]
+            or amendment["repeatedCampaignCases"] or not amendment["originalFortyDenominatorUnchanged"]
+            or not amendment["all50CloudCasesObservedBeforeApplication"]):
+        raise ValueError("Implementation correction changes the experimental evidence")
+    for field in ("campaignSummary", "quiescence"):
+        if sha(ROOT / amendment[field + "Path"]) != amendment[field + "Sha256"]:
+            raise ValueError("Post-campaign correction lost its terminal evidence")
+    record = next((row for row in amendment["files"] if row["path"] == path), None)
+    if (record is None or record["frozenSha256"] != frozen_digest
+            or sha(ROOT / record["archivedPath"]) != frozen_digest
+            or sha(ROOT / path) != record["currentSha256"]):
+        raise ValueError("Changed producer source is not exactly archived and explained: " + path)
+    if datetime.fromisoformat(amendment["appliedAt"]) <= datetime.fromisoformat(data["aggregate_quiescence"]["at"]):
+        raise ValueError("Producer correction preceded campaign quiescence")
+
+
+def validate_post_campaign_checks(data, paths):
+    validation = data.get("post_campaign_validation")
+    if validation is None:
+        return
+    results = validation["results"]
+    if (not validation["productionAppliedBeforeChecks"] or results["backendFunctional"]["exitCode"]
+            or not results["backendVerifier"]["passed"] or not results["semanticVerifier"]["passed"]
+            or not results["failedStrictCompatibility"]["defaultAccepted"]
+            or results["broadRelevantRegression"]["exitCode"] or results["broadRelevantRegression"]["failed"]
+            or results["typecheck"]["exitCode"] or results["peerNativeRunner"]["failed"]):
+        raise ValueError("Applied producer corrections do not pass their local checks")
+    for path, digest in validation["sourceHashes"].items():
+        if sha(ROOT / path) != digest:
+            raise ValueError("Validated implementation source changed")
+    amendment = data["post_campaign_amendment"]
+    if not amendment["localValidationVerified"] or amendment["localValidationSha256"] != sha(paths["post_campaign_validation"]):
+        raise ValueError("Post-campaign implementation report is not externally linked")
+    cloud = data.get("post_campaign_cloud")
+    if cloud is None:
+        return
+    if (cloud["schema"] != "helix-post-campaign-default-integration/1.0"
+            or not cloud["verified"] or cloud["checksPassed"] != len(cloud["checks"])
+            or not all(row["ok"] for row in cloud["checks"])
+            or cloud["legacyOptionUsed"] or cloud["original50Changed"]
+            or cloud["reservedScientificMetrics"] is not None):
+        raise ValueError("Post-correction cloud integration is not independently verified")
+    if (not amendment["cloudValidationVerified"]
+            or amendment["cloudValidationSha256"] != sha(paths["post_campaign_cloud"])
+            or cloud["verifierSha256"] != sha(ROOT / "packages/helix/src/trp/verify_bundle.py.txt")):
+        raise ValueError("Post-correction live validation lost its source anchor")
+    quiescence = data["post_campaign_cloud_quiescence"]
+    if (not quiescence["verified"] or quiescence != cloud["postQuiescence"]
+            or sha(paths["post_campaign_cloud_quiescence"]) != cloud["postQuiescenceSha256"]
+            or not all(quiescence[key] for key in ("allNativeJobsEmpty", "allContainersEmpty", "ownedProcessesEmpty", "controllerCgroupsEmpty"))):
+        raise ValueError("Post-correction cloud activity has not closed")
+    positive, negative = cloud["positive"], cloud["negative"]
+    for result, status in ((positive, "succeeded"), (negative, "failed")):
+        package = ROOT / result["sourcePackage"]
+        cold = result["defaultCold"]
+        if (not result["verified"] or not cold["ok"] or not cold["externallyAnchored"]
+                or cold["legacyBackendMetadata"] or cold["status"] != status
+                or cold["manifestSha256"] != sha(package / "manifest.json")
+                or result["defaultColdFileCount"] != cold["files"]):
+            raise ValueError("Post-correction package is not anchored in its default cold result")
+    if (not positive["backendConsistent"] or not positive["fourRealNativeTasks"]
+            or len(positive["nativeIds"]) != 4 or not positive["ownInputGoldEqual"]
+            or not positive["realPersistentSqlite"] or positive["actualExitCode"] != 0
+            or negative["actualState"] != "CANCELLED" or negative["actualExitCode"] != "0:9"
+            or not negative["automaticFailedPackage"] or not negative["nativeLedgerFreshSourceConfirmed"]
+            or negative["actualClientExitCode"] != 1 or not negative["ownedControllerAndTracerReaped"]
+            or not negative["inducedFaultOnly"] or negative["physicalFeasibilityLabel"] is not None):
+        raise ValueError("Unexpected live repair outcomes; rewrite from new evidence")
+
+
+def validate_strict_offline(data, paths):
+    audit = data["strict_offline"]
+    if not audit["verified"] or not all(row["passed"] for row in audit["checks"]):
+        raise ValueError("Strict full-client offline audit did not pass")
+    faults = audit["faultInjection"]
+    if faults["artifacts"] != 150 or faults["detected"] != faults["injected"] or faults["semanticDetected"] != faults["semanticInjected"] or not faults["originalUnchanged"] or not faults["restored"]["ok"]:
+        raise ValueError("Strict full-client fault coverage or restored copy failed")
+    bundle = ROOT / audit["sourceBundlePath"]
+    if sha(bundle / "manifest.json") != audit["externalManifestSha256"] or sha(paths["aggregate_freeze"]) != audit["freezeSha256"]:
+        raise ValueError("Strict full-client offline audit lost external anchors")
+    methods = next(row["result"] for row in audit["checks"] if row["name"] == "all24_methods_source_pointers_and_exact_template")
+    gates = next(row["result"] for row in audit["checks"] if row["name"] == "exact10_gates_sources_order_hash_chain")
+    if methods["fieldsChecked"] != 24 or methods["requiredFields"] != 24 or not all(field["equal"] for field in methods["fields"]):
+        raise ValueError("Strict source-backed methods coverage changed")
+    if gates["gatesChecked"] != 10 or gates["callbackActionsIndependentlyCaptured"] or not gates["ledgerSourceBindings"]:
+        raise ValueError("Strict mandatory-path event coverage changed")
 
 
 def validate_surface(data, paths):
@@ -520,7 +837,78 @@ def measured_campaign(writer, data):
     paragraphs.append(writer.paragraph("El piloto fijó dos pasos por caso, 180 segundos de tiempo máximo y un límite propuesto de 8192 tokens de salida por paso. Una sonda posterior dejó maximumOutputTokens=null y serviceTier=null en la configuración observada y en las solicitudes capturadas; el agente principal de esa sonda tenía razonamiento medium configurado. Por ello, el límite de salida no se presenta como confirmado en la solicitud enviada ni se asigna un nivel de servicio efectivo o una revisión del proveedor no observados. Estas limitaciones deben resolverse y congelarse antes de una campaña científica reservada; no impidieron los cuatro ensayos de desarrollo descritos."))
     regression = data["regression"]
     paragraphs.append(writer.paragraph(f"La regresión posterior de TRP y componentes relacionados pasó {regression['passed']} pruebas, con {regression['assertions']} aserciones, {regression['skipped_opt_in']} pruebas opcionales omitidas y cero fallos. Las comprobaciones de motores opcionales y nube tienen registros propios; una omisión no cuenta como ejecución aprobada. Esta regresión de software no estima admisibilidad del lenguaje, acuerdo humano ni validez biológica."))
+    focused = data["strict_probe_regression"]
+    if focused["exitCode"] != 0 or focused["failed"] != 0 or sha(BASE / "checks/strict-profile-integration/early-nextflow-temporary-scope/focused.log") != focused["logSha256"]:
+        raise ValueError("Strict initial-probe regression evidence changed")
+    paragraphs.append(writer.paragraph(f"Un ajuste posterior del perfil co-localizado aplicó el directorio temporal de Nextflow y Java antes de sus consultas iniciales de versión y configuración. Las {focused['passed']} pruebas focalizadas pertinentes pasaron con {focused['assertions']} aserciones y cero fallos. El cliente se ejecuta en el controlador y utiliza transporte Python local verificado; Slurm mantiene las tareas en los dos trabajadores. La política root y las observaciones Linux vinculan las rutas declaradas de trabajo, temporal, estado, caché y exportación a un proyecto XFS, con el cliente y Nextflow dentro del mismo cgroup. Los caches de software preinstalado y las observaciones externas del supervisor se identifican por separado. Este perfil opcional no extiende esas garantías a la ruta SSH ordinaria ni sustituye una medición de factibilidad con el cliente real."))
+    old, new = (data["strict_pilot_comparison"][key] for key in ("before", "after"))
+    paragraphs.append(writer.paragraph("El perfil estricto se contrastó después con el cliente completo de Helix: bootstrap y SQLite persistente, copia inicial de coordenadas, temporales, cachés propias, trabajo remoto y exportación portable dentro de un mismo proyecto XFS. Cliente, Python y Nextflow comparten un cgroup de una CPU y 2 GiB con swap cero; cada tarea científica tiene una asignación separada de dos CPU y 2 GiB en el trabajador correspondiente. Las tareas son secuenciales y sus límites no se suman como un pico medido. Las copias de entrada en los trabajadores se materializan mediante stageInMode=copy; se conservan identidad de proyecto y comprobaciones recursivas. El software preinstalado, las cachés compartidas de Docker/Nextflow y la telemetría externa del supervisor quedan fuera de este presupuesto de trabajo."))
+    paragraphs.append(writer.paragraph(f"El primer piloto completo terminó con cuatro trabajos nativos, referencia numérica propia, SQLite reabierta y paquete de {old['defaultPortableVerifier']['files']} archivos verificado sin ejecutar el análisis. La cuota observó un máximo muestreado de {old['allocatedBlockBytesObservedPeak']} bytes frente a {old['predictedWorkBytes']} estimados, una subestimación de {old['observedUnderestimateBytes']} bytes. El límite autorizado de 128 MiB no se excedió. Este resultado permanece como fallo del contador inicial y no se sustituye por una estimación posterior."))
+    paragraphs.append(writer.paragraph(f"Antes de congelar la evaluación se ajustó exclusivamente el perfil co-localizado: se descontaron los términos deterministas de copias del piloto y se redondeó el residuo al siguiente valor de potencia de dos, 32 MiB de reserva fija. Las rutas ordinarias conservan 12 MiB. Un nuevo piloto completo observó {new['allocatedBlockBytesObservedPeak']} bytes frente a {new['predictedWorkBytes']} estimados, margen {as_spanish(100*new['observedOverestimationFraction'])}%, y verificó {new['checksPassed']}/{new['checksTotal']} comprobaciones y su paquete portable. Es calibración y comprobación de desarrollo sobre una proteína; los umbrales de 25% de sobreestimación mediana, 5% de falso rechazo y cero excesos de presupuesto permanecen vigentes."))
+    paragraphs.append(writer.paragraph("Las tentativas anteriores conservaron errores del comprobador de cuota, un ciclo de importación del bootstrap y enlaces de entrada del flujo, además de una asignación pequeña que falló durante preparación del operador. No proporcionan etiquetas de factibilidad completas. Una posterior copia inicial con 64 KiB terminó en ENOSPC y se conservó inicialmente como desconocida. Un control separado repitió la misma operación de Bun y los mismos 359397 bytes: falló bajo 64 KiB y copió con hash idéntico bajo 128 MiB, con espacio e inodos disponibles en la raíz del sistema XFS. La disponibilidad consultada dentro del proyecto estaba recortada por su cuota; esa interpretación se corrigió en una revisión adicional sin modificar los datos primarios. Esta prueba justifica una regla causal para ENOSPC fijada antes de la nueva campaña, cuando coinciden ruta, proceso, tiempo y terminación, y no convierte cualquier error de caché en inviabilidad física."))
+    paragraphs.extend(aggregate_sections(writer, data))
     paragraphs.append(writer.paragraph("NOTA PARA EL AUTOR. La asesora está designada para la referencia independiente. El libro de setenta solicitudes continúa sin respuestas definitivas, referencias ni paráfrasis humanas recibidas. R1.3 requiere cincuenta intenciones factibles y cien paráfrasis revisadas; R3.3 requiere al menos cien turnos humanos reales y sus primeras etiquetas independientes. Las respuestas sintéticas del conductor a Question.Service no cuentan como anotación humana ni permiten calcular kappa. Estas dependencias no se resuelven con más créditos AWS.", note=True))
+    return paragraphs
+
+
+def aggregate_sections(writer, data):
+    summary = data["aggregate"]
+    counts, rates = summary["originalCounts"], summary["originalRates"]
+    boundary, boundary_rates = summary["boundaryCounts"], summary["boundaryRates"]
+    paragraphs = [writer.paragraph("Evaluación técnica del presupuesto completo", heading=True)]
+    paragraphs.append(writer.paragraph("La matriz original del perfil conjunto fijó veinte composiciones de desarrollo y dos presupuestos por composición antes de ejecutarlas: 128 MiB y un límite pequeño entre 64 KiB y 16 MiB. Los cuarenta IDs y sus presupuestos permanecen en el denominador planificado; factibilidad no se deduce del tamaño del límite ni de la decisión de admisión. Para una negativa exclusivamente por workBytes se conserva el rechazo real y se permite una ejecución contrafactual dentro del mismo límite para observar factibilidad. Las negativas por otras causas conservan sus controles. La etiqueta positiva exige cliente completo, SQLite persistente, cuatro trabajos nativos, CSV propio idéntico, exportación portable y límites verificados. La negativa exige fallo terminal causal por cuota o memoria del núcleo; las restantes observaciones son desconocidas."))
+    if counts["observed"]:
+        accuracy = "no calculado" if rates["classificationAccuracy"] is None else as_spanish(100*rates["classificationAccuracy"]) + "%"
+        rejection = "no calculado" if rates["falseRejectionRate"] is None else as_spanish(100*rates["falseRejectionRate"]) + "%"
+        margin = "no calculada" if rates["medianPositiveOnlyStorageOverestimation"] is None else as_spanish(100*rates["medianPositiveOnlyStorageOverestimation"]) + "%"
+        paragraphs.append(writer.paragraph(f"Se observaron {counts['observed']}/{counts['planned']} IDs originales: {counts['feasible']} factibles, {counts['infeasible']} inviables y {counts['unknown']} sin etiqueta establecida, de los cuales {counts['notObserved']} no tienen ejecución observada. Hubo {counts['attempts']} tentativas registradas. El acierto sobre los casos etiquetados fue {accuracy}; los falsos rechazos fueron {counts['falseRejections']}/{counts['feasible']} ({rejection}) y las falsas admisiones {counts['falseAdmissions']}/{counts['infeasible']}. Se observaron {counts['actualBudgetExcessCases']} excesos del presupuesto aprobado y {counts['admittedPredictionBoundExcessCases']} excesos de la estimación en casos admitidos. La sobreestimación positiva mediana del almacenamiento, medida frente al máximo muestreado de bloques asignados, fue {margin}. Los {counts['verifiedColdFullSuccesses']} casos positivos tienen verificación portable y {counts['reproducibleCountCases']} reproducen el conteo de demanda. Son resultados de ingeniería sobre una proteína; no constituyen el indicador científico reservado de R2.4."))
+        first = summary.get("frozenOriginalAuditorCounts")
+        if first is not None:
+            paragraphs.append(writer.paragraph(f"La lectura del auditor congelado conserva por separado {first['feasible']} factibles, {first['infeasible']} inviables y {first['unknown']} sin etiqueta, incluidos {first['notObserved']} sin salida observada. Las revisiones de interpretación se añadieron después de observar sus errores, sin modificar productor, datos, presupuesto ni repetir tareas. Se conservaron la fuente congelada, los primeros informes y cada revisión con hashes. Una corrección temporal reconoce la cuantización de un milisegundo de Date.now frente a los microsegundos de strace; mantiene el intervalo causal de cinco segundos. Un error de SQLite o un descriptor sólo se considera causal cuando enlaza el archivo de esa sesión, su syscall fallido y la terminación. Las tasas anteriores describen esa interpretación revisada de ingeniería, no una evaluación científica intacta. La falta de un syscall trazado permanece desconocida."))
+    else:
+        paragraphs.append(writer.paragraph("Los cuarenta casos están fijados, pero no hay salidas observadas incluidas todavía. No se presenta una tasa proyectada ni un resultado satisfactorio a partir de los presupuestos elegidos."))
+    paragraphs.append(writer.paragraph("Un contraste de frontera fijó aparte tres composiciones de desarrollo no usadas en el piloto, cada una con 39 y 41 MiB. Ese diseño se eligió después de conocer la calibración y antes de observar sus propias salidas. Sus seis IDs se reportan como cohorte separada; no reemplazan casos ni se suman para cambiar la tasa original de cuarenta."))
+    if boundary["observed"]:
+        boundary_rejection = "no calculado" if boundary_rates["falseRejectionRate"] is None else as_spanish(100*boundary_rates["falseRejectionRate"]) + "%"
+        paragraphs.append(writer.paragraph(f"En la frontera se observaron {boundary['observed']}/{boundary['planned']} IDs: {boundary['feasible']} factibles, {boundary['infeasible']} inviables y {boundary['unknown']} desconocidos. Hubo {boundary['falseRejections']}/{boundary['feasible']} falsos rechazos ({boundary_rejection}), {boundary['falseAdmissions']} falsas admisiones y {boundary['actualBudgetExcessCases']} excesos del presupuesto. Este contraste permite mostrar rechazo conservador cerca de la reserva sin ocultarlo tras los casos de 128 MiB."))
+        if boundary_rates["falseRejectionThresholdMet"] is False:
+            paragraphs.append(writer.paragraph("El falso rechazo de frontera incumple la meta de 5%. Los tres presupuestos de 39 MiB permitieron completar el flujo y la evidencia aunque el estimador los rechazó. Las ejecuciones contrafactuales se conservan como oráculos de factibilidad, no como admisiones reales. El margen conservador evita exceder la reserva observada, pero también puede impedir trabajo realizable; una tasa favorable en los casos alejados del límite no demuestra cumplimiento general de R2.4."))
+    supplement = summary["extensionCounts"]
+    combined = summary["originalPlusSupplement"]["counts"]
+    paragraphs.append(writer.paragraph(f"El mínimo de veinte casos factibles y veinte inviables no se alcanzó en la matriz original: quedaron {counts['feasible']} y {counts['infeasible']} demostrados. Después de observar esa insuficiencia se fijaron por separado cuatro IDs nuevos, con entradas y presupuestos sellados antes de sus propias salidas. El suplemento observó {supplement['feasible']} factibles y {supplement['infeasible']} inviables, con {supplement['unknown']} desconocidos. La unión descriptiva de original y suplemento contiene {combined['planned']} IDs, {combined['feasible']} factibles, {combined['infeasible']} inviables y {combined['unknown']} desconocidos. Aporta soporte técnico adicional sin completar retrospectivamente el mínimo original, cambiar su tasa ni sumar la frontera para ocultar sus rechazos."))
+    all_counts, all_rates = summary["allEngineeringIncludingBoundary"]["counts"], summary["allEngineeringIncludingBoundary"]["rates"]
+    paragraphs.append(writer.paragraph(f"La unión puramente descriptiva de las tres cohortes contiene {all_counts['planned']} IDs, {all_counts['feasible']} factibles, {all_counts['infeasible']} inviables y {all_counts['unknown']} desconocidos. Sus falsos rechazos son {all_counts['falseRejections']}/{all_counts['feasible']} ({as_spanish(100*all_rates['falseRejectionRate'])}%), también superiores a la meta. Se confirmaron {all_counts['correct']} decisiones correctas en {all_counts['feasible']+all_counts['infeasible']} casos con etiqueta; los desconocidos permanecen fuera de ese denominador. Este agregado no reemplaza la matriz original ni representa una muestra aleatoria de desempeño."))
+    paragraphs.append(writer.paragraph("Los cuatro desconocidos finales se conservan: dos errores de creación de directorios carecen de la syscall causal trazada y dos ejecuciones generosas sufrieron problemas de entrada/salida y vencimiento del controlador. En el trabajo nativo 312, el registro del trabajador identifica Stale file handle al abrir stdout y señal 53; el observador capturó PENDING pero perdió después ese ID, sin retener una consulta nativa de estado terminal. Esa evidencia identifica un problema de infraestructura y seguimiento, no inviabilidad por el presupuesto ni un fallo físico de la proteína."))
+    preflight = data["continuation_preflight"]
+    if not preflight["ready"] or preflight["originalCasesRetried"] or not preflight["producerUnchanged"]:
+        raise ValueError("Continuation preflight is not a verified unchanged-producer checkpoint")
+    paragraphs.append(writer.paragraph("La continuidad preservó las 27 primeras tentativas terminales, exportó la evidencia y comprobó ausencia de procesos y trabajos propios antes de detener y reiniciar las instancias. Se remontó la misma imagen XFS y su UUID, sin reformatear ni borrar proyectos anteriores. La exportación NFS recibió una identidad estable y se comprobó lectura, escritura, stdout y Docker en ambos trabajadores mediante los trabajos 316 y 317. Después se enviaron únicamente los trece IDs todavía no despachados. Los preflights fallidos y la reparación se conservan como operaciones separadas; no sustituyen resultados ni repiten casos originales."))
+    paragraphs.append(writer.paragraph("Los bloques del proyecto XFS son la medida primaria de almacenamiento: incluyen reservas y metadatos que pueden diferir de la suma de tamaños lógicos o de bloques lstat de archivos. El máximo es muestreado, no una observación continua. La imposición de la cuota, el cgroup y las restricciones Docker se contrasta con fuentes Linux, y el pico de memoria del cgroup pertenece al cliente/controlador. No se suman picos de procesos para atribuir un pico físico del clúster. aggregate-resource-contrasts/summary.json y cases.csv conservan cohortes, desconocidos, decisiones originales, errores causales, estimaciones, límites y referencias a cada paquete observado."))
+    paragraphs.append(writer.figure(BASE / "aggregate-resource-contrasts/figures/aggregate-storage.png",
+                                    "Cuota aprobada y pico muestreado de almacenamiento; matriz original y frontera por separado.", width_cm=13.5))
+    paragraphs.append(writer.caption("Ilustración 4. Cuota aprobada y pico muestreado del proyecto XFS. El color identifica la decisión original de admisión y la forma, la factibilidad observada. Se conservan los casos desconocidos. El pico de un flujo incompleto no estima todo el almacenamiento necesario. Los tres casos de frontera con 39 MiB completaron el flujo pese al rechazo. Las cachés de infraestructura y la telemetría externa están excluidas; el suplemento no aparece en la figura. Elaboración propia con los registros de la campaña."))
+    offline = data["strict_offline"]["faultInjection"]
+    paragraphs.append(writer.paragraph(f"Una auditoría adicional se aplicó a una copia nueva del primer caso completo, con el hash del manifiesto conservado fuera del paquete. Detectó {offline['detected']}/{offline['injected']} ausencias, alteraciones y enlaces sobre {offline['artifacts']} artefactos, incluidos política, comprobador y recibos del perfil estricto; detectó {offline['semanticDetected']}/{offline['semanticInjected']} contradicciones semánticas con manifiestos reconstruidos. La restauración final verificó y el paquete original no cambió. Se contrastaron los 24 campos de métodos y su texto exacto con fuentes, y los diez eventos del camino obligatorio con orden, cadena y artefactos. Este caso no capturó un oráculo externo de acciones de los callbacks; esa comprobación corresponde a las cuatro sesiones negativas descritas antes. La auditoría antigua fijaba SSH y no admitió el perfil co-localizado: se reutilizaron sus lectores de tareas y versiones dentro de un observador específico, sin fingir transporte SSH."))
+    semantic = data["strict_offline_faults"]["semanticChecks"]
+    verifier_detected = sum(row["trustedVerifierDetected"] for row in semantic)
+    observer_only = sum(not row["trustedVerifierDetected"] and row["separateObserverDetected"] for row in semantic)
+    paragraphs.append(writer.paragraph(f"La detección semántica anterior corresponde al conjunto de verificador y observador: el verificador congelado detectó {verifier_detected}/{len(semantic)} casos; otros {observer_only} fueron detectados por el observador específico. Esos tres huecos eran la omisión de un campo estricto de métodos, la adición de prosa sin fuente y la eliminación de un evento obligatorio con la cadena reconstruida. Motivaron el endurecimiento posterior; no se atribuye su corrección al código que produjo los resultados históricos."))
+    final_audit = data["aggregate_final_audit"]
+    paragraphs.append(writer.paragraph(f"La auditoría final volvió a comprobar en frío los cincuenta registros con {final_audit['checksPassed']} controles aprobados, utilizando los archivos exactos del productor congelado. Contrastó paquetes crudos, referencias propias, SQLite de sólo lectura, hashes y las interpretaciones seleccionadas, preservando los informes originales y sus desconocidos. Esta lectura no volvió a ejecutar ciencia, no llamó a AWS ni modificó casos."))
+    validation = data.get("post_campaign_validation")
+    if validation is not None:
+        results = validation["results"]
+        broad, native = results["broadRelevantRegression"], results["peerNativeRunner"]
+        paragraphs.append(writer.paragraph("Correcciones posteriores a la campaña", heading=True))
+        paragraphs.append(writer.paragraph("Una revisión posterior corrigió tres problemas de implementación sin cambiar los casos ni las tasas anteriores. El evento de finalización y run.json ahora conservan el backend de execution.json verificado. El verificador exige los campos de métodos, su texto derivado y los eventos obligatorios del perfil estricto, con sus fuentes y aprobación coherentes. El monitor persiste los IDs propietarios, vuelve a consultar trabajos que ya salieron de la cola y conserva estados desconocidos y terminales. Un fallo nativo confirmado detiene el proceso de Nextflow y se intenta limpiar únicamente los trabajos propios, incluso si el registro de seguimiento está truncado o no puede leerse."))
+        paragraphs.append(writer.paragraph(f"La regresión sobre el código aplicado aprobó {broad['passed']} pruebas, omitió {broad['skipped_opt_in']} pruebas opcionales y registró {broad['failed']} fallos; la comprobación de tipos terminó con código cero. El seguimiento nativo aprobó {native['nativeTests']} contratos nuevos y {native['strictRegressionTests']} existentes, incluido un subproceso local real. El verificador detectó {results['semanticVerifier']['malformedDetected']} contradicciones en {results['semanticVerifier']['contrasts']} contrastes de endurecimiento, con los baselines preservados. Dos paquetes estrictos realmente fallidos, de 98 y 86 archivos, siguen verificando como failed. Las transiciones sintéticas de pruebas no se atribuyen a consultas nativas históricas inexistentes ni a nuevos experimentos en AWS."))
+        paragraphs.append(writer.paragraph("Los paquetes históricos satisfactorios del perfil estricto conservan el nombre genérico SSH en run.json y su evento terminal, aunque execution.json y los métodos identifican correctamente el transporte co-localizado. El nuevo verificador rechaza esa discordancia por defecto. Para consultar esos registros intactos admite exclusivamente la opción explícita --allow-legacy-strict-backend junto con --sha256 obtenido fuera del paquete y reporta legacyBackendMetadata=true. No reconstruye eventos ni corrige bytes históricos. La fuente congelada reproduce la evaluación original; el código corregido se aplica a propuestas nuevas y requiere nueva aprobación."))
+        cloud = data.get("post_campaign_cloud")
+        if cloud is not None:
+            positive, negative = cloud["positive"], cloud["negative"]
+            paragraphs.append(writer.paragraph(f"Después de aplicar las correcciones se congelaron fuentes y propuestas nuevas y se contrastaron dos recorridos completos en Slurm con {cloud['checksPassed']} comprobaciones independientes. El recorrido satisfactorio completó las cuatro tareas nativas {', '.join(positive['nativeIds'])}, conservó SQLite persistente y reprodujo el CSV de referencia propio. Su paquete de {positive['defaultColdFileCount']} archivos verificó por defecto, con backend co-localizado consistente y sin compatibilidad histórica."))
+            paragraphs.append(writer.paragraph(f"El recorrido negativo canceló deliberadamente el trabajo propio {negative['actualNativeId']} mientras se ejecutaba. Una consulta nativa posterior confirmó {negative['actualState']} y ExitCode {negative['actualExitCode']}; el registro persistente conservó la fuente terminal aunque el trabajo ya no aparecía en la cola. El cliente terminó con código uno y produjo automáticamente un paquete de {negative['defaultColdFileCount']} archivos, verificado por defecto como failed. El controlador y el trazador propios terminaron y la comprobación final encontró vacíos la cola, los contenedores y los cgroups del controlador en los tres nodos."))
+            paragraphs.append(writer.paragraph("Para observar esa cancelación se utilizó una entrada sintética de ingeniería de 1000 unidades y 6000 posiciones CA, con una aprobación registrada por un actor sintético. No aporta una referencia biológica ni una etiqueta de factibilidad física. Se preservan dos fallos previos del conductor de pruebas antes de enviar trabajos nativos: una colisión del directorio de salida y un intento de analizar la representación visual truncada de la propuesta. La enmienda leyó los artefactos durables mediante ID y digest y recibió una congelación nueva; no repitió los cincuenta casos de la matriz. El observador rápido sólo alcanzó COMPLETING; la confirmación CANCELLED proviene de consultas posteriores independientes y del registro del productor. Este contraste no estima un P95 ni un límite de latencia del planificador."))
     return paragraphs
 
 
@@ -561,10 +949,11 @@ def structural_sections(writer, data):
         paragraphs.append(writer.paragraph(f"Después del lote primario se congeló un contraste secundario de tiempo para los tres casos que vencieron: mismos archivos, parámetros y motor, una tentativa de hasta 600 segundos por caso y un trabajador. Se recuperó valor estérico en {secondary['secondaryRecovered']}/{secondary['secondaryRetried']} ({details}). Los {secondary['primaryEvaluable']}/{secondary['primaryTotal']} valores del perfil primario y sus exclusiones permanecen intactos; el perfil ampliado se reporta por separado en structural/runtime-600/summary.json y no modifica etiquetas, umbrales físicos ni la inferencia pendiente."))
         expanded = secondary["expandedProfile"]
         paragraphs.append(writer.paragraph(f"El perfil secundario combinado dispone de {expanded['pratt-original']['evaluable']}/{expanded['pratt-original']['cases']} originales y {expanded['experimental-reviewed-beta-solenoid']['evaluable']}/{expanded['experimental-reviewed-beta-solenoid']['cases']} referencias con puntaje. La referencia recuperada 1ea0-A tiene clashscore {as_spanish(expanded['experimental-reviewed-beta-solenoid']['clashscoreMax'])}, superior al de cuatro de los cinco problemas ilustrados. Este solapamiento refuerza el límite de una interpretación clasificatoria. La concurrencia también cambió respecto del primario, por lo que no se atribuye la recuperación exclusivamente a ampliar el tiempo."))
+    paragraphs.append(writer.figure(BASE / "structural/steric-distribution.png",
+                                    "Distribución del clashscore primario en referencias revisadas y originales de Pratt; sin umbral de clasificación."))
+    paragraphs.append(writer.caption("Ilustración 5. Distribución descriptiva del clashscore del perfil primario de 180 segundos. Cada punto es una cadena; las cajas muestran mediana y cuartiles. Los denominadores conservan los casos sin puntaje. Los cinco ejemplos problemáticos mantienen sus etiquetas publicadas; los demás originales carecen de etiqueta física. Las referencias experimentales refinadas y los modelos AF2 sin relajación tienen preparaciones distintas. No se establece un umbral ni se estima sensibilidad o especificidad. Elaboración propia con CCTBX Reduce2/Probe2."))
     paragraphs.extend(surface_sections(writer, data))
     paragraphs.append(writer.paragraph("NOTA PARA EL AUTOR. Mantener separados el puntaje estérico, la alarma de confianza y la etiqueta de fallo físico. Las treinta referencias revisadas aportan un comparador pertinente, pero no completan por sí solas la especificidad. El contraste entre modelos no relajados y referencias refinadas debe conservarse como limitación de cualquier ilustración o comparación de grupos.", note=True))
-    if (BASE / "structural/steric-distribution.png").exists():
-        paragraphs.append(writer.paragraph("NOTA PARA EL AUTOR. La ilustración propia structural/steric-distribution.png, también disponible en PDF y SVG junto con su pie, muestra estos valores sin imponer un corte físico. Puede incorporarse al informe después de revisar tamaño y ubicación; debe acompañarse de la diferencia entre modelos no relajados y estructuras refinadas y de los casos no evaluables.", note=True))
     return paragraphs
 
 
@@ -581,6 +970,9 @@ def surface_sections(writer, data):
     files = data["sasa_agent"]["verification"]["files"]
     paragraphs.append(writer.paragraph(f"Se incorporó a Helix una envoltura opcional configurada por el operador mediante HELIX_TRP_SURFACE_PYTHON, con versiones y hashes de FreeSASA y Gemmi, selección explícita y límite de 180 segundos. La inspección real de archivos para 22r coincidió con los observables externos y verificó una copia portable privada de {files} archivos. La eliminación controlada de OD1 en Asp28 permaneció identificada como cadena lateral incompleta y el caso 8b conservó un estadístico no aplicable. Esos controles verifican ingeniería, no etiquetas biológicas. El paquete aprobado incluye la envoltura y su hash; C9 conserva no evaluable y la validez biológica no establecida. Las 108 mediciones externas no se presentan como 108 sesiones del agente."))
     paragraphs.append(writer.paragraph("La SASA se calculó sobre la cadena polimérica completa seleccionada, sin otras cadenas, ligandos, aguas ni hidrógenos. Las ausencias en residuos vecinos y los componentes omitidos también pueden cambiar el área. La composición, longitud y preparación distintas impiden atribuir el contraste entre grupos exclusivamente a validez física. La figura propia structural/freesasa/surface-exposure.png, con versiones PDF/SVG y pie, muestra las distribuciones y cuatro posiciones de 22r sin añadir un corte de decisión. La sensibilidad y especificidad físicas continúan sin estimar."))
+    paragraphs.append(writer.figure(BASE / "structural/freesasa/surface-exposure.png",
+                                    "Medianas de accesibilidad lateral relativa y cuatro posiciones repetidas de22r; análisis descriptivo."))
+    paragraphs.append(writer.caption("Ilustración 6. Accesibilidad lateral relativa con FreeSASA/ProtOr. A: medianas de Asp/Glu/Lys/Arg con cadenas laterales completas; los denominadores distinguen aplicabilidad de total previsto. Los modelos sin esos residuos no son ceros. B: cuatro posiciones de las diez unidades de 22r; las líneas unen posiciones equivalentes, no tiempos. La normalización puede superar 1. Se estudia la cadena aislada, sin clasificar protonación, compensación de cargas ni validez física. Elaboración propia."))
     return paragraphs
 
 
@@ -604,7 +996,7 @@ def result_table(writer, data):
         ["R1.8", "Informes conservan comprobaciones realizadas, omitidas y no evaluables, con motivos.", "Implementado en las ejecuciones observadas; cobertura de campaña completa pendiente."],
         ["R1.9", "Cero de treinta inválidas admitidas; diez modos con tres variantes, además de la regresión histórica.", "Corpus técnico medido; no se presenta como desempeño sobre proteínas independientes."],
         ["R2.1", "Inventarios fechados de controlador y nodos; memoria y CPU por trabajo, sin sumar RAM entre trabajadores.", "Implementado local y remoto; recurso compartido y alcance de reservas explícitos."],
-        ["R2.2", "Cuatro tareas por flujo, conteos verificables en frío; siete contrastes locales con margen mediano 13,54%.", "Ingeniería local verificada; cota estricta y margen de almacenamiento remoto no demostrados."],
+        ["R2.2", "Cuatro tareas por flujo, conteos verificables en frío; siete contrastes locales con margen mediano 13,54%. Dos pilotos completos co-localizados con cuota XFS/cgroup; subestimación original conservada y comprobación del perfil recalibrado con margen 14,76%.", "Límites estrictos contrastados en las rutas declaradas; piloto de una proteína, sin mediana ni generalización de campaña científica."],
         ["R2.3", "Negativas tipificadas y reobservación antes de ejecutar; límites de capacidad contrastados independientemente.", "Mecanismo implementado; corpus completo de decisiones de flujos pendiente."],
         ["R2.4", "Hardware: cuarenta contrastes. Espacio del controlador: cuarenta casos, 26 factibles, 14 inviables; acierto 34/40 y falso rechazo 6/26. Extensión separada de seis inviables.", "Falso rechazo acotado: 23,08%, superior a 5%; alcance distinto del presupuesto completo. Evaluación agregada y científica pendientes."],
         ["R3.1", "Paquetes de 144 y 156 archivos: 296/296 y 320/320 fallos inyectados detectados; copia mapeada verificada fuera del repositorio.", "Integridad y conteos verificados sin red ni modelo; intentos fallidos conservados, sin acreditar verdad biológica."],
@@ -616,6 +1008,16 @@ def result_table(writer, data):
         ["R3.7", "Reportes por instancia con fuente, versión, marco, confianza y diagnóstico disponible.", "Artefactos implementados y verificables; validez biológica no establecida."],
         ["R3.8", "Setenta y ocho originales Pratt y cinco ejemplos problemáticos; treinta referencias revisadas del dominio.", "Sensibilidad física y especificidad sin calcular; faltan regla validada y etiquetas físicas pertinentes."],
     ]
+    counts, rates = data["aggregate"]["originalCounts"], data["aggregate"]["originalRates"]
+    boundary = data["aggregate"]["boundaryCounts"]
+    if counts["observed"]:
+        margin = "no calculada" if rates["medianPositiveOnlyStorageOverestimation"] is None else as_spanish(100*rates["medianPositiveOnlyStorageOverestimation"]) + "%"
+        by_id = {row[0]: row for row in rows}
+        by_id["R2.2"][1:] = [f"Perfil conjunto: {counts['observed']}/40 IDs observados; {counts['verifiedColdFullSuccesses']} positivos con verificación portable y {counts['reproducibleCountCases']} conteos reproducidos. Sobreestimación positiva mediana {margin}; {counts['actualBudgetExcessCases']} excesos de presupuesto y {counts['admittedPredictionBoundExcessCases']} de estimación admitida. Subestimación inicial conservada.", "Límites XFS/cgroup de rutas declaradas contrastados en desarrollo; software compartido y telemetría externa excluidos. Evaluación científica reservada pendiente."]
+        by_id["R2.3"][1:] = ["Política root, inventarios por nodo, ventana, aprobación y reobservación de admisión verificadas. Decisiones reales retenidas antes del oráculo exclusivo de workBytes.", "Rechazos técnicos contrastados en el perfil declarado; el oráculo forzado no cuenta como admisión real. Cobertura reservada pendiente."]
+        by_id["R2.4"][1:] = [f"Matriz original conjunta: {counts['observed']}/40 observados, {counts['feasible']} factibles, {counts['infeasible']} inviables y {counts['unknown']} desconocidos; acierto {counts['correct']}/{counts['feasible']+counts['infeasible']}, falso rechazo {counts['falseRejections']}/{counts['feasible']}. Frontera separada: {boundary['observed']}/6, falso rechazo {boundary['falseRejections']}/{boundary['feasible']}.", "Resultados de ingeniería de una proteína, tras calibración previa; conservar el resultado histórico del espacio remoto 6/26 y los denominadores separados. Indicador científico sin calcular."]
+        by_id["R3.1"][1:] = ["Paquete estricto de 150 artefactos: 460/460 fallos de integridad y 19/19 contradicciones semánticas detectadas en copia; restauración y original intactos. Referencia SIFTS: 320/320 y copia fuera del repositorio.", "Integridad y enlaces verificados con anclas externas; no autentica autores ni establece verdad biológica." ]
+        by_id["R3.4"][1:] = ["Perfil estricto: 24/24 campos de métodos iguales a sus fuentes y texto derivado exacto. Referencias anteriores de veinte campos conservadas.", "Derivación mecánica contrastada en los alcances descritos; revisión científica reservada pendiente." ]
     return [writer.paragraph("Estado de los veintiún resultados", heading=True),
             writer.paragraph("Tabla 4.2. Evidencia y estado de verificación por resultado esperado"),
             writer.table(["ID", "Evidencia observada", "Estado y alcance pendiente"], rows, [900, 3900, 4200]),
@@ -625,9 +1027,9 @@ def result_table(writer, data):
 def annex(writer, data):
     paragraphs = [writer.paragraph(ANNEX_TITLE, heading=True)]
     paragraphs.append(writer.paragraph("La adaptación operativa utiliza dos cuentas Learner Lab de US$50 cada una, sin sumar sus créditos, RAM o cuotas como si pertenecieran a un solo equipo. Cada clúster reside dentro de una cuenta y una red propia. La topología permitida tiene un controlador t3.medium de dos vCPU y 4 GiB y dos trabajadores m5.large de dos vCPU y 8 GiB cada uno; Slurm reserva 7400 MiB por trabajador. Se asignaron volúmenes raíz de 50, 20 y 20 GiB, noventa por cuenta, que incluyen sistema y cachés. La instalación manual con el perfil de laboratorio disponible conserva Slurm, Docker y un directorio NFS compartido. No presupone permisos de AWS ParallelCluster, instancias grandes, GPU ni ejecución MPI."))
-    paragraphs.append(writer.paragraph("Se verificó una duración de cuatro horas por sesión de Academy y su renovación mediante Start Lab. Las credenciales temporales se mantienen fuera del repositorio. Un temporizador del huésped detiene cada instancia a los 180 minutos de su arranque, y la admisión observa el tiempo restante antes de aceptar un flujo. Renovar la sesión no elimina ese temporizador. Se conservan puntos de recuperación y copias locales de evidencia antes de detener cómputo. Las instancias detenidas dejan de ejecutar, pero los volúmenes conservados siguen generando costo; el panel de presupuesto puede reflejar consumos con ocho a doce horas de retraso. No se afirma un costo final a partir de una cifra retrasada."))
+    paragraphs.append(writer.paragraph("Se verificó una duración de cuatro horas por sesión de Academy y su renovación mediante Start Lab. Las credenciales temporales se mantienen fuera del repositorio. Un temporizador del huésped detiene cada instancia a los 180 minutos de su arranque, y la admisión observa el tiempo restante antes de aceptar un flujo. Renovar la sesión no elimina ese temporizador. Se conservan puntos de recuperación y copias locales de evidencia antes de detener cómputo. Las instancias detenidas dejan de ejecutar, pero los volúmenes conservados siguen generando costo. El panel informa uso acumulado; su latencia de actualización y la facturación final no se verificaron independientemente. No se afirma un costo final a partir de esa cifra."))
     paragraphs.append(writer.paragraph("El operador fija destino SSH, claves, confianza del anfitrión, cola y nodos en una configuración privada. El modelo no suministra esas credenciales ni inventa capacidades. El destino, la configuración de Nextflow, los programas, entradas, presupuesto e imagen se incorporan al digest antes de la respuesta de aprobación. Una modificación invalida la propuesta. El controlador realiza el recorrido simulado, publica un nuevo inventario y espera la decisión de admisión reconocida por el agente antes de lanzar tareas científicas. Se guardan IDs y estados nativos, ubicación por nodo, observaciones cgroup, transferencias y fallos."))
-    paragraphs.append(writer.paragraph("Los contenedores científicos observados tuvieron cuota de dos CPU, límite de 2 GiB y swap cero; se fijó BLAS a una hebra y perfil Haswell para el contraste numérico documentado. La cuota CPU representa ancho de cómputo, sin reservar núcleos exclusivos. La reserva del controlador y la estimación de disco de esta ruta no disponen de los límites duros XFS/cgroup de la asignación local descrita en A.20. La capacidad de un trabajo se decide por nodo; dos trabajadores de 8 GiB no permiten ejecutar un proceso que exija 16 GiB en uno de ellos."))
+    paragraphs.append(writer.paragraph("Los contenedores científicos observados tuvieron cuota de dos CPU, límite de 2 GiB y swap cero; se fijó BLAS a una hebra y perfil Haswell para el contraste numérico documentado. La cuota CPU representa ancho de cómputo, sin reservar núcleos exclusivos. La ruta SSH ordinaria conserva una reserva del controlador y estimación de disco sin garantía dura conjunta. El perfil opcional co-localizado exige una política y comprobador root, proyecto XFS común para las rutas declaradas y cgroup compartido de cliente y controlador. Se informa el alcance de cada ejecución, sin extender ese perfil a toda instalación remota. La capacidad de un trabajo se decide por nodo; dos trabajadores de 8 GiB no permiten ejecutar un proceso que exija 16 GiB en uno de ellos."))
     paragraphs.append(writer.paragraph("La reproducción de infraestructura utiliza script/tesis/aws_academy_access.py, aws_academy_cluster.py y aws-academy-bootstrap.sh, con su estado privado fuera del repositorio. La campaña de límites se conserva en cloud/lab2-pressure/plan.json y sus cuarenta registros. script/tesis/audit_remote_campaign.py comprueba la copia de Helix usando un hash de manifiesto conservado por separado, las trazas nativas, el enlace de aprobación y los métodos derivados. Su opción --reference-run exige las mismas coordenadas, cadena, modelo, unidades e inserciones antes de comparar CSV; --fault-injection altera solo una copia. trace/audit_pressure.py reconstruye la capacidad observada de cada nodo y los resultados de presión sin acceder a AWS."))
     paragraphs.append(writer.paragraph("Los cincuenta grafos válidos y treinta inválidos se reproducen mediante evaluation/trp/campaign-20261012/run_contract_graphs.ts. Los archivos contract-corpus/graphs.json y freeze.json fijan sus etiquetas; las modificaciones posteriores de recursos conservan el código de procedencia original en frozen-sources sin alterar los casos. Las variantes de 2xqh y sus ejecuciones siguen siendo desarrollo. Los cuarenta presupuestos sintéticos adicionales verifican fronteras de contrato y mantienen factibilidad física sin etiqueta: no son la matriz empírica de R2.4."))
     if data["workflow"] is not None:
@@ -642,16 +1044,26 @@ def annex(writer, data):
     paragraphs.append(writer.paragraph("script/tesis/audit_public_mapping_contrasts.py compara las filas y salidas reales con las expectativas congeladas; verify_public_mapping_evidence.py comprueba además hashes, conjuntos exactos de etiquetas, denominadores y la reproducción de una cadena admitida y ambos rechazos. summary.json conserva 11751 correspondencias label/autor, 11749 filas SIFTS observadas con accesión, 265 no observadas y 11215 residuos preparados en 28 cadenas. Dos cadenas se rechazan por residuos observados sin CA; cuatro CA carecen de la referencia observada seleccionada. Cero inserciones o ubicaciones alternativas no acreditan cobertura real de esos casos. Ninguno de estos conteos valida límites biológicos de repetición ni deriva de una anotación humana. Las fuentes metodológicas oficiales se consultan en https://www.ebi.ac.uk/pdbe/docs/sifts/quick.html y https://www.ebi.ac.uk/pdbe/docs/sifts/efamily.html."))
     paragraphs.append(writer.paragraph("Las enmiendas operativas describen la topología manual permitida, la separación de campañas deterministas y humanas y el perfil numérico fijado. Mantienen las metas de F2 y conservan intentos fallidos. No se usaron resultados reservados para rebajar metas, eliminar casos o elegir un corte físico. Las referencias metodológicas de MolProbity y de la implementación mantenida se citan como fuentes del método fuera de la revisión sistemática del Capítulo 3."))
     paragraphs.append(writer.paragraph("El primer contraste de factibilidad de desarrollo se reproduce desde cloud/lab2/r24-campaign, r24-continuation y r24-extension. r24-summary.json distingue los cuarenta IDs originales, sus 42 tentativas y los seis casos posteriores; r24-evidence-manifest.json conserva 7763 archivos. Su unidad es el bloque asignado del proyecto XFS del controlador, con el cliente real fuera del alcance. event-negative-contrasts/protocol.json fija las cuatro sesiones de rechazo antes del resultado; audit.json contrasta las acciones externas con los registros efectivos y conserva dos paquetes automáticos fallidos. Ambas campañas tienen referencias deterministas, sin etiquetas humanas ni validación biológica."))
+    paragraphs.append(writer.paragraph("Los pilotos completos, la calibración y el control causal de copia se reproducen desde aggregate-resource-contrasts/. deploy_runtime.py y refresh_runtime.py fijan el software público preinstalado; prepare_cases.ts conserva entradas y comparadores propios antes de las salidas; full_client.ts inicializa los servicios reales y drive_campaign.py observa, recupera y audita cada asignación. script/tesis/provision_remote_strict_profile.py aplica y observa los límites Linux. audit_cases.py contrasta resultados, manifiesto externo, SQLite, trabajos nativos, cuota y cgroup. Los namespaces y proyectos de cada tentativa son distintos. Un rechazo de trabajo puede ejecutarse únicamente como oráculo experimental de factibilidad: se conserva la decisión original y se omite sólo esa negativa, con el resto de controles intactos. Esa ejecución forzada queda marcada y no cuenta como admisión real del agente."))
+    paragraphs.append(writer.paragraph("summary.json y cases.csv del perfil conjunto conservan por separado los cuarenta casos originales y seis casos de frontera, con desconocidos y decisiones reales visibles. Una revisión de resolución temporal o interpretación de un error debe conservar el auditor original y su primer resultado, enlazar una fuente nueva y recalcular desde los mismos datos sin ejecutar ciencia de nuevo. La observación milisegundo de Date.now y la microsegundo de strace no son relojes de idéntica precisión. La reproducción utiliza destinos nuevos; las auditorías de integridad se aplican a copias y los paquetes originales no se sobrescriben."))
+    paragraphs.append(writer.paragraph("El suplemento de cuatro IDs está en extension-inputs y extension-outcomes, separado de original y frontera. final-package-verification.json reproduce cincuenta interpretaciones con el productor exacto guardado en source-snapshots/frozen-original40; analysis-manifest.json y manifest-verification.json enlazan el paquete completo. Las etiquetas del auditor congelado y las revisiones de resolución y descriptor permanecen disponibles. El código posterior no se introduce retroactivamente en esa reproducción."))
+    paragraphs.append(writer.paragraph("Las correcciones posteriores se conservan en checks/post-campaign-production-20261013/. source-amendment.json identifica las fuentes congeladas, las copias exactas archivadas, los cambios aplicados después de la quiescencia y su validación local. summary.json registra 543 pruebas aprobadas, 63 opcionales omitidas y comprobación de tipos sin errores. Los contratos nuevos de seguimiento también comprueban la limpieza propia ante un registro truncado. Los ensayos posteriores en infraestructura conservan sus propios IDs y congelación, sin actualizar las tasas de la campaña original."))
+    if data.get("post_campaign_cloud") is not None:
+        paragraphs.append(writer.paragraph("La verificación remota posterior está en checks/post-campaign-production-20261013/cloud/: summary.json, audit_integration.py y post-quiescence.json enlazan las consultas, fuentes, paquetes y limpieza propia. inputs/freeze.json y inputs-amendment-r2/freeze.json conservan las congelaciones separadas de los recorridos satisfactorio y negativo. Los resultados fallidos del conductor permanecen en outcomes y outcomes-amendment; outcomes-amendment-r2 conserva el fallo nativo observado. Los README indican comandos y anclas externas para la verificación por defecto de los paquetes nuevos. Los registros final-stopped-post-corrections-20261013.json de ambos laboratorios confirman por DescribeInstances que los seis nodos están detenidos; el almacenamiento persistente sigue siendo facturable."))
+    paragraphs.append(writer.paragraph("Para comprobar un paquete satisfactorio estricto histórico con el verificador actualizado se utiliza python3 packages/helix/src/trp/verify_bundle.py.txt RUTA_DEL_PAQUETE --sha256 HASH_EXTERNO --allow-legacy-strict-backend. El hash debe proceder del registro externo de esa ejecución; no se toma de un manifiesto modificado como si fuera una referencia independiente. El resultado informa legacyBackendMetadata=true. Las nuevas ejecuciones coherentes y los paquetes fallidos preservados se verifican por defecto. Las instrucciones y anclas concretas se encuentran en el README de las comprobaciones posteriores."))
     paragraphs.append(writer.paragraph("NOTA PARA EL AUTOR. La entrega externa requerida continúa siendo el Excel con referencias y paráfrasis y, en una segunda etapa, la anotación de turnos humanos reales. La financiación de AWS y el acceso al modelo permiten continuar trabajo técnico, pero no reemplazan esas entregas. Mantener como pendientes las mediciones dependientes y documentar el consumo real cuando el panel y los registros de facturación permitan contrastarlo.", note=True))
     return paragraphs
 
 
-def replacements():
+def replacements(data):
     # Two-pass refinement: retain historical measurements but correct present
     # dependency claims; avoid claiming broad completion from narrow evidence.
     return {
         "Este capítulo presenta los 21 resultados esperados": "Este capítulo presenta los 21 resultados de los tres objetivos específicos y distingue implementación, contraste técnico y evaluación científica reservada. Conserva las referencias históricas de las fases F1 a F5 e incorpora la campaña iniciada el 12 de octubre de 2026: ejecución real de Helix en Slurm sobre AWS Academy, comprobaciones de recursos, evidencia portable, piloto real del modelo elegido y diagnósticos estérico y de superficie. El Anexo A documenta el plan y las condiciones de reproducción. Las mediciones que requieren referencia independiente permanecen explícitas.",
         "La arquitectura prevista sigue el orden pregunta": "La arquitectura implementada enlaza pregunta, especificación, aprobación, composición, validación, admisión, ejecución y evidencia. La aprobación identifica un contenido concreto, incluido el destino remoto cuando existe; un cambio posterior no hereda automáticamente esa aprobación. Identificadores, numeración y recursos se comprueban antes de ejecutar, y los veredictos se conservan con sus datos. La existencia de la ruta no demuestra por sí sola comprensión de todas las solicitudes.",
+        "NOTA PARA EL AUTOR. Ilustración propia recomendada: diagrama de esa secuencia": "NOTA PARA EL AUTOR. Ilustración propia recomendada: diagrama de la secuencia implementada, con la frontera entre propuesta del modelo y decisión mecánica. La campaña permite acompañarlo de un caso real de preparación, aprobación, trabajo Slurm y evidencia recuperada. Para mostrar un rechazo de numeración usar los casos públicos 2bm4/A o 1o8i/A, cuyas fuentes y ausencia de CA se conservaron; las capturas deben corresponder al registro efectivo.",
+        "NOTA PARA EL AUTOR. La preparación experimental incorpora ya SIFTS": "NOTA PARA EL AUTOR. La preparación incorpora SIFTS y conversión label/autor. La geometría de modelos predichos dispone también de la herramienta trp_predicted_geometry del agente, con sus comprobaciones y límites documentados. La confianza favorable no certifica plausibilidad física. Siguen pendientes referencias humanas y una regla física validada; las garantías del perfil conjunto de recursos sólo se atribuyen a las rutas y casos realmente medidos.",
+        "NOTA PARA EL AUTOR. Ilustración propia recomendada: conectar inventario": "NOTA PARA EL AUTOR. Ilustración propia recomendada: conectar inventario, demanda, protocolo, aprobación, límites de cliente/controlador y tareas, cuota y evidencias, señalando las reobservaciones. Los métodos históricos están en docs/tesis/F4-ADMISION.md y docs/tesis/R3.2-RECURSOS.md; A.25 describe las garantías posteriores y su alcance. Los mapeos SIFTS ya tienen contrastes públicos. Conservar explícitas la evaluación independiente y los contratos de dominio restantes.",
         "Relación con el objetivo: OE1. Preparar al menos 50 enunciados": "El instrumento de referencia contiene setenta solicitudes propuestas: cincuenta intenciones factibles y veinte fuera de alcance. La asesora está designada como experta externa al desarrollo, según lo declarado por el tesista. No se han recibido todavía sus referencias, correcciones ni las cien paráfrasis humanas requeridas. La admisibilidad y estabilidad se medirán después de preservar y congelar su primera entrega; las propuestas asistidas por IA no se presentan como anotaciones independientes.",
         "En F2 se redactó el protocolo TRP 1.0.0": "En F2 se redactó el protocolo TRP 1.0.0 y posteriormente se migraron los identificadores a la versión 1.0.1, sin modificar umbrales ni tamaños. Sus veintiún indicadores tienen medición, denominador, criterio y regla de reporte. El apartado A.16 conserva el diseño; la campaña técnica y las enmiendas operativas se documentan en A.25 y evaluation/trp/campaign-20261012/. El registro local por Git y hash no se presenta como prerregistro externo.",
         "Estos umbrales son metas, no resultados ni valores avalados": "Estos umbrales son metas, no resultados ni valores avalados por las herramientas. El protocolo separa desarrollo y reserva por intención, sesión y familia, y fija repeticiones, caídas de servicio, exclusiones e incertidumbre. La asesora y el modelo gpt-6-sol fueron elegidos por el autor; dos laboratorios AWS y el acceso efectivo al modelo quedaron comprobados técnicamente. La referencia humana, las paráfrasis y la congelación científica aplicable permanecen pendientes.",
@@ -671,7 +1083,7 @@ def replacements():
         "Antes de F6 se congelarán commit, protocolo, catálogo": "Antes de cada campaña reservada se congelarán commit, protocolo, catálogo, inventario y casos, fuentes, licencias, modelo/revisión, instrucciones, parámetros de muestreo, límites de tokens y llamadas, imágenes, dependencias, hardware y presupuesto. Se registrarán seudónimo, experiencia y acuerdo de la anotadora. Un dato aplicable pendiente impide iniciar la medición dependiente. El acceso a Slurm y gpt-6-sol tiene comprobación técnica y la experta fue designada; las etiquetas y paráfrasis humanas siguen sin recibir. Las campañas técnicas fechadas no se presentan como inferencia reservada realizada en F2.",
         "NOTA PARA EL AUTOR. Antes de F6 resolver anotador, modelo, presupuesto": "NOTA PARA EL AUTOR. Antes de la inferencia reservada recibir y congelar referencias, paráfrasis y acuerdo de uso de etiquetas; conservar la configuración efectiva del modelo y sus límites. El clúster y el acceso a gpt-6-sol ya tienen comprobación técnica. Se mantienen sustentación en julio de 2027 y borrador completo objetivo al 4 de junio. Las ilustraciones finales deben derivar de los datos conservados, sin suplir referencias humanas con ejemplos sintéticos.",
         "Permanecen pendientes ampliación del catálogo, mapeos SIFTS/UniProt": "STRPsearch está admitido en el catálogo 1.2.0 y los mapeos SIFTS/UniProt y la ruta predicha se incorporaron en el alcance documentado. Siguen pendientes ReUPred, contratos restantes y evaluación independiente del dominio. F4 y A.20 conservan la gobernanza local estricta; A.25 documenta la ruta remota y sus límites distintos. No se extiende una garantía por la sola existencia de un adaptador.",
-        "R2.1 y R2.3 cuentan con mecanismos verificados en la ruta local.": "R2.1 y R2.3 cuentan con mecanismos locales y remotos verificados en desarrollo. R2.2 conserva su contraste local estricto de siete casos; el margen y una cota dura de almacenamiento remoto no se dan por establecidos. R2.4 necesita decisiones de flujos contrastadas con factibilidad observada, y R3.3 necesita turnos y primeras etiquetas independientes. La cobertura de puertas de R3.2 se verificó en la referencia remota, sin una afirmación de cobertura completa de sesiones. Modelo, experta y AWS tienen decisiones registradas; esas decisiones no sustituyen anotaciones terminadas.",
+        "R2.1 y R2.3 cuentan con mecanismos verificados en la ruta local.": f"R2.1 y R2.3 cuentan con mecanismos locales y remotos verificados en desarrollo. R2.2 conserva el contraste local estricto y añade cuota XFS y cgroup de cliente/controlador en el perfil conjunto. La primera subestimación y la calibración previa se conservan; la matriz posterior registra {data['aggregate']['originalCounts']['observed']}/40 IDs con una sobreestimación positiva mediana de {as_spanish(100*data['aggregate']['originalRates']['medianPositiveOnlyStorageOverestimation'])}%. La frontera conserva tres falsos rechazos entre seis ejecuciones factibles, por encima de la meta. El resultado anterior de 6/26 del espacio remoto tiene un alcance diferente, con el cliente fuera de su cuota. Ninguna de estas tasas sustituye la evaluación científica reservada. R3.3 necesita turnos y primeras etiquetas independientes; R3.2 conserva cobertura técnica en los caminos realmente observados.",
         "C9. Plausibilidad física.": "C9. Plausibilidad física. Pratt et al. (2025) muestran problemas que confianza alta no descarta. El control incorpora diagnósticos opcionales mediante Reduce2/Probe2 y FreeSASA, identificados por versiones y hashes, con contactos atómicos, clashscore y áreas de superficie. No hay un clasificador validado de validez física de la molécula: C9 conserva no evaluable y la validez biológica no establecida. La exposición medida no establece protonación ni compensación de cargas. Los observables y sus referencias experimentales se presentan separados de sensibilidad y especificidad.",
         "La evaluación reservada de F6 conserva el protocolo, las particiones": "La evaluación reservada conserva protocolo, particiones y referencias independientes. La asesora está designada y el acceso a gpt-6-sol y a Slurm fue comprobado técnicamente; no hay referencias humanas recibidas ni congelación final de T-LANG/T-TURNS. Los originales de rango 1 de Pratt se recuperaron y el diagnóstico estérico se incorporó como extensión exploratoria, sin validar un veredicto físico general. Los casos 2xqh y P69905 continúan excluidos de la reserva.",
         "Los resultados se conservan con valor, umbral y estado: 78/78": "La inspección histórica conserva 78/78 alarmas en el perfil principal y 77/78 en el central, incluidos los cinco ejemplos publicados. El control físico general sigue no evaluable. La campaña posterior añade valores estéricos en 77/78 originales y 28/30 referencias experimentales dentro de su perfil temporal, con tres límites de tiempo conservados. Las referencias revisadas no son automáticamente negativos físicos. Los otros 73 originales no se etiquetan retrospectivamente como correctos o fallidos; no hay rangos 2 a 5 ni todos los modelos preliminares de las figuras. Sensibilidad física y especificidad requieren una regla y etiquetas pertinentes independientes.",
@@ -683,11 +1095,18 @@ def conclusion_changes(data):
     workflow_note = ("Las variantes técnicas observadas se conservan sin presentar un lote incompleto como terminado."
                      if counts is None else
                      f"Se verificaron {counts['unique_cases_verified']}/50 IDs técnicos tras conservar {counts['first_attempt_succeeded']} primeras tentativas satisfactorias, {counts['first_attempt_failed']} fallos y {counts['retry_attempts']} tentativas adicionales; son variantes de una sola proteína.")
+    resource = data["aggregate"]["originalCounts"]
+    frontier = data["aggregate"]["boundaryCounts"]
+    resource_note = (f"El perfil posterior que incorpora al cliente completo observó {resource['feasible']} casos factibles, "
+                     f"{resource['infeasible']} inviables y {resource['unknown']} desconocidos en cuarenta IDs. "
+                     f"Los casos de frontera conservan {frontier['falseRejections']}/{frontier['feasible']} falsos rechazos, "
+                     "por encima de la meta de 5%. El suplemento satisface veinte factibles y veinte inviables sólo en la unión descriptiva de 44 IDs; "
+                     "no completa el mínimo original ni elimina sus desconocidos. Estas mediciones no demuestran desempeño científico sobre una población de proteínas.")
     return {
         "La continuación técnica amplía el alcance verificable: incorpora detección STRPsearch": "La implementación integra un catálogo inicial, detección STRPsearch, correspondencias SIFTS, geometría sobre modelos predichos y ejecución aprobada con evidencia portable. La campaña de octubre demuestra que Helix puede enviar y recuperar trabajos reales de Slurm en la infraestructura permitida de AWS Academy y reproducir la referencia geométrica bajo condiciones fijadas. Los diagnósticos estérico y de superficie añaden observables independientes de pLDDT/PAE, contrastados con los adaptadores reales de Helix, sin validar por sí solos la plausibilidad completa del pliegue. La anotación externa y las métricas reservadas permanecen pendientes.",
-        "Las cinco fases desarrolladas construyen una base verificable": "Los resultados técnicos sostienen la separación entre propuesta, aprobación, decisiones mecánicas y evidencia. La ruta local dispone de la asignación estricta documentada; la ruta remota aporta trabajos nativos, observaciones de límites de contenedores y verificación sin red. Sus garantías no son idénticas: no se demostró cuota dura de disco ni límite duro del controlador remoto. La infraestructura disponible permite continuar evaluación técnica sin atribuirle validación humana o biológica.",
+        "Las cinco fases desarrolladas construyen una base verificable": "Los resultados técnicos sostienen la separación entre propuesta, aprobación, decisiones mecánicas y evidencia. La ruta remota aporta trabajos nativos y verificación sin red. El perfil co-localizado añade límites XFS para las rutas declaradas y cgroup compartido de cliente/controlador, contrastados mediante pilotos completos. Conserva la subestimación inicial del contador y su calibración prospectiva, sin atribuir esas garantías a la ruta SSH ordinaria ni a caches compartidas externas. La infraestructura permitió continuar evaluación técnica; la referencia humana y la validez física general requieren evidencia adicional.",
         "Respecto del OE1, se implementaron el catálogo inicial": f"Respecto del OE1, el motor transforma una especificación aprobada y validada en un flujo ejecutable local o en Slurm para las rutas admitidas. La referencia reprodujo el CSV y las composiciones adversariales permitieron contrastar rechazos estáticos. {workflow_note} El contraste público coincidió con expectativas de fuentes separadas en 11751 correspondencias label/autor y treinta parses SIFTS; admitió 28 preparaciones con 11215 residuos y conservó dos rechazos correctos por ausencia de CA. No valida límites biológicos ni casos reales con inserciones, ausentes del conjunto. El piloto real de cuatro solicitudes no tiene puntuación semántica independiente. La admisibilidad del lenguaje, su estabilidad ante paráfrasis y la tasa sobre cincuenta especificaciones externas no pueden concluirse sin las referencias humanas previstas.",
-        "Respecto del OE2, se implementaron inventarios fechados": "Respecto del OE2, existen inventarios fechados, conteos reproducibles y negativas tipificadas. Los cuarenta contrastes independientes demostraron límites de capacidad y contención del laboratorio, con recursos considerados por nodo. No constituyen una matriz de acierto y falso rechazo de flujos bioinformáticos, por lo que ese resultado conserva su evaluación pendiente. Respecto del OE3, el paquete remoto y los métodos derivados permiten verificar integridad y decisiones registradas sin el modelo ni la infraestructura que ejecutó el análisis. El kappa y la sensibilidad/especificidad física requieren sus referencias independientes.",
+        "Respecto del OE2, se implementaron inventarios fechados": "Respecto del OE2, existen inventarios fechados, conteos reproducibles y negativas tipificadas. Los cuarenta contrastes de capacidad verificaron límites del laboratorio por nodo. Una matriz distinta de cuarenta flujos/presupuestos sobre el espacio remoto observó acierto 34/40 y falso rechazo 6/26, superior al umbral de 5%; ese alcance excluía al cliente. " + resource_note + " Respecto del OE3, el paquete remoto, los métodos derivados y las cuatro sesiones técnicas de rechazo permiten verificar integridad y decisiones registradas sin el modelo ni la infraestructura. Las correcciones de proveniencia y seguimiento preservan las fuentes experimentales originales; no alteran esas tasas ni corrigen por sí solas el falso rechazo del estimador. Kappa y sensibilidad/especificidad física requieren sus referencias independientes.",
         "NOTA PARA EL AUTOR. Conclusiones provisionales de avance.": "NOTA PARA EL AUTOR. Estas conclusiones se apoyan en las mediciones técnicas del Capítulo 4. El clúster y el modelo dejaron de ser dependencias de acceso, pero las referencias humanas, el corpus de turnos y una regla física validada siguen abiertos. No presentar el cierre técnico como cumplimiento de los tres objetivos ni trasladar estos requisitos a trabajos futuros para dar por terminada la tesis.",
     }
 
@@ -727,6 +1146,7 @@ def main():
     parser.add_argument("--checks", type=Path, default=BASE / "document/checks.json")
     parser.add_argument("--require-structural-summary", action="store_true")
     parser.add_argument("--require-workflow-summary", action="store_true")
+    parser.add_argument("--require-aggregate-observed", action="store_true")
     args = parser.parse_args()
     if args.source.resolve() == args.target.resolve() or args.target.resolve() == SOURCE.resolve():
         raise ValueError("This generator writes a candidate only; root installs separately")
@@ -736,6 +1156,8 @@ def main():
         raise ValueError("Final structural summary not yet available; no projected results")
     if args.require_workflow_summary and data["workflow"] is None:
         raise ValueError("Final workflow summary not yet available; no projected results")
+    if args.require_aggregate_observed and not data["aggregate"]["allRequiredCloudCasesObserved"]:
+        raise ValueError("Not all forty original, six boundary and four supplemental cases are observed; no final aggregate claim")
     changed = []
     with ZipFile(args.source) as archive:
         original = archive.read("word/document.xml")
@@ -746,8 +1168,9 @@ def main():
         if any(text(item) == SECTION_TITLE or text(item) == ANNEX_TITLE for item in body):
             raise ValueError("Candidate sections already exist; regenerate from unchanged original Word")
         protected = [E.tostring(item) for item in items[:boundary]]
-        writer = Writer(body)
-        map_current = replacements()
+        relationships = E.fromstring(archive.read("word/_rels/document.xml.rels"))
+        writer = Writer(body, relationships)
+        map_current = replacements(data)
         map_conclusions = conclusion_changes(data)
         conclusion = next(item for item in body if text(item) == "Conclusiones y trabajos futuros")
         references = next(item for item in body if text(item) == "Referencias")
@@ -778,11 +1201,22 @@ def main():
         args.target.parent.mkdir(parents=True, exist_ok=True)
         with ZipFile(args.target, "w", ZIP_DEFLATED) as out:
             for entry in archive.infolist():
-                out.writestr(copy(entry), serialized if entry.filename == "word/document.xml" else archive.read(entry.filename))
+                payload = (serialized if entry.filename == "word/document.xml" else
+                           E.tostring(relationships, encoding="utf-8", xml_declaration=True)
+                           if entry.filename == "word/_rels/document.xml.rels" else archive.read(entry.filename))
+                out.writestr(copy(entry), payload)
+            for name, raw in writer.media_parts.items():
+                if name in archive.namelist():
+                    raise ValueError("New figure conflicts with an original media part")
+                out.writestr(name, raw)
         with ZipFile(args.target) as written:
-            unchanged_parts = all(written.read(name) == archive.read(name) for name in archive.namelist() if name != "word/document.xml")
+            unchanged_parts = all(written.read(name) == archive.read(name) for name in archive.namelist()
+                                  if name not in ("word/document.xml", "word/_rels/document.xml.rels"))
             if not unchanged_parts:
                 raise ValueError("Non-document ZIP parts were changed")
+            original_relationships = E.fromstring(archive.read("word/_rels/document.xml.rels"))
+            if [dict(r.attrib) for r in relationships[:len(original_relationships)]] != [dict(r.attrib) for r in original_relationships]:
+                raise ValueError("Original drawing or citation relationships changed")
     rows = candidate.find(q("body")).findall(q("tbl"))
     result_tables = [t for t in rows if text(t).startswith("IDEvidencia observadaEstado y alcance pendiente")]
     if len(result_tables) != 1 or len(result_tables[0].findall(q("tr"))) != 22:
@@ -800,6 +1234,7 @@ def main():
         "chapters_1_to_3_xml_preserved": True, "protected_body_elements": boundary,
         "protected_body_sha256": hashlib.sha256(b"".join(protected)).hexdigest(),
         "all_other_zip_parts_preserved": unchanged_parts, "result_ids": table_ids,
+        "original_relationships_preserved": True, "figures_embedded": writer.figure_records,
         "replaced_paragraphs": changed, "source_evidence": data["source_records"],
         "structural_summary_included": data["structural"] is not None,
         "additional_cloud_summaries": data["additional_cloud_summaries"],
@@ -818,6 +1253,8 @@ def main():
         "r24_empirical_rate_included": True,
         "r24_head_workspace_scope": {"original_cases": 40, "attempts": 42, "feasible": 26, "infeasible": 14, "false_rejections": 6, "false_rejection_rate": 6/26, "accuracy": 34/40, "separate_posthoc_extension": 6, "aggregate_client_and_remote": False, "scientific_metric": None},
         "negative_events_included": {"cases": 4, "eligible": 13, "matched": 13, "actor": "synthetic permission/UI callbacks", "human_labels": 0},
+        "aggregate_resource_included": {"original": data["aggregate"]["originalCounts"], "original_rates": data["aggregate"]["originalRates"], "boundary": data["aggregate"]["boundaryCounts"], "boundary_rates": data["aggregate"]["boundaryRates"], "supplement": data["aggregate"]["extensionCounts"], "minimum_only_in_original_plus_supplement": data["aggregate"]["minimumTechnicalSupportMet"], "all50_observed": data["aggregate"]["allRequiredCloudCasesObserved"], "scientific_metric": None, "unique_proteins": 1},
+        "strict_calibration_included": {"old_prediction": data["strict_pilot_comparison"]["before"]["predictedWorkBytes"], "old_observed": data["strict_pilot_comparison"]["before"]["allocatedBlockBytesObservedPeak"], "new_prediction": data["strict_pilot_comparison"]["after"]["predictedWorkBytes"], "new_observed": data["strict_pilot_comparison"]["after"]["allocatedBlockBytesObservedPeak"], "profile": data["strict_calibration"]["candidateProfile"]["id"]},
         "citation_sources": ["https://pmc.ncbi.nlm.nih.gov/articles/PMC5734394/", "https://pubmed.ncbi.nlm.nih.gov/29067766/", "https://github.com/cctbx/cctbx_project/blob/master/mmtbx/programs/clashscore2.py", "https://f1000research.com/articles/5-189/v1", "https://freesasa.github.io/doxygen/CLI.html"],
         "writing_review": {"pass_1": "Numbers checked against saved evidence; current identifiers, null scientific metrics and independent-label dependencies retained.",
                            "pass_2": "Current-state prose condensed; historical failures and bounded claims preserved; no invented figure or whole-thesis completion."},

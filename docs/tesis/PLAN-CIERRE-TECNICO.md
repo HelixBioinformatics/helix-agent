@@ -1,22 +1,30 @@
 # Plan de cierre técnico y evaluación
 
-## Actualización operativa, 12 de octubre de 2026
+## Actualización operativa, 13 de octubre de 2026
 
-Se mantienen julio de 2027 y el borrador completo objetivo del 4 de junio de 2027. El plan actúa sobre resultados, conclusiones, anexos y trazabilidad; capítulos 1 a 3 cerrados. Las entradas de septiembre/octubre posteriores a esta sección se conservan como historia, con sus scopes originales. [Evidencia y límites vigentes](RESULTADOS-AWS-20261012.md).
+Se mantienen julio de 2027 y el borrador completo objetivo del 4 de junio de 2027. El trabajo documental se limita a resultados, conclusiones, anexos y trazabilidad; los capítulos 1 a 3 están cerrados. Las entradas fechadas posteriores se conservan como historia. [Resultados y límites vigentes](RESULTADOS-AWS-20261012.md).
 
-| Hito vigente | Estado comprobado | Trabajo pendiente y compuerta |
-|---|---|---|
-| Acceso y ejecución remota | Revisión a951d73; ventana mínima Academy/temporizadores de los tres huéspedes. Dos clústeres Academy de tres nodos probados; 50 grafos de desarrollo verificados en 52 intentos, dos fallos conservados | No presentar este corpus de una proteína como reserva científica de R1.5; ampliar sólo con entradas y referencias congeladas |
-| Correspondencias y prueba de interrupción | SIFTS real, 12 unidades, 156 archivos y copia externa; cancelación limpia real, 143 archivos | Conservar comparación gold, observaciones nativas, eventos y límites de scope |
-| Admisión y demanda | Inventario por nodo y límites efectivos Docker; rechazo honesto de cuota remota dura | R2.4 sigue en ejecución sin indicador final. R2.2 conjunto cliente/remoto y pico agregado no demostrados; no heredar automáticamente la cuota local |
-| Referencia humana | Asesora seleccionada independiente según el autor; 70 solicitudes reales preparadas | Recibir referencias y dos paráfrasis por intención factible; luego ejecutar/capturar sesiones y entregar turnos reales para kappa sin adjudicación previa |
-| Modelo y gasto | gpt-6-sol/medium, OAuth, cuatro pilotos de preparación/alcance | Registrar ausencia de cap duro 8192 y factura efectiva desconocida; verificar límites si se exige un gasto cerrado, antes de congelar la reserva |
-| Fallos estructurales | 78 originales Pratt; CCTBX 105/108 primario y 3/3 recuperados en contraste; FreeSASA 108/108 descriptivo | Definir criterio externo, clasificador y negativos físicos pertinentes; C9, sensibilidad y especificidad no se declaran satisfechos |
-| Integración de resultados | Evidencias por instancia, métodos y hashes actuales enlazados a 21 IDs | Cerrar reporte del contraste en curso sin borrar fallos; completar métricas humanas/científicas y revisión final antes de afirmar tesis completa |
+| Hito vigente | Estado comprobado | Siguiente acción y criterio |
+| --- | --- | --- |
+| Ejecución remota | Dos clústeres Academy de tres nodos; 50 grafos de desarrollo verificados en 52 intentos | Conservar los dos fallos y sus reintentos; no presentarlos como 50 intenciones humanas ni como R1.5 científico |
+| Correspondencias y cancelación | SIFTS remoto: 12 unidades y 156 archivos; cancelación nativa 128. Contraste público: 30 cadenas, 11 751 posiciones label/autor y dos rechazos correctos | Mantener sus límites: Gemmi léxico compartido, cero inserciones observadas y ausencia de referencia humana sobre repeticiones |
+| Demanda y admisión agregadas | Todos los casos terminales: originales 18/18/4, frontera seis factibles y 3/6 falsos rechazos, suplemento 2/2 | Informar las tres cohortes separadas. Sólo la unión de 44 alcanza veinte factibles y veinte inviables. La frontera falla el umbral de 5 %; no reducirlo ni ajustar retrospectivamente el estimador |
+| Reparaciones posteriores | `9ada336`, helper `0dcb38a`; local 543/63/0 y tipos correctos. Integración nueva: 89 controles, positivo 152 archivos y cuatro tareas correctas; negativo 151 archivos, nativo 384 CANCELLED 0:9 | Terminadas para este alcance, sin legacy ni reescritura de la matriz original; conservar los dos fallos previos del harness y las fuentes nuevas |
+| Referencia humana | Asesora seleccionada; 70 solicitudes preparadas | Recibir flujo esperado, factibilidad y dos paráfrasis por intención factible; congelar reserva y particiones antes de ejecutar |
+| Evaluación lingüística e intervenciones | Modelo elegido y OAuth probado; no hay etiquetas externas recibidas | Ejecutar R1.5 después de congelar referencias. Capturar sesiones y entregar turnos reales a la experta para R3.3, sin adjudicación previa ni aprobaciones sintéticas como etiquetas |
+| Fallos estructurales | Originales Pratt recuperados; CCTBX/FreeSASA descriptivos ejecutados y timeouts conservados | Definir criterio externo y clasificador con controles físicos pertinentes antes de calcular sensibilidad/especificidad; las referencias repetitivas no son negativos físicos certificados |
+| Documento y cierre | Word/PDF instalados: 155 páginas, 261 comprobaciones, diez notas rojas nuevas; 21 IDs y contenido protegido conservados | Registrar entrega y archivos finales; la instalación verificada no completa las validaciones científicas pendientes |
 
-Las aprobaciones de esta campaña son entradas sintéticas de un conductor autorizado. La referencia humana de 70 solicitudes sigue pendiente y no fue sustituida por el piloto del modelo. Los timeouts principales se conservan aunque un perfil secundario más amplio los resuelva. La documentación inicial es responsabilidad del autor, fuera de los pendientes del agente.
+No queda un experimento de la matriz ni de la integración posterior por ejecutar. No se necesitan más cuentas AWS para este cierre técnico. Las respuestas frescas de EC2 DescribeInstances confirman las tres instancias propias de Lab1 detenidas a las 17:06:16 UTC y las tres de Lab2 a las 17:50:26 UTC. En Lab2, la parada siguió a la recuperación de la integración y la comprobación de quiescencia de las 17:43:06 UTC. Los volúmenes permanecen; la parada de cómputo no significa coste de almacenamiento cero ni factura final. Los USD 48,6 restantes de Lab2 fueron un reporte del portal, con demora de facturación. [Lab1](../../evaluation/trp/campaign-20261012/cloud/lab1/final-stopped-post-corrections-20261013.json), [Lab2](../../evaluation/trp/campaign-20261012/cloud/lab2/final-stopped-post-corrections-20261013.json).
 
-**Supersesión:** el listado histórico de decisiones externas queda actualizado: anotadora seleccionada, modelo escogido, originales Pratt recuperados y acceso a clúster efectivamente usado. Persisten las etiquetas y métricas independientes, los contratos de dominio restantes y la gobernanza estricta de todas las rutas. No se cambia ningún umbral científico por los resultados del desarrollo.
+El alcance estricto comprende las siete rutas declaradas del cliente/controlador/remoto y sus bloques XFS; excluye software preinstalado, cachés compartidas y telemetría del observador. Los picos de disco se muestrean cada 0,5 s y la memoria se informa aparte. La ruta SSH ordinaria y las rutas dedicadas no heredan automáticamente esa garantía. No existe P95 de latencia medido.
+
+La reserva de 32 MiB se calibró en desarrollo antes de congelar los casos. Se conservan la subestimación inicial de 16 084 992 bytes, las reglas causales y sus revisiones, los cuatro desconocidos y los fallos de infraestructura. El ciclo legítimo de las mismas instancias y la reparación NFS con `fsid=43` no reenvían casos terminales. La última quiescencia de campaña está verificada.
+
+No se solicita elegir de nuevo modelo, conseguir más cuentas AWS o recuperar los 78 originales Pratt. Las limitaciones de facturación OAuth y del tope de salida se declaran; no bloquean las comprobaciones técnicas independientes. La documentación inicial sigue a cargo del autor.
+
+
+Word y PDF instalados el 13 de octubre a las 18:02 UTC: **155 páginas, 261 comprobaciones de render y diez notas rojas nuevas**. Los capítulos 1 a 3, bibliografía, imágenes originales y 21 IDs se conservaron. La revisión visual aceptó el candidato; los hashes instalados y el backup exacto del archivo del autor se verificaron. [Instalación y hashes](../../evaluation/trp/campaign-20261012/document/installation.json). La tesis sigue incompleta en sus validaciones científicas obligatorias.
 
 ## Actualización de originales Pratt, 1 de octubre de 2026
 

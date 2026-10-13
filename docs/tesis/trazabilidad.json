@@ -354,23 +354,81 @@
         "packages/helix/test/tool/trp-predicted.test.ts",
         "packages/helix/test/trp/predicted.live.test.ts"
       ],
-      "pendiente": "SIFTS/UniProt y numeración label/autor integrados. Referencia remota mapeada: 12 unidades, CSV gold idéntico y paquete de 156 archivos copiado/verificado. Ruta AFDB predicha ya integrada por herramienta dedicada; contratos restantes y gobernanza estricta conjunta siguen abiertos.",
+      "pendiente": "SIFTS/UniProt y numeración label/autor integrados. Referencia remota: 12 unidades, CSV idéntico y 156 archivos verificados. Contraste público de 30 cadenas: 11751/11751 correspondencias label/autor y parser SIFTS 30/30; 28 preparaciones con 11215 residuos y dos rechazos correctos por ausencia de CA. Gemmi léxico compartido, uniones independientes; cero inserciones observadas no valida ese dominio. Es desarrollo, no reserva ni anotación biológica. Ruta AFDB integrada; contratos restantes, gobernanza estricta conjunta y evaluación humana reservada siguen abiertos.",
       "fase_cierre": "F5",
       "medicion": {
         "tipo": "ingenieria_o_preparacion_no_evaluacion_cientifica_reservada",
         "metricas_cientificas_finales": null,
         "fuentes": [
           "evaluation/trp/campaign-20261012/cloud/lab1/mapped-reference-protocol/driver-terminal.json",
-          "evaluation/trp/campaign-20261012/trace/mapped-reference.json"
+          "evaluation/trp/campaign-20261012/trace/mapped-reference.json",
+          "evaluation/trp/campaign-20261012/mapping-public-contrasts/summary.json",
+          "evaluation/trp/campaign-20261012/mapping-public-contrasts/audit.json",
+          "evaluation/trp/campaign-20261012/mapping-public-contrasts/manifest.json",
+          "evaluation/trp/campaign-20261012/mapping-public-contrasts/protocol.json",
+          "evaluation/trp/campaign-20261012/mapping-public-contrasts/oracle-freeze.json",
+          "evaluation/trp/campaign-20261012/checks/root-review-20261013/public-mapping.json"
         ],
         "unidades_mapeadas": 12,
-        "archivos_verificados": 156
+        "archivos_verificados": 156,
+        "correspondencias_publicas": {
+          "scope": "public_development_numbering_contrasts_not_held_out_or_biological_annotation",
+          "chains": 30,
+          "label_positions": 11751,
+          "label_to_author_mapped": 11751,
+          "sifts_parser_chains": 30,
+          "prepared_admitted_chains": 28,
+          "prepared_residues": 11215,
+          "prepared_correct_rejected_chains": 2,
+          "observed_sifts_accession_rows": 11749,
+          "unobserved_sifts_accession_rows": 265,
+          "observed_ca_without_selected_sifts": 4,
+          "source_insertions_observed": 0,
+          "source_alternates_observed": 0,
+          "real_insertion_domain_validated": false,
+          "gemmi_lexical_parser_shared": true,
+          "independent_join_identity_coordinate_logic": true,
+          "oracle_agreement": true,
+          "reproduced_cases": 3,
+          "reproduction_byte_identical": true,
+          "human_reference": false,
+          "reserved_scientific_evaluation": false,
+          "biological_validity": "not_established",
+          "evidence_index_keys": [
+            "public_mapping_summary",
+            "public_mapping_audit",
+            "public_mapping_manifest",
+            "public_mapping_protocol",
+            "public_mapping_freeze",
+            "public_mapping_root_review"
+          ],
+          "missing_ca_correct_rejections": [
+            {
+              "case": "2bm4-A",
+              "residue": "GLY",
+              "author": "182",
+              "uniprot": "182"
+            },
+            {
+              "case": "1o8i-A",
+              "residue": "LYS",
+              "author": "353",
+              "uniprot": "375"
+            }
+          ]
+        }
       },
       "id_anterior": "R2.3",
       "evidencia": [
         "evaluation/trp/reference/predicted-agent-20260923/summary.json",
         "evaluation/trp/campaign-20261012/cloud/lab1/mapped-reference-protocol/driver-terminal.json",
-        "evaluation/trp/campaign-20261012/trace/mapped-reference.json"
+        "evaluation/trp/campaign-20261012/trace/mapped-reference.json",
+        "evaluation/trp/campaign-20261012/mapping-public-contrasts/summary.json",
+        "evaluation/trp/campaign-20261012/mapping-public-contrasts/audit.json",
+        "evaluation/trp/campaign-20261012/mapping-public-contrasts/manifest.json",
+        "evaluation/trp/campaign-20261012/mapping-public-contrasts/protocol.json",
+        "evaluation/trp/campaign-20261012/mapping-public-contrasts/oracle-freeze.json",
+        "evaluation/trp/campaign-20261012/checks/root-review-20261013/public-mapping.json"
       ],
       "historial_actualizaciones": [
         {
@@ -397,10 +455,62 @@
         "metricas_cientificas_finales": null,
         "fuentes": [
           "evaluation/trp/campaign-20261012/cloud/lab1/mapped-reference-protocol/driver-terminal.json",
-          "evaluation/trp/campaign-20261012/trace/mapped-reference.json"
+          "evaluation/trp/campaign-20261012/trace/mapped-reference.json",
+          "evaluation/trp/campaign-20261012/mapping-public-contrasts/summary.json",
+          "evaluation/trp/campaign-20261012/mapping-public-contrasts/audit.json",
+          "evaluation/trp/campaign-20261012/mapping-public-contrasts/manifest.json",
+          "evaluation/trp/campaign-20261012/mapping-public-contrasts/protocol.json",
+          "evaluation/trp/campaign-20261012/mapping-public-contrasts/oracle-freeze.json",
+          "evaluation/trp/campaign-20261012/checks/root-review-20261013/public-mapping.json"
         ],
         "unidades_mapeadas": 12,
-        "archivos_verificados": 156
+        "archivos_verificados": 156,
+        "correspondencias_publicas": {
+          "scope": "public_development_numbering_contrasts_not_held_out_or_biological_annotation",
+          "chains": 30,
+          "label_positions": 11751,
+          "label_to_author_mapped": 11751,
+          "sifts_parser_chains": 30,
+          "prepared_admitted_chains": 28,
+          "prepared_residues": 11215,
+          "prepared_correct_rejected_chains": 2,
+          "observed_sifts_accession_rows": 11749,
+          "unobserved_sifts_accession_rows": 265,
+          "observed_ca_without_selected_sifts": 4,
+          "source_insertions_observed": 0,
+          "source_alternates_observed": 0,
+          "real_insertion_domain_validated": false,
+          "gemmi_lexical_parser_shared": true,
+          "independent_join_identity_coordinate_logic": true,
+          "oracle_agreement": true,
+          "reproduced_cases": 3,
+          "reproduction_byte_identical": true,
+          "human_reference": false,
+          "reserved_scientific_evaluation": false,
+          "biological_validity": "not_established",
+          "evidence_index_keys": [
+            "public_mapping_summary",
+            "public_mapping_audit",
+            "public_mapping_manifest",
+            "public_mapping_protocol",
+            "public_mapping_freeze",
+            "public_mapping_root_review"
+          ],
+          "missing_ca_correct_rejections": [
+            {
+              "case": "2bm4-A",
+              "residue": "GLY",
+              "author": "182",
+              "uniprot": "182"
+            },
+            {
+              "case": "1o8i-A",
+              "residue": "LYS",
+              "author": "353",
+              "uniprot": "375"
+            }
+          ]
+        }
       }
     },
     {
@@ -658,7 +768,9 @@
         "packages/helix/src/trp/enforcement.ts",
         "script/tesis/trp_sandbox.py",
         "packages/helix/src/trp/remote.ts",
-        "packages/helix/src/trp/remote_runner.py.txt"
+        "packages/helix/src/trp/remote_runner.py.txt",
+        "packages/helix/src/trp/remote-enforcement.ts",
+        "packages/helix/src/trp/remote_strict.py.txt"
       ],
       "pruebas": [
         "packages/helix/test/trp/resources.test.ts",
@@ -669,17 +781,49 @@
         "packages/helix/test/trp/remote-cancellation.live.test.ts",
         "script/tesis/audit_remote_campaign.py"
       ],
-      "pendiente": "Se conserva la ingeniería local XFS/cgroup y sus siete contrastes. En nube se observan límites de tareas Docker, pero no un límite agregado cliente/controlador/remoto ni estimación de error sobre idéntico scope completo. Los tamaños finales no son picos; la evaluación agregada R2.2 permanece sin demostrar.",
+      "pendiente": "Perfil opcional co-localizado verificado con el cliente real, SQLite, cachés, temporales, trabajo NFS y exportación bajo una cuota XFS, y cliente/controlador bajo cgroup compartido. Los 26 flujos completos reprodujeron los conteos sin diferencias; no se observaron excesos de cuota ni de predicción en casos admitidos. Mediana de sobreestimación: 13,90 % en los 18 positivos originales, 11,20 % en frontera y 12,64 % en el suplemento. La subestimación inicial de 16 084 992 bytes se conserva; la reserva de 32 MiB se calibró antes de congelar los casos. Son bloques asignados muestreados cada 0,5 s; software instalado, cachés compartidas y telemetría externa quedan fuera. No demuestra el indicador científico reservado ni las mismas garantías en la ruta SSH ordinaria o todas las rutas del dominio.",
       "fase_cierre": "F4 ingeniería cerrada; F6 indicador reservado",
       "medicion": {
         "tipo": "ingenieria_o_preparacion_no_evaluacion_cientifica_reservada",
         "metricas_cientificas_finales": null,
         "fuentes": [
           "evaluation/trp/campaign-20261012/cloud/lab1/mapped-reference-protocol/driver-terminal.json",
-          "evaluation/trp/campaign-20261012/trace/r24-progress-independent-audit.json"
+          "evaluation/trp/campaign-20261012/trace/r24-progress-independent-audit.json",
+          "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/summary.json",
+          "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/final-package-verification.json"
         ],
-        "scope_remoto_agregado_demostrado": false,
-        "pico_disco_cliente_head_medido": false
+        "scope_remoto_agregado_demostrado": true,
+        "pico_disco_cliente_head_medido": "bloques_asignados_muestreados_0.5s_no_todos_los_discos",
+        "contraste_cliente_completo": {
+          "source_summary": "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/summary.json",
+          "source_summary_sha256": "a53095ee21ad8a1a4ba2efcfb7245e3e082cf5d1b1a33419685150f7026970e4",
+          "canonical_details": "vigente.cloud.R2_4_full_client_development",
+          "producer_frozen_commit": "ecfab67",
+          "attempts": 50,
+          "original_counts": {
+            "observed": 40,
+            "feasible": 18,
+            "infeasible": 18,
+            "unknown": 4
+          },
+          "boundary_counts": {
+            "observed": 6,
+            "feasible": 6,
+            "falseRejections": 3,
+            "thresholdMet": false
+          },
+          "supplement_counts": {
+            "observed": 4,
+            "feasible": 2,
+            "infeasible": 2
+          },
+          "union44_minimum20_each_met": true,
+          "original40_minimum20_each_met": false,
+          "scientific_R2_4_rate": null
+        },
+        "estado": "campana_tecnica_completa_umbral_frontera_incumplido",
+        "acierto_final": null,
+        "falso_rechazo_final": null
       },
       "evidencia": [
         "packages/helix/src/trp/resources.ts",
@@ -689,7 +833,15 @@
         "docs/tesis/R3.2-RECURSOS.md",
         "evaluation/trp/verification-20260923/output/summary.json",
         "evaluation/trp/campaign-20261012/cloud/lab1/mapped-reference-protocol/driver-terminal.json",
-        "evaluation/trp/campaign-20261012/trace/r24-progress-independent-audit.json"
+        "evaluation/trp/campaign-20261012/trace/r24-progress-independent-audit.json",
+        "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/smoke-outcomes-r4/summary.json",
+        "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/smoke-outcomes-r5/summary.json",
+        "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/calibration-before-final-campaign.json",
+        "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/copy-causal-controls/mechanism-review.json",
+        "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/campaign-inputs/freeze.json",
+        "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/boundary-inputs/freeze.json",
+        "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/summary.json",
+        "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/final-package-verification.json"
       ],
       "id_anterior": "R3.2",
       "historial_actualizaciones": [
@@ -716,20 +868,114 @@
             "evaluation/trp/verification-20260923/output/summary.json"
           ],
           "fase_cierre": "F4 ingeniería cerrada; F6 indicador reservado"
+        },
+        {
+          "snapshot_at_utc": "2026-10-13T06:08:23.807767+00:00",
+          "reason": "Strict co-located full-client pilot evidence supersedes prior absence of this optional guarantee",
+          "row": {
+            "id": "R2.2",
+            "objetivo": "OE2",
+            "titulo": "Contador de demanda",
+            "estado": "implementado",
+            "codigo": [
+              "packages/helix/src/trp/resources.ts",
+              "packages/helix/src/trp/enforcement.ts",
+              "script/tesis/trp_sandbox.py",
+              "packages/helix/src/trp/remote.ts",
+              "packages/helix/src/trp/remote_runner.py.txt"
+            ],
+            "pruebas": [
+              "packages/helix/test/trp/resources.test.ts",
+              "packages/helix/test/trp/enforcement.test.ts",
+              "script/tesis/audit_resource_runs.py",
+              "packages/helix/test/trp/remote.test.ts",
+              "packages/helix/test/trp/remote-status-repair.test.ts",
+              "packages/helix/test/trp/remote-cancellation.live.test.ts",
+              "script/tesis/audit_remote_campaign.py"
+            ],
+            "pendiente": "Se conserva la ingeniería local XFS/cgroup y sus siete contrastes. En nube se observan límites de tareas Docker, pero no un límite agregado cliente/controlador/remoto ni estimación de error sobre idéntico scope completo. Los tamaños finales no son picos; la evaluación agregada R2.2 permanece sin demostrar.",
+            "fase_cierre": "F4 ingeniería cerrada; F6 indicador reservado",
+            "medicion": {
+              "tipo": "ingenieria_o_preparacion_no_evaluacion_cientifica_reservada",
+              "metricas_cientificas_finales": null,
+              "fuentes": [
+                "evaluation/trp/campaign-20261012/cloud/lab1/mapped-reference-protocol/driver-terminal.json",
+                "evaluation/trp/campaign-20261012/trace/r24-progress-independent-audit.json"
+              ],
+              "scope_remoto_agregado_demostrado": false,
+              "pico_disco_cliente_head_medido": false
+            },
+            "evidencia": [
+              "packages/helix/src/trp/resources.ts",
+              "packages/helix/src/trp/enforcement.ts",
+              "script/tesis/trp_sandbox.py",
+              "docs/tesis/evidencia/r32.json",
+              "docs/tesis/R3.2-RECURSOS.md",
+              "evaluation/trp/verification-20260923/output/summary.json",
+              "evaluation/trp/campaign-20261012/cloud/lab1/mapped-reference-protocol/driver-terminal.json",
+              "evaluation/trp/campaign-20261012/trace/r24-progress-independent-audit.json"
+            ],
+            "id_anterior": "R3.2",
+            "actualizacion_vigente": "2026-10-12",
+            "nota_supersesion": "Sustituye el estado operativo del snapshot anterior; las evidencias y métricas históricas permanecen en historial_actualizaciones. No cambia identificadores ni umbrales científicos.",
+            "medicion_vigente": {
+              "tipo": "ingenieria_o_preparacion_no_evaluacion_cientifica_reservada",
+              "metricas_cientificas_finales": null,
+              "fuentes": [
+                "evaluation/trp/campaign-20261012/cloud/lab1/mapped-reference-protocol/driver-terminal.json",
+                "evaluation/trp/campaign-20261012/trace/r24-progress-independent-audit.json"
+              ],
+              "scope_remoto_agregado_demostrado": false,
+              "pico_disco_cliente_head_medido": false
+            }
+          }
         }
       ],
-      "actualizacion_vigente": "2026-10-12",
+      "actualizacion_vigente": "2026-10-13",
       "nota_supersesion": "Sustituye el estado operativo del snapshot anterior; las evidencias y métricas históricas permanecen en historial_actualizaciones. No cambia identificadores ni umbrales científicos.",
       "medicion_vigente": {
         "tipo": "ingenieria_o_preparacion_no_evaluacion_cientifica_reservada",
         "metricas_cientificas_finales": null,
         "fuentes": [
           "evaluation/trp/campaign-20261012/cloud/lab1/mapped-reference-protocol/driver-terminal.json",
-          "evaluation/trp/campaign-20261012/trace/r24-progress-independent-audit.json"
+          "evaluation/trp/campaign-20261012/trace/r24-progress-independent-audit.json",
+          "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/summary.json",
+          "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/final-package-verification.json"
         ],
-        "scope_remoto_agregado_demostrado": false,
-        "pico_disco_cliente_head_medido": false
-      }
+        "scope_remoto_agregado_demostrado": true,
+        "pico_disco_cliente_head_medido": "bloques_asignados_muestreados_0.5s_no_todos_los_discos",
+        "contraste_cliente_completo": {
+          "source_summary": "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/summary.json",
+          "source_summary_sha256": "a53095ee21ad8a1a4ba2efcfb7245e3e082cf5d1b1a33419685150f7026970e4",
+          "canonical_details": "vigente.cloud.R2_4_full_client_development",
+          "producer_frozen_commit": "ecfab67",
+          "attempts": 50,
+          "original_counts": {
+            "observed": 40,
+            "feasible": 18,
+            "infeasible": 18,
+            "unknown": 4
+          },
+          "boundary_counts": {
+            "observed": 6,
+            "feasible": 6,
+            "falseRejections": 3,
+            "thresholdMet": false
+          },
+          "supplement_counts": {
+            "observed": 4,
+            "feasible": 2,
+            "infeasible": 2
+          },
+          "union44_minimum20_each_met": true,
+          "original40_minimum20_each_met": false,
+          "scientific_R2_4_rate": null
+        },
+        "estado": "campana_tecnica_completa_umbral_frontera_incumplido",
+        "acierto_final": null,
+        "falso_rechazo_final": null
+      },
+      "actualizacion_vigente_utc": "2026-10-13T16:49:18.627028+00:00"
     },
     {
       "id": "R2.3",
@@ -740,7 +986,9 @@
         "packages/helix/src/trp/resources.ts",
         "packages/helix/src/trp/workflow.ts",
         "packages/helix/src/trp/remote.ts",
-        "packages/helix/src/trp/remote_runner.py.txt"
+        "packages/helix/src/trp/remote_runner.py.txt",
+        "packages/helix/src/trp/remote-enforcement.ts",
+        "packages/helix/src/trp/remote_strict.py.txt"
       ],
       "pruebas": [
         "packages/helix/test/trp/resources.test.ts",
@@ -750,15 +998,49 @@
         "packages/helix/test/trp/remote-cancellation.live.test.ts",
         "script/tesis/audit_remote_campaign.py"
       ],
-      "pendiente": "Negativas por capacidad, ventana o configuración están tipificadas. Se rechaza honestamente una solicitud remota de cuota dura de disco al no existir esa garantía. Cancelación limpia y fallos de seguimiento conservan causa y limpieza; el contraste de viabilidad independiente R2.4 sigue en curso.",
+      "pendiente": "Decisiones originales de admisión por capacidad, presupuesto, ventana y configuración conservadas para los 50 contrastes del cliente completo. El contrafactual sólo fuerza rechazos exclusivos de estimación workBytes, sin cambiar la decisión real ni saltar cuotas, cgroups, permisos, propiedad o plazo. En frontera, tres flujos rechazados completaron la ejecución y demostraron falsos rechazos. La ruta SSH ordinaria mantiene garantías diferentes.",
       "fase_cierre": "F6",
       "medicion": {
         "tipo": "ingenieria_o_preparacion_no_evaluacion_cientifica_reservada",
         "metricas_cientificas_finales": null,
         "fuentes": [
           "evaluation/trp/campaign-20261012/cloud/lab1/cancellation/next-ctx-abort/driver-terminal.json",
-          "evaluation/trp/campaign-20261012/trace/r24-progress-independent-audit.json"
-        ]
+          "evaluation/trp/campaign-20261012/trace/r24-progress-independent-audit.json",
+          "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/summary.json",
+          "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/final-package-verification.json"
+        ],
+        "contraste_cliente_completo": {
+          "source_summary": "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/summary.json",
+          "source_summary_sha256": "a53095ee21ad8a1a4ba2efcfb7245e3e082cf5d1b1a33419685150f7026970e4",
+          "canonical_details": "vigente.cloud.R2_4_full_client_development",
+          "producer_frozen_commit": "ecfab67",
+          "attempts": 50,
+          "original_counts": {
+            "observed": 40,
+            "feasible": 18,
+            "infeasible": 18,
+            "unknown": 4
+          },
+          "boundary_counts": {
+            "observed": 6,
+            "feasible": 6,
+            "falseRejections": 3,
+            "thresholdMet": false
+          },
+          "supplement_counts": {
+            "observed": 4,
+            "feasible": 2,
+            "infeasible": 2
+          },
+          "union44_minimum20_each_met": true,
+          "original40_minimum20_each_met": false,
+          "scientific_R2_4_rate": null
+        },
+        "estado": "campana_tecnica_completa_umbral_frontera_incumplido",
+        "scope_remoto_agregado_demostrado": true,
+        "pico_disco_cliente_head_medido": "bloques_asignados_muestreados_0.5s_no_todos_los_discos",
+        "acierto_final": null,
+        "falso_rechazo_final": null
       },
       "id_anterior": "R3.3",
       "historial_actualizaciones": [
@@ -773,23 +1055,116 @@
             "reserva_evaluada": false
           },
           "fase_cierre": "F6"
+        },
+        {
+          "snapshot_at_utc": "2026-10-13T06:08:23.807767+00:00",
+          "reason": "Strict co-located full-client pilot evidence supersedes prior absence of this optional guarantee",
+          "row": {
+            "id": "R2.3",
+            "objetivo": "OE2",
+            "titulo": "Rechazo tipificado de admisión",
+            "estado": "implementado",
+            "codigo": [
+              "packages/helix/src/trp/resources.ts",
+              "packages/helix/src/trp/workflow.ts",
+              "packages/helix/src/trp/remote.ts",
+              "packages/helix/src/trp/remote_runner.py.txt"
+            ],
+            "pruebas": [
+              "packages/helix/test/trp/resources.test.ts",
+              "packages/helix/test/trp/admission.test.ts",
+              "packages/helix/test/trp/remote.test.ts",
+              "packages/helix/test/trp/remote-status-repair.test.ts",
+              "packages/helix/test/trp/remote-cancellation.live.test.ts",
+              "script/tesis/audit_remote_campaign.py"
+            ],
+            "pendiente": "Negativas por capacidad, ventana o configuración están tipificadas. Se rechaza honestamente una solicitud remota de cuota dura de disco al no existir esa garantía. Cancelación limpia y fallos de seguimiento conservan causa y limpieza; el contraste de viabilidad independiente R2.4 sigue en curso.",
+            "fase_cierre": "F6",
+            "medicion": {
+              "tipo": "ingenieria_o_preparacion_no_evaluacion_cientifica_reservada",
+              "metricas_cientificas_finales": null,
+              "fuentes": [
+                "evaluation/trp/campaign-20261012/cloud/lab1/cancellation/next-ctx-abort/driver-terminal.json",
+                "evaluation/trp/campaign-20261012/trace/r24-progress-independent-audit.json"
+              ]
+            },
+            "id_anterior": "R3.3",
+            "actualizacion_vigente": "2026-10-12",
+            "nota_supersesion": "Sustituye el estado operativo del snapshot anterior; las evidencias y métricas históricas permanecen en historial_actualizaciones. No cambia identificadores ni umbrales científicos.",
+            "evidencia": [
+              "evaluation/trp/campaign-20261012/cloud/lab1/cancellation/next-ctx-abort/driver-terminal.json",
+              "evaluation/trp/campaign-20261012/trace/r24-progress-independent-audit.json",
+              "evaluation/trp/campaign-20261012/cloud/lab2/prepare-window/prepare-status.json"
+            ],
+            "medicion_vigente": {
+              "tipo": "ingenieria_o_preparacion_no_evaluacion_cientifica_reservada",
+              "metricas_cientificas_finales": null,
+              "fuentes": [
+                "evaluation/trp/campaign-20261012/cloud/lab1/cancellation/next-ctx-abort/driver-terminal.json",
+                "evaluation/trp/campaign-20261012/trace/r24-progress-independent-audit.json"
+              ]
+            }
+          }
         }
       ],
-      "actualizacion_vigente": "2026-10-12",
+      "actualizacion_vigente": "2026-10-13",
       "nota_supersesion": "Sustituye el estado operativo del snapshot anterior; las evidencias y métricas históricas permanecen en historial_actualizaciones. No cambia identificadores ni umbrales científicos.",
       "evidencia": [
         "evaluation/trp/campaign-20261012/cloud/lab1/cancellation/next-ctx-abort/driver-terminal.json",
         "evaluation/trp/campaign-20261012/trace/r24-progress-independent-audit.json",
-        "evaluation/trp/campaign-20261012/cloud/lab2/prepare-window/prepare-status.json"
+        "evaluation/trp/campaign-20261012/cloud/lab2/prepare-window/prepare-status.json",
+        "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/smoke-outcomes-r4/summary.json",
+        "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/smoke-outcomes-r5/summary.json",
+        "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/calibration-before-final-campaign.json",
+        "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/copy-causal-controls/mechanism-review.json",
+        "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/campaign-inputs/freeze.json",
+        "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/boundary-inputs/freeze.json",
+        "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/summary.json",
+        "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/final-package-verification.json"
       ],
       "medicion_vigente": {
         "tipo": "ingenieria_o_preparacion_no_evaluacion_cientifica_reservada",
         "metricas_cientificas_finales": null,
         "fuentes": [
           "evaluation/trp/campaign-20261012/cloud/lab1/cancellation/next-ctx-abort/driver-terminal.json",
-          "evaluation/trp/campaign-20261012/trace/r24-progress-independent-audit.json"
-        ]
-      }
+          "evaluation/trp/campaign-20261012/trace/r24-progress-independent-audit.json",
+          "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/summary.json",
+          "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/final-package-verification.json"
+        ],
+        "contraste_cliente_completo": {
+          "source_summary": "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/summary.json",
+          "source_summary_sha256": "a53095ee21ad8a1a4ba2efcfb7245e3e082cf5d1b1a33419685150f7026970e4",
+          "canonical_details": "vigente.cloud.R2_4_full_client_development",
+          "producer_frozen_commit": "ecfab67",
+          "attempts": 50,
+          "original_counts": {
+            "observed": 40,
+            "feasible": 18,
+            "infeasible": 18,
+            "unknown": 4
+          },
+          "boundary_counts": {
+            "observed": 6,
+            "feasible": 6,
+            "falseRejections": 3,
+            "thresholdMet": false
+          },
+          "supplement_counts": {
+            "observed": 4,
+            "feasible": 2,
+            "infeasible": 2
+          },
+          "union44_minimum20_each_met": true,
+          "original40_minimum20_each_met": false,
+          "scientific_R2_4_rate": null
+        },
+        "estado": "campana_tecnica_completa_umbral_frontera_incumplido",
+        "scope_remoto_agregado_demostrado": true,
+        "pico_disco_cliente_head_medido": "bloques_asignados_muestreados_0.5s_no_todos_los_discos",
+        "acierto_final": null,
+        "falso_rechazo_final": null
+      },
+      "actualizacion_vigente_utc": "2026-10-13T16:49:18.627028+00:00"
     },
     {
       "id": "R2.4",
@@ -803,17 +1178,88 @@
       "pruebas": [
         "script/tesis/test_f6_readiness.py"
       ],
-      "pendiente": "Contraste acotado de admisión y ejecución de desarrollo en curso en Lab2. No se publica acierto ni falso rechazo final y no se declara satisfecho el indicador científico; el oracle del head no incluye preparación/exportación del cliente real.",
+      "pendiente": "Campaña del cliente completo terminada: originales 40 con 18 factibles, 18 inviables y 4 desconocidos; 0/18 falsos rechazos y 36/40 aciertos comprobados, sin contar los desconocidos como correctos. Frontera separada: 6 factibles, 3/6 falsos rechazos (50 %), por lo que falla el umbral de 5 %. Suplemento posterior separado: 2 factibles y 2 inviables. Sólo la unión de originales y suplemento, 44 observados con 4 desconocidos, alcanza 20/20 reales; los 40 originales no alcanzan ese mínimo. Todas las variantes proceden de una proteína de desarrollo. El contraste anterior limitado al head se conserva con su alcance propio; la tasa científica de R2.4 permanece sin medir.",
       "fase_cierre": "F6",
       "medicion": {
         "tipo": "ingenieria_o_preparacion_no_evaluacion_cientifica_reservada",
         "metricas_cientificas_finales": null,
         "fuentes": [
-          "evaluation/trp/campaign-20261012/trace/r24-progress-independent-audit.json"
+          "evaluation/trp/campaign-20261012/cloud/lab2/r24-summary.json",
+          "evaluation/trp/campaign-20261012/cloud/lab2/r24-campaign/all-original-attempts.json",
+          "evaluation/trp/campaign-20261012/cloud/lab2/r24-extension/summary.json",
+          "evaluation/trp/campaign-20261012/cloud/lab2/r24-evidence-manifest.json",
+          "evaluation/trp/campaign-20261012/trace/r24-canonical-source-review.json",
+          "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/summary.json",
+          "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/final-package-verification.json"
         ],
-        "estado": "en_ejecucion",
+        "estado": "campana_tecnica_completa_umbral_frontera_incumplido",
         "acierto_final": null,
-        "falso_rechazo_final": null
+        "falso_rechazo_final": null,
+        "contraste_head": {
+          "scope": "head_workspace_desarrollo_no_cliente_real_no_reserva",
+          "originales": {
+            "casos": 40,
+            "factibles": 26,
+            "inviables": 14,
+            "aciertos": 34,
+            "falsos_rechazos": 6,
+            "falso_rechazo": 0.23076923076923078,
+            "acierto": 0.85,
+            "intentos_enviados": 42,
+            "intentos_desconocidos_historicos_conservados": 2,
+            "casos_unicos_sin_resolver": 0,
+            "IC95_Wilson_falso_rechazo": [
+              0.11033849405783291,
+              0.42051554078943687
+            ],
+            "IC95_Wilson_acierto": [
+              0.709276756335103,
+              0.9293881228267964
+            ],
+            "umbral_falso_rechazo": 0.05,
+            "umbral_alcanzado": false
+          },
+          "extension_separada": {
+            "casos": 6,
+            "factibles": 0,
+            "inviables": 6,
+            "aciertos": 6,
+            "escogida_tras_observar_originales": true,
+            "falso_rechazo": null
+          },
+          "gobernanza_agregada_cliente_real_remoto_demostrada": false,
+          "tasa_cientifica_R2_4": null,
+          "intervalos": "Descriptivos bajo convención binomial; variantes de una proteína no sustentan generalización entre proteínas."
+        },
+        "contraste_cliente_completo": {
+          "source_summary": "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/summary.json",
+          "source_summary_sha256": "a53095ee21ad8a1a4ba2efcfb7245e3e082cf5d1b1a33419685150f7026970e4",
+          "canonical_details": "vigente.cloud.R2_4_full_client_development",
+          "producer_frozen_commit": "ecfab67",
+          "attempts": 50,
+          "original_counts": {
+            "observed": 40,
+            "feasible": 18,
+            "infeasible": 18,
+            "unknown": 4
+          },
+          "boundary_counts": {
+            "observed": 6,
+            "feasible": 6,
+            "falseRejections": 3,
+            "thresholdMet": false
+          },
+          "supplement_counts": {
+            "observed": 4,
+            "feasible": 2,
+            "infeasible": 2
+          },
+          "union44_minimum20_each_met": true,
+          "original40_minimum20_each_met": false,
+          "scientific_R2_4_rate": null
+        },
+        "scope_remoto_agregado_demostrado": true,
+        "pico_disco_cliente_head_medido": "bloques_asignados_muestreados_0.5s_no_todos_los_discos"
       },
       "id_anterior": "R3.4",
       "historial_actualizaciones": [
@@ -824,23 +1270,147 @@
           "pendiente": "F2 fija falso rechazo ≤5% y reporte conjunto de acierto con contraste observado. Falta construir escenarios y ejecutar evaluación; un rechazo sin contraste sigue no evaluado.",
           "medicion": null,
           "fase_cierre": "F6"
+        },
+        {
+          "capturado_antes_utc": "2026-10-13T04:22:44.307820+00:00",
+          "motivo": "Actualización acotada R2.4 head y R3.2 negativas; conservación exacta del estado anterior",
+          "datos": {
+            "id": "R2.4",
+            "objetivo": "OE2",
+            "titulo": "Acierto y falso rechazo",
+            "estado": "parcial",
+            "codigo": [
+              "script/tesis/check_f6_readiness.py",
+              "script/tesis/prepare_f6_draft.py"
+            ],
+            "pruebas": [
+              "script/tesis/test_f6_readiness.py"
+            ],
+            "pendiente": "Contraste acotado de admisión y ejecución de desarrollo en curso en Lab2. No se publica acierto ni falso rechazo final y no se declara satisfecho el indicador científico; el oracle del head no incluye preparación/exportación del cliente real.",
+            "fase_cierre": "F6",
+            "medicion": {
+              "tipo": "ingenieria_o_preparacion_no_evaluacion_cientifica_reservada",
+              "metricas_cientificas_finales": null,
+              "fuentes": [
+                "evaluation/trp/campaign-20261012/trace/r24-progress-independent-audit.json"
+              ],
+              "estado": "en_ejecucion",
+              "acierto_final": null,
+              "falso_rechazo_final": null
+            },
+            "id_anterior": "R3.4",
+            "actualizacion_vigente": "2026-10-12",
+            "nota_supersesion": "Sustituye el estado operativo del snapshot anterior; las evidencias y métricas históricas permanecen en historial_actualizaciones. No cambia identificadores ni umbrales científicos.",
+            "evidencia": [
+              "evaluation/trp/campaign-20261012/trace/r24-progress-independent-audit.json"
+            ],
+            "medicion_vigente": {
+              "tipo": "ingenieria_o_preparacion_no_evaluacion_cientifica_reservada",
+              "metricas_cientificas_finales": null,
+              "fuentes": [
+                "evaluation/trp/campaign-20261012/trace/r24-progress-independent-audit.json"
+              ],
+              "estado": "en_ejecucion",
+              "acierto_final": null,
+              "falso_rechazo_final": null
+            }
+          }
         }
       ],
-      "actualizacion_vigente": "2026-10-12",
+      "actualizacion_vigente": "2026-10-13",
       "nota_supersesion": "Sustituye el estado operativo del snapshot anterior; las evidencias y métricas históricas permanecen en historial_actualizaciones. No cambia identificadores ni umbrales científicos.",
       "evidencia": [
-        "evaluation/trp/campaign-20261012/trace/r24-progress-independent-audit.json"
+        "evaluation/trp/campaign-20261012/trace/r24-progress-independent-audit.json",
+        "evaluation/trp/campaign-20261012/cloud/lab2/r24-summary.json",
+        "evaluation/trp/campaign-20261012/cloud/lab2/r24-campaign/all-original-attempts.json",
+        "evaluation/trp/campaign-20261012/cloud/lab2/r24-extension/summary.json",
+        "evaluation/trp/campaign-20261012/cloud/lab2/r24-evidence-manifest.json",
+        "evaluation/trp/campaign-20261012/trace/r24-canonical-source-review.json",
+        "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/summary.json",
+        "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/final-package-verification.json"
       ],
       "medicion_vigente": {
         "tipo": "ingenieria_o_preparacion_no_evaluacion_cientifica_reservada",
         "metricas_cientificas_finales": null,
         "fuentes": [
-          "evaluation/trp/campaign-20261012/trace/r24-progress-independent-audit.json"
+          "evaluation/trp/campaign-20261012/cloud/lab2/r24-summary.json",
+          "evaluation/trp/campaign-20261012/cloud/lab2/r24-campaign/all-original-attempts.json",
+          "evaluation/trp/campaign-20261012/cloud/lab2/r24-extension/summary.json",
+          "evaluation/trp/campaign-20261012/cloud/lab2/r24-evidence-manifest.json",
+          "evaluation/trp/campaign-20261012/trace/r24-canonical-source-review.json",
+          "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/summary.json",
+          "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/final-package-verification.json"
         ],
-        "estado": "en_ejecucion",
+        "estado": "campana_tecnica_completa_umbral_frontera_incumplido",
         "acierto_final": null,
-        "falso_rechazo_final": null
-      }
+        "falso_rechazo_final": null,
+        "contraste_head": {
+          "scope": "head_workspace_desarrollo_no_cliente_real_no_reserva",
+          "originales": {
+            "casos": 40,
+            "factibles": 26,
+            "inviables": 14,
+            "aciertos": 34,
+            "falsos_rechazos": 6,
+            "falso_rechazo": 0.23076923076923078,
+            "acierto": 0.85,
+            "intentos_enviados": 42,
+            "intentos_desconocidos_historicos_conservados": 2,
+            "casos_unicos_sin_resolver": 0,
+            "IC95_Wilson_falso_rechazo": [
+              0.11033849405783291,
+              0.42051554078943687
+            ],
+            "IC95_Wilson_acierto": [
+              0.709276756335103,
+              0.9293881228267964
+            ],
+            "umbral_falso_rechazo": 0.05,
+            "umbral_alcanzado": false
+          },
+          "extension_separada": {
+            "casos": 6,
+            "factibles": 0,
+            "inviables": 6,
+            "aciertos": 6,
+            "escogida_tras_observar_originales": true,
+            "falso_rechazo": null
+          },
+          "gobernanza_agregada_cliente_real_remoto_demostrada": false,
+          "tasa_cientifica_R2_4": null,
+          "intervalos": "Descriptivos bajo convención binomial; variantes de una proteína no sustentan generalización entre proteínas."
+        },
+        "contraste_cliente_completo": {
+          "source_summary": "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/summary.json",
+          "source_summary_sha256": "a53095ee21ad8a1a4ba2efcfb7245e3e082cf5d1b1a33419685150f7026970e4",
+          "canonical_details": "vigente.cloud.R2_4_full_client_development",
+          "producer_frozen_commit": "ecfab67",
+          "attempts": 50,
+          "original_counts": {
+            "observed": 40,
+            "feasible": 18,
+            "infeasible": 18,
+            "unknown": 4
+          },
+          "boundary_counts": {
+            "observed": 6,
+            "feasible": 6,
+            "falseRejections": 3,
+            "thresholdMet": false
+          },
+          "supplement_counts": {
+            "observed": 4,
+            "feasible": 2,
+            "infeasible": 2
+          },
+          "union44_minimum20_each_met": true,
+          "original40_minimum20_each_met": false,
+          "scientific_R2_4_rate": null
+        },
+        "scope_remoto_agregado_demostrado": true,
+        "pico_disco_cliente_head_medido": "bloques_asignados_muestreados_0.5s_no_todos_los_discos"
+      },
+      "actualizacion_vigente_utc": "2026-10-13T16:49:18.627028+00:00"
     },
     {
       "id": "R3.1",
@@ -872,15 +1442,86 @@
         "packages/helix/test/trp/remote-cancellation.live.test.ts",
         "script/tesis/audit_remote_campaign.py"
       ],
-      "pendiente": "Paquetes actuales verificados con anclas externas. Referencia SIFTS de 156 archivos verificada fuera del checkout; 320/320 alteraciones offline detectadas. La integridad y portabilidad no certifican autoría, verdad biológica ni reanudación universal.",
+      "pendiente": "Integridad y reproducción en frío verificadas con anclas externas. La matriz original conserva sus 1766 controles y 21 059 archivos; no se reescribió. La corrección 9ada336 refuerza métodos y compuertas. Dos paquetes nuevos verifican por defecto sin legacy: positivo de 152 archivos y negativo automático de 151. No certifica autoría, verdad biológica ni satisfacción científica de los 21 indicadores.",
       "fase_cierre": "F6",
       "medicion": {
         "tipo": "ingenieria_o_preparacion_no_evaluacion_cientifica_reservada",
         "metricas_cientificas_finales": null,
         "fuentes": [
           "evaluation/trp/campaign-20261012/trace/mapped-reference.json",
-          "evaluation/trp/campaign-20261012/trace/mapped-reference-copy.json"
-        ]
+          "evaluation/trp/campaign-20261012/trace/mapped-reference-copy.json",
+          "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/summary.json",
+          "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/final-package-verification.json",
+          "evaluation/trp/campaign-20261012/checks/post-campaign-production-20261013/cloud/summary.json"
+        ],
+        "correcciones_semanticas_postcampana": {
+          "status": "applied_locally_checked_and_live_integrated",
+          "production_revision": "9ada336",
+          "operator_helper_revision": "0dcb38a",
+          "producer_source_hashes": {
+            "packages/helix/src/trp/workflow.ts": "986f4b13e1c2661ede6f42114ec23bc4a5e891872a401d1874c992e9ba3b5cc7",
+            "packages/helix/src/trp/verify_bundle.py.txt": "952e79d5cecae707954ed667d231838569323dffdd068ab43edd770284841eb9",
+            "packages/helix/src/trp/remote_runner.py.txt": "f2aa0d714848da79726bf1126ed5611e999b941cd0ee653067a901a9873e1805",
+            "packages/helix/test/trp/workflow-backend.test.ts": "46ead7759736ac5ca4b1aa1fad6c3b1729b9080f6d250e87bab2daad86b011a6"
+          },
+          "local_summary": {
+            "path": "evaluation/trp/campaign-20261012/checks/post-campaign-production-20261013/summary.json",
+            "sha256": "fa5d578fb5e9983087a7042204f85fdc4761ef12e90a3b12ef407d2e460b9324"
+          },
+          "local_regression": {
+            "passed": 543,
+            "skipped_opt_in": 63,
+            "failed": 0,
+            "assertions": 1601,
+            "files": 57,
+            "source": {
+              "path": "evaluation/trp/campaign-20261012/checks/post-campaign-production-20261013/broad-summary.json",
+              "sha256": "145ad9de75f48a69db680c9f8e5515947a6f6e9dcf22ee2af4570137bd4ca08f"
+            }
+          },
+          "local_typecheck_exit_code": 0,
+          "integration_summary": {
+            "path": "evaluation/trp/campaign-20261012/checks/post-campaign-production-20261013/cloud/summary.json",
+            "sha256": "79d058fee282b559e7133ce43d602b3633484d6f5829a4d5e1bd4dae0df6530f"
+          },
+          "integration": {
+            "independent_checks": 89,
+            "ordinary_default_verifier": true,
+            "legacy_flag_used": false,
+            "positive_files": 152,
+            "positive_native_ids": [
+              "377",
+              "378",
+              "379",
+              "380"
+            ],
+            "positive_gold_equal": true,
+            "backend_consistent": true,
+            "negative_case": "POST-04-native-cancellation-1000",
+            "negative_files": 151,
+            "negative_native_id": "384",
+            "negative_native_state": "CANCELLED",
+            "negative_native_exit_code": "0:9",
+            "automatic_failed_package": true,
+            "queue_loss_terminal_retained": true,
+            "approval_kind": "synthetic_actual_Question_Service",
+            "two_prelaunch_or_preRun_harness_failures_preserved": true,
+            "latency_P95": null,
+            "native_cancellation_observer_qualification": "Bounded fast watcher saw COMPLETING; later independent scontrol and producer ledger confirmed CANCELLED. Timestamp difference is one observed interval, not an internal latency bound."
+          },
+          "final_quiescence": {
+            "path": "evaluation/trp/campaign-20261012/checks/post-campaign-production-20261013/cloud/post-quiescence.json",
+            "sha256": "3511e2ef52679a46d77c508eb939c142f761b3b07b3783d46ce4e93c64403856"
+          },
+          "original_campaign_source_and_metrics_immutable": true,
+          "original_matrix_summary_sha256": "a53095ee21ad8a1a4ba2efcfb7245e3e082cf5d1b1a33419685150f7026970e4",
+          "items": [
+            "Backend is derived from actual completed execution and is consistent in execution, Run and completion event.",
+            "Default cold verifier checks methods and gates; historical qualification remains explicit and new packets use no legacy flag.",
+            "Seen native IDs and terminal state are kept after queue disappearance; own native failure was observed and automatically packaged."
+          ],
+          "scientific_reserved_metrics": null
+        }
       },
       "id_anterior": "R4.1",
       "historial_actualizaciones": [
@@ -898,20 +1539,94 @@
           "fase_cierre": "F6"
         }
       ],
-      "actualizacion_vigente": "2026-10-12",
+      "actualizacion_vigente": "2026-10-13",
       "nota_supersesion": "Sustituye el estado operativo del snapshot anterior; las evidencias y métricas históricas permanecen en historial_actualizaciones. No cambia identificadores ni umbrales científicos.",
       "evidencia": [
         "evaluation/trp/campaign-20261012/trace/mapped-reference.json",
-        "evaluation/trp/campaign-20261012/trace/mapped-reference-copy.json"
+        "evaluation/trp/campaign-20261012/trace/mapped-reference-copy.json",
+        "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/summary.json",
+        "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/final-package-verification.json"
       ],
       "medicion_vigente": {
         "tipo": "ingenieria_o_preparacion_no_evaluacion_cientifica_reservada",
         "metricas_cientificas_finales": null,
         "fuentes": [
           "evaluation/trp/campaign-20261012/trace/mapped-reference.json",
-          "evaluation/trp/campaign-20261012/trace/mapped-reference-copy.json"
-        ]
-      }
+          "evaluation/trp/campaign-20261012/trace/mapped-reference-copy.json",
+          "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/summary.json",
+          "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/final-package-verification.json",
+          "evaluation/trp/campaign-20261012/checks/post-campaign-production-20261013/cloud/summary.json"
+        ],
+        "correcciones_semanticas_postcampana": {
+          "status": "applied_locally_checked_and_live_integrated",
+          "production_revision": "9ada336",
+          "operator_helper_revision": "0dcb38a",
+          "producer_source_hashes": {
+            "packages/helix/src/trp/workflow.ts": "986f4b13e1c2661ede6f42114ec23bc4a5e891872a401d1874c992e9ba3b5cc7",
+            "packages/helix/src/trp/verify_bundle.py.txt": "952e79d5cecae707954ed667d231838569323dffdd068ab43edd770284841eb9",
+            "packages/helix/src/trp/remote_runner.py.txt": "f2aa0d714848da79726bf1126ed5611e999b941cd0ee653067a901a9873e1805",
+            "packages/helix/test/trp/workflow-backend.test.ts": "46ead7759736ac5ca4b1aa1fad6c3b1729b9080f6d250e87bab2daad86b011a6"
+          },
+          "local_summary": {
+            "path": "evaluation/trp/campaign-20261012/checks/post-campaign-production-20261013/summary.json",
+            "sha256": "fa5d578fb5e9983087a7042204f85fdc4761ef12e90a3b12ef407d2e460b9324"
+          },
+          "local_regression": {
+            "passed": 543,
+            "skipped_opt_in": 63,
+            "failed": 0,
+            "assertions": 1601,
+            "files": 57,
+            "source": {
+              "path": "evaluation/trp/campaign-20261012/checks/post-campaign-production-20261013/broad-summary.json",
+              "sha256": "145ad9de75f48a69db680c9f8e5515947a6f6e9dcf22ee2af4570137bd4ca08f"
+            }
+          },
+          "local_typecheck_exit_code": 0,
+          "integration_summary": {
+            "path": "evaluation/trp/campaign-20261012/checks/post-campaign-production-20261013/cloud/summary.json",
+            "sha256": "79d058fee282b559e7133ce43d602b3633484d6f5829a4d5e1bd4dae0df6530f"
+          },
+          "integration": {
+            "independent_checks": 89,
+            "ordinary_default_verifier": true,
+            "legacy_flag_used": false,
+            "positive_files": 152,
+            "positive_native_ids": [
+              "377",
+              "378",
+              "379",
+              "380"
+            ],
+            "positive_gold_equal": true,
+            "backend_consistent": true,
+            "negative_case": "POST-04-native-cancellation-1000",
+            "negative_files": 151,
+            "negative_native_id": "384",
+            "negative_native_state": "CANCELLED",
+            "negative_native_exit_code": "0:9",
+            "automatic_failed_package": true,
+            "queue_loss_terminal_retained": true,
+            "approval_kind": "synthetic_actual_Question_Service",
+            "two_prelaunch_or_preRun_harness_failures_preserved": true,
+            "latency_P95": null,
+            "native_cancellation_observer_qualification": "Bounded fast watcher saw COMPLETING; later independent scontrol and producer ledger confirmed CANCELLED. Timestamp difference is one observed interval, not an internal latency bound."
+          },
+          "final_quiescence": {
+            "path": "evaluation/trp/campaign-20261012/checks/post-campaign-production-20261013/cloud/post-quiescence.json",
+            "sha256": "3511e2ef52679a46d77c508eb939c142f761b3b07b3783d46ce4e93c64403856"
+          },
+          "original_campaign_source_and_metrics_immutable": true,
+          "original_matrix_summary_sha256": "a53095ee21ad8a1a4ba2efcfb7245e3e082cf5d1b1a33419685150f7026970e4",
+          "items": [
+            "Backend is derived from actual completed execution and is consistent in execution, Run and completion event.",
+            "Default cold verifier checks methods and gates; historical qualification remains explicit and new packets use no legacy flag.",
+            "Seen native IDs and terminal state are kept after queue disappearance; own native failure was observed and automatically packaged."
+          ],
+          "scientific_reserved_metrics": null
+        }
+      },
+      "actualizacion_vigente_utc": "2026-10-13T16:49:18.627028+00:00"
     },
     {
       "id": "R3.2",
@@ -935,9 +1650,11 @@
         "packages/helix/test/trp/remote.test.ts",
         "packages/helix/test/trp/remote-status-repair.test.ts",
         "packages/helix/test/trp/remote-cancellation.live.test.ts",
-        "script/tesis/audit_remote_campaign.py"
+        "script/tesis/audit_remote_campaign.py",
+        "packages/helix/test/trp/event-negative.campaign.test.ts",
+        "evaluation/trp/campaign-20261012/event-negative-contrasts/audit.py"
       ],
-      "pendiente": "Cadena de decisiones, aprobación/configuración/transferencia y métodos contrastados en ejecuciones remotas. Cancelación real de trabajo nativo 128 conserva RUNNING, Tool.Context.abort, CANCELLED y evento final automático; los intentos anteriores deficientes siguen conservados. No equivale a cobertura universal de sesión humana.",
+      "pendiente": "Decisiones y negativas conservadas; cuatro sesiones locales contrastan 13/13 registros y una revisión independiente aporta 31 controles. Después de reparar el seguimiento, una inyección única sobre el trabajo propio 384 observado RUNNING terminó CANCELLED, ExitCode 0:9; el ledger conservó el terminal tras pérdida de cola y Helix archivó automáticamente el fallo. Auditoría conjunta: 89 controles; tres nodos sin trabajos, contenedores ni procesos propios antes de detenerlos. Aprobación sintética no es anotación humana ni kappa; no hay P95 medido.",
       "fase_cierre": "F6",
       "medicion": {
         "tipo": "ingenieria_o_preparacion_no_evaluacion_cientifica_reservada",
@@ -945,8 +1662,113 @@
         "fuentes": [
           "evaluation/trp/campaign-20261012/cloud/lab1/cancellation/next-ctx-abort/driver-terminal.json",
           "evaluation/trp/campaign-20261012/trace/running-cancellation-clean.json",
-          "evaluation/trp/campaign-20261012/cloud/workflow-summary.json"
-        ]
+          "evaluation/trp/campaign-20261012/cloud/workflow-summary.json",
+          "evaluation/trp/campaign-20261012/event-negative-contrasts/audit.json",
+          "evaluation/trp/campaign-20261012/event-negative-contrasts/driver-terminal.json",
+          "evaluation/trp/campaign-20261012/trace/event-negative-second-review.json",
+          "evaluation/trp/campaign-20261012/trace/event-negative-independent-agent-review.json",
+          "evaluation/trp/campaign-20261012/checks/post-campaign-production-20261013/cloud/summary.json"
+        ],
+        "contrastes_negativos": {
+          "scope": "cuatro_sesiones_locales_de_ingenieria_con_callbacks_sinteticos",
+          "casos_unicos": 4,
+          "registros_exigibles": 13,
+          "registros_coincidentes": 13,
+          "por_fuente": {
+            "admision": {
+              "coincidentes": 4,
+              "exigibles": 4
+            },
+            "protocolo": {
+              "coincidentes": 3,
+              "exigibles": 3
+            },
+            "permisos": {
+              "coincidentes": 4,
+              "exigibles": 4
+            },
+            "aprobacion": {
+              "coincidentes": 2,
+              "exigibles": 2
+            }
+          },
+          "paquetes_fallidos_verificados_en_frio": 2,
+          "archivos_por_paquete": 25,
+          "expectativas_congeladas_antes_del_productor": true,
+          "observaciones_acciones_todas_antes_de_crear_ledger": false,
+          "observaciones_antes_de_leer_registros_productor": true,
+          "callback_sintetico": true,
+          "anotador_humano_independiente": false,
+          "kappa": null
+        },
+        "correcciones_semanticas_postcampana": {
+          "status": "applied_locally_checked_and_live_integrated",
+          "production_revision": "9ada336",
+          "operator_helper_revision": "0dcb38a",
+          "producer_source_hashes": {
+            "packages/helix/src/trp/workflow.ts": "986f4b13e1c2661ede6f42114ec23bc4a5e891872a401d1874c992e9ba3b5cc7",
+            "packages/helix/src/trp/verify_bundle.py.txt": "952e79d5cecae707954ed667d231838569323dffdd068ab43edd770284841eb9",
+            "packages/helix/src/trp/remote_runner.py.txt": "f2aa0d714848da79726bf1126ed5611e999b941cd0ee653067a901a9873e1805",
+            "packages/helix/test/trp/workflow-backend.test.ts": "46ead7759736ac5ca4b1aa1fad6c3b1729b9080f6d250e87bab2daad86b011a6"
+          },
+          "local_summary": {
+            "path": "evaluation/trp/campaign-20261012/checks/post-campaign-production-20261013/summary.json",
+            "sha256": "fa5d578fb5e9983087a7042204f85fdc4761ef12e90a3b12ef407d2e460b9324"
+          },
+          "local_regression": {
+            "passed": 543,
+            "skipped_opt_in": 63,
+            "failed": 0,
+            "assertions": 1601,
+            "files": 57,
+            "source": {
+              "path": "evaluation/trp/campaign-20261012/checks/post-campaign-production-20261013/broad-summary.json",
+              "sha256": "145ad9de75f48a69db680c9f8e5515947a6f6e9dcf22ee2af4570137bd4ca08f"
+            }
+          },
+          "local_typecheck_exit_code": 0,
+          "integration_summary": {
+            "path": "evaluation/trp/campaign-20261012/checks/post-campaign-production-20261013/cloud/summary.json",
+            "sha256": "79d058fee282b559e7133ce43d602b3633484d6f5829a4d5e1bd4dae0df6530f"
+          },
+          "integration": {
+            "independent_checks": 89,
+            "ordinary_default_verifier": true,
+            "legacy_flag_used": false,
+            "positive_files": 152,
+            "positive_native_ids": [
+              "377",
+              "378",
+              "379",
+              "380"
+            ],
+            "positive_gold_equal": true,
+            "backend_consistent": true,
+            "negative_case": "POST-04-native-cancellation-1000",
+            "negative_files": 151,
+            "negative_native_id": "384",
+            "negative_native_state": "CANCELLED",
+            "negative_native_exit_code": "0:9",
+            "automatic_failed_package": true,
+            "queue_loss_terminal_retained": true,
+            "approval_kind": "synthetic_actual_Question_Service",
+            "two_prelaunch_or_preRun_harness_failures_preserved": true,
+            "latency_P95": null,
+            "native_cancellation_observer_qualification": "Bounded fast watcher saw COMPLETING; later independent scontrol and producer ledger confirmed CANCELLED. Timestamp difference is one observed interval, not an internal latency bound."
+          },
+          "final_quiescence": {
+            "path": "evaluation/trp/campaign-20261012/checks/post-campaign-production-20261013/cloud/post-quiescence.json",
+            "sha256": "3511e2ef52679a46d77c508eb939c142f761b3b07b3783d46ce4e93c64403856"
+          },
+          "original_campaign_source_and_metrics_immutable": true,
+          "original_matrix_summary_sha256": "a53095ee21ad8a1a4ba2efcfb7245e3e082cf5d1b1a33419685150f7026970e4",
+          "items": [
+            "Backend is derived from actual completed execution and is consistent in execution, Run and completion event.",
+            "Default cold verifier checks methods and gates; historical qualification remains explicit and new packets use no legacy flag.",
+            "Seen native IDs and terminal state are kept after queue disappearance; own native failure was observed and automatically packaged."
+          ],
+          "scientific_reserved_metrics": null
+        }
       },
       "id_anterior": "R4.2",
       "historial_actualizaciones": [
@@ -961,14 +1783,75 @@
             "reserva_evaluada": false
           },
           "fase_cierre": "F6"
+        },
+        {
+          "capturado_antes_utc": "2026-10-13T04:22:44.307820+00:00",
+          "motivo": "Actualización acotada R2.4 head y R3.2 negativas; conservación exacta del estado anterior",
+          "datos": {
+            "id": "R3.2",
+            "objetivo": "OE3",
+            "titulo": "Registro de decisiones y rechazos",
+            "estado": "implementado",
+            "codigo": [
+              "packages/helix/src/nfcore/protocol.ts",
+              "packages/helix/src/nfcore/record.ts",
+              "packages/helix/src/trp/workflow.ts",
+              "packages/helix/src/trp/evidence.ts",
+              "packages/helix/src/trp/remote.ts",
+              "packages/helix/src/trp/remote_runner.py.txt"
+            ],
+            "pruebas": [
+              "packages/helix/test/nfcore/protocol.test.ts",
+              "packages/helix/test/nfcore/record.test.ts",
+              "packages/helix/test/trp/admission.test.ts",
+              "packages/helix/test/trp/preflight.test.ts",
+              "packages/helix/test/trp/workflow.test.ts",
+              "packages/helix/test/trp/remote.test.ts",
+              "packages/helix/test/trp/remote-status-repair.test.ts",
+              "packages/helix/test/trp/remote-cancellation.live.test.ts",
+              "script/tesis/audit_remote_campaign.py"
+            ],
+            "pendiente": "Cadena de decisiones, aprobación/configuración/transferencia y métodos contrastados en ejecuciones remotas. Cancelación real de trabajo nativo 128 conserva RUNNING, Tool.Context.abort, CANCELLED y evento final automático; los intentos anteriores deficientes siguen conservados. No equivale a cobertura universal de sesión humana.",
+            "fase_cierre": "F6",
+            "medicion": {
+              "tipo": "ingenieria_o_preparacion_no_evaluacion_cientifica_reservada",
+              "metricas_cientificas_finales": null,
+              "fuentes": [
+                "evaluation/trp/campaign-20261012/cloud/lab1/cancellation/next-ctx-abort/driver-terminal.json",
+                "evaluation/trp/campaign-20261012/trace/running-cancellation-clean.json",
+                "evaluation/trp/campaign-20261012/cloud/workflow-summary.json"
+              ]
+            },
+            "id_anterior": "R4.2",
+            "actualizacion_vigente": "2026-10-12",
+            "nota_supersesion": "Sustituye el estado operativo del snapshot anterior; las evidencias y métricas históricas permanecen en historial_actualizaciones. No cambia identificadores ni umbrales científicos.",
+            "evidencia": [
+              "evaluation/trp/campaign-20261012/cloud/lab1/cancellation/next-ctx-abort/driver-terminal.json",
+              "evaluation/trp/campaign-20261012/trace/running-cancellation-clean.json",
+              "evaluation/trp/campaign-20261012/cloud/workflow-summary.json"
+            ],
+            "medicion_vigente": {
+              "tipo": "ingenieria_o_preparacion_no_evaluacion_cientifica_reservada",
+              "metricas_cientificas_finales": null,
+              "fuentes": [
+                "evaluation/trp/campaign-20261012/cloud/lab1/cancellation/next-ctx-abort/driver-terminal.json",
+                "evaluation/trp/campaign-20261012/trace/running-cancellation-clean.json",
+                "evaluation/trp/campaign-20261012/cloud/workflow-summary.json"
+              ]
+            }
+          }
         }
       ],
-      "actualizacion_vigente": "2026-10-12",
+      "actualizacion_vigente": "2026-10-13",
       "nota_supersesion": "Sustituye el estado operativo del snapshot anterior; las evidencias y métricas históricas permanecen en historial_actualizaciones. No cambia identificadores ni umbrales científicos.",
       "evidencia": [
         "evaluation/trp/campaign-20261012/cloud/lab1/cancellation/next-ctx-abort/driver-terminal.json",
         "evaluation/trp/campaign-20261012/trace/running-cancellation-clean.json",
-        "evaluation/trp/campaign-20261012/cloud/workflow-summary.json"
+        "evaluation/trp/campaign-20261012/cloud/workflow-summary.json",
+        "evaluation/trp/campaign-20261012/event-negative-contrasts/audit.json",
+        "evaluation/trp/campaign-20261012/event-negative-contrasts/driver-terminal.json",
+        "evaluation/trp/campaign-20261012/trace/event-negative-second-review.json",
+        "evaluation/trp/campaign-20261012/trace/event-negative-independent-agent-review.json"
       ],
       "medicion_vigente": {
         "tipo": "ingenieria_o_preparacion_no_evaluacion_cientifica_reservada",
@@ -976,9 +1859,115 @@
         "fuentes": [
           "evaluation/trp/campaign-20261012/cloud/lab1/cancellation/next-ctx-abort/driver-terminal.json",
           "evaluation/trp/campaign-20261012/trace/running-cancellation-clean.json",
-          "evaluation/trp/campaign-20261012/cloud/workflow-summary.json"
-        ]
-      }
+          "evaluation/trp/campaign-20261012/cloud/workflow-summary.json",
+          "evaluation/trp/campaign-20261012/event-negative-contrasts/audit.json",
+          "evaluation/trp/campaign-20261012/event-negative-contrasts/driver-terminal.json",
+          "evaluation/trp/campaign-20261012/trace/event-negative-second-review.json",
+          "evaluation/trp/campaign-20261012/trace/event-negative-independent-agent-review.json",
+          "evaluation/trp/campaign-20261012/checks/post-campaign-production-20261013/cloud/summary.json"
+        ],
+        "contrastes_negativos": {
+          "scope": "cuatro_sesiones_locales_de_ingenieria_con_callbacks_sinteticos",
+          "casos_unicos": 4,
+          "registros_exigibles": 13,
+          "registros_coincidentes": 13,
+          "por_fuente": {
+            "admision": {
+              "coincidentes": 4,
+              "exigibles": 4
+            },
+            "protocolo": {
+              "coincidentes": 3,
+              "exigibles": 3
+            },
+            "permisos": {
+              "coincidentes": 4,
+              "exigibles": 4
+            },
+            "aprobacion": {
+              "coincidentes": 2,
+              "exigibles": 2
+            }
+          },
+          "paquetes_fallidos_verificados_en_frio": 2,
+          "archivos_por_paquete": 25,
+          "expectativas_congeladas_antes_del_productor": true,
+          "observaciones_acciones_todas_antes_de_crear_ledger": false,
+          "observaciones_antes_de_leer_registros_productor": true,
+          "callback_sintetico": true,
+          "anotador_humano_independiente": false,
+          "kappa": null
+        },
+        "correcciones_semanticas_postcampana": {
+          "status": "applied_locally_checked_and_live_integrated",
+          "production_revision": "9ada336",
+          "operator_helper_revision": "0dcb38a",
+          "producer_source_hashes": {
+            "packages/helix/src/trp/workflow.ts": "986f4b13e1c2661ede6f42114ec23bc4a5e891872a401d1874c992e9ba3b5cc7",
+            "packages/helix/src/trp/verify_bundle.py.txt": "952e79d5cecae707954ed667d231838569323dffdd068ab43edd770284841eb9",
+            "packages/helix/src/trp/remote_runner.py.txt": "f2aa0d714848da79726bf1126ed5611e999b941cd0ee653067a901a9873e1805",
+            "packages/helix/test/trp/workflow-backend.test.ts": "46ead7759736ac5ca4b1aa1fad6c3b1729b9080f6d250e87bab2daad86b011a6"
+          },
+          "local_summary": {
+            "path": "evaluation/trp/campaign-20261012/checks/post-campaign-production-20261013/summary.json",
+            "sha256": "fa5d578fb5e9983087a7042204f85fdc4761ef12e90a3b12ef407d2e460b9324"
+          },
+          "local_regression": {
+            "passed": 543,
+            "skipped_opt_in": 63,
+            "failed": 0,
+            "assertions": 1601,
+            "files": 57,
+            "source": {
+              "path": "evaluation/trp/campaign-20261012/checks/post-campaign-production-20261013/broad-summary.json",
+              "sha256": "145ad9de75f48a69db680c9f8e5515947a6f6e9dcf22ee2af4570137bd4ca08f"
+            }
+          },
+          "local_typecheck_exit_code": 0,
+          "integration_summary": {
+            "path": "evaluation/trp/campaign-20261012/checks/post-campaign-production-20261013/cloud/summary.json",
+            "sha256": "79d058fee282b559e7133ce43d602b3633484d6f5829a4d5e1bd4dae0df6530f"
+          },
+          "integration": {
+            "independent_checks": 89,
+            "ordinary_default_verifier": true,
+            "legacy_flag_used": false,
+            "positive_files": 152,
+            "positive_native_ids": [
+              "377",
+              "378",
+              "379",
+              "380"
+            ],
+            "positive_gold_equal": true,
+            "backend_consistent": true,
+            "negative_case": "POST-04-native-cancellation-1000",
+            "negative_files": 151,
+            "negative_native_id": "384",
+            "negative_native_state": "CANCELLED",
+            "negative_native_exit_code": "0:9",
+            "automatic_failed_package": true,
+            "queue_loss_terminal_retained": true,
+            "approval_kind": "synthetic_actual_Question_Service",
+            "two_prelaunch_or_preRun_harness_failures_preserved": true,
+            "latency_P95": null,
+            "native_cancellation_observer_qualification": "Bounded fast watcher saw COMPLETING; later independent scontrol and producer ledger confirmed CANCELLED. Timestamp difference is one observed interval, not an internal latency bound."
+          },
+          "final_quiescence": {
+            "path": "evaluation/trp/campaign-20261012/checks/post-campaign-production-20261013/cloud/post-quiescence.json",
+            "sha256": "3511e2ef52679a46d77c508eb939c142f761b3b07b3783d46ce4e93c64403856"
+          },
+          "original_campaign_source_and_metrics_immutable": true,
+          "original_matrix_summary_sha256": "a53095ee21ad8a1a4ba2efcfb7245e3e082cf5d1b1a33419685150f7026970e4",
+          "items": [
+            "Backend is derived from actual completed execution and is consistent in execution, Run and completion event.",
+            "Default cold verifier checks methods and gates; historical qualification remains explicit and new packets use no legacy flag.",
+            "Seen native IDs and terminal state are kept after queue disappearance; own native failure was observed and automatically packaged."
+          ],
+          "scientific_reserved_metrics": null
+        }
+      },
+      "actualizacion_vigente_utc": "2026-10-13T16:49:18.627028+00:00"
     },
     {
       "id": "R3.3",
@@ -1064,7 +2053,7 @@
         "packages/helix/test/trp/remote-cancellation.live.test.ts",
         "script/tesis/audit_remote_campaign.py"
       ],
-      "pendiente": "Métodos derivados y enlazados a fuentes verificados en los 50 casos técnicos de desarrollo y en SIFTS/cancelación; imagen, perfil, parámetros y conteos observados constan en los paquetes. Corrección de métodos científicos en una reserva independiente aún pendiente.",
+      "pendiente": "Backend corregido en 9ada336 y derivado de la ejecución real: registro de ejecución, Run y evento de finalización coinciden en la nueva integración. El verificador por defecto contrasta métodos y compuertas; los paquetes históricos con metadatos anteriores conservan su calificación explícita, fuentes y anclas. Los 89 controles nuevos no borran afirmaciones históricas ni demuestran corrección científica sobre una reserva independiente.",
       "fase_cierre": "F6",
       "medicion": {
         "tipo": "ingenieria_o_preparacion_no_evaluacion_cientifica_reservada",
@@ -1072,8 +2061,79 @@
         "fuentes": [
           "evaluation/trp/campaign-20261012/cloud/workflow-summary.json",
           "evaluation/trp/campaign-20261012/trace/mapped-reference.json",
-          "evaluation/trp/campaign-20261012/trace/running-cancellation-clean.json"
-        ]
+          "evaluation/trp/campaign-20261012/trace/running-cancellation-clean.json",
+          "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/summary.json",
+          "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/final-package-verification.json",
+          "evaluation/trp/campaign-20261012/checks/post-campaign-production-20261013/cloud/summary.json"
+        ],
+        "correcciones_semanticas_postcampana": {
+          "status": "applied_locally_checked_and_live_integrated",
+          "production_revision": "9ada336",
+          "operator_helper_revision": "0dcb38a",
+          "producer_source_hashes": {
+            "packages/helix/src/trp/workflow.ts": "986f4b13e1c2661ede6f42114ec23bc4a5e891872a401d1874c992e9ba3b5cc7",
+            "packages/helix/src/trp/verify_bundle.py.txt": "952e79d5cecae707954ed667d231838569323dffdd068ab43edd770284841eb9",
+            "packages/helix/src/trp/remote_runner.py.txt": "f2aa0d714848da79726bf1126ed5611e999b941cd0ee653067a901a9873e1805",
+            "packages/helix/test/trp/workflow-backend.test.ts": "46ead7759736ac5ca4b1aa1fad6c3b1729b9080f6d250e87bab2daad86b011a6"
+          },
+          "local_summary": {
+            "path": "evaluation/trp/campaign-20261012/checks/post-campaign-production-20261013/summary.json",
+            "sha256": "fa5d578fb5e9983087a7042204f85fdc4761ef12e90a3b12ef407d2e460b9324"
+          },
+          "local_regression": {
+            "passed": 543,
+            "skipped_opt_in": 63,
+            "failed": 0,
+            "assertions": 1601,
+            "files": 57,
+            "source": {
+              "path": "evaluation/trp/campaign-20261012/checks/post-campaign-production-20261013/broad-summary.json",
+              "sha256": "145ad9de75f48a69db680c9f8e5515947a6f6e9dcf22ee2af4570137bd4ca08f"
+            }
+          },
+          "local_typecheck_exit_code": 0,
+          "integration_summary": {
+            "path": "evaluation/trp/campaign-20261012/checks/post-campaign-production-20261013/cloud/summary.json",
+            "sha256": "79d058fee282b559e7133ce43d602b3633484d6f5829a4d5e1bd4dae0df6530f"
+          },
+          "integration": {
+            "independent_checks": 89,
+            "ordinary_default_verifier": true,
+            "legacy_flag_used": false,
+            "positive_files": 152,
+            "positive_native_ids": [
+              "377",
+              "378",
+              "379",
+              "380"
+            ],
+            "positive_gold_equal": true,
+            "backend_consistent": true,
+            "negative_case": "POST-04-native-cancellation-1000",
+            "negative_files": 151,
+            "negative_native_id": "384",
+            "negative_native_state": "CANCELLED",
+            "negative_native_exit_code": "0:9",
+            "automatic_failed_package": true,
+            "queue_loss_terminal_retained": true,
+            "approval_kind": "synthetic_actual_Question_Service",
+            "two_prelaunch_or_preRun_harness_failures_preserved": true,
+            "latency_P95": null,
+            "native_cancellation_observer_qualification": "Bounded fast watcher saw COMPLETING; later independent scontrol and producer ledger confirmed CANCELLED. Timestamp difference is one observed interval, not an internal latency bound."
+          },
+          "final_quiescence": {
+            "path": "evaluation/trp/campaign-20261012/checks/post-campaign-production-20261013/cloud/post-quiescence.json",
+            "sha256": "3511e2ef52679a46d77c508eb939c142f761b3b07b3783d46ce4e93c64403856"
+          },
+          "original_campaign_source_and_metrics_immutable": true,
+          "original_matrix_summary_sha256": "a53095ee21ad8a1a4ba2efcfb7245e3e082cf5d1b1a33419685150f7026970e4",
+          "items": [
+            "Backend is derived from actual completed execution and is consistent in execution, Run and completion event.",
+            "Default cold verifier checks methods and gates; historical qualification remains explicit and new packets use no legacy flag.",
+            "Seen native IDs and terminal state are kept after queue disappearance; own native failure was observed and automatically packaged."
+          ],
+          "scientific_reserved_metrics": null
+        }
       },
       "id_anterior": "R4.4",
       "historial_actualizaciones": [
@@ -1090,12 +2150,14 @@
           "fase_cierre": "F6"
         }
       ],
-      "actualizacion_vigente": "2026-10-12",
+      "actualizacion_vigente": "2026-10-13",
       "nota_supersesion": "Sustituye el estado operativo del snapshot anterior; las evidencias y métricas históricas permanecen en historial_actualizaciones. No cambia identificadores ni umbrales científicos.",
       "evidencia": [
         "evaluation/trp/campaign-20261012/cloud/workflow-summary.json",
         "evaluation/trp/campaign-20261012/trace/mapped-reference.json",
-        "evaluation/trp/campaign-20261012/trace/running-cancellation-clean.json"
+        "evaluation/trp/campaign-20261012/trace/running-cancellation-clean.json",
+        "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/summary.json",
+        "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/final-package-verification.json"
       ],
       "medicion_vigente": {
         "tipo": "ingenieria_o_preparacion_no_evaluacion_cientifica_reservada",
@@ -1103,9 +2165,81 @@
         "fuentes": [
           "evaluation/trp/campaign-20261012/cloud/workflow-summary.json",
           "evaluation/trp/campaign-20261012/trace/mapped-reference.json",
-          "evaluation/trp/campaign-20261012/trace/running-cancellation-clean.json"
-        ]
-      }
+          "evaluation/trp/campaign-20261012/trace/running-cancellation-clean.json",
+          "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/summary.json",
+          "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/final-package-verification.json",
+          "evaluation/trp/campaign-20261012/checks/post-campaign-production-20261013/cloud/summary.json"
+        ],
+        "correcciones_semanticas_postcampana": {
+          "status": "applied_locally_checked_and_live_integrated",
+          "production_revision": "9ada336",
+          "operator_helper_revision": "0dcb38a",
+          "producer_source_hashes": {
+            "packages/helix/src/trp/workflow.ts": "986f4b13e1c2661ede6f42114ec23bc4a5e891872a401d1874c992e9ba3b5cc7",
+            "packages/helix/src/trp/verify_bundle.py.txt": "952e79d5cecae707954ed667d231838569323dffdd068ab43edd770284841eb9",
+            "packages/helix/src/trp/remote_runner.py.txt": "f2aa0d714848da79726bf1126ed5611e999b941cd0ee653067a901a9873e1805",
+            "packages/helix/test/trp/workflow-backend.test.ts": "46ead7759736ac5ca4b1aa1fad6c3b1729b9080f6d250e87bab2daad86b011a6"
+          },
+          "local_summary": {
+            "path": "evaluation/trp/campaign-20261012/checks/post-campaign-production-20261013/summary.json",
+            "sha256": "fa5d578fb5e9983087a7042204f85fdc4761ef12e90a3b12ef407d2e460b9324"
+          },
+          "local_regression": {
+            "passed": 543,
+            "skipped_opt_in": 63,
+            "failed": 0,
+            "assertions": 1601,
+            "files": 57,
+            "source": {
+              "path": "evaluation/trp/campaign-20261012/checks/post-campaign-production-20261013/broad-summary.json",
+              "sha256": "145ad9de75f48a69db680c9f8e5515947a6f6e9dcf22ee2af4570137bd4ca08f"
+            }
+          },
+          "local_typecheck_exit_code": 0,
+          "integration_summary": {
+            "path": "evaluation/trp/campaign-20261012/checks/post-campaign-production-20261013/cloud/summary.json",
+            "sha256": "79d058fee282b559e7133ce43d602b3633484d6f5829a4d5e1bd4dae0df6530f"
+          },
+          "integration": {
+            "independent_checks": 89,
+            "ordinary_default_verifier": true,
+            "legacy_flag_used": false,
+            "positive_files": 152,
+            "positive_native_ids": [
+              "377",
+              "378",
+              "379",
+              "380"
+            ],
+            "positive_gold_equal": true,
+            "backend_consistent": true,
+            "negative_case": "POST-04-native-cancellation-1000",
+            "negative_files": 151,
+            "negative_native_id": "384",
+            "negative_native_state": "CANCELLED",
+            "negative_native_exit_code": "0:9",
+            "automatic_failed_package": true,
+            "queue_loss_terminal_retained": true,
+            "approval_kind": "synthetic_actual_Question_Service",
+            "two_prelaunch_or_preRun_harness_failures_preserved": true,
+            "latency_P95": null,
+            "native_cancellation_observer_qualification": "Bounded fast watcher saw COMPLETING; later independent scontrol and producer ledger confirmed CANCELLED. Timestamp difference is one observed interval, not an internal latency bound."
+          },
+          "final_quiescence": {
+            "path": "evaluation/trp/campaign-20261012/checks/post-campaign-production-20261013/cloud/post-quiescence.json",
+            "sha256": "3511e2ef52679a46d77c508eb939c142f761b3b07b3783d46ce4e93c64403856"
+          },
+          "original_campaign_source_and_metrics_immutable": true,
+          "original_matrix_summary_sha256": "a53095ee21ad8a1a4ba2efcfb7245e3e082cf5d1b1a33419685150f7026970e4",
+          "items": [
+            "Backend is derived from actual completed execution and is consistent in execution, Run and completion event.",
+            "Default cold verifier checks methods and gates; historical qualification remains explicit and new packets use no legacy flag.",
+            "Seen native IDs and terminal state are kept after queue disappearance; own native failure was observed and automatically packaged."
+          ],
+          "scientific_reserved_metrics": null
+        }
+      },
+      "actualizacion_vigente_utc": "2026-10-13T16:49:18.627028+00:00"
     },
     {
       "id": "R3.5",
@@ -1431,7 +2565,7 @@
       }
     }
   ],
-  "actualizacion": "2026-10-12",
+  "actualizacion": "2026-10-13",
   "agrupacion_objetivos": {
     "fecha": "2026-09-23",
     "criterio": "Reorganización editorial; resultados, indicadores y evidencias sin cambios",
@@ -1451,8 +2585,8 @@
   "identificadores_version": "2026-09-23",
   "equivalencias": "docs/tesis/renumeracion-20260923/equivalencias.json",
   "vigente": {
-    "date": "2026-10-12",
-    "updated_at_utc": "2026-10-13T03:10:34.895288+00:00",
+    "date": "2026-10-13",
+    "updated_at_utc": "2026-10-13T18:06:39.685689+00:00",
     "scope": "campaña técnica de desarrollo 20261012, no evaluación científica reservada",
     "ids": [
       "R1.1",
@@ -1478,14 +2612,18 @@
       "R3.8"
     ],
     "criteria": [
-      "Implementado describe software o diseño verificado en un alcance, no la satisfacción de un indicador científico.",
-      "Las 50 variantes de grafos proceden de una proteína de desarrollo, 2XQH/A; no son 50 proteínas ni 50 intenciones humanas reservadas.",
-      "Los dos fallos iniciales y sus reintentos se cuentan como 52 intentos, sin borrar fallos ni convertir 50 éxitos finales en la tasa científica de R1.5.",
-      "Aprobaciones sintéticas y permisos automáticos no son intervenciones anotadas por una experta.",
-      "Observables estéricos y de superficie no constituyen un clasificador de plausibilidad física; sensibilidad, especificidad y kappa permanecen ausentes.",
-      "Los límites efectivos de tareas Docker, tamaños finales por carpeta y telemetría de procesos no demuestran un límite agregado cliente/controlador/clúster ni un pico de almacenamiento.",
-      "El contraste R2.4 en ejecución no tiene indicador final; no se trasladan tasas provisionales a la conclusión.",
-      "Se conservan los 21 identificadores y el cierre autoral de los capítulos 1 a 3."
+      "Implementado describe software o diseño comprobado en un alcance; no demuestra por sí solo un indicador científico.",
+      "Se conservan los 21 IDs, los tres objetivos y el cierre autoral de los capítulos 1 a 3.",
+      "Los 50 grafos remotos proceden de una proteína de desarrollo: 52 intentos, 48 primeros éxitos y dos fallos con sus reintentos conservados; no son intenciones humanas reservadas.",
+      "La campaña agregada conserva 40 originales, 6 de frontera y 4 de suplemento separados. Sólo la unión de 44 alcanza veinte factibles y veinte inviables; mantiene cuatro desconocidos.",
+      "La frontera produjo tres falsos rechazos entre seis factibles (50 %), incumpliendo el umbral de 5 %. No se cambió el estimador ni el umbral después de observarla.",
+      "Los 26 flujos completos reproducen conteos sin diferencias. Los bloques asignados se muestrean cada 0,5 s; no equivalen a todos los discos físicos ni garantizan observar todo pico transitorio.",
+      "La aprobación sintética no sustituye conversaciones ni etiquetas humanas independientes. R1.5 científico y kappa siguen ausentes.",
+      "CCTBX y FreeSASA aportan observables; C9, sensibilidad y especificidad físicos permanecen no evaluables sin un clasificador y referencia externa válidos.",
+      "P95 de latencia no está medido. Duraciones de comandos, temporizadores configurados y timestamps Slurm de resolución de segundos no lo sustituyen.",
+      "Los límites efectivos de tareas de la ruta SSH ordinaria no heredan la cuota ni el cgroup agregados del perfil opcional co-localizado.",
+      "El contraste anterior del head conserva sus denominadores y fuentes; no se transforma en la nueva campaña del cliente completo ni en tasa científica.",
+      "Las correspondencias públicas son desarrollo de numeración: 11 751 posiciones label/autor, 11 215 residuos preparados en 28 cadenas y dos rechazos correctos; Gemmi léxico compartido y cero inserciones observadas limitan su independencia y cobertura."
     ],
     "evidence_index": {
       "workflows": {
@@ -1571,6 +2709,170 @@
       "operator_window_helper": {
         "path": "script/tesis/aws_academy_prepare_remote.py",
         "sha256": "af16699cf13f285dfb53e8fbc9cab8ce7c95e0e43ff35748922870bdd51f9739"
+      },
+      "public_mapping_summary": {
+        "path": "evaluation/trp/campaign-20261012/mapping-public-contrasts/summary.json",
+        "sha256": "7388b1eb7f776d7a092a6c4f7f3641b586db428fb63eb471b79a93909846591c"
+      },
+      "public_mapping_audit": {
+        "path": "evaluation/trp/campaign-20261012/mapping-public-contrasts/audit.json",
+        "sha256": "b9c5b98fcac3464eb2bbe4d1e93ce112d272c93ce000bd6a856f0c7a3c61da6c"
+      },
+      "public_mapping_manifest": {
+        "path": "evaluation/trp/campaign-20261012/mapping-public-contrasts/manifest.json",
+        "sha256": "baedd3702e605efb04eabe803294b7368771bd0f2c07ac7427f2f2b2b4474ac6"
+      },
+      "public_mapping_protocol": {
+        "path": "evaluation/trp/campaign-20261012/mapping-public-contrasts/protocol.json",
+        "sha256": "81bf8e5bf0a151c63df779b8036490e04ba18c2e4c1d5baf6b1defdbd425b6b1"
+      },
+      "public_mapping_freeze": {
+        "path": "evaluation/trp/campaign-20261012/mapping-public-contrasts/oracle-freeze.json",
+        "sha256": "86e81898e53fed7208323e4609d8aa7fb155718a675da3e00f4d5fdf99cd314d"
+      },
+      "public_mapping_root_review": {
+        "path": "evaluation/trp/campaign-20261012/checks/root-review-20261013/public-mapping.json",
+        "sha256": "7ad1eac7a9fb0545e1caf6e1139363f56f5045d0bf5b5cfee2269897eb93b021"
+      },
+      "r24_head_final": {
+        "path": "evaluation/trp/campaign-20261012/cloud/lab2/r24-summary.json",
+        "sha256": "a36bee8d3bd32538550d16eda6d5e3392d3e8061b3148c62248815faee9a687b"
+      },
+      "r24_head_source_review": {
+        "path": "evaluation/trp/campaign-20261012/trace/r24-canonical-source-review.json",
+        "sha256": "d159b1b7cb63c195d55856aa479430a2f81d29569b37250853e547ffbc8316a7"
+      },
+      "event_negative": {
+        "path": "evaluation/trp/campaign-20261012/event-negative-contrasts/audit.json",
+        "sha256": "f25e63cfcd6f6f92e091aeaf687641ed3ff479c59e078be174076cc555cd7c24"
+      },
+      "event_negative_second_review": {
+        "path": "evaluation/trp/campaign-20261012/trace/event-negative-second-review.json",
+        "sha256": "e47908f6f5c18661c4054005330f78e3d78872745c7358aa67b63baeaed514c5"
+      },
+      "strict_pilot_old": {
+        "path": "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/smoke-outcomes-r4/summary.json",
+        "sha256": "b70b92ac12501054b84c68dc5f7b0e4d0b2d3cb0c56d732a4977a8142a3cfd8a"
+      },
+      "strict_pilot_new": {
+        "path": "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/smoke-outcomes-r5/summary.json",
+        "sha256": "11956c8dd067a2e9ef2802c6f1a2ccc05f170723a145409baf256f91357eb241"
+      },
+      "strict_calibration": {
+        "path": "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/calibration-before-final-campaign.json",
+        "sha256": "db8454721db409c014ab96320d4e9b34bcdf1015bbbab177ca4768a9c8b2f6a4"
+      },
+      "strict_copy_causal": {
+        "path": "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/copy-causal-controls/mechanism-review.json",
+        "sha256": "f3eb0d1f7f1e12b9c5c6a98d4ff7cf17ed19f883d751b6bc10d1af467d23dd1d"
+      },
+      "strict_frozen_original40": {
+        "path": "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/campaign-inputs/freeze.json",
+        "sha256": "c33fb8b69e6361fb90bac025ccbf62fb590122b93b5f78d8da754b3886d28f20"
+      },
+      "strict_frozen_boundary6": {
+        "path": "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/boundary-inputs/freeze.json",
+        "sha256": "6ef89e2db501a307ad1034ab41f9ad7c5dd01029848c2115a23d97c3ac0a518e"
+      },
+      "lab1_fresh_stop": {
+        "path": "evaluation/trp/campaign-20261012/cloud/lab1/final-stopped-20261013.json",
+        "sha256": "1ef4b53f0f0e78fe9db4349fed3592cc581a478528093dcf641e5b4e92683364"
+      },
+      "strict_regression": {
+        "path": "evaluation/trp/campaign-20261012/checks/strict-profile-integration/root-regression-pinned-environment/summary.json",
+        "sha256": "f927e1a7d90ff53360e91e7b030602d40b590e1dd868e40f3dc97bbefddac5dc"
+      },
+      "strict_storage_focused": {
+        "path": "evaluation/trp/campaign-20261012/checks/strict-profile-integration/calibrated-client-storage/summary.json",
+        "sha256": "f31cb2718ed3b2c1f35516f6114d2710ccad7fdc695393571d8d3491cd9efb02"
+      },
+      "strict_typecheck": {
+        "path": "evaluation/trp/campaign-20261012/checks/strict-profile-integration/calibrated-typecheck/summary.json",
+        "sha256": "de42608c7699892be5d45c0562e581c538653b05dbbb0bf6c19d88b6457b360f"
+      },
+      "strict_final_summary": {
+        "path": "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/summary.json",
+        "sha256": "a53095ee21ad8a1a4ba2efcfb7245e3e082cf5d1b1a33419685150f7026970e4"
+      },
+      "strict_final_cases": {
+        "path": "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/cases.csv",
+        "sha256": "6de287549d175b9402b511bcbb9298a91383b3b4a7a331b1ee05387e474e329a"
+      },
+      "strict_final_cold_audit": {
+        "path": "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/final-package-verification.json",
+        "sha256": "99bf437f36f6c5d7c7cfd1ca1541b7fda143adec4b7486fef82caa6958bd1ed7"
+      },
+      "strict_final_quiescence": {
+        "path": "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/final-quiescence.json",
+        "sha256": "3aac5f5c80421d416f61e489d9c0095d00d1059458cf96b33072a38198cab24a"
+      },
+      "strict_final_manifest": {
+        "path": "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/analysis-manifest.json",
+        "sha256": "f15ca302f6159e54997ec0e2ea85c37470cae26cd8967aee6612ad19f46eaf16"
+      },
+      "strict_final_manifest_verification": {
+        "path": "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/manifest-verification.json",
+        "sha256": "a8b0e115e34e8f099d9897e3ad59cdc524be9342859ec4a35f70a54f4e71525d"
+      },
+      "strict_frozen_supplement4": {
+        "path": "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/extension-inputs/freeze.json",
+        "sha256": "2947a9d34ab84687e16e848620b3221ad4add9642ee8710827b311c14fd691b3"
+      },
+      "strict_final_figure": {
+        "path": "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/figures/figure-manifest.json",
+        "sha256": "27f9a0fdefcde94568118df07a247f5eefa3bb5b6333b0d1a622972a2e4352a8"
+      },
+      "event_negative_agent_review": {
+        "path": "evaluation/trp/campaign-20261012/trace/event-negative-independent-agent-review.json",
+        "sha256": "ca0b8d07f60b66cd5dba64a0b30c3d9cf6dd6d857725f183480e9d4a3f700a38"
+      },
+      "cloud_status_20261013T1634": {
+        "path": "evaluation/trp/campaign-20261012/checks/user-status-20261013T1634.json",
+        "sha256": "5edb967947644800948dc1c7ce6f1d23bf16425829f02b516ea757626a0cab3e"
+      },
+      "post_campaign_local": {
+        "path": "evaluation/trp/campaign-20261012/checks/post-campaign-production-20261013/summary.json",
+        "sha256": "fa5d578fb5e9983087a7042204f85fdc4761ef12e90a3b12ef407d2e460b9324"
+      },
+      "post_campaign_regression": {
+        "path": "evaluation/trp/campaign-20261012/checks/post-campaign-production-20261013/broad-summary.json",
+        "sha256": "145ad9de75f48a69db680c9f8e5515947a6f6e9dcf22ee2af4570137bd4ca08f"
+      },
+      "post_campaign_typecheck": {
+        "path": "evaluation/trp/campaign-20261012/checks/post-campaign-production-20261013/typecheck-summary.json",
+        "sha256": "1267514fc51af9115c22485c3c4c2b2c9a3dd8428959f138104241e97f436bc5"
+      },
+      "post_campaign_native": {
+        "path": "evaluation/trp/campaign-20261012/checks/post-campaign-production-20261013/native/summary.json",
+        "sha256": "5793f61c7e8c7828b4f573701930609db96946d400acefb2683edb1763a41d0f"
+      },
+      "post_campaign_cloud": {
+        "path": "evaluation/trp/campaign-20261012/checks/post-campaign-production-20261013/cloud/summary.json",
+        "sha256": "79d058fee282b559e7133ce43d602b3633484d6f5829a4d5e1bd4dae0df6530f"
+      },
+      "post_campaign_cloud_quiescence": {
+        "path": "evaluation/trp/campaign-20261012/checks/post-campaign-production-20261013/cloud/post-quiescence.json",
+        "sha256": "3511e2ef52679a46d77c508eb939c142f761b3b07b3783d46ce4e93c64403856"
+      },
+      "lab1_post_corrections_stop": {
+        "path": "evaluation/trp/campaign-20261012/cloud/lab1/final-stopped-post-corrections-20261013.json",
+        "sha256": "9175710c5605bdaa353e89a49feb59ef05f6faf40a6d4a848cb4b470161f9fb7"
+      },
+      "lab2_post_corrections_stop": {
+        "path": "evaluation/trp/campaign-20261012/cloud/lab2/final-stopped-post-corrections-20261013.json",
+        "sha256": "20feafae4b138f28fb6e23c3ccb4587f681407293154ae8c5b091fd95848ff17"
+      },
+      "installed_document": {
+        "path": "evaluation/trp/campaign-20261012/document/installation.json",
+        "sha256": "9c85c3ac0b2ce658801c087dcb195a31c076b968ffd5781b4faf56229d53e828"
+      },
+      "final_rendered_document": {
+        "path": "evaluation/trp/campaign-20261012/document/final-rendered-audit.json",
+        "sha256": "f51b5edc4b39916de9c463edfe390d3c4587cb387ad2aad1d038ee41be7a68d1"
+      },
+      "final_document_peer_review": {
+        "path": "evaluation/trp/campaign-20261012/document/final-peer-review-20261013.json",
+        "sha256": "f848a99aa772e9b4bfbf4020ba9d345609557a0951cbef0b991b601ceb9e77a7"
       }
     },
     "annotation": {
@@ -1599,7 +2901,7 @@
       "independent_labs": 2,
       "nodes_per_cluster": 3,
       "scheduler": "Slurm",
-      "executor": "SSH + Nextflow + Docker",
+      "executor": "SSH ordinary profile plus optional root-verified co-located Python profile; Nextflow/Slurm/Docker scientific tasks",
       "accounts_credits_pooled": false,
       "image": "sha256:1dd91e70acb153a0bd9a51346fc001dd5025f851c9598697cdd37f07d9490b0a",
       "numerical_profile": "haswell-single-thread",
@@ -1609,20 +2911,299 @@
       "first_attempt_successes": 48,
       "first_attempt_failures_retained": 2,
       "scientific_R1_5_rate": null,
-      "lab1_state": "stopped, independently observed 2026-10-13T02:43:25.831083+00:00",
-      "lab2_state": "resource contrast in progress; final result not declared",
+      "lab1_state": "Fresh EC2 DescribeInstances: all three owned nodes stopped at 2026-10-13T17:06:16.659074+00:00; storage retained, not a final billing assertion.",
+      "lab2_state": "Fresh EC2 DescribeInstances: all three owned nodes stopped at 2026-10-13T17:50:26.663561+00:00 after recovered integration and independent quiescence; storage retained.",
       "task_effective_cpu_quota": 2,
       "task_effective_memory_bytes": 2147483648,
       "task_effective_swap_bytes": 0,
-      "aggregate_client_remote_R2_2_demonstrated": false,
-      "hard_controller_limit_verified": false,
-      "hard_aggregate_disk_quota_verified": false,
-      "strict_remote_disk_quota_request": "refused honestly because unavailable",
-      "R2_4_status": "in_progress_development_contrast",
+      "aggregate_client_remote_R2_2_demonstrated": true,
+      "hard_controller_limit_verified": true,
+      "hard_aggregate_disk_quota_verified": true,
+      "strict_remote_disk_quota_request": "Accepted only with root-verified co-located policy, otherwise refused honestly",
+      "R2_4_status": "completed_full_client_development_original40_boundary6_supplement4_with_boundary_threshold_failure",
       "R2_4_final_accuracy": null,
       "R2_4_final_false_rejection_rate": null,
       "admission_deadline_binding": "minimum of Academy session expiry and observed 180 minute boot-stop guards on all three required guests, written to operator private config",
-      "operator_window_evidence": "evaluation/trp/campaign-20261012/cloud/lab2/prepare-window/prepare-status.json"
+      "operator_window_evidence": "evaluation/trp/campaign-20261012/cloud/lab2/prepare-window/prepare-status.json",
+      "aggregate_guarantee_scope": "Verified engineering profile for the actual declared client/state/cache/temp/remote/export paths under one XFS project and shared client/controller cgroup, across the fifty preserved contrasts. Preinstalled runtime, shared Docker/Nextflow infrastructure and root-only experiment telemetry excluded. Ordinary SSH and other dedicated routes do not inherit it.",
+      "strict_profile": "trp-slurm-colocated-strict/1.0.0",
+      "storage_profile": "trp-colocated-client-storage/1.0.0",
+      "controller_cpu_quota": 1,
+      "controller_memory_bytes": 2147483648,
+      "controller_swap_bytes": 0,
+      "client_and_controller_same_cgroup": true,
+      "R2_4_full_client_development": {
+        "scope": "Engineering same-scope full Helix tool client/bootstrap/SQLite/cache/temp, co-located Python/Nextflow and worker NFS data plus actual portable export under one kernel quota and actual cgroups; preinstalled runtime/sharedDocker caches/root-only experiment telemetry excluded",
+        "source_summary": "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/summary.json",
+        "source_summary_sha256": "a53095ee21ad8a1a4ba2efcfb7245e3e082cf5d1b1a33419685150f7026970e4",
+        "producer_frozen_commit": "ecfab67",
+        "original40": {
+          "counts": {
+            "planned": 40,
+            "observed": 40,
+            "feasible": 18,
+            "infeasible": 18,
+            "unknown": 4,
+            "notObserved": 0,
+            "accepted": 20,
+            "rejected": 20,
+            "correct": 36,
+            "falseRejections": 0,
+            "falseAdmissions": 0,
+            "actualBudgetExcessCases": 0,
+            "admittedPredictionBoundExcessCases": 0,
+            "verifiedColdFullSuccesses": 18,
+            "reproducibleCountCases": 18,
+            "attempts": 40,
+            "dispatched": 40,
+            "decisionObserved": 40,
+            "unknownObserved": 4
+          },
+          "rates": {
+            "classificationAccuracy": 1.0,
+            "falseRejectionRate": 0.0,
+            "falseAdmissionRate": 0.0,
+            "medianSignedStorageOverestimation": 0.138962472406181,
+            "medianPositiveOnlyStorageOverestimation": 0.138962472406181,
+            "falseRejectionThreshold": 0.05,
+            "storageOverestimationThreshold": 0.25,
+            "falseRejectionThresholdMet": true,
+            "storageMarginThresholdMet": true,
+            "scientificR24Rate": null
+          }
+        },
+        "boundary6": {
+          "counts": {
+            "planned": 6,
+            "observed": 6,
+            "feasible": 6,
+            "infeasible": 0,
+            "unknown": 0,
+            "notObserved": 0,
+            "accepted": 3,
+            "rejected": 3,
+            "correct": 3,
+            "falseRejections": 3,
+            "falseAdmissions": 0,
+            "actualBudgetExcessCases": 0,
+            "admittedPredictionBoundExcessCases": 0,
+            "verifiedColdFullSuccesses": 6,
+            "reproducibleCountCases": 6,
+            "attempts": 6,
+            "dispatched": 6,
+            "decisionObserved": 6,
+            "unknownObserved": 0
+          },
+          "rates": {
+            "classificationAccuracy": 0.5,
+            "falseRejectionRate": 0.5,
+            "falseAdmissionRate": null,
+            "medianSignedStorageOverestimation": 0.11202765962531924,
+            "medianPositiveOnlyStorageOverestimation": 0.11202765962531924,
+            "falseRejectionThreshold": 0.05,
+            "storageOverestimationThreshold": 0.25,
+            "falseRejectionThresholdMet": false,
+            "storageMarginThresholdMet": true,
+            "scientificR24Rate": null
+          }
+        },
+        "supplement4": {
+          "counts": {
+            "planned": 4,
+            "observed": 4,
+            "feasible": 2,
+            "infeasible": 2,
+            "unknown": 0,
+            "notObserved": 0,
+            "accepted": 2,
+            "rejected": 2,
+            "correct": 4,
+            "falseRejections": 0,
+            "falseAdmissions": 0,
+            "actualBudgetExcessCases": 0,
+            "admittedPredictionBoundExcessCases": 0,
+            "verifiedColdFullSuccesses": 2,
+            "reproducibleCountCases": 2,
+            "attempts": 4,
+            "dispatched": 4,
+            "decisionObserved": 4,
+            "unknownObserved": 0
+          },
+          "rates": {
+            "classificationAccuracy": 1.0,
+            "falseRejectionRate": 0.0,
+            "falseAdmissionRate": 0.0,
+            "medianSignedStorageOverestimation": 0.12641670205621625,
+            "medianPositiveOnlyStorageOverestimation": 0.12641670205621625,
+            "falseRejectionThreshold": 0.05,
+            "storageOverestimationThreshold": 0.25,
+            "falseRejectionThresholdMet": true,
+            "storageMarginThresholdMet": true,
+            "scientificR24Rate": null
+          }
+        },
+        "original_plus_supplement44": {
+          "counts": {
+            "planned": 44,
+            "observed": 44,
+            "feasible": 20,
+            "infeasible": 20,
+            "unknown": 4,
+            "notObserved": 0,
+            "accepted": 22,
+            "rejected": 22,
+            "correct": 40,
+            "falseRejections": 0,
+            "falseAdmissions": 0,
+            "actualBudgetExcessCases": 0,
+            "admittedPredictionBoundExcessCases": 0,
+            "verifiedColdFullSuccesses": 20,
+            "reproducibleCountCases": 20,
+            "attempts": 44,
+            "dispatched": 44,
+            "decisionObserved": 44,
+            "unknownObserved": 4
+          },
+          "rates": {
+            "classificationAccuracy": 1.0,
+            "falseRejectionRate": 0.0,
+            "falseAdmissionRate": 0.0,
+            "medianSignedStorageOverestimation": 0.138773964880129,
+            "scientificR24Rate": null
+          },
+          "minimaTwentyFeasibleTwentyInfeasibleMet": true,
+          "oneDevelopmentProtein": true,
+          "scientificPopulationEstimate": false
+        },
+        "all_three_descriptive50": {
+          "counts": {
+            "planned": 50,
+            "observed": 50,
+            "feasible": 26,
+            "infeasible": 20,
+            "unknown": 4,
+            "notObserved": 0,
+            "accepted": 25,
+            "rejected": 25,
+            "correct": 43,
+            "falseRejections": 3,
+            "falseAdmissions": 0,
+            "actualBudgetExcessCases": 0,
+            "admittedPredictionBoundExcessCases": 0,
+            "verifiedColdFullSuccesses": 26,
+            "reproducibleCountCases": 26,
+            "attempts": 50,
+            "dispatched": 50,
+            "decisionObserved": 50,
+            "unknownObserved": 4
+          },
+          "rates": {
+            "classificationAccuracy": 0.9347826086956522,
+            "falseRejectionRate": 0.11538461538461539,
+            "falseAdmissionRate": 0.0,
+            "medianSignedStorageOverestimation": 0.1340328189507217,
+            "scientificR24Rate": null
+          },
+          "minimaTwentyFeasibleTwentyInfeasibleMet": true,
+          "oneDevelopmentProtein": true,
+          "scientificPopulationEstimate": false
+        },
+        "original40_minimum20_each_met": false,
+        "union44_minimum20_each_met": true,
+        "all_required_cases_observed": true,
+        "attempts": 50,
+        "resubmissions": 0,
+        "unknowns_preserved": [
+          "AGG-08-small",
+          "AGG-18-small",
+          "AGG-13-generous",
+          "AGG-14-generous"
+        ],
+        "frozen_original_auditor_counts": {
+          "planned": 40,
+          "observed": 40,
+          "feasible": 18,
+          "infeasible": 10,
+          "unknown": 12,
+          "notObserved": 0,
+          "accepted": 20,
+          "rejected": 20,
+          "correct": 28,
+          "falseRejections": 0,
+          "falseAdmissions": 0,
+          "actualBudgetExcessCases": 0,
+          "admittedPredictionBoundExcessCases": 0,
+          "verifiedColdFullSuccesses": 18,
+          "reproducibleCountCases": 18,
+          "attempts": 40,
+          "dispatched": 40,
+          "decisionObserved": 40,
+          "unknownObserved": 12
+        },
+        "selected_auditor_interpretation": "Separate timestamp-resolution and descriptor reviews; first audit bytes and source restoration remain preserved.",
+        "accuracy_denominator": "The summary classificationAccuracy uses labeled contrasts. Confirmed-correct/observed is separately retained: 36/40 original, 3/6 boundary, 4/4 supplement; four original unknowns are not silently correct.",
+        "confirmed_correct_over_observed": {
+          "original40": [
+            36,
+            40
+          ],
+          "boundary6": [
+            3,
+            6
+          ],
+          "supplement4": [
+            4,
+            4
+          ]
+        },
+        "sampled_allocated_block_storage_only": true,
+        "sampling_interval_seconds": 0.5,
+        "full_successes_with_cold_counts_reproduced": 26,
+        "counter_difference": 0,
+        "underestimates_after_final_freeze": 0,
+        "development_pilot_underestimate_retained_bytes": 16084992,
+        "boundary_false_rejection_threshold_met": false,
+        "scientific_R2_4_rate": null,
+        "unique_development_proteins": 1,
+        "P95_latency": null,
+        "population_confidence_intervals": null,
+        "interval_note": "No population inference or biological independence is asserted for variants of one development protein."
+      },
+      "R2_4_scientific_metrics": null,
+      "latest_operational_status": {
+        "path": "evaluation/trp/campaign-20261012/checks/user-status-20261013T1634.json",
+        "sha256": "5edb967947644800948dc1c7ce6f1d23bf16425829f02b516ea757626a0cab3e"
+      },
+      "reported_lab2_remaining_usd": 48.6,
+      "reported_usage_is_final_bill": false,
+      "needs_more_accounts_for_completed_campaign": false,
+      "remaining_original_campaign_dispatches": 0,
+      "all_required_cloud_cases_observed": true,
+      "last_native_quiescence_verified": true,
+      "last_native_quiescence_at_utc": "2026-10-13T08:21:20.620104+00:00",
+      "current_individual_ec2_stop_proof": false,
+      "new_api_credential_required_for_current_development_work": false,
+      "final_lifecycle": {
+        "lab1": {
+          "all_stopped": true,
+          "observed_at_utc": "2026-10-13T17:06:16.659074+00:00",
+          "source": {
+            "path": "evaluation/trp/campaign-20261012/cloud/lab1/final-stopped-post-corrections-20261013.json",
+            "sha256": "9175710c5605bdaa353e89a49feb59ef05f6faf40a6d4a848cb4b470161f9fb7"
+          }
+        },
+        "lab2": {
+          "all_stopped": true,
+          "observed_at_utc": "2026-10-13T17:50:26.663561+00:00",
+          "source": {
+            "path": "evaluation/trp/campaign-20261012/cloud/lab2/final-stopped-post-corrections-20261013.json",
+            "sha256": "20feafae4b138f28fb6e23c3ccb4587f681407293154ae8c5b091fd95848ff17"
+          }
+        },
+        "all_six_compute_instances_stopped": true,
+        "storage_removed": false,
+        "final_invoice_observed": false
+      }
     },
     "structural": {
       "pratt_original_models_available": 78,
@@ -1655,24 +3236,295 @@
       "clean_cancellation_native_state": "CANCELLED",
       "clean_cancellation_files": 143,
       "clean_cancellation_manifest_sha256": "62cf9fba9e9a2e23cb4e4e55f30bd50a36000976c438b8d4387d7468a7b735e6",
-      "clean_cancellation_automatic_final_event": true
+      "clean_cancellation_automatic_final_event": true,
+      "R3_2_negative_contrasts": {
+        "scope": "cuatro_sesiones_locales_de_ingenieria_con_callbacks_sinteticos",
+        "casos_unicos": 4,
+        "registros_exigibles": 13,
+        "registros_coincidentes": 13,
+        "por_fuente": {
+          "admision": {
+            "coincidentes": 4,
+            "exigibles": 4
+          },
+          "protocolo": {
+            "coincidentes": 3,
+            "exigibles": 3
+          },
+          "permisos": {
+            "coincidentes": 4,
+            "exigibles": 4
+          },
+          "aprobacion": {
+            "coincidentes": 2,
+            "exigibles": 2
+          }
+        },
+        "paquetes_fallidos_verificados_en_frio": 2,
+        "archivos_por_paquete": 25,
+        "expectativas_congeladas_antes_del_productor": true,
+        "observaciones_acciones_todas_antes_de_crear_ledger": false,
+        "observaciones_antes_de_leer_registros_productor": true,
+        "callback_sintetico": true,
+        "anotador_humano_independiente": false,
+        "kappa": null,
+        "independent_agent_review": {
+          "path": "evaluation/trp/campaign-20261012/trace/event-negative-independent-agent-review.json",
+          "sha256": "ca0b8d07f60b66cd5dba64a0b30c3d9cf6dd6d857725f183480e9d4a3f700a38"
+        }
+      }
     },
     "documentation": {
       "chapters_1_to_3_closed_by_author": true,
       "original_word_managed_by_root": true,
       "this_update_touched_original_word": false,
-      "final_render_verification_in_this_update": null,
-      "initial_documentation_owned_by_author_not_agent_pending": true
+      "final_render_verification_in_this_update": {
+        "source": {
+          "path": "evaluation/trp/campaign-20261012/document/final-rendered-audit.json",
+          "sha256": "f51b5edc4b39916de9c463edfe390d3c4587cb387ad2aad1d038ee41be7a68d1"
+        },
+        "checks": 261,
+        "pdfPages": 155,
+        "peer_review": {
+          "path": "evaluation/trp/campaign-20261012/document/final-peer-review-20261013.json",
+          "sha256": "f848a99aa772e9b4bfbf4020ba9d345609557a0951cbef0b991b601ceb9e77a7"
+        },
+        "reused_root_render_not_rerendered": true
+      },
+      "initial_documentation_owned_by_author_not_agent_pending": true,
+      "original_word_installed_for_academy_campaign": true,
+      "installed_word_path": "/home/webiwabou/Projects/Tesis.docx",
+      "installed_word_sha256": "c545774dadf8e4910c8ae620cb3e4f3f8830fa38aa02e40accd03dcde0c118ac",
+      "installed_pdf_path": "/home/webiwabou/Projects/Tesis.pdf",
+      "installed_pdf_sha256": "9f0fa60a320a12049a15d34ff69e14a997970afdc5a4874b804b16f74f427438",
+      "author_source_backup": "/home/webiwabou/Projects/Tesis-before-AWS-20261013.docx",
+      "author_source_backup_sha256": "0b5e1e0c7a74f4dd3468656b6f9abef945bfeaf19b791c033bdc0c8cc573b28d",
+      "installed_at_utc": "2026-10-13T18:02:02.982461+00:00",
+      "new_red_italic_notes": 10,
+      "thesis_scientifically_complete": false,
+      "installation_source": {
+        "path": "evaluation/trp/campaign-20261012/document/installation.json",
+        "sha256": "9c85c3ac0b2ce658801c087dcb195a31c076b968ffd5781b4faf56229d53e828"
+      }
     },
-    "implementation_revision": "a951d73",
+    "implementation_revision": "9ada336",
     "regression": {
-      "passed": 532,
-      "skipped_opt_in": 59,
+      "schema": "helix-post-campaign-production-local-check/1.0",
+      "observedAtUtc": "2026-10-13T16:44:42.630320+00:00",
+      "command": [
+        "bun",
+        "test",
+        "test/trp",
+        "test/bio",
+        "test/nfcore",
+        "test/tool/trp-detect.test.ts",
+        "test/tool/trp-detect-question.test.ts",
+        "test/tool/trp-predicted.test.ts",
+        "test/plugin/codex.test.ts",
+        "--timeout",
+        "30000"
+      ],
+      "cwd": "packages/helix",
+      "environment": {
+        "HELIX_TRP_PYTHON": "/home/webiwabou/.local/state/helix/freesasa-20261012/venv/bin/python",
+        "gemmiVersion": "0.7.5",
+        "liveSwitchesCleared": true,
+        "removedVariableNames": [],
+        "TRP_BACKEND_TEST_OUTPUT": null
+      },
+      "exitCode": 0,
+      "elapsedSeconds": 20.183814862000872,
+      "logSha256": "7f82d71bbd657f5bef16b552b1a130cb01c45655f10fc051a03ac3ccbd9aad1f",
+      "statistics": {
+        "passed": 543,
+        "skipped_opt_in": 63,
+        "failed": 0,
+        "assertions": 1601,
+        "tests": 606,
+        "files": 57
+      },
+      "sourceHashes": {
+        "packages/helix/src/trp/workflow.ts": "986f4b13e1c2661ede6f42114ec23bc4a5e891872a401d1874c992e9ba3b5cc7",
+        "packages/helix/src/trp/verify_bundle.py.txt": "952e79d5cecae707954ed667d231838569323dffdd068ab43edd770284841eb9",
+        "packages/helix/src/trp/remote_runner.py.txt": "f2aa0d714848da79726bf1126ed5611e999b941cd0ee653067a901a9873e1805",
+        "packages/helix/test/trp/workflow-backend.test.ts": "46ead7759736ac5ca4b1aa1fad6c3b1729b9080f6d250e87bab2daad86b011a6"
+      },
+      "scope": "Local production regression/type checks only; mocked unit boundaries and optional skips retain their declared scope. No new science/model/cloud observations.",
+      "source": {
+        "path": "evaluation/trp/campaign-20261012/checks/post-campaign-production-20261013/broad-summary.json",
+        "sha256": "145ad9de75f48a69db680c9f8e5515947a6f6e9dcf22ee2af4570137bd4ca08f"
+      },
+      "passed": 543,
+      "skipped_opt_in": 63,
       "failed": 0,
-      "assertions": 1562,
-      "source": "evaluation/trp/campaign-20261012/checks/final-regression/summary.json"
+      "assertions": 1601,
+      "tests": 606,
+      "files": 57,
+      "exit_code": 0,
+      "elapsed_seconds": 20.183814862000872,
+      "log_sha256": "7f82d71bbd657f5bef16b552b1a130cb01c45655f10fc051a03ac3ccbd9aad1f"
     },
-    "r24_checkpoint_observation_is_final_metric": false
+    "r24_checkpoint_observation_is_final_metric": false,
+    "public_mapping": {
+      "scope": "public_development_numbering_contrasts_not_held_out_or_biological_annotation",
+      "chains": 30,
+      "label_positions": 11751,
+      "label_to_author_mapped": 11751,
+      "sifts_parser_chains": 30,
+      "prepared_admitted_chains": 28,
+      "prepared_residues": 11215,
+      "prepared_correct_rejected_chains": 2,
+      "observed_sifts_accession_rows": 11749,
+      "unobserved_sifts_accession_rows": 265,
+      "observed_ca_without_selected_sifts": 4,
+      "source_insertions_observed": 0,
+      "source_alternates_observed": 0,
+      "real_insertion_domain_validated": false,
+      "gemmi_lexical_parser_shared": true,
+      "independent_join_identity_coordinate_logic": true,
+      "oracle_agreement": true,
+      "reproduced_cases": 3,
+      "reproduction_byte_identical": true,
+      "human_reference": false,
+      "reserved_scientific_evaluation": false,
+      "biological_validity": "not_established",
+      "evidence_index_keys": [
+        "public_mapping_summary",
+        "public_mapping_audit",
+        "public_mapping_manifest",
+        "public_mapping_protocol",
+        "public_mapping_freeze",
+        "public_mapping_root_review"
+      ],
+      "missing_ca_correct_rejections": [
+        {
+          "case": "2bm4-A",
+          "residue": "GLY",
+          "author": "182",
+          "uniprot": "182"
+        },
+        {
+          "case": "1o8i-A",
+          "residue": "LYS",
+          "author": "353",
+          "uniprot": "375"
+        }
+      ]
+    },
+    "actualizaciones_acotadas": [
+      {
+        "at_utc": "2026-10-13T04:22:44.307820+00:00",
+        "ids": [
+          "R2.4",
+          "R3.2"
+        ],
+        "supersede_current_resource_progress": true,
+        "other19rowsPreservedExactly": true,
+        "previous_document_snapshot": "evaluation/trp/campaign-20261012/checks/canonical-r24-events-update-20261013/before/docs/tesis/trazabilidad.json"
+      },
+      {
+        "at_utc": "2026-10-13T06:08:23.807767+00:00",
+        "ids": [
+          "R2.2",
+          "R2.3"
+        ],
+        "strict_development_pilots": true,
+        "original40_and_boundary6_final_results": false,
+        "before_snapshot": "evaluation/trp/campaign-20261012/checks/current-strict-pilot-update-20261013/before/docs/tesis/trazabilidad.json"
+      },
+      {
+        "at_utc": "2026-10-13T16:49:18.627028+00:00",
+        "ids": [
+          "R2.2",
+          "R2.3",
+          "R2.4",
+          "R3.1",
+          "R3.2",
+          "R3.4"
+        ],
+        "scope": "Final full-client development campaign; original forty, boundary six and supplemental four remain separate; no scientific metric substitution.",
+        "summary_sha256": "a53095ee21ad8a1a4ba2efcfb7245e3e082cf5d1b1a33419685150f7026970e4",
+        "original40_minimum20_each_met": false,
+        "union44_minimum20_each_met": true,
+        "boundary_threshold_met": false,
+        "history_and_frozen_campaign_untouched": true
+      }
+    ],
+    "post_campaign_corrections": {
+      "status": "applied_locally_checked_and_live_integrated",
+      "production_revision": "9ada336",
+      "operator_helper_revision": "0dcb38a",
+      "producer_source_hashes": {
+        "packages/helix/src/trp/workflow.ts": "986f4b13e1c2661ede6f42114ec23bc4a5e891872a401d1874c992e9ba3b5cc7",
+        "packages/helix/src/trp/verify_bundle.py.txt": "952e79d5cecae707954ed667d231838569323dffdd068ab43edd770284841eb9",
+        "packages/helix/src/trp/remote_runner.py.txt": "f2aa0d714848da79726bf1126ed5611e999b941cd0ee653067a901a9873e1805",
+        "packages/helix/test/trp/workflow-backend.test.ts": "46ead7759736ac5ca4b1aa1fad6c3b1729b9080f6d250e87bab2daad86b011a6"
+      },
+      "local_summary": {
+        "path": "evaluation/trp/campaign-20261012/checks/post-campaign-production-20261013/summary.json",
+        "sha256": "fa5d578fb5e9983087a7042204f85fdc4761ef12e90a3b12ef407d2e460b9324"
+      },
+      "local_regression": {
+        "passed": 543,
+        "skipped_opt_in": 63,
+        "failed": 0,
+        "assertions": 1601,
+        "files": 57,
+        "source": {
+          "path": "evaluation/trp/campaign-20261012/checks/post-campaign-production-20261013/broad-summary.json",
+          "sha256": "145ad9de75f48a69db680c9f8e5515947a6f6e9dcf22ee2af4570137bd4ca08f"
+        }
+      },
+      "local_typecheck_exit_code": 0,
+      "integration_summary": {
+        "path": "evaluation/trp/campaign-20261012/checks/post-campaign-production-20261013/cloud/summary.json",
+        "sha256": "79d058fee282b559e7133ce43d602b3633484d6f5829a4d5e1bd4dae0df6530f"
+      },
+      "integration": {
+        "independent_checks": 89,
+        "ordinary_default_verifier": true,
+        "legacy_flag_used": false,
+        "positive_files": 152,
+        "positive_native_ids": [
+          "377",
+          "378",
+          "379",
+          "380"
+        ],
+        "positive_gold_equal": true,
+        "backend_consistent": true,
+        "negative_case": "POST-04-native-cancellation-1000",
+        "negative_files": 151,
+        "negative_native_id": "384",
+        "negative_native_state": "CANCELLED",
+        "negative_native_exit_code": "0:9",
+        "automatic_failed_package": true,
+        "queue_loss_terminal_retained": true,
+        "approval_kind": "synthetic_actual_Question_Service",
+        "two_prelaunch_or_preRun_harness_failures_preserved": true,
+        "latency_P95": null,
+        "native_cancellation_observer_qualification": "Bounded fast watcher saw COMPLETING; later independent scontrol and producer ledger confirmed CANCELLED. Timestamp difference is one observed interval, not an internal latency bound."
+      },
+      "final_quiescence": {
+        "path": "evaluation/trp/campaign-20261012/checks/post-campaign-production-20261013/cloud/post-quiescence.json",
+        "sha256": "3511e2ef52679a46d77c508eb939c142f761b3b07b3783d46ce4e93c64403856"
+      },
+      "original_campaign_source_and_metrics_immutable": true,
+      "original_matrix_summary_sha256": "a53095ee21ad8a1a4ba2efcfb7245e3e082cf5d1b1a33419685150f7026970e4",
+      "items": [
+        "Backend is derived from actual completed execution and is consistent in execution, Run and completion event.",
+        "Default cold verifier checks methods and gates; historical qualification remains explicit and new packets use no legacy flag.",
+        "Seen native IDs and terminal state are kept after queue disappearance; own native failure was observed and automatically packaged."
+      ],
+      "scientific_reserved_metrics": null
+    },
+    "technical_next_steps": [
+      "Root preserves final local evidence archives and selected Git delivery; Word/PDF installation is verified, no further original campaign run remains.",
+      "Receive independent expert references and paraphrases, freeze reserved partitions and execute linguistic evaluation; annotate real resulting turns for kappa.",
+      "Define and validate a physical failure criterion with pertinent independent labels before computing structural sensitivity or specificity.",
+      "Keep dedicated predicted/detector resource limits and unresolved domain contracts explicit; verified strict geometry route does not establish all-domain implementation completeness."
+    ],
+    "operator_helper_revision": "0dcb38a"
   },
   "nota_supersesion": "Campos estado, pendiente y medicion son vigentes; medicion_vigente es su alias explícito. Los campos originales y sus métricas se conservan exactamente en historial_actualizaciones. No cambian IDs ni umbrales científicos."
 }

@@ -21,6 +21,7 @@ def main():
  report={'lab':a.lab,'observed_at_utc':datetime.now(timezone.utc).isoformat(),'image':IMAGE,'nodes':[]}
  def ssh(n,command,timeout=60):
   return subprocess.run(['ssh',*m.ssh_options(n),'ubuntu@'+n['public_ip'],'bash -lc '+shlex.quote(command)],capture_output=True,text=True,timeout=timeout)
+ guest_deadlines=[]
  for n in state['nodes']:
   if n['state']!='running':raise RuntimeError('Node not running: '+n['name'])
   mount_check='mountpoint -q /shared/helix' if n['role']=='head' else 'test "$(findmnt -n -t nfs4 -T /shared/helix -o FSTYPE)" = nfs4'
@@ -31,6 +32,20 @@ def main():
   if r.returncode:
    status=ssh(n,'sudo cloud-init status --format json; sudo tail -8 /var/log/helix-bootstrap.log');row['bootstrap_status']=status.stdout
    (a.output/'prepare-status.json').write_text(json.dumps(report,indent=2)+'\n');print(json.dumps({'lab':a.lab,'ready':False,'node':n['name'],'status':status.stdout[-1200:]}));return 2
+  # Academy renewal does not extend a guest's independent OnBoot shutdown.
+  # Observe the guard on every required node and bind the earliest deadline.
+  timer_code="""import json,pathlib,subprocess,time
+unit='helix-session-stop.timer'
+active=subprocess.run(['systemctl','is-active','--quiet',unit]).returncode==0
+content=subprocess.check_output(['systemctl','cat',unit],text=True)
+if not active or 'OnBootSec=180min' not in content:raise RuntimeError('Expected active180minute guest stop guard unavailable')
+boot=int(next(line.split()[1] for line in pathlib.Path('/proc/stat').read_text().splitlines() if line.startswith('btime ')))
+print(json.dumps({'active':active,'boot_epoch_seconds':boot,'stop_epoch_seconds':boot+180*60,'observed_epoch_seconds':time.time(),'guard_minutes_after_boot':180}))
+"""
+  timer=ssh(n,'python3 -c '+shlex.quote(timer_code))
+  if timer.returncode:raise RuntimeError('Guest stop guard cannot be verified on '+n['name']+': '+timer.stderr)
+  observed=json.loads(timer.stdout);row['guest_stop_guard']=observed
+  guest_deadlines.append(observed['stop_epoch_seconds'])
  head=next(n for n in state['nodes'] if n['role']=='head')
  missing=[]
  for n in state['nodes']:
@@ -54,7 +69,12 @@ def main():
  session=json.loads((Path.home()/f'.local/state/helix/aws-academy/session-{a.lab}.json').read_text())
  deadline=re.search(r'\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}[+-]\d{4}',session['after']['Session to end'])
  if not deadline:raise RuntimeError('Academy session deadline unavailable')
- config['sessionExpiresAt']=datetime.fromisoformat(deadline.group()).isoformat()
+ academy_deadline=datetime.fromisoformat(deadline.group())
+ effective_deadline=min(academy_deadline.timestamp(),*guest_deadlines)
+ if effective_deadline-datetime.now(timezone.utc).timestamp()<1200:
+  raise RuntimeError('Less than20minutes remain before Academy or a required guest stop guard; checkpoint and renew/restart before new runs')
+ config['sessionExpiresAt']=datetime.fromtimestamp(effective_deadline,timezone.utc).isoformat()
+ report['execution_window']={'academy_session_end':academy_deadline.isoformat(),'earliest_guest_stop':datetime.fromtimestamp(min(guest_deadlines),timezone.utc).isoformat(),'effective_admission_deadline':config['sessionExpiresAt'],'policy':'Minimum of Academy expiry and verified180minute boot guard on all required nodes'}
  m.private_write(m.PRIVATE/'remote.json',json.dumps(config,indent=2)+'\n')
  r=ssh(head,'sinfo -N -o "%N %c %m %t"; squeue -h; df -B1 /shared/helix; nextflow -version; sudo cloud-init status --format json')
  report['cluster_status_stdout']=r.stdout;report['cluster_status_stderr']=r.stderr;report['cluster_status_exit']=r.returncode

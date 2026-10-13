@@ -112,6 +112,26 @@ class AcademyObservationTests(unittest.TestCase):
             with self.assertRaises(TimeoutException):
                 access.credential_metadata(Driver(), Wait(Driver()))
 
+    def test_stopped_lab_can_start_without_inventing_session_or_budget(self):
+        stopped = access.parse_metadata("No current session", "Stopped")
+        with patch.object(access, "details", side_effect=TimeoutException), \
+             patch.object(access, "metadata_snapshot", return_value=stopped):
+            value = access.before_start_metadata(Driver(), Wait(Driver()), True)
+        self.assertTrue(value["session_metadata_unavailable_before_start"])
+        self.assertNotIn("Session to end", value)
+        self.assertNotIn("reported_budget_usd", value)
+        with patch.object(access, "metadata_snapshot", return_value=value):
+            with self.assertRaises(TimeoutException):
+                access.credential_metadata(Driver(), Wait(Driver()))
+
+    def test_partial_metadata_does_not_silently_renew_or_accept_running_lab(self):
+        for renew, title in ((False, "Stopped"), (True, "Ready"), (True, "Unknown")):
+            with self.subTest(renew=renew, title=title), \
+                 patch.object(access, "details", side_effect=TimeoutException), \
+                 patch.object(access, "metadata_snapshot", return_value=access.parse_metadata("", title)):
+                with self.assertRaises(TimeoutException):
+                    access.before_start_metadata(Driver(), Wait(Driver()), renew)
+
     def test_credential_session_metadata_waits_for_hydrated_fields(self):
         partial = access.parse_metadata("Remaining session time: 01:12:34", "Ready")
         complete = access.parse_metadata(TEXT, "Ready")

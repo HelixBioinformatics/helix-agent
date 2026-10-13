@@ -138,6 +138,21 @@ def credential_metadata(driver, wait):
     return wait.until(complete)
 
 
+def before_start_metadata(driver, wait, renew):
+    """A stopped lab can omit session details until the authorized Start Lab.
+
+    This fallback never creates a session deadline or budget. Complete metadata
+    is still mandatory before saving CLI credentials and before starting EC2.
+    """
+    try:
+        return details(driver, wait)
+    except TimeoutException:
+        value = metadata_snapshot(driver)
+        if not renew or value.get("lab_status") != "stopped_or_not_ready":
+            raise
+        return {**value, "session_metadata_unavailable_before_start": True}
+
+
 def atomic_private_write(path, content):
     path.parent.mkdir(parents=True, exist_ok=True, mode=0o700)
     fd, temporary = tempfile.mkstemp(prefix=".academy-", dir=path.parent)
@@ -203,7 +218,7 @@ def main():
         if args.observe_only:
             print(json.dumps(observation(driver, wait, args.lab), indent=2))
             return 0
-        before = details(driver, wait)
+        before = before_start_metadata(driver, wait, args.renew)
         close = driver.find_elements(By.ID, "panel3-hide")
         if close and close[0].is_displayed():
             close[0].click()

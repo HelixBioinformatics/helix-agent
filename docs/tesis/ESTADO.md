@@ -1,5 +1,20 @@
 # Estado del cierre
 
+## Estado vigente, 12 de octubre de 2026
+
+La campaña técnica ya probó Helix mediante SSH, Slurm, Nextflow y Docker en dos clústeres AWS Academy independientes de tres nodos. La implementación y la tesis completas siguen abiertas: pasar pruebas de ingeniería no demuestra los 21 indicadores científicos. Los capítulos 1 a 3 permanecen cerrados por el autor.
+
+- **Flujos:** 52 intentos sobre 50 grafos únicos de una proteína de desarrollo; 48 primeros éxitos, dos fallos iniciales conservados y dos reintentos reparados. Los 50 casos finalmente verificados no constituyen la tasa científica de R1.5.
+- **SIFTS y trazabilidad:** referencia remota de 12 unidades, CSV gold idéntico, paquete automático de 156 archivos verificado fuera del checkout y 320/320 alteraciones offline detectadas. Cancelación limpia de trabajo nativo 128 con RUNNING, señal real, CANCELLED y paquete automático de 143 archivos.
+- **Recursos:** límites efectivos por tarea Docker de 2 CPU, 2 GiB y cero swap. No se demuestra límite agregado cliente/controlador/remoto, pico de disco ni cuota remota dura; una solicitud estricta se rechaza honestamente. R2.4 sigue en ejecución, sin tasa final publicada. Lab1 está detenido según comprobación registrada. La revisión a951d73 vincula la ventana a la mínima fecha Academy/temporizadores observados de los tres huéspedes.
+- **Experta:** asesora Layla Hirsh seleccionada; independencia respecto del desarrollo declarada por el autor. Entrega real de 70 solicitudes preparada. Referencias, paráfrasis y turnos reales anotados no recibidos; kappa pendiente.
+- **Modelo:** cuatro casos piloto reales de desarrollo con `openai/gpt-6-sol`, razonamiento `medium` y OAuth existente. Sin ciencia ni reserva humana ejecutada en el piloto. El cap solicitado de 8192 tokens no es duro bajo este adaptador; factura efectiva y revisión interna del proveedor desconocidas.
+- **Estructuras:** 78 originales Pratt disponibles. CCTBX principal produjo observables en 105/108 casos y conservó tres timeouts de 180 s; el contraste 600 s recuperó 3/3. FreeSASA descriptivo evaluó 108/108. C9 continúa no evaluable como veredicto amplio: no hay clasificador validado, sensibilidad ni especificidad física.
+
+[Informe y hashes](RESULTADOS-AWS-20261012.md), [21 resultados vigentes](trazabilidad.md), [checkpoint](checkpoint.json). Las fuentes y criterios figuran también en los campos `vigente` y `current` de los JSON. La documentación inicial queda a cargo del autor y no se registra como tarea pendiente del agente.
+
+**Nota de supersesión:** las entradas fechadas siguientes conservan historia. Las afirmaciones antiguas de anotador/clúster/modelo pendientes, originales Pratt ausentes, adaptador remoto inexistente o ingeniería R2.2 completa fuera de su scope local se leen con sus fechas y quedan sustituidas por esta actualización. No se reescriben sus resultados ni se borran fallos.
+
 ## Actualización de originales Pratt, 1 de octubre de 2026
 
 Se recuperaron del envío de los autores 78 modelos AF2 de rango 1, sus puntuaciones y sus PAE, correspondientes a toda la Tabla S1. Helix incorporó el contrato local ColabFold y ejecutó dos perfiles fijados antes de sus veredictos. El principal produce 78/78 alarmas mecánicas y marca los cinco ejemplos explícitamente problemáticos de las figuras 3, 6 y 7; esto no valida discriminación ni plausibilidad física. El control físico sigue no evaluable, con cobertura 0%, sensibilidad física y especificidad sin calcular. Faltan un control físico validado y al menos 30 negativos pertinentes revisados. Los originales de la Tabla S1 dejan de ser dependencia pendiente; los de las figuras 1/S1 y 14 no están en este envío. No se usó el modelo ni AWS. [Informe y evidencia](../../evaluation/trp/reference/pratt-author-20261001/README.md).
@@ -24,7 +39,7 @@ Renumeración posterior del 23/09/2026: los códigos vigentes se toman de las ta
 
 Word sincronizado con las tres causas, los tres objetivos y la numeración vigente: métodos, resultados, conclusiones y anexos. Tabla accidental duplicada retirada e índice reconstruido; véase [auditoría documental](renumeracion-20260923/document-checks.json).
 
-## Cierre técnico — 21 de septiembre de 2026 (estado vigente)
+## Cierre técnico — 21 de septiembre de 2026 (registro histórico; supersedido el 12/10/2026)
 
 Se ejecutó [el plan CT1–CT5](PLAN-CIERRE-TECNICO.md) con tres agentes y revisión integrada.
 Los apartados siguientes conservan la historia de fases; sus pendientes se actualizan aquí.

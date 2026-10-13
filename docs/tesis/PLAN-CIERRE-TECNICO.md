@@ -1,5 +1,23 @@
 # Plan de cierre técnico y evaluación
 
+## Actualización operativa, 12 de octubre de 2026
+
+Se mantienen julio de 2027 y el borrador completo objetivo del 4 de junio de 2027. El plan actúa sobre resultados, conclusiones, anexos y trazabilidad; capítulos 1 a 3 cerrados. Las entradas de septiembre/octubre posteriores a esta sección se conservan como historia, con sus scopes originales. [Evidencia y límites vigentes](RESULTADOS-AWS-20261012.md).
+
+| Hito vigente | Estado comprobado | Trabajo pendiente y compuerta |
+|---|---|---|
+| Acceso y ejecución remota | Revisión a951d73; ventana mínima Academy/temporizadores de los tres huéspedes. Dos clústeres Academy de tres nodos probados; 50 grafos de desarrollo verificados en 52 intentos, dos fallos conservados | No presentar este corpus de una proteína como reserva científica de R1.5; ampliar sólo con entradas y referencias congeladas |
+| Correspondencias y prueba de interrupción | SIFTS real, 12 unidades, 156 archivos y copia externa; cancelación limpia real, 143 archivos | Conservar comparación gold, observaciones nativas, eventos y límites de scope |
+| Admisión y demanda | Inventario por nodo y límites efectivos Docker; rechazo honesto de cuota remota dura | R2.4 sigue en ejecución sin indicador final. R2.2 conjunto cliente/remoto y pico agregado no demostrados; no heredar automáticamente la cuota local |
+| Referencia humana | Asesora seleccionada independiente según el autor; 70 solicitudes reales preparadas | Recibir referencias y dos paráfrasis por intención factible; luego ejecutar/capturar sesiones y entregar turnos reales para kappa sin adjudicación previa |
+| Modelo y gasto | gpt-6-sol/medium, OAuth, cuatro pilotos de preparación/alcance | Registrar ausencia de cap duro 8192 y factura efectiva desconocida; verificar límites si se exige un gasto cerrado, antes de congelar la reserva |
+| Fallos estructurales | 78 originales Pratt; CCTBX 105/108 primario y 3/3 recuperados en contraste; FreeSASA 108/108 descriptivo | Definir criterio externo, clasificador y negativos físicos pertinentes; C9, sensibilidad y especificidad no se declaran satisfechos |
+| Integración de resultados | Evidencias por instancia, métodos y hashes actuales enlazados a 21 IDs | Cerrar reporte del contraste en curso sin borrar fallos; completar métricas humanas/científicas y revisión final antes de afirmar tesis completa |
+
+Las aprobaciones de esta campaña son entradas sintéticas de un conductor autorizado. La referencia humana de 70 solicitudes sigue pendiente y no fue sustituida por el piloto del modelo. Los timeouts principales se conservan aunque un perfil secundario más amplio los resuelva. La documentación inicial es responsabilidad del autor, fuera de los pendientes del agente.
+
+**Supersesión:** el listado histórico de decisiones externas queda actualizado: anotadora seleccionada, modelo escogido, originales Pratt recuperados y acceso a clúster efectivamente usado. Persisten las etiquetas y métricas independientes, los contratos de dominio restantes y la gobernanza estricta de todas las rutas. No se cambia ningún umbral científico por los resultados del desarrollo.
+
 ## Actualización de originales Pratt, 1 de octubre de 2026
 
 Se recuperaron del envío de los autores 78 modelos AF2 de rango 1, sus puntuaciones y sus PAE, correspondientes a toda la Tabla S1. Helix incorporó el contrato local ColabFold y ejecutó dos perfiles fijados antes de sus veredictos. El principal produce 78/78 alarmas mecánicas y marca los cinco ejemplos explícitamente problemáticos de las figuras 3, 6 y 7; esto no valida discriminación ni plausibilidad física. El control físico sigue no evaluable, con cobertura 0%, sensibilidad física y especificidad sin calcular. Faltan un control físico validado y al menos 30 negativos pertinentes revisados. Los originales de la Tabla S1 dejan de ser dependencia pendiente; los de las figuras 1/S1 y 14 no están en este envío. No se usó el modelo ni AWS. [Informe y evidencia](../../evaluation/trp/reference/pratt-author-20261001/README.md).
@@ -54,7 +72,7 @@ La documentación distingue implementación, evidencia de desarrollo y campaña
 reservada. El Word se edita desde su versión actual y se compara para conservar
 el contenido de los capítulos que el autor cerró.
 
-## Estado de ejecución
+## Estado de ejecución histórico, 21 de septiembre de 2026
 
 - CT1 completado en el alcance definido: integración y referencia SIFTS real, 206 residuos/12 unidades y verificación portable.
 - CT2 completado para STRPsearch: guardia, herramienta interactiva, pruebas negativas y referencias reales; ReUPred y RepeatsDB siguen fuera del catálogo admitido.

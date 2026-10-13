@@ -1,5 +1,40 @@
 # Herramientas de evidencia de la tesis
 
+## Campaña de AWS Academy, octubre de 2026
+
+La [campaña actual](../../evaluation/trp/campaign-20261012/README.md) conserva
+congelaciones, intentos fallidos y verificaciones posteriores. Los ejemplos
+históricos de edición de Word que siguen reproducen sus revisiones originales.
+
+- `aws_academy_cluster.py`: opera sólo sobre recursos registrados y etiquetados
+  del laboratorio seleccionado; mantiene separados ambos estados y credenciales.
+- `aws_academy_prepare_remote.py`: prepara la configuración privada de Helix,
+  verifica imagen/entorno y liga el plazo a Academia y a los tres guardas de
+  apagado por arranque. Las claves permanecen fuera del repositorio.
+- `record_academy_state.py`: obtiene una respuesta EC2 nueva y registra los
+  estados de los nodos; `--require-stopped` falla si todavía queda cómputo activo.
+- `provision_r24_workspace.py`: crea una única imagen XFS aislada para contrastes
+  de ingeniería, sin nuevas instancias o volúmenes. Se niega a reformatear rutas
+  existentes. `resume_r24_workspace.py` remonta esa misma imagen tras reiniciar,
+  sin recrearla ni restablecer cuotas, y verifica los mounts NFS.
+- `summarize_remote_workflows.py`: audita paquetes con sus propias referencias
+  numéricas, separa primeros intentos y reintentos y cuenta IDs únicos.
+- `audit_remote_campaign.py`: comprueba los paquetes, trabajos Slurm, límites
+  observados, eventos y métodos. El oráculo de eventos puede suministrarse desde
+  las acciones del corredor, independientemente del registro producido.
+- `verify_structural_campaign.py --inputs`: verifica evidencia estérica primaria,
+  coordenadas privadas y recursos químicos instalados, sin repetir mediciones.
+  `structural_runtime_contrast.py verify` necesita el Python CCTBX fijado en su
+  congelación, pues comprueba también los módulos instalados bajo `sys.prefix`.
+  `verify_sasa_campaign.py` comprueba áreas, residuos, ausencias y denominadores.
+- `update_academy_campaign_docx.py`: genera una copia desde el Word actual con
+  resultados observados. `audit_academy_docx.py` contrasta la copia renderizada
+  y su PDF con el original antes de instalarla.
+
+Las cuotas del workspace experimental del head no acreditan la cuota agregada
+de cliente y clúster. Las variantes de desarrollo, aprobaciones del corredor y
+diagnósticos continuos tampoco sustituyen las referencias humanas reservadas.
+
 ## Comprobación independiente de instantáneas
 
 `verify_snapshot.py` requiere Python 3.9 o posterior y únicamente su biblioteca estándar. Se puede copiar junto a un corpus a otra máquina. No importa código de Bioinformática.org, no ejecuta el modelo, no escribe archivos y no usa la red.

@@ -222,6 +222,8 @@ def verify(root, expected=None):
         if not {'remote_strict_policy.json', 'remote_strict.py'} <= set(bundle['files']):
             raise ValueError('strict policy/checker not approved')
         allocated = record('remote_strict_policy.json')
+        if execution.get('inputStaging') != 'copy' or "process.stageInMode = 'copy'" not in config:
+            raise ValueError('strict worker inputs must be physical project-accounted copies')
         if allocated != inventory.get('remoteStrict') or allocated != execution['target'].get('strict') or allocated['targetFingerprint'] != inventory['remote']['fingerprint'] or execution.get('transport') != 'co-located-python':
             raise ValueError('strict target/allocation differs')
         p = allocated['policy']

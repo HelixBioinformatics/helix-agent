@@ -248,13 +248,17 @@ export function bind(bundle: N.Bundle, target: Target, id: string): void {
   const execution = JSON.parse(bundle.files["execution.json"])
   execution.backend = target.strict ? H.BACKEND : VERSION
   execution.target = target.public
-  if (target.strict) execution.transport = "co-located-python"
+  if (target.strict) {
+    execution.transport = "co-located-python"
+    execution.inputStaging = "copy"
+  }
   execution.numericalProfile = c.numericalProfile ?? "native-single-thread"
   bundle.files["execution.json"] = S.canonical(execution) + "\n"
   bundle.files["nextflow.config"] = bundle.files["nextflow.config"]
     .replace("process.executor = 'local'", `process.executor = 'slurm'\nprocess.queue = '${c.partition}'`)
     .replace("--cpus 2 --tmpfs", "--cpus 2 --memory=2g --memory-swap=2g --tmpfs")
   bundle.files["nextflow.config"] += `process.clusterOptions = '--comment=helix:${id}'\n`
+  if (target.strict) bundle.files["nextflow.config"] += "process.stageInMode = 'copy'\n"
   if (c.selectNode)
     bundle.files["nextflow.config"] +=
       `process { withName: ${select} { clusterOptions = '--comment=helix:${id} --nodelist=${c.selectNode}' } }\n`

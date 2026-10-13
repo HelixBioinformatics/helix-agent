@@ -132,6 +132,7 @@ export async function methods(directory: string): Promise<void> {
       pointer: [],
       value: remoteStrict,
     })
+    fields.push({ name: "worker input staging", artifact: "execution.json", pointer: ["inputStaging"], value: execution.inputStaging })
   }
   if (enforcement)
     fields.push({ name: "resource enforcement", artifact: "enforcement.json", pointer: [], value: enforcement })

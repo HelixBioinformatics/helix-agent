@@ -279,6 +279,8 @@ describe("optional co-located Slurm strict allocation", () => {
     const execution = JSON.parse(bundle.files["execution.json"])
     expect(execution.backend).toBe(H.BACKEND)
     expect(execution.transport).toBe("co-located-python")
+    expect(execution.inputStaging).toBe("copy")
+    expect(bundle.files["nextflow.config"]).toContain("process.stageInMode = 'copy'")
     expect(bundle.files["remote_strict.py"]).toBe(H.checkerSource)
     expect(JSON.parse(bundle.files["remote_strict_policy.json"])).toEqual(strict)
     const digest = N.bundleDigest(bundle.files)

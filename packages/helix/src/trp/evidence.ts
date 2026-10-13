@@ -118,6 +118,21 @@ export async function methods(directory: string): Promise<void> {
   const software = await read("software.json").catch(() => undefined)
   const structural = await read("structural_report.json").catch(() => undefined)
   const enforcement = await read("enforcement.json").catch(() => undefined)
+  const remoteStrict = await read("remote_strict_policy.json").catch(() => undefined)
+  if (remoteStrict) {
+    fields.push({
+      name: "co-located Slurm transport",
+      artifact: "execution.json",
+      pointer: ["transport"],
+      value: execution.transport,
+    })
+    fields.push({
+      name: "remote strict allocation",
+      artifact: "remote_strict_policy.json",
+      pointer: [],
+      value: remoteStrict,
+    })
+  }
   if (enforcement)
     fields.push({ name: "resource enforcement", artifact: "enforcement.json", pointer: [], value: enforcement })
   if (structural)
@@ -147,14 +162,18 @@ export async function methods(directory: string): Promise<void> {
     )
   const limitations = [
     "Author-PDB numbering; supplied units, not repeat detection; experimental B-factor is not pLDDT.",
-    execution.backend
-      ? "The first-unit geometry zeros are placeholders. Remote Slurm execution is recorded for this run; external annotation and held-out scientific evaluation remain separate requirements."
-      : "The first-unit geometry zeros are placeholders. External annotator and held-out evaluation remain separate requirements. This run uses local execution.",
-    execution.backend
-      ? "Slurm requests resources per job; container observations record effective CPU, memory and swap limits. Controller resources and aggregate storage use estimates and admission, without a hard controller limit or disk quota. Memory is not pooled between workers."
-      : enforcement
-        ? "Operator XFS quota and cgroup v2 bound controller and task resources. CPU quota is bandwidth, not exclusive cores. Full-run peaks are preserved by the external supervisor."
-        : "Host resource admission uses estimates and reservations; aggregate disk quota and controller memory enforcement are unavailable.",
+    remoteStrict
+      ? "The real Helix client runs on the verified head. Local Python transport invokes the controller; Slurm executes worker jobs. This is not an SSH transport experiment."
+      : execution.backend
+        ? "The first-unit geometry zeros are placeholders. Remote Slurm execution is recorded for this run; external annotation and held-out scientific evaluation remain separate requirements."
+        : "The first-unit geometry zeros are placeholders. External annotator and held-out evaluation remain separate requirements. This run uses local execution.",
+    remoteStrict
+      ? "Root-owned policy and kernel receipts bind one XFS project quota covering declared client work/temp/state/cache/export and NFS remote work. Real Helix and Python/Nextflow share 1 CPU/2 GiB/swap-zero controller cgroup; sequential worker containers use 2 CPU/2 GiB. Root sampler records current usage separately from total-run entitlement. Preloaded read-only software/image caches and external root-supervisor records are infrastructure outside workBytes."
+      : execution.backend
+        ? "Slurm requests resources per job; container observations record effective CPU, memory and swap limits. Controller resources and aggregate storage use estimates and admission, without a hard controller limit or disk quota. Memory is not pooled between workers."
+        : enforcement
+          ? "Operator XFS quota and cgroup v2 bound controller and task resources. CPU quota is bandwidth, not exclusive cores. Full-run peaks are preserved by the external supervisor."
+          : "Host resource admission uses estimates and reservations; aggregate disk quota and controller memory enforcement are unavailable.",
     "Offline verification checks bytes and declared links, not scientific truth or an authenticated human identity.",
     "Agent provider/model/cost are not observed by this workflow; task software is identified by the pinned catalogue reference and image.",
   ]

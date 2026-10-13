@@ -45,6 +45,49 @@ def safe_name(name):
     return name
 
 
+def strict_receipt(receipt, allocated):
+    """Check preserved receipt semantics, never execute its root checker."""
+    p = allocated['policy']
+    if receipt['version'] != 'trp-remote-strict/1.0.0' or receipt['policy'] != p or receipt['policySha256'] != allocated['policySha256']:
+        raise ValueError('strict root policy receipt differs')
+    if digest(receipt['policyRaw'].encode()) != allocated['policySha256'] or parse(receipt['policyRaw']) != p:
+        raise ValueError('strict root policy source differs')
+    sample = parse(receipt['sampleRaw'])
+    if digest(receipt['sampleRaw'].encode()) != receipt['sampleSha256'] or sample['policySha256'] != allocated['policySha256'] or sample['bootId'] != p['bootId']:
+        raise ValueError('strict root sampler source differs')
+    if not -1 <= receipt['checkedAt'] - sample['observedAt'] <= 5:
+        raise ValueError('strict root sampler was stale when checked')
+    if receipt['host'] != p['hostname'] or receipt['transport'] != 'co-located-python' or receipt['membership'] != '0::/' + p['controller']['cgroup']:
+        raise ValueError('strict controller host/transport/membership differs')
+    limits = receipt['cgroup']
+    cpu = limits['cpu.max'].split()
+    if len(cpu) != 2 or cpu[0] == 'max' or int(cpu[0]) != int(cpu[1]) or limits['memory.max'] != '2147483648' or limits['memory.swap.max'] != '0':
+        raise ValueError('strict shared controller limits differ')
+    if receipt['currentUsageIsSubtractedFromEntitlement'] or receipt['entitlement'] != p['entitlement']:
+        raise ValueError('strict entitlement was reduced by current usage')
+    if receipt['role'] not in ('client', 'controller'):
+        raise ValueError('strict receipt role differs')
+    cwd = Path(receipt['cwd'])
+    if not cwd.is_relative_to(p['paths']['clientWorkspace' if receipt['role'] == 'client' else 'remoteRoot']):
+        raise ValueError('strict cwd was outside allocation')
+    if receipt['role'] == 'client' and receipt['parentMembership'] != receipt['membership']:
+        raise ValueError('real client parent was outside strict controller')
+    if {r['name'] for r in receipt['paths']} != set(p['paths']) or len(receipt['paths']) != len(p['paths']):
+        raise ValueError('strict path witness set differs')
+    for row in receipt['paths']:
+        if row['path'] != p['paths'][row['name']] or row['device'] != p['filesystem']['device'] or row['projectId'] != p['filesystem']['projectId'] or not row['inherit']:
+            raise ValueError('strict project/device/path witness differs')
+    mount = receipt['mount']
+    if mount['target'] != p['filesystem']['mountPoint'] or mount['uuid'] != p['filesystem']['uuid'] or mount['fstype'] != 'xfs' or not {'pquota', 'prjquota'} & set(mount['options'].split(',')):
+        raise ValueError('strict filesystem witness differs')
+    q = sample['quota']
+    rows = re.findall(r'^#?' + str(p['filesystem']['projectId']) + r'\s+(\d+)\s+(\d+)\s+(\d+)\s', q['reportSource'], re.M)
+    if len(rows) != 1 or int(rows[0][0]) * 1024 != q['usedBytes'] or int(rows[0][2]) * 1024 != q['hardBytes'] or q['hardBytes'] != p['filesystem']['hardBytes']:
+        raise ValueError('strict kernel quota source differs')
+    if 'Accounting: ON' not in q['stateSource'] or 'Enforcement: ON' not in q['stateSource'] or q['treeCheckExitCode'] != 0 or q['treeCheckStdout'].strip() or q['treeCheckStderr'].strip():
+        raise ValueError('strict kernel quota/inheritance was not enforced')
+
+
 def walk(root):
     result = set()
     for item in root.rglob('*'):
@@ -151,7 +194,8 @@ def verify(root, expected=None):
             raise ValueError('approved bundle changed: ' + name)
     admission, inventory, budget = record('admission.json'), record('inventory.json'), record('budget.json')
     execution = record('execution.json')
-    remote = execution.get('backend') == 'trp-slurm-ssh/1.0.0'
+    strict = execution.get('backend') == 'trp-slurm-colocated-strict/1.0.0'
+    remote = strict or execution.get('backend') == 'trp-slurm-ssh/1.0.0'
     if remote:
         if not {'remote_target.json', 'remote_runner.py'} <= set(bundle['files']):
             raise ValueError('missing approved remote target/controller')
@@ -161,6 +205,8 @@ def verify(root, expected=None):
         if "process.executor = 'slurm'" not in config or '--memory=2g' not in config or '--memory-swap=2g' not in config:
             raise ValueError('remote executor or effective task memory limits missing')
     if 'enforcement' in inventory:
+        if strict:
+            raise ValueError('local sandbox cannot authorize strict Slurm allocation')
         enforced = record('enforcement.json')
         if enforced != inventory['enforcement'] or 'enforcement.json' not in bundle['files']:
             raise ValueError('unbound resource enforcement')
@@ -172,6 +218,23 @@ def verify(root, expected=None):
                        '--memory-swap=2g', '--log-driver=none'):
             if option not in config:
                 raise ValueError('Docker task allocation missing: ' + option)
+    elif strict:
+        if not {'remote_strict_policy.json', 'remote_strict.py'} <= set(bundle['files']):
+            raise ValueError('strict policy/checker not approved')
+        allocated = record('remote_strict_policy.json')
+        if allocated != inventory.get('remoteStrict') or allocated != execution['target'].get('strict') or allocated['targetFingerprint'] != inventory['remote']['fingerprint'] or execution.get('transport') != 'co-located-python':
+            raise ValueError('strict target/allocation differs')
+        p = allocated['policy']
+        if p['version'] != 'trp-remote-strict/1.0.0' or p['controller'] != {'cgroup': 'helix-strict-' + p['id'] + '.service', 'cpus': 1, 'memoryBytes': 2147483648, 'swapBytes': 0}:
+            raise ValueError('strict controller policy differs')
+        if p['entitlement'] != {'cpus': 3, 'memoryBytes': 4294967296, 'workBytes': p['filesystem']['hardBytes'], 'wallSeconds': 1080}:
+            raise ValueError('strict total-run entitlement differs')
+        if digest((root/'run/remote_strict.py').read_bytes()) != p['checker']['sha256']:
+            raise ValueError('strict checker code differs')
+        for key in ('cpus', 'memoryBytes', 'workBytes', 'wallSeconds'):
+            if p['entitlement'][key] > budget[key]:
+                raise ValueError('strict allocation exceeds approved budget')
+        strict_receipt(inventory['remoteStrictObservation'], allocated)
     elif budget['requireHardStorageLimit']:
         raise ValueError('hard budget without enforcement')
     if admission['inventoryHash'] != digest(canonical(inventory)) or admission['budgetHash'] != digest(canonical(budget)):
@@ -222,6 +285,10 @@ def verify(root, expected=None):
             r = record(name)
             if r['inventory'].get('enforcement') != inventory.get('enforcement'):
                 raise ValueError('allocation changed during execution')
+            if strict:
+                if r['inventory'].get('remoteStrict') != allocated:
+                    raise ValueError('strict allocation changed during execution')
+                strict_receipt(r['inventory']['remoteStrictObservation'], allocated)
             if (not r['decision']['accepted'] or r['decision']['inventoryHash'] != digest(canonical(r['inventory']))
                     or r['decision']['budgetHash'] != admission['budgetHash'] or r['decision']['demand'] != d):
                 raise ValueError('resource recheck differs')
@@ -235,6 +302,11 @@ def verify(root, expected=None):
         if not remote and (len(processes) != 6 or any(p.get('exitCode') != 0 for p in processes)):
             raise ValueError('successful controller command count differs')
         if remote:
+            if strict:
+                for name in ['remote-strict-start.json', 'remote-strict-before-science.json']:
+                    if 'run/' + name not in listed:
+                        raise ValueError('successful strict run lacks ' + name)
+                    strict_receipt(record(name), allocated)
             for name in ['remote-terminal.json', 'remote-approved.json', 'remote-transfer.json', 'remote-processes.jsonl', 'remote-native-jobs.jsonl', 'remote-task-runtime.json']:
                 if 'run/' + name not in listed:
                     raise ValueError('successful remote run lacks ' + name)

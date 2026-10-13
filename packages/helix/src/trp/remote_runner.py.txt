@@ -9,6 +9,7 @@ import os
 from pathlib import Path
 import platform
 import re
+import runpy
 import shutil
 import signal
 import socket
@@ -19,6 +20,28 @@ import time
 from datetime import datetime, timezone
 
 VERSION = 'trp-slurm-ssh/1.0.0'
+STRICT_VERSION = 'trp-remote-strict/1.0.0'
+
+
+def strict_observation(req, role='client'):
+    fixed = req['target'].get('strict')
+    if fixed is None:
+        return None
+    if fixed.get('version') != STRICT_VERSION or req['target'].get('transport') != 'co-located-python':
+        raise ValueError('Unrecognized strict co-located transport')
+    checker = Path('/usr/local/libexec/helix-remote-strict-check.py')
+    for file, directory in [(checker.parent, True), (checker, False)]:
+        found = file.lstat()
+        if found.st_uid != 0 or found.st_mode & 0o022 or file.is_symlink() or file.resolve(strict=True) != file:
+            raise ValueError('Strict root checker path is untrusted')
+        if directory and not file.is_dir() or not directory and not file.is_file():
+            raise ValueError('Strict root checker is not an ordinary file')
+    if hashlib.sha256(checker.read_bytes()).hexdigest() != fixed['policy']['checker']['sha256']:
+        raise ValueError('Strict root checker changed')
+    receipt = runpy.run_path(str(checker))['observe'](fixed['policyPath'], req['target'], fixed['policySha256'], role)
+    if receipt['policy'] != fixed['policy'] or fixed['targetFingerprint'] != req['target']['fingerprint']:
+        raise ValueError('Strict allocation differs from approved target')
+    return receipt
 
 
 def canonical(value):
@@ -99,6 +122,7 @@ def fields(text):
 
 
 def observe(req):
+    strict = strict_observation(req, 'controller' if req.get('strictController') else 'client')
     root = target_root(req)
     queue = req['target']['partition']
     partition = fields(invoke(['scontrol', 'show', 'partition', queue, '--oneliner']).stdout)
@@ -143,13 +167,23 @@ def observe(req):
         seconds = min(seconds, guard_seconds) if seconds is not None else guard_seconds
     return {'ok': True, 'observedAt': now(), 'platform': platform.system().lower(), 'architecture': 'x64' if platform.machine() == 'x86_64' else platform.machine(),
             'host': socket.gethostname(), 'workspace': str(root), 'filesystem': str(os.stat(root).st_dev),
-            'cpus': cpus + best['cpus'], 'memoryBytes': memory + best['memoryBytes'], 'freeBytes': capacity.f_bavail * capacity.f_frsize,
+            'cpus': strict['entitlement']['cpus'] if strict else cpus + best['cpus'],
+            'memoryBytes': strict['entitlement']['memoryBytes'] if strict else memory + best['memoryBytes'],
+            'freeBytes': strict['entitlement']['workBytes'] if strict else capacity.f_bavail * capacity.f_frsize,
+            **({'remoteStrict': req['target']['strict'], 'remoteStrictObservation': strict} if strict else {}),
             'remote': {'version': VERSION, 'fingerprint': req['target']['fingerprint'], 'partition': queue,
-                       'controllerCpus': cpus, 'controllerMemoryBytes': memory, 'nodes': nodes, 'requiredNodes': [req['target'][key] for key in ['selectNode', 'geometryNode'] if req['target'].get(key)], 'secondsRemaining': seconds},
-            'sources': ['SSH host key verified by local client', '/proc/meminfo:MemAvailable', '/proc/self/cgroup and ancestor limits', 'os.statvfs shared root', 'scontrol partition/nodes', 'Academy expiry and per-boot guard when available'],
-            'limitations': ['Capacity is observed, not an exclusive reservation. Controller and worker capacity are separate; one task must fit one worker.',
+                       # The strict total-run entitlement includes the real client.
+                       # Its current consumption stays in the separate receipt.
+                       'controllerCpus': strict['policy']['controller']['cpus'] if strict else cpus,
+                       'controllerMemoryBytes': strict['policy']['controller']['memoryBytes'] if strict else memory,
+                       'nodes': nodes, 'requiredNodes': [req['target'][key] for key in ['selectNode', 'geometryNode'] if req['target'].get(key)], 'secondsRemaining': seconds},
+            'sources': (['Root-owned co-located policy and fresh kernel XFS quota sample', 'FSGETXATTR project/inheritance; findmnt UUID/device; /proc boot/host/cgroup and controller limits', 'scontrol partition/nodes', 'current controller usage recorded separately from allocation entitlement'] if strict else ['SSH host key verified by local client', '/proc/meminfo:MemAvailable', '/proc/self/cgroup and ancestor limits', 'os.statvfs shared root', 'scontrol partition/nodes', 'Academy expiry and per-boot guard when available']),
+            'limitations': (['Real Helix client and Python/Nextflow controller share the fixed controller cgroup; sequential worker tasks have separate Docker limits.',
+                             'One XFS project covers declared client and NFS worker-visible work paths; preloaded read-only runtime/image caches and root supervisor records are outside workBytes.',
+                             'Local Python transport on the verified head is explicit; this strict profile is not an SSH transport test. Worker memory is never pooled.',
+                             'Allocated controller entitlement is not reduced by its own current usage. CPU quota is bandwidth, not exclusive cores.'] if strict else ['Capacity is observed, not an exclusive reservation. Controller and worker capacity are separate; one task must fit one worker.',
                             'Slurm CPU/memory requests and Docker effective task limits are recorded separately. No aggregate disk quota or hard controller-memory limit is claimed.',
-                            'Image caches and distributions are infrastructure outside workBytes. Cluster shared filesystem availability is tested by actual execution.']}
+                            'Image caches and distributions are infrastructure outside workBytes. Cluster shared filesystem availability is tested by actual execution.'])}
 
 
 def verify(req, root):
@@ -178,6 +212,7 @@ def controller_alive(state):
 
 
 def start(req):
+    strict = strict_observation(req)
     root = run_root(req, False)
     if root.exists():
         raise ValueError('Run already exists; automatic resubmission is forbidden')
@@ -195,9 +230,14 @@ def start(req):
     # Transported script must equal the script currently serving this request.
     if (root / 'remote_runner.py').read_text() != SCRIPT_SELF:
         raise ValueError('Runner bytes differ from approved runner')
+    if strict:
+        if json.loads((root / 'remote_strict_policy.json').read_text()) != req['target']['strict'] or sha((root / 'remote_strict.py').read_bytes()) != strict['policy']['checker']['sha256']:
+            raise ValueError('Strict policy/checker are not bound to the approval digest')
+        write(root, 'remote-strict-start.json', strict)
     with (root / 'remote-controller.log').open('wb') as out, (root / 'remote-controller.stderr').open('wb') as err:
         child = subprocess.Popen([sys.executable, str(root / 'remote_runner.py'), 'controller', base64.b64encode(canonical({k: v for k, v in req.items() if k != 'files'}).encode()).decode()],
-                                 stdin=subprocess.DEVNULL, stdout=out, stderr=err, start_new_session=True)
+                                 stdin=subprocess.DEVNULL, stdout=out, stderr=err, start_new_session=True,
+                                 cwd=root if strict else None)
     ticks = (Path('/proc') / str(child.pid) / 'stat').read_text().split()[21]
     state = {'pid': child.pid, 'startTicks': ticks, 'id': req['id'], 'digest': req['digest'], 'status': 'starting', 'startedAt': now()}
     write(root, 'remote-controller-identity.json', state)
@@ -260,6 +300,8 @@ def runtime_records(root):
 
 
 def controller(req):
+    if req['target'].get('strict'):
+        req['strictController'] = True
     root = run_root(req)
     signal.signal(signal.SIGTERM, lambda *_: (_ for _ in ()).throw(InterruptedError('Controller cancelled')))
     status = 'failed'
@@ -281,7 +323,8 @@ def controller(req):
         if not re.search(r'version\s+25\.10\.4(?:\s|$)', version):
             raise ValueError('Nextflow 25.10.4 is required')
         write(root, 'software.json', {'imageId': exact_image, 'nextflowVersionOutput': version,
-                                      'slurmVersionOutput': invoke(['scontrol', '--version']).stdout, 'backend': VERSION})
+                                      'slurmVersionOutput': invoke(['scontrol', '--version']).stdout,
+                                      'backend': 'trp-slurm-colocated-strict/1.0.0' if req['target'].get('strict') else VERSION})
         process_run(root, ['nextflow', '-C', 'nextflow.config', 'config', '-flat'], root, 30)
         manifest = verify(req, root)
         dry = root / 'dry-run'
@@ -293,9 +336,16 @@ def controller(req):
         env = os.environ.copy()
         env.update({'NXF_OFFLINE': 'true', 'NXF_DISABLE_CHECK_LATEST': 'true'})
         os.environ.update(env)
+        if req['target'].get('strict'):
+            temporary = req['target']['strict']['policy']['paths']['temporaryRoot']
+            os.environ['NXF_TEMP'] = temporary
+            # Java does not infer java.io.tmpdir from the POSIX TMPDIR variable.
+            os.environ['NXF_OPTS'] = os.environ.get('NXF_OPTS', '') + ' -Djava.io.tmpdir=' + temporary
         process_run(root, [*args, '-stub-run'], dry, min(480, req['budget']['wallSeconds']))
         snapshot_jobs(req, root)
         verify(req, root)
+        if req['target'].get('strict'):
+            write(root, 'remote-strict-before-science.json', strict_observation(req, 'controller'))
         analysis_inventory = observe(req)
         write(root, 'remote-analysis-inventory.json', analysis_inventory)
         if analysis_inventory['remote']['controllerCpus'] < 1 or analysis_inventory['remote']['controllerMemoryBytes'] < 2147483648 or not any(n['eligible'] and n['cpus'] >= 2 and n['memoryBytes'] >= 2147483648 for n in analysis_inventory['remote']['nodes']):
@@ -305,6 +355,8 @@ def controller(req):
             if time.monotonic() > deadline:
                 raise ValueError('Client did not grant fresh analysis resource admission')
             time.sleep(0.5)
+        if req['target'].get('strict'):
+            write(root, 'remote-strict-before-science.json', strict_observation(req, 'controller'))
         process_run(root, args, root, min(480, req['budget']['wallSeconds']))
         snapshot_jobs(req, root)
         verify(req, root)
@@ -342,6 +394,8 @@ def admit_analysis(req):
     decision = req['decision']
     raw = json.loads((root / 'remote-analysis-inventory.json').read_text())
     inventory = {key: raw[key] for key in ['observedAt', 'platform', 'architecture', 'host', 'workspace', 'filesystem', 'cpus', 'memoryBytes', 'freeBytes', 'sources', 'limitations', 'remote']}
+    if raw.get('remoteStrict'):
+        inventory.update(remoteStrict=raw['remoteStrict'], remoteStrictObservation=raw['remoteStrictObservation'])
     inventory['version'] = 'trp-resources/1.2.0'
     admission = json.loads((root / 'admission.json').read_text())
     budget = json.loads((root / 'budget.json').read_text())

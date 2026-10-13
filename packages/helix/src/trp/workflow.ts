@@ -18,6 +18,7 @@ import { Protocol } from "../nfcore/protocol"
 import { HandCount } from "../nfcore/handcount"
 import { TrpInterventions } from "./interventions"
 import { TrpEnforcement } from "./enforcement"
+import { TrpRemoteEnforcement } from "./remote-enforcement"
 import { TrpRemote } from "./remote"
 
 interface Draft {
@@ -137,6 +138,7 @@ const layer = Layer.effect(
         }
         const allocation = inventory.enforcement
         if (allocation) yield* Effect.promise(() => TrpEnforcement.claim(allocation))
+        if (inventory.remoteStrict) yield* Effect.promise(() => TrpRemoteEnforcement.claim(inventory.remoteStrict!))
         const action = {
           request: bundle.spec.intent.value,
           detail: S.canonical(bundle.spec) + " " + N.command.join(" "),
@@ -167,9 +169,11 @@ const layer = Layer.effect(
             ? {
                 ...check,
                 status: "passed" as const,
-                detail: inventory.enforcement
-                  ? "Dated inventory, explicit budget, XFS quota and controller/task cgroups verified. See admission.json and enforcement.json."
-                  : "Dated inventory and explicit budget checked; storage is an estimate, not a quota. See admission.json.",
+                detail: inventory.remoteStrict
+                  ? "Root policy and kernel receipts verify one XFS project for co-located client and Slurm work, plus shared client/controller cgroup. See inventory.json and remote_strict_policy.json."
+                  : inventory.enforcement
+                    ? "Dated inventory, explicit budget, XFS quota and controller/task cgroups verified. See admission.json and enforcement.json."
+                    : "Dated inventory and explicit budget checked; storage is an estimate, not a quota. See admission.json.",
               }
             : check,
         )
@@ -223,11 +227,13 @@ const layer = Layer.effect(
           admission: structuredClone(admission),
           inventory: structuredClone(inventory),
           budget: structuredClone(budget),
-          limits: target
-            ? "SSH/Slurm on the reviewed operator target. Controller: reservation 1 CPU/2 GiB on head; each sequential Docker task: 2 CPU/2 GiB with effective cgroup observations. Worker memory is not pooled. Storage is estimated; no hard disk quota or exclusive CPU allocation. Two stub tasks then two scientific tasks, no automatic retries."
-            : inventory.enforcement
-              ? "Local Docker in an operator allocation: XFS project quota; controller 1 CPU/2 GiB; sequential tasks 2 CPU/2 GiB; aggregate 3 CPU/4 GiB. No automatic retries."
-              : "Local Docker; two stub tasks followed by two real tasks, each at most 2 CPUs, 2 GB RAM and 3 minutes. Host inventory and reviewed budget required; storage is an estimate with no aggregate quota. No automatic retries.",
+          limits: inventory.remoteStrict
+            ? "Verified co-located Slurm: real Helix client and Python/Nextflow share 1 CPU/2 GiB/swap-zero controller cgroup; declared client/work/temp/state/cache/export and worker-visible remote work inherit one global XFS project quota. Sequential worker Docker tasks have 2 CPU/2 GiB limits. Python transport is local to the verified head; no SSH transport is claimed. No automatic retries."
+            : target
+              ? "SSH/Slurm on the reviewed operator target. Controller: reservation 1 CPU/2 GiB on head; each sequential Docker task: 2 CPU/2 GiB with effective cgroup observations. Worker memory is not pooled. Storage is estimated; no hard disk quota or exclusive CPU allocation. Two stub tasks then two scientific tasks, no automatic retries."
+              : inventory.enforcement
+                ? "Local Docker in an operator allocation: XFS project quota; controller 1 CPU/2 GiB; sequential tasks 2 CPU/2 GiB; aggregate 3 CPU/4 GiB. No automatic retries."
+                : "Local Docker; two stub tasks followed by two real tasks, each at most 2 CPUs, 2 GB RAM and 3 minutes. Host inventory and reviewed budget required; storage is an estimate with no aggregate quota. No automatic retries.",
         }
       }).pipe(Effect.orDie)
 
@@ -310,7 +316,7 @@ const layer = Layer.effect(
               questions: [
                 {
                   header: "Ejecutar análisis TRP",
-                  question: `Aprobación de la especificación ${digest}.\nInfraestructura aprobada: ${draft.target ? S.canonical(draft.target.public) : "equipo local"}.\nSe comprobará la configuración y se ejecutarán dos tareas simuladas de recorrido en seco, seguidas de dos tareas reales con Docker y Nextflow (máximo por tarea: 2 CPU, 2 GB, 3 minutos), sin reintentos. Se guardarán entradas, código, aprobación, validación y resultados en .helix/trp/. Esta ruta calcula geometría de unidades suministradas; no detecta repeticiones.\n\nPresupuesto propuesto (su aprobación autoriza estos límites):\n${JSON.stringify(draft.budget, null, 2)}\nReserva calculada y supuestos:\n${JSON.stringify(draft.demand, null, 2)}\n${draft.bundle.files["enforcement.json"] ? "Cuota XFS y límites agregados de CPU/memoria verificados; controlador y tareas comparten la asignación." : "El espacio de trabajo es una estimación sin cuota agregada."} El presupuesto global de API no está medido por esta ruta.\nProtocolo comprobado:\n${draft.bundle.files["protocol.json"]}\n\nEspecificación completa y fuentes declaradas:\n${JSON.stringify(draft.bundle.spec, null, 2)}\n\nComprobaciones omitidas:\n${draft.bundle.report.checks
+                  question: `Aprobación de la especificación ${digest}.\nInfraestructura aprobada: ${draft.target ? S.canonical(draft.target.public) : "equipo local"}.\nSe comprobará la configuración y se ejecutarán dos tareas simuladas de recorrido en seco, seguidas de dos tareas reales con Docker y Nextflow (máximo por tarea: 2 CPU, 2 GB, 3 minutos), sin reintentos. Se guardarán entradas, código, aprobación, validación y resultados en .helix/trp/. Esta ruta calcula geometría de unidades suministradas; no detecta repeticiones.\n\nPresupuesto propuesto (su aprobación autoriza estos límites):\n${JSON.stringify(draft.budget, null, 2)}\nReserva calculada y supuestos:\n${JSON.stringify(draft.demand, null, 2)}\n${draft.bundle.files["remote_strict_policy.json"] ? "Perfil Slurm co-localizado verificado: cliente real y controlador/Nextflow comparten 1 CPU/2 GiB/swap cero; sus rutas de trabajo y las de los trabajadores heredan una única cuota XFS global. Transporte Python local en el head verificado; no es transporte SSH. Cada tarea del trabajador tiene límite independiente de 2 CPU/2 GiB." : draft.bundle.files["enforcement.json"] ? "Cuota XFS y límites agregados de CPU/memoria verificados; controlador y tareas comparten la asignación." : "El espacio de trabajo es una estimación sin cuota agregada."} El presupuesto global de API no está medido por esta ruta.\nProtocolo comprobado:\n${draft.bundle.files["protocol.json"]}\n\nEspecificación completa y fuentes declaradas:\n${JSON.stringify(draft.bundle.spec, null, 2)}\n\nComprobaciones omitidas:\n${draft.bundle.report.checks
                     .filter((c) => c.status === "omitted")
                     .map((c) => c.detail)
                     .join(

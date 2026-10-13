@@ -8,6 +8,7 @@ import { AppProcess } from "@helix/core/process"
 import { TrpSpecification as S } from "./specification"
 import type { TrpNextflow as N } from "./nextflow"
 import { TrpResources as R } from "./resources"
+import { TrpRemoteEnforcement as H } from "./remote-enforcement"
 import RUNNER from "./remote_runner.py.txt"
 
 export const VERSION = "trp-slurm-ssh/1.0.0"
@@ -16,8 +17,8 @@ export const Config = Schema.Struct({
   host: Schema.String,
   port: Schema.Number,
   user: Schema.String,
-  identityFile: Schema.String,
-  knownHostsFile: Schema.String,
+  identityFile: Schema.optional(Schema.String),
+  knownHostsFile: Schema.optional(Schema.String),
   hostKeyAlias: Schema.String,
   root: Schema.String,
   partition: Schema.String,
@@ -25,12 +26,14 @@ export const Config = Schema.Struct({
   geometryNode: Schema.optional(Schema.String),
   numericalProfile: Schema.optional(Schema.Literal("haswell-single-thread")),
   sessionExpiresAt: Schema.optional(Schema.String),
+  strictPolicy: Schema.optional(Schema.String),
 })
 export type Config = Schema.Schema.Type<typeof Config>
 export interface Target {
   config: Config
   fingerprint: string
   public: Record<string, unknown>
+  strict?: H.Allocation
 }
 
 /** The model cannot choose credentials, cluster capacity or a different target.
@@ -77,20 +80,43 @@ export async function configured(): Promise<Target | undefined> {
     throw new S.WorkflowError("remote-config", "Invalid port or shared root")
   if (config.sessionExpiresAt !== undefined && !Number.isFinite(Date.parse(config.sessionExpiresAt)))
     throw new S.WorkflowError("remote-config", "Invalid session expiry")
-  const credentialsHash = await privateFile(config.identityFile, true)
-  const knownHostsHash = await privateFile(config.knownHostsFile, false)
-  const fingerprint = S.sha256(S.canonical({ configHash, credentialsHash, knownHostsHash }))
+  if (!config.strictPolicy && (!config.identityFile || !config.knownHostsFile))
+    throw new S.WorkflowError("remote-config", "SSH requires owner-controlled identity and known-host files")
+  const credentialsHash = config.identityFile ? await privateFile(config.identityFile, true) : null
+  const knownHostsHash = config.knownHostsFile ? await privateFile(config.knownHostsFile, false) : null
   const { identityFile: _identity, knownHostsFile: _known, ...description } = config
+  const receipt = config.strictPolicy ? await H.observe(config.strictPolicy, description) : undefined
+  const fingerprint = S.sha256(
+    S.canonical({
+      configHash,
+      credentialsHash,
+      knownHostsHash,
+      ...(receipt ? { strictPolicySha256: receipt.policySha256, strictCheckerSha256: H.checkerSha256 } : {}),
+    }),
+  )
+  const strict = receipt ? H.allocation(config.strictPolicy!, receipt, fingerprint) : undefined
   return {
     config,
     fingerprint,
-    public: { ...description, fingerprint, hostKeyVerification: "strict", credentialBytes: "excluded" },
+    public: {
+      ...description,
+      fingerprint,
+      hostKeyVerification: strict ? "not_used_co_located_root_policy" : "strict",
+      credentialBytes: "excluded",
+      ...(strict ? { strict, transport: "co-located-python" } : {}),
+    },
+    ...(strict ? { strict } : {}),
   }
 }
 
 const quote = (text: string) => "'" + text.replaceAll("'", "'\\''") + "'"
 export function command(target: Target) {
+  // request() revalidates Linux/root receipts before selecting this transport.
+  // It exists only for the operator deployment with the real client on head.
+  if (target.strict) return ChildProcess.make("/usr/bin/python3", ["-c", RUNNER])
   const c = target.config
+  if (!c.identityFile || !c.knownHostsFile)
+    throw new S.WorkflowError("remote-config", "SSH identity and trust files are required")
   return ChildProcess.make("ssh", [
     "-T",
     "-o",
@@ -154,6 +180,8 @@ export function request(
   signal?: AbortSignal,
 ) {
   return Effect.gen(function* () {
+    if (target.strict)
+      yield* Effect.promise(() => H.observe(target.strict!.policyPath, target.public, target.strict!.policySha256))
     const result = yield* runProcess(command(target), {
       stdin: S.canonical({ action, target: target.public, ...payload }),
       signal,
@@ -200,6 +228,9 @@ export function inventory(value: any): R.Inventory {
     sources: value.sources,
     limitations: value.limitations,
     remote: value.remote,
+    ...(value.remoteStrict
+      ? { remoteStrict: value.remoteStrict, remoteStrictObservation: value.remoteStrictObservation }
+      : {}),
   }
 }
 
@@ -210,9 +241,14 @@ export function bind(bundle: N.Bundle, target: Target, id: string): void {
   const geometry = bundle.spec.graph.nodes.find((n) => n.operation === "geometre.geometry")!.id.toUpperCase()
   bundle.files["remote_target.json"] = S.canonical(target.public) + "\n"
   bundle.files["remote_runner.py"] = RUNNER
+  if (target.strict) {
+    bundle.files["remote_strict_policy.json"] = S.canonical(target.strict) + "\n"
+    bundle.files["remote_strict.py"] = H.checkerSource
+  }
   const execution = JSON.parse(bundle.files["execution.json"])
-  execution.backend = VERSION
+  execution.backend = target.strict ? H.BACKEND : VERSION
   execution.target = target.public
+  if (target.strict) execution.transport = "co-located-python"
   execution.numericalProfile = c.numericalProfile ?? "native-single-thread"
   bundle.files["execution.json"] = S.canonical(execution) + "\n"
   bundle.files["nextflow.config"] = bundle.files["nextflow.config"]

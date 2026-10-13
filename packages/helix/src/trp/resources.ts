@@ -7,6 +7,7 @@ import os from "node:os"
 import path from "node:path"
 import { TrpSpecification as S } from "./specification"
 import { TrpEnforcement } from "./enforcement"
+import { TrpRemoteEnforcement as H } from "./remote-enforcement"
 
 export const VERSION = "trp-resources/1.2.0"
 export const MiB = 1024 ** 2
@@ -33,6 +34,8 @@ export const Inventory = Schema.Struct({
   sources: Schema.Array(Schema.String),
   limitations: Schema.Array(Schema.String),
   enforcement: Schema.optional(TrpEnforcement.AllocationSchema),
+  remoteStrict: Schema.optional(H.Allocation),
+  remoteStrictObservation: Schema.optional(Schema.Unknown),
   remote: Schema.optional(
     Schema.Struct({
       version: Schema.Literal("trp-slurm-ssh/1.0.0"),
@@ -112,11 +115,15 @@ export function count(files: Record<string, string>): Demand {
       hardLimit: false,
     },
     assumptions: [
-      ...(files["remote_target.json"]
+      ...(files["remote_strict_policy.json"]
         ? [
-            "SSH/Slurm backend: controller and worker capacity are checked separately. A 2 CPU/2 GiB task must fit one eligible worker; memory is never pooled across workers. Docker effective task cgroup limits are checked in scientific adapters; aggregate storage and controller enforcement remain unavailable.",
+            "Verified co-located Slurm profile: the real Helix client and Python/Nextflow controller share a root-controlled 1 CPU/2 GiB/swap-zero cgroup. All declared client work/temp/state/cache/export and remote workspace paths inherit one kernel XFS project quota. Worker tasks remain separate 2 CPU/2 GiB Docker allocations; no memory pooling.",
           ]
-        : []),
+        : files["remote_target.json"]
+          ? [
+              "SSH/Slurm backend: controller and worker capacity are checked separately. A 2 CPU/2 GiB task must fit one eligible worker; memory is never pooled across workers. Docker effective task cgroup limits are checked in scientific adapters; aggregate storage and controller enforcement remain unavailable.",
+            ]
+          : []),
       "Two sequential tasks per traversal; one stub traversal then one real traversal; no retry or resume.",
       "Task allocation: 2 CPUs/2 GiB. Controller allocation: 1 CPU/2 GiB; cgroup enforcement requires an independently verified operator sandbox. CPU bandwidth is not an exclusive core reservation.",
       "Each traversal has an 8 minute watchdog; probes/configuration reserve another 120 seconds. This is a configured timeout, not a runtime prediction.",
@@ -183,6 +190,30 @@ export function admit(demand: Demand, rawInventory: unknown, rawBudget: unknown,
         reject("remote-session-insufficient", "secondsRemaining", demand.wallSeconds + 120, remote.secondsRemaining)
       if (!/^[0-9a-f]{64}$/.test(remote.fingerprint))
         reject("remote-identity-invalid", "fingerprint", "SHA-256 operator target", remote.fingerprint)
+      if (inventory.remoteStrict) {
+        const strict = inventory.remoteStrict
+        const entitled = strict.policy.entitlement
+        if (
+          !H.validateReceipt(inventory.remoteStrictObservation, strict, now.getTime() / 1000) ||
+          strict.targetFingerprint !== remote.fingerprint ||
+          !/^[0-9a-f]{64}$/.test(strict.policySha256) ||
+          strict.policy.checker.sha256 !== H.checkerSha256 ||
+          strict.policy.controller.cpus !== 1 ||
+          strict.policy.controller.memoryBytes !== 2048 * MiB ||
+          strict.policy.controller.swapBytes !== 0 ||
+          entitled.cpus !== 3 ||
+          entitled.memoryBytes !== 4096 * MiB ||
+          entitled.workBytes !== strict.policy.filesystem.hardBytes ||
+          remote.controllerCpus !== 1 ||
+          remote.controllerMemoryBytes !== 2048 * MiB ||
+          inventory.cpus !== entitled.cpus ||
+          inventory.memoryBytes !== entitled.memoryBytes ||
+          inventory.freeBytes !== entitled.workBytes
+        )
+          reject("remote-strict-receipt-invalid", "enforcement", "bound controller/global quota entitlement", null)
+      }
+    } else if (inventory.remoteStrict) {
+      reject("remote-strict-target-missing", "enforcement", "verified co-located Slurm target", null)
     }
   }
   if (budget) {
@@ -192,11 +223,17 @@ export function admit(demand: Demand, rawInventory: unknown, rawBudget: unknown,
         reject("budget-insufficient", key, demand[key], Number.isFinite(budget[key]) ? budget[key] : null)
     }
     const enforced = inventory?.enforcement as TrpEnforcement.Allocation | undefined
-    if (budget.requireHardStorageLimit && !enforced)
+    const remoteStrict = inventory?.remoteStrict
+    if (budget.requireHardStorageLimit && !enforced && !remoteStrict)
       reject("storage-quota-unavailable", "workBytes", "enforced aggregate disk quota", "estimate only")
     if (enforced) {
       for (const key of ["cpus", "memoryBytes", "workBytes", "wallSeconds"] as const)
         if (enforced[key] > budget[key]) reject("enforcement-exceeds-budget", key, enforced[key], budget[key])
+    }
+    if (remoteStrict) {
+      for (const key of ["cpus", "memoryBytes", "workBytes", "wallSeconds"] as const)
+        if (remoteStrict.policy.entitlement[key] > budget[key])
+          reject("enforcement-exceeds-budget", key, remoteStrict.policy.entitlement[key], budget[key])
     }
   }
   return {

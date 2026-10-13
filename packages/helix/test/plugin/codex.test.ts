@@ -15,6 +15,16 @@ function createTestJwt(payload: object): string {
 }
 
 describe("plugin.codex", () => {
+  test("preserves integer and decimal GPT generations in the OAuth model filter", async () => {
+    const plugin = await CodexAuthPlugin({} as never)
+    const ids = ["gpt-6-sol", "gpt-6-luna", "gpt-6.1-sol", "gpt-5.6-sol", "gpt-5.4", "gpt-5.5-pro", "gpt-4.1", "gpt-4o"]
+    const models = Object.fromEntries(ids.map((id) => [id, { id, api: { id }, limit: {}, cost: {} }]))
+    const result = await plugin.provider!.models!({ models } as never, { auth: { type: "oauth" } } as never)
+    expect(Object.keys(result)).toEqual(["gpt-6-sol", "gpt-6-luna", "gpt-6.1-sol", "gpt-5.6-sol", "gpt-5.4"])
+    const unchanged = await plugin.provider!.models!({ models } as never, { auth: { type: "api" } } as never)
+    expect(unchanged).toBe(models as never)
+  })
+
   test("escapes provider errors in callback HTML", () => {
     const error = `</div><script>alert("xss" & 'more')</script>`
     const html = renderOAuthError(error)

@@ -155,7 +155,12 @@ run(
             await fs.cp(path.join(result.directory, "evidence"), path.join(target, "evidence"), { recursive: true })
             await fs.cp(path.join(result.directory, "results"), path.join(target, "results"), { recursive: true })
             await fs.mkdir(path.join(target, "dry-run"))
-            for (const name of ["stdout.log", "stderr.log", "trace.tsv", "results/geometry.csv"]) {
+            const execution = JSON.parse(await fs.readFile(path.join(result.directory, "execution.json"), "utf8"))
+            const logs =
+              execution.backend === "trp-slurm-ssh/1.0.0"
+                ? ["remote-stdout.log", "remote-stderr.stderr"]
+                : ["stdout.log", "stderr.log"]
+            for (const name of [...logs, "trace.tsv", "results/geometry.csv"]) {
               const destination = path.join(target, "dry-run", name)
               await fs.mkdir(path.dirname(destination), { recursive: true })
               await fs.copyFile(path.join(result.directory, "dry-run", name), destination)

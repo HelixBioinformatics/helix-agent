@@ -18,6 +18,7 @@ import { Protocol } from "../nfcore/protocol"
 import { HandCount } from "../nfcore/handcount"
 import { TrpInterventions } from "./interventions"
 import { TrpEnforcement } from "./enforcement"
+import { TrpRemote } from "./remote"
 
 interface Draft {
   id: string
@@ -31,6 +32,7 @@ interface Draft {
   evidence?: Awaited<ReturnType<typeof E.pack>>
   abort: AbortController
   status: "prepared" | "reviewing" | "consumed"
+  target?: TrpRemote.Target
 }
 export interface Preview {
   id: string
@@ -56,6 +58,27 @@ export interface Interface {
   run: (id: string, digest: string, ctx: Tool.Context) => Effect.Effect<RunResult>
 }
 export class Service extends Context.Service<Service, Interface>()("@helix/TrpWorkflow") {}
+
+async function measureTasks(directory: string) {
+  const counts = []
+  for (const name of ["trace.tsv", "dry-run/trace.tsv"]) {
+    const lines = (await fs.readFile(path.join(directory, name), "utf8"))
+      .trim()
+      .split(/\r?\n/)
+      .map((s) => s.split("\t"))
+    const status = lines[0].indexOf("status"),
+      exit = lines[0].indexOf("exit")
+    if (
+      lines.length !== 3 ||
+      status < 0 ||
+      exit < 0 ||
+      lines.slice(1).some((r) => r[status] !== "COMPLETED" || r[exit] !== "0")
+    )
+      throw new S.WorkflowError("trace-count", "Expected exactly two completed tasks per traversal")
+    counts.push(lines.length - 1)
+  }
+  return { scientificTasks: counts[0], stubTasks: counts[1] }
+}
 
 const layer = Layer.effect(
   Service,
@@ -83,10 +106,14 @@ const layer = Layer.effect(
           drafts.delete(oldest)
           generations.delete(oldest)
         }
+        const target = yield* Effect.promise(() => TrpRemote.configured())
         const bundle = yield* Effect.promise(() => N.prepare(raw, evidenceRoot, directory))
+        if (target) TrpRemote.bind(bundle, target, generation)
         const demand = R.count(bundle.files)
         const parent = yield* Effect.promise(() => E.parent(directory))
-        const observation = yield* resources.observe(directory).pipe(Effect.exit)
+        const observation = yield* (
+          target ? TrpRemote.observe(target, process.run) : resources.observe(directory)
+        ).pipe(Effect.exit)
         if (observation._tag === "Failure") {
           const admission = R.admit(demand, undefined, budget)
           yield* Effect.promise(() =>
@@ -109,8 +136,7 @@ const layer = Layer.effect(
           return yield* Effect.die(new S.WorkflowError("resource-rejected", S.canonical(admission)))
         }
         const allocation = inventory.enforcement
-        if (allocation)
-          yield* Effect.promise(() => TrpEnforcement.claim(allocation))
+        if (allocation) yield* Effect.promise(() => TrpEnforcement.claim(allocation))
         const action = {
           request: bundle.spec.intent.value,
           detail: S.canonical(bundle.spec) + " " + N.command.join(" "),
@@ -141,10 +167,9 @@ const layer = Layer.effect(
             ? {
                 ...check,
                 status: "passed" as const,
-                detail:
-                  inventory.enforcement
-                    ? "Dated inventory, explicit budget, XFS quota and controller/task cgroups verified. See admission.json and enforcement.json."
-                    : "Dated inventory and explicit budget checked; storage is an estimate, not a quota. See admission.json.",
+                detail: inventory.enforcement
+                  ? "Dated inventory, explicit budget, XFS quota and controller/task cgroups verified. See admission.json and enforcement.json."
+                  : "Dated inventory and explicit budget checked; storage is an estimate, not a quota. See admission.json.",
               }
             : check,
         )
@@ -179,6 +204,7 @@ const layer = Layer.effect(
           event,
           abort: new AbortController(),
           status: "prepared",
+          target,
         }
         drafts.set(session, draft)
         if (drafts.size > 100) {
@@ -197,8 +223,9 @@ const layer = Layer.effect(
           admission: structuredClone(admission),
           inventory: structuredClone(inventory),
           budget: structuredClone(budget),
-          limits:
-            inventory.enforcement
+          limits: target
+            ? "SSH/Slurm on the reviewed operator target. Controller: reservation 1 CPU/2 GiB on head; each sequential Docker task: 2 CPU/2 GiB with effective cgroup observations. Worker memory is not pooled. Storage is estimated; no hard disk quota or exclusive CPU allocation. Two stub tasks then two scientific tasks, no automatic retries."
+            : inventory.enforcement
               ? "Local Docker in an operator allocation: XFS project quota; controller 1 CPU/2 GiB; sequential tasks 2 CPU/2 GiB; aggregate 3 CPU/4 GiB. No automatic retries."
               : "Local Docker; two stub tasks followed by two real tasks, each at most 2 CPUs, 2 GB RAM and 3 minutes. Host inventory and reviewed budget required; storage is an estimate with no aggregate quota. No automatic retries.",
         }
@@ -228,6 +255,9 @@ const layer = Layer.effect(
               start = Date.now()
             const argv =
               command._tag === "StandardCommand" ? [command.command, ...command.args] : ["unsupported-pipeline"]
+            if (argv[0] === "ssh")
+              argv[argv.length - 1] =
+                `python3 -c <approved-runner-sha256:${S.sha256(draft.bundle.files["remote_runner.py"])}>`
             const result = yield* process.run(command, options).pipe(
               Effect.onExit((exit) =>
                 Effect.promise(async () => {
@@ -280,7 +310,7 @@ const layer = Layer.effect(
               questions: [
                 {
                   header: "Ejecutar análisis TRP",
-                  question: `Aprobación de la especificación ${digest}.\nSe comprobará la configuración y se ejecutarán dos tareas simuladas de recorrido en seco, seguidas de dos tareas reales con Docker y Nextflow (máximo por tarea: 2 CPU, 2 GB, 3 minutos), sin reintentos. Se guardarán entradas, código, aprobación, validación y resultados en .helix/trp/. Esta ruta calcula geometría de unidades suministradas; no detecta repeticiones.\n\nPresupuesto propuesto (su aprobación autoriza estos límites):\n${JSON.stringify(draft.budget, null, 2)}\nReserva calculada y supuestos:\n${JSON.stringify(draft.demand, null, 2)}\n${draft.bundle.files["enforcement.json"] ? "Cuota XFS y límites agregados de CPU/memoria verificados; controlador y tareas comparten la asignación." : "El espacio de trabajo es una estimación sin cuota agregada."} El presupuesto global de API no está medido por esta ruta.\nProtocolo comprobado:\n${draft.bundle.files["protocol.json"]}\n\nEspecificación completa y fuentes declaradas:\n${JSON.stringify(draft.bundle.spec, null, 2)}\n\nComprobaciones omitidas:\n${draft.bundle.report.checks
+                  question: `Aprobación de la especificación ${digest}.\nInfraestructura aprobada: ${draft.target ? S.canonical(draft.target.public) : "equipo local"}.\nSe comprobará la configuración y se ejecutarán dos tareas simuladas de recorrido en seco, seguidas de dos tareas reales con Docker y Nextflow (máximo por tarea: 2 CPU, 2 GB, 3 minutos), sin reintentos. Se guardarán entradas, código, aprobación, validación y resultados en .helix/trp/. Esta ruta calcula geometría de unidades suministradas; no detecta repeticiones.\n\nPresupuesto propuesto (su aprobación autoriza estos límites):\n${JSON.stringify(draft.budget, null, 2)}\nReserva calculada y supuestos:\n${JSON.stringify(draft.demand, null, 2)}\n${draft.bundle.files["enforcement.json"] ? "Cuota XFS y límites agregados de CPU/memoria verificados; controlador y tareas comparten la asignación." : "El espacio de trabajo es una estimación sin cuota agregada."} El presupuesto global de API no está medido por esta ruta.\nProtocolo comprobado:\n${draft.bundle.files["protocol.json"]}\n\nEspecificación completa y fuentes declaradas:\n${JSON.stringify(draft.bundle.spec, null, 2)}\n\nComprobaciones omitidas:\n${draft.bundle.report.checks
                     .filter((c) => c.status === "omitted")
                     .map((c) => c.detail)
                     .join(
@@ -315,7 +345,16 @@ const layer = Layer.effect(
               new S.WorkflowError("approval-invalidated", "Proposal replaced or cancelled during review"),
             )
           // Re-read source and catalogue reference evidence after the human response.
+          const targetNow = yield* Effect.promise(() => TrpRemote.configured())
+          if (targetNow?.fingerprint !== draft.target?.fingerprint)
+            return yield* Effect.die(
+              new S.WorkflowError(
+                "remote-target-changed",
+                "Operator target or SSH trust changed during review; prepare again",
+              ),
+            )
           const fresh = yield* Effect.promise(() => N.prepare(draft.bundle.spec, draft.evidenceRoot, directory))
+          if (targetNow) TrpRemote.bind(fresh, targetNow, draft.id)
           const protocolNow = {
             state: (yield* protocol.read()) ?? null,
             ledger: yield* protocol.ledger(),
@@ -334,7 +373,9 @@ const layer = Layer.effect(
           fresh.digest = N.bundleDigest(fresh.files)
           if (fresh.digest !== digest || signal.aborted || drafts.get(ctx.sessionID) !== draft)
             return yield* Effect.die(new S.WorkflowError("approval-invalidated", "Bundle changed during review"))
-          const observed = yield* resources.observe(directory)
+          const observed = yield* draft.target
+            ? TrpRemote.observe(draft.target, runProcess, signal)
+            : resources.observe(directory)
           const decision = R.admit(draft.demand, observed, draft.budget)
           yield* Effect.promise(() => E.write(destination, "recheck.json", { inventory: observed, decision }))
           yield* log("admission", decision.accepted ? "recheck-accepted" : "recheck-rejected", decision)
@@ -362,6 +403,38 @@ const layer = Layer.effect(
           )
           const execute = Effect.gen(function* () {
             yield* Effect.promise(() => N.verifyMaterialized(fresh, destination))
+            if (draft.target) {
+              yield* TrpRemote.execute(
+                draft.target,
+                fresh,
+                destination,
+                draft.id,
+                draft.budget,
+                runProcess,
+                signal,
+                (outcome, detail) =>
+                  draft.event(outcome.startsWith("analysis-") ? "admission" : "execution", outcome, detail),
+              )
+              yield* Effect.promise(() => N.verifyMaterialized(fresh, destination))
+              const geometry = yield* Effect.promise(async () =>
+                N.validateGeometry(
+                  await fs.readFile(path.join(destination, "results", "geometry.csv"), "utf8"),
+                  fresh.spec,
+                ),
+              )
+              const measuredTasks = yield* Effect.promise(() => measureTasks(destination))
+              yield* log("execution", "completed", { digest, geometry, measuredTasks, backend: TrpRemote.VERSION })
+              const record = {
+                digest,
+                status: "succeeded" as const,
+                geometry,
+                measuredTasks,
+                outputs: ["results/geometry.csv"],
+                backend: TrpRemote.VERSION,
+              }
+              yield* Effect.promise(() => E.write(destination, "run.json", record))
+              return { ...record, directory: destination }
+            }
             const endpoint = yield* runProcess(
               ChildProcess.make("docker", ["context", "inspect", "--format", "{{.Endpoints.docker.Host}}"]),
               { signal, timeout: "15 seconds", maxOutputBytes: 4096, maxErrorBytes: 8192 },

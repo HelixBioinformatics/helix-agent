@@ -9,9 +9,11 @@ import { TrpSpecification as S } from "./specification"
 import { TrpEvidence as E } from "./evidence"
 import SCRIPT from "./inspect_structure.py.txt"
 import VERIFIER from "./verify_inspection.py.txt"
+import STERIC_SCRIPT from "./steric_diagnostic.py.txt"
 import catalog from "./structural_catalog.json"
 
 export { SCRIPT, catalog }
+export { STERIC_SCRIPT }
 export const VERSION = "trp-structural/1.1.0"
 const Range = Schema.Struct({ start: Schema.Number, end: Schema.Number })
 export const Options = Schema.Struct({
@@ -86,6 +88,7 @@ export async function runParser(
   signal?: AbortSignal,
   python = process.env.HELIX_TRP_PYTHON ?? "python3",
   script = SCRIPT,
+  timeoutMs = 30_000,
 ): Promise<unknown> {
   const stdin = S.canonical(request)
   if (Buffer.byteLength(stdin) > 40_000_000) throw new S.WorkflowError("inspection-size", "Inspection exceeds 40 MB")
@@ -101,7 +104,7 @@ export async function runParser(
             stderr: "pipe",
           })
           const kill = () => child.kill("SIGKILL")
-          const timer = setTimeout(kill, 30_000)
+          const timer = setTimeout(kill, timeoutMs)
           signal?.addEventListener("abort", kill, { once: true })
           let size = 0
           const collect = async (stream: ReadableStream<Uint8Array>) => {
@@ -132,7 +135,7 @@ export async function runParser(
       : await new Promise<string>((resolve, reject) => {
           const child = spawn(python, ["-I", "-c", script], {
             stdio: ["pipe", "pipe", "pipe"],
-            timeout: 30_000,
+            timeout: timeoutMs,
             signal,
           })
           const chunks: Buffer[] = [],
@@ -189,7 +192,61 @@ export async function inspect(
     S.canonical(report.checks.map((c) => c.id).sort()) !== S.canonical(catalog.controls.map((c) => c.id).sort())
   )
     throw new S.WorkflowError("inspection-contract", "Unexpected report identity or control inventory")
-  return report
+  const stericPython = process.env.HELIX_TRP_STERIC_PYTHON
+  if (!stericPython) return report
+  signal?.throwIfAborted()
+  let diagnostic: unknown
+  try {
+    diagnostic = await runParser(request, signal, stericPython, STERIC_SCRIPT, 180_000)
+    const value = Schema.decodeUnknownSync(
+      Schema.Struct({
+        version: Schema.Literal("helix-steric-diagnostic/1.0.0"),
+        status: Schema.Literals(["measured", "not_evaluable"]),
+      }),
+    )(diagnostic)
+    if (value.status === "measured") {
+      const measured = diagnostic as {
+        sourceSha256?: string
+        scope?: { authorChain?: string; modelOrdinal?: number }
+        measurement?: { clashscore?: number; severeClashes?: number }
+        foldVerdict?: string
+        structureLevelThreshold?: unknown
+      }
+      if (
+        measured.sourceSha256 !== report.provenance.structureSha256 ||
+        measured.scope?.authorChain !== request.options.chain ||
+        measured.scope?.modelOrdinal !== request.options.model ||
+        !Number.isFinite(measured.measurement?.clashscore) ||
+        !Number.isInteger(measured.measurement?.severeClashes) ||
+        Number(measured.measurement?.clashscore) < 0 ||
+        Number(measured.measurement?.severeClashes) < 0 ||
+        measured.foldVerdict !== "not_established" ||
+        measured.structureLevelThreshold !== null
+      )
+        throw new S.WorkflowError("steric-contract", "Unexpected steric measurement identity or classification")
+    }
+  } catch {
+    signal?.throwIfAborted()
+    diagnostic = {
+      version: "helix-steric-diagnostic/1.0.0",
+      status: "not_evaluable",
+      failureCode: "validator-failed-or-interrupted",
+    }
+  }
+  return {
+    ...report,
+    checks: report.checks.map((check) =>
+      check.id === "fold-plausibility"
+        ? {
+            ...check,
+            value: { stericDiagnostic: diagnostic, wrapperSha256: S.sha256(STERIC_SCRIPT) },
+            reason:
+              check.reason +
+              " An optional maintained all-atom steric diagnostic is recorded separately; its measurement does not establish overall fold plausibility.",
+          }
+        : check,
+    ),
+  }
 }
 
 export async function legacy(spec: S.Specification, bytes: Uint8Array) {
@@ -272,6 +329,8 @@ export async function inspectFiles(args: Parameters, workspace: string, signal?:
   files["report.json"] = S.canonical(report) + "\n"
   files["catalogue.json"] = S.canonical(catalog) + "\n"
   files["trp_inspect.py"] = SCRIPT
+  if (report.checks.some((check) => check.id === "fold-plausibility" && check.value !== null))
+    files["steric_diagnostic.py"] = STERIC_SCRIPT
   files["verify.py"] = VERIFIER
   const directory = path.join(await E.parent(root), "inspection-" + randomUUID())
   await fs.mkdir(directory, { mode: 0o700 })

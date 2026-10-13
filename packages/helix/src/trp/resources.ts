@@ -33,6 +33,27 @@ export const Inventory = Schema.Struct({
   sources: Schema.Array(Schema.String),
   limitations: Schema.Array(Schema.String),
   enforcement: Schema.optional(TrpEnforcement.AllocationSchema),
+  remote: Schema.optional(
+    Schema.Struct({
+      version: Schema.Literal("trp-slurm-ssh/1.0.0"),
+      fingerprint: Schema.String,
+      partition: Schema.String,
+      controllerCpus: Schema.Number,
+      controllerMemoryBytes: Schema.Number,
+      requiredNodes: Schema.Array(Schema.String),
+      secondsRemaining: Schema.Union([Schema.Number, Schema.Null]),
+      nodes: Schema.Array(
+        Schema.Struct({
+          name: Schema.String,
+          cpus: Schema.Number,
+          memoryBytes: Schema.Number,
+          state: Schema.String,
+          eligible: Schema.Boolean,
+          source: Schema.String,
+        }),
+      ),
+    }),
+  ),
 })
 export type Inventory = Schema.Schema.Type<typeof Inventory>
 export interface Demand {
@@ -75,19 +96,35 @@ export function count(files: Record<string, string>): Demand {
     sourceBytes,
     selectionBytes,
     bundleBytes,
-    counts: { scientificTasks: 2, stubTasks: 2, remoteScientificCalls: 0, retries: 0 },
+    counts: {
+      scientificTasks: 2,
+      stubTasks: 2,
+      remoteScientificCalls: files["remote_target.json"] ? 2 : 0,
+      retries: 0,
+    },
     cpus: 3,
     memoryBytes: 4096 * MiB,
     workBytes: Math.ceil((12 * MiB + 7 * bundleBytes + 4 * selectionBytes) / 4096) * 4096,
     wallSeconds: 1080,
-    storage: { kind: "estimate", formula: "ceil((12*1048576 + 7*bundleBytes + 4*selectionBytes)/4096)*4096", hardLimit: false },
+    storage: {
+      kind: "estimate",
+      formula: "ceil((12*1048576 + 7*bundleBytes + 4*selectionBytes)/4096)*4096",
+      hardLimit: false,
+    },
     assumptions: [
+      ...(files["remote_target.json"]
+        ? [
+            "SSH/Slurm backend: controller and worker capacity are checked separately. A 2 CPU/2 GiB task must fit one eligible worker; memory is never pooled across workers. Docker effective task cgroup limits are checked in scientific adapters; aggregate storage and controller enforcement remain unavailable.",
+          ]
+        : []),
       "Two sequential tasks per traversal; one stub traversal then one real traversal; no retry or resume.",
       "Task allocation: 2 CPUs/2 GiB. Controller allocation: 1 CPU/2 GiB; cgroup enforcement requires an independently verified operator sandbox. CPU bandwidth is not an exclusive core reservation.",
       "Each traversal has an 8 minute watchdog; probes/configuration reserve another 120 seconds. This is a configured timeout, not a runtime prediction.",
       "Storage estimates allocated workspace bytes including working copies, logs and portable evidence; an independently observed XFS project quota enforces an approved budget only inside an operator allocation.",
       "The exact image and Nextflow distribution must already be cached. Image pulls/builds and shared Docker/Nextflow caches are outside workBytes.",
-      "Zero remote scientific calls applies to the offline workflow only; agent provider tokens, cost and conversation calls are not measured here.",
+      files["remote_target.json"]
+        ? "Two remote scientific tasks are planned; SSH probes, controller commands and stub jobs are not scientific calls. Agent provider tokens, cost and conversation calls are not measured here."
+        : "Zero remote scientific calls applies to the offline workflow only; agent provider tokens, cost and conversation calls are not measured here.",
     ],
   }
 }
@@ -128,6 +165,25 @@ export function admit(demand: Demand, rawInventory: unknown, rawBudget: unknown,
       if (!Number.isSafeInteger(available) || available < demand[key])
         reject("capacity-insufficient", key, demand[key], Number.isFinite(available) ? available : null)
     }
+    if (inventory.remote) {
+      const remote = inventory.remote
+      if (remote.controllerCpus < 1 || remote.controllerMemoryBytes < 2048 * MiB)
+        reject(
+          "remote-controller-insufficient",
+          "controller",
+          "1 CPU / 2 GiB available on head",
+          remote.controllerMemoryBytes,
+        )
+      if (!remote.nodes.some((n) => n.eligible && n.cpus >= 2 && n.memoryBytes >= 2048 * MiB))
+        reject("remote-worker-insufficient", "worker", "2 CPU / 2 GiB on one eligible worker", null)
+      for (const name of remote.requiredNodes)
+        if (!remote.nodes.some((n) => n.name === name && n.eligible && n.cpus >= 2 && n.memoryBytes >= 2048 * MiB))
+          reject("remote-placement-insufficient", "worker", name + ": 2 CPU / 2 GiB", null)
+      if (remote.secondsRemaining !== null && remote.secondsRemaining < demand.wallSeconds + 120)
+        reject("remote-session-insufficient", "secondsRemaining", demand.wallSeconds + 120, remote.secondsRemaining)
+      if (!/^[0-9a-f]{64}$/.test(remote.fingerprint))
+        reject("remote-identity-invalid", "fingerprint", "SHA-256 operator target", remote.fingerprint)
+    }
   }
   if (budget) {
     if (!budget.origin.trim()) reject("budget-origin-missing", "origin", "declared source", "")
@@ -162,13 +218,15 @@ export async function observe(workspace: string): Promise<Inventory> {
   const available = memory.match(/^MemAvailable:\s+(\d+) kB$/m)
   if (!available) throw new S.WorkflowError("inventory-unavailable", "Linux MemAvailable is unreadable")
   const stat = await fs.statfs(workspace)
-  let cpus = os.availableParallelism(), memoryBytes = Number(available[1]) * 1024
+  let cpus = os.availableParallelism(),
+    memoryBytes = Number(available[1]) * 1024
   const cgroupSources: string[] = []
   if (!enforced) {
     const membership = (await fs.readFile("/proc/self/cgroup", "utf8")).match(/^0::([^\n]+)$/m)
     if (!membership) throw new S.WorkflowError("inventory-unavailable", "Unified cgroup membership unavailable")
     let current = path.resolve("/sys/fs/cgroup", "." + membership[1])
-    if (!current.startsWith("/sys/fs/cgroup")) throw new S.WorkflowError("inventory-unavailable", "Cgroup path outside mount")
+    if (!current.startsWith("/sys/fs/cgroup"))
+      throw new S.WorkflowError("inventory-unavailable", "Cgroup path outside mount")
     for (;;) {
       const cpu = await fs.readFile(path.join(current, "cpu.max"), "utf8").catch(() => "max 100000")
       const [quota, period] = cpu.trim().split(/\s+/)
@@ -195,16 +253,24 @@ export async function observe(workspace: string): Promise<Inventory> {
     memoryBytes: enforced?.config.memoryBytes ?? memoryBytes,
     freeBytes: enforced?.config.workBytes ?? stat.bavail * stat.bsize,
     ...(enforced ? { enforcement: enforced.config } : {}),
-    sources: enforced ? ["root supervisor: XFS project quota", "/proc/self/cgroup", "cgroup v2 cpu.max/memory.max/memory.min/memory.swap.max"] : ["os.availableParallelism", "/proc/meminfo:MemAvailable", "fs.statfs:bavail*bsize", ...cgroupSources],
-    limitations: enforced ? [
-      "Dedicated allocation entitlement; current usage is recorded separately, not subtracted from the total-run budget during rechecks.",
-      "CPU bandwidth limits do not promise exclusive cores. Kernel memory protection is not a performance guarantee.",
-      "Preloaded software/image caches, shared Docker daemon and external supervisor records are infrastructure outside workBytes.",
-    ] : [
-      "Host capacity clipped to inherited cgroup limits/headroom; not an exclusive allocation. Shared loads can change it.",
-      "Local Docker daemon/image and Nextflow version are separately checked before task launch. Remote Docker is rejected.",
-      "GPU not required; cluster access unconfirmed and unsupported by this route; aggregate disk quota unavailable.",
-    ],
+    sources: enforced
+      ? [
+          "root supervisor: XFS project quota",
+          "/proc/self/cgroup",
+          "cgroup v2 cpu.max/memory.max/memory.min/memory.swap.max",
+        ]
+      : ["os.availableParallelism", "/proc/meminfo:MemAvailable", "fs.statfs:bavail*bsize", ...cgroupSources],
+    limitations: enforced
+      ? [
+          "Dedicated allocation entitlement; current usage is recorded separately, not subtracted from the total-run budget during rechecks.",
+          "CPU bandwidth limits do not promise exclusive cores. Kernel memory protection is not a performance guarantee.",
+          "Preloaded software/image caches, shared Docker daemon and external supervisor records are infrastructure outside workBytes.",
+        ]
+      : [
+          "Host capacity clipped to inherited cgroup limits/headroom; not an exclusive allocation. Shared loads can change it.",
+          "Local Docker daemon/image and Nextflow version are separately checked before task launch. Remote Docker is rejected.",
+          "GPU not required; cluster access unconfirmed and unsupported by this route; aggregate disk quota unavailable.",
+        ],
   }
 }
 export class Service extends Context.Service<Service, { observe: (workspace: string) => Effect.Effect<Inventory> }>()(

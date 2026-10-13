@@ -176,6 +176,8 @@ env.OMP_NUM_THREADS = '1'
 env.MKL_NUM_THREADS = '1'
 `,
   }
+  if (structural.checks.some((check) => check.id === "fold-plausibility" && check.value !== null))
+    files["steric_diagnostic.py"] = TrpStructural.STERIC_SCRIPT
   if (enforced) files["enforcement.json"] = S.canonical(enforced.config) + "\n"
   const digest = bundleDigest(files)
   return { spec, report: publicReport, files, digest, image }

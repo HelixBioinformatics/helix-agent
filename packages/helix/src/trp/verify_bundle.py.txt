@@ -116,6 +116,12 @@ def verify(root, expected=None):
         structural = record('structural_report.json')
         expected_ids = {c['id'] for c in record('structural_catalogue.json')['controls']}
         controls = structural['checks']
+        fold = next((c for c in controls if c['id'] == 'fold-plausibility'), None)
+        if fold and isinstance(fold.get('value'), dict) and 'stericDiagnostic' in fold['value']:
+            if 'steric_diagnostic.py' not in bundle['files'] or fold['value'].get('wrapperSha256') != digest((root/'run/steric_diagnostic.py').read_bytes()):
+                raise ValueError('optional steric diagnostic source differs')
+            if fold['status'] != 'not_evaluable':
+                raise ValueError('steric diagnostic cannot establish broad fold plausibility')
         if len(controls) != len(expected_ids) or {c['id'] for c in controls} != expected_ids:
             raise ValueError('structural inventory differs')
         if structural['version'] not in ('trp-structural/1.0.0', 'trp-structural/1.1.0') or structural['provenance']['structureSha256'] != digest((root / 'run/source.pdb').read_bytes()):
@@ -133,6 +139,16 @@ def verify(root, expected=None):
         if digest((root / 'run' / name).read_bytes()) != sha:
             raise ValueError('approved bundle changed: ' + name)
     admission, inventory, budget = record('admission.json'), record('inventory.json'), record('budget.json')
+    execution = record('execution.json')
+    remote = execution.get('backend') == 'trp-slurm-ssh/1.0.0'
+    if remote:
+        if not {'remote_target.json', 'remote_runner.py'} <= set(bundle['files']):
+            raise ValueError('missing approved remote target/controller')
+        if record('remote_target.json') != execution['target'] or inventory['remote']['fingerprint'] != execution['target']['fingerprint']:
+            raise ValueError('remote target differs')
+        config = (root/'run/nextflow.config').read_text()
+        if "process.executor = 'slurm'" not in config or '--memory=2g' not in config or '--memory-swap=2g' not in config:
+            raise ValueError('remote executor or effective task memory limits missing')
     if 'enforcement' in inventory:
         enforced = record('enforcement.json')
         if enforced != inventory['enforcement'] or 'enforcement.json' not in bundle['files']:
@@ -150,7 +166,7 @@ def verify(root, expected=None):
     if admission['inventoryHash'] != digest(canonical(inventory)) or admission['budgetHash'] != digest(canonical(budget)):
         raise ValueError('admission hash links differ')
     d = admission['demand']
-    if d['counts'] != {'scientificTasks': 2, 'stubTasks': 2, 'remoteScientificCalls': 0, 'retries': 0}:
+    if d['counts'] != {'scientificTasks': 2, 'stubTasks': 2, 'remoteScientificCalls': 2 if remote else 0, 'retries': 0}:
         raise ValueError('unexpected deterministic counts')
     if d['sourceBytes'] != (root / 'run/source.pdb').stat().st_size or d['selectionBytes'] != (root / 'run/selection.pdb').stat().st_size:
         raise ValueError('input byte count differs')
@@ -205,8 +221,47 @@ def verify(root, expected=None):
         if not sources.index(('permission', 'returned-allowed')) < sources.index(('approval', 'answered')) < sources.index(('execution', 'completed')):
             raise ValueError('gate event order differs')
         processes = [parse(line) for line in (root/'run/processes.jsonl').read_bytes().splitlines()]
-        if len(processes) != 6 or any(p.get('exitCode') != 0 for p in processes):
+        if not remote and (len(processes) != 6 or any(p.get('exitCode') != 0 for p in processes)):
             raise ValueError('successful controller command count differs')
+        if remote:
+            for name in ['remote-terminal.json', 'remote-approved.json', 'remote-transfer.json', 'remote-processes.jsonl', 'remote-native-jobs.jsonl', 'remote-task-runtime.json']:
+                if 'run/' + name not in listed:
+                    raise ValueError('successful remote run lacks ' + name)
+            approved = record('remote-approved.json')
+            if approved['digest'] != bundle['digest'] or approved['files'] != bundle['files'] or approved['target'] != execution['target']:
+                raise ValueError('remote approval links differ')
+            terminal = record('remote-terminal.json')
+            if terminal['digest'] != bundle['digest'] or terminal['status'] != 'succeeded':
+                raise ValueError('remote terminal state differs')
+            if record('remote-analysis-approval.json')['decision'] != record('analysis-admission.json')['decision']:
+                raise ValueError('remote scientific admission handshake differs')
+            for file in record('remote-transfer.json')['files']:
+                if digest((root/'run'/safe_name(file['path'])).read_bytes()) != file['sha256']:
+                    raise ValueError('remote retrieval hash differs')
+            controller = [parse(line) for line in (root/'run/remote-processes.jsonl').read_bytes().splitlines()]
+            if len(controller) != 4 or any(p.get('exitCode') != 0 for p in controller):
+                raise ValueError('remote Nextflow controller commands differ')
+            observations = record('remote-task-runtime.json')['records']
+            if len(observations) != 2:
+                raise ValueError('remote effective task observation count differs')
+            for observation in observations:
+                quota, period = map(int, observation['cpuMax'].split())
+                if quota / period != 2 or int(observation['memoryMax']) != 2147483648 or int(observation['swapMax']) != 0 or observation['threads'] != '1':
+                    raise ValueError('remote effective limits differ')
+                if execution['numericalProfile'] == 'haswell-single-thread' and (observation['numericalProfile'] != 'Haswell' or not any(b.get('architecture') == 'Haswell' and b.get('num_threads') == 1 for b in observation['blas'])):
+                    raise ValueError('remote BLAS profile differs')
+            native = {}
+            for line in (root/'run/remote-native-jobs.jsonl').read_bytes().splitlines():
+                for job in parse(line)['records']:
+                    if job['state'] == 'COMPLETED':
+                        native[job['id']] = job
+            for trace in ['trace.tsv', 'dry-run/trace.tsv']:
+                lines = (root/'run'/trace).read_text().strip().splitlines()
+                headers = lines[0].split('\t')
+                for line in lines[1:]:
+                    job_id = line.split('\t')[headers.index('native_id')]
+                    if job_id not in native or 'Comment=helix:' + approved['id'] not in native[job_id]['source']:
+                        raise ValueError('native Slurm completion/ownership not verified')
         if run['geometry']['sha256'] != digest((root / 'run/results/geometry.csv').read_bytes()):
             raise ValueError('result hash differs')
         for name, count in [('trace.tsv', 2), ('dry-run/trace.tsv', 2)]:

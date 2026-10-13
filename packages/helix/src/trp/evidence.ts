@@ -134,12 +134,27 @@ export async function methods(directory: string): Promise<void> {
       pointer: ["nextflowVersionOutput"],
       value: software.nextflowVersionOutput,
     })
+  if (execution.backend)
+    fields.push(
+      { name: "execution backend", artifact: "execution.json", pointer: ["backend"], value: execution.backend },
+      { name: "remote infrastructure", artifact: "execution.json", pointer: ["target"], value: execution.target },
+      {
+        name: "numerical profile",
+        artifact: "execution.json",
+        pointer: ["numericalProfile"],
+        value: execution.numericalProfile,
+      },
+    )
   const limitations = [
     "Author-PDB numbering; supplied units, not repeat detection; experimental B-factor is not pLDDT.",
-    "The first-unit geometry zeros are placeholders. External annotator, held-out evaluation and cluster are pending.",
-    enforcement
-      ? "Operator XFS quota and cgroup v2 bound controller and task resources. CPU quota is bandwidth, not exclusive cores. Full-run peaks are preserved by the external supervisor."
-      : "Host resource admission uses estimates and reservations; aggregate disk quota and controller memory enforcement are unavailable.",
+    execution.backend
+      ? "The first-unit geometry zeros are placeholders. Remote Slurm execution is recorded for this run; external annotation and held-out scientific evaluation remain separate requirements."
+      : "The first-unit geometry zeros are placeholders. External annotator and held-out evaluation remain separate requirements. This run uses local execution.",
+    execution.backend
+      ? "Slurm requests resources per job; container observations record effective CPU, memory and swap limits. Controller resources and aggregate storage use estimates and admission, without a hard controller limit or disk quota. Memory is not pooled between workers."
+      : enforcement
+        ? "Operator XFS quota and cgroup v2 bound controller and task resources. CPU quota is bandwidth, not exclusive cores. Full-run peaks are preserved by the external supervisor."
+        : "Host resource admission uses estimates and reservations; aggregate disk quota and controller memory enforcement are unavailable.",
     "Offline verification checks bytes and declared links, not scientific truth or an authenticated human identity.",
     "Agent provider/model/cost are not observed by this workflow; task software is identified by the pinned catalogue reference and image.",
   ]
@@ -158,7 +173,7 @@ export async function methods(directory: string): Promise<void> {
       "",
       `Se procesó ${spec.structure.value.pdb}, cadena autora ${spec.chain.value}, modelo ${spec.model.value}, con ${spec.units.value.ranges.length} unidades suministradas. La entrada se identifica mediante SHA-256 ${spec.structure.value.sha256}.`,
       "",
-      `El adaptador ${execution.engine} generó la orden ${JSON.stringify(execution.run)} y fijó la imagen ${execution.container}. La revisión de GeomeTRe es ${catalogue.entries[index].source.revision}; su contrato de parámetros es ${JSON.stringify(catalogue.entries[index].parameters)}. Se planificaron dos tareas simuladas y dos reales, sin reintentos ni llamadas científicas remotas. Estado registrado: ${run.status}.`,
+      `El adaptador ${execution.engine} generó la orden ${JSON.stringify(execution.run)} y fijó la imagen ${execution.container}. La revisión de GeomeTRe es ${catalogue.entries[index].source.revision}; su contrato de parámetros es ${JSON.stringify(catalogue.entries[index].parameters)}. Se planificaron dos tareas simuladas y dos reales, sin reintentos; tareas científicas en infraestructura remota: ${admission.demand.counts.remoteScientificCalls}. Estado registrado: ${run.status}.`,
       "",
       software
         ? `Salida observada de la consulta de versión de Nextflow: ${JSON.stringify(software.nextflowVersionOutput)}.`

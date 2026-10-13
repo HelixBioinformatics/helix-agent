@@ -1,0 +1,139 @@
+"""Optional, bounded physical observable using maintained CCTBX Reduce2/Probe2.
+
+JSON data on stdin. Never execute input text or fetch resources. This is a
+steric measurement, not a plausible/implausible fold classifier.
+"""
+import hashlib
+import importlib.metadata
+import io
+import json
+import math
+from pathlib import Path
+import sys
+from contextlib import redirect_stderr, redirect_stdout
+from tempfile import TemporaryDirectory
+
+VERSION = 'helix-steric-diagnostic/1.0.0'
+STANDARD = ('ALA ARG ASN ASP CYS GLN GLU GLY HIS ILE LEU LYS MET PHE PRO SER THR TRP TYR VAL').split()
+
+
+def digest(data):
+    return hashlib.sha256(data).hexdigest()
+
+
+def measure(request):
+    # Load CCTBX's Boost.Python runtime before Gemmi's native extension. The
+    # reverse order crashes the supported Linux wheel before validation starts.
+    from iotbx.cli_parser import run_program
+    from mmtbx.programs.clashscore2 import Program
+    import gemmi
+    import libtbx.load_env
+    import mmtbx
+    from mmtbx import chemical_components
+    from mmtbx.monomer_library import server
+    import mmtbx_probe_ext
+    import mmtbx_reduce_ext
+
+    versions = {name: importlib.metadata.version(name) for name in ('cctbx-base', 'gemmi', 'numpy', 'scipy')}
+    if versions['cctbx-base'] != '2025.11' or versions['gemmi'] != '0.7.5':
+        raise ValueError('unsupported-engine-version')
+    source = request['structure']
+    options = request['options']
+    if len(source.encode('utf-8')) > 20_000_000:
+        raise ValueError('structure-size')
+    if options['format'] == 'mmcif':
+        structure = gemmi.make_structure_from_block(gemmi.cif.read_string(source).sole_block())
+    else:
+        structure = gemmi.read_pdb_string(source)
+    ordinal = options['model']
+    if not isinstance(ordinal, int) or not 1 <= ordinal <= len(structure):
+        raise ValueError('model-selection')
+    selected_model = structure[ordinal - 1]
+    chains = [c for c in selected_model if c.name == options['chain']]
+    if len(chains) != 1:
+        raise ValueError('ambiguous-author-chain')
+    residues = [r for r in chains[0] if r.entity_type == gemmi.EntityType.Polymer or r.het_flag == 'A']
+    if not residues or any(r.name not in STANDARD for r in residues):
+        raise ValueError('unsupported-polymer-residue')
+    atoms = [a for r in residues for a in r]
+    if len(atoms) > 30_000:
+        raise ValueError('atom-limit')
+    if any(a.altloc not in ('\x00', ' ') or abs(a.occ - 1) > 0.001 for a in atoms):
+        raise ValueError('ambiguous-or-partially-occupied-atoms')
+    if any(not all(math.isfinite(x) for x in (a.pos.x, a.pos.y, a.pos.z)) for a in atoms):
+        raise ValueError('nonfinite-coordinates')
+    mono = gemmi.Structure()
+    model = gemmi.Model('1')
+    chain = gemmi.Chain(options['chain'])
+    for residue in residues:
+        chain.add_residue(residue.clone())
+    model.add_chain(chain)
+    mono.add_model(model)
+    coordinate_text = mono.make_pdb_string()
+    resources = {}
+    geostd = libtbx.env.find_in_repositories(relative_path='geostd') or libtbx.env.find_in_repositories(relative_path='chem_data/geostd')
+    if geostd is None or chemical_components.data_dir is None:
+        raise ValueError('missing-chemical-resources')
+    core = ['list/mon_lib_list.cif', 'list/geostd_list.cif', 'ener_lib.cif', 'geostd_ener_lib.cif']
+    core += ['rna_dna/' + n for n in ('chain_link_rna2p.cif', 'chain_link_rna3p.cif', 'mod_rna2p.cif', 'mod_rna2p_pur.cif', 'mod_rna2p_pyr.cif', 'mod_rna3p.cif', 'mod_rna3p_pur.cif', 'mod_rna3p_pyr.cif')]
+    core += [r[0].lower() + '/data_' + r + '.cif' for r in STANDARD]
+    for name in core:
+        resources['geostd/' + name] = digest((Path(str(geostd)) / name).read_bytes())
+    for residue in STANDARD:
+        resources['CCD/' + residue] = digest(Path(chemical_components.get_cif_filename(residue)).read_bytes())
+    # Record the actual monomer base selected by CCTBX, including an operator
+    # library override if one exists; never assume the installed geostd wins.
+    for name, components in (('selected-mon-lib', ['list', 'mon_lib_list.cif']), ('selected-ener-lib', ['ener_lib.cif'])):
+        actual = server.find_mon_lib_file(relative_path_components=components)
+        if actual is None:
+            raise ValueError('missing-chemical-resources')
+        resources[name] = digest(Path(actual).read_bytes())
+    package_root = Path(mmtbx.__file__).parent
+    modules = {}
+    for name in ('programs/clashscore2.py', 'validation/clashscore2.py', 'hydrogens/reduce_hydrogen.py', 'probe/Helpers.py', 'monomer_library/server.py'):
+        modules['mmtbx/' + name] = digest((package_root / name).read_bytes())
+    for name, module in (('mmtbx_probe_ext', mmtbx_probe_ext), ('mmtbx_reduce_ext', mmtbx_reduce_ext)):
+        modules[name] = digest(Path(module.__file__).read_bytes())
+    buffer = io.StringIO()
+    with TemporaryDirectory(prefix='helix-steric-') as directory:
+        file = Path(directory) / 'selected.pdb'
+        file.write_text(coordinate_text)
+        with redirect_stdout(buffer), redirect_stderr(buffer):
+            result = run_program(program_class=Program, args=[str(file), 'keep_hydrogens=False', 'do_flips=False', 'nuclear=False', 'b_factor_cutoff=None', 'fast=False', 'verbose=False', 'json=False'], logger=buffer)
+    report = json.loads(result.as_JSON())
+    if len(report['summary_results']) != 1:
+        raise ValueError('validator-model-count')
+    summary = next(iter(report['summary_results'].values()))
+    score = summary['clashscore']
+    clashes = report['flat_results']
+    if not isinstance(score, (int, float)) or not math.isfinite(score) or score < 0 or summary['num_clashes'] != len(clashes):
+        raise ValueError('validator-output')
+    return {'version': VERSION, 'status': 'measured', 'sourceSha256': digest(source.encode('utf-8')),
+            'selectedCoordinatesSha256': digest(coordinate_text.encode('utf-8')),
+            'scope': {'authorChain': options['chain'], 'modelOrdinal': ordinal, 'residues': len(residues), 'inputAtoms': len(atoms), 'selection': 'complete selected polymer chain; other chains, ligands and waters excluded'},
+            'engine': {'name': 'CCTBX Reduce2/Probe2', 'versions': versions, 'modulesSha256': modules, 'resourcesSha256': resources},
+            'parameters': {'keepHydrogens': False, 'doFlips': False, 'nuclear': False, 'bFactorCutoff': None, 'severeOverlapAngstrom': 0.4},
+            'measurement': {'clashscore': score, 'severeClashes': summary['num_clashes'], 'maximumOverlapAngstrom': max([-c['overlap'] for c in clashes], default=0)},
+            'foldVerdict': 'not_established', 'structureLevelThreshold': None,
+            'limitations': ['Steric overlap is one physical observable, not overall fold validity.', 'No calibrated structure-level pass/fail threshold or independent physical ground truth is supplied.', 'Charged buried stacks, exposed hydrophobic stacks and molecular environment are not evaluated by this observable.']}
+
+
+def main():
+    raw = sys.stdin.buffer.read(40_000_001)
+    if len(raw) > 40_000_000:
+        raise ValueError('request-size')
+    request = json.loads(raw)
+    try:
+        result = measure(request)
+    except (ImportError, FileNotFoundError):
+        result = {'version': VERSION, 'status': 'not_evaluable', 'failureCode': 'missing-validator-dependencies'}
+    except ValueError as error:
+        known = {'unsupported-engine-version', 'structure-size', 'model-selection', 'ambiguous-author-chain', 'unsupported-polymer-residue', 'atom-limit', 'ambiguous-or-partially-occupied-atoms', 'nonfinite-coordinates', 'missing-chemical-resources', 'validator-model-count', 'validator-output'}
+        result = {'version': VERSION, 'status': 'not_evaluable', 'failureCode': str(error) if str(error) in known else 'validator-failed'}
+    except Exception:
+        result = {'version': VERSION, 'status': 'not_evaluable', 'failureCode': 'validator-failed'}
+    print(json.dumps(result, sort_keys=True, allow_nan=False))
+
+
+if __name__ == '__main__':
+    main()

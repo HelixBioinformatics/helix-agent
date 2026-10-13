@@ -36,6 +36,14 @@ def verify(directory, expected=None):
     ids={c['id'] for c in json.loads((root/'catalogue.json').read_bytes())['controls']}
     if len(r['checks'])!=len(ids) or {c['id'] for c in r['checks']}!=ids: raise ValueError('control inventory differs')
     if any(c['status'] not in ('pass','fail','not_evaluable','not_applicable') or not c['reason'] for c in r['checks']): raise ValueError('invalid control verdict')
+    physical=next(c for c in r['checks'] if c['id']=='fold-plausibility')
+    if isinstance(physical.get('value'),dict) and 'stericDiagnostic' in physical['value']:
+        value=physical['value']; diagnostic=value['stericDiagnostic']
+        if 'steric_diagnostic.py' not in listed or value.get('wrapperSha256')!=digest((root/'steric_diagnostic.py').read_bytes()): raise ValueError('steric wrapper differs')
+        if physical['status']!='not_evaluable' or diagnostic.get('version')!='helix-steric-diagnostic/1.0.0' or diagnostic.get('status') not in ('measured','not_evaluable'): raise ValueError('unsupported physical classification')
+        if diagnostic['status']=='measured':
+            if diagnostic.get('sourceSha256')!=r['provenance']['structureSha256'] or diagnostic.get('scope',{}).get('authorChain')!=o['chain'] or diagnostic.get('scope',{}).get('modelOrdinal')!=o['model']: raise ValueError('steric selection differs')
+            if diagnostic.get('foldVerdict')!='not_established' or diagnostic.get('structureLevelThreshold') is not None: raise ValueError('unsupported fold verdict')
     failed=[c['id'] for c in r['checks'] if c['status']=='fail']
     unknown=[c['id'] for c in r['checks'] if c['status']=='not_evaluable']
     blocking=failed+[c for c in unknown if c in ('confidence-scale','filter-direction','interunit-pae')]

@@ -310,6 +310,11 @@ def controller(req):
         verify(req, root)
         observed = observe(req)
         write(root, 'remote-head-observation.json', observed)
+        if req['target'].get('strict'):
+            temporary = req['target']['strict']['policy']['paths']['temporaryRoot']
+            os.environ['NXF_TEMP'] = temporary
+            # Bind Java temporary files before version/configuration probes too.
+            os.environ['NXF_OPTS'] = os.environ.get('NXF_OPTS', '') + ' -Djava.io.tmpdir=' + temporary
         image = json.loads((root / 'execution.json').read_text())['container']
         endpoint = invoke(['docker', 'context', 'inspect', '--format', '{{.Endpoints.docker.Host}}']).stdout.strip()
         endpoint = os.environ.get('DOCKER_HOST') or endpoint
@@ -336,11 +341,6 @@ def controller(req):
         env = os.environ.copy()
         env.update({'NXF_OFFLINE': 'true', 'NXF_DISABLE_CHECK_LATEST': 'true'})
         os.environ.update(env)
-        if req['target'].get('strict'):
-            temporary = req['target']['strict']['policy']['paths']['temporaryRoot']
-            os.environ['NXF_TEMP'] = temporary
-            # Java does not infer java.io.tmpdir from the POSIX TMPDIR variable.
-            os.environ['NXF_OPTS'] = os.environ.get('NXF_OPTS', '') + ' -Djava.io.tmpdir=' + temporary
         process_run(root, [*args, '-stub-run'], dry, min(480, req['budget']['wallSeconds']))
         snapshot_jobs(req, root)
         verify(req, root)

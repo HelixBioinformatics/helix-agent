@@ -69,7 +69,7 @@ export interface Demand {
   memoryBytes: number
   workBytes: number
   wallSeconds: number
-  storage: { kind: "estimate"; formula: string; hardLimit: false }
+  storage: { kind: "estimate"; formula: string; hardLimit: false; profile?: string }
   assumptions: string[]
 }
 export interface Rejection {
@@ -94,6 +94,8 @@ export function count(files: Record<string, string>): Demand {
   const sourceBytes = Buffer.byteLength(files["source.pdb"])
   const selectionBytes = Buffer.byteLength(files["selection.pdb"])
   const bundleBytes = Object.values(files).reduce((n, s) => n + Buffer.byteLength(s), 0)
+  const colocated = Boolean(files["remote_strict_policy.json"])
+  const overheadMiB = colocated ? 32 : 12
   return {
     version: VERSION,
     sourceBytes,
@@ -107,17 +109,19 @@ export function count(files: Record<string, string>): Demand {
     },
     cpus: 3,
     memoryBytes: 4096 * MiB,
-    workBytes: Math.ceil((12 * MiB + 7 * bundleBytes + 4 * selectionBytes) / 4096) * 4096,
+    workBytes: Math.ceil((overheadMiB * MiB + 7 * bundleBytes + 4 * selectionBytes) / 4096) * 4096,
     wallSeconds: 1080,
     storage: {
       kind: "estimate",
-      formula: "ceil((12*1048576 + 7*bundleBytes + 4*selectionBytes)/4096)*4096",
+      formula: `ceil((${overheadMiB}*1048576 + 7*bundleBytes + 4*selectionBytes)/4096)*4096`,
       hardLimit: false,
+      ...(colocated ? { profile: "trp-colocated-client-storage/1.0.0" } : {}),
     },
     assumptions: [
       ...(files["remote_strict_policy.json"]
         ? [
             "Verified co-located Slurm profile: the real Helix client and Python/Nextflow controller share a root-controlled 1 CPU/2 GiB/swap-zero cgroup. All declared client work/temp/state/cache/export and remote workspace paths inherit one kernel XFS project quota. Worker tasks remain separate 2 CPU/2 GiB Docker allocations; no memory pooling.",
+            "Storage profile trp-colocated-client-storage/1.0.0 reserves32MiB overhead plus working-copy terms. This covers the real client/bootstrap/cache and portable export scope, calibrated on one development pilot before the aggregate campaign freeze; it is not a universal peak guarantee.",
           ]
         : files["remote_target.json"]
           ? [

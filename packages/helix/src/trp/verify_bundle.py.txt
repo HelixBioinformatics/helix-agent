@@ -253,6 +253,11 @@ def verify(root, expected=None):
         estimated = 64*1048576 + 4*d['bundleBytes'] + 4*d['selectionBytes']
     elif d['version'] in {'trp-resources/1.1.0', 'trp-resources/1.2.0'}:
         copies, headroom = (5, 14) if d['version'] == 'trp-resources/1.1.0' else (7, 12)
+        profile = d['storage'].get('profile')
+        if profile is not None:
+            if not strict or d['version'] != 'trp-resources/1.2.0' or profile != 'trp-colocated-client-storage/1.0.0':
+                raise ValueError('unknown or misplaced client storage profile')
+            headroom = 32
         numerator = headroom*1048576 + copies*d['bundleBytes'] + 4*d['selectionBytes']
         estimated = ((numerator + 4095) // 4096) * 4096
     else:

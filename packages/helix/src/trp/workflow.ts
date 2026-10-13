@@ -422,6 +422,7 @@ const layer = Layer.effect(
                   draft.event(outcome.startsWith("analysis-") ? "admission" : "execution", outcome, detail),
               )
               yield* Effect.promise(() => N.verifyMaterialized(fresh, destination))
+              const backend = JSON.parse(fresh.files["execution.json"]).backend as string
               const geometry = yield* Effect.promise(async () =>
                 N.validateGeometry(
                   await fs.readFile(path.join(destination, "results", "geometry.csv"), "utf8"),
@@ -429,14 +430,14 @@ const layer = Layer.effect(
                 ),
               )
               const measuredTasks = yield* Effect.promise(() => measureTasks(destination))
-              yield* log("execution", "completed", { digest, geometry, measuredTasks, backend: TrpRemote.VERSION })
+              yield* log("execution", "completed", { digest, geometry, measuredTasks, backend })
               const record = {
                 digest,
                 status: "succeeded" as const,
                 geometry,
                 measuredTasks,
                 outputs: ["results/geometry.csv"],
-                backend: TrpRemote.VERSION,
+                backend,
               }
               yield* Effect.promise(() => E.write(destination, "run.json", record))
               return { ...record, directory: destination }

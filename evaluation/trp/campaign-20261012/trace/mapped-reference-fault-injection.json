@@ -1,0 +1,1306 @@
+{
+  "kind": "engineering-fault-injection; not held-out evaluation",
+  "baseline": {
+    "ok": true,
+    "files": 156,
+    "bytes": 5748810,
+    "manifestSha256": "b400c54428684c5d1f767324154388f906f466c849736bf28394241fabed80aa",
+    "status": "succeeded",
+    "externallyAnchored": true,
+    "scope": "integrity, declared links and cold counts; not biological accuracy or authorship"
+  },
+  "restored": {
+    "ok": true,
+    "files": 156,
+    "bytes": 5748810,
+    "manifestSha256": "b400c54428684c5d1f767324154388f906f466c849736bf28394241fabed80aa",
+    "status": "succeeded",
+    "externallyAnchored": true,
+    "scope": "integrity, declared links and cold counts; not biological accuracy or authorship"
+  },
+  "injected": 320,
+  "detected": 320,
+  "checks": [
+    {
+      "case": "missing:run/.nextflow/cache/a6198221-5276-4960-af35-c6f1eb3351f7/db/000003.log",
+      "detected": true
+    },
+    {
+      "case": "changed:run/.nextflow/cache/a6198221-5276-4960-af35-c6f1eb3351f7/db/000003.log",
+      "detected": true
+    },
+    {
+      "case": "missing:run/.nextflow/cache/a6198221-5276-4960-af35-c6f1eb3351f7/db/CURRENT",
+      "detected": true
+    },
+    {
+      "case": "changed:run/.nextflow/cache/a6198221-5276-4960-af35-c6f1eb3351f7/db/CURRENT",
+      "detected": true
+    },
+    {
+      "case": "missing:run/.nextflow/cache/a6198221-5276-4960-af35-c6f1eb3351f7/db/LOCK",
+      "detected": true
+    },
+    {
+      "case": "changed:run/.nextflow/cache/a6198221-5276-4960-af35-c6f1eb3351f7/db/LOCK",
+      "detected": true
+    },
+    {
+      "case": "missing:run/.nextflow/cache/a6198221-5276-4960-af35-c6f1eb3351f7/db/MANIFEST-000002",
+      "detected": true
+    },
+    {
+      "case": "changed:run/.nextflow/cache/a6198221-5276-4960-af35-c6f1eb3351f7/db/MANIFEST-000002",
+      "detected": true
+    },
+    {
+      "case": "missing:run/.nextflow/cache/a6198221-5276-4960-af35-c6f1eb3351f7/index.golden_descartes",
+      "detected": true
+    },
+    {
+      "case": "changed:run/.nextflow/cache/a6198221-5276-4960-af35-c6f1eb3351f7/index.golden_descartes",
+      "detected": true
+    },
+    {
+      "case": "missing:run/.nextflow/history",
+      "detected": true
+    },
+    {
+      "case": "changed:run/.nextflow/history",
+      "detected": true
+    },
+    {
+      "case": "missing:run/.nextflow.log",
+      "detected": true
+    },
+    {
+      "case": "changed:run/.nextflow.log",
+      "detected": true
+    },
+    {
+      "case": "missing:run/admission.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/admission.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/analysis-admission.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/analysis-admission.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/approval.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/approval.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/budget.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/budget.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/catalogue_evidence.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/catalogue_evidence.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/catalogue.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/catalogue.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/coordinate_mapping.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/coordinate_mapping.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/docker-endpoint.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/docker-endpoint.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/.nextflow/cache/b3e24aa8-ba70-4d4e-9876-30c18a2d652c/db/000003.log",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/.nextflow/cache/b3e24aa8-ba70-4d4e-9876-30c18a2d652c/db/000003.log",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/.nextflow/cache/b3e24aa8-ba70-4d4e-9876-30c18a2d652c/db/CURRENT",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/.nextflow/cache/b3e24aa8-ba70-4d4e-9876-30c18a2d652c/db/CURRENT",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/.nextflow/cache/b3e24aa8-ba70-4d4e-9876-30c18a2d652c/db/LOCK",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/.nextflow/cache/b3e24aa8-ba70-4d4e-9876-30c18a2d652c/db/LOCK",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/.nextflow/cache/b3e24aa8-ba70-4d4e-9876-30c18a2d652c/db/MANIFEST-000002",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/.nextflow/cache/b3e24aa8-ba70-4d4e-9876-30c18a2d652c/db/MANIFEST-000002",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/.nextflow/cache/b3e24aa8-ba70-4d4e-9876-30c18a2d652c/index.condescending_kay",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/.nextflow/cache/b3e24aa8-ba70-4d4e-9876-30c18a2d652c/index.condescending_kay",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/.nextflow/history",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/.nextflow/history",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/.nextflow.log",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/.nextflow.log",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/admission.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/admission.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/budget.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/budget.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/catalogue_evidence.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/catalogue_evidence.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/catalogue.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/catalogue.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/coordinate_mapping.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/coordinate_mapping.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/execution.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/execution.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/inspect_structure.py",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/inspect_structure.py",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/inventory.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/inventory.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/main.nf",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/main.nf",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/mapping_source_report.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/mapping_source_report.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/mapping_source.cif",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/mapping_source.cif",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/nextflow.config",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/nextflow.config",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/protocol.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/protocol.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/remote_runner.py",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/remote_runner.py",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/remote_target.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/remote_target.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/remote-stderr.stderr",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/remote-stderr.stderr",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/remote-stdout.log",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/remote-stdout.log",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/results/geometry.csv",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/results/geometry.csv",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/selection.pdb",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/selection.pdb",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/settings.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/settings.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/sifts_mapping.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/sifts_mapping.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/sifts_residues.py",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/sifts_residues.py",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/sifts_source.xml",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/sifts_source.xml",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/source.pdb",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/source.pdb",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/specification.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/specification.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/structural_catalogue.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/structural_catalogue.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/structural_report.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/structural_report.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/trace.tsv",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/trace.tsv",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/trp_geometry.py",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/trp_geometry.py",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/trp_select.py",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/trp_select.py",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/validation.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/validation.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/work/c7/cc5f9a451dc0c36f279c455d4c07d6/.command.begin",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/work/c7/cc5f9a451dc0c36f279c455d4c07d6/.command.begin",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/work/c7/cc5f9a451dc0c36f279c455d4c07d6/.command.err",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/work/c7/cc5f9a451dc0c36f279c455d4c07d6/.command.err",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/work/c7/cc5f9a451dc0c36f279c455d4c07d6/.command.log",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/work/c7/cc5f9a451dc0c36f279c455d4c07d6/.command.log",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/work/c7/cc5f9a451dc0c36f279c455d4c07d6/.command.out",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/work/c7/cc5f9a451dc0c36f279c455d4c07d6/.command.out",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/work/c7/cc5f9a451dc0c36f279c455d4c07d6/.command.run",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/work/c7/cc5f9a451dc0c36f279c455d4c07d6/.command.run",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/work/c7/cc5f9a451dc0c36f279c455d4c07d6/.command.sh",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/work/c7/cc5f9a451dc0c36f279c455d4c07d6/.command.sh",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/work/c7/cc5f9a451dc0c36f279c455d4c07d6/.command.trace",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/work/c7/cc5f9a451dc0c36f279c455d4c07d6/.command.trace",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/work/c7/cc5f9a451dc0c36f279c455d4c07d6/.exitcode",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/work/c7/cc5f9a451dc0c36f279c455d4c07d6/.exitcode",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/work/c7/cc5f9a451dc0c36f279c455d4c07d6/2xqh.pdb",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/work/c7/cc5f9a451dc0c36f279c455d4c07d6/2xqh.pdb",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/work/c7/cc5f9a451dc0c36f279c455d4c07d6/geometry.csv",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/work/c7/cc5f9a451dc0c36f279c455d4c07d6/geometry.csv",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/work/c7/cc5f9a451dc0c36f279c455d4c07d6/settings.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/work/c7/cc5f9a451dc0c36f279c455d4c07d6/settings.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/work/c7/cc5f9a451dc0c36f279c455d4c07d6/trp_geometry.py",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/work/c7/cc5f9a451dc0c36f279c455d4c07d6/trp_geometry.py",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/work/e7/a919444ac08fdb31a062a88433fb10/.command.begin",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/work/e7/a919444ac08fdb31a062a88433fb10/.command.begin",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/work/e7/a919444ac08fdb31a062a88433fb10/.command.err",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/work/e7/a919444ac08fdb31a062a88433fb10/.command.err",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/work/e7/a919444ac08fdb31a062a88433fb10/.command.log",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/work/e7/a919444ac08fdb31a062a88433fb10/.command.log",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/work/e7/a919444ac08fdb31a062a88433fb10/.command.out",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/work/e7/a919444ac08fdb31a062a88433fb10/.command.out",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/work/e7/a919444ac08fdb31a062a88433fb10/.command.run",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/work/e7/a919444ac08fdb31a062a88433fb10/.command.run",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/work/e7/a919444ac08fdb31a062a88433fb10/.command.sh",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/work/e7/a919444ac08fdb31a062a88433fb10/.command.sh",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/work/e7/a919444ac08fdb31a062a88433fb10/.command.trace",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/work/e7/a919444ac08fdb31a062a88433fb10/.command.trace",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/work/e7/a919444ac08fdb31a062a88433fb10/.exitcode",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/work/e7/a919444ac08fdb31a062a88433fb10/.exitcode",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/work/e7/a919444ac08fdb31a062a88433fb10/2xqh.pdb",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/work/e7/a919444ac08fdb31a062a88433fb10/2xqh.pdb",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/work/e7/a919444ac08fdb31a062a88433fb10/selection.pdb",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/work/e7/a919444ac08fdb31a062a88433fb10/selection.pdb",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/work/e7/a919444ac08fdb31a062a88433fb10/settings.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/work/e7/a919444ac08fdb31a062a88433fb10/settings.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/work/e7/a919444ac08fdb31a062a88433fb10/source.pdb",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/work/e7/a919444ac08fdb31a062a88433fb10/source.pdb",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/work/e7/a919444ac08fdb31a062a88433fb10/trp_select.py",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/work/e7/a919444ac08fdb31a062a88433fb10/trp_select.py",
+      "detected": true
+    },
+    {
+      "case": "missing:run/events.jsonl",
+      "detected": true
+    },
+    {
+      "case": "changed:run/events.jsonl",
+      "detected": true
+    },
+    {
+      "case": "missing:run/execution.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/execution.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/inspect_structure.py",
+      "detected": true
+    },
+    {
+      "case": "changed:run/inspect_structure.py",
+      "detected": true
+    },
+    {
+      "case": "missing:run/interventions.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/interventions.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/inventory.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/inventory.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/main.nf",
+      "detected": true
+    },
+    {
+      "case": "changed:run/main.nf",
+      "detected": true
+    },
+    {
+      "case": "missing:run/mapping_source_report.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/mapping_source_report.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/mapping_source.cif",
+      "detected": true
+    },
+    {
+      "case": "changed:run/mapping_source.cif",
+      "detected": true
+    },
+    {
+      "case": "missing:run/methods.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/methods.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/methods.md",
+      "detected": true
+    },
+    {
+      "case": "changed:run/methods.md",
+      "detected": true
+    },
+    {
+      "case": "missing:run/nextflow.config",
+      "detected": true
+    },
+    {
+      "case": "changed:run/nextflow.config",
+      "detected": true
+    },
+    {
+      "case": "missing:run/processes.jsonl",
+      "detected": true
+    },
+    {
+      "case": "changed:run/processes.jsonl",
+      "detected": true
+    },
+    {
+      "case": "missing:run/protocol.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/protocol.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/recheck.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/recheck.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/remote_runner.py",
+      "detected": true
+    },
+    {
+      "case": "changed:run/remote_runner.py",
+      "detected": true
+    },
+    {
+      "case": "missing:run/remote_target.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/remote_target.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/remote-analysis-approval.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/remote-analysis-approval.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/remote-analysis-inventory.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/remote-analysis-inventory.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/remote-approved.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/remote-approved.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/remote-config.log",
+      "detected": true
+    },
+    {
+      "case": "changed:run/remote-config.log",
+      "detected": true
+    },
+    {
+      "case": "missing:run/remote-config.stderr",
+      "detected": true
+    },
+    {
+      "case": "changed:run/remote-config.stderr",
+      "detected": true
+    },
+    {
+      "case": "missing:run/remote-controller-identity.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/remote-controller-identity.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/remote-controller.log",
+      "detected": true
+    },
+    {
+      "case": "changed:run/remote-controller.log",
+      "detected": true
+    },
+    {
+      "case": "missing:run/remote-controller.stderr",
+      "detected": true
+    },
+    {
+      "case": "changed:run/remote-controller.stderr",
+      "detected": true
+    },
+    {
+      "case": "missing:run/remote-head-observation.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/remote-head-observation.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/remote-native-jobs.jsonl",
+      "detected": true
+    },
+    {
+      "case": "changed:run/remote-native-jobs.jsonl",
+      "detected": true
+    },
+    {
+      "case": "missing:run/remote-observation.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/remote-observation.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/remote-processes.jsonl",
+      "detected": true
+    },
+    {
+      "case": "changed:run/remote-processes.jsonl",
+      "detected": true
+    },
+    {
+      "case": "missing:run/remote-stderr.stderr",
+      "detected": true
+    },
+    {
+      "case": "changed:run/remote-stderr.stderr",
+      "detected": true
+    },
+    {
+      "case": "missing:run/remote-stdout.log",
+      "detected": true
+    },
+    {
+      "case": "changed:run/remote-stdout.log",
+      "detected": true
+    },
+    {
+      "case": "missing:run/remote-task-runtime.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/remote-task-runtime.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/remote-terminal.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/remote-terminal.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/remote-transfer.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/remote-transfer.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/remote-version.log",
+      "detected": true
+    },
+    {
+      "case": "changed:run/remote-version.log",
+      "detected": true
+    },
+    {
+      "case": "missing:run/remote-version.stderr",
+      "detected": true
+    },
+    {
+      "case": "changed:run/remote-version.stderr",
+      "detected": true
+    },
+    {
+      "case": "missing:run/results/geometry.csv",
+      "detected": true
+    },
+    {
+      "case": "changed:run/results/geometry.csv",
+      "detected": true
+    },
+    {
+      "case": "missing:run/run.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/run.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/selection.pdb",
+      "detected": true
+    },
+    {
+      "case": "changed:run/selection.pdb",
+      "detected": true
+    },
+    {
+      "case": "missing:run/settings.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/settings.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/sifts_mapping.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/sifts_mapping.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/sifts_residues.py",
+      "detected": true
+    },
+    {
+      "case": "changed:run/sifts_residues.py",
+      "detected": true
+    },
+    {
+      "case": "missing:run/sifts_source.xml",
+      "detected": true
+    },
+    {
+      "case": "changed:run/sifts_source.xml",
+      "detected": true
+    },
+    {
+      "case": "missing:run/software.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/software.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/source.pdb",
+      "detected": true
+    },
+    {
+      "case": "changed:run/source.pdb",
+      "detected": true
+    },
+    {
+      "case": "missing:run/specification.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/specification.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/structural_catalogue.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/structural_catalogue.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/structural_report.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/structural_report.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/trace.tsv",
+      "detected": true
+    },
+    {
+      "case": "changed:run/trace.tsv",
+      "detected": true
+    },
+    {
+      "case": "missing:run/trp_geometry.py",
+      "detected": true
+    },
+    {
+      "case": "changed:run/trp_geometry.py",
+      "detected": true
+    },
+    {
+      "case": "missing:run/trp_select.py",
+      "detected": true
+    },
+    {
+      "case": "changed:run/trp_select.py",
+      "detected": true
+    },
+    {
+      "case": "missing:run/validation.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/validation.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/work/0f/e3a658093d31946022fedc9c8f5978/.command.begin",
+      "detected": true
+    },
+    {
+      "case": "changed:run/work/0f/e3a658093d31946022fedc9c8f5978/.command.begin",
+      "detected": true
+    },
+    {
+      "case": "missing:run/work/0f/e3a658093d31946022fedc9c8f5978/.command.err",
+      "detected": true
+    },
+    {
+      "case": "changed:run/work/0f/e3a658093d31946022fedc9c8f5978/.command.err",
+      "detected": true
+    },
+    {
+      "case": "missing:run/work/0f/e3a658093d31946022fedc9c8f5978/.command.log",
+      "detected": true
+    },
+    {
+      "case": "changed:run/work/0f/e3a658093d31946022fedc9c8f5978/.command.log",
+      "detected": true
+    },
+    {
+      "case": "missing:run/work/0f/e3a658093d31946022fedc9c8f5978/.command.out",
+      "detected": true
+    },
+    {
+      "case": "changed:run/work/0f/e3a658093d31946022fedc9c8f5978/.command.out",
+      "detected": true
+    },
+    {
+      "case": "missing:run/work/0f/e3a658093d31946022fedc9c8f5978/.command.run",
+      "detected": true
+    },
+    {
+      "case": "changed:run/work/0f/e3a658093d31946022fedc9c8f5978/.command.run",
+      "detected": true
+    },
+    {
+      "case": "missing:run/work/0f/e3a658093d31946022fedc9c8f5978/.command.sh",
+      "detected": true
+    },
+    {
+      "case": "changed:run/work/0f/e3a658093d31946022fedc9c8f5978/.command.sh",
+      "detected": true
+    },
+    {
+      "case": "missing:run/work/0f/e3a658093d31946022fedc9c8f5978/.command.trace",
+      "detected": true
+    },
+    {
+      "case": "changed:run/work/0f/e3a658093d31946022fedc9c8f5978/.command.trace",
+      "detected": true
+    },
+    {
+      "case": "missing:run/work/0f/e3a658093d31946022fedc9c8f5978/.exitcode",
+      "detected": true
+    },
+    {
+      "case": "changed:run/work/0f/e3a658093d31946022fedc9c8f5978/.exitcode",
+      "detected": true
+    },
+    {
+      "case": "missing:run/work/0f/e3a658093d31946022fedc9c8f5978/2xqh.pdb",
+      "detected": true
+    },
+    {
+      "case": "changed:run/work/0f/e3a658093d31946022fedc9c8f5978/2xqh.pdb",
+      "detected": true
+    },
+    {
+      "case": "missing:run/work/0f/e3a658093d31946022fedc9c8f5978/selection.pdb",
+      "detected": true
+    },
+    {
+      "case": "changed:run/work/0f/e3a658093d31946022fedc9c8f5978/selection.pdb",
+      "detected": true
+    },
+    {
+      "case": "missing:run/work/0f/e3a658093d31946022fedc9c8f5978/settings.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/work/0f/e3a658093d31946022fedc9c8f5978/settings.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/work/0f/e3a658093d31946022fedc9c8f5978/source.pdb",
+      "detected": true
+    },
+    {
+      "case": "changed:run/work/0f/e3a658093d31946022fedc9c8f5978/source.pdb",
+      "detected": true
+    },
+    {
+      "case": "missing:run/work/0f/e3a658093d31946022fedc9c8f5978/trp_select.py",
+      "detected": true
+    },
+    {
+      "case": "changed:run/work/0f/e3a658093d31946022fedc9c8f5978/trp_select.py",
+      "detected": true
+    },
+    {
+      "case": "missing:run/work/f2/e5c13ebc9b9099d6de85402f3ef6ff/.command.begin",
+      "detected": true
+    },
+    {
+      "case": "changed:run/work/f2/e5c13ebc9b9099d6de85402f3ef6ff/.command.begin",
+      "detected": true
+    },
+    {
+      "case": "missing:run/work/f2/e5c13ebc9b9099d6de85402f3ef6ff/.command.err",
+      "detected": true
+    },
+    {
+      "case": "changed:run/work/f2/e5c13ebc9b9099d6de85402f3ef6ff/.command.err",
+      "detected": true
+    },
+    {
+      "case": "missing:run/work/f2/e5c13ebc9b9099d6de85402f3ef6ff/.command.log",
+      "detected": true
+    },
+    {
+      "case": "changed:run/work/f2/e5c13ebc9b9099d6de85402f3ef6ff/.command.log",
+      "detected": true
+    },
+    {
+      "case": "missing:run/work/f2/e5c13ebc9b9099d6de85402f3ef6ff/.command.out",
+      "detected": true
+    },
+    {
+      "case": "changed:run/work/f2/e5c13ebc9b9099d6de85402f3ef6ff/.command.out",
+      "detected": true
+    },
+    {
+      "case": "missing:run/work/f2/e5c13ebc9b9099d6de85402f3ef6ff/.command.run",
+      "detected": true
+    },
+    {
+      "case": "changed:run/work/f2/e5c13ebc9b9099d6de85402f3ef6ff/.command.run",
+      "detected": true
+    },
+    {
+      "case": "missing:run/work/f2/e5c13ebc9b9099d6de85402f3ef6ff/.command.sh",
+      "detected": true
+    },
+    {
+      "case": "changed:run/work/f2/e5c13ebc9b9099d6de85402f3ef6ff/.command.sh",
+      "detected": true
+    },
+    {
+      "case": "missing:run/work/f2/e5c13ebc9b9099d6de85402f3ef6ff/.command.trace",
+      "detected": true
+    },
+    {
+      "case": "changed:run/work/f2/e5c13ebc9b9099d6de85402f3ef6ff/.command.trace",
+      "detected": true
+    },
+    {
+      "case": "missing:run/work/f2/e5c13ebc9b9099d6de85402f3ef6ff/.exitcode",
+      "detected": true
+    },
+    {
+      "case": "changed:run/work/f2/e5c13ebc9b9099d6de85402f3ef6ff/.exitcode",
+      "detected": true
+    },
+    {
+      "case": "missing:run/work/f2/e5c13ebc9b9099d6de85402f3ef6ff/2xqh.pdb",
+      "detected": true
+    },
+    {
+      "case": "changed:run/work/f2/e5c13ebc9b9099d6de85402f3ef6ff/2xqh.pdb",
+      "detected": true
+    },
+    {
+      "case": "missing:run/work/f2/e5c13ebc9b9099d6de85402f3ef6ff/geometry.csv",
+      "detected": true
+    },
+    {
+      "case": "changed:run/work/f2/e5c13ebc9b9099d6de85402f3ef6ff/geometry.csv",
+      "detected": true
+    },
+    {
+      "case": "missing:run/work/f2/e5c13ebc9b9099d6de85402f3ef6ff/geometry.npy",
+      "detected": true
+    },
+    {
+      "case": "changed:run/work/f2/e5c13ebc9b9099d6de85402f3ef6ff/geometry.npy",
+      "detected": true
+    },
+    {
+      "case": "missing:run/work/f2/e5c13ebc9b9099d6de85402f3ef6ff/settings.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/work/f2/e5c13ebc9b9099d6de85402f3ef6ff/settings.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/work/f2/e5c13ebc9b9099d6de85402f3ef6ff/trp_geometry.py",
+      "detected": true
+    },
+    {
+      "case": "changed:run/work/f2/e5c13ebc9b9099d6de85402f3ef6ff/trp_geometry.py",
+      "detected": true
+    },
+    {
+      "case": "missing:verify.py",
+      "detected": true
+    },
+    {
+      "case": "changed:verify.py",
+      "detected": true
+    },
+    {
+      "case": "path:../escape",
+      "detected": true
+    },
+    {
+      "case": "path:/tmp/escape",
+      "detected": true
+    },
+    {
+      "case": "path:run/../escape",
+      "detected": true
+    },
+    {
+      "case": "path:C:\\escape",
+      "detected": true
+    },
+    {
+      "case": "path:run//source.pdb",
+      "detected": true
+    },
+    {
+      "case": "unlisted-file",
+      "detected": true
+    },
+    {
+      "case": "external-symlink",
+      "detected": true
+    },
+    {
+      "case": "wrong-anchor",
+      "detected": true
+    }
+  ],
+  "verifierSha256": "69b88a192d44707c82358814d61ae83f2d46c579e93d8cf3afe6882b52382187"
+}

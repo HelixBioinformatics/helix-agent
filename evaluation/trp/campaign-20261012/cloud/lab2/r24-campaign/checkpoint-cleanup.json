@@ -1,0 +1,375 @@
+{
+  "schema": "helix-r24-checkpoint-cleanup/1.0",
+  "verified": true,
+  "checkedAtUtc": "2026-10-13T02:59:47.226314+00:00",
+  "freezeSha256": "16872909f574519c35c31d9f9045b3ee464e471da0444ae630f2a0c96a5cff8e",
+  "progressSha256": "f8a42b2335b9ed2e8b1218f05e24ae7557e1bf64d1ec5a7b80e92f437a565d3d",
+  "driverTerminalSha256": "78cc0e117b764549964ad5208ad371c4ea239ad7a9640079c76857237927595f",
+  "ownedJobs": [],
+  "scheduler": {
+    "node": "helix-head",
+    "instanceId": "i-04339a8d8aad24c6e",
+    "command": "squeue --noheader --format='%i|%k'",
+    "exitCode": 0,
+    "stdout": "",
+    "stderr": "",
+    "observedAtUtc": "2026-10-13T02:59:36.663950+00:00"
+  },
+  "controllerServices": {
+    "node": "helix-head",
+    "instanceId": "i-04339a8d8aad24c6e",
+    "command": "python3 -c 'import json,subprocess\nunits=json.loads('\"'\"'[\"helix-r24-r24-1-generous.service\", \"helix-r24-r24-1-small.service\", \"helix-r24-r24-2-generous.service\", \"helix-r24-r24-2-small.service\", \"helix-r24-r24-3-generous.service\", \"helix-r24-r24-3-small.service\", \"helix-r24-r24-4-generous.service\", \"helix-r24-r24-4-small.service\", \"helix-r24-r24-5-generous.service\", \"helix-r24-r24-5-small.service\", \"helix-r24-r24-6-generous.service\", \"helix-r24-r24-6-small.service\", \"helix-r24-r24-7-generous.service\", \"helix-r24-r24-7-small.service\", \"helix-r24-r24-8-generous.service\", \"helix-r24-r24-8-small.service\", \"helix-r24-r24-9-generous.service\", \"helix-r24-r24-9-small.service\", \"helix-r24-r24-10-generous.service\", \"helix-r24-r24-10-small.service\", \"helix-r24-r24-11-generous.service\", \"helix-r24-r24-11-small.service\", \"helix-r24-r24-12-generous.service\", \"helix-r24-r24-12-small.service\", \"helix-r24-r24-13-generous.service\", \"helix-r24-r24-13-small.service\"]'\"'\"')\nprint(json.dumps([{'\"'\"'unit'\"'\"':u,'\"'\"'active'\"'\"':subprocess.run(['\"'\"'systemctl'\"'\"','\"'\"'is-active'\"'\"','\"'\"'--quiet'\"'\"',u]).returncode==0} for u in units]))\n'",
+    "exitCode": 0,
+    "stdout": "[{\"unit\": \"helix-r24-r24-1-generous.service\", \"active\": false}, {\"unit\": \"helix-r24-r24-1-small.service\", \"active\": false}, {\"unit\": \"helix-r24-r24-2-generous.service\", \"active\": false}, {\"unit\": \"helix-r24-r24-2-small.service\", \"active\": false}, {\"unit\": \"helix-r24-r24-3-generous.service\", \"active\": false}, {\"unit\": \"helix-r24-r24-3-small.service\", \"active\": false}, {\"unit\": \"helix-r24-r24-4-generous.service\", \"active\": false}, {\"unit\": \"helix-r24-r24-4-small.service\", \"active\": false}, {\"unit\": \"helix-r24-r24-5-generous.service\", \"active\": false}, {\"unit\": \"helix-r24-r24-5-small.service\", \"active\": false}, {\"unit\": \"helix-r24-r24-6-generous.service\", \"active\": false}, {\"unit\": \"helix-r24-r24-6-small.service\", \"active\": false}, {\"unit\": \"helix-r24-r24-7-generous.service\", \"active\": false}, {\"unit\": \"helix-r24-r24-7-small.service\", \"active\": false}, {\"unit\": \"helix-r24-r24-8-generous.service\", \"active\": false}, {\"unit\": \"helix-r24-r24-8-small.service\", \"active\": false}, {\"unit\": \"helix-r24-r24-9-generous.service\", \"active\": false}, {\"unit\": \"helix-r24-r24-9-small.service\", \"active\": false}, {\"unit\": \"helix-r24-r24-10-generous.service\", \"active\": false}, {\"unit\": \"helix-r24-r24-10-small.service\", \"active\": false}, {\"unit\": \"helix-r24-r24-11-generous.service\", \"active\": false}, {\"unit\": \"helix-r24-r24-11-small.service\", \"active\": false}, {\"unit\": \"helix-r24-r24-12-generous.service\", \"active\": false}, {\"unit\": \"helix-r24-r24-12-small.service\", \"active\": false}, {\"unit\": \"helix-r24-r24-13-generous.service\", \"active\": false}, {\"unit\": \"helix-r24-r24-13-small.service\", \"active\": false}]\n",
+    "stderr": "",
+    "observedAtUtc": "2026-10-13T02:59:39.136068+00:00"
+  },
+  "controllerStates": [
+    {
+      "unit": "helix-r24-r24-1-generous.service",
+      "active": false
+    },
+    {
+      "unit": "helix-r24-r24-1-small.service",
+      "active": false
+    },
+    {
+      "unit": "helix-r24-r24-2-generous.service",
+      "active": false
+    },
+    {
+      "unit": "helix-r24-r24-2-small.service",
+      "active": false
+    },
+    {
+      "unit": "helix-r24-r24-3-generous.service",
+      "active": false
+    },
+    {
+      "unit": "helix-r24-r24-3-small.service",
+      "active": false
+    },
+    {
+      "unit": "helix-r24-r24-4-generous.service",
+      "active": false
+    },
+    {
+      "unit": "helix-r24-r24-4-small.service",
+      "active": false
+    },
+    {
+      "unit": "helix-r24-r24-5-generous.service",
+      "active": false
+    },
+    {
+      "unit": "helix-r24-r24-5-small.service",
+      "active": false
+    },
+    {
+      "unit": "helix-r24-r24-6-generous.service",
+      "active": false
+    },
+    {
+      "unit": "helix-r24-r24-6-small.service",
+      "active": false
+    },
+    {
+      "unit": "helix-r24-r24-7-generous.service",
+      "active": false
+    },
+    {
+      "unit": "helix-r24-r24-7-small.service",
+      "active": false
+    },
+    {
+      "unit": "helix-r24-r24-8-generous.service",
+      "active": false
+    },
+    {
+      "unit": "helix-r24-r24-8-small.service",
+      "active": false
+    },
+    {
+      "unit": "helix-r24-r24-9-generous.service",
+      "active": false
+    },
+    {
+      "unit": "helix-r24-r24-9-small.service",
+      "active": false
+    },
+    {
+      "unit": "helix-r24-r24-10-generous.service",
+      "active": false
+    },
+    {
+      "unit": "helix-r24-r24-10-small.service",
+      "active": false
+    },
+    {
+      "unit": "helix-r24-r24-11-generous.service",
+      "active": false
+    },
+    {
+      "unit": "helix-r24-r24-11-small.service",
+      "active": false
+    },
+    {
+      "unit": "helix-r24-r24-12-generous.service",
+      "active": false
+    },
+    {
+      "unit": "helix-r24-r24-12-small.service",
+      "active": false
+    },
+    {
+      "unit": "helix-r24-r24-13-generous.service",
+      "active": false
+    },
+    {
+      "unit": "helix-r24-r24-13-small.service",
+      "active": false
+    }
+  ],
+  "supervisorProbe": {
+    "node": "helix-head",
+    "instanceId": "i-04339a8d8aad24c6e",
+    "command": "sudo python3 -c 'import json,pathlib\npaths=json.loads('\"'\"'[\"/home/ubuntu/helix-r24-16872909f574/R24-1-generous.pid\", \"/home/ubuntu/helix-r24-16872909f574/R24-1-small.pid\", \"/home/ubuntu/helix-r24-16872909f574/R24-2-generous.pid\", \"/home/ubuntu/helix-r24-16872909f574/R24-2-small.pid\", \"/home/ubuntu/helix-r24-16872909f574/R24-3-generous.pid\", \"/home/ubuntu/helix-r24-16872909f574/R24-3-small.pid\", \"/home/ubuntu/helix-r24-16872909f574/R24-4-generous.pid\", \"/home/ubuntu/helix-r24-16872909f574/R24-4-small.pid\", \"/home/ubuntu/helix-r24-16872909f574/R24-5-generous.pid\", \"/home/ubuntu/helix-r24-16872909f574/R24-5-small.pid\", \"/home/ubuntu/helix-r24-16872909f574/R24-6-generous.pid\", \"/home/ubuntu/helix-r24-16872909f574/R24-6-small.pid\", \"/home/ubuntu/helix-r24-16872909f574/R24-7-generous.pid\", \"/home/ubuntu/helix-r24-16872909f574/R24-7-small.pid\", \"/home/ubuntu/helix-r24-16872909f574/R24-8-generous.pid\", \"/home/ubuntu/helix-r24-16872909f574/R24-8-small.pid\", \"/home/ubuntu/helix-r24-16872909f574/R24-9-generous.pid\", \"/home/ubuntu/helix-r24-16872909f574/R24-9-small.pid\", \"/home/ubuntu/helix-r24-16872909f574/R24-10-generous.pid\", \"/home/ubuntu/helix-r24-16872909f574/R24-10-small.pid\", \"/home/ubuntu/helix-r24-16872909f574/R24-11-generous.pid\", \"/home/ubuntu/helix-r24-16872909f574/R24-11-small.pid\", \"/home/ubuntu/helix-r24-16872909f574/R24-12-generous.pid\", \"/home/ubuntu/helix-r24-16872909f574/R24-12-small.pid\", \"/home/ubuntu/helix-r24-16872909f574/R24-13-generous.pid\", \"/home/ubuntu/helix-r24-16872909f574/R24-13-small.pid\"]'\"'\"')\nrows=[]\nfor name in paths:\n p=pathlib.Path(name)\n if not p.is_file():rows.append({'\"'\"'pidFile'\"'\"':name,'\"'\"'known'\"'\"':False,'\"'\"'ownedRunning'\"'\"':None});continue\n pid=int(p.read_text().strip())\n proc=pathlib.Path('\"'\"'/proc'\"'\"')/str(pid)\n cmd=(proc/'\"'\"'cmdline'\"'\"').read_bytes().decode(errors='\"'\"'replace'\"'\"') if (proc/'\"'\"'cmdline'\"'\"').exists() else '\"'\"''\"'\"'\n state=(proc/'\"'\"'stat'\"'\"').read_text().split('\"'\"') '\"'\"',1)[1].split()[0] if (proc/'\"'\"'stat'\"'\"').exists() else None\n rows.append({'\"'\"'pidFile'\"'\"':name,'\"'\"'pid'\"'\"':pid,'\"'\"'state'\"'\"':state,'\"'\"'known'\"'\"':True,'\"'\"'ownedRunning'\"'\"':'\"'\"'run_r24_independent.py'\"'\"' in cmd and state!='\"'\"'Z'\"'\"','\"'\"'cmdline'\"'\"':cmd})\nprint(json.dumps(rows))\n'",
+    "exitCode": 0,
+    "stdout": "[{\"pidFile\": \"/home/ubuntu/helix-r24-16872909f574/R24-1-generous.pid\", \"pid\": 72765, \"state\": null, \"known\": true, \"ownedRunning\": false, \"cmdline\": \"\"}, {\"pidFile\": \"/home/ubuntu/helix-r24-16872909f574/R24-1-small.pid\", \"pid\": 75862, \"state\": null, \"known\": true, \"ownedRunning\": false, \"cmdline\": \"\"}, {\"pidFile\": \"/home/ubuntu/helix-r24-16872909f574/R24-2-generous.pid\", \"pid\": 76264, \"state\": null, \"known\": true, \"ownedRunning\": false, \"cmdline\": \"\"}, {\"pidFile\": \"/home/ubuntu/helix-r24-16872909f574/R24-2-small.pid\", \"pid\": 79312, \"state\": null, \"known\": true, \"ownedRunning\": false, \"cmdline\": \"\"}, {\"pidFile\": \"/home/ubuntu/helix-r24-16872909f574/R24-3-generous.pid\", \"pid\": 79777, \"state\": null, \"known\": true, \"ownedRunning\": false, \"cmdline\": \"\"}, {\"pidFile\": \"/home/ubuntu/helix-r24-16872909f574/R24-3-small.pid\", \"pid\": 83277, \"state\": null, \"known\": true, \"ownedRunning\": false, \"cmdline\": \"\"}, {\"pidFile\": \"/home/ubuntu/helix-r24-16872909f574/R24-4-generous.pid\", \"pid\": 83684, \"state\": null, \"known\": true, \"ownedRunning\": false, \"cmdline\": \"\"}, {\"pidFile\": \"/home/ubuntu/helix-r24-16872909f574/R24-4-small.pid\", \"pid\": 86798, \"state\": null, \"known\": true, \"ownedRunning\": false, \"cmdline\": \"\"}, {\"pidFile\": \"/home/ubuntu/helix-r24-16872909f574/R24-5-generous.pid\", \"pid\": 87197, \"state\": null, \"known\": true, \"ownedRunning\": false, \"cmdline\": \"\"}, {\"pidFile\": \"/home/ubuntu/helix-r24-16872909f574/R24-5-small.pid\", \"pid\": 90292, \"state\": null, \"known\": true, \"ownedRunning\": false, \"cmdline\": \"\"}, {\"pidFile\": \"/home/ubuntu/helix-r24-16872909f574/R24-6-generous.pid\", \"pid\": 90698, \"state\": null, \"known\": true, \"ownedRunning\": false, \"cmdline\": \"\"}, {\"pidFile\": \"/home/ubuntu/helix-r24-16872909f574/R24-6-small.pid\", \"pid\": 94205, \"state\": null, \"known\": true, \"ownedRunning\": false, \"cmdline\": \"\"}, {\"pidFile\": \"/home/ubuntu/helix-r24-16872909f574/R24-7-generous.pid\", \"pid\": 94616, \"state\": null, \"known\": true, \"ownedRunning\": false, \"cmdline\": \"\"}, {\"pidFile\": \"/home/ubuntu/helix-r24-16872909f574/R24-7-small.pid\", \"pid\": 98004, \"state\": null, \"known\": true, \"ownedRunning\": false, \"cmdline\": \"\"}, {\"pidFile\": \"/home/ubuntu/helix-r24-16872909f574/R24-8-generous.pid\", \"pid\": 101279, \"state\": null, \"known\": true, \"ownedRunning\": false, \"cmdline\": \"\"}, {\"pidFile\": \"/home/ubuntu/helix-r24-16872909f574/R24-8-small.pid\", \"pid\": 104548, \"state\": null, \"known\": true, \"ownedRunning\": false, \"cmdline\": \"\"}, {\"pidFile\": \"/home/ubuntu/helix-r24-16872909f574/R24-9-generous.pid\", \"pid\": 107937, \"state\": null, \"known\": true, \"ownedRunning\": false, \"cmdline\": \"\"}, {\"pidFile\": \"/home/ubuntu/helix-r24-16872909f574/R24-9-small.pid\", \"pid\": 111327, \"state\": null, \"known\": true, \"ownedRunning\": false, \"cmdline\": \"\"}, {\"pidFile\": \"/home/ubuntu/helix-r24-16872909f574/R24-10-generous.pid\", \"pid\": 114615, \"state\": null, \"known\": true, \"ownedRunning\": false, \"cmdline\": \"\"}, {\"pidFile\": \"/home/ubuntu/helix-r24-16872909f574/R24-10-small.pid\", \"pid\": 118005, \"state\": null, \"known\": true, \"ownedRunning\": false, \"cmdline\": \"\"}, {\"pidFile\": \"/home/ubuntu/helix-r24-16872909f574/R24-11-generous.pid\", \"pid\": 121396, \"state\": null, \"known\": true, \"ownedRunning\": false, \"cmdline\": \"\"}, {\"pidFile\": \"/home/ubuntu/helix-r24-16872909f574/R24-11-small.pid\", \"pid\": 124784, \"state\": null, \"known\": true, \"ownedRunning\": false, \"cmdline\": \"\"}, {\"pidFile\": \"/home/ubuntu/helix-r24-16872909f574/R24-12-generous.pid\", \"pid\": 125183, \"state\": null, \"known\": true, \"ownedRunning\": false, \"cmdline\": \"\"}, {\"pidFile\": \"/home/ubuntu/helix-r24-16872909f574/R24-12-small.pid\", \"pid\": 128456, \"state\": null, \"known\": true, \"ownedRunning\": false, \"cmdline\": \"\"}, {\"pidFile\": \"/home/ubuntu/helix-r24-16872909f574/R24-13-generous.pid\", \"pid\": 128854, \"state\": null, \"known\": true, \"ownedRunning\": false, \"cmdline\": \"\"}, {\"pidFile\": \"/home/ubuntu/helix-r24-16872909f574/R24-13-small.pid\", \"pid\": 130929, \"state\": null, \"known\": true, \"ownedRunning\": false, \"cmdline\": \"\"}]\n",
+    "stderr": "",
+    "observedAtUtc": "2026-10-13T02:59:41.730261+00:00"
+  },
+  "supervisorStates": [
+    {
+      "pidFile": "/home/ubuntu/helix-r24-16872909f574/R24-1-generous.pid",
+      "pid": 72765,
+      "state": null,
+      "known": true,
+      "ownedRunning": false,
+      "cmdline": ""
+    },
+    {
+      "pidFile": "/home/ubuntu/helix-r24-16872909f574/R24-1-small.pid",
+      "pid": 75862,
+      "state": null,
+      "known": true,
+      "ownedRunning": false,
+      "cmdline": ""
+    },
+    {
+      "pidFile": "/home/ubuntu/helix-r24-16872909f574/R24-2-generous.pid",
+      "pid": 76264,
+      "state": null,
+      "known": true,
+      "ownedRunning": false,
+      "cmdline": ""
+    },
+    {
+      "pidFile": "/home/ubuntu/helix-r24-16872909f574/R24-2-small.pid",
+      "pid": 79312,
+      "state": null,
+      "known": true,
+      "ownedRunning": false,
+      "cmdline": ""
+    },
+    {
+      "pidFile": "/home/ubuntu/helix-r24-16872909f574/R24-3-generous.pid",
+      "pid": 79777,
+      "state": null,
+      "known": true,
+      "ownedRunning": false,
+      "cmdline": ""
+    },
+    {
+      "pidFile": "/home/ubuntu/helix-r24-16872909f574/R24-3-small.pid",
+      "pid": 83277,
+      "state": null,
+      "known": true,
+      "ownedRunning": false,
+      "cmdline": ""
+    },
+    {
+      "pidFile": "/home/ubuntu/helix-r24-16872909f574/R24-4-generous.pid",
+      "pid": 83684,
+      "state": null,
+      "known": true,
+      "ownedRunning": false,
+      "cmdline": ""
+    },
+    {
+      "pidFile": "/home/ubuntu/helix-r24-16872909f574/R24-4-small.pid",
+      "pid": 86798,
+      "state": null,
+      "known": true,
+      "ownedRunning": false,
+      "cmdline": ""
+    },
+    {
+      "pidFile": "/home/ubuntu/helix-r24-16872909f574/R24-5-generous.pid",
+      "pid": 87197,
+      "state": null,
+      "known": true,
+      "ownedRunning": false,
+      "cmdline": ""
+    },
+    {
+      "pidFile": "/home/ubuntu/helix-r24-16872909f574/R24-5-small.pid",
+      "pid": 90292,
+      "state": null,
+      "known": true,
+      "ownedRunning": false,
+      "cmdline": ""
+    },
+    {
+      "pidFile": "/home/ubuntu/helix-r24-16872909f574/R24-6-generous.pid",
+      "pid": 90698,
+      "state": null,
+      "known": true,
+      "ownedRunning": false,
+      "cmdline": ""
+    },
+    {
+      "pidFile": "/home/ubuntu/helix-r24-16872909f574/R24-6-small.pid",
+      "pid": 94205,
+      "state": null,
+      "known": true,
+      "ownedRunning": false,
+      "cmdline": ""
+    },
+    {
+      "pidFile": "/home/ubuntu/helix-r24-16872909f574/R24-7-generous.pid",
+      "pid": 94616,
+      "state": null,
+      "known": true,
+      "ownedRunning": false,
+      "cmdline": ""
+    },
+    {
+      "pidFile": "/home/ubuntu/helix-r24-16872909f574/R24-7-small.pid",
+      "pid": 98004,
+      "state": null,
+      "known": true,
+      "ownedRunning": false,
+      "cmdline": ""
+    },
+    {
+      "pidFile": "/home/ubuntu/helix-r24-16872909f574/R24-8-generous.pid",
+      "pid": 101279,
+      "state": null,
+      "known": true,
+      "ownedRunning": false,
+      "cmdline": ""
+    },
+    {
+      "pidFile": "/home/ubuntu/helix-r24-16872909f574/R24-8-small.pid",
+      "pid": 104548,
+      "state": null,
+      "known": true,
+      "ownedRunning": false,
+      "cmdline": ""
+    },
+    {
+      "pidFile": "/home/ubuntu/helix-r24-16872909f574/R24-9-generous.pid",
+      "pid": 107937,
+      "state": null,
+      "known": true,
+      "ownedRunning": false,
+      "cmdline": ""
+    },
+    {
+      "pidFile": "/home/ubuntu/helix-r24-16872909f574/R24-9-small.pid",
+      "pid": 111327,
+      "state": null,
+      "known": true,
+      "ownedRunning": false,
+      "cmdline": ""
+    },
+    {
+      "pidFile": "/home/ubuntu/helix-r24-16872909f574/R24-10-generous.pid",
+      "pid": 114615,
+      "state": null,
+      "known": true,
+      "ownedRunning": false,
+      "cmdline": ""
+    },
+    {
+      "pidFile": "/home/ubuntu/helix-r24-16872909f574/R24-10-small.pid",
+      "pid": 118005,
+      "state": null,
+      "known": true,
+      "ownedRunning": false,
+      "cmdline": ""
+    },
+    {
+      "pidFile": "/home/ubuntu/helix-r24-16872909f574/R24-11-generous.pid",
+      "pid": 121396,
+      "state": null,
+      "known": true,
+      "ownedRunning": false,
+      "cmdline": ""
+    },
+    {
+      "pidFile": "/home/ubuntu/helix-r24-16872909f574/R24-11-small.pid",
+      "pid": 124784,
+      "state": null,
+      "known": true,
+      "ownedRunning": false,
+      "cmdline": ""
+    },
+    {
+      "pidFile": "/home/ubuntu/helix-r24-16872909f574/R24-12-generous.pid",
+      "pid": 125183,
+      "state": null,
+      "known": true,
+      "ownedRunning": false,
+      "cmdline": ""
+    },
+    {
+      "pidFile": "/home/ubuntu/helix-r24-16872909f574/R24-12-small.pid",
+      "pid": 128456,
+      "state": null,
+      "known": true,
+      "ownedRunning": false,
+      "cmdline": ""
+    },
+    {
+      "pidFile": "/home/ubuntu/helix-r24-16872909f574/R24-13-generous.pid",
+      "pid": 128854,
+      "state": null,
+      "known": true,
+      "ownedRunning": false,
+      "cmdline": ""
+    },
+    {
+      "pidFile": "/home/ubuntu/helix-r24-16872909f574/R24-13-small.pid",
+      "pid": 130929,
+      "state": null,
+      "known": true,
+      "ownedRunning": false,
+      "cmdline": ""
+    }
+  ],
+  "workerContainers": [
+    {
+      "node": "helix-worker1",
+      "instanceId": "i-06ebae4bcd7f51a00",
+      "command": "docker ps --no-trunc --format '{{.ID}}|{{.Image}}|{{.Status}}'",
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": "",
+      "observedAtUtc": "2026-10-13T02:59:44.241127+00:00"
+    },
+    {
+      "node": "helix-worker2",
+      "instanceId": "i-0656b76c4b22adfb8",
+      "command": "docker ps --no-trunc --format '{{.ID}}|{{.Image}}|{{.Status}}'",
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": "",
+      "observedAtUtc": "2026-10-13T02:59:47.226225+00:00"
+    }
+  ],
+  "probeSourceSha256": "69505fa05ed111d3e97c17818d9454a1173cc5c6a162be0e47fd105dac602fc0",
+  "cloudMutation": false,
+  "scope": "All original unique comments, all dispatched controller services, and both exclusive campaign workers."
+}

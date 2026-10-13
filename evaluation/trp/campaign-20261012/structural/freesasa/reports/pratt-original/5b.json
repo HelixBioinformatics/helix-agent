@@ -1,0 +1,4028 @@
+{
+  "version": "structural-sasa-descriptive/1.0.0",
+  "inputSha256": "c31ccc618ff74c146a44f1992d9197b1ffd272476acadcc6ad6a5f24eff2e78a",
+  "parameters": {
+    "algorithm": "LeeRichards",
+    "probe-radius": 1.4,
+    "n-slices": 20,
+    "n-points": 100,
+    "n-threads": 1
+  },
+  "classifier": "protor",
+  "parserOptions": {
+    "hetatm": false,
+    "hydrogen": false,
+    "join-models": false,
+    "skip-unknown": false,
+    "halt-at-unknown": true
+  },
+  "scope": "unchanged isolated selected polymer chain",
+  "excludedAtoms": {
+    "hydrogen": 0,
+    "hetatm": 0
+  },
+  "atoms": 430,
+  "residues": 50,
+  "libraryTotalArea": 3738.183600566355,
+  "areaAngstromSquared": {
+    "total": 3738.1836005663554,
+    "mainChain": 601.7525536575677,
+    "sideChain": 3136.4310469087877,
+    "polar": 1016.7851602317965,
+    "apolar": 2721.398440334559
+  },
+  "apolarAreaFraction": 0.7280002084226821,
+  "polarAreaFraction": 0.2719997915773179,
+  "residuesWithMissingExpectedHeavyAtoms": 0,
+  "chargedResidues": 0,
+  "completeChargedSidechains": 0,
+  "incompleteChargedSidechains": 0,
+  "chargedSidechainRelativeAreaMedian": null,
+  "chargedSidechainRelativeAreaMin": null,
+  "chargedSidechainRelativeAreaMax": null,
+  "residueObservations": [
+    {
+      "chain": "A",
+      "residue": "1",
+      "residueName": "ILE",
+      "observedAtomCount": 8,
+      "atoms": [
+        {
+          "name": "N",
+          "area": 37.841300441773086,
+          "polarity": "Polar",
+          "radius": 1.64
+        },
+        {
+          "name": "CA",
+          "area": 0.04559254497146929,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "C",
+          "area": 0.41475691395528747,
+          "polarity": "Apolar",
+          "radius": 1.61
+        },
+        {
+          "name": "CB",
+          "area": 8.833361007006106,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "O",
+          "area": 0.0,
+          "polarity": "Polar",
+          "radius": 1.42
+        },
+        {
+          "name": "CG1",
+          "area": 14.941720809845663,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "CG2",
+          "area": 36.334317610861916,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "CD1",
+          "area": 71.8155830141162,
+          "polarity": "Apolar",
+          "radius": 1.88
+        }
+      ],
+      "missingExpectedHeavyAtoms": [],
+      "areaAngstromSquared": {
+        "total": 170.22663234252974,
+        "mainChain": 38.30164990069984,
+        "sideChain": 131.92498244182988,
+        "polar": 37.841300441773086,
+        "apolar": 132.38533190075663
+      },
+      "relativeArea": {
+        "total": 0.9686828221847706,
+        "mainChain": 0.9231537695998998,
+        "sideChain": 0.982827851015644,
+        "polar": 1.026900961784887,
+        "apolar": 0.9533040390347564
+      },
+      "hasRelativeAreas": true,
+      "chargedResidueIdentity": false,
+      "missingChargedSidechainAtoms": null,
+      "chargedSidechainComplete": null,
+      "interpretableChargedSidechainRelativeArea": null
+    },
+    {
+      "chain": "A",
+      "residue": "2",
+      "residueName": "PHE",
+      "observedAtomCount": 11,
+      "atoms": [
+        {
+          "name": "N",
+          "area": 1.961344182071804,
+          "polarity": "Polar",
+          "radius": 1.64
+        },
+        {
+          "name": "CA",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "C",
+          "area": 0.15747336058000003,
+          "polarity": "Apolar",
+          "radius": 1.61
+        },
+        {
+          "name": "CB",
+          "area": 28.21391700883828,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "O",
+          "area": 28.633404002249588,
+          "polarity": "Polar",
+          "radius": 1.42
+        },
+        {
+          "name": "CG",
+          "area": 0.5604107888879774,
+          "polarity": "Apolar",
+          "radius": 1.61
+        },
+        {
+          "name": "CD1",
+          "area": 16.19219379193974,
+          "polarity": "Apolar",
+          "radius": 1.76
+        },
+        {
+          "name": "CD2",
+          "area": 13.395458163294155,
+          "polarity": "Apolar",
+          "radius": 1.76
+        },
+        {
+          "name": "CE1",
+          "area": 17.802617684899136,
+          "polarity": "Apolar",
+          "radius": 1.76
+        },
+        {
+          "name": "CE2",
+          "area": 24.111789239435023,
+          "polarity": "Apolar",
+          "radius": 1.76
+        },
+        {
+          "name": "CZ",
+          "area": 22.318357539139946,
+          "polarity": "Apolar",
+          "radius": 1.76
+        }
+      ],
+      "missingExpectedHeavyAtoms": [],
+      "areaAngstromSquared": {
+        "total": 153.34696576133564,
+        "mainChain": 30.752221544901392,
+        "sideChain": 122.59474421643426,
+        "polar": 30.594748184321393,
+        "apolar": 122.75221757701425
+      },
+      "relativeArea": {
+        "total": 0.7671951458942148,
+        "mainChain": 0.8002139355946238,
+        "sideChain": 0.759335671826784,
+        "polar": 0.8756367539874469,
+        "apolar": 0.7442234605130001
+      },
+      "hasRelativeAreas": true,
+      "chargedResidueIdentity": false,
+      "missingChargedSidechainAtoms": null,
+      "chargedSidechainComplete": null,
+      "interpretableChargedSidechainRelativeArea": null
+    },
+    {
+      "chain": "A",
+      "residue": "3",
+      "residueName": "CYS",
+      "observedAtomCount": 6,
+      "atoms": [
+        {
+          "name": "N",
+          "area": 0.3995835116290137,
+          "polarity": "Polar",
+          "radius": 1.64
+        },
+        {
+          "name": "CA",
+          "area": 4.496193426588932,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "C",
+          "area": 0.042005882773449736,
+          "polarity": "Apolar",
+          "radius": 1.61
+        },
+        {
+          "name": "CB",
+          "area": 11.591956943753061,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "O",
+          "area": 2.2685118844821606,
+          "polarity": "Polar",
+          "radius": 1.42
+        },
+        {
+          "name": "SG",
+          "area": 25.518228400206077,
+          "polarity": "Polar",
+          "radius": 1.77
+        }
+      ],
+      "missingExpectedHeavyAtoms": [],
+      "areaAngstromSquared": {
+        "total": 44.31648004943269,
+        "mainChain": 7.206294705473556,
+        "sideChain": 37.11018534395914,
+        "polar": 28.18632379631725,
+        "apolar": 16.130156253115445
+      },
+      "relativeArea": {
+        "total": 0.33522299583534565,
+        "mainChain": 0.1693606276257005,
+        "sideChain": 0.41389901119740286,
+        "polar": 0.3039284429190991,
+        "apolar": 0.40866876749722436
+      },
+      "hasRelativeAreas": true,
+      "chargedResidueIdentity": false,
+      "missingChargedSidechainAtoms": null,
+      "chargedSidechainComplete": null,
+      "interpretableChargedSidechainRelativeArea": null
+    },
+    {
+      "chain": "A",
+      "residue": "4",
+      "residueName": "TYR",
+      "observedAtomCount": 12,
+      "atoms": [
+        {
+          "name": "N",
+          "area": 7.022711594097218,
+          "polarity": "Polar",
+          "radius": 1.64
+        },
+        {
+          "name": "CA",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "C",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.61
+        },
+        {
+          "name": "CB",
+          "area": 28.133009288302524,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "O",
+          "area": 22.694634883578285,
+          "polarity": "Polar",
+          "radius": 1.42
+        },
+        {
+          "name": "CG",
+          "area": 0.5220104079954938,
+          "polarity": "Apolar",
+          "radius": 1.61
+        },
+        {
+          "name": "CD1",
+          "area": 18.26319302731069,
+          "polarity": "Apolar",
+          "radius": 1.76
+        },
+        {
+          "name": "CD2",
+          "area": 8.10680170944611,
+          "polarity": "Apolar",
+          "radius": 1.76
+        },
+        {
+          "name": "CE1",
+          "area": 16.535979608218106,
+          "polarity": "Apolar",
+          "radius": 1.76
+        },
+        {
+          "name": "CE2",
+          "area": 7.74707355260039,
+          "polarity": "Apolar",
+          "radius": 1.76
+        },
+        {
+          "name": "OH",
+          "area": 22.33942263763272,
+          "polarity": "Polar",
+          "radius": 1.46
+        },
+        {
+          "name": "CZ",
+          "area": 1.7055129154235389,
+          "polarity": "Apolar",
+          "radius": 1.61
+        }
+      ],
+      "missingExpectedHeavyAtoms": [],
+      "areaAngstromSquared": {
+        "total": 133.07034962460506,
+        "mainChain": 29.717346477675502,
+        "sideChain": 103.35300314692957,
+        "polar": 52.05676911530822,
+        "apolar": 81.01358050929684
+      },
+      "relativeArea": {
+        "total": 0.621272466616579,
+        "mainChain": 0.7732851022033698,
+        "sideChain": 0.5880348381140735,
+        "polar": 0.6417254575358509,
+        "apolar": 0.6088042421980675
+      },
+      "hasRelativeAreas": true,
+      "chargedResidueIdentity": false,
+      "missingChargedSidechainAtoms": null,
+      "chargedSidechainComplete": null,
+      "interpretableChargedSidechainRelativeArea": null
+    },
+    {
+      "chain": "A",
+      "residue": "5",
+      "residueName": "CYS",
+      "observedAtomCount": 6,
+      "atoms": [
+        {
+          "name": "N",
+          "area": 0.0,
+          "polarity": "Polar",
+          "radius": 1.64
+        },
+        {
+          "name": "CA",
+          "area": 4.386901184650882,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "C",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.61
+        },
+        {
+          "name": "CB",
+          "area": 2.630222932141533,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "O",
+          "area": 0.0,
+          "polarity": "Polar",
+          "radius": 1.42
+        },
+        {
+          "name": "SG",
+          "area": 22.99021182058379,
+          "polarity": "Polar",
+          "radius": 1.77
+        }
+      ],
+      "missingExpectedHeavyAtoms": [],
+      "areaAngstromSquared": {
+        "total": 30.007335937376205,
+        "mainChain": 4.386901184650882,
+        "sideChain": 25.620434752725323,
+        "polar": 22.99021182058379,
+        "apolar": 7.017124116792415
+      },
+      "relativeArea": {
+        "total": 0.2269843868182769,
+        "mainChain": 0.10309991033257068,
+        "sideChain": 0.2857510010341883,
+        "polar": 0.2478996314490381,
+        "apolar": 0.17778373744090234
+      },
+      "hasRelativeAreas": true,
+      "chargedResidueIdentity": false,
+      "missingChargedSidechainAtoms": null,
+      "chargedSidechainComplete": null,
+      "interpretableChargedSidechainRelativeArea": null
+    },
+    {
+      "chain": "A",
+      "residue": "6",
+      "residueName": "ILE",
+      "observedAtomCount": 8,
+      "atoms": [
+        {
+          "name": "N",
+          "area": 5.215029004098996,
+          "polarity": "Polar",
+          "radius": 1.64
+        },
+        {
+          "name": "CA",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "C",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.61
+        },
+        {
+          "name": "CB",
+          "area": 7.1495286214445555,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "O",
+          "area": 0.06467397630564513,
+          "polarity": "Polar",
+          "radius": 1.42
+        },
+        {
+          "name": "CG1",
+          "area": 3.031575578756233,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "CG2",
+          "area": 34.22672450136527,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "CD1",
+          "area": 68.12975307884422,
+          "polarity": "Apolar",
+          "radius": 1.88
+        }
+      ],
+      "missingExpectedHeavyAtoms": [],
+      "areaAngstromSquared": {
+        "total": 117.81728476081491,
+        "mainChain": 5.279702980404641,
+        "sideChain": 112.53758178041028,
+        "polar": 5.279702980404641,
+        "apolar": 112.53758178041028
+      },
+      "relativeArea": {
+        "total": 0.670444914134268,
+        "mainChain": 0.12725242179813548,
+        "sideChain": 0.8383936659495663,
+        "polar": 0.14327552185629963,
+        "apolar": 0.8103808006078367
+      },
+      "hasRelativeAreas": true,
+      "chargedResidueIdentity": false,
+      "missingChargedSidechainAtoms": null,
+      "chargedSidechainComplete": null,
+      "interpretableChargedSidechainRelativeArea": null
+    },
+    {
+      "chain": "A",
+      "residue": "7",
+      "residueName": "PHE",
+      "observedAtomCount": 11,
+      "atoms": [
+        {
+          "name": "N",
+          "area": 2.5416696246220547,
+          "polarity": "Polar",
+          "radius": 1.64
+        },
+        {
+          "name": "CA",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "C",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.61
+        },
+        {
+          "name": "CB",
+          "area": 23.341916233312986,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "O",
+          "area": 23.139844900751132,
+          "polarity": "Polar",
+          "radius": 1.42
+        },
+        {
+          "name": "CG",
+          "area": 0.41707835574139135,
+          "polarity": "Apolar",
+          "radius": 1.61
+        },
+        {
+          "name": "CD1",
+          "area": 18.034423017095904,
+          "polarity": "Apolar",
+          "radius": 1.76
+        },
+        {
+          "name": "CD2",
+          "area": 10.66269509484232,
+          "polarity": "Apolar",
+          "radius": 1.76
+        },
+        {
+          "name": "CE1",
+          "area": 20.508299712069668,
+          "polarity": "Apolar",
+          "radius": 1.76
+        },
+        {
+          "name": "CE2",
+          "area": 25.922770599164338,
+          "polarity": "Apolar",
+          "radius": 1.76
+        },
+        {
+          "name": "CZ",
+          "area": 27.473462606635,
+          "polarity": "Apolar",
+          "radius": 1.76
+        }
+      ],
+      "missingExpectedHeavyAtoms": [],
+      "areaAngstromSquared": {
+        "total": 152.0421601442348,
+        "mainChain": 25.68151452537319,
+        "sideChain": 126.36064561886161,
+        "polar": 25.68151452537319,
+        "apolar": 126.36064561886161
+      },
+      "relativeArea": {
+        "total": 0.7606672010417991,
+        "mainChain": 0.6682673568923546,
+        "sideChain": 0.7826611682803445,
+        "polar": 0.7350175880186947,
+        "apolar": 0.7661006767240306
+      },
+      "hasRelativeAreas": true,
+      "chargedResidueIdentity": false,
+      "missingChargedSidechainAtoms": null,
+      "chargedSidechainComplete": null,
+      "interpretableChargedSidechainRelativeArea": null
+    },
+    {
+      "chain": "A",
+      "residue": "8",
+      "residueName": "CYS",
+      "observedAtomCount": 6,
+      "atoms": [
+        {
+          "name": "N",
+          "area": 0.0,
+          "polarity": "Polar",
+          "radius": 1.64
+        },
+        {
+          "name": "CA",
+          "area": 3.052315741983832,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "C",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.61
+        },
+        {
+          "name": "CB",
+          "area": 0.09820479089052664,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "O",
+          "area": 0.004160149134160225,
+          "polarity": "Polar",
+          "radius": 1.42
+        },
+        {
+          "name": "SG",
+          "area": 15.622006218245769,
+          "polarity": "Polar",
+          "radius": 1.77
+        }
+      ],
+      "missingExpectedHeavyAtoms": [],
+      "areaAngstromSquared": {
+        "total": 18.776686900254287,
+        "mainChain": 3.056475891117992,
+        "sideChain": 15.720211009136296,
+        "polar": 15.626166367379929,
+        "apolar": 3.1505205328743586
+      },
+      "relativeArea": {
+        "total": 0.14203242738467692,
+        "mainChain": 0.07183257088408912,
+        "sideChain": 0.1753313741817566,
+        "polar": 0.16849435375652286,
+        "apolar": 0.07982063675891458
+      },
+      "hasRelativeAreas": true,
+      "chargedResidueIdentity": false,
+      "missingChargedSidechainAtoms": null,
+      "chargedSidechainComplete": null,
+      "interpretableChargedSidechainRelativeArea": null
+    },
+    {
+      "chain": "A",
+      "residue": "9",
+      "residueName": "TYR",
+      "observedAtomCount": 12,
+      "atoms": [
+        {
+          "name": "N",
+          "area": 6.208319340114993,
+          "polarity": "Polar",
+          "radius": 1.64
+        },
+        {
+          "name": "CA",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "C",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.61
+        },
+        {
+          "name": "CB",
+          "area": 14.367941381131203,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "O",
+          "area": 23.155220209862453,
+          "polarity": "Polar",
+          "radius": 1.42
+        },
+        {
+          "name": "CG",
+          "area": 0.5145599487069888,
+          "polarity": "Apolar",
+          "radius": 1.61
+        },
+        {
+          "name": "CD1",
+          "area": 18.045730875613245,
+          "polarity": "Apolar",
+          "radius": 1.76
+        },
+        {
+          "name": "CD2",
+          "area": 7.43176335905931,
+          "polarity": "Apolar",
+          "radius": 1.76
+        },
+        {
+          "name": "CE1",
+          "area": 20.64547791909366,
+          "polarity": "Apolar",
+          "radius": 1.76
+        },
+        {
+          "name": "CE2",
+          "area": 8.493738533109841,
+          "polarity": "Apolar",
+          "radius": 1.76
+        },
+        {
+          "name": "OH",
+          "area": 28.76405409735918,
+          "polarity": "Polar",
+          "radius": 1.46
+        },
+        {
+          "name": "CZ",
+          "area": 1.6548085698338924,
+          "polarity": "Apolar",
+          "radius": 1.61
+        }
+      ],
+      "missingExpectedHeavyAtoms": [],
+      "areaAngstromSquared": {
+        "total": 129.28161423388477,
+        "mainChain": 29.363539549977446,
+        "sideChain": 99.9180746839073,
+        "polar": 58.127593647336624,
+        "apolar": 71.15402058654813
+      },
+      "relativeArea": {
+        "total": 0.6035838005223623,
+        "mainChain": 0.7640785727290514,
+        "sideChain": 0.5684915491801736,
+        "polar": 0.7165630380588834,
+        "apolar": 0.534711209036959
+      },
+      "hasRelativeAreas": true,
+      "chargedResidueIdentity": false,
+      "missingChargedSidechainAtoms": null,
+      "chargedSidechainComplete": null,
+      "interpretableChargedSidechainRelativeArea": null
+    },
+    {
+      "chain": "A",
+      "residue": "10",
+      "residueName": "CYS",
+      "observedAtomCount": 6,
+      "atoms": [
+        {
+          "name": "N",
+          "area": 0.0,
+          "polarity": "Polar",
+          "radius": 1.64
+        },
+        {
+          "name": "CA",
+          "area": 4.710888166068124,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "C",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.61
+        },
+        {
+          "name": "CB",
+          "area": 18.170191644120596,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "O",
+          "area": 0.0,
+          "polarity": "Polar",
+          "radius": 1.42
+        },
+        {
+          "name": "SG",
+          "area": 0.6009437641864579,
+          "polarity": "Polar",
+          "radius": 1.77
+        }
+      ],
+      "missingExpectedHeavyAtoms": [],
+      "areaAngstromSquared": {
+        "total": 23.482023574375177,
+        "mainChain": 4.710888166068124,
+        "sideChain": 18.771135408307053,
+        "polar": 0.6009437641864579,
+        "apolar": 22.88107981018872
+      },
+      "relativeArea": {
+        "total": 0.17762498921615114,
+        "mainChain": 0.11071417546576086,
+        "sideChain": 0.20935908329586275,
+        "polar": 0.006479876689524024,
+        "apolar": 0.5797081279500562
+      },
+      "hasRelativeAreas": true,
+      "chargedResidueIdentity": false,
+      "missingChargedSidechainAtoms": null,
+      "chargedSidechainComplete": null,
+      "interpretableChargedSidechainRelativeArea": null
+    },
+    {
+      "chain": "A",
+      "residue": "11",
+      "residueName": "ILE",
+      "observedAtomCount": 8,
+      "atoms": [
+        {
+          "name": "N",
+          "area": 5.117582279444098,
+          "polarity": "Polar",
+          "radius": 1.64
+        },
+        {
+          "name": "CA",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "C",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.61
+        },
+        {
+          "name": "CB",
+          "area": 6.844167254143522,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "O",
+          "area": 0.0,
+          "polarity": "Polar",
+          "radius": 1.42
+        },
+        {
+          "name": "CG1",
+          "area": 5.2758679912160105,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "CG2",
+          "area": 18.311130744894044,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "CD1",
+          "area": 69.7426800203797,
+          "polarity": "Apolar",
+          "radius": 1.88
+        }
+      ],
+      "missingExpectedHeavyAtoms": [],
+      "areaAngstromSquared": {
+        "total": 105.29142829007736,
+        "mainChain": 5.117582279444098,
+        "sideChain": 100.17384601063327,
+        "polar": 5.117582279444098,
+        "apolar": 100.17384601063327
+      },
+      "relativeArea": {
+        "total": 0.5991659266492766,
+        "mainChain": 0.12334495732571939,
+        "sideChain": 0.7462850779306659,
+        "polar": 0.13887604557514513,
+        "apolar": 0.7213497948486589
+      },
+      "hasRelativeAreas": true,
+      "chargedResidueIdentity": false,
+      "missingChargedSidechainAtoms": null,
+      "chargedSidechainComplete": null,
+      "interpretableChargedSidechainRelativeArea": null
+    },
+    {
+      "chain": "A",
+      "residue": "12",
+      "residueName": "PHE",
+      "observedAtomCount": 11,
+      "atoms": [
+        {
+          "name": "N",
+          "area": 2.6057775404332384,
+          "polarity": "Polar",
+          "radius": 1.64
+        },
+        {
+          "name": "CA",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "C",
+          "area": 0.2823966851686338,
+          "polarity": "Apolar",
+          "radius": 1.61
+        },
+        {
+          "name": "CB",
+          "area": 27.67535224448853,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "O",
+          "area": 22.285579331834416,
+          "polarity": "Polar",
+          "radius": 1.42
+        },
+        {
+          "name": "CG",
+          "area": 0.5508280795067757,
+          "polarity": "Apolar",
+          "radius": 1.61
+        },
+        {
+          "name": "CD1",
+          "area": 18.072482779518666,
+          "polarity": "Apolar",
+          "radius": 1.76
+        },
+        {
+          "name": "CD2",
+          "area": 14.61280113655632,
+          "polarity": "Apolar",
+          "radius": 1.76
+        },
+        {
+          "name": "CE1",
+          "area": 21.23277905998187,
+          "polarity": "Apolar",
+          "radius": 1.76
+        },
+        {
+          "name": "CE2",
+          "area": 22.89135781829631,
+          "polarity": "Apolar",
+          "radius": 1.76
+        },
+        {
+          "name": "CZ",
+          "area": 22.514169974342405,
+          "polarity": "Apolar",
+          "radius": 1.76
+        }
+      ],
+      "missingExpectedHeavyAtoms": [],
+      "areaAngstromSquared": {
+        "total": 152.72352465012716,
+        "mainChain": 25.17375355743629,
+        "sideChain": 127.54977109269089,
+        "polar": 24.891356872267654,
+        "apolar": 127.83216777785952
+      },
+      "relativeArea": {
+        "total": 0.764076068891971,
+        "mainChain": 0.6550547373779935,
+        "sideChain": 0.7900264545846448,
+        "polar": 0.7124028870139569,
+        "apolar": 0.7750222370429218
+      },
+      "hasRelativeAreas": true,
+      "chargedResidueIdentity": false,
+      "missingChargedSidechainAtoms": null,
+      "chargedSidechainComplete": null,
+      "interpretableChargedSidechainRelativeArea": null
+    },
+    {
+      "chain": "A",
+      "residue": "13",
+      "residueName": "CYS",
+      "observedAtomCount": 6,
+      "atoms": [
+        {
+          "name": "N",
+          "area": 0.9798679052884763,
+          "polarity": "Polar",
+          "radius": 1.64
+        },
+        {
+          "name": "CA",
+          "area": 3.2448904354323505,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "C",
+          "area": 0.3195319867146879,
+          "polarity": "Apolar",
+          "radius": 1.61
+        },
+        {
+          "name": "CB",
+          "area": 0.23190623670735047,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "O",
+          "area": 2.5623992754879827,
+          "polarity": "Polar",
+          "radius": 1.42
+        },
+        {
+          "name": "SG",
+          "area": 12.888477613247357,
+          "polarity": "Polar",
+          "radius": 1.77
+        }
+      ],
+      "missingExpectedHeavyAtoms": [],
+      "areaAngstromSquared": {
+        "total": 20.227073452878205,
+        "mainChain": 7.106689602923498,
+        "sideChain": 13.120383849954708,
+        "polar": 16.430744794023816,
+        "apolar": 3.7963286588543887
+      },
+      "relativeArea": {
+        "total": 0.15300358133795922,
+        "mainChain": 0.16701973214861335,
+        "sideChain": 0.1463348633722363,
+        "polar": 0.17716998915272608,
+        "apolar": 0.09618263640370886
+      },
+      "hasRelativeAreas": true,
+      "chargedResidueIdentity": false,
+      "missingChargedSidechainAtoms": null,
+      "chargedSidechainComplete": null,
+      "interpretableChargedSidechainRelativeArea": null
+    },
+    {
+      "chain": "A",
+      "residue": "14",
+      "residueName": "TYR",
+      "observedAtomCount": 12,
+      "atoms": [
+        {
+          "name": "N",
+          "area": 8.202395480245556,
+          "polarity": "Polar",
+          "radius": 1.64
+        },
+        {
+          "name": "CA",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "C",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.61
+        },
+        {
+          "name": "CB",
+          "area": 28.03429223335651,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "O",
+          "area": 23.31811621622157,
+          "polarity": "Polar",
+          "radius": 1.42
+        },
+        {
+          "name": "CG",
+          "area": 0.9571881406587172,
+          "polarity": "Apolar",
+          "radius": 1.61
+        },
+        {
+          "name": "CD1",
+          "area": 18.140151373956716,
+          "polarity": "Apolar",
+          "radius": 1.76
+        },
+        {
+          "name": "CD2",
+          "area": 8.365132185866301,
+          "polarity": "Apolar",
+          "radius": 1.76
+        },
+        {
+          "name": "CE1",
+          "area": 22.509736023976824,
+          "polarity": "Apolar",
+          "radius": 1.76
+        },
+        {
+          "name": "CE2",
+          "area": 9.655061269269622,
+          "polarity": "Apolar",
+          "radius": 1.76
+        },
+        {
+          "name": "OH",
+          "area": 32.46457177709131,
+          "polarity": "Polar",
+          "radius": 1.46
+        },
+        {
+          "name": "CZ",
+          "area": 2.0401314567583926,
+          "polarity": "Apolar",
+          "radius": 1.61
+        }
+      ],
+      "missingExpectedHeavyAtoms": [],
+      "areaAngstromSquared": {
+        "total": 153.6867761574015,
+        "mainChain": 31.520511696467125,
+        "sideChain": 122.16626446093439,
+        "polar": 63.98508347355843,
+        "apolar": 89.70169268384308
+      },
+      "relativeArea": {
+        "total": 0.7175254501022528,
+        "mainChain": 0.8202058729239429,
+        "sideChain": 0.6950743312524715,
+        "polar": 0.788770752879172,
+        "apolar": 0.6740940308397316
+      },
+      "hasRelativeAreas": true,
+      "chargedResidueIdentity": false,
+      "missingChargedSidechainAtoms": null,
+      "chargedSidechainComplete": null,
+      "interpretableChargedSidechainRelativeArea": null
+    },
+    {
+      "chain": "A",
+      "residue": "15",
+      "residueName": "CYS",
+      "observedAtomCount": 6,
+      "atoms": [
+        {
+          "name": "N",
+          "area": 0.0,
+          "polarity": "Polar",
+          "radius": 1.64
+        },
+        {
+          "name": "CA",
+          "area": 4.572036509218806,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "C",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.61
+        },
+        {
+          "name": "CB",
+          "area": 8.24339450242731,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "O",
+          "area": 0.5898454040259485,
+          "polarity": "Polar",
+          "radius": 1.42
+        },
+        {
+          "name": "SG",
+          "area": 0.0,
+          "polarity": "Polar",
+          "radius": 1.77
+        }
+      ],
+      "missingExpectedHeavyAtoms": [],
+      "areaAngstromSquared": {
+        "total": 13.405276415672066,
+        "mainChain": 5.161881913244755,
+        "sideChain": 8.24339450242731,
+        "polar": 0.5898454040259485,
+        "apolar": 12.815431011646117
+      },
+      "relativeArea": {
+        "total": 0.10140148574638477,
+        "mainChain": 0.12131332346051128,
+        "sideChain": 0.09194060341765906,
+        "polar": 0.00636020491725198,
+        "apolar": 0.3246878898314192
+      },
+      "hasRelativeAreas": true,
+      "chargedResidueIdentity": false,
+      "missingChargedSidechainAtoms": null,
+      "chargedSidechainComplete": null,
+      "interpretableChargedSidechainRelativeArea": null
+    },
+    {
+      "chain": "A",
+      "residue": "16",
+      "residueName": "ILE",
+      "observedAtomCount": 8,
+      "atoms": [
+        {
+          "name": "N",
+          "area": 1.6221772912618793,
+          "polarity": "Polar",
+          "radius": 1.64
+        },
+        {
+          "name": "CA",
+          "area": 0.1152993279637649,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "C",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.61
+        },
+        {
+          "name": "CB",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "O",
+          "area": 0.0,
+          "polarity": "Polar",
+          "radius": 1.42
+        },
+        {
+          "name": "CG1",
+          "area": 5.39989607297616,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "CG2",
+          "area": 13.277903545350753,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "CD1",
+          "area": 51.31475496432204,
+          "polarity": "Apolar",
+          "radius": 1.88
+        }
+      ],
+      "missingExpectedHeavyAtoms": [],
+      "areaAngstromSquared": {
+        "total": 71.7300312018746,
+        "mainChain": 1.7374766192256441,
+        "sideChain": 69.99255458264895,
+        "polar": 1.6221772912618793,
+        "apolar": 70.10785391061272
+      },
+      "relativeArea": {
+        "total": 0.4081831855794378,
+        "mainChain": 0.04187699733009506,
+        "sideChain": 0.5214374922345896,
+        "polar": 0.04402109338566836,
+        "apolar": 0.5048452071045778
+      },
+      "hasRelativeAreas": true,
+      "chargedResidueIdentity": false,
+      "missingChargedSidechainAtoms": null,
+      "chargedSidechainComplete": null,
+      "interpretableChargedSidechainRelativeArea": null
+    },
+    {
+      "chain": "A",
+      "residue": "17",
+      "residueName": "PHE",
+      "observedAtomCount": 11,
+      "atoms": [
+        {
+          "name": "N",
+          "area": 0.1694640425715151,
+          "polarity": "Polar",
+          "radius": 1.64
+        },
+        {
+          "name": "CA",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "C",
+          "area": 0.5522318040419473,
+          "polarity": "Apolar",
+          "radius": 1.61
+        },
+        {
+          "name": "CB",
+          "area": 5.251472139215903,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "O",
+          "area": 0.47117641652675335,
+          "polarity": "Polar",
+          "radius": 1.42
+        },
+        {
+          "name": "CG",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.61
+        },
+        {
+          "name": "CD1",
+          "area": 10.172342552672431,
+          "polarity": "Apolar",
+          "radius": 1.76
+        },
+        {
+          "name": "CD2",
+          "area": 0.5529373218334522,
+          "polarity": "Apolar",
+          "radius": 1.76
+        },
+        {
+          "name": "CE1",
+          "area": 15.513247763100011,
+          "polarity": "Apolar",
+          "radius": 1.76
+        },
+        {
+          "name": "CE2",
+          "area": 16.619399747844298,
+          "polarity": "Apolar",
+          "radius": 1.76
+        },
+        {
+          "name": "CZ",
+          "area": 21.98732635750384,
+          "polarity": "Apolar",
+          "radius": 1.76
+        }
+      ],
+      "missingExpectedHeavyAtoms": [],
+      "areaAngstromSquared": {
+        "total": 71.28959814531015,
+        "mainChain": 1.1928722631402158,
+        "sideChain": 70.09672588216993,
+        "polar": 0.6406404590982684,
+        "apolar": 70.64895768621187
+      },
+      "relativeArea": {
+        "total": 0.35666198791930237,
+        "mainChain": 0.031040131749680348,
+        "sideChain": 0.4341698722958807,
+        "polar": 0.01833544530905176,
+        "apolar": 0.4283312579496294
+      },
+      "hasRelativeAreas": true,
+      "chargedResidueIdentity": false,
+      "missingChargedSidechainAtoms": null,
+      "chargedSidechainComplete": null,
+      "interpretableChargedSidechainRelativeArea": null
+    },
+    {
+      "chain": "A",
+      "residue": "18",
+      "residueName": "CYS",
+      "observedAtomCount": 6,
+      "atoms": [
+        {
+          "name": "N",
+          "area": 2.1913270449565174,
+          "polarity": "Polar",
+          "radius": 1.64
+        },
+        {
+          "name": "CA",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "C",
+          "area": 0.4429927179970089,
+          "polarity": "Apolar",
+          "radius": 1.61
+        },
+        {
+          "name": "CB",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "O",
+          "area": 2.1521960059322085,
+          "polarity": "Polar",
+          "radius": 1.42
+        },
+        {
+          "name": "SG",
+          "area": 1.4315381983793003,
+          "polarity": "Polar",
+          "radius": 1.77
+        }
+      ],
+      "missingExpectedHeavyAtoms": [],
+      "areaAngstromSquared": {
+        "total": 6.2180539672650355,
+        "mainChain": 4.786515768885735,
+        "sideChain": 1.4315381983793003,
+        "polar": 5.775061249268026,
+        "apolar": 0.4429927179970089
+      },
+      "relativeArea": {
+        "total": 0.04703520398838908,
+        "mainChain": 0.11249155743562246,
+        "sideChain": 0.015966297104386577,
+        "polar": 0.062271525223938175,
+        "apolar": 0.01122352971869797
+      },
+      "hasRelativeAreas": true,
+      "chargedResidueIdentity": false,
+      "missingChargedSidechainAtoms": null,
+      "chargedSidechainComplete": null,
+      "interpretableChargedSidechainRelativeArea": null
+    },
+    {
+      "chain": "A",
+      "residue": "19",
+      "residueName": "TYR",
+      "observedAtomCount": 12,
+      "atoms": [
+        {
+          "name": "N",
+          "area": 1.325364789490295,
+          "polarity": "Polar",
+          "radius": 1.64
+        },
+        {
+          "name": "CA",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "C",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.61
+        },
+        {
+          "name": "CB",
+          "area": 18.50439866745906,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "O",
+          "area": 0.0,
+          "polarity": "Polar",
+          "radius": 1.42
+        },
+        {
+          "name": "CG",
+          "area": 0.46919100264428676,
+          "polarity": "Apolar",
+          "radius": 1.61
+        },
+        {
+          "name": "CD1",
+          "area": 1.9789475173294702,
+          "polarity": "Apolar",
+          "radius": 1.76
+        },
+        {
+          "name": "CD2",
+          "area": 10.444022027973988,
+          "polarity": "Apolar",
+          "radius": 1.76
+        },
+        {
+          "name": "CE1",
+          "area": 7.124523690792928,
+          "polarity": "Apolar",
+          "radius": 1.76
+        },
+        {
+          "name": "CE2",
+          "area": 10.735663180130713,
+          "polarity": "Apolar",
+          "radius": 1.76
+        },
+        {
+          "name": "OH",
+          "area": 26.55076103827964,
+          "polarity": "Polar",
+          "radius": 1.46
+        },
+        {
+          "name": "CZ",
+          "area": 1.7144074997244902,
+          "polarity": "Apolar",
+          "radius": 1.61
+        }
+      ],
+      "missingExpectedHeavyAtoms": [],
+      "areaAngstromSquared": {
+        "total": 78.84727941382486,
+        "mainChain": 1.325364789490295,
+        "sideChain": 77.52191462433457,
+        "polar": 27.876125827769933,
+        "apolar": 50.97115358605493
+      },
+      "relativeArea": {
+        "total": 0.36811839681509345,
+        "mainChain": 0.034487764493632445,
+        "sideChain": 0.4410668788366783,
+        "polar": 0.343640604385724,
+        "apolar": 0.38304015620391474
+      },
+      "hasRelativeAreas": true,
+      "chargedResidueIdentity": false,
+      "missingChargedSidechainAtoms": null,
+      "chargedSidechainComplete": null,
+      "interpretableChargedSidechainRelativeArea": null
+    },
+    {
+      "chain": "A",
+      "residue": "20",
+      "residueName": "CYS",
+      "observedAtomCount": 6,
+      "atoms": [
+        {
+          "name": "N",
+          "area": 0.0,
+          "polarity": "Polar",
+          "radius": 1.64
+        },
+        {
+          "name": "CA",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "C",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.61
+        },
+        {
+          "name": "CB",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "O",
+          "area": 0.0,
+          "polarity": "Polar",
+          "radius": 1.42
+        },
+        {
+          "name": "SG",
+          "area": 0.0,
+          "polarity": "Polar",
+          "radius": 1.77
+        }
+      ],
+      "missingExpectedHeavyAtoms": [],
+      "areaAngstromSquared": {
+        "total": 0.0,
+        "mainChain": 0.0,
+        "sideChain": 0.0,
+        "polar": 0.0,
+        "apolar": 0.0
+      },
+      "relativeArea": {
+        "total": 0.0,
+        "mainChain": 0.0,
+        "sideChain": 0.0,
+        "polar": 0.0,
+        "apolar": 0.0
+      },
+      "hasRelativeAreas": true,
+      "chargedResidueIdentity": false,
+      "missingChargedSidechainAtoms": null,
+      "chargedSidechainComplete": null,
+      "interpretableChargedSidechainRelativeArea": null
+    },
+    {
+      "chain": "A",
+      "residue": "21",
+      "residueName": "ILE",
+      "observedAtomCount": 8,
+      "atoms": [
+        {
+          "name": "N",
+          "area": 0.0,
+          "polarity": "Polar",
+          "radius": 1.64
+        },
+        {
+          "name": "CA",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "C",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.61
+        },
+        {
+          "name": "CB",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "O",
+          "area": 0.0,
+          "polarity": "Polar",
+          "radius": 1.42
+        },
+        {
+          "name": "CG1",
+          "area": 0.6300656775895335,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "CG2",
+          "area": 14.04946813131113,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "CD1",
+          "area": 31.468735529567166,
+          "polarity": "Apolar",
+          "radius": 1.88
+        }
+      ],
+      "missingExpectedHeavyAtoms": [],
+      "areaAngstromSquared": {
+        "total": 46.14826933846783,
+        "mainChain": 0.0,
+        "sideChain": 46.14826933846783,
+        "polar": 0.0,
+        "apolar": 46.14826933846783
+      },
+      "relativeArea": {
+        "total": 0.2626089417769751,
+        "mainChain": 0.0,
+        "sideChain": 0.34379996527205414,
+        "polar": 0.0,
+        "apolar": 0.3323127337687609
+      },
+      "hasRelativeAreas": true,
+      "chargedResidueIdentity": false,
+      "missingChargedSidechainAtoms": null,
+      "chargedSidechainComplete": null,
+      "interpretableChargedSidechainRelativeArea": null
+    },
+    {
+      "chain": "A",
+      "residue": "22",
+      "residueName": "PHE",
+      "observedAtomCount": 11,
+      "atoms": [
+        {
+          "name": "N",
+          "area": 0.0,
+          "polarity": "Polar",
+          "radius": 1.64
+        },
+        {
+          "name": "CA",
+          "area": 0.07479606844717156,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "C",
+          "area": 0.228545528844921,
+          "polarity": "Apolar",
+          "radius": 1.61
+        },
+        {
+          "name": "CB",
+          "area": 3.0666343002345475,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "O",
+          "area": 0.02800899123107458,
+          "polarity": "Polar",
+          "radius": 1.42
+        },
+        {
+          "name": "CG",
+          "area": 0.189039278841984,
+          "polarity": "Apolar",
+          "radius": 1.61
+        },
+        {
+          "name": "CD1",
+          "area": 12.463522567179817,
+          "polarity": "Apolar",
+          "radius": 1.76
+        },
+        {
+          "name": "CD2",
+          "area": 8.01680025064445,
+          "polarity": "Apolar",
+          "radius": 1.76
+        },
+        {
+          "name": "CE1",
+          "area": 17.8685541783612,
+          "polarity": "Apolar",
+          "radius": 1.76
+        },
+        {
+          "name": "CE2",
+          "area": 23.10492376205668,
+          "polarity": "Apolar",
+          "radius": 1.76
+        },
+        {
+          "name": "CZ",
+          "area": 22.66393130481,
+          "polarity": "Apolar",
+          "radius": 1.76
+        }
+      ],
+      "missingExpectedHeavyAtoms": [],
+      "areaAngstromSquared": {
+        "total": 87.70475623065184,
+        "mainChain": 0.3313505885231671,
+        "sideChain": 87.37340564212869,
+        "polar": 0.02800899123107458,
+        "apolar": 87.67674723942076
+      },
+      "relativeArea": {
+        "total": 0.4387870533852904,
+        "mainChain": 0.008622185493707185,
+        "sideChain": 0.5411793474272449,
+        "polar": 0.0008016311170885685,
+        "apolar": 0.5315675229745408
+      },
+      "hasRelativeAreas": true,
+      "chargedResidueIdentity": false,
+      "missingChargedSidechainAtoms": null,
+      "chargedSidechainComplete": null,
+      "interpretableChargedSidechainRelativeArea": null
+    },
+    {
+      "chain": "A",
+      "residue": "23",
+      "residueName": "CYS",
+      "observedAtomCount": 6,
+      "atoms": [
+        {
+          "name": "N",
+          "area": 1.4035344895129578,
+          "polarity": "Polar",
+          "radius": 1.64
+        },
+        {
+          "name": "CA",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "C",
+          "area": 0.6457356969092506,
+          "polarity": "Apolar",
+          "radius": 1.61
+        },
+        {
+          "name": "CB",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "O",
+          "area": 0.9087368084016624,
+          "polarity": "Polar",
+          "radius": 1.42
+        },
+        {
+          "name": "SG",
+          "area": 1.5993150319296845,
+          "polarity": "Polar",
+          "radius": 1.77
+        }
+      ],
+      "missingExpectedHeavyAtoms": [],
+      "areaAngstromSquared": {
+        "total": 4.557322026753555,
+        "mainChain": 2.9580069948238705,
+        "sideChain": 1.5993150319296845,
+        "polar": 3.9115863298443045,
+        "apolar": 0.6457356969092506
+      },
+      "relativeArea": {
+        "total": 0.03447293514942175,
+        "mainChain": 0.06951837825673021,
+        "sideChain": 0.017837553334036187,
+        "polar": 0.04217798501018228,
+        "apolar": 0.016360164603730697
+      },
+      "hasRelativeAreas": true,
+      "chargedResidueIdentity": false,
+      "missingChargedSidechainAtoms": null,
+      "chargedSidechainComplete": null,
+      "interpretableChargedSidechainRelativeArea": null
+    },
+    {
+      "chain": "A",
+      "residue": "24",
+      "residueName": "TYR",
+      "observedAtomCount": 12,
+      "atoms": [
+        {
+          "name": "N",
+          "area": 0.8960948513221804,
+          "polarity": "Polar",
+          "radius": 1.64
+        },
+        {
+          "name": "CA",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "C",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.61
+        },
+        {
+          "name": "CB",
+          "area": 10.233377448702472,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "O",
+          "area": 0.0,
+          "polarity": "Polar",
+          "radius": 1.42
+        },
+        {
+          "name": "CG",
+          "area": 0.49609696030778816,
+          "polarity": "Apolar",
+          "radius": 1.61
+        },
+        {
+          "name": "CD1",
+          "area": 1.5433225142250788,
+          "polarity": "Apolar",
+          "radius": 1.76
+        },
+        {
+          "name": "CD2",
+          "area": 9.94136679896959,
+          "polarity": "Apolar",
+          "radius": 1.76
+        },
+        {
+          "name": "CE1",
+          "area": 7.167834992188227,
+          "polarity": "Apolar",
+          "radius": 1.76
+        },
+        {
+          "name": "CE2",
+          "area": 22.643445388002664,
+          "polarity": "Apolar",
+          "radius": 1.76
+        },
+        {
+          "name": "OH",
+          "area": 34.10914938006471,
+          "polarity": "Polar",
+          "radius": 1.46
+        },
+        {
+          "name": "CZ",
+          "area": 1.9375642654095637,
+          "polarity": "Apolar",
+          "radius": 1.61
+        }
+      ],
+      "missingExpectedHeavyAtoms": [],
+      "areaAngstromSquared": {
+        "total": 88.96825259919227,
+        "mainChain": 0.8960948513221804,
+        "sideChain": 88.0721577478701,
+        "polar": 35.00524423138689,
+        "apolar": 53.96300836780539
+      },
+      "relativeArea": {
+        "total": 0.415370711047165,
+        "mainChain": 0.023317586555352078,
+        "sideChain": 0.5010932962441403,
+        "polar": 0.43152421389776735,
+        "apolar": 0.40552347161498
+      },
+      "hasRelativeAreas": true,
+      "chargedResidueIdentity": false,
+      "missingChargedSidechainAtoms": null,
+      "chargedSidechainComplete": null,
+      "interpretableChargedSidechainRelativeArea": null
+    },
+    {
+      "chain": "A",
+      "residue": "25",
+      "residueName": "CYS",
+      "observedAtomCount": 6,
+      "atoms": [
+        {
+          "name": "N",
+          "area": 0.0,
+          "polarity": "Polar",
+          "radius": 1.64
+        },
+        {
+          "name": "CA",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "C",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.61
+        },
+        {
+          "name": "CB",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "O",
+          "area": 0.20596555598565333,
+          "polarity": "Polar",
+          "radius": 1.42
+        },
+        {
+          "name": "SG",
+          "area": 0.0,
+          "polarity": "Polar",
+          "radius": 1.77
+        }
+      ],
+      "missingExpectedHeavyAtoms": [],
+      "areaAngstromSquared": {
+        "total": 0.20596555598565333,
+        "mainChain": 0.20596555598565333,
+        "sideChain": 0.0,
+        "polar": 0.20596555598565333,
+        "apolar": 0.0
+      },
+      "relativeArea": {
+        "total": 0.0015579845384693898,
+        "mainChain": 0.004840553607183392,
+        "sideChain": 0.0,
+        "polar": 0.002220892344033355,
+        "apolar": 0.0
+      },
+      "hasRelativeAreas": true,
+      "chargedResidueIdentity": false,
+      "missingChargedSidechainAtoms": null,
+      "chargedSidechainComplete": null,
+      "interpretableChargedSidechainRelativeArea": null
+    },
+    {
+      "chain": "A",
+      "residue": "26",
+      "residueName": "ILE",
+      "observedAtomCount": 8,
+      "atoms": [
+        {
+          "name": "N",
+          "area": 0.0,
+          "polarity": "Polar",
+          "radius": 1.64
+        },
+        {
+          "name": "CA",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "C",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.61
+        },
+        {
+          "name": "CB",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "O",
+          "area": 0.0,
+          "polarity": "Polar",
+          "radius": 1.42
+        },
+        {
+          "name": "CG1",
+          "area": 0.8176987226546113,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "CG2",
+          "area": 12.90995126961647,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "CD1",
+          "area": 32.55595748850014,
+          "polarity": "Apolar",
+          "radius": 1.88
+        }
+      ],
+      "missingExpectedHeavyAtoms": [],
+      "areaAngstromSquared": {
+        "total": 46.283607480771224,
+        "mainChain": 0.0,
+        "sideChain": 46.283607480771224,
+        "polar": 0.0,
+        "apolar": 46.283607480771224
+      },
+      "relativeArea": {
+        "total": 0.2633790899719526,
+        "mainChain": 0.0,
+        "sideChain": 0.34480822082076457,
+        "polar": 0.0,
+        "apolar": 0.3332873009344799
+      },
+      "hasRelativeAreas": true,
+      "chargedResidueIdentity": false,
+      "missingChargedSidechainAtoms": null,
+      "chargedSidechainComplete": null,
+      "interpretableChargedSidechainRelativeArea": null
+    },
+    {
+      "chain": "A",
+      "residue": "27",
+      "residueName": "PHE",
+      "observedAtomCount": 11,
+      "atoms": [
+        {
+          "name": "N",
+          "area": 0.0,
+          "polarity": "Polar",
+          "radius": 1.64
+        },
+        {
+          "name": "CA",
+          "area": 0.1073524925003066,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "C",
+          "area": 0.40830103344740043,
+          "polarity": "Apolar",
+          "radius": 1.61
+        },
+        {
+          "name": "CB",
+          "area": 6.999593658351395,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "O",
+          "area": 0.6177354507733698,
+          "polarity": "Polar",
+          "radius": 1.42
+        },
+        {
+          "name": "CG",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.61
+        },
+        {
+          "name": "CD1",
+          "area": 9.49267718954832,
+          "polarity": "Apolar",
+          "radius": 1.76
+        },
+        {
+          "name": "CD2",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.76
+        },
+        {
+          "name": "CE1",
+          "area": 18.315570282005243,
+          "polarity": "Apolar",
+          "radius": 1.76
+        },
+        {
+          "name": "CE2",
+          "area": 16.04678312055681,
+          "polarity": "Apolar",
+          "radius": 1.76
+        },
+        {
+          "name": "CZ",
+          "area": 23.583518119258823,
+          "polarity": "Apolar",
+          "radius": 1.76
+        }
+      ],
+      "missingExpectedHeavyAtoms": [],
+      "areaAngstromSquared": {
+        "total": 75.57153134644167,
+        "mainChain": 1.133388976721077,
+        "sideChain": 74.4381423697206,
+        "polar": 0.6177354507733698,
+        "apolar": 74.9537958956683
+      },
+      "relativeArea": {
+        "total": 0.3780845074366704,
+        "mainChain": 0.02949229707835225,
+        "sideChain": 0.461060033259341,
+        "polar": 0.017679892695288205,
+        "apolar": 0.4544306771896951
+      },
+      "hasRelativeAreas": true,
+      "chargedResidueIdentity": false,
+      "missingChargedSidechainAtoms": null,
+      "chargedSidechainComplete": null,
+      "interpretableChargedSidechainRelativeArea": null
+    },
+    {
+      "chain": "A",
+      "residue": "28",
+      "residueName": "CYS",
+      "observedAtomCount": 6,
+      "atoms": [
+        {
+          "name": "N",
+          "area": 1.3370473373800043,
+          "polarity": "Polar",
+          "radius": 1.64
+        },
+        {
+          "name": "CA",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "C",
+          "area": 0.6345624950902854,
+          "polarity": "Apolar",
+          "radius": 1.61
+        },
+        {
+          "name": "CB",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "O",
+          "area": 0.2577051024129596,
+          "polarity": "Polar",
+          "radius": 1.42
+        },
+        {
+          "name": "SG",
+          "area": 1.727830530152336,
+          "polarity": "Polar",
+          "radius": 1.77
+        }
+      ],
+      "missingExpectedHeavyAtoms": [],
+      "areaAngstromSquared": {
+        "total": 3.957145465035585,
+        "mainChain": 2.229314934883249,
+        "sideChain": 1.727830530152336,
+        "polar": 3.3225829699453,
+        "apolar": 0.6345624950902854
+      },
+      "relativeArea": {
+        "total": 0.02993302167197871,
+        "mainChain": 0.05239283043203876,
+        "sideChain": 0.019270918248408833,
+        "polar": 0.03582685971474337,
+        "apolar": 0.01607708373676933
+      },
+      "hasRelativeAreas": true,
+      "chargedResidueIdentity": false,
+      "missingChargedSidechainAtoms": null,
+      "chargedSidechainComplete": null,
+      "interpretableChargedSidechainRelativeArea": null
+    },
+    {
+      "chain": "A",
+      "residue": "29",
+      "residueName": "TYR",
+      "observedAtomCount": 12,
+      "atoms": [
+        {
+          "name": "N",
+          "area": 1.3457542292011995,
+          "polarity": "Polar",
+          "radius": 1.64
+        },
+        {
+          "name": "CA",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "C",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.61
+        },
+        {
+          "name": "CB",
+          "area": 18.75482761984796,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "O",
+          "area": 0.0,
+          "polarity": "Polar",
+          "radius": 1.42
+        },
+        {
+          "name": "CG",
+          "area": 0.286922410705929,
+          "polarity": "Apolar",
+          "radius": 1.61
+        },
+        {
+          "name": "CD1",
+          "area": 1.8135092469182374,
+          "polarity": "Apolar",
+          "radius": 1.76
+        },
+        {
+          "name": "CD2",
+          "area": 9.64134927674948,
+          "polarity": "Apolar",
+          "radius": 1.76
+        },
+        {
+          "name": "CE1",
+          "area": 10.105451898403366,
+          "polarity": "Apolar",
+          "radius": 1.76
+        },
+        {
+          "name": "CE2",
+          "area": 23.934004697559782,
+          "polarity": "Apolar",
+          "radius": 1.76
+        },
+        {
+          "name": "OH",
+          "area": 38.105415014353916,
+          "polarity": "Polar",
+          "radius": 1.46
+        },
+        {
+          "name": "CZ",
+          "area": 1.7015420381360837,
+          "polarity": "Apolar",
+          "radius": 1.61
+        }
+      ],
+      "missingExpectedHeavyAtoms": [],
+      "areaAngstromSquared": {
+        "total": 105.68877643187595,
+        "mainChain": 1.3457542292011995,
+        "sideChain": 104.34302220267476,
+        "polar": 39.451169243555114,
+        "apolar": 66.23760718832084
+      },
+      "relativeArea": {
+        "total": 0.4934346908439981,
+        "mainChain": 0.035018324985719475,
+        "sideChain": 0.5936676274617363,
+        "polar": 0.4863309817992494,
+        "apolar": 0.4977651400640328
+      },
+      "hasRelativeAreas": true,
+      "chargedResidueIdentity": false,
+      "missingChargedSidechainAtoms": null,
+      "chargedSidechainComplete": null,
+      "interpretableChargedSidechainRelativeArea": null
+    },
+    {
+      "chain": "A",
+      "residue": "30",
+      "residueName": "CYS",
+      "observedAtomCount": 6,
+      "atoms": [
+        {
+          "name": "N",
+          "area": 0.0,
+          "polarity": "Polar",
+          "radius": 1.64
+        },
+        {
+          "name": "CA",
+          "area": 0.003366967167165788,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "C",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.61
+        },
+        {
+          "name": "CB",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "O",
+          "area": 1.143183115873982,
+          "polarity": "Polar",
+          "radius": 1.42
+        },
+        {
+          "name": "SG",
+          "area": 0.0,
+          "polarity": "Polar",
+          "radius": 1.77
+        }
+      ],
+      "missingExpectedHeavyAtoms": [],
+      "areaAngstromSquared": {
+        "total": 1.146550083041148,
+        "mainChain": 1.146550083041148,
+        "sideChain": 0.0,
+        "polar": 1.143183115873982,
+        "apolar": 0.003366967167165788
+      },
+      "relativeArea": {
+        "total": 0.008672844803639546,
+        "mainChain": 0.026945947897559296,
+        "sideChain": 0.0,
+        "polar": 0.012326753459930796,
+        "apolar": 8.530446331810965e-05
+      },
+      "hasRelativeAreas": true,
+      "chargedResidueIdentity": false,
+      "missingChargedSidechainAtoms": null,
+      "chargedSidechainComplete": null,
+      "interpretableChargedSidechainRelativeArea": null
+    },
+    {
+      "chain": "A",
+      "residue": "31",
+      "residueName": "ILE",
+      "observedAtomCount": 8,
+      "atoms": [
+        {
+          "name": "N",
+          "area": 0.012519702178486532,
+          "polarity": "Polar",
+          "radius": 1.64
+        },
+        {
+          "name": "CA",
+          "area": 0.09201650295294568,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "C",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.61
+        },
+        {
+          "name": "CB",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "O",
+          "area": 0.0,
+          "polarity": "Polar",
+          "radius": 1.42
+        },
+        {
+          "name": "CG1",
+          "area": 2.8540925661564556,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "CG2",
+          "area": 12.83619278604603,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "CD1",
+          "area": 36.086288050788816,
+          "polarity": "Apolar",
+          "radius": 1.88
+        }
+      ],
+      "missingExpectedHeavyAtoms": [],
+      "areaAngstromSquared": {
+        "total": 51.881109608122735,
+        "mainChain": 0.10453620513143222,
+        "sideChain": 51.7765734029913,
+        "polar": 0.012519702178486532,
+        "apolar": 51.86858990594425
+      },
+      "relativeArea": {
+        "total": 0.29523194450647433,
+        "mainChain": 0.0025195518228833987,
+        "sideChain": 0.38573026449371456,
+        "polar": 0.0003397476846265002,
+        "apolar": 0.3735046439543764
+      },
+      "hasRelativeAreas": true,
+      "chargedResidueIdentity": false,
+      "missingChargedSidechainAtoms": null,
+      "chargedSidechainComplete": null,
+      "interpretableChargedSidechainRelativeArea": null
+    },
+    {
+      "chain": "A",
+      "residue": "32",
+      "residueName": "PHE",
+      "observedAtomCount": 11,
+      "atoms": [
+        {
+          "name": "N",
+          "area": 0.0,
+          "polarity": "Polar",
+          "radius": 1.64
+        },
+        {
+          "name": "CA",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "C",
+          "area": 0.5442876168450139,
+          "polarity": "Apolar",
+          "radius": 1.61
+        },
+        {
+          "name": "CB",
+          "area": 9.539103442184627,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "O",
+          "area": 0.8283817141912131,
+          "polarity": "Polar",
+          "radius": 1.42
+        },
+        {
+          "name": "CG",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.61
+        },
+        {
+          "name": "CD1",
+          "area": 6.586539853648711,
+          "polarity": "Apolar",
+          "radius": 1.76
+        },
+        {
+          "name": "CD2",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.76
+        },
+        {
+          "name": "CE1",
+          "area": 14.839268408444036,
+          "polarity": "Apolar",
+          "radius": 1.76
+        },
+        {
+          "name": "CE2",
+          "area": 13.76786561813862,
+          "polarity": "Apolar",
+          "radius": 1.76
+        },
+        {
+          "name": "CZ",
+          "area": 23.955906684124937,
+          "polarity": "Apolar",
+          "radius": 1.76
+        }
+      ],
+      "missingExpectedHeavyAtoms": [],
+      "areaAngstromSquared": {
+        "total": 70.06135333757716,
+        "mainChain": 1.372669331036227,
+        "sideChain": 68.68868400654094,
+        "polar": 0.8283817141912131,
+        "apolar": 69.23297162338595
+      },
+      "relativeArea": {
+        "total": 0.3505170769340462,
+        "mainChain": 0.03571869193432805,
+        "sideChain": 0.4254486466803403,
+        "polar": 0.023708692449662654,
+        "apolar": 0.4197464024699039
+      },
+      "hasRelativeAreas": true,
+      "chargedResidueIdentity": false,
+      "missingChargedSidechainAtoms": null,
+      "chargedSidechainComplete": null,
+      "interpretableChargedSidechainRelativeArea": null
+    },
+    {
+      "chain": "A",
+      "residue": "33",
+      "residueName": "CYS",
+      "observedAtomCount": 6,
+      "atoms": [
+        {
+          "name": "N",
+          "area": 0.4571163308262736,
+          "polarity": "Polar",
+          "radius": 1.64
+        },
+        {
+          "name": "CA",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "C",
+          "area": 0.5420389051304257,
+          "polarity": "Apolar",
+          "radius": 1.61
+        },
+        {
+          "name": "CB",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "O",
+          "area": 0.0,
+          "polarity": "Polar",
+          "radius": 1.42
+        },
+        {
+          "name": "SG",
+          "area": 2.7360059399970265,
+          "polarity": "Polar",
+          "radius": 1.77
+        }
+      ],
+      "missingExpectedHeavyAtoms": [],
+      "areaAngstromSquared": {
+        "total": 3.735161175953726,
+        "mainChain": 0.9991552359566993,
+        "sideChain": 2.7360059399970265,
+        "polar": 3.1931222708233,
+        "apolar": 0.5420389051304257
+      },
+      "relativeArea": {
+        "total": 0.028253866686488095,
+        "mainChain": 0.023481909188171547,
+        "sideChain": 0.030515346196710088,
+        "polar": 0.03443090652170908,
+        "apolar": 0.013732934003811141
+      },
+      "hasRelativeAreas": true,
+      "chargedResidueIdentity": false,
+      "missingChargedSidechainAtoms": null,
+      "chargedSidechainComplete": null,
+      "interpretableChargedSidechainRelativeArea": null
+    },
+    {
+      "chain": "A",
+      "residue": "34",
+      "residueName": "TYR",
+      "observedAtomCount": 12,
+      "atoms": [
+        {
+          "name": "N",
+          "area": 1.1750684547234789,
+          "polarity": "Polar",
+          "radius": 1.64
+        },
+        {
+          "name": "CA",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "C",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.61
+        },
+        {
+          "name": "CB",
+          "area": 14.93886758373554,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "O",
+          "area": 0.0,
+          "polarity": "Polar",
+          "radius": 1.42
+        },
+        {
+          "name": "CG",
+          "area": 0.4289622310845937,
+          "polarity": "Apolar",
+          "radius": 1.61
+        },
+        {
+          "name": "CD1",
+          "area": 0.37487991011818494,
+          "polarity": "Apolar",
+          "radius": 1.76
+        },
+        {
+          "name": "CD2",
+          "area": 9.791076268001087,
+          "polarity": "Apolar",
+          "radius": 1.76
+        },
+        {
+          "name": "CE1",
+          "area": 4.305393125231061,
+          "polarity": "Apolar",
+          "radius": 1.76
+        },
+        {
+          "name": "CE2",
+          "area": 23.474427076298475,
+          "polarity": "Apolar",
+          "radius": 1.76
+        },
+        {
+          "name": "OH",
+          "area": 46.68435185632441,
+          "polarity": "Polar",
+          "radius": 1.46
+        },
+        {
+          "name": "CZ",
+          "area": 3.31705023235714,
+          "polarity": "Apolar",
+          "radius": 1.61
+        }
+      ],
+      "missingExpectedHeavyAtoms": [],
+      "areaAngstromSquared": {
+        "total": 104.49007673787398,
+        "mainChain": 1.1750684547234789,
+        "sideChain": 103.31500828315049,
+        "polar": 47.85942031104789,
+        "apolar": 56.630656426826086
+      },
+      "relativeArea": {
+        "total": 0.48783825919918755,
+        "mainChain": 0.030576852842141008,
+        "sideChain": 0.5878186634225677,
+        "polar": 0.5899829920000973,
+        "apolar": 0.4255704247901562
+      },
+      "hasRelativeAreas": true,
+      "chargedResidueIdentity": false,
+      "missingChargedSidechainAtoms": null,
+      "chargedSidechainComplete": null,
+      "interpretableChargedSidechainRelativeArea": null
+    },
+    {
+      "chain": "A",
+      "residue": "35",
+      "residueName": "CYS",
+      "observedAtomCount": 6,
+      "atoms": [
+        {
+          "name": "N",
+          "area": 0.0,
+          "polarity": "Polar",
+          "radius": 1.64
+        },
+        {
+          "name": "CA",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "C",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.61
+        },
+        {
+          "name": "CB",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "O",
+          "area": 1.0280259041337094,
+          "polarity": "Polar",
+          "radius": 1.42
+        },
+        {
+          "name": "SG",
+          "area": 0.04773639390188241,
+          "polarity": "Polar",
+          "radius": 1.77
+        }
+      ],
+      "missingExpectedHeavyAtoms": [],
+      "areaAngstromSquared": {
+        "total": 1.0757622980355919,
+        "mainChain": 1.0280259041337094,
+        "sideChain": 0.04773639390188241,
+        "polar": 1.0757622980355919,
+        "apolar": 0.0
+      },
+      "relativeArea": {
+        "total": 0.008137385007833524,
+        "mainChain": 0.024160420778700575,
+        "sideChain": 0.0005324157249819586,
+        "polar": 0.011599765991326201,
+        "apolar": 0.0
+      },
+      "hasRelativeAreas": true,
+      "chargedResidueIdentity": false,
+      "missingChargedSidechainAtoms": null,
+      "chargedSidechainComplete": null,
+      "interpretableChargedSidechainRelativeArea": null
+    },
+    {
+      "chain": "A",
+      "residue": "36",
+      "residueName": "ILE",
+      "observedAtomCount": 8,
+      "atoms": [
+        {
+          "name": "N",
+          "area": 0.0,
+          "polarity": "Polar",
+          "radius": 1.64
+        },
+        {
+          "name": "CA",
+          "area": 4.173233367759751,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "C",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.61
+        },
+        {
+          "name": "CB",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "O",
+          "area": 20.298680225619076,
+          "polarity": "Polar",
+          "radius": 1.42
+        },
+        {
+          "name": "CG1",
+          "area": 8.757327009460454,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "CG2",
+          "area": 27.613137469748388,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "CD1",
+          "area": 34.42437430803078,
+          "polarity": "Apolar",
+          "radius": 1.88
+        }
+      ],
+      "missingExpectedHeavyAtoms": [],
+      "areaAngstromSquared": {
+        "total": 95.26675238061844,
+        "mainChain": 24.47191359337883,
+        "sideChain": 70.79483878723963,
+        "polar": 20.298680225619076,
+        "apolar": 74.96807215499936
+      },
+      "relativeArea": {
+        "total": 0.5421200272043387,
+        "mainChain": 0.5898267918384871,
+        "sideChain": 0.5274144288701456,
+        "polar": 0.5508461390941405,
+        "apolar": 0.5398435382371957
+      },
+      "hasRelativeAreas": true,
+      "chargedResidueIdentity": false,
+      "missingChargedSidechainAtoms": null,
+      "chargedSidechainComplete": null,
+      "interpretableChargedSidechainRelativeArea": null
+    },
+    {
+      "chain": "A",
+      "residue": "37",
+      "residueName": "PHE",
+      "observedAtomCount": 11,
+      "atoms": [
+        {
+          "name": "N",
+          "area": 0.0,
+          "polarity": "Polar",
+          "radius": 1.64
+        },
+        {
+          "name": "CA",
+          "area": 2.794845756507225,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "C",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.61
+        },
+        {
+          "name": "CB",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "O",
+          "area": 0.3714088533727945,
+          "polarity": "Polar",
+          "radius": 1.42
+        },
+        {
+          "name": "CG",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.61
+        },
+        {
+          "name": "CD1",
+          "area": 13.465943075458913,
+          "polarity": "Apolar",
+          "radius": 1.76
+        },
+        {
+          "name": "CD2",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.76
+        },
+        {
+          "name": "CE1",
+          "area": 34.71836547550921,
+          "polarity": "Apolar",
+          "radius": 1.76
+        },
+        {
+          "name": "CE2",
+          "area": 16.100314312923697,
+          "polarity": "Apolar",
+          "radius": 1.76
+        },
+        {
+          "name": "CZ",
+          "area": 34.18006603417404,
+          "polarity": "Apolar",
+          "radius": 1.76
+        }
+      ],
+      "missingExpectedHeavyAtoms": [],
+      "areaAngstromSquared": {
+        "total": 101.63094350794589,
+        "mainChain": 3.1662546098800193,
+        "sideChain": 98.46468889806587,
+        "polar": 0.3714088533727945,
+        "apolar": 101.25953465457309
+      },
+      "relativeArea": {
+        "total": 0.508459793415779,
+        "mainChain": 0.08239017980432005,
+        "sideChain": 0.6098772926482866,
+        "polar": 0.010629904217881927,
+        "apolar": 0.613917392109695
+      },
+      "hasRelativeAreas": true,
+      "chargedResidueIdentity": false,
+      "missingChargedSidechainAtoms": null,
+      "chargedSidechainComplete": null,
+      "interpretableChargedSidechainRelativeArea": null
+    },
+    {
+      "chain": "A",
+      "residue": "38",
+      "residueName": "CYS",
+      "observedAtomCount": 6,
+      "atoms": [
+        {
+          "name": "N",
+          "area": 7.131302765854177,
+          "polarity": "Polar",
+          "radius": 1.64
+        },
+        {
+          "name": "CA",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "C",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.61
+        },
+        {
+          "name": "CB",
+          "area": 5.998226550651471,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "O",
+          "area": 23.589724037187917,
+          "polarity": "Polar",
+          "radius": 1.42
+        },
+        {
+          "name": "SG",
+          "area": 8.496144404615606,
+          "polarity": "Polar",
+          "radius": 1.77
+        }
+      ],
+      "missingExpectedHeavyAtoms": [],
+      "areaAngstromSquared": {
+        "total": 45.21539775830917,
+        "mainChain": 30.721026803042093,
+        "sideChain": 14.494370955267076,
+        "polar": 39.2171712076577,
+        "apolar": 5.998226550651471
+      },
+      "relativeArea": {
+        "total": 0.34202267593274716,
+        "mainChain": 0.7219982797424699,
+        "sideChain": 0.16165927900141733,
+        "polar": 0.42287223644228705,
+        "apolar": 0.1519692564137692
+      },
+      "hasRelativeAreas": true,
+      "chargedResidueIdentity": false,
+      "missingChargedSidechainAtoms": null,
+      "chargedSidechainComplete": null,
+      "interpretableChargedSidechainRelativeArea": null
+    },
+    {
+      "chain": "A",
+      "residue": "39",
+      "residueName": "TYR",
+      "observedAtomCount": 12,
+      "atoms": [
+        {
+          "name": "N",
+          "area": 0.0,
+          "polarity": "Polar",
+          "radius": 1.64
+        },
+        {
+          "name": "CA",
+          "area": 3.346193045729997,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "C",
+          "area": 1.1275099246798026,
+          "polarity": "Apolar",
+          "radius": 1.61
+        },
+        {
+          "name": "CB",
+          "area": 3.2822792809574914,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "O",
+          "area": 0.25519345226508966,
+          "polarity": "Polar",
+          "radius": 1.42
+        },
+        {
+          "name": "CG",
+          "area": 0.470202629421474,
+          "polarity": "Apolar",
+          "radius": 1.61
+        },
+        {
+          "name": "CD1",
+          "area": 25.32938828901551,
+          "polarity": "Apolar",
+          "radius": 1.76
+        },
+        {
+          "name": "CD2",
+          "area": 12.805286866268641,
+          "polarity": "Apolar",
+          "radius": 1.76
+        },
+        {
+          "name": "CE1",
+          "area": 35.150087113387094,
+          "polarity": "Apolar",
+          "radius": 1.76
+        },
+        {
+          "name": "CE2",
+          "area": 17.088168828592003,
+          "polarity": "Apolar",
+          "radius": 1.76
+        },
+        {
+          "name": "OH",
+          "area": 45.0159609690965,
+          "polarity": "Polar",
+          "radius": 1.46
+        },
+        {
+          "name": "CZ",
+          "area": 3.3854476279478187,
+          "polarity": "Apolar",
+          "radius": 1.61
+        }
+      ],
+      "missingExpectedHeavyAtoms": [],
+      "areaAngstromSquared": {
+        "total": 147.25571802736144,
+        "mainChain": 4.7288964226748895,
+        "sideChain": 142.52682160468655,
+        "polar": 45.27115442136159,
+        "apolar": 101.98456360599982
+      },
+      "relativeArea": {
+        "total": 0.6875004343216837,
+        "mainChain": 0.12305220980158443,
+        "sideChain": 0.8109172826848348,
+        "polar": 0.5580763612100788,
+        "apolar": 0.7663978628240763
+      },
+      "hasRelativeAreas": true,
+      "chargedResidueIdentity": false,
+      "missingChargedSidechainAtoms": null,
+      "chargedSidechainComplete": null,
+      "interpretableChargedSidechainRelativeArea": null
+    },
+    {
+      "chain": "A",
+      "residue": "40",
+      "residueName": "CYS",
+      "observedAtomCount": 6,
+      "atoms": [
+        {
+          "name": "N",
+          "area": 5.809805617445045,
+          "polarity": "Polar",
+          "radius": 1.64
+        },
+        {
+          "name": "CA",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "C",
+          "area": 0.8372895168622964,
+          "polarity": "Apolar",
+          "radius": 1.61
+        },
+        {
+          "name": "CB",
+          "area": 3.280113564833931,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "O",
+          "area": 25.56472451774708,
+          "polarity": "Polar",
+          "radius": 1.42
+        },
+        {
+          "name": "SG",
+          "area": 0.5554846539961575,
+          "polarity": "Polar",
+          "radius": 1.77
+        }
+      ],
+      "missingExpectedHeavyAtoms": [],
+      "areaAngstromSquared": {
+        "total": 36.047417870884516,
+        "mainChain": 32.21181965205442,
+        "sideChain": 3.8355982188300883,
+        "polar": 31.93001478918828,
+        "apolar": 4.117403081696227
+      },
+      "relativeArea": {
+        "total": 0.27267335757098726,
+        "mainChain": 0.757034539413735,
+        "sideChain": 0.042779368936315953,
+        "polar": 0.3442960404268739,
+        "apolar": 0.1043172810158659
+      },
+      "hasRelativeAreas": true,
+      "chargedResidueIdentity": false,
+      "missingChargedSidechainAtoms": null,
+      "chargedSidechainComplete": null,
+      "interpretableChargedSidechainRelativeArea": null
+    },
+    {
+      "chain": "A",
+      "residue": "41",
+      "residueName": "ILE",
+      "observedAtomCount": 8,
+      "atoms": [
+        {
+          "name": "N",
+          "area": 0.2835637559197255,
+          "polarity": "Polar",
+          "radius": 1.64
+        },
+        {
+          "name": "CA",
+          "area": 5.349725447844882,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "C",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.61
+        },
+        {
+          "name": "CB",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "O",
+          "area": 23.503470450877657,
+          "polarity": "Polar",
+          "radius": 1.42
+        },
+        {
+          "name": "CG1",
+          "area": 18.806986298619623,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "CG2",
+          "area": 27.409476743247673,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "CD1",
+          "area": 31.961520132695412,
+          "polarity": "Apolar",
+          "radius": 1.88
+        }
+      ],
+      "missingExpectedHeavyAtoms": [],
+      "areaAngstromSquared": {
+        "total": 107.31474282920497,
+        "mainChain": 29.136759654642265,
+        "sideChain": 78.17798317456271,
+        "polar": 23.787034206797383,
+        "apolar": 83.52770862240759
+      },
+      "relativeArea": {
+        "total": 0.6106796951528195,
+        "mainChain": 0.7022598133198906,
+        "sideChain": 0.5824181120059801,
+        "polar": 0.6455097478099696,
+        "apolar": 0.6014813035386158
+      },
+      "hasRelativeAreas": true,
+      "chargedResidueIdentity": false,
+      "missingChargedSidechainAtoms": null,
+      "chargedSidechainComplete": null,
+      "interpretableChargedSidechainRelativeArea": null
+    },
+    {
+      "chain": "A",
+      "residue": "42",
+      "residueName": "PHE",
+      "observedAtomCount": 11,
+      "atoms": [
+        {
+          "name": "N",
+          "area": 0.0,
+          "polarity": "Polar",
+          "radius": 1.64
+        },
+        {
+          "name": "CA",
+          "area": 3.064882646253263,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "C",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.61
+        },
+        {
+          "name": "CB",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "O",
+          "area": 0.20280469220757094,
+          "polarity": "Polar",
+          "radius": 1.42
+        },
+        {
+          "name": "CG",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.61
+        },
+        {
+          "name": "CD1",
+          "area": 14.548623299519038,
+          "polarity": "Apolar",
+          "radius": 1.76
+        },
+        {
+          "name": "CD2",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.76
+        },
+        {
+          "name": "CE1",
+          "area": 35.37415994870915,
+          "polarity": "Apolar",
+          "radius": 1.76
+        },
+        {
+          "name": "CE2",
+          "area": 15.322901510205599,
+          "polarity": "Apolar",
+          "radius": 1.76
+        },
+        {
+          "name": "CZ",
+          "area": 33.19844235024638,
+          "polarity": "Apolar",
+          "radius": 1.76
+        }
+      ],
+      "missingExpectedHeavyAtoms": [],
+      "areaAngstromSquared": {
+        "total": 101.711814447141,
+        "mainChain": 3.2676873384608336,
+        "sideChain": 98.44412710868016,
+        "polar": 0.20280469220757094,
+        "apolar": 101.50900975493343
+      },
+      "relativeArea": {
+        "total": 0.5088643908702272,
+        "mainChain": 0.08502959506793738,
+        "sideChain": 0.6097499356375359,
+        "polar": 0.0058043701261468504,
+        "apolar": 0.6154299124222956
+      },
+      "hasRelativeAreas": true,
+      "chargedResidueIdentity": false,
+      "missingChargedSidechainAtoms": null,
+      "chargedSidechainComplete": null,
+      "interpretableChargedSidechainRelativeArea": null
+    },
+    {
+      "chain": "A",
+      "residue": "43",
+      "residueName": "CYS",
+      "observedAtomCount": 6,
+      "atoms": [
+        {
+          "name": "N",
+          "area": 7.6975644599357915,
+          "polarity": "Polar",
+          "radius": 1.64
+        },
+        {
+          "name": "CA",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "C",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.61
+        },
+        {
+          "name": "CB",
+          "area": 19.302671121678554,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "O",
+          "area": 23.841276716836145,
+          "polarity": "Polar",
+          "radius": 1.42
+        },
+        {
+          "name": "SG",
+          "area": 8.548170327513036,
+          "polarity": "Polar",
+          "radius": 1.77
+        }
+      ],
+      "missingExpectedHeavyAtoms": [],
+      "areaAngstromSquared": {
+        "total": 59.38968262596352,
+        "mainChain": 31.538841176771935,
+        "sideChain": 27.85084144919159,
+        "polar": 40.08701150428497,
+        "apolar": 19.302671121678554
+      },
+      "relativeArea": {
+        "total": 0.4492411696366379,
+        "mainChain": 0.7412183590310678,
+        "sideChain": 0.3106272746954226,
+        "polar": 0.4322515797313454,
+        "apolar": 0.4890466461028263
+      },
+      "hasRelativeAreas": true,
+      "chargedResidueIdentity": false,
+      "missingChargedSidechainAtoms": null,
+      "chargedSidechainComplete": null,
+      "interpretableChargedSidechainRelativeArea": null
+    },
+    {
+      "chain": "A",
+      "residue": "44",
+      "residueName": "TYR",
+      "observedAtomCount": 12,
+      "atoms": [
+        {
+          "name": "N",
+          "area": 0.0,
+          "polarity": "Polar",
+          "radius": 1.64
+        },
+        {
+          "name": "CA",
+          "area": 3.3462105143983067,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "C",
+          "area": 1.5090411702800328,
+          "polarity": "Apolar",
+          "radius": 1.61
+        },
+        {
+          "name": "CB",
+          "area": 3.810214285018128,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "O",
+          "area": 1.031744817593814,
+          "polarity": "Polar",
+          "radius": 1.42
+        },
+        {
+          "name": "CG",
+          "area": 0.41777237154856556,
+          "polarity": "Apolar",
+          "radius": 1.61
+        },
+        {
+          "name": "CD1",
+          "area": 24.975744729112776,
+          "polarity": "Apolar",
+          "radius": 1.76
+        },
+        {
+          "name": "CD2",
+          "area": 11.225401706517093,
+          "polarity": "Apolar",
+          "radius": 1.76
+        },
+        {
+          "name": "CE1",
+          "area": 34.66903850690893,
+          "polarity": "Apolar",
+          "radius": 1.76
+        },
+        {
+          "name": "CE2",
+          "area": 16.571939406164894,
+          "polarity": "Apolar",
+          "radius": 1.76
+        },
+        {
+          "name": "OH",
+          "area": 44.97524126198794,
+          "polarity": "Polar",
+          "radius": 1.46
+        },
+        {
+          "name": "CZ",
+          "area": 3.5772442113916667,
+          "polarity": "Apolar",
+          "radius": 1.61
+        }
+      ],
+      "missingExpectedHeavyAtoms": [],
+      "areaAngstromSquared": {
+        "total": 146.10959298092217,
+        "mainChain": 5.8869965022721535,
+        "sideChain": 140.22259647865002,
+        "polar": 46.00698607958175,
+        "apolar": 100.10260690134041
+      },
+      "relativeArea": {
+        "total": 0.6821494606700694,
+        "mainChain": 0.1531875228277948,
+        "sideChain": 0.7978072171065659,
+        "polar": 0.5671472642946468,
+        "apolar": 0.7522552558904367
+      },
+      "hasRelativeAreas": true,
+      "chargedResidueIdentity": false,
+      "missingChargedSidechainAtoms": null,
+      "chargedSidechainComplete": null,
+      "interpretableChargedSidechainRelativeArea": null
+    },
+    {
+      "chain": "A",
+      "residue": "45",
+      "residueName": "CYS",
+      "observedAtomCount": 6,
+      "atoms": [
+        {
+          "name": "N",
+          "area": 4.6086781851719225,
+          "polarity": "Polar",
+          "radius": 1.64
+        },
+        {
+          "name": "CA",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "C",
+          "area": 0.8748768409590669,
+          "polarity": "Apolar",
+          "radius": 1.61
+        },
+        {
+          "name": "CB",
+          "area": 2.6655167578790064,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "O",
+          "area": 25.587118222447476,
+          "polarity": "Polar",
+          "radius": 1.42
+        },
+        {
+          "name": "SG",
+          "area": 0.09269574880471268,
+          "polarity": "Polar",
+          "radius": 1.77
+        }
+      ],
+      "missingExpectedHeavyAtoms": [],
+      "areaAngstromSquared": {
+        "total": 33.828885755262185,
+        "mainChain": 31.070673248578466,
+        "sideChain": 2.7582125066837193,
+        "polar": 30.28849215642411,
+        "apolar": 3.5403935988380733
+      },
+      "relativeArea": {
+        "total": 0.2558917228083373,
+        "mainChain": 0.7302155875106573,
+        "sideChain": 0.030763021488776705,
+        "polar": 0.32659577481587354,
+        "apolar": 0.08969834301591267
+      },
+      "hasRelativeAreas": true,
+      "chargedResidueIdentity": false,
+      "missingChargedSidechainAtoms": null,
+      "chargedSidechainComplete": null,
+      "interpretableChargedSidechainRelativeArea": null
+    },
+    {
+      "chain": "A",
+      "residue": "46",
+      "residueName": "ILE",
+      "observedAtomCount": 8,
+      "atoms": [
+        {
+          "name": "N",
+          "area": 0.19800642201756077,
+          "polarity": "Polar",
+          "radius": 1.64
+        },
+        {
+          "name": "CA",
+          "area": 5.653810564850408,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "C",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.61
+        },
+        {
+          "name": "CB",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "O",
+          "area": 23.011960076228704,
+          "polarity": "Polar",
+          "radius": 1.42
+        },
+        {
+          "name": "CG1",
+          "area": 20.953576171576508,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "CG2",
+          "area": 25.617419624192785,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "CD1",
+          "area": 35.17659143596887,
+          "polarity": "Apolar",
+          "radius": 1.88
+        }
+      ],
+      "missingExpectedHeavyAtoms": [],
+      "areaAngstromSquared": {
+        "total": 110.61136429483483,
+        "mainChain": 28.863777063096673,
+        "sideChain": 81.74758723173815,
+        "polar": 23.209966498246263,
+        "apolar": 87.40139779658857
+      },
+      "relativeArea": {
+        "total": 0.6294392778400663,
+        "mainChain": 0.6956803341310357,
+        "sideChain": 0.6090113032238558,
+        "polar": 0.6298498371301564,
+        "apolar": 0.6293756592250923
+      },
+      "hasRelativeAreas": true,
+      "chargedResidueIdentity": false,
+      "missingChargedSidechainAtoms": null,
+      "chargedSidechainComplete": null,
+      "interpretableChargedSidechainRelativeArea": null
+    },
+    {
+      "chain": "A",
+      "residue": "47",
+      "residueName": "PHE",
+      "observedAtomCount": 11,
+      "atoms": [
+        {
+          "name": "N",
+          "area": 0.0,
+          "polarity": "Polar",
+          "radius": 1.64
+        },
+        {
+          "name": "CA",
+          "area": 3.163984442419868,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "C",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.61
+        },
+        {
+          "name": "CB",
+          "area": 0.11033981692969284,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "O",
+          "area": 0.0,
+          "polarity": "Polar",
+          "radius": 1.42
+        },
+        {
+          "name": "CG",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.61
+        },
+        {
+          "name": "CD1",
+          "area": 12.896178016304003,
+          "polarity": "Apolar",
+          "radius": 1.76
+        },
+        {
+          "name": "CD2",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.76
+        },
+        {
+          "name": "CE1",
+          "area": 35.181918184700976,
+          "polarity": "Apolar",
+          "radius": 1.76
+        },
+        {
+          "name": "CE2",
+          "area": 15.277993495780025,
+          "polarity": "Apolar",
+          "radius": 1.76
+        },
+        {
+          "name": "CZ",
+          "area": 33.04764900991,
+          "polarity": "Apolar",
+          "radius": 1.76
+        }
+      ],
+      "missingExpectedHeavyAtoms": [],
+      "areaAngstromSquared": {
+        "total": 99.67806296604456,
+        "mainChain": 3.163984442419868,
+        "sideChain": 96.5140785236247,
+        "polar": 0.0,
+        "apolar": 99.67806296604456
+      },
+      "relativeArea": {
+        "total": 0.49868952854735127,
+        "mainChain": 0.08233110701066532,
+        "sideChain": 0.5977954693318347,
+        "polar": 0.0,
+        "apolar": 0.6043292286046111
+      },
+      "hasRelativeAreas": true,
+      "chargedResidueIdentity": false,
+      "missingChargedSidechainAtoms": null,
+      "chargedSidechainComplete": null,
+      "interpretableChargedSidechainRelativeArea": null
+    },
+    {
+      "chain": "A",
+      "residue": "48",
+      "residueName": "CYS",
+      "observedAtomCount": 6,
+      "atoms": [
+        {
+          "name": "N",
+          "area": 7.3469785042085585,
+          "polarity": "Polar",
+          "radius": 1.64
+        },
+        {
+          "name": "CA",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "C",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.61
+        },
+        {
+          "name": "CB",
+          "area": 21.321927887491242,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "O",
+          "area": 25.5687656095607,
+          "polarity": "Polar",
+          "radius": 1.42
+        },
+        {
+          "name": "SG",
+          "area": 11.691095520507425,
+          "polarity": "Polar",
+          "radius": 1.77
+        }
+      ],
+      "missingExpectedHeavyAtoms": [],
+      "areaAngstromSquared": {
+        "total": 65.92876752176792,
+        "mainChain": 32.91574411376926,
+        "sideChain": 33.013023407998666,
+        "polar": 44.60683963427668,
+        "apolar": 21.321927887491242
+      },
+      "relativeArea": {
+        "total": 0.4987047467607256,
+        "mainChain": 0.7735780050239544,
+        "sideChain": 0.3682023578853298,
+        "polar": 0.4809881349393647,
+        "apolar": 0.5402059257028438
+      },
+      "hasRelativeAreas": true,
+      "chargedResidueIdentity": false,
+      "missingChargedSidechainAtoms": null,
+      "chargedSidechainComplete": null,
+      "interpretableChargedSidechainRelativeArea": null
+    },
+    {
+      "chain": "A",
+      "residue": "49",
+      "residueName": "TYR",
+      "observedAtomCount": 12,
+      "atoms": [
+        {
+          "name": "N",
+          "area": 0.0,
+          "polarity": "Polar",
+          "radius": 1.64
+        },
+        {
+          "name": "CA",
+          "area": 3.823696619757094,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "C",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.61
+        },
+        {
+          "name": "CB",
+          "area": 4.123665029921657,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "O",
+          "area": 0.0,
+          "polarity": "Polar",
+          "radius": 1.42
+        },
+        {
+          "name": "CG",
+          "area": 0.48994889395254715,
+          "polarity": "Apolar",
+          "radius": 1.61
+        },
+        {
+          "name": "CD1",
+          "area": 25.534503053016056,
+          "polarity": "Apolar",
+          "radius": 1.76
+        },
+        {
+          "name": "CD2",
+          "area": 9.277961610417776,
+          "polarity": "Apolar",
+          "radius": 1.76
+        },
+        {
+          "name": "CE1",
+          "area": 35.310953221513046,
+          "polarity": "Apolar",
+          "radius": 1.76
+        },
+        {
+          "name": "CE2",
+          "area": 10.275705914372342,
+          "polarity": "Apolar",
+          "radius": 1.76
+        },
+        {
+          "name": "OH",
+          "area": 38.10107879132627,
+          "polarity": "Polar",
+          "radius": 1.46
+        },
+        {
+          "name": "CZ",
+          "area": 3.1655856974671375,
+          "polarity": "Apolar",
+          "radius": 1.61
+        }
+      ],
+      "missingExpectedHeavyAtoms": [],
+      "areaAngstromSquared": {
+        "total": 130.10309883174392,
+        "mainChain": 3.823696619757094,
+        "sideChain": 126.27940221198683,
+        "polar": 38.10107879132627,
+        "apolar": 92.00202004041765
+      },
+      "relativeArea": {
+        "total": 0.6074191084165643,
+        "mainChain": 0.0994977002278713,
+        "sideChain": 0.7184763439462155,
+        "polar": 0.46968785492266113,
+        "apolar": 0.6913806270415395
+      },
+      "hasRelativeAreas": true,
+      "chargedResidueIdentity": false,
+      "missingChargedSidechainAtoms": null,
+      "chargedSidechainComplete": null,
+      "interpretableChargedSidechainRelativeArea": null
+    },
+    {
+      "chain": "A",
+      "residue": "50",
+      "residueName": "CYS",
+      "observedAtomCount": 6,
+      "atoms": [
+        {
+          "name": "N",
+          "area": 5.141852567055381,
+          "polarity": "Polar",
+          "radius": 1.64
+        },
+        {
+          "name": "CA",
+          "area": 0.0,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "C",
+          "area": 15.053552496196842,
+          "polarity": "Apolar",
+          "radius": 1.61
+        },
+        {
+          "name": "CB",
+          "area": 32.93764884022266,
+          "polarity": "Apolar",
+          "radius": 1.88
+        },
+        {
+          "name": "O",
+          "area": 40.084012591433364,
+          "polarity": "Polar",
+          "radius": 1.42
+        },
+        {
+          "name": "SG",
+          "area": 27.61207753438841,
+          "polarity": "Polar",
+          "radius": 1.77
+        }
+      ],
+      "missingExpectedHeavyAtoms": [],
+      "areaAngstromSquared": {
+        "total": 120.82914402929664,
+        "mainChain": 60.27941765468559,
+        "sideChain": 60.54972637461107,
+        "polar": 72.83794269287715,
+        "apolar": 47.9912013364195
+      },
+      "relativeArea": {
+        "total": 0.9139874737465707,
+        "mainChain": 1.416672565327511,
+        "sideChain": 0.6753259689338732,
+        "polar": 0.7853994251981578,
+        "apolar": 1.2158905836437675
+      },
+      "hasRelativeAreas": true,
+      "chargedResidueIdentity": false,
+      "missingChargedSidechainAtoms": null,
+      "chargedSidechainComplete": null,
+      "interpretableChargedSidechainRelativeArea": null
+    }
+  ],
+  "physicalFoldVerdict": "not_established",
+  "burialThreshold": null,
+  "confidenceScoresUsed": false
+}

@@ -1,0 +1,17 @@
+{
+  "at": "2026-10-13T05:52:43.061569+00:00",
+  "guest": "/srv/helix-strict-results/campaign-50000-AGG-04-small",
+  "allocationSha256": "ba1bd5503ec1bb3af5b75706b143f1c7e7f8b2a58e6411909f74c0bb4160903c",
+  "freezeSha256": "c33fb8b69e6361fb90bac025ccbf62fb590122b93b5f78d8da754b3886d28f20",
+  "command": "sudo env NXF_HOME=/home/ubuntu/.nextflow HELIX_MODELS_PATH=/opt/helix-strict-runtime/packages/core/test/plugin/fixtures/models-dev.json HELIX_TRP_PYTHON=/opt/helix-strict-runtime/python/bin/python nohup python3 /opt/helix-strict-runtime/script/tesis/provision_remote_strict_profile.py guest-supervise --allocation /srv/helix-strict-results/campaign-50000-AGG-04-small-allocation.json --deadline 1791874140.0 --output /srv/helix-strict-results/campaign-50000-AGG-04-small -- /usr/bin/strace -f -Z -yy -ttt -e trace=write,pwrite64,writev,pwritev,openat,ftruncate,copy_file_range -s 256 /usr/local/bin/helix-strict-bun /opt/helix-strict-runtime/evaluation/trp/campaign-20261012/aggregate-resource-contrasts/full_client.ts /opt/helix-strict-runtime/campaign/original40/AGG-04-small.json >/tmp/AGG-04-small-50000.supervisor.stdout 2>/tmp/AGG-04-small-50000.supervisor.stderr < /dev/null &",
+  "case": "AGG-04-small",
+  "budget": {
+    "cpus": 3,
+    "memoryBytes": 4294967296,
+    "workBytes": 524288,
+    "wallSeconds": 1080,
+    "requireHardStorageLimit": true,
+    "origin": "Prospectively bounded aggregate Helix client/controller and Slurm development contrast"
+  },
+  "retryForbiddenOnUnknownTransport": true
+}

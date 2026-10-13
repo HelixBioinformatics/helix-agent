@@ -1,0 +1,30 @@
+{
+  "observedAtUtc": "2026-10-13T04:56:47.699387+00:00",
+  "command": [
+    "bun",
+    "test",
+    "test/trp/remote-strict.test.ts",
+    "test/trp/remote.test.ts",
+    "test/trp/remote-status-repair.test.ts",
+    "test/trp/remote-approval.test.ts",
+    "test/trp/resources.test.ts",
+    "test/trp/enforcement.test.ts",
+    "test/trp/workflow.test.ts",
+    "test/trp/preflight.test.ts",
+    "--timeout",
+    "30000"
+  ],
+  "exitCode": 0,
+  "elapsedSeconds": 12.017760437003744,
+  "sourceSha256": {
+    "packages/helix/src/trp/remote.ts": "9b0fe6b2a1fa89a1e8ed77523102261b0f397ec7913cf4b407acf65014f6c0f6",
+    "packages/helix/src/trp/evidence.ts": "c5b91c3c0d42f20c1b97d14cfc8493e923baa06ba588540a20ddcd14f18a0a85",
+    "packages/helix/src/trp/verify_bundle.py.txt": "c45adf08da109c0dc6433da872085b6b3a69b1e81009edd8ee031fe51c687fa6",
+    "packages/helix/test/trp/remote-strict.test.ts": "e0f705814299e7abebd15f438d04a10e7f391731f1527123ae32b5cdb95ed655"
+  },
+  "logSha256": "d4d6515e08650cf014bd7a64ce2995d02496f410b8c7d5b0f1c1159be2b92fbb",
+  "reason": "Only strict Slurm worker inputs become physical project-accounted copies; provenance and cold verification bind staging; prior inconclusive link warnings retained",
+  "passed": 65,
+  "failed": 0,
+  "assertions": 263
+}

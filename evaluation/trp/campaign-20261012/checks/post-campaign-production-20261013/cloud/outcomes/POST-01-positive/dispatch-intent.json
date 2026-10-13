@@ -1,0 +1,17 @@
+{
+  "at": "2026-10-13T17:05:17.732249+00:00",
+  "guest": "/srv/helix-strict-results/post-integration-80000-POST-01-positive",
+  "allocationSha256": "8d8861c4d672eec5c4dcaf36a995fa00cf22d971631e33bf3d1abf9f4ba2c5c3",
+  "freezeSha256": "df0d2a76e7434e3d9a9a907d0183f101c7afe466e5d1963b922f2230205a1a5d",
+  "command": "sudo env NXF_HOME=/home/ubuntu/.nextflow HELIX_MODELS_PATH=/opt/helix-post-campaign-runtime-20261013-r1/packages/core/test/plugin/fixtures/models-dev.json HELIX_TRP_PYTHON=/opt/helix-post-campaign-runtime-20261013-r1/python/bin/python nohup python3 /opt/helix-post-campaign-runtime-20261013-r1/script/tesis/provision_remote_strict_profile.py guest-supervise --allocation /srv/helix-strict-results/post-integration-80000-POST-01-positive-allocation.json --deadline 1791919200.0 --output /srv/helix-strict-results/post-integration-80000-POST-01-positive -- /usr/bin/strace -f -Z -yy -ttt -e trace=write,pwrite64,writev,pwritev,openat,ftruncate,copy_file_range -s 256 /usr/local/bin/helix-strict-bun /opt/helix-post-campaign-runtime-20261013-r1/evaluation/trp/campaign-20261012/checks/post-campaign-production-20261013/cloud/full_client.ts /opt/helix-post-campaign-runtime-20261013-r1/campaign/post-integration/POST-01-positive.json >/tmp/POST-01-positive-80000.supervisor.stdout 2>/tmp/POST-01-positive-80000.supervisor.stderr < /dev/null &",
+  "case": "POST-01-positive",
+  "budget": {
+    "cpus": 3,
+    "memoryBytes": 4294967296,
+    "workBytes": 134217728,
+    "wallSeconds": 1080,
+    "requireHardStorageLimit": true,
+    "origin": "New post-repair integration only; no resource-label or scientific-rate inference"
+  },
+  "retryForbiddenOnUnknownTransport": true
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "helix-model-settings-observation/1.0",
+  "observed_at_utc": "2026-10-13T01:42:26.146197+00:00",
+  "configured_main_agent": [
+    {
+      "stage": "configured-parameters",
+      "at": "2026-10-13T01:36:07.292Z",
+      "agent": "settings-probe",
+      "model": "gpt-6-sol",
+      "provider": "openai",
+      "maximumOutputTokens": null,
+      "reasoningEffort": "medium",
+      "serviceTier": null
+    }
+  ],
+  "main_request_wire_capture_available": false,
+  "outbound_observations_scope": "Title generation only; repeated hook observations do not independently count provider calls",
+  "requested_output_cap": 8192,
+  "effective_chat_params_output_cap": null,
+  "hard_provider_output_cap_enforced": false,
+  "cause": "Built-in OpenAI Codex plugin removes maximumOutputTokens at chat.params; the development output stayed within8192tokens but this does not demonstrate a server cap",
+  "effective_service_tier": null,
+  "effective_provider_revision": null,
+  "actual_billing": null,
+  "source_code": "packages/helix/src/plugin/openai/codex.ts",
+  "source_sha256": "f1c5402e8108049b86e588cf3f043c4d80d931989a8ea92c1c7129a50c5a6df8",
+  "scope": "Model/medium reasoning observed in plugin parameters; no assertion about unexposed provider revision or service tier"
+}

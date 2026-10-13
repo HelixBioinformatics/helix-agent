@@ -1,0 +1,43 @@
+{
+  "schema": "helix-academy-legitimate-checkpoint-cycle/1.0",
+  "observedAtUtc": "2026-10-13T03:10:34.901528+00:00",
+  "lab": "185395",
+  "cloudActions": [
+    "stop existing3nodes",
+    "start same3nodes"
+  ],
+  "newVMs": 0,
+  "newEBSVolumes": 0,
+  "priorSupervisorCleanup": {
+    "path": "evaluation/trp/campaign-20261012/cloud/lab2/r24-campaign/checkpoint-cleanup.json",
+    "sha256": "2c8900fd57d2cf62c37e603b685b7beef3c7aac3cd74b42cdaded32067d66a2a",
+    "verified": true
+  },
+  "freshStoppedState": {
+    "path": "evaluation/trp/campaign-20261012/cloud/lab2/checkpoint-stop-state.json",
+    "sha256": "785c3705428fdf1d003840437c95d37cf9dd8e45462139a06313a67a5fbc50af",
+    "all_stopped": true
+  },
+  "existingXfsResume": {
+    "path": "evaluation/trp/campaign-20261012/cloud/lab2/r24-workspace/resume-after-checkpoint/resume.json",
+    "sha256": "8c34a489bd176eed4717c29e326dfef57ef697fee023ad0d8fd787cb0eac36ef",
+    "ready": true,
+    "format_performed": false,
+    "quotas_reset": false
+  },
+  "newPreparedWindow": {
+    "path": "evaluation/trp/campaign-20261012/cloud/lab2/prepare-continuation/prepare-status.json",
+    "sha256": "783a06cb5720935833f46f5e326e99d144f7c95e3404a71259cc56c8b669db84",
+    "execution_window": {
+      "academy_session_end": "2026-10-12T21:18:18-07:00",
+      "earliest_guest_stop": "2026-10-13T06:04:53+00:00",
+      "effective_admission_deadline": "2026-10-13T04:18:18+00:00",
+      "policy": "Minimum of Academy expiry and verified180minute boot guard on all required nodes"
+    }
+  },
+  "priorUnknownAttemptsRetained": [
+    "R24-13-generous",
+    "R24-13-small"
+  ],
+  "mutationOfOriginalFreeze": false
+}

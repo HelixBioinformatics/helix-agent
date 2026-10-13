@@ -1,0 +1,15 @@
+Traceback (most recent call last):
+  File "/home/ubuntu/helix-r24-cf54a7812c8a/run_r24_continuation.py", line 252, in <module>
+    main()
+  File "/home/ubuntu/helix-r24-cf54a7812c8a/run_r24_continuation.py", line 118, in main
+    controller(package, item, args.controller_workspace.resolve())
+  File "/home/ubuntu/helix-r24-cf54a7812c8a/run_r24_continuation.py", line 74, in controller
+    shutil.copyfile(workspace/name, dry/name)
+  File "/usr/lib/python3.12/shutil.py", line 273, in copyfile
+    _fastcopy_sendfile(fsrc, fdst)
+  File "/usr/lib/python3.12/shutil.py", line 164, in _fastcopy_sendfile
+    raise err from None
+  File "/usr/lib/python3.12/shutil.py", line 150, in _fastcopy_sendfile
+    sent = os.sendfile(outfd, infd, offset, blocksize)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+OSError: [Errno 28] No space left on device: '/shared/helix-r24/r24-continuation-1/R24-16-small/source.pdb' -> '/shared/helix-r24/r24-continuation-1/R24-16-small/dry-run/source.pdb'

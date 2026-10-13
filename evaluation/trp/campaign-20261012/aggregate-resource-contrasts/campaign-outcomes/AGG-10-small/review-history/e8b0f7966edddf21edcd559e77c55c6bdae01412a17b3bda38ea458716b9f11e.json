@@ -1,0 +1,1755 @@
+{
+  "case": "AGG-10-small",
+  "physicalFeasibilityLabel": false,
+  "labelReason": "Actual terminal I/O failure linked by path and timestamp to kernel EDQUOT or independently qualified quota-reservation ENOSPC under matching enforced quota",
+  "actualDecision": {
+    "version": "trp-resources/1.2.0",
+    "decidedAt": "2026-10-13T06:12:26.713Z",
+    "accepted": false,
+    "inventoryHash": "99ba4ffe31bb1cd9f03b89038f80573c85b9d96f79362421f19227a251b0e642",
+    "budgetHash": "0f77d5e4c05c79f5e7b36050cdf2353e9b3db4a728d47055a6faf631a94770af",
+    "demand": {
+      "version": "trp-resources/1.2.0",
+      "sourceBytes": 359397,
+      "selectionBytes": 150911,
+      "bundleBytes": 1158099,
+      "counts": {
+        "scientificTasks": 2,
+        "stubTasks": 2,
+        "remoteScientificCalls": 2,
+        "retries": 0
+      },
+      "cpus": 3,
+      "memoryBytes": 4294967296,
+      "workBytes": 42266624,
+      "wallSeconds": 1080,
+      "storage": {
+        "kind": "estimate",
+        "formula": "ceil((32*1048576 + 7*bundleBytes + 4*selectionBytes)/4096)*4096",
+        "hardLimit": false,
+        "profile": "trp-colocated-client-storage/1.0.0"
+      },
+      "assumptions": [
+        "Verified co-located Slurm profile: the real Helix client and Python/Nextflow controller share a root-controlled 1 CPU/2 GiB/swap-zero cgroup. All declared client work/temp/state/cache/export and remote workspace paths inherit one kernel XFS project quota. Worker tasks remain separate 2 CPU/2 GiB Docker allocations; no memory pooling.",
+        "Storage profile trp-colocated-client-storage/1.0.0 reserves32MiB overhead plus working-copy terms. This covers the real client/bootstrap/cache and portable export scope, calibrated on one development pilot before the aggregate campaign freeze; it is not a universal peak guarantee.",
+        "Two sequential tasks per traversal; one stub traversal then one real traversal; no retry or resume.",
+        "Task allocation: 2 CPUs/2 GiB. Controller allocation: 1 CPU/2 GiB; cgroup enforcement requires an independently verified operator sandbox. CPU bandwidth is not an exclusive core reservation.",
+        "Each traversal has an 8 minute watchdog; probes/configuration reserve another 120 seconds. This is a configured timeout, not a runtime prediction.",
+        "Storage estimates allocated workspace bytes including working copies, logs and portable evidence; an independently observed XFS project quota enforces an approved budget only inside an operator allocation.",
+        "The exact image and Nextflow distribution must already be cached. Image pulls/builds and shared Docker/Nextflow caches are outside workBytes.",
+        "Two remote scientific tasks are planned; SSH probes, controller commands and stub jobs are not scientific calls. Agent provider tokens, cost and conversation calls are not measured here."
+      ]
+    },
+    "rejections": [
+      {
+        "code": "capacity-insufficient",
+        "resource": "workBytes",
+        "demand": 42266624,
+        "available": 16777216
+      },
+      {
+        "code": "budget-insufficient",
+        "resource": "workBytes",
+        "demand": 42266624,
+        "available": 16777216
+      }
+    ]
+  },
+  "defaultPortableVerifier": null,
+  "executionOracleForcedOnly": true,
+  "allocatedBlockBytesObservedPeak": 16777216,
+  "allocatedBlockBytesFinal": 16777216,
+  "predictedWorkBytes": 42266624,
+  "observedUnderestimateBytes": 0,
+  "observedOverestimationFraction": null,
+  "kernelMemoryPeak": 560054272,
+  "causalKernelQuotaFailures": [
+    "[pid 71541] 1791871998.282915 openat(AT_FDCWD</shared/helix-strict/hrsb6ba2e3058584489/client>, \"/shared/helix-strict/hrsb6ba2e3058584489/client/.helix/trp/88f03ec097a7-9d9d6372-70a9-4b85-8c37-8b279eeaeb61/docker-endpoint.json\", O_WRONLY|O_CREAT|O_EXCL|O_TRUNC, 0600) = -1 ENOSPC (No space left on device)",
+    "[pid 71540] 1791871998.310346 openat(AT_FDCWD</shared/helix-strict/hrsb6ba2e3058584489/client>, \"/shared/helix-strict/hrsb6ba2e3058584489/client/.helix/trp/88f03ec097a7-9d9d6372-70a9-4b85-8c37-8b279eeaeb61/interventions.json\", O_WRONLY|O_CREAT, 0600) = -1 ENOSPC (No space left on device)",
+    "[pid 71536] 1791871998.369213 pwrite64(12</shared/helix-strict/hrsb6ba2e3058584489/state/data/helix/helix-local.db>, \"\\n\\0\\0\\0\\0\\20\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\"..., 4096, 167936) = -1 ENOSPC (No space left on device)"
+  ],
+  "causallyLinkedTerminalIoFailures": [
+    {
+      "failure": {
+        "pid": 71536,
+        "failedAtEpochSeconds": 1791871998.391,
+        "name": "Error",
+        "code": "ENOSPC",
+        "errno": -28,
+        "syscall": "open",
+        "path": "/shared/helix-strict/hrsb6ba2e3058584489/client/.helix/trp/88f03ec097a7-9d9d6372-70a9-4b85-8c37-8b279eeaeb61/interventions.json",
+        "message": "ENOSPC: no space left on device, open '/shared/helix-strict/hrsb6ba2e3058584489/client/.helix/trp/88f03ec097a7-9d9d6372-70a9-4b85-8c37-8b279eeaeb61/interventions.json'",
+        "cause": "Error: ENOSPC: no space left on device, open '/shared/helix-strict/hrsb6ba2e3058584489/client/.helix/trp/88f03ec097a7-9d9d6372-70a9-4b85-8c37-8b279eeaeb61/interventions.json'",
+        "stack": "Error: ENOSPC: no space left on device, open '/shared/helix-strict/hrsb6ba2e3058584489/client/.helix/trp/88f03ec097a7-9d9d6372-70a9-4b85-8c37-8b279eeaeb61/interventions.json'\n    at async write (/opt/helix-strict-runtime/packages/helix/src/trp/evidence.ts:32:12)\n    at async <anonymous> (/opt/helix-strict-runtime/packages/helix/src/trp/workflow.ts:616:23)"
+      },
+      "kernelSyscall": "[pid 71540] 1791871998.310346 openat(AT_FDCWD</shared/helix-strict/hrsb6ba2e3058584489/client>, \"/shared/helix-strict/hrsb6ba2e3058584489/client/.helix/trp/88f03ec097a7-9d9d6372-70a9-4b85-8c37-8b279eeaeb61/interventions.json\", O_WRONLY|O_CREAT, 0600) = -1 ENOSPC (No space left on device)"
+    }
+  ],
+  "actualExitCode": 1,
+  "terminationCause": null,
+  "elapsedSeconds": 54.19437429200025,
+  "persistentSqlite": [
+    {
+      "path": "state/data/helix/helix-local.db",
+      "bytes": 167936,
+      "sha256": "bb8fa73baacb0b0c90a7335549c1b5b8c8899b2243f654fcfc6eb49f839ead82"
+    }
+  ],
+  "checks": [
+    {
+      "name": "root-allocation-policy-binding",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "exact-kernel-budget",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "owner-quiescence",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "real-controller-and-tracer-reaped",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-0",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-0",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-1",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-1",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-2",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-2",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-3",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-3",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-4",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-4",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-5",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-5",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-6",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-6",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-7",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-7",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-8",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-8",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-9",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-9",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-10",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-10",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-11",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-11",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-12",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-12",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-13",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-13",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-14",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-14",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-15",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-15",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-16",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-16",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-17",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-17",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-18",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-18",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-19",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-19",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-20",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-20",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-21",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-21",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-22",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-22",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-23",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-23",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-24",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-24",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-25",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-25",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-26",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-26",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-27",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-27",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-28",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-28",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-29",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-29",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-30",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-30",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-31",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-31",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-32",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-32",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-33",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-33",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-34",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-34",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-35",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-35",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-36",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-36",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-37",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-37",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-38",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-38",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-39",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-39",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-40",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-40",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-41",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-41",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-42",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-42",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-43",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-43",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-44",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-44",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-45",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-45",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-46",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-46",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-47",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-47",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-48",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-48",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-49",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-49",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-50",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-50",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-51",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-51",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-52",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-52",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-53",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-53",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-54",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-54",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-55",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-55",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-56",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-56",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-57",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-57",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-58",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-58",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-59",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-59",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-60",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-60",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-61",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-61",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-62",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-62",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-63",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-63",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-64",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-64",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-65",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-65",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-66",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-66",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-67",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-67",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-68",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-68",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-69",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-69",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-70",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-70",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-71",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-71",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-72",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-72",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-73",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-73",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-74",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-74",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-75",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-75",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-76",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-76",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-77",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-77",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-78",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-78",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-79",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-79",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-80",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-80",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-81",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-81",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-82",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-82",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-83",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-83",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-84",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-84",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-85",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-85",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-86",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-86",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-87",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-87",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-88",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-88",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-89",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-89",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-90",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-90",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-91",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-91",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-92",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-92",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-93",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-93",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-94",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-94",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-95",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-95",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-96",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-96",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-97",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-97",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-98",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-98",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-99",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-99",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-100",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-100",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-101",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-101",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-102",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-102",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-103",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-103",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-104",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-104",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-105",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-105",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-106",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-106",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-107",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-107",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-0",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-1",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-2",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-3",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-4",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-5",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-6",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-7",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-8",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-9",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-10",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-11",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-12",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-13",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-14",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-15",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-16",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-17",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-18",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-19",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-20",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-21",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-22",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-23",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-24",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-25",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-26",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-27",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-28",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-29",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-30",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-31",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-32",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-33",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-34",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-35",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-36",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-37",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-38",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-39",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-40",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-41",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-42",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-43",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-44",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-45",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-46",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-47",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-48",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-49",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-50",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-51",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-52",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-53",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-54",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-55",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-56",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-57",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-58",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-59",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-60",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-61",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-62",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-63",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-64",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-65",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-66",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-67",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-68",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-69",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-70",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-71",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-72",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-73",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-74",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-75",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-76",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-77",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-78",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-79",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-80",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-81",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-82",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-83",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-84",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-85",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-86",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-87",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-88",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-89",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-90",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-91",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-92",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-93",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-94",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-95",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-96",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-97",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-98",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-99",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-100",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-101",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-102",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-103",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-104",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-105",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "actual-unmodified-decision-source",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "actual-bound-decision-policy",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "actual-decision-budget-hash",
+      "ok": true,
+      "detail": null
+    }
+  ],
+  "checksPassed": 329,
+  "checksTotal": 329,
+  "supervisionSha256": "d81c88def3abebe6fbeed337506652404685be4679ab54e4f1426bb7bfeb291f",
+  "retainedArchiveSha256": "a2b6b1b616287c39e9b526cea05820cbb8511477c0849518cf85139fdbb6e5ef",
+  "causalTimestampQuantizationToleranceSeconds": 0.001,
+  "scientificR24Rate": null,
+  "scope": "Engineering, one development protein, actual aggregate client/head declared paths plus sequential worker tasks; infrastructure/runtime/Docker caches and experiment-only root telemetry excluded",
+  "frozenAuditSha256": "b302a234e2e3c4a3f85c4e21227c728c1a07adadfd532513765e27d5f7064842",
+  "reviewSourceSha256": "ececa8c4da4f066d87a506d8670991b16abc0ba40ab0aa8d19e3fcf1840ced4f",
+  "amendmentSha256": "c7cdcdff37a7b4de0f4f50dd5a0748002c33f3d899ca1455b14379daa80939a9"
+}

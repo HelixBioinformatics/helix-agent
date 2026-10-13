@@ -1,0 +1,82 @@
+{
+  "schema": "actual-failed-strict-backend-verifier/1.0",
+  "at": "2026-10-13T07:31:54.175547+00:00",
+  "candidateSha256": "952e79d5cecae707954ed667d231838569323dffdd068ab43edd770284841eb9",
+  "productionChanged": false,
+  "cloudOperations": 0,
+  "cases": [
+    {
+      "case": "AGG-13-generous",
+      "copiedBundleFiles": 98,
+      "manifestSha256": "904bf7f80d23b93a66d88ed25ad7d01882036841b82d58dfd4bdd4ca951d5db3",
+      "externalProducerSidecar": "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/campaign-outcomes/AGG-13-generous/recovered/campaign-50000-AGG-13-generous/retained-allocation/client/.helix/trp/8703dfca7b1a-a8a4d2eb-8601-4c0a-a1c9-ba96d1abcf87/evidence-location.json",
+      "externalSidecarSha256": "a7ab9025423d5892dcb00212abe7488491742fa88dfc857f0e0958e086a9beb5",
+      "retainedArchiveSha256": "8da6fb71fd176aa21f3616eb89297c72a366ba3d5c486d6958a3368dc01ce693",
+      "runStatus": "failed",
+      "coldVerification": {
+        "ok": true,
+        "files": 98,
+        "bytes": 10931838,
+        "manifestSha256": "904bf7f80d23b93a66d88ed25ad7d01882036841b82d58dfd4bdd4ca951d5db3",
+        "status": "failed",
+        "externallyAnchored": true,
+        "legacyBackendMetadata": false,
+        "scope": "integrity, declared links and cold counts; not biological accuracy or authorship"
+      },
+      "softwarePresent": true,
+      "structuralReportPresent": true,
+      "methodsFields": 24,
+      "rawError": "Cause([Die(WorkflowError: Command '['nextflow', '-C', 'nextflow.config', 'run', 'main.nf', '-ansi-log', 'false', '-with-trace', 'trace.tsv', '-stub-run']' timed out after 480 seconds)])",
+      "scientificFeasibilityEstablished": false
+    },
+    {
+      "case": "AGG-14-generous",
+      "copiedBundleFiles": 86,
+      "manifestSha256": "0fc3ceed8c140a004551562fb5ea34e11ab65742a6156f2f07196199e00c2f2e",
+      "externalProducerSidecar": "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/campaign-outcomes/AGG-14-generous/recovered/campaign-50000-AGG-14-generous/retained-allocation/client/.helix/trp/46e21ea5e713-f456441c-4f3c-4665-a7aa-34f977305cd8/evidence-location.json",
+      "externalSidecarSha256": "60777299f478c707e70af321f6f8a20ae4c0bd2de10373651645d6488e4ba708",
+      "retainedArchiveSha256": "225fcf3627b281067ad1e71d91acffb129a8ec2e307680ca53a4f31df5727b9c",
+      "runStatus": "failed",
+      "coldVerification": {
+        "ok": true,
+        "files": 86,
+        "bytes": 7654969,
+        "manifestSha256": "0fc3ceed8c140a004551562fb5ea34e11ab65742a6156f2f07196199e00c2f2e",
+        "status": "failed",
+        "externallyAnchored": true,
+        "legacyBackendMetadata": false,
+        "scope": "integrity, declared links and cold counts; not biological accuracy or authorship"
+      },
+      "softwarePresent": true,
+      "structuralReportPresent": true,
+      "methodsFields": 24,
+      "rawError": "Cause([Die(WorkflowError: Command exit 1: nextflow: N E X T F L O W  ~  version 25.10.4\nLaunching `main.nf` [astonishing_khorana] DSL2 - revision: 0f14c41768\n[2b/73d044] Submitted process > SELECT\nERROR ~ Error executing process > 'SELECT'\n\nCaused by:\n  Process `SELECT` terminated for an unknown reason -- Likely it has been terminated by the external system\n\n\nCommand executed:\n\n  cp selection.pdb 2xqh.pdb\n\nCommand exit status:\n  -\n\nCommand output:\n  (empty)\n\nWork dir:\n  /shared/helix-strict/hrs57bbb2a6c3444741/remote/trp-46e21ea5e713-f456441c-4f3c-4665-a7aa-34f977305cd8/dry-run/work/2b/73d044345face4f6fc72191a2a2fbc\n\nContainer:\n  sha256:1dd91e70acb153a0bd9a51346fc001dd5025f851c9598697cdd37f07d9490b0a\n\nTip: when you have fixed the problem you can continue the execution adding the option `-resume` to the run command line\n\n -- Check '.nextflow.log' file for details\n)])",
+      "scientificFeasibilityEstablished": false
+    }
+  ],
+  "optionalSoftwareUnitFixture": {
+    "sourceFailedCase": "AGG-14-generous",
+    "metadataGenerator": "Unmodified production TrpEvidence.methods",
+    "metadataGeneratorSha256": "ad6f2f15f84ff659cb3e760dd909412d475af39e0d906e876dae67a9400f558b",
+    "generatorExitCode": 0,
+    "generatorStderr": "",
+    "methodsFields": 23,
+    "declaredUnavailable": [
+      "Nextflow version probe did not complete successfully; see run.json and process records"
+    ],
+    "verification": {
+      "ok": true,
+      "files": 85,
+      "bytes": 7654292,
+      "manifestSha256": "0c1b743dadbd308f7c8ee1cd018b11a0184843d44a4722e714cac14720f87a9a",
+      "status": "failed",
+      "externallyAnchored": true,
+      "legacyBackendMetadata": false,
+      "scope": "integrity, declared links and cold counts; not biological accuracy or authorship"
+    },
+    "actualNewExecution": false,
+    "sourceDataReplaced": false,
+    "scope": "Unit test of absent optional software metadata, not a claim the real failed case lacked its observed version."
+  },
+  "verified": true
+}

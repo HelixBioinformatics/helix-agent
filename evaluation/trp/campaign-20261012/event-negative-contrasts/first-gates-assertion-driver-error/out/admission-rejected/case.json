@@ -1,0 +1,32 @@
+{
+  "preparationSucceeded": false,
+  "terminalFailed": true,
+  "cause": "WorkflowError: {\"accepted\":false,\"budgetHash\":\"4905d1db70e3ca4ed712f5bfa0274975b8b8c91f2897a2475bf8e6ea5db6eeb8\",\"decidedAt\":\"2026-10-13T03:50:22.004Z\",\"demand\":{\"assumptions\":[\"Two sequential tasks per traversal; one stub traversal then one real traversal; no retry or resume.\",\"Task allocation: 2 CPUs/2 GiB. Controller allocation: 1 CPU/2 GiB; cgroup enforcement requires an independently verified operator sandbox. CPU bandwidth is not an exclusive core reservation.\",\"Each traversal has an 8 minute watchdog; probes/configuration reserve another 120 seconds. This is a configured timeout, not a runtime prediction.\",\"Storage estimates allocated workspace bytes including working copies, logs and portable evidence; an independently observed XFS project quota enforces an approved budget only inside an operator allocation.\",\"The exact image and Nextflow distribution must already be cached. Image pulls/builds and shared Docker/Nextflow caches are outside workBytes.\",\"Zero remote scientific calls applies to the offline workflow only; agent provider tokens, cost and conversation calls are not measured here.\"],\"bundleBytes\":1111763,\"counts\":{\"remoteScientificCalls\":0,\"retries\":0,\"scientificTasks\":2,\"stubTasks\":2},\"cpus\":3,\"memoryBytes\":4294967296,\"selectionBytes\":150911,\"sourceBytes\":359397,\"storage\":{\"formula\":\"ceil((12*1048576 + 7*bundleBytes + 4*selectionBytes)/4096)*4096\",\"hardLimit\":false,\"kind\":\"estimate\"},\"version\":\"trp-resources/1.2.0\",\"wallSeconds\":1080,\"workBytes\":20971520},\"inventoryHash\":\"73aac9d35fef0289c74198de903228762593764dd8fc9d1108c9d70505d10e16\",\"rejections\":[{\"available\":1,\"code\":\"budget-insufficient\",\"demand\":3,\"resource\":\"cpus\"}],\"version\":\"trp-resources/1.2.0\"}\n    at <anonymous> (/home/webiwabou/Projects/bioinformatica-org/packages/helix/src/trp/workflow.ts:136:42)\n    at Tool.execute (/home/webiwabou/Projects/bioinformatica-org/packages/helix/src/tool/tool.ts:145:38)",
+  "runDirectory": null,
+  "sourceFreezeSha256": "c22729cde6bf5fe329c2e40fff84d35a5a6ce2f2aaeb6cc845402566f4d9205e",
+  "actionOracleBeforeProducerRead": true,
+  "expected": {
+    "id": "admission-rejected",
+    "causeContains": "resource-rejected",
+    "expectedEvents": [],
+    "expectedPermissionActions": 0,
+    "expectedApprovalActions": 0,
+    "expectedProtocolGuards": 0,
+    "expectedAdmissionDecision": false,
+    "expectedPreparationRecord": {
+      "admissionAccepted": false,
+      "resource": "cpus",
+      "code": "budget-insufficient",
+      "demand": 3,
+      "available": 1
+    }
+  },
+  "actualHostInventory": true,
+  "syntheticCallbacks": true,
+  "modelCalls": 0,
+  "awsOperations": 0,
+  "forbiddenExternalLaunchAttempts": 0,
+  "scientificTasksLaunched": 0,
+  "humanLabels": 0,
+  "scientificMetrics": null
+}

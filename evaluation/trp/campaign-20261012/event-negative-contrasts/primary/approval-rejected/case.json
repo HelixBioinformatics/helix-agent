@@ -1,0 +1,55 @@
+{
+  "preparationSucceeded": true,
+  "terminalFailed": true,
+  "cause": "WorkflowError: The proposal was not approved\n    at <anonymous> (/home/webiwabou/Projects/bioinformatica-org/packages/helix/src/trp/workflow.ts:341:44)\n    at Tool.execute (/home/webiwabou/Projects/bioinformatica-org/packages/helix/src/tool/tool.ts:145:38)",
+  "failureCode": "approval-denied",
+  "runDirectory": "producer/trp/7e480375ebbd-7330d8bd-2d5b-4a76-adc2-e5f5c7ca2332",
+  "sourceFreezeSha256": "e35b57d0e9e81eaf0055281df856bf9226aefbd25529332e728e731b00b1e7bd",
+  "actionOracleBeforeProducerRead": true,
+  "expected": {
+    "id": "approval-rejected",
+    "expectedEvents": [
+      {
+        "source": "admission",
+        "outcome": "accepted-for-review"
+      },
+      {
+        "source": "protocol",
+        "outcome": "not-committed"
+      },
+      {
+        "source": "permission",
+        "outcome": "requested"
+      },
+      {
+        "source": "permission",
+        "outcome": "returned-allowed"
+      },
+      {
+        "source": "approval",
+        "outcome": "requested"
+      },
+      {
+        "source": "approval",
+        "outcome": "answered"
+      },
+      {
+        "source": "execution",
+        "outcome": "failed-or-rejected"
+      }
+    ],
+    "expectedPermissionActions": 2,
+    "expectedApprovalActions": 2,
+    "expectedProtocolGuards": 1,
+    "expectedAdmissionDecision": true,
+    "causeCode": "approval-denied"
+  },
+  "actualHostInventory": true,
+  "syntheticCallbacks": true,
+  "modelCalls": 0,
+  "awsOperations": 0,
+  "forbiddenExternalLaunchAttempts": 0,
+  "scientificTasksLaunched": 0,
+  "humanLabels": 0,
+  "scientificMetrics": null
+}

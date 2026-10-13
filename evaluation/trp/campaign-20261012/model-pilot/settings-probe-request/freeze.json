@@ -1,0 +1,30 @@
+{
+  "frozen_at_utc": "2026-10-13T01:36:02.996444+00:00",
+  "config": {
+    "model": "openai/gpt-6-sol",
+    "share": "disabled",
+    "permission": {
+      "*": "deny"
+    },
+    "plugin": [
+      "file:///home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/model-pilot/observe-settings.ts"
+    ],
+    "agent": {
+      "settings-probe": {
+        "mode": "primary",
+        "model": "openai/gpt-6-sol",
+        "variant": "medium",
+        "steps": 1,
+        "permission": {
+          "*": "deny"
+        }
+      }
+    }
+  },
+  "prompt": "This is an isolated development settings probe. Reply with exactly HELIX_SETTINGS_OK. Do not call tools.",
+  "output_token_max_environment": 8192,
+  "observer_sha256": "d538dca9a2633e841b04f8c1ffdac483e9e3308ac6f2612f49db3337e1a35b0b",
+  "no_reserved_case": true,
+  "no_headers_or_input_content_observed": true,
+  "reason": "PreviousobservercapturedconfiguredparametersbutmissednativeUint8Arrayrequestbody;preservedthatprobeandextendedbodyreadingwithoutchangingparameters."
+}

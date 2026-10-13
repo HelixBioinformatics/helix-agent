@@ -1,0 +1,107 @@
+{
+  "schema": "helix-remote-campaign-audit/1.0",
+  "bundle": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab1/helix-reference-failure-1791851770481/f8a9e2dab650-f4b221ba-2926-4d7b-aa69-898a2089af37/evidence",
+  "externally_recorded_manifest_sha256": "0802926c48f1e20817975686b1bf32fea2cb9a9faf2dc013b01cfbd3250bdc90",
+  "expected_outcome": "failed",
+  "trusted_verifier_sha256": "5a60afbfd245f2b06ebcec5e409b971d7131a8faaa2f01b136f40de2283378a6",
+  "checks": [
+    {
+      "name": "portable_integrity_and_cold_counts",
+      "passed": true,
+      "result": {
+        "ok": true,
+        "files": 91,
+        "bytes": 2884825,
+        "manifestSha256": "0802926c48f1e20817975686b1bf32fea2cb9a9faf2dc013b01cfbd3250bdc90",
+        "status": "failed",
+        "externallyAnchored": true,
+        "scope": "integrity, declared links and cold counts; not biological accuracy or authorship"
+      }
+    },
+    {
+      "name": "expected_outcome",
+      "passed": true,
+      "result": {
+        "outcome": "failed"
+      }
+    },
+    {
+      "name": "source_backed_methods_and_template",
+      "passed": true,
+      "result": {
+        "fields_checked": 20,
+        "required_fields": 18,
+        "markdown_reproduced_from_sources": true,
+        "unavailable_fields": []
+      }
+    },
+    {
+      "name": "event_chain_and_independent_gate_oracle",
+      "passed": true,
+      "result": {
+        "recorded_events": 10,
+        "source_counts": {
+          "admission": 2,
+          "protocol": 1,
+          "permission": 2,
+          "approval": 2,
+          "execution": 3
+        },
+        "independent_success_path_gate_events": 0,
+        "external_action_oracle_expected_events": null,
+        "limitation": "Mandatory path coverage only unless an independent action oracle is supplied; not full-session human coverage or protocol-violation sensitivity."
+      }
+    },
+    {
+      "name": "approval_configuration_and_transfer_bindings",
+      "passed": true,
+      "result": {
+        "run_id": "f4b221ba-2926-4d7b-aa69-898a2089af37",
+        "digest": "f8a9e2dab650daef004c2620fb403b5110dbb7bb043112402f8d5fa66ebbb662",
+        "bound_files": 21,
+        "transferred_files": 79,
+        "target_fingerprint": "7eb9ec4e4d2301e3eacd0e7720545e42470a9d8eb731237bde00347a9da68ab6",
+        "terminal_status": "failed",
+        "approval_actor": "Question.Service answer; actor provenance must be disclosed by the campaign driver."
+      }
+    }
+  ],
+  "scope": "Actual recorded remote engineering execution and source-backed methods; no independent human agreement or physical specificity.",
+  "partial_execution": {
+    "terminal": {
+      "digest": "f8a9e2dab650daef004c2620fb403b5110dbb7bb043112402f8d5fa66ebbb662",
+      "error": "Command exit 1: nextflow: ",
+      "finishedAt": "2026-10-13T00:36:02.161879+00:00",
+      "id": "f4b221ba-2926-4d7b-aa69-898a2089af37",
+      "status": "failed"
+    },
+    "native_tasks_observed_in_traces": [
+      {
+        "traversal": "stub",
+        "process": "SELECT",
+        "native_id": "15",
+        "state": "FAILED",
+        "exit": "126"
+      }
+    ],
+    "scientific_tasks_completed": 0,
+    "captured_task_errors": [
+      {
+        "artifact": "dry-run/work/b3/2259d51f460a495f5ef938ce0866c6/.command.err",
+        "sha256": "3ac4bdc75cdf469c7d54c71623cc1b5d2991a7dc581b574df64e362e5af5f3cc",
+        "excerpt": "docker: Error response from daemon: error while creating mount source path '/shared/helix/trp-f8a9e2dab650-f4b221ba-2926-4d7b-aa69-898a2089af37/dry-run': mkdir /shared/helix/trp-f8a9e2dab650-f4b221ba-2926-4d7b-aa69-898a2089af37/dry-run: permission denied\n\nRun 'docker run --help' for more information\n"
+      }
+    ],
+    "docker_mount_permission_denial_observed": true,
+    "native_cancellation": {
+      "at": "2026-10-13T00:36:02.161595+00:00",
+      "confirmed": true,
+      "remaining": [],
+      "requested": []
+    },
+    "no_owned_active_jobs_after_failure_confirmed": true,
+    "running_job_cancellation_demonstrated": false,
+    "limitation": "Trace native IDs do not establish actual node placement without matching native scheduler records. Empty cancellation requests show no owned active jobs, not cancellation of a running task."
+  },
+  "verified": true
+}

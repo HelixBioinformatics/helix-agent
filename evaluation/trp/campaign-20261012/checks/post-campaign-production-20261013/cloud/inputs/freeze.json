@@ -1,0 +1,500 @@
+{
+  "schema": "helix-post-repair-strict-integration/1.0",
+  "mode": "post-integration",
+  "guestInputNamespace": "post-integration",
+  "frozenAt": "2026-10-13T17:04:10.965Z",
+  "cases": [
+    {
+      "id": "POST-01-positive",
+      "graphId": "G-valid-048",
+      "cohort": "ordinary-positive",
+      "specification": {
+        "version": "trp-spec/1.0.0",
+        "catalogHash": "e1c049cf4e4922d22d9f9f285582158b2f215170efa6520182007b990cf54815",
+        "intent": {
+          "value": "Calcular la geometría de las unidades suministradas para 2xqh, cadena A.",
+          "origin": {
+            "kind": "reference",
+            "reference": "evaluation/trp/reference/geometre/units.json",
+            "detail": "Published GeomeTRe 1.0 example for 2xqh A; development reference, excluded from held-out evaluation"
+          }
+        },
+        "structure": {
+          "value": {
+            "path": "evaluation/trp/reference/geometre/2xqh.pdb",
+            "sha256": "f674267d0ef4752a3d4da00497947bfc09f441a5c36d39593b72bc2ba390df0b",
+            "pdb": "2xqh"
+          },
+          "origin": {
+            "kind": "reference",
+            "reference": "evaluation/trp/reference/geometre/units.json",
+            "detail": "Published GeomeTRe 1.0 example for 2xqh A; development reference, excluded from held-out evaluation"
+          }
+        },
+        "chain": {
+          "value": "A",
+          "origin": {
+            "kind": "reference",
+            "reference": "evaluation/trp/reference/geometre/units.json",
+            "detail": "Published GeomeTRe 1.0 example for 2xqh A; development reference, excluded from held-out evaluation"
+          }
+        },
+        "model": {
+          "value": 1,
+          "origin": {
+            "kind": "reference",
+            "reference": "evaluation/trp/reference/geometre/units.json",
+            "detail": "Published GeomeTRe 1.0 example for 2xqh A; development reference, excluded from held-out evaluation"
+          }
+        },
+        "units": {
+          "value": {
+            "contract": {
+              "protein": "2xqh",
+              "chain": "A",
+              "format": "json",
+              "numbering": "pdb-author",
+              "insertionCodes": "excluded",
+              "confidence": "none",
+              "scale": "author-residue-interval"
+            },
+            "ranges": [
+              {
+                "start": 190,
+                "end": 203
+              },
+              {
+                "start": 204,
+                "end": 217
+              },
+              {
+                "start": 218,
+                "end": 233
+              },
+              {
+                "start": 234,
+                "end": 249
+              },
+              {
+                "start": 250,
+                "end": 263
+              },
+              {
+                "start": 264,
+                "end": 276
+              },
+              {
+                "start": 305,
+                "end": 326
+              },
+              {
+                "start": 327,
+                "end": 350
+              },
+              {
+                "start": 373,
+                "end": 392
+              },
+              {
+                "start": 393,
+                "end": 416
+              }
+            ]
+          },
+          "origin": {
+            "kind": "derived",
+            "reference": "evaluation/trp/reference/geometre/units.json",
+            "detail": "Fixed subset of published development units, not an independent biological annotation."
+          }
+        },
+        "insertions": {
+          "value": [
+            {
+              "start": 351,
+              "end": 372
+            }
+          ],
+          "origin": {
+            "kind": "reference",
+            "reference": "evaluation/trp/reference/geometre/units.json",
+            "detail": "Published GeomeTRe 1.0 example for 2xqh A; development reference, excluded from held-out evaluation"
+          }
+        },
+        "graph": {
+          "nodes": [
+            {
+              "id": "structure",
+              "operation": "input.structure"
+            },
+            {
+              "id": "units",
+              "operation": "input.units"
+            },
+            {
+              "id": "select",
+              "operation": "pdb.select"
+            },
+            {
+              "id": "geometry",
+              "operation": "geometre.geometry"
+            }
+          ],
+          "edges": [
+            {
+              "from": "structure",
+              "to": "select",
+              "input": "structure",
+              "contract": {
+                "protein": "2xqh",
+                "chain": "A",
+                "numbering": "pdb-author",
+                "confidence": "none",
+                "format": "pdb",
+                "insertionCodes": "preserved",
+                "scale": "xyz:angstrom;B:angstrom^2"
+              }
+            },
+            {
+              "from": "select",
+              "to": "geometry",
+              "input": "structure",
+              "contract": {
+                "protein": "2xqh",
+                "chain": "A",
+                "numbering": "pdb-author",
+                "confidence": "none",
+                "format": "pdb",
+                "insertionCodes": "excluded",
+                "scale": "xyz:angstrom;B:angstrom^2"
+              }
+            },
+            {
+              "from": "units",
+              "to": "geometry",
+              "input": "units",
+              "contract": {
+                "protein": "2xqh",
+                "chain": "A",
+                "numbering": "pdb-author",
+                "confidence": "none",
+                "format": "json",
+                "insertionCodes": "excluded",
+                "scale": "author-residue-interval"
+              }
+            }
+          ]
+        }
+      },
+      "budget": {
+        "cpus": 3,
+        "memoryBytes": 4294967296,
+        "workBytes": 134217728,
+        "wallSeconds": 1080,
+        "requireHardStorageLimit": true,
+        "origin": "New post-repair integration only; no resource-label or scientific-rate inference"
+      },
+      "prospectiveDecisionUuid": "c1ee688d-e554-4d9d-a56c-1337118fcb3f",
+      "allowWorkOnlyOracle": false,
+      "unboundBundlePath": "/opt/helix-post-campaign-runtime-20261013-r1/campaign/post-integration/G-valid-048/unbound-bundle.json",
+      "unboundFileHashes": {
+        "catalogue.json": "97684486814a24bc435353bda9477d852032538e4662468b13fa16c1192fc8df",
+        "catalogue_evidence.json": "d4563219e99d42068a057b1c1e8a718db1cba3e9391260aba2f954436d880249",
+        "execution.json": "75bd42e61bf921a191d6c618549f8df093c86426b9072dea643e26decb3e82d6",
+        "specification.json": "07c2091410910b248012284c67f51a84c743bd53d7e03a54e4ec51a7495cafb2",
+        "validation.json": "e02f8e009e658df42d9ff70baec4d5091c73964c47349e451900a186c641d5dd",
+        "structural_report.json": "9852a601a2f825bc5c8843525c94b9a9843a9a8328fb35b8b80cece170461123",
+        "structural_catalogue.json": "2536d668520fcd19f2d8fea5377e47dbcb839d6307ed216eaaeaa5cf294c2cb5",
+        "inspect_structure.py": "10e3f2224213fbb6718023348e243605fd71afcd6b1b3bfdf1feb14f8822993b",
+        "source.pdb": "f674267d0ef4752a3d4da00497947bfc09f441a5c36d39593b72bc2ba390df0b",
+        "selection.pdb": "e126fdcfaec095bf8a874bf0f5c35af98162fb5258ee42c91b1258b157b5fceb",
+        "settings.json": "a91d0eecf45bf696a7d6bfa5eeb648152bbe389f1ec7eef3619c3830ac9a8965",
+        "trp_select.py": "31659d173eb50bd0ffbf7200e26ff51d3febec5f287a459489452934c3b0247e",
+        "trp_geometry.py": "60d6606d3ce57d1d71b02d85d4fa369abfc65a9da97dbc8fce398dfd78b4bbcf",
+        "main.nf": "93f4e5ae23ec27a7fc5b671bb396b854c5381eb4441e15dff2997809de2e8be5",
+        "nextflow.config": "79dad9b9a201f498964a84223d8eeb305a40e2f13c4ab87a44b34751edb2f05b"
+      },
+      "sourceInputPath": "/opt/helix-post-campaign-runtime-20261013-r1/campaign/post-integration/G-valid-048/source.pdb",
+      "sourceInputSha256": "f674267d0ef4752a3d4da00497947bfc09f441a5c36d39593b72bc2ba390df0b",
+      "goldCsvPath": "/opt/helix-post-campaign-runtime-20261013-r1/campaign/post-integration/G-valid-048/geometry.csv",
+      "goldCsvSha256": "2d0ff6b22dfe2fed7cea441639223ac3e7481e7cc399bbfbc9c8d8e2e2ab93cb",
+      "evidenceRoot": "/opt/helix-post-campaign-runtime-20261013-r1",
+      "physicalFeasibilityLabel": null,
+      "helixDecision": null,
+      "expectedIntegrationOutcome": "four native tasks and own-input gold plus cold verified export",
+      "faultInjection": null
+    },
+    {
+      "id": "POST-02-native-cancellation",
+      "graphId": "G-valid-049",
+      "cohort": "controlled-native-failure",
+      "specification": {
+        "version": "trp-spec/1.0.0",
+        "catalogHash": "e1c049cf4e4922d22d9f9f285582158b2f215170efa6520182007b990cf54815",
+        "intent": {
+          "value": "Calcular la geometría de las unidades suministradas para 2xqh, cadena A.",
+          "origin": {
+            "kind": "reference",
+            "reference": "evaluation/trp/reference/geometre/units.json",
+            "detail": "Published GeomeTRe 1.0 example for 2xqh A; development reference, excluded from held-out evaluation"
+          }
+        },
+        "structure": {
+          "value": {
+            "path": "evaluation/trp/reference/geometre/2xqh.pdb",
+            "sha256": "f674267d0ef4752a3d4da00497947bfc09f441a5c36d39593b72bc2ba390df0b",
+            "pdb": "2xqh"
+          },
+          "origin": {
+            "kind": "reference",
+            "reference": "evaluation/trp/reference/geometre/units.json",
+            "detail": "Published GeomeTRe 1.0 example for 2xqh A; development reference, excluded from held-out evaluation"
+          }
+        },
+        "chain": {
+          "value": "A",
+          "origin": {
+            "kind": "reference",
+            "reference": "evaluation/trp/reference/geometre/units.json",
+            "detail": "Published GeomeTRe 1.0 example for 2xqh A; development reference, excluded from held-out evaluation"
+          }
+        },
+        "model": {
+          "value": 1,
+          "origin": {
+            "kind": "reference",
+            "reference": "evaluation/trp/reference/geometre/units.json",
+            "detail": "Published GeomeTRe 1.0 example for 2xqh A; development reference, excluded from held-out evaluation"
+          }
+        },
+        "units": {
+          "value": {
+            "contract": {
+              "protein": "2xqh",
+              "chain": "A",
+              "format": "json",
+              "numbering": "pdb-author",
+              "insertionCodes": "excluded",
+              "confidence": "none",
+              "scale": "author-residue-interval"
+            },
+            "ranges": [
+              {
+                "start": 161,
+                "end": 175
+              },
+              {
+                "start": 176,
+                "end": 189
+              },
+              {
+                "start": 190,
+                "end": 203
+              },
+              {
+                "start": 204,
+                "end": 217
+              },
+              {
+                "start": 218,
+                "end": 233
+              },
+              {
+                "start": 234,
+                "end": 249
+              },
+              {
+                "start": 264,
+                "end": 276
+              },
+              {
+                "start": 305,
+                "end": 326
+              },
+              {
+                "start": 327,
+                "end": 350
+              },
+              {
+                "start": 373,
+                "end": 392
+              }
+            ]
+          },
+          "origin": {
+            "kind": "derived",
+            "reference": "evaluation/trp/reference/geometre/units.json",
+            "detail": "Fixed subset of published development units, not an independent biological annotation."
+          }
+        },
+        "insertions": {
+          "value": [
+            {
+              "start": 351,
+              "end": 372
+            }
+          ],
+          "origin": {
+            "kind": "reference",
+            "reference": "evaluation/trp/reference/geometre/units.json",
+            "detail": "Published GeomeTRe 1.0 example for 2xqh A; development reference, excluded from held-out evaluation"
+          }
+        },
+        "graph": {
+          "nodes": [
+            {
+              "id": "structure",
+              "operation": "input.structure"
+            },
+            {
+              "id": "units",
+              "operation": "input.units"
+            },
+            {
+              "id": "select",
+              "operation": "pdb.select"
+            },
+            {
+              "id": "geometry",
+              "operation": "geometre.geometry"
+            }
+          ],
+          "edges": [
+            {
+              "from": "structure",
+              "to": "select",
+              "input": "structure",
+              "contract": {
+                "protein": "2xqh",
+                "chain": "A",
+                "numbering": "pdb-author",
+                "confidence": "none",
+                "format": "pdb",
+                "insertionCodes": "preserved",
+                "scale": "xyz:angstrom;B:angstrom^2"
+              }
+            },
+            {
+              "from": "select",
+              "to": "geometry",
+              "input": "structure",
+              "contract": {
+                "protein": "2xqh",
+                "chain": "A",
+                "numbering": "pdb-author",
+                "confidence": "none",
+                "format": "pdb",
+                "insertionCodes": "excluded",
+                "scale": "xyz:angstrom;B:angstrom^2"
+              }
+            },
+            {
+              "from": "units",
+              "to": "geometry",
+              "input": "units",
+              "contract": {
+                "protein": "2xqh",
+                "chain": "A",
+                "numbering": "pdb-author",
+                "confidence": "none",
+                "format": "json",
+                "insertionCodes": "excluded",
+                "scale": "author-residue-interval"
+              }
+            }
+          ]
+        }
+      },
+      "budget": {
+        "cpus": 3,
+        "memoryBytes": 4294967296,
+        "workBytes": 134217728,
+        "wallSeconds": 1080,
+        "requireHardStorageLimit": true,
+        "origin": "New post-repair integration only; no resource-label or scientific-rate inference"
+      },
+      "prospectiveDecisionUuid": "bd1bdeec-a6a7-4895-abf6-544e0e6adf44",
+      "allowWorkOnlyOracle": false,
+      "unboundBundlePath": "/opt/helix-post-campaign-runtime-20261013-r1/campaign/post-integration/G-valid-049/unbound-bundle.json",
+      "unboundFileHashes": {
+        "catalogue.json": "97684486814a24bc435353bda9477d852032538e4662468b13fa16c1192fc8df",
+        "catalogue_evidence.json": "d4563219e99d42068a057b1c1e8a718db1cba3e9391260aba2f954436d880249",
+        "execution.json": "75bd42e61bf921a191d6c618549f8df093c86426b9072dea643e26decb3e82d6",
+        "specification.json": "14ae2454e71448363a04680655e147d1c36f50e1f54897d8c2c610fb2acac006",
+        "validation.json": "e02f8e009e658df42d9ff70baec4d5091c73964c47349e451900a186c641d5dd",
+        "structural_report.json": "74d79288f5795e4ae4003300ecde39aed1bc8c9c5f03ae7150a1cfbac9a6b53b",
+        "structural_catalogue.json": "2536d668520fcd19f2d8fea5377e47dbcb839d6307ed216eaaeaa5cf294c2cb5",
+        "inspect_structure.py": "10e3f2224213fbb6718023348e243605fd71afcd6b1b3bfdf1feb14f8822993b",
+        "source.pdb": "f674267d0ef4752a3d4da00497947bfc09f441a5c36d39593b72bc2ba390df0b",
+        "selection.pdb": "e126fdcfaec095bf8a874bf0f5c35af98162fb5258ee42c91b1258b157b5fceb",
+        "settings.json": "f40a948c06825158cddf371713d2c4430b74e08e03d39bf91c2eed1789f51ab6",
+        "trp_select.py": "31659d173eb50bd0ffbf7200e26ff51d3febec5f287a459489452934c3b0247e",
+        "trp_geometry.py": "60d6606d3ce57d1d71b02d85d4fa369abfc65a9da97dbc8fce398dfd78b4bbcf",
+        "main.nf": "93f4e5ae23ec27a7fc5b671bb396b854c5381eb4441e15dff2997809de2e8be5",
+        "nextflow.config": "79dad9b9a201f498964a84223d8eeb305a40e2f13c4ab87a44b34751edb2f05b"
+      },
+      "sourceInputPath": "/opt/helix-post-campaign-runtime-20261013-r1/campaign/post-integration/G-valid-049/source.pdb",
+      "sourceInputSha256": "f674267d0ef4752a3d4da00497947bfc09f441a5c36d39593b72bc2ba390df0b",
+      "goldCsvPath": "/opt/helix-post-campaign-runtime-20261013-r1/campaign/post-integration/G-valid-049/geometry.csv",
+      "goldCsvSha256": "ec6f7ba567180c434355f02720cd7509cee26af23945eefdcd618e3bd61fbe4f",
+      "evidenceRoot": "/opt/helix-post-campaign-runtime-20261013-r1",
+      "physicalFeasibilityLabel": null,
+      "helixDecision": null,
+      "expectedIntegrationOutcome": "own scientific GEOMETRY native task observed RUNNING then scancel; automatic failed package and complete owned cleanup",
+      "faultInjection": {
+        "kind": "native-scancel",
+        "afterApproval": true,
+        "afterAnalysisAdmission": true,
+        "jobName": "nf-GEOMETRY",
+        "requiredInitialNativeState": "RUNNING",
+        "exactOwnerCommentRequired": true,
+        "oneInjectionOnly": true,
+        "scientificResourceLabel": null
+      }
+    }
+  ],
+  "sourceHashes": {
+    "packages/helix/src/trp/catalog.ts": "e30d5e78c7c0e601f73b767868e5a6c70b25f48b84876c6fe5dac420b51c593c",
+    "packages/helix/src/trp/catalog.json": "10aeb85d21e0f124173c615e61924c665b6d69fd0c799ae70d05b810003842c0",
+    "packages/helix/src/trp/specification.ts": "7203ac6634be723b8d88ca9efefa0df7b6141486c60a2b6bd62fb7a42f0155ff",
+    "packages/helix/src/trp/graph.ts": "31d66a12fc902e1a7219e45751ade36a13f720c73c45cf6059567f8c2db7ff18",
+    "packages/helix/src/trp/nextflow.ts": "3729bf84120a359ba5efb68349bca85d7d80be579638bbb4810c018554458309",
+    "packages/helix/src/trp/interventions.ts": "99b20265751966910521db0eda32ddf38c3a5133928e2d6546ab6c0d2a122542",
+    "packages/helix/src/trp/inspect_structure.py.txt": "10e3f2224213fbb6718023348e243605fd71afcd6b1b3bfdf1feb14f8822993b",
+    "packages/helix/src/trp/structural.ts": "54fc5cff7a5a2e7cd7d96bf13b9236a7122a28a2d41da35c8a301399872a8f5d",
+    "packages/helix/src/trp/verify_inspection.py.txt": "9922cc49279f2539452875d398557db00cc53c02751db7c370d93b76c16e0d38",
+    "packages/helix/src/trp/enforcement.ts": "9b624ff112a57948e074efbae2a6818e97b7e21cee289379956190b84684e383",
+    "packages/helix/src/trp/coordinates.ts": "ffaca8f54d37f69bb5bf8f0618ab729a4d7e398b519a03b4595cf02beb088db5",
+    "packages/helix/src/trp/sifts_residues.py.txt": "6bdf0e763daf4e8100cb9c65eb0428e0e08c10fb07ab66c0e2b9de8c862e0a0b",
+    "packages/helix/src/trp/strpsearch_guard.py.txt": "5d7b075e50998577299d15ca11be64454d83ec9bd79c7f7b23c6ef97ed6d013a",
+    "packages/helix/src/trp/predicted_geometry.py.txt": "f4b7d728c54e3a0a3e2eba91914c3ec26b25ec6d5740ddf0adce7ef50e671d0e",
+    "packages/helix/src/trp/verify_predicted.py.txt": "ffc3a233d08bfa948df019a07fa6289c0093912582fac3cfe10477bc031175a0",
+    "packages/helix/src/trp/steric_diagnostic.py.txt": "b84956c0b451be20843e46930bc89bf4c1dc2446e807969fb8a78d8cdb41a676",
+    "packages/helix/src/trp/surface_diagnostic.py.txt": "881566e1f18083801deafea9d6a0218e1df5698208217bced08aefc957250e64",
+    "packages/helix/src/trp/evidence.ts": "ad6f2f15f84ff659cb3e760dd909412d475af39e0d906e876dae67a9400f558b",
+    "packages/helix/src/trp/remote.ts": "9b0fe6b2a1fa89a1e8ed77523102261b0f397ec7913cf4b407acf65014f6c0f6",
+    "packages/helix/src/trp/resources.ts": "094766a68a26373bb3367bf844d83e32b0ccdcf0a9bb75374e92c45c8733007d",
+    "packages/helix/src/trp/remote-enforcement.ts": "c34e9f86faf5d0e1d41679239d73212139f7c76be9b24a57ca62db1372e1eb92",
+    "packages/helix/src/trp/remote_strict.py.txt": "f7587626581f414ca8515b87997495f1f65785e07231e1a2151a33da395b9b50",
+    "packages/helix/src/trp/workflow.ts": "986f4b13e1c2661ede6f42114ec23bc4a5e891872a401d1874c992e9ba3b5cc7",
+    "packages/helix/src/trp/verify_bundle.py.txt": "952e79d5cecae707954ed667d231838569323dffdd068ab43edd770284841eb9",
+    "packages/helix/src/trp/remote_runner.py.txt": "f2aa0d714848da79726bf1126ed5611e999b941cd0ee653067a901a9873e1805",
+    "evaluation/trp/campaign-20261012/checks/post-campaign-production-20261013/cloud/full_client.ts": "d9e37cd3b78945b74925781623ed073221e5be95023fd620fc1d538f6162d323",
+    "evaluation/trp/campaign-20261012/checks/post-campaign-production-20261013/cloud/prepare_integration.ts": "25b411f8ced18597aa4f16d84ec7af117f8d4e7078c6238e5471edc7398ce98f",
+    "evaluation/trp/campaign-20261012/checks/post-campaign-production-20261013/cloud/fault_native.py": "1b2de0addd577a7c589d012b778960b1aa8ac6d2981f78313e2393588212c13e",
+    "evaluation/trp/campaign-20261012/checks/post-campaign-production-20261013/cloud/prepare_runtime.py": "71770e85201d39ad64e107b8f4f3ee8f96b7229a6c3fd41016050ae75e43b632",
+    "evaluation/trp/campaign-20261012/checks/post-campaign-production-20261013/cloud/drive_integration.py": "1548957ba935f2769b372d13245cb6e6dfe83b115f14c3cf86d961b23be6c07b",
+    "script/tesis/provision_remote_strict_profile.py": "4a38853089c592e9927c50c78b6de9a4ee092ab44954d860cb9a231f24371e3d"
+  },
+  "graphCorpusSha256": "3d20eda715833d882a7ff8e0e5b10180c3fecec4f20012eb74f266062bfc9e7d",
+  "uniqueProteins": 1,
+  "resourceClassificationMetrics": null,
+  "scientificMetrics": null,
+  "original50Unmodified": true,
+  "approvalActor": "synthetic operator via real Question.Service",
+  "producerCommit": "0dcb38aa97cd41883a3181ebda720cb0aeab5167",
+  "originalCampaignCommit": "ecfab67",
+  "localIntegrationHarnessBytesFrozen": true,
+  "runtimeRoot": "/opt/helix-post-campaign-runtime-20261013-r1",
+  "nativeFaultSource": "fault_native.py",
+  "resubmissionForbiddenOnTransportUnknown": true
+}

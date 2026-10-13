@@ -1,0 +1,133 @@
+{
+  "schema": "helix-aggregate-resource-independent-audit/1.0",
+  "freezeSha256": "2fc329f24459413fdb7447532bd56bd985c9200bd2b704206b773f1ff0add1a8",
+  "rows": [
+    {
+      "case": "SMOKE-01-generous",
+      "physicalFeasibilityLabel": null,
+      "labelReason": "Not established from terminal production or causal kernel evidence",
+      "actualDecision": null,
+      "defaultPortableVerifier": null,
+      "executionOracleForcedOnly": null,
+      "allocatedBlockBytesObservedPeak": 2445312,
+      "allocatedBlockBytesFinal": 2445312,
+      "predictedWorkBytes": null,
+      "observedUnderestimateBytes": null,
+      "observedOverestimationFraction": null,
+      "kernelMemoryPeak": 97071104,
+      "actualExitCode": 1,
+      "terminationCause": null,
+      "elapsedSeconds": 1.5941506680001112,
+      "persistentSqlite": [],
+      "checks": [
+        {
+          "name": "root-allocation-policy-binding",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "exact-kernel-budget",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "owner-quiescence",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-0",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-0",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-1",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-1",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-2",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-2",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-3",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-3",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-4",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-4",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-5",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-5",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-0",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-1",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-2",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-3",
+          "ok": true,
+          "detail": null
+        }
+      ],
+      "checksPassed": 19,
+      "checksTotal": 19,
+      "supervisionSha256": "95a5e3327f8d0e867cb6a52500bd8786e122ee5ba46ae870d7a5955d422487c5",
+      "retainedArchiveSha256": "2f93a2c3b5e307e9009634b20f887648b080d4954417cd7406f3fed7bddb5fd8",
+      "scientificR24Rate": null,
+      "scope": "Engineering, one development protein, actual aggregate client/head declared paths plus sequential worker tasks; infrastructure/runtime/Docker caches and experiment-only root telemetry excluded"
+    }
+  ],
+  "actualObservedCases": 1,
+  "actualFeasible": 0,
+  "actualInfeasible": 0,
+  "unknown": 1,
+  "scientificR24Rate": null,
+  "auditSourceSha256": "1d35e2f4ef3e7b917bc7f92d56cfe94371514cb271f15ef2062d77d3601e4784"
+}

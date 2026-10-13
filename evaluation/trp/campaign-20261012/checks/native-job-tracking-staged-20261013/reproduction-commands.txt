@@ -1,0 +1,5 @@
+python3 test_native_job_tracking.py
+HELIX_NATIVE_RUNNER_UNDER_TEST=remote_runner.py.txt.original python3 test_native_job_tracking.py TrackingContracts.test_observed_job_survives_empty_queue_and_trace
+git apply --check production.patch
+# Existing strict tests were loaded independently and runner module replaced with staged SourceFileLoader; see checks.json and strict-regression.txt.
+# Root owns actual production integration; no apply was executed by this reviewer.

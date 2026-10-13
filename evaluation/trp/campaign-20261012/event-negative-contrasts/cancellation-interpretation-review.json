@@ -1,0 +1,33 @@
+{
+  "schema": "helix-cancellation-observation-interpretation-review/1.0",
+  "reviewedAtUtc": "2026-10-13T03:54:55.778039+00:00",
+  "oldReportMutated": false,
+  "cloudScienceResubmitted": false,
+  "finding": "Generic partial_execution summary in the original gate auditor does not consume the external independently observed RUNNING/abort/after records. Its false field is an absence of demonstration within that generic trace-only function, not a contrary scheduler observation.",
+  "sources": [
+    {
+      "path": "evaluation/trp/campaign-20261012/trace/running-cancellation-clean.json",
+      "sha256": "002f23614d2333ecc510127e9afcd68c5cc8d73e2668c767b1b7d01a7d5ee08b"
+    },
+    {
+      "path": "evaluation/trp/campaign-20261012/trace/running-cancellation-external-second-review.json",
+      "sha256": "5c640a283170bda3549a64a054d0e1129971d89cf130e9ac90ecc4d91494c058"
+    },
+    {
+      "path": "script/tesis/audit_remote_campaign.py",
+      "sha256": "8c91411dd0225f76c725297dde7d518e27473a99aa96eb08aba0ce8ba531bf33"
+    }
+  ],
+  "originalGenericField": false,
+  "independentObservationProvesRunningCancellation": true,
+  "authoritativeObservedSequence": {
+    "nativeJob": "128",
+    "independentRunningObservedAt": "2026-10-13T02:15:34.422736+00:00",
+    "ctxAbortAt": "2026-10-13T02:15:34.491Z",
+    "nativeAfter": "CANCELLED",
+    "nativeExit": "143:0",
+    "remainingOwnedJobs": [],
+    "controllerStopped": true
+  },
+  "scope": "Engineering controlled cancellation of the same native owned task; no human annotation, biological truth or subsecond native cancellation latency. Preserve original auditor and external evidence together."
+}

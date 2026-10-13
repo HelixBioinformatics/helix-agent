@@ -1,0 +1,59 @@
+{
+  "kind": "clean actual native running-job cancellation completion",
+  "observedDriverTerminalAt": "2026-10-13T02:16:22Z",
+  "recordedAt": "2026-10-13T02:18:37.270246+00:00",
+  "execSession": 10044,
+  "execExitCode": 0,
+  "tests": {
+    "pass": 1,
+    "fail": 0,
+    "filteredOut": 1,
+    "assertions": 6,
+    "durationSeconds": 146.15
+  },
+  "runId": "6b2252f8-ac94-4611-85c4-0a710cec219f",
+  "digest": "5246c76d479605f75e3a3c2f89fa9d2c27ccb6f0017d89846db4ff0dc88be07b",
+  "nativeJob": "128",
+  "nativeRunningObservedAt": "2026-10-13T02:15:34.422736+00:00",
+  "contextAbortRequestedAt": "2026-10-13T02:15:34.491Z",
+  "nativeAfter": "CANCELLED",
+  "nativeExitCode": "143:0",
+  "nativeRuntimeSeconds": 3,
+  "portableRunStatus": "failed",
+  "automaticFinalization": true,
+  "manualRecovery": false,
+  "controllerStopped": true,
+  "ownedJobsRemaining": [],
+  "worker2ContainerReadback": {
+    "command": "docker ps --format \"{{json .}}\"",
+    "transport": "trusted AWS helper SSH to deployment-owned helix-worker2",
+    "exitCode": 0,
+    "stdoutBytes": 0
+  },
+  "evidence": "out/running-job/evidence",
+  "manifestSha256": "62cf9fba9e9a2e23cb4e4e55f30bd50a36000976c438b8d4387d7468a7b735e6",
+  "files": 143,
+  "independentAudit": {
+    "repositoryRelativePath": "evaluation/trp/campaign-20261012/trace/running-cancellation-clean.json",
+    "sha256": "002f23614d2333ecc510127e9afcd68c5cc8d73e2668c767b1b7d01a7d5ee08b",
+    "verified": true,
+    "checksPassed": 6
+  },
+  "sidecars": {
+    "test-driver.log": "994349c4d6ec00f21d55b56c70c854d86c3a6537b5afbc7e96be33d1884b965e",
+    "implementation-source-snapshot.json": "fb67f0a8f5ba36cf7295e20188ca328b352dd414f7bc33dbe6b2ccbc3c789998",
+    "source-snapshot-reference.json": "49390166d06ee439ae15500ea37de2a035a7c77b7072885ff7c6bbd276c278e5",
+    "worker2-containers.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "out/running-job/before-abort.json": "fea7cdbd6cd2b0b5cdcb7ef76ad8970eb1af32b0e51850563d436df7b8daa9bb",
+    "out/running-job/abort-request.json": "6a8ceb9c9037b5214aa4f33c29f2658d8ccf813d5b6f193126a027df2e7015c0",
+    "out/running-job/after-abort.json": "56285e449eee4f3eecfbc43a491a8daab5a2bd776de7e0c15da1e9492b4885ac",
+    "out/running-job/case.json": "c39e7f767bb53eb40579a473e82f364a6f22454576e1a5fd074822a4900d83df",
+    "out/running-job/protocol.json": "1dcc684f5ca22221dd4e6b789280427186a0af3f5223aa89fc01e249b05da777",
+    "out/running-job/fixture-freeze.json": "9debc0bc863fabecb8da4322eb564cd35fae53e87ddf7ec844e231abb7f708c9"
+  },
+  "fixtureUnchanged": true,
+  "syntheticEngineeringCase": true,
+  "humanEvaluation": false,
+  "biologicalAccuracyEvidence": false,
+  "lab1Released": true
+}

@@ -1,0 +1,265 @@
+{
+  "case": "BOUND-03-below",
+  "status": "succeeded",
+  "executionOracleForcedOnly": true,
+  "realDecision": {
+    "version": "trp-resources/1.2.0",
+    "decidedAt": "2026-10-13T07:57:18.394Z",
+    "accepted": false,
+    "inventoryHash": "e6b62ee2da4ca99308c33f4a1d3908653b8c78559934e2b5e13a50f01c28d58f",
+    "budgetHash": "8ccbad2065d0ccfffd90c9d4745c274724b568bad1aa3ffffdccb3404333c99f",
+    "demand": {
+      "version": "trp-resources/1.2.0",
+      "sourceBytes": 359397,
+      "selectionBytes": 150911,
+      "bundleBytes": 1158246,
+      "counts": {
+        "scientificTasks": 2,
+        "stubTasks": 2,
+        "remoteScientificCalls": 2,
+        "retries": 0
+      },
+      "cpus": 3,
+      "memoryBytes": 4294967296,
+      "workBytes": 42266624,
+      "wallSeconds": 1080,
+      "storage": {
+        "kind": "estimate",
+        "formula": "ceil((32*1048576 + 7*bundleBytes + 4*selectionBytes)/4096)*4096",
+        "hardLimit": false,
+        "profile": "trp-colocated-client-storage/1.0.0"
+      },
+      "assumptions": [
+        "Verified co-located Slurm profile: the real Helix client and Python/Nextflow controller share a root-controlled 1 CPU/2 GiB/swap-zero cgroup. All declared client work/temp/state/cache/export and remote workspace paths inherit one kernel XFS project quota. Worker tasks remain separate 2 CPU/2 GiB Docker allocations; no memory pooling.",
+        "Storage profile trp-colocated-client-storage/1.0.0 reserves32MiB overhead plus working-copy terms. This covers the real client/bootstrap/cache and portable export scope, calibrated on one development pilot before the aggregate campaign freeze; it is not a universal peak guarantee.",
+        "Two sequential tasks per traversal; one stub traversal then one real traversal; no retry or resume.",
+        "Task allocation: 2 CPUs/2 GiB. Controller allocation: 1 CPU/2 GiB; cgroup enforcement requires an independently verified operator sandbox. CPU bandwidth is not an exclusive core reservation.",
+        "Each traversal has an 8 minute watchdog; probes/configuration reserve another 120 seconds. This is a configured timeout, not a runtime prediction.",
+        "Storage estimates allocated workspace bytes including working copies, logs and portable evidence; an independently observed XFS project quota enforces an approved budget only inside an operator allocation.",
+        "The exact image and Nextflow distribution must already be cached. Image pulls/builds and shared Docker/Nextflow caches are outside workBytes.",
+        "Two remote scientific tasks are planned; SSH probes, controller commands and stub jobs are not scientific calls. Agent provider tokens, cost and conversation calls are not measured here."
+      ]
+    },
+    "rejections": [
+      {
+        "code": "capacity-insufficient",
+        "resource": "workBytes",
+        "demand": 42266624,
+        "available": 40894464
+      },
+      {
+        "code": "budget-insufficient",
+        "resource": "workBytes",
+        "demand": 42266624,
+        "available": 40894464
+      }
+    ]
+  },
+  "gateRecords": [
+    {
+      "actual": {
+        "version": "trp-resources/1.2.0",
+        "decidedAt": "2026-10-13T07:57:24.567Z",
+        "accepted": false,
+        "inventoryHash": "b8c8da2bddbb2ef973b24f29e18e8e96f915c7febf5c386f123da05fff8e9a83",
+        "budgetHash": "8ccbad2065d0ccfffd90c9d4745c274724b568bad1aa3ffffdccb3404333c99f",
+        "demand": {
+          "version": "trp-resources/1.2.0",
+          "sourceBytes": 359397,
+          "selectionBytes": 150911,
+          "bundleBytes": 1158246,
+          "counts": {
+            "scientificTasks": 2,
+            "stubTasks": 2,
+            "remoteScientificCalls": 2,
+            "retries": 0
+          },
+          "cpus": 3,
+          "memoryBytes": 4294967296,
+          "workBytes": 42266624,
+          "wallSeconds": 1080,
+          "storage": {
+            "kind": "estimate",
+            "formula": "ceil((32*1048576 + 7*bundleBytes + 4*selectionBytes)/4096)*4096",
+            "hardLimit": false,
+            "profile": "trp-colocated-client-storage/1.0.0"
+          },
+          "assumptions": [
+            "Verified co-located Slurm profile: the real Helix client and Python/Nextflow controller share a root-controlled 1 CPU/2 GiB/swap-zero cgroup. All declared client work/temp/state/cache/export and remote workspace paths inherit one kernel XFS project quota. Worker tasks remain separate 2 CPU/2 GiB Docker allocations; no memory pooling.",
+            "Storage profile trp-colocated-client-storage/1.0.0 reserves32MiB overhead plus working-copy terms. This covers the real client/bootstrap/cache and portable export scope, calibrated on one development pilot before the aggregate campaign freeze; it is not a universal peak guarantee.",
+            "Two sequential tasks per traversal; one stub traversal then one real traversal; no retry or resume.",
+            "Task allocation: 2 CPUs/2 GiB. Controller allocation: 1 CPU/2 GiB; cgroup enforcement requires an independently verified operator sandbox. CPU bandwidth is not an exclusive core reservation.",
+            "Each traversal has an 8 minute watchdog; probes/configuration reserve another 120 seconds. This is a configured timeout, not a runtime prediction.",
+            "Storage estimates allocated workspace bytes including working copies, logs and portable evidence; an independently observed XFS project quota enforces an approved budget only inside an operator allocation.",
+            "The exact image and Nextflow distribution must already be cached. Image pulls/builds and shared Docker/Nextflow caches are outside workBytes.",
+            "Two remote scientific tasks are planned; SSH probes, controller commands and stub jobs are not scientific calls. Agent provider tokens, cost and conversation calls are not measured here."
+          ]
+        },
+        "rejections": [
+          {
+            "code": "capacity-insufficient",
+            "resource": "workBytes",
+            "demand": 42266624,
+            "available": 40894464
+          },
+          {
+            "code": "budget-insufficient",
+            "resource": "workBytes",
+            "demand": 42266624,
+            "available": 40894464
+          }
+        ]
+      },
+      "overrideUsed": true,
+      "scope": "Independent executor only; actual decision retained; no policy/capacity/runtime override"
+    },
+    {
+      "actual": {
+        "version": "trp-resources/1.2.0",
+        "decidedAt": "2026-10-13T07:57:25.682Z",
+        "accepted": false,
+        "inventoryHash": "864c2a0b79bb92f55197a81f67c806b8a59dbfc41a3d559c0d476d5b655cfa12",
+        "budgetHash": "8ccbad2065d0ccfffd90c9d4745c274724b568bad1aa3ffffdccb3404333c99f",
+        "demand": {
+          "version": "trp-resources/1.2.0",
+          "sourceBytes": 359397,
+          "selectionBytes": 150911,
+          "bundleBytes": 1158246,
+          "counts": {
+            "scientificTasks": 2,
+            "stubTasks": 2,
+            "remoteScientificCalls": 2,
+            "retries": 0
+          },
+          "cpus": 3,
+          "memoryBytes": 4294967296,
+          "workBytes": 42266624,
+          "wallSeconds": 1080,
+          "storage": {
+            "kind": "estimate",
+            "formula": "ceil((32*1048576 + 7*bundleBytes + 4*selectionBytes)/4096)*4096",
+            "hardLimit": false,
+            "profile": "trp-colocated-client-storage/1.0.0"
+          },
+          "assumptions": [
+            "Verified co-located Slurm profile: the real Helix client and Python/Nextflow controller share a root-controlled 1 CPU/2 GiB/swap-zero cgroup. All declared client work/temp/state/cache/export and remote workspace paths inherit one kernel XFS project quota. Worker tasks remain separate 2 CPU/2 GiB Docker allocations; no memory pooling.",
+            "Storage profile trp-colocated-client-storage/1.0.0 reserves32MiB overhead plus working-copy terms. This covers the real client/bootstrap/cache and portable export scope, calibrated on one development pilot before the aggregate campaign freeze; it is not a universal peak guarantee.",
+            "Two sequential tasks per traversal; one stub traversal then one real traversal; no retry or resume.",
+            "Task allocation: 2 CPUs/2 GiB. Controller allocation: 1 CPU/2 GiB; cgroup enforcement requires an independently verified operator sandbox. CPU bandwidth is not an exclusive core reservation.",
+            "Each traversal has an 8 minute watchdog; probes/configuration reserve another 120 seconds. This is a configured timeout, not a runtime prediction.",
+            "Storage estimates allocated workspace bytes including working copies, logs and portable evidence; an independently observed XFS project quota enforces an approved budget only inside an operator allocation.",
+            "The exact image and Nextflow distribution must already be cached. Image pulls/builds and shared Docker/Nextflow caches are outside workBytes.",
+            "Two remote scientific tasks are planned; SSH probes, controller commands and stub jobs are not scientific calls. Agent provider tokens, cost and conversation calls are not measured here."
+          ]
+        },
+        "rejections": [
+          {
+            "code": "capacity-insufficient",
+            "resource": "workBytes",
+            "demand": 42266624,
+            "available": 40894464
+          },
+          {
+            "code": "budget-insufficient",
+            "resource": "workBytes",
+            "demand": 42266624,
+            "available": 40894464
+          }
+        ]
+      },
+      "overrideUsed": true,
+      "scope": "Independent executor only; actual decision retained; no policy/capacity/runtime override"
+    },
+    {
+      "actual": {
+        "version": "trp-resources/1.2.0",
+        "decidedAt": "2026-10-13T07:58:53.753Z",
+        "accepted": false,
+        "inventoryHash": "b0f18ad22631c95bc532fe9e3d16aa77ed2c3f29a5f8e34e84bad341b6783ddf",
+        "budgetHash": "8ccbad2065d0ccfffd90c9d4745c274724b568bad1aa3ffffdccb3404333c99f",
+        "demand": {
+          "assumptions": [
+            "Verified co-located Slurm profile: the real Helix client and Python/Nextflow controller share a root-controlled 1 CPU/2 GiB/swap-zero cgroup. All declared client work/temp/state/cache/export and remote workspace paths inherit one kernel XFS project quota. Worker tasks remain separate 2 CPU/2 GiB Docker allocations; no memory pooling.",
+            "Storage profile trp-colocated-client-storage/1.0.0 reserves32MiB overhead plus working-copy terms. This covers the real client/bootstrap/cache and portable export scope, calibrated on one development pilot before the aggregate campaign freeze; it is not a universal peak guarantee.",
+            "Two sequential tasks per traversal; one stub traversal then one real traversal; no retry or resume.",
+            "Task allocation: 2 CPUs/2 GiB. Controller allocation: 1 CPU/2 GiB; cgroup enforcement requires an independently verified operator sandbox. CPU bandwidth is not an exclusive core reservation.",
+            "Each traversal has an 8 minute watchdog; probes/configuration reserve another 120 seconds. This is a configured timeout, not a runtime prediction.",
+            "Storage estimates allocated workspace bytes including working copies, logs and portable evidence; an independently observed XFS project quota enforces an approved budget only inside an operator allocation.",
+            "The exact image and Nextflow distribution must already be cached. Image pulls/builds and shared Docker/Nextflow caches are outside workBytes.",
+            "Two remote scientific tasks are planned; SSH probes, controller commands and stub jobs are not scientific calls. Agent provider tokens, cost and conversation calls are not measured here."
+          ],
+          "bundleBytes": 1158246,
+          "counts": {
+            "remoteScientificCalls": 2,
+            "retries": 0,
+            "scientificTasks": 2,
+            "stubTasks": 2
+          },
+          "cpus": 3,
+          "memoryBytes": 4294967296,
+          "selectionBytes": 150911,
+          "sourceBytes": 359397,
+          "storage": {
+            "formula": "ceil((32*1048576 + 7*bundleBytes + 4*selectionBytes)/4096)*4096",
+            "hardLimit": false,
+            "kind": "estimate",
+            "profile": "trp-colocated-client-storage/1.0.0"
+          },
+          "version": "trp-resources/1.2.0",
+          "wallSeconds": 1080,
+          "workBytes": 42266624
+        },
+        "rejections": [
+          {
+            "code": "capacity-insufficient",
+            "resource": "workBytes",
+            "demand": 42266624,
+            "available": 40894464
+          },
+          {
+            "code": "budget-insufficient",
+            "resource": "workBytes",
+            "demand": 42266624,
+            "available": 40894464
+          }
+        ]
+      },
+      "overrideUsed": true,
+      "scope": "Independent executor only; actual decision retained; no policy/capacity/runtime override"
+    }
+  ],
+  "terminal": {
+    "prepared": {
+      "id": "d1f08c53-d915-4d6a-a0f7-b72d8d5aa5c0",
+      "digest": "272111830f6703f379b1c661758cf4851eb2e95659b0c0ead44204fa4c917ac6",
+      "truncated": false
+    },
+    "executed": {
+      "directory": "/shared/helix-strict/hrsec5cba187b464afa/client/.helix/trp/272111830f67-d1f08c53-d915-4d6a-a0f7-b72d8d5aa5c0",
+      "digest": "272111830f6703f379b1c661758cf4851eb2e95659b0c0ead44204fa4c917ac6",
+      "manifestSha256": "b5194d93e50a2f5567259bee38e8f3b5bf53416af9347a6683c9f46189a64f2f",
+      "truncated": false
+    }
+  },
+  "actualCsvSha256": "4a040be99c9be83d6e742978edaf6f00b6eccf7ad29703685517bcf2ec450d55",
+  "goldCsvSha256": "4a040be99c9be83d6e742978edaf6f00b6eccf7ad29703685517bcf2ec450d55",
+  "numericalEqual": true,
+  "portableExportDirectory": "/shared/helix-strict/hrsec5cba187b464afa/export/portable-evidence",
+  "portableVerification": {
+    "ok": true,
+    "files": 150,
+    "bytes": 6205003,
+    "manifestSha256": "b5194d93e50a2f5567259bee38e8f3b5bf53416af9347a6683c9f46189a64f2f",
+    "status": "succeeded",
+    "externallyAnchored": false,
+    "scope": "integrity, declared links and cold counts; not biological accuracy or authorship"
+  },
+  "portableVerifierExitCode": 0,
+  "portableVerifierStderr": "",
+  "ordinaryExportRequired": false,
+  "independentCounterfactualAuditRequired": true,
+  "syntheticApproval": true,
+  "humanEvaluation": false,
+  "persistentSqliteExpected": true,
+  "fullSourceSha256": "552940cd3a4521edcd75f1a5212a0580cb4969f74fd7108781c3939af5f861d5"
+}

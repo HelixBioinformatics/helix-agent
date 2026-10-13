@@ -1,0 +1,76 @@
+{
+  "schema": "helix-r24-guest-workspace-setup/1.0",
+  "lab": "185395",
+  "started_at_utc": "2026-10-13T01:57:07.195796+00:00",
+  "mount": "/shared/helix-r24",
+  "new_ec2_instances": 0,
+  "new_ebs_volumes": 0,
+  "existing_positive_workspace_modified": false,
+  "steps": [
+    {
+      "node": "helix-head",
+      "command": "squeue --noheader --format='%i|%k'",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "node": "helix-head",
+      "command": "test ! -e /shared/helix-r24 && test ! -e /srv/helix-r24-store",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "node": "helix-worker1",
+      "command": "test ! -e /shared/helix-r24 && test ! -e /srv/helix-r24-store",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "node": "helix-worker2",
+      "command": "test ! -e /shared/helix-r24 && test ! -e /srv/helix-r24-store",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "node": "helix-head",
+      "command": "df -B1 --output=avail /srv/helix | tail -1",
+      "exit_code": 0,
+      "stdout": "46574669824\n",
+      "stderr": ""
+    },
+    {
+      "node": "helix-head",
+      "command": "set -euo pipefail\nsudo apt-get install -y xfsprogs\nsudo install -d -m 0755 /srv/helix-r24-store /shared/helix-r24\nsudo fallocate -l 2G /srv/helix-r24-store/disk.img\nsudo chmod 0600 /srv/helix-r24-store/disk.img\nsudo mkfs.xfs -f -q /srv/helix-r24-store/disk.img\nsudo mount -o loop,prjquota,allocsize=4k /srv/helix-r24-store/disk.img /shared/helix-r24\nsudo exportfs -o rw,sync,no_subtree_check,root_squash 172.31.0.221:/shared/helix-r24\nsudo exportfs -o rw,sync,no_subtree_check,root_squash 172.31.0.222:/shared/helix-r24\nsudo xfs_quota -x -c 'state -p' /shared/helix-r24\nsudo exportfs -v\nfindmnt -n -T /shared/helix-r24 -o FSTYPE,OPTIONS\nsudo install -d -o ubuntu -g ubuntu -m 0711 /shared/helix-r24/operator-witness\nprintf '%s\\n' 'HELIX_R24_SHARED_WITNESS' > /shared/helix-r24/operator-witness/source.txt\nsha256sum /shared/helix-r24/operator-witness/source.txt",
+      "exit_code": 0,
+      "stdout": "Reading package lists...\nBuilding dependency tree...\nReading state information...\nxfsprogs is already the newest version (6.6.0-1ubuntu2.1).\nxfsprogs set to manually installed.\n0 upgraded, 0 newly installed, 0 to remove and 12 not upgraded.\nProject quota state on /shared/helix-r24 (/dev/loop3)\n  Accounting: ON\n  Enforcement: ON\n  Inode: #131 (1 blocks, 1 extents)\nBlocks grace time: [7 days]\nBlocks max warnings: 0\nInodes grace time: [7 days]\nInodes max warnings: 0\nRealtime Blocks grace time: [7 days]\n/shared/helix-r24\n\t\t172.31.0.222(sync,wdelay,hide,no_subtree_check,sec=sys,rw,secure,root_squash,no_all_squash)\n/shared/helix-r24\n\t\t172.31.0.221(sync,wdelay,hide,no_subtree_check,sec=sys,rw,secure,root_squash,no_all_squash)\n/srv/helix    \t172.31.0.0/20(sync,wdelay,hide,no_subtree_check,sec=sys,rw,secure,root_squash,no_all_squash)\nxfs    rw,relatime,inode64,allocsize=4k,logbufs=8,logbsize=32k,prjquota\n0c3fa90c06b777fe92689feb869e14c3fd15d58b32646ad4f9327e00a0885fd8  /shared/helix-r24/operator-witness/source.txt\n",
+      "stderr": ""
+    },
+    {
+      "node": "helix-worker1",
+      "command": "set -euo pipefail\nsudo install -d -m 0755 /shared/helix-r24\nsudo mount -t nfs4 172.31.0.220:/shared/helix-r24 /shared/helix-r24\nfindmnt -n -t nfs4 -T /shared/helix-r24 -o SOURCE,FSTYPE,OPTIONS\nsha256sum /shared/helix-r24/operator-witness/source.txt\nprintf '%s\\n' 'helix-worker1' > /shared/helix-r24/operator-witness/helix-worker1.txt",
+      "exit_code": 0,
+      "stdout": "172.31.0.220:/shared/helix-r24 nfs4   rw,relatime,vers=4.2,rsize=524288,wsize=524288,namlen=255,hard,fatal_neterrors=none,proto=tcp,timeo=600,retrans=2,sec=sys,clientaddr=172.31.0.221,local_lock=none,addr=172.31.0.220\n0c3fa90c06b777fe92689feb869e14c3fd15d58b32646ad4f9327e00a0885fd8  /shared/helix-r24/operator-witness/source.txt\n",
+      "stderr": ""
+    },
+    {
+      "node": "helix-worker2",
+      "command": "set -euo pipefail\nsudo install -d -m 0755 /shared/helix-r24\nsudo mount -t nfs4 172.31.0.220:/shared/helix-r24 /shared/helix-r24\nfindmnt -n -t nfs4 -T /shared/helix-r24 -o SOURCE,FSTYPE,OPTIONS\nsha256sum /shared/helix-r24/operator-witness/source.txt\nprintf '%s\\n' 'helix-worker2' > /shared/helix-r24/operator-witness/helix-worker2.txt",
+      "exit_code": 0,
+      "stdout": "172.31.0.220:/shared/helix-r24 nfs4   rw,relatime,vers=4.2,rsize=524288,wsize=524288,namlen=255,hard,fatal_neterrors=none,proto=tcp,timeo=600,retrans=2,sec=sys,clientaddr=172.31.0.222,local_lock=none,addr=172.31.0.220\n0c3fa90c06b777fe92689feb869e14c3fd15d58b32646ad4f9327e00a0885fd8  /shared/helix-r24/operator-witness/source.txt\n",
+      "stderr": ""
+    },
+    {
+      "node": "helix-head",
+      "command": "sha256sum /shared/helix-r24/operator-witness/*.txt",
+      "exit_code": 0,
+      "stdout": "25d81c905fabd22d3b6c1997423d72d589718c0d914f5eb0078c397d64cc78be  /shared/helix-r24/operator-witness/helix-worker1.txt\n8cc36cb7667e6ee211ed3f490d78a4b03fb0eee3b10b4fd7df5dedc90e73c978  /shared/helix-r24/operator-witness/helix-worker2.txt\n0c3fa90c06b777fe92689feb869e14c3fd15d58b32646ad4f9327e00a0885fd8  /shared/helix-r24/operator-witness/source.txt\n",
+      "stderr": ""
+    }
+  ],
+  "completed_at_utc": "2026-10-13T01:57:23.453789+00:00",
+  "ready": true
+}

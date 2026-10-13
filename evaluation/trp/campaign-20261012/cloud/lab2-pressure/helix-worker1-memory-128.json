@@ -1,0 +1,24 @@
+{
+  "case": {
+    "id": "helix-worker1-memory-128",
+    "node": "helix-worker1",
+    "mode": "memory",
+    "cpus": 1,
+    "memory_mib": 128,
+    "expected": "feasible"
+  },
+  "command": "srun --partition=helix --nodelist=helix-worker1 --cpus-per-task=2 --mem=3000M --time=00:02:00 --kill-on-bad-exit=1 docker run --rm --network none --read-only --cap-drop ALL --security-opt no-new-privileges --pids-limit 128 --cpus 1 --memory 128m --memory-swap 128m --entrypoint python sha256:1dd91e70acb153a0bd9a51346fc001dd5025f851c9598697cdd37f07d9490b0a -c 'import json,multiprocessing,pathlib,time\np=pathlib.Path('\"'\"'/sys/fs/cgroup'\"'\"')\ndef values():return {k:int(v) for k,v in (l.split() for l in (p/'\"'\"'memory.events'\"'\"').read_text().splitlines())}\ndef fill():\n xs=[]\n while True:xs.append(bytearray(8*1024**2))\na=values();x=multiprocessing.Process(target=fill);x.start();x.join(40)\nif x.is_alive():x.kill();x.join();raise RuntimeError('\"'\"'Memory probe did not stop at hard limit'\"'\"')\nb=values();print(json.dumps({'\"'\"'cpu_max'\"'\"':(p/'\"'\"'cpu.max'\"'\"').read_text().strip(),'\"'\"'memory_max'\"'\"':(p/'\"'\"'memory.max'\"'\"').read_text().strip(),'\"'\"'swap_max'\"'\"':(p/'\"'\"'memory.swap.max'\"'\"').read_text().strip(),'\"'\"'oom_kill_delta'\"'\"':b['\"'\"'oom_kill'\"'\"']-a['\"'\"'oom_kill'\"'\"'],'\"'\"'child_exit_code'\"'\"':x.exitcode,'\"'\"'peak_bytes'\"'\"':int((p/'\"'\"'memory.peak'\"'\"').read_text())}))\n'",
+  "observed_at": "2026-10-13T00:34:48.716428+00:00",
+  "exit_code": 0,
+  "stdout": "{\"cpu_max\": \"100000 100000\", \"memory_max\": \"134217728\", \"swap_max\": \"0\", \"oom_kill_delta\": 1, \"child_exit_code\": -9, \"peak_bytes\": 134217728}\n",
+  "stderr": "",
+  "observed": {
+    "cpu_max": "100000 100000",
+    "memory_max": "134217728",
+    "swap_max": "0",
+    "oom_kill_delta": 1,
+    "child_exit_code": -9,
+    "peak_bytes": 134217728
+  },
+  "passed": true
+}

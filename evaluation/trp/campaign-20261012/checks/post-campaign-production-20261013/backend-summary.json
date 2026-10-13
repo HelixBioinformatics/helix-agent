@@ -1,0 +1,37 @@
+{
+  "schema": "helix-post-campaign-production-local-check/1.0",
+  "observedAtUtc": "2026-10-13T16:43:10.665931+00:00",
+  "command": [
+    "bun",
+    "test",
+    "test/trp/workflow-backend.test.ts",
+    "--timeout",
+    "60000"
+  ],
+  "cwd": "packages/helix",
+  "environment": {
+    "HELIX_TRP_PYTHON": "/home/webiwabou/.local/state/helix/freesasa-20261012/venv/bin/python",
+    "gemmiVersion": "0.7.5",
+    "liveSwitchesCleared": true,
+    "removedVariableNames": [],
+    "TRP_BACKEND_TEST_OUTPUT": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/checks/post-campaign-production-20261013/backend-results"
+  },
+  "exitCode": 0,
+  "elapsedSeconds": 2.4301215750019765,
+  "logSha256": "51b6c4c00585ea209d3a993ec2fd02257de8671efcdaf52efb4529945371c421",
+  "statistics": {
+    "passed": 2,
+    "skipped_opt_in": null,
+    "failed": 0,
+    "assertions": 14,
+    "tests": 2,
+    "files": 1
+  },
+  "sourceHashes": {
+    "packages/helix/src/trp/workflow.ts": "986f4b13e1c2661ede6f42114ec23bc4a5e891872a401d1874c992e9ba3b5cc7",
+    "packages/helix/src/trp/verify_bundle.py.txt": "952e79d5cecae707954ed667d231838569323dffdd068ab43edd770284841eb9",
+    "packages/helix/src/trp/remote_runner.py.txt": "f2aa0d714848da79726bf1126ed5611e999b941cd0ee653067a901a9873e1805",
+    "packages/helix/test/trp/workflow-backend.test.ts": "46ead7759736ac5ca4b1aa1fad6c3b1729b9080f6d250e87bab2daad86b011a6"
+  },
+  "scope": "Local production regression/type checks only; mocked unit boundaries and optional skips retain their declared scope. No new science/model/cloud observations."
+}

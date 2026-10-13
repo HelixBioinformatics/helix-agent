@@ -1,0 +1,17 @@
+{
+  "at": "2026-10-13T06:05:11.445833+00:00",
+  "guest": "/srv/helix-strict-results/campaign-50000-AGG-09-generous",
+  "allocationSha256": "70c28019e49aa193f8755f46e58d9d7478646abb70029e78712c01c23db65a81",
+  "freezeSha256": "c33fb8b69e6361fb90bac025ccbf62fb590122b93b5f78d8da754b3886d28f20",
+  "command": "sudo env NXF_HOME=/home/ubuntu/.nextflow HELIX_MODELS_PATH=/opt/helix-strict-runtime/packages/core/test/plugin/fixtures/models-dev.json HELIX_TRP_PYTHON=/opt/helix-strict-runtime/python/bin/python nohup python3 /opt/helix-strict-runtime/script/tesis/provision_remote_strict_profile.py guest-supervise --allocation /srv/helix-strict-results/campaign-50000-AGG-09-generous-allocation.json --deadline 1791874140.0 --output /srv/helix-strict-results/campaign-50000-AGG-09-generous -- /usr/bin/strace -f -Z -yy -ttt -e trace=write,pwrite64,writev,pwritev,openat,ftruncate,copy_file_range -s 256 /usr/local/bin/helix-strict-bun /opt/helix-strict-runtime/evaluation/trp/campaign-20261012/aggregate-resource-contrasts/full_client.ts /opt/helix-strict-runtime/campaign/original40/AGG-09-generous.json >/tmp/AGG-09-generous-50000.supervisor.stdout 2>/tmp/AGG-09-generous-50000.supervisor.stderr < /dev/null &",
+  "case": "AGG-09-generous",
+  "budget": {
+    "cpus": 3,
+    "memoryBytes": 4294967296,
+    "workBytes": 134217728,
+    "wallSeconds": 1080,
+    "requireHardStorageLimit": true,
+    "origin": "Prospectively bounded aggregate Helix client/controller and Slurm development contrast"
+  },
+  "retryForbiddenOnUnknownTransport": true
+}

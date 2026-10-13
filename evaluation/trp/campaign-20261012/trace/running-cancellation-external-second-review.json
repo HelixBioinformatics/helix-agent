@@ -1,0 +1,45 @@
+{
+  "schema": "helix-independent-cancellation-external-review/1.0",
+  "reviewed_at_utc": "2026-10-13T02:21:00.449291+00:00",
+  "verified": true,
+  "run_digest": "5246c76d479605f75e3a3c2f89fa9d2c27ccb6f0017d89846db4ff0dc88be07b",
+  "manifest_sha256": "62cf9fba9e9a2e23cb4e4e55f30bd50a36000976c438b8d4387d7468a7b735e6",
+  "source_files": [
+    {
+      "path": "evaluation/trp/campaign-20261012/cloud/lab1/cancellation/next-ctx-abort/out/running-job/before-abort.json",
+      "sha256": "fea7cdbd6cd2b0b5cdcb7ef76ad8970eb1af32b0e51850563d436df7b8daa9bb"
+    },
+    {
+      "path": "evaluation/trp/campaign-20261012/cloud/lab1/cancellation/next-ctx-abort/out/running-job/abort-request.json",
+      "sha256": "6a8ceb9c9037b5214aa4f33c29f2658d8ccf813d5b6f193126a027df2e7015c0"
+    },
+    {
+      "path": "evaluation/trp/campaign-20261012/cloud/lab1/cancellation/next-ctx-abort/out/running-job/after-abort.json",
+      "sha256": "56285e449eee4f3eecfbc43a491a8daab5a2bd776de7e0c15da1e9492b4885ac"
+    },
+    {
+      "path": "evaluation/trp/campaign-20261012/cloud/lab1/cancellation/next-ctx-abort/out/running-job/case.json",
+      "sha256": "c39e7f767bb53eb40579a473e82f364a6f22454576e1a5fd074822a4900d83df"
+    },
+    {
+      "path": "evaluation/trp/campaign-20261012/cloud/lab1/cancellation/next-ctx-abort/out/running-job/protocol.json",
+      "sha256": "1dcc684f5ca22221dd4e6b789280427186a0af3f5223aa89fc01e249b05da777"
+    },
+    {
+      "path": "evaluation/trp/campaign-20261012/cloud/lab1/cancellation/next-ctx-abort/out/running-job/fixture-freeze.json",
+      "sha256": "9debc0bc863fabecb8da4322eb564cd35fae53e87ddf7ec844e231abb7f708c9"
+    }
+  ],
+  "external_running_observed_at": "2026-10-13T02:15:34.422736+00:00",
+  "controlled_abort_at": "2026-10-13T02:15:34.491Z",
+  "native_id": "128",
+  "native_after_state": "CANCELLED",
+  "native_exit": "143:0",
+  "native_recorded_runtime_seconds": 3,
+  "remaining_owned_jobs": [],
+  "controller_stopped": true,
+  "synthetic_approval": true,
+  "human_evaluation": false,
+  "scientific_fixture_truth": "not_established",
+  "scope": "Real controlled Tool.Context.abort after independently observed RUNNING scientific scheduler task, automatic failure ledger/portable integrity confirmed; no human-turn or biological metric. Native times have second precision, not exact subsecond cancellation latency."
+}

@@ -1,0 +1,318 @@
+{
+  "case": "AGG-17-small",
+  "physicalFeasibilityLabel": false,
+  "labelReason": "Actual terminal I/O failure linked by path and timestamp to kernel EDQUOT or independently qualified quota-reservation ENOSPC under matching enforced quota",
+  "actualDecision": {
+    "version": "trp-resources/1.2.0",
+    "decidedAt": "2026-10-13T07:33:34.527Z",
+    "accepted": false,
+    "inventoryHash": "f8964e4b311c5cba439783dbb0a87263e9a72ec525398ebb870a1d26db8c761f",
+    "budgetHash": "280222b6b5004be061a9b8cbb0f05b4e491246146f43f7a4863db6d834184c0d",
+    "demand": {
+      "version": "trp-resources/1.2.0",
+      "sourceBytes": 359397,
+      "selectionBytes": 150911,
+      "bundleBytes": 1158141,
+      "counts": {
+        "scientificTasks": 2,
+        "stubTasks": 2,
+        "remoteScientificCalls": 2,
+        "retries": 0
+      },
+      "cpus": 3,
+      "memoryBytes": 4294967296,
+      "workBytes": 42266624,
+      "wallSeconds": 1080,
+      "storage": {
+        "kind": "estimate",
+        "formula": "ceil((32*1048576 + 7*bundleBytes + 4*selectionBytes)/4096)*4096",
+        "hardLimit": false,
+        "profile": "trp-colocated-client-storage/1.0.0"
+      },
+      "assumptions": [
+        "Verified co-located Slurm profile: the real Helix client and Python/Nextflow controller share a root-controlled 1 CPU/2 GiB/swap-zero cgroup. All declared client work/temp/state/cache/export and remote workspace paths inherit one kernel XFS project quota. Worker tasks remain separate 2 CPU/2 GiB Docker allocations; no memory pooling.",
+        "Storage profile trp-colocated-client-storage/1.0.0 reserves32MiB overhead plus working-copy terms. This covers the real client/bootstrap/cache and portable export scope, calibrated on one development pilot before the aggregate campaign freeze; it is not a universal peak guarantee.",
+        "Two sequential tasks per traversal; one stub traversal then one real traversal; no retry or resume.",
+        "Task allocation: 2 CPUs/2 GiB. Controller allocation: 1 CPU/2 GiB; cgroup enforcement requires an independently verified operator sandbox. CPU bandwidth is not an exclusive core reservation.",
+        "Each traversal has an 8 minute watchdog; probes/configuration reserve another 120 seconds. This is a configured timeout, not a runtime prediction.",
+        "Storage estimates allocated workspace bytes including working copies, logs and portable evidence; an independently observed XFS project quota enforces an approved budget only inside an operator allocation.",
+        "The exact image and Nextflow distribution must already be cached. Image pulls/builds and shared Docker/Nextflow caches are outside workBytes.",
+        "Two remote scientific tasks are planned; SSH probes, controller commands and stub jobs are not scientific calls. Agent provider tokens, cost and conversation calls are not measured here."
+      ]
+    },
+    "rejections": [
+      {
+        "code": "capacity-insufficient",
+        "resource": "workBytes",
+        "demand": 42266624,
+        "available": 4194304
+      },
+      {
+        "code": "budget-insufficient",
+        "resource": "workBytes",
+        "demand": 42266624,
+        "available": 4194304
+      }
+    ]
+  },
+  "defaultPortableVerifier": null,
+  "executionOracleForcedOnly": true,
+  "allocatedBlockBytesObservedPeak": 4182016,
+  "allocatedBlockBytesFinal": 4182016,
+  "predictedWorkBytes": 42266624,
+  "observedUnderestimateBytes": 0,
+  "observedOverestimationFraction": null,
+  "kernelMemoryPeak": 178421760,
+  "causalKernelQuotaFailures": [
+    "[pid 18863] 1791876815.214294 openat(13</shared/helix-strict/hrs1ea8d75604d047bd/cache/transpiler>, \".99fe7ef9feddff5f-00000019..pile\", O_WRONLY|O_CREAT|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 18862] 1791876815.257120 openat(16</shared/helix-strict/hrs1ea8d75604d047bd/cache/transpiler>, \".19dfd67fffbffb8f-0000001A..pile\", O_WRONLY|O_CREAT|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 18862] 1791876815.277808 openat(15</shared/helix-strict/hrs1ea8d75604d047bd/cache/transpiler>, \".3dde067ebfffa77e-0000001B..pile\", O_WRONLY|O_CREAT|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 18863] 1791876815.282294 openat(15</shared/helix-strict/hrs1ea8d75604d047bd/cache/transpiler>, \".7bdef67972afffd7-0000001C..pile\", O_WRONLY|O_CREAT|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 18863] 1791876815.490972 openat(15</shared/helix-strict/hrs1ea8d75604d047bd/cache/transpiler>, \".5ededf7c6cbfedfe-0000001D..pile\", O_WRONLY|O_CREAT|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 18858] 1791876815.521486 openat(14</shared/helix-strict/hrs1ea8d75604d047bd/cache/transpiler>, \".defebefc7e7e5bd3-0000001E..pile\", O_WRONLY|O_CREAT|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 18858] 1791876815.722344 openat(14</shared/helix-strict/hrs1ea8d75604d047bd/cache/transpiler>, \".59de26787b6b7f8f-0000001F..pile\", O_WRONLY|O_CREAT|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 18862] 1791876815.895898 openat(13</shared/helix-strict/hrs1ea8d75604d047bd/cache/transpiler>, \".1dde377cf7bf2fef-00000020..pile\", O_WRONLY|O_CREAT|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 18863] 1791876815.964991 openat(17</shared/helix-strict/hrs1ea8d75604d047bd/cache/transpiler>, \".9fdfaf7fe8fdf4fb-00000021..pile\", O_WRONLY|O_CREAT|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 18858] 1791876816.604807 openat(14</shared/helix-strict/hrs1ea8d75604d047bd/cache/transpiler>, \".5bffbefddeff8e90-00000022..pile\", O_WRONLY|O_CREAT|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 18858] 1791876816.619010 openat(14</shared/helix-strict/hrs1ea8d75604d047bd/cache/transpiler>, \".3fde9efe8ff73ff5-00000023..pile\", O_WRONLY|O_CREAT|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 18858] 1791876816.622981 openat(14</shared/helix-strict/hrs1ea8d75604d047bd/cache/transpiler>, \".5efe1f7bd5fbfea5-00000024..pile\", O_WRONLY|O_CREAT|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 18858] 1791876816.803150 openat(14</shared/helix-strict/hrs1ea8d75604d047bd/cache/transpiler>, \".7edf36fd9adf24b7-00000025..pile\", O_WRONLY|O_CREAT|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 18858] 1791876816.898945 openat(AT_FDCWD</shared/helix-strict/hrs1ea8d75604d047bd/client>, \"/shared/helix-strict/hrs1ea8d75604d047bd/state/data/helix/helix-local.db\", O_RDWR|O_CREAT|O_NOFOLLOW|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)"
+  ],
+  "causallyLinkedTerminalIoFailures": [
+    {
+      "failure": {
+        "pid": 18858,
+        "failedAtEpochSeconds": 1791876816.904,
+        "name": "SQLiteError",
+        "code": "SQLITE_CANTOPEN",
+        "errno": 14,
+        "message": "unable to open database file",
+        "cause": "SQLiteError: unable to open database file",
+        "stack": "SQLiteError: unable to open database file\n    at open (unknown)\n    at new Database (bun:sqlite:260:28)\n    at <anonymous> (/opt/helix-strict-runtime/packages/core/src/database/sqlite.bun.ts:158:26)\n    at ~effect/Effect/successCont (/opt/helix-strict-runtime/node_modules/.bun/effect@4.0.0-beta.83/node_modules/effect/dist/internal/effect.js:870:26)\n    at runLoop (/opt/helix-strict-runtime/node_modules/.bun/effect@4.0.0-beta.83/node_modules/effect/dist/internal/effect.js:444:98)\n    at evaluate (/opt/helix-strict-runtime/node_modules/.bun/effect@4.0.0-beta.83/node_modules/effect/dist/internal/effect.js:412:23)\n    at forkUnsafe (/opt/helix-strict-runtime/node_modules/.bun/effect@4.0.0-beta.83/node_modules/effect/dist/internal/effect.js:2079:11)\n    at go (/opt/helix-strict-runtime/node_modules/.bun/effect@4.0.0-beta.83/node_modules/effect/dist/internal/effect.js:1926:25)\n    at <anonymous> (/opt/helix-strict-runtime/node_modules/.bun/effect@4.0.0-beta.83/node_modules/effect/dist/internal/effect.js:1914:28)\n    at ~effect/Effect/evaluate (/opt/helix-strict-runtime/node_modules/.bun/effect@4.0.0-beta.83/node_modules/effect/dist/internal/effect.js:719:22)\n    at runLoop (/opt/helix-strict-runtime/node_modules/.bun/effect@4.0.0-beta.83/node_modules/effect/dist/internal/effect.js:444:98)\n    at evaluate (/opt/helix-strict-runtime/node_modules/.bun/effect@4.0.0-beta.83/node_modules/effect/dist/internal/effect.js:412:23)\n    at forkUnsafe (/opt/helix-strict-runtime/node_modules/.bun/effect@4.0.0-beta.83/node_modules/effect/dist/internal/effect.js:2079:11)\n    at go (/opt/helix-strict-runtime/node_modules/.bun/effect@4.0.0-beta.83/node_modules/effect/dist/internal/effect.js:1926:25)\n    at <anonymous> (/opt/helix-strict-runtime/node_modules/.bun/effect@4.0.0-beta.83/node_modules/effect/dist/internal/effect.js:1914:28)\n    at ~effect/Effect/evaluate (/opt/helix-strict-runtime/node_modules/.bun/effect@4.0.0-beta.83/node_modules/effect/dist/internal/effect.js:719:22)\n    at runLoop (/opt/helix-strict-runtime/node_modules/.bun/effect@4.0.0-beta.83/node_modules/effect/dist/internal/effect.js:444:98)\n    at evaluate (/opt/helix-strict-runtime/node_modules/.bun/effect@4.0.0-beta.83/node_modules/effect/dist/internal/effect.js:412:23)\n    at <anonymous> (/opt/helix-strict-runtime/node_modules/.bun/effect@4.0.0-beta.83/node_modules/effect/dist/internal/effect.js:2127:9)\n    at <anonymous> (/opt/helix-strict-runtime/node_modules/.bun/effect@4.0.0-beta.83/node_modules/effect/dist/internal/effect.js:2179:19)\n    at <anonymous> (/opt/helix-strict-runtime/node_modules/.bun/effect@4.0.0-beta.83/node_modules/effect/dist/internal/effect.js:2190:31)\n    at main (/opt/helix-strict-runtime/evaluation/trp/campaign-20261012/aggregate-resource-contrasts/full_client.ts:92:24)\n    at processTicksAndRejections (native:7:39)"
+      },
+      "kernelSyscall": "[pid 18858] 1791876816.898945 openat(AT_FDCWD</shared/helix-strict/hrs1ea8d75604d047bd/client>, \"/shared/helix-strict/hrs1ea8d75604d047bd/state/data/helix/helix-local.db\", O_RDWR|O_CREAT|O_NOFOLLOW|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)"
+    }
+  ],
+  "actualExitCode": 1,
+  "terminationCause": null,
+  "elapsedSeconds": 4.707505372000014,
+  "persistentSqlite": [],
+  "checks": [
+    {
+      "name": "root-allocation-policy-binding",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "exact-kernel-budget",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "owner-quiescence",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "real-controller-and-tracer-reaped",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-0",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-0",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-1",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-1",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-2",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-2",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-3",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-3",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-4",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-4",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-5",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-5",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-6",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-6",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-7",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-7",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-8",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-8",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-9",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-9",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-10",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-10",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-11",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-11",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-0",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-1",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-2",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-3",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-4",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-5",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-6",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-7",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-8",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-9",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "actual-unmodified-decision-source",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "actual-bound-decision-policy",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "actual-decision-budget-hash",
+      "ok": true,
+      "detail": null
+    }
+  ],
+  "checksPassed": 41,
+  "checksTotal": 41,
+  "supervisionSha256": "d57736cdac4de8cb8bcadc163d838ab0e26e77bf28a8542c051143c2810a2e0b",
+  "retainedArchiveSha256": "fad4e19c42df81d14939c298fdee8b935cf2c627fb3c5c106b7ccab1f00bec77",
+  "causalTimestampQuantizationToleranceSeconds": 0.001,
+  "scientificR24Rate": null,
+  "scope": "Engineering, one development protein, actual aggregate client/head declared paths plus sequential worker tasks; infrastructure/runtime/Docker caches and experiment-only root telemetry excluded",
+  "frozenAuditSha256": "05076c5ecb89315ca825a999895ddd52c868bfd4a689114b967943492dc68713",
+  "reviewSourceSha256": "ececa8c4da4f066d87a506d8670991b16abc0ba40ab0aa8d19e3fcf1840ced4f",
+  "amendmentSha256": "c7cdcdff37a7b4de0f4f50dd5a0748002c33f3d899ca1455b14379daa80939a9"
+}

@@ -1,5 +1,7 @@
 # Estado del cierre
 
+[Entrega final de la campaña y restauración de artefactos](ENTREGA-AWS-20261013.md).
+
 ## Estado vigente, 13 de octubre de 2026
 
 La campaña técnica del cliente completo de Helix terminó y sus cincuenta contrastes están recuperados. La tesis y la implementación completa siguen abiertas: los resultados de ingeniería no demuestran los 21 indicadores científicos. Los capítulos 1 a 3 permanecen cerrados por el autor.

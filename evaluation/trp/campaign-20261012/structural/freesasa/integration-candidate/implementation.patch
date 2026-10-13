@@ -1,0 +1,595 @@
+--- a/packages/helix/src/trp/structural.ts
++++ b/packages/helix/src/trp/structural.ts
+@@ -10,16 +10,19 @@
+ import SCRIPT from "./inspect_structure.py.txt"
+ import VERIFIER from "./verify_inspection.py.txt"
+ import STERIC_SCRIPT from "./steric_diagnostic.py.txt"
++import SURFACE_SCRIPT from "./surface_diagnostic.py.txt"
+ import catalog from "./structural_catalog.json"
+ 
+ export { SCRIPT, catalog }
+-export { STERIC_SCRIPT }
++export { STERIC_SCRIPT, SURFACE_SCRIPT }
+ export const VERSION = "trp-structural/1.1.0"
+ const Range = Schema.Struct({ start: Schema.Number, end: Schema.Number })
+ export const Options = Schema.Struct({
+   format: Schema.Literals(["mmcif", "pdb"]),
+   model: Schema.Number,
+-  chain: Schema.String.annotate({ description: "Author chain identifier, even when intervals use label_seq_id" }),
++  chain: Schema.String.annotate({
++    description: "Author chain identifier, even when intervals use label_seq_id",
++  }),
+   frame: Schema.Literals(["auth_seq_id", "label_seq_id"]),
+   units: Schema.Array(Range),
+   plddtMin: Schema.optional(Schema.Number),
+@@ -183,9 +186,9 @@
+   python = process.env.HELIX_TRP_PYTHON ?? "python3",
+ ): Promise<Report> {
+   Schema.decodeUnknownSync(Options, { onExcessProperty: "error" })(request.options)
+-  const report = Schema.decodeUnknownSync(Report, { onExcessProperty: "error" })(
+-    await runParser(request, signal, python),
+-  )
++  const report = Schema.decodeUnknownSync(Report, {
++    onExcessProperty: "error",
++  })(await runParser(request, signal, python))
+   if (
+     report.version !== VERSION ||
+     report.provenance.structureSha256 !== S.sha256(request.structure) ||
+@@ -193,56 +196,146 @@
+   )
+     throw new S.WorkflowError("inspection-contract", "Unexpected report identity or control inventory")
+   const stericPython = process.env.HELIX_TRP_STERIC_PYTHON
+-  if (!stericPython) return report
++  let extended = report
++  if (stericPython) {
++    signal?.throwIfAborted()
++    let diagnostic: unknown
++    try {
++      diagnostic = await runParser(request, signal, stericPython, STERIC_SCRIPT, 180_000)
++      const value = Schema.decodeUnknownSync(
++        Schema.Struct({
++          version: Schema.Literal("helix-steric-diagnostic/1.0.0"),
++          status: Schema.Literals(["measured", "not_evaluable"]),
++        }),
++      )(diagnostic)
++      if (value.status === "measured") {
++        const measured = diagnostic as {
++          sourceSha256?: string
++          scope?: { authorChain?: string; modelOrdinal?: number }
++          measurement?: { clashscore?: number; severeClashes?: number }
++          foldVerdict?: string
++          structureLevelThreshold?: unknown
++        }
++        if (
++          measured.sourceSha256 !== report.provenance.structureSha256 ||
++          measured.scope?.authorChain !== request.options.chain ||
++          measured.scope?.modelOrdinal !== request.options.model ||
++          !Number.isFinite(measured.measurement?.clashscore) ||
++          !Number.isInteger(measured.measurement?.severeClashes) ||
++          Number(measured.measurement?.clashscore) < 0 ||
++          Number(measured.measurement?.severeClashes) < 0 ||
++          measured.foldVerdict !== "not_established" ||
++          measured.structureLevelThreshold !== null
++        )
++          throw new S.WorkflowError("steric-contract", "Unexpected steric measurement identity or classification")
++      }
++    } catch {
++      signal?.throwIfAborted()
++      diagnostic = {
++        version: "helix-steric-diagnostic/1.0.0",
++        status: "not_evaluable",
++        failureCode: "validator-failed-or-interrupted",
++      }
++    }
++    extended = {
++      ...report,
++      checks: report.checks.map((check) =>
++        check.id === "fold-plausibility"
++          ? {
++              ...check,
++              value: {
++                stericDiagnostic: diagnostic,
++                wrapperSha256: S.sha256(STERIC_SCRIPT),
++              },
++              reason:
++                check.reason +
++                " An optional maintained all-atom steric diagnostic is recorded separately; its measurement does not establish overall fold plausibility.",
++            }
++          : check,
++      ),
++    }
++  }
++  const surfacePython = process.env.HELIX_TRP_SURFACE_PYTHON
++  if (!surfacePython) return extended
+   signal?.throwIfAborted()
+-  let diagnostic: unknown
++  let surfaceDiagnostic: unknown
+   try {
+-    diagnostic = await runParser(request, signal, stericPython, STERIC_SCRIPT, 180_000)
++    surfaceDiagnostic = await runParser(request, signal, surfacePython, SURFACE_SCRIPT, 180_000)
+     const value = Schema.decodeUnknownSync(
+       Schema.Struct({
+-        version: Schema.Literal("helix-steric-diagnostic/1.0.0"),
++        version: Schema.Literal("helix-surface-diagnostic/1.0.0"),
+         status: Schema.Literals(["measured", "not_evaluable"]),
+       }),
+-    )(diagnostic)
++    )(surfaceDiagnostic)
+     if (value.status === "measured") {
+-      const measured = diagnostic as {
++      const measured = surfaceDiagnostic as {
+         sourceSha256?: string
+         scope?: { authorChain?: string; modelOrdinal?: number }
+-        measurement?: { clashscore?: number; severeClashes?: number }
++        measurement?: {
++          areaAngstromSquared?: { total?: number }
++          apolarAreaFraction?: number
++          polarAreaFraction?: number
++          chargedResidues?: number
++          completeChargedSidechains?: number
++          incompleteChargedSidechains?: number
++          chargedSidechainRelativeAreaMedian?: number | null
++        }
+         foldVerdict?: string
+-        structureLevelThreshold?: unknown
++        burialThreshold?: unknown
++        confidenceScoresUsed?: boolean
+       }
++      const m = measured.measurement
+       if (
+         measured.sourceSha256 !== report.provenance.structureSha256 ||
+         measured.scope?.authorChain !== request.options.chain ||
+         measured.scope?.modelOrdinal !== request.options.model ||
+-        !Number.isFinite(measured.measurement?.clashscore) ||
+-        !Number.isInteger(measured.measurement?.severeClashes) ||
+-        Number(measured.measurement?.clashscore) < 0 ||
+-        Number(measured.measurement?.severeClashes) < 0 ||
++        !Number.isFinite(m?.areaAngstromSquared?.total) ||
++        Number(m?.areaAngstromSquared?.total) <= 0 ||
++        !Number.isFinite(m?.apolarAreaFraction) ||
++        Number(m?.apolarAreaFraction) < 0 ||
++        Number(m?.apolarAreaFraction) > 1 ||
++        !Number.isFinite(m?.polarAreaFraction) ||
++        Number(m?.polarAreaFraction) < 0 ||
++        Number(m?.polarAreaFraction) > 1 ||
++        !Number.isInteger(m?.chargedResidues) ||
++        Number(m?.chargedResidues) < 0 ||
++        !Number.isInteger(m?.completeChargedSidechains) ||
++        Number(m?.completeChargedSidechains) < 0 ||
++        !Number.isInteger(m?.incompleteChargedSidechains) ||
++        Number(m?.incompleteChargedSidechains) < 0 ||
++        Number(m?.chargedResidues) !== Number(m?.completeChargedSidechains) + Number(m?.incompleteChargedSidechains) ||
++        (m?.completeChargedSidechains === 0
++          ? m.chargedSidechainRelativeAreaMedian !== null
++          : !Number.isFinite(m?.chargedSidechainRelativeAreaMedian) ||
++            Number(m?.chargedSidechainRelativeAreaMedian) < 0) ||
+         measured.foldVerdict !== "not_established" ||
+-        measured.structureLevelThreshold !== null
++        measured.burialThreshold !== null ||
++        measured.confidenceScoresUsed !== false
+       )
+-        throw new S.WorkflowError("steric-contract", "Unexpected steric measurement identity or classification")
++        throw new S.WorkflowError("surface-contract", "Unexpected surface measurement identity or classification")
+     }
+   } catch {
+     signal?.throwIfAborted()
+-    diagnostic = {
+-      version: "helix-steric-diagnostic/1.0.0",
++    surfaceDiagnostic = {
++      version: "helix-surface-diagnostic/1.0.0",
+       status: "not_evaluable",
+       failureCode: "validator-failed-or-interrupted",
+     }
+   }
+   return {
+-    ...report,
+-    checks: report.checks.map((check) =>
++    ...extended,
++    checks: extended.checks.map((check) =>
+       check.id === "fold-plausibility"
+         ? {
+             ...check,
+-            value: { stericDiagnostic: diagnostic, wrapperSha256: S.sha256(STERIC_SCRIPT) },
++            value: {
++              ...(check.value as Record<string, unknown> | null),
++              surfaceDiagnostic,
++              surfaceWrapperSha256: S.sha256(SURFACE_SCRIPT),
++            },
+             reason:
+               check.reason +
+-              " An optional maintained all-atom steric diagnostic is recorded separately; its measurement does not establish overall fold plausibility.",
++              " An optional solvent-exposure diagnostic records continuous areas and incomplete sidechains; it does not establish overall fold plausibility.",
+           }
+         : check,
+     ),
+@@ -265,7 +358,11 @@
+ export const Parameters = Schema.Struct({
+   structure: Schema.String,
+   options: Options,
+-  pae: Schema.optional(Schema.String.annotate({ description: "Path to AFDB JSON PAE; paired with API metadata" })),
++  pae: Schema.optional(
++    Schema.String.annotate({
++      description: "Path to AFDB JSON PAE; paired with API metadata",
++    }),
++  ),
+   api: Schema.optional(
+     Schema.String.annotate({
+       description: "Path to archived AFDB API response; entry, chain, sequence and versioned URLs must match",
+@@ -276,7 +373,9 @@
+       metadata: Schema.String.annotate({
+         description: "Path to colabfold-local/1.0.0 identity, sequence and SHA-256 manifest",
+       }),
+-      scores: Schema.String.annotate({ description: "Path to original ColabFold scores JSON, paired with the PDB" }),
++      scores: Schema.String.annotate({
++        description: "Path to original ColabFold scores JSON, paired with the PDB",
++      }),
+       pae: Schema.String.annotate({
+         description: "Path to original local predicted_aligned_error JSON; not AFDB metadata",
+       }),
+@@ -329,13 +428,20 @@
+   files["report.json"] = S.canonical(report) + "\n"
+   files["catalogue.json"] = S.canonical(catalog) + "\n"
+   files["trp_inspect.py"] = SCRIPT
+-  if (report.checks.some((check) => check.id === "fold-plausibility" && check.value !== null))
+-    files["steric_diagnostic.py"] = STERIC_SCRIPT
++  const physical = report.checks.find((check) => check.id === "fold-plausibility")?.value as Record<
++    string,
++    unknown
++  > | null
++  if (physical?.stericDiagnostic) files["steric_diagnostic.py"] = STERIC_SCRIPT
++  if (physical?.surfaceDiagnostic) files["surface_diagnostic.py"] = SURFACE_SCRIPT
+   files["verify.py"] = VERIFIER
+   const directory = path.join(await E.parent(root), "inspection-" + randomUUID())
+   await fs.mkdir(directory, { mode: 0o700 })
+   for (const [name, text] of Object.entries(files))
+-    await fs.writeFile(path.join(directory, name), text, { flag: "wx", mode: 0o600 })
++    await fs.writeFile(path.join(directory, name), text, {
++      flag: "wx",
++      mode: 0o600,
++    })
+   const manifest =
+     S.canonical({
+       version: "trp-inspection-evidence/1.0.0",
+@@ -346,6 +452,9 @@
+       })),
+       limitations: "Integrity and declared provenance do not prove scientific validity or authorship.",
+     }) + "\n"
+-  await fs.writeFile(path.join(directory, "manifest.json"), manifest, { flag: "wx", mode: 0o600 })
++  await fs.writeFile(path.join(directory, "manifest.json"), manifest, {
++    flag: "wx",
++    mode: 0o600,
++  })
+   return { directory, manifestSha256: S.sha256(manifest), report }
+ }
+--- a/packages/helix/src/trp/nextflow.ts
++++ b/packages/helix/src/trp/nextflow.ts
+@@ -176,8 +176,12 @@
+ env.MKL_NUM_THREADS = '1'
+ `,
+   }
+-  if (structural.checks.some((check) => check.id === "fold-plausibility" && check.value !== null))
+-    files["steric_diagnostic.py"] = TrpStructural.STERIC_SCRIPT
++  const physical = structural.checks.find((check) => check.id === "fold-plausibility")?.value as Record<
++    string,
++    unknown
++  > | null
++  if (physical?.stericDiagnostic) files["steric_diagnostic.py"] = TrpStructural.STERIC_SCRIPT
++  if (physical?.surfaceDiagnostic) files["surface_diagnostic.py"] = TrpStructural.SURFACE_SCRIPT
+   if (enforced) files["enforcement.json"] = S.canonical(enforced.config) + "\n"
+   const digest = bundleDigest(files)
+   return { spec, report: publicReport, files, digest, image }
+@@ -198,7 +202,10 @@
+   await fs.mkdir(directory, { recursive: false, mode: 0o700 })
+   for (const [name, text] of Object.entries(bundle.files)) {
+     if (!/^[a-z][a-z0-9_.]*$/.test(name)) throw new S.WorkflowError("bundle-path", name)
+-    await fs.writeFile(path.join(directory, name), text, { flag: "wx", mode: 0o600 })
++    await fs.writeFile(path.join(directory, name), text, {
++      flag: "wx",
++      mode: 0o600,
++    })
+   }
+ }
+ 
+--- a/packages/helix/src/trp/verify_inspection.py.txt
++++ b/packages/helix/src/trp/verify_inspection.py.txt
+@@ -44,6 +44,16 @@
+         if diagnostic['status']=='measured':
+             if diagnostic.get('sourceSha256')!=r['provenance']['structureSha256'] or diagnostic.get('scope',{}).get('authorChain')!=o['chain'] or diagnostic.get('scope',{}).get('modelOrdinal')!=o['model']: raise ValueError('steric selection differs')
+             if diagnostic.get('foldVerdict')!='not_established' or diagnostic.get('structureLevelThreshold') is not None: raise ValueError('unsupported fold verdict')
++    if isinstance(physical.get('value'),dict) and 'surfaceDiagnostic' in physical['value']:
++        value=physical['value']; diagnostic=value['surfaceDiagnostic']
++        if 'surface_diagnostic.py' not in listed or value.get('surfaceWrapperSha256')!=digest((root/'surface_diagnostic.py').read_bytes()): raise ValueError('surface wrapper differs')
++        if physical['status']!='not_evaluable' or diagnostic.get('version')!='helix-surface-diagnostic/1.0.0' or diagnostic.get('status') not in ('measured','not_evaluable'): raise ValueError('unsupported surface classification')
++        if diagnostic['status']=='measured':
++            if diagnostic.get('sourceSha256')!=r['provenance']['structureSha256'] or diagnostic.get('scope',{}).get('authorChain')!=o['chain'] or diagnostic.get('scope',{}).get('modelOrdinal')!=o['model']: raise ValueError('surface selection differs')
++            if diagnostic.get('foldVerdict')!='not_established' or diagnostic.get('burialThreshold') is not None or diagnostic.get('confidenceScoresUsed') is not False: raise ValueError('unsupported surface fold verdict')
++            metric=diagnostic['measurement']; residues=diagnostic['chargedResidueObservations']
++            if metric['chargedResidues']!=len(residues) or metric['completeChargedSidechains']+metric['incompleteChargedSidechains']!=len(residues): raise ValueError('surface denominator differs')
++            if any(row['completeSidechain']!=(not bool(row['missingSidechainAtoms'])) or (not row['completeSidechain'] and row['interpretableRelativeSidechainArea'] is not None) for row in residues): raise ValueError('surface incomplete sidechain differs')
+     failed=[c['id'] for c in r['checks'] if c['status']=='fail']
+     unknown=[c['id'] for c in r['checks'] if c['status']=='not_evaluable']
+     blocking=failed+[c for c in unknown if c in ('confidence-scale','filter-direction','interunit-pae')]
+--- a/packages/helix/src/trp/verify_bundle.py.txt
++++ b/packages/helix/src/trp/verify_bundle.py.txt
+@@ -122,6 +122,17 @@
+                 raise ValueError('optional steric diagnostic source differs')
+             if fold['status'] != 'not_evaluable':
+                 raise ValueError('steric diagnostic cannot establish broad fold plausibility')
++        if fold and isinstance(fold.get('value'), dict) and 'surfaceDiagnostic' in fold['value']:
++            value = fold['value']; diagnostic = value['surfaceDiagnostic']
++            if 'surface_diagnostic.py' not in bundle['files'] or value.get('surfaceWrapperSha256') != digest((root/'run/surface_diagnostic.py').read_bytes()):
++                raise ValueError('optional surface diagnostic source differs')
++            if fold['status'] != 'not_evaluable' or diagnostic.get('version') != 'helix-surface-diagnostic/1.0.0' or diagnostic.get('status') not in ('measured', 'not_evaluable'):
++                raise ValueError('surface diagnostic cannot establish broad fold plausibility')
++            if diagnostic['status'] == 'measured':
++                if diagnostic.get('sourceSha256') != structural['provenance']['structureSha256'] or diagnostic.get('scope', {}).get('authorChain') != spec['chain']['value'] or diagnostic.get('scope', {}).get('modelOrdinal') != spec['model']['value']:
++                    raise ValueError('surface diagnostic selection differs')
++                if diagnostic.get('foldVerdict') != 'not_established' or diagnostic.get('burialThreshold') is not None or diagnostic.get('confidenceScoresUsed') is not False:
++                    raise ValueError('unsupported surface fold verdict')
+         if len(controls) != len(expected_ids) or {c['id'] for c in controls} != expected_ids:
+             raise ValueError('structural inventory differs')
+         if structural['version'] not in ('trp-structural/1.0.0', 'trp-structural/1.1.0') or structural['provenance']['structureSha256'] != digest((root / 'run/source.pdb').read_bytes()):
+--- /dev/null
++++ b/packages/helix/src/trp/surface_diagnostic.py.txt
+@@ -0,0 +1,167 @@
++"""Optional bounded FreeSASA observations. No burial cutoff or fold classifier."""
++import hashlib
++import importlib.metadata
++import json
++import math
++from pathlib import Path
++import statistics
++import sys
++from tempfile import TemporaryDirectory
++
++VERSION = 'helix-surface-diagnostic/1.0.0'
++SIDE = {'ALA': 'CB', 'ARG': 'CB CG CD NE CZ NH1 NH2', 'ASN': 'CB CG OD1 ND2',
++        'ASP': 'CB CG OD1 OD2', 'CYS': 'CB SG', 'GLN': 'CB CG CD OE1 NE2',
++        'GLU': 'CB CG CD OE1 OE2', 'GLY': '', 'HIS': 'CB CG ND1 CD2 CE1 NE2',
++        'ILE': 'CB CG1 CG2 CD1', 'LEU': 'CB CG CD1 CD2', 'LYS': 'CB CG CD CE NZ',
++        'MET': 'CB CG SD CE', 'PHE': 'CB CG CD1 CD2 CE1 CE2 CZ', 'PRO': 'CB CG CD',
++        'SER': 'CB OG', 'THR': 'CB OG1 CG2', 'TRP': 'CB CG CD1 CD2 NE1 CE2 CE3 CZ2 CZ3 CH2',
++        'TYR': 'CB CG CD1 CD2 CE1 CE2 CZ OH', 'VAL': 'CB CG1 CG2'}
++CHARGED = {'ASP': 100.47, 'GLU': 132.18, 'LYS': 162.98, 'ARG': 196.17}
++PARAMETERS = {'algorithm': 'LeeRichards', 'probe-radius': 1.4, 'n-slices': 20, 'n-points': 100, 'n-threads': 1}
++OPTIONS = {'hetatm': False, 'hydrogen': False, 'join-models': False, 'skip-unknown': False, 'halt-at-unknown': True}
++
++
++def digest(data):
++    return hashlib.sha256(data).hexdigest()
++
++
++def measure(request):
++    import freesasa
++    import gemmi
++    versions = {name: importlib.metadata.version(name) for name in ('freesasa', 'gemmi')}
++    if versions != {'freesasa': '2.2.1', 'gemmi': '0.7.5'}:
++        raise ValueError('unsupported-engine-version')
++    source, options = request['structure'], request['options']
++    if len(source.encode('utf-8')) > 20_000_000:
++        raise ValueError('structure-size')
++    structure = (gemmi.make_structure_from_block(gemmi.cif.read_string(source).sole_block())
++                 if options['format'] == 'mmcif' else gemmi.read_pdb_string(source))
++    ordinal = options['model']
++    if not isinstance(ordinal, int) or not 1 <= ordinal <= len(structure):
++        raise ValueError('model-selection')
++    chains = [c for c in structure[ordinal - 1] if c.name == options['chain']]
++    if len(chains) != 1 or len(chains[0].name) > 1:
++        raise ValueError('ambiguous-or-unsupported-author-chain')
++    residues = [r for r in chains[0] if r.entity_type == gemmi.EntityType.Polymer or r.het_flag == 'A']
++    if not residues or any(r.name not in SIDE for r in residues):
++        raise ValueError('unsupported-polymer-residue')
++    atoms = [a for r in residues for a in r]
++    if len(atoms) > 30_000:
++        raise ValueError('atom-limit')
++    if any(a.altloc not in ('\x00', ' ') or abs(a.occ - 1) > 0.001 for a in atoms):
++        raise ValueError('ambiguous-or-partially-occupied-atoms')
++    if any(not all(math.isfinite(x) for x in (a.pos.x, a.pos.y, a.pos.z)) for a in atoms):
++        raise ValueError('nonfinite-coordinates')
++    atom_keys = [(str(r.seqid), a.name) for r in residues for a in r]
++    if len(atom_keys) != len(set(atom_keys)):
++        raise ValueError('duplicate-atom-identity')
++    heavy = [a for a in atoms if not a.is_hydrogen()]
++    if any(a.element.name not in ('C', 'N', 'O', 'S') for a in heavy):
++        raise ValueError('unsupported-element')
++    classifier = freesasa.Classifier.getStandardClassifier('protor')
++    for r in residues:
++        for a in r:
++            if not a.is_hydrogen() and (classifier.radius(r.name, a.name) <= 0 or classifier.classify(r.name, a.name) not in ('Polar', 'Apolar')):
++                raise ValueError('unknown-protor-atom')
++    selected = gemmi.Structure()
++    model, chain = gemmi.Model('1'), gemmi.Chain(options['chain'])
++    for r in residues:
++        chain.add_residue(r.clone())
++    model.add_chain(chain)
++    selected.add_model(model)
++    coordinates = selected.make_pdb_string()
++    with TemporaryDirectory(prefix='helix-surface-') as directory:
++        file = Path(directory) / 'selected.pdb'
++        file.write_text(coordinates)
++        parsed = freesasa.Structure(str(file), classifier=classifier, options=OPTIONS)
++        if parsed.nAtoms() != len(heavy):
++            raise ValueError('parser-atom-inventory')
++        expected = [(str(r.seqid), r.name, a.name, (a.pos.x, a.pos.y, a.pos.z)) for r in residues for a in r if not a.is_hydrogen()]
++        for i, (resid, name, atom, xyz) in enumerate(expected):
++            if (parsed.chainLabel(i), parsed.residueNumber(i).strip(), parsed.residueName(i).strip(), parsed.atomName(i).strip()) != (options['chain'], resid, name, atom):
++                raise ValueError('parser-atom-inventory')
++            # Gemmi's PDB serialization retains three coordinate decimals.
++            if any(abs(x - y) > 0.00051 for x, y in zip(parsed.coord(i), xyz)):
++                raise ValueError('parser-coordinate-precision')
++        result = freesasa.calc(parsed, freesasa.Parameters(PARAMETERS))
++        areas = result.residueAreas()
++        if sum(len(v) for v in areas.values()) != len(residues):
++            raise ValueError('parser-residue-inventory')
++        totals = {name: sum(getattr(area, name) for values in areas.values() for area in values.values()) for name in ('total', 'mainChain', 'sideChain', 'polar', 'apolar')}
++        if any(not math.isfinite(v) or v < 0 for v in totals.values()) or totals['total'] <= 0:
++            raise ValueError('nonfinite-surface-area')
++        if not math.isclose(totals['total'], result.totalArea(), rel_tol=1e-10, abs_tol=1e-7):
++            raise ValueError('surface-area-identity')
++        for parts in (('mainChain', 'sideChain'), ('polar', 'apolar')):
++            if not math.isclose(sum(totals[p] for p in parts), totals['total'], rel_tol=1e-10, abs_tol=1e-7):
++                raise ValueError('surface-area-identity')
++        charged, missing_all = [], []
++        for residue in residues:
++            names = {a.name for a in residue if not a.is_hydrogen()}
++            missing = sorted(set(('N CA C O ' + SIDE[residue.name]).split()) - names)
++            if missing:
++                missing_all.append({'residue': str(residue.seqid), 'residueName': residue.name, 'missingExpectedHeavyAtoms': missing})
++            if residue.name not in CHARGED:
++                continue
++            area = areas[options['chain']][str(residue.seqid)]
++            if not area.hasRelativeAreas or not math.isfinite(area.relativeSideChain) or area.relativeSideChain < 0:
++                raise ValueError('relative-area-reference')
++            if not math.isclose(area.relativeSideChain * CHARGED[residue.name], area.sideChain, rel_tol=1e-10, abs_tol=1e-7):
++                raise ValueError('relative-area-reference')
++            missing_side = sorted(set(SIDE[residue.name].split()) - names)
++            charged.append({'residue': str(residue.seqid), 'residueName': residue.name,
++                            'sidechainAreaAngstromSquared': area.sideChain, 'relativeSidechainArea': area.relativeSideChain,
++                            'completeSidechain': not missing_side, 'missingSidechainAtoms': missing_side,
++                            'interpretableRelativeSidechainArea': area.relativeSideChain if not missing_side else None})
++    values = [r['interpretableRelativeSidechainArea'] for r in charged if r['completeSidechain']]
++    gemmi_binary = list(Path(gemmi.__file__).parent.glob('gemmi_ext*.so'))
++    if len(gemmi_binary) != 1:
++        raise ValueError('engine-identity')
++    modules = {'freesasa': digest(Path(freesasa.__file__).read_bytes()), 'gemmi': digest(Path(gemmi.__file__).read_bytes()),
++               'gemmi_ext': digest(gemmi_binary[0].read_bytes())}
++    return {'version': VERSION, 'status': 'measured', 'sourceSha256': digest(source.encode('utf-8')),
++            'selectedCoordinatesSha256': digest(coordinates.encode('utf-8')),
++            'scope': {'authorChain': options['chain'], 'modelOrdinal': ordinal, 'residues': len(residues),
++                      'inputAtoms': len(atoms), 'heavyAtoms': len(heavy), 'excludedHydrogens': len(atoms) - len(heavy),
++                      'selection': 'complete selected polymer chain; other chains, ligands and waters excluded'},
++            'engine': {'name': 'FreeSASA Python binding', 'versions': versions, 'modulesSha256': modules,
++                       'sourceConfigVersionText': '2.0.2', 'versionNote': 'Python distribution 2.2.1; bundled config.h text 2.0.2. Installed modules are identified by hashes.'},
++            'parameters': PARAMETERS, 'classifier': 'protor',
++            'reference': {'convention': 'extended Ala-X-Ala ProtOr sidechain area', 'sidechainAreasAngstromSquared': CHARGED, 'ratioCanExceedOne': True},
++            'measurement': {'areaAngstromSquared': totals, 'apolarAreaFraction': totals['apolar'] / totals['total'],
++                            'polarAreaFraction': totals['polar'] / totals['total'], 'chargedResidues': len(charged),
++                            'completeChargedSidechains': len(values), 'incompleteChargedSidechains': len(charged) - len(values),
++                            'chargedSidechainRelativeAreaMedian': statistics.median(values) if values else None,
++                            'chargedSidechainRelativeAreaMin': min(values) if values else None,
++                            'chargedSidechainRelativeAreaMax': max(values) if values else None},
++            'chargedResidueObservations': charged, 'residuesWithMissingExpectedHeavyAtoms': missing_all,
++            'foldVerdict': 'not_established', 'burialThreshold': None, 'confidenceScoresUsed': False,
++            'limitations': ['Surface exposure alone does not establish fold validity, energetic stability, charge compensation or protonation.',
++                            'Partial sidechains remain explicit and are excluded from interpretable relative-area summaries.',
++                            'Missing neighboring atoms and omitted assembly partners can change the areas.',
++                            'No calibrated burial cutoff or independent physical labels are supplied.']}
++
++
++def main():
++    raw = sys.stdin.buffer.read(40_000_001)
++    if len(raw) > 40_000_000:
++        raise ValueError('request-size')
++    request = json.loads(raw)
++    try:
++        result = measure(request)
++    except (ImportError, FileNotFoundError):
++        result = {'version': VERSION, 'status': 'not_evaluable', 'failureCode': 'missing-validator-dependencies'}
++    except ValueError as error:
++        known = {'unsupported-engine-version', 'structure-size', 'model-selection', 'ambiguous-or-unsupported-author-chain',
++                 'unsupported-polymer-residue', 'atom-limit', 'ambiguous-or-partially-occupied-atoms', 'nonfinite-coordinates',
++                 'duplicate-atom-identity', 'unsupported-element', 'unknown-protor-atom', 'parser-atom-inventory',
++                 'parser-coordinate-precision', 'parser-residue-inventory', 'nonfinite-surface-area', 'surface-area-identity',
++                 'relative-area-reference', 'engine-identity'}
++        result = {'version': VERSION, 'status': 'not_evaluable', 'failureCode': str(error) if str(error) in known else 'validator-failed'}
++    except Exception:
++        result = {'version': VERSION, 'status': 'not_evaluable', 'failureCode': 'validator-failed'}
++    print(json.dumps(result, sort_keys=True, allow_nan=False))
++
++
++if __name__ == '__main__':
++    main()
+--- /dev/null
++++ b/packages/helix/test/trp/surface.test.ts
+@@ -0,0 +1,91 @@
++import { expect, test } from "bun:test"
++import fs from "node:fs/promises"
++import os from "node:os"
++import path from "node:path"
++import { TrpStructural as C } from "../../src/trp/structural"
++
++const root = path.resolve(import.meta.dir, "../../../..")
++const cohort = JSON.parse(await fs.readFile(path.join(root, "evaluation/trp/campaign-20261012/structural/cases.json"), "utf8"))
++const options: C.Options = { format: "pdb", model: 1, chain: "A", frame: "auth_seq_id", units: [{ start: 1, end: 22 }, { start: 23, end: 44 }] }
++const original = await fs.readFile(cohort.find((c: { id: string }) => c.id === "22r").scoreInputPath, "utf8")
++
++async function configured(run: () => Promise<void>) {
++  const surface = process.env.HELIX_TRP_SURFACE_PYTHON
++  const steric = process.env.HELIX_TRP_STERIC_PYTHON
++  process.env.HELIX_TRP_SURFACE_PYTHON = process.env.HELIX_TRP_SURFACE_TEST_PYTHON!
++  delete process.env.HELIX_TRP_STERIC_PYTHON
++  try { await run() } finally {
++    if (surface === undefined) delete process.env.HELIX_TRP_SURFACE_PYTHON
++    else process.env.HELIX_TRP_SURFACE_PYTHON = surface
++    if (steric === undefined) delete process.env.HELIX_TRP_STERIC_PYTHON
++    else process.env.HELIX_TRP_STERIC_PYTHON = steric
++  }
++}
++
++test("missing operator-configured surface runtime preserves explicit uncertainty", async () => {
++  const previous = process.env.HELIX_TRP_SURFACE_PYTHON
++  process.env.HELIX_TRP_SURFACE_PYTHON = "/missing/helix-surface-python"
++  try {
++    const report = await C.inspect({ structure: original, options })
++    const physical = report.checks.find(c => c.id === "fold-plausibility")!
++    expect(physical.status).toBe("not_evaluable")
++    expect((physical.value as any).surfaceDiagnostic.status).toBe("not_evaluable")
++    expect(report.summary.biologicalValidity).toBe("not_established")
++  } finally {
++    if (previous === undefined) delete process.env.HELIX_TRP_SURFACE_PYTHON
++    else process.env.HELIX_TRP_SURFACE_PYTHON = previous
++  }
++})
++
++test.skipIf(!process.env.HELIX_TRP_SURFACE_TEST_PYTHON)("surface measurement is deterministic and portable without a fold verdict", async () => configured(async () => {
++  const first = await C.inspect({ structure: original, options })
++  const second = await C.inspect({ structure: original, options })
++  expect(second).toEqual(first)
++  const physical = first.checks.find(c => c.id === "fold-plausibility")!
++  const value = physical.value as any
++  const diagnostic = value.surfaceDiagnostic
++  expect(physical.status).toBe("not_evaluable")
++  expect(diagnostic.status).toBe("measured")
++  expect(diagnostic.sourceSha256).toBe(first.provenance.structureSha256)
++  expect(diagnostic.measurement.chargedResidues).toBe(40)
++  expect(diagnostic.measurement.completeChargedSidechains).toBe(40)
++  expect(diagnostic.measurement.chargedSidechainRelativeAreaMedian).toBeCloseTo(0.5077180802119905, 12)
++  expect(diagnostic.measurement.chargedSidechainRelativeAreaMin).toBeCloseTo(0.00004633258019466424, 12)
++  expect(diagnostic.foldVerdict).toBe("not_established")
++  expect(diagnostic.burialThreshold).toBeNull()
++  expect(diagnostic.engine.versions.freesasa).toBe("2.2.1")
++  expect(Object.keys(diagnostic.engine.modulesSha256)).toHaveLength(3)
++  const workspace = await fs.mkdtemp(path.join(os.tmpdir(), "helix-surface-integration-"))
++  try {
++    await fs.writeFile(path.join(workspace, "original.pdb"), original, { mode: 0o600 })
++    const evidence = await C.inspectFiles({ structure: "original.pdb", options }, workspace)
++    const verify = () => Bun.spawn(["python3", path.join(evidence.directory, "verify.py"), evidence.directory, "--sha256", evidence.manifestSha256], { stdout: "ignore", stderr: "ignore" }).exited
++    expect(await verify()).toBe(0)
++    const names = await fs.readdir(evidence.directory)
++    expect(names).toContain("surface_diagnostic.py")
++    expect(names).not.toContain("steric_diagnostic.py")
++    await fs.appendFile(path.join(evidence.directory, "surface_diagnostic.py"), "\nchanged\n")
++    expect(await verify()).not.toBe(0)
++  } finally { await fs.rm(workspace, { recursive: true, force: true }) }
++}))
++
++test.skipIf(!process.env.HELIX_TRP_SURFACE_TEST_PYTHON)("missing sidechain coordinates remain incomplete and absent charge identities remain non applicable", async () => configured(async () => {
++  const partial = original.split("\n").filter(line => !(line.startsWith("ATOM  ") && line.slice(22, 26).trim() === "28" && line.slice(12, 16).trim() === "OD1")).join("\n")
++  const report = await C.inspect({ structure: partial, options })
++  const diagnostic = (report.checks.find(c => c.id === "fold-plausibility")!.value as any).surfaceDiagnostic
++  expect(diagnostic.status).toBe("measured")
++  expect(diagnostic.measurement.chargedResidues).toBe(40)
++  expect(diagnostic.measurement.completeChargedSidechains).toBe(39)
++  expect(diagnostic.measurement.incompleteChargedSidechains).toBe(1)
++  const residue = diagnostic.chargedResidueObservations.find((r: { residue: string }) => r.residue === "28")
++  expect(residue.missingSidechainAtoms).toEqual(["OD1"])
++  expect(residue.interpretableRelativeSidechainArea).toBeNull()
++  expect(report.summary.biologicalValidity).toBe("not_established")
++  const eight = await fs.readFile(cohort.find((c: { id: string }) => c.id === "8b").scoreInputPath, "utf8")
++  const empty = await C.inspect({ structure: eight, options: { ...options, units: [{ start: 1, end: 8 }, { start: 9, end: 16 }] } })
++  const absent = (empty.checks.find(c => c.id === "fold-plausibility")!.value as any).surfaceDiagnostic
++  expect(absent.status).toBe("measured")
++  expect(absent.measurement.chargedResidues).toBe(0)
++  expect(absent.measurement.chargedSidechainRelativeAreaMedian).toBeNull()
++  expect(absent.chargedResidueObservations).toHaveLength(0)
++}))

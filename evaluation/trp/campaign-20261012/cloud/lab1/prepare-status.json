@@ -1,0 +1,36 @@
+{
+  "lab": "183928",
+  "observed_at_utc": "2026-10-13T00:22:51.312064+00:00",
+  "image": "sha256:1dd91e70acb153a0bd9a51346fc001dd5025f851c9598697cdd37f07d9490b0a",
+  "nodes": [
+    {
+      "node": "helix-head",
+      "instance_type": "t3.medium",
+      "id": "i-0f448183fd29011a8",
+      "checks_exit": 0,
+      "checks_stdout": "active\nactive\nactive\nenabled\n",
+      "checks_stderr": ""
+    },
+    {
+      "node": "helix-worker1",
+      "instance_type": "m5.large",
+      "id": "i-0509c635a9b526417",
+      "checks_exit": 0,
+      "checks_stdout": "active\nactive\nactive\nenabled\n",
+      "checks_stderr": ""
+    },
+    {
+      "node": "helix-worker2",
+      "instance_type": "m5.large",
+      "id": "i-0e58f08256b09b1a9",
+      "checks_exit": 0,
+      "checks_stdout": "active\nactive\nactive\nenabled\n",
+      "checks_stderr": ""
+    }
+  ],
+  "cluster_status_stdout": "NODELIST CPUS MEMORY STATE\nhelix-worker1 2 7400 idle\nhelix-worker2 2 7400 idle\nFilesystem       1B-blocks       Used   Available Use% Mounted on\n/dev/root      50884108288 4230942720 46636388352   9% /shared/helix\n\n      N E X T F L O W\n      version 25.10.4 build 11177\n      created 10-02-2026 17:12 UTC \n      cite doi:10.1038/nbt.3820\n      http://nextflow.io\n\n{\n  \"boot_status_code\": \"enabled-by-generator\",\n  \"datasource\": \"ec2local\",\n  \"detail\": \"DataSourceEc2Local\",\n  \"errors\": [],\n  \"extended_status\": \"done\",\n  \"init\": {\n    \"errors\": [],\n    \"finished\": 5.74,\n    \"recoverable_errors\": {},\n    \"start\": 5.54\n  },\n  \"init-local\": {\n    \"errors\": [],\n    \"finished\": 5.11,\n    \"recoverable_errors\": {},\n    \"start\": 4.57\n  },\n  \"last_update\": \"Thu, 01 Jan 1970 00:00:10 +0000\",\n  \"modules-config\": {\n    \"errors\": [],\n    \"finished\": 7.97,\n    \"recoverable_errors\": {},\n    \"start\": 7.86\n  },\n  \"modules-final\": {\n    \"errors\": [],\n    \"finished\": 10.04,\n    \"recoverable_errors\": {},\n    \"start\": 9.93\n  },\n  \"recoverable_errors\": {},\n  \"stage\": null,\n  \"status\": \"done\"\n}\n",
+  "cluster_status_stderr": "",
+  "cluster_status_exit": 0,
+  "ready": true,
+  "private_config_written": true
+}

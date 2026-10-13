@@ -1,0 +1,259 @@
+{
+  "case": "AGG-02-small",
+  "physicalFeasibilityLabel": false,
+  "labelReason": "Actual terminal I/O failure linked by path and timestamp to kernel EDQUOT or independently qualified quota-reservation ENOSPC under matching enforced quota",
+  "actualDecision": {
+    "version": "trp-resources/1.2.0",
+    "decidedAt": "2026-10-13T05:46:42.068Z",
+    "accepted": false,
+    "inventoryHash": "6c8f607b089103397a021675598c3ade517f0685672501f4b6ce8031cabe041c",
+    "budgetHash": "35f1293ed358c1596fb5affa66d7cb7d3aa5abff1672f1a189bb782f511c179d",
+    "demand": {
+      "version": "trp-resources/1.2.0",
+      "sourceBytes": 359397,
+      "selectionBytes": 150911,
+      "bundleBytes": 1158087,
+      "counts": {
+        "scientificTasks": 2,
+        "stubTasks": 2,
+        "remoteScientificCalls": 2,
+        "retries": 0
+      },
+      "cpus": 3,
+      "memoryBytes": 4294967296,
+      "workBytes": 42266624,
+      "wallSeconds": 1080,
+      "storage": {
+        "kind": "estimate",
+        "formula": "ceil((32*1048576 + 7*bundleBytes + 4*selectionBytes)/4096)*4096",
+        "hardLimit": false,
+        "profile": "trp-colocated-client-storage/1.0.0"
+      },
+      "assumptions": [
+        "Verified co-located Slurm profile: the real Helix client and Python/Nextflow controller share a root-controlled 1 CPU/2 GiB/swap-zero cgroup. All declared client work/temp/state/cache/export and remote workspace paths inherit one kernel XFS project quota. Worker tasks remain separate 2 CPU/2 GiB Docker allocations; no memory pooling.",
+        "Storage profile trp-colocated-client-storage/1.0.0 reserves32MiB overhead plus working-copy terms. This covers the real client/bootstrap/cache and portable export scope, calibrated on one development pilot before the aggregate campaign freeze; it is not a universal peak guarantee.",
+        "Two sequential tasks per traversal; one stub traversal then one real traversal; no retry or resume.",
+        "Task allocation: 2 CPUs/2 GiB. Controller allocation: 1 CPU/2 GiB; cgroup enforcement requires an independently verified operator sandbox. CPU bandwidth is not an exclusive core reservation.",
+        "Each traversal has an 8 minute watchdog; probes/configuration reserve another 120 seconds. This is a configured timeout, not a runtime prediction.",
+        "Storage estimates allocated workspace bytes including working copies, logs and portable evidence; an independently observed XFS project quota enforces an approved budget only inside an operator allocation.",
+        "The exact image and Nextflow distribution must already be cached. Image pulls/builds and shared Docker/Nextflow caches are outside workBytes.",
+        "Two remote scientific tasks are planned; SSH probes, controller commands and stub jobs are not scientific calls. Agent provider tokens, cost and conversation calls are not measured here."
+      ]
+    },
+    "rejections": [
+      {
+        "code": "capacity-insufficient",
+        "resource": "workBytes",
+        "demand": 42266624,
+        "available": 131072
+      },
+      {
+        "code": "budget-insufficient",
+        "resource": "workBytes",
+        "demand": 42266624,
+        "available": 131072
+      }
+    ]
+  },
+  "defaultPortableVerifier": null,
+  "executionOracleForcedOnly": true,
+  "allocatedBlockBytesObservedPeak": 4096,
+  "allocatedBlockBytesFinal": 4096,
+  "predictedWorkBytes": 42266624,
+  "observedUnderestimateBytes": 0,
+  "observedOverestimationFraction": null,
+  "kernelMemoryPeak": 101621760,
+  "causalKernelQuotaFailures": [
+    "[pid 29447] 1791870402.078900 openat(AT_FDCWD</shared/helix-strict/hrs083467813050467c/client>, \"/shared/helix-strict/hrs083467813050467c/client/input.pdb\", O_WRONLY|O_CREAT, 0666) = -1 ENOSPC (No space left on device)"
+  ],
+  "causallyLinkedTerminalIoFailures": [
+    {
+      "failure": {
+        "pid": 29443,
+        "failedAtEpochSeconds": 1791870402.079,
+        "name": "Error",
+        "code": "ENOSPC",
+        "errno": -28,
+        "syscall": "copyfile",
+        "path": "/opt/helix-strict-runtime/campaign/original40/G-valid-002/source.pdb",
+        "dest": "/shared/helix-strict/hrs083467813050467c/client/input.pdb",
+        "message": "ENOSPC: no space left on device, copyfile '/opt/helix-strict-runtime/campaign/original40/G-valid-002/source.pdb' -> '/shared/helix-strict/hrs083467813050467c/client/input.pdb'",
+        "cause": "Error: ENOSPC: no space left on device, copyfile '/opt/helix-strict-runtime/campaign/original40/G-valid-002/source.pdb' -> '/shared/helix-strict/hrs083467813050467c/client/input.pdb'",
+        "stack": "Error: ENOSPC: no space left on device, copyfile '/opt/helix-strict-runtime/campaign/original40/G-valid-002/source.pdb' -> '/shared/helix-strict/hrs083467813050467c/client/input.pdb'\n    at async main (/opt/helix-strict-runtime/evaluation/trp/campaign-20261012/aggregate-resource-contrasts/full_client.ts:68:10)"
+      },
+      "kernelSyscall": "[pid 29447] 1791870402.078900 openat(AT_FDCWD</shared/helix-strict/hrs083467813050467c/client>, \"/shared/helix-strict/hrs083467813050467c/client/input.pdb\", O_WRONLY|O_CREAT, 0666) = -1 ENOSPC (No space left on device)"
+    }
+  ],
+  "actualExitCode": 1,
+  "terminationCause": null,
+  "elapsedSeconds": 3.130631811999592,
+  "persistentSqlite": [],
+  "checks": [
+    {
+      "name": "root-allocation-policy-binding",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "exact-kernel-budget",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "owner-quiescence",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "real-controller-and-tracer-reaped",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-0",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-0",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-1",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-1",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-2",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-2",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-3",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-3",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-4",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-4",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-5",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-5",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-6",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-6",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-7",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-7",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-8",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-8",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-0",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-1",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-2",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-3",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-4",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-5",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-6",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "actual-unmodified-decision-source",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "actual-bound-decision-policy",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "actual-decision-budget-hash",
+      "ok": true,
+      "detail": null
+    }
+  ],
+  "checksPassed": 32,
+  "checksTotal": 32,
+  "supervisionSha256": "b09fd1c4072a9f0a21ef07e29b91f3d165b9869dce081824c11cacced4907b0e",
+  "retainedArchiveSha256": "5158c618780c18a1fcd7d4acd111c3e8376e73fd78383ab00f855f7f1b691956",
+  "scientificR24Rate": null,
+  "scope": "Engineering, one development protein, actual aggregate client/head declared paths plus sequential worker tasks; infrastructure/runtime/Docker caches and experiment-only root telemetry excluded"
+}

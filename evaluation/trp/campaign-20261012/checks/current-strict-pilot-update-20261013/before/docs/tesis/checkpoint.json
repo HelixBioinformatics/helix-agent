@@ -1,0 +1,791 @@
+{
+  "project": "Helix Agent, tesis TRP",
+  "updated": "2026-10-12",
+  "phases_completed": [
+    "F1",
+    "F2",
+    "F3",
+    "F4"
+  ],
+  "next_phase": "F6",
+  "schedule": {
+    "defense_month": "2027-07",
+    "defense_month_status": "confirmed_by_user",
+    "complete_draft_before_defense": true,
+    "complete_draft_target": "2027-06-04",
+    "draft_target_status": "planned",
+    "review_window": {
+      "start": "2027-06-05",
+      "end": "2027-06-30"
+    },
+    "defense_day": null,
+    "weekly_hours_status": "unconfirmed",
+    "budget_status": "engineering_resources_authorized; effective_OAuth_bill_unobserved"
+  },
+  "thesis_complete": false,
+  "implementation_complete": false,
+  "phases": {
+    "F1": "complete",
+    "F2": "complete",
+    "F3": "complete_initial_scope",
+    "F4": "complete_engineering_scope_with_reserved_evaluation_pending",
+    "F5": "complete_initial_scope_with_domain_gate_open",
+    "F6": "development_campaign_executed_reserved_human_and_scientific_metrics_open",
+    "F7": "planned"
+  },
+  "artifacts": {
+    "plan": "docs/tesis/PLAN.md",
+    "status": "docs/tesis/ESTADO.md",
+    "traceability": "docs/tesis/trazabilidad.json",
+    "document_content": "script/tesis/update_pratt_originals_docx.py",
+    "engineering_evidence": "docs/tesis/evidencia/r32.json",
+    "document_evidence": "evaluation/trp/reference/pratt-author-20261001/document-checks.json",
+    "docx": "/home/webiwabou/Projects/Tesis.docx",
+    "pdf": "/home/webiwabou/Projects/Tesis-Pratt-20261001.pdf",
+    "verifier": "script/tesis/verify_snapshot.py",
+    "catalogue": "packages/helix/src/trp/catalog.json",
+    "protocol": "evaluation/trp/PROTOCOL.md",
+    "annotation_guide": "evaluation/trp/ANNOTATION.md",
+    "algorithm": "docs/tesis/F5-CONTROLES.md",
+    "nextflow_reference": "evaluation/trp/reference/nextflow-f5/engineering-reference.json",
+    "execution_verifier": "packages/helix/src/trp/verify_bundle.py.txt",
+    "structural_reference": "evaluation/trp/reference/structural-f5/engineering-reference.json",
+    "resource_executor": "script/tesis/trp_sandbox.py",
+    "resource_audit": "script/tesis/audit_resource_runs.py",
+    "remaining_decisions": "docs/tesis/DECISIONES-PENDIENTES.md",
+    "coordinate_reference": "evaluation/trp/reference/coordinate-integrated-20260921/summary.json",
+    "resumed_nextflow_reference": "evaluation/trp/reference/nextflow-20260921/engineering-reference.json",
+    "technical_plan": "docs/tesis/PLAN-CIERRE-TECNICO.md",
+    "technical_evidence": "docs/tesis/evidencia/cierre-tecnico-20260921.json",
+    "traceability_readable": "docs/tesis/trazabilidad.md",
+    "f6_draft": "evaluation/trp/f6-readiness-20260921/technical-draft/freeze.draft.json",
+    "identifier_mapping": "docs/tesis/renumeracion-20260923/equivalencias.json",
+    "helix_verification": "evaluation/trp/verification-20260923/README.md",
+    "pratt_originals": "evaluation/trp/reference/pratt-author-20261001/README.md",
+    "current_campaign_report": "docs/tesis/RESULTADOS-AWS-20261012.md",
+    "workflow_campaign_summary": "evaluation/trp/campaign-20261012/cloud/workflow-summary.json",
+    "model_pilot_audit": "evaluation/trp/campaign-20261012/model-pilot/audit.json",
+    "current_mapped_reference": "evaluation/trp/campaign-20261012/cloud/lab1/mapped-reference-protocol/driver-terminal.json",
+    "current_cancellation": "evaluation/trp/campaign-20261012/cloud/lab1/cancellation/next-ctx-abort/driver-terminal.json"
+  },
+  "external_dependencies": [
+    "Expert references, final feasibility and two human paraphrases per feasible intention; advisor selected, labels not received",
+    "Actual conversation-turn annotations and paired intervention judgments for kappa",
+    "Independent physical failure criterion, calibrated classifier and pertinent reviewed physical negative controls",
+    "Reserved scientific corpus/partitions and final protocol freeze beyond one development protein",
+    "If hard model billing/output bounds are claimed, a verified provider path; current OAuth bill and8192hardcap unverified"
+  ],
+  "provider_connection": {
+    "provider": "OpenAI",
+    "status": "existing_oauth_development_pilot_verified",
+    "verification": "Four real development cases and captured plugin settings; no scientific execution in pilot",
+    "model_id": "openai/gpt-6-sol",
+    "evaluation_budget": {
+      "planned_total_usd": 100,
+      "planned_pilot_usd": 10,
+      "actual_oauth_bill": null,
+      "hard_output_token_cap_enforced": false
+    },
+    "reasoning_effort": "medium"
+  },
+  "current_phase": "F6 desarrollo técnico ejecutado; anotación y evaluación científica pendientes; F5 dominio abierto",
+  "resource_availability": {
+    "annotator": "advisor_selected_independent_by_author_declaration; 70 real requests prepared; external labels and turns pending",
+    "cluster": "two independent Academy Slurm clusters of three nodes actually tested; lab1 stopped; lab2 resource contrast in progress",
+    "reason": "Supersedes September pending access/proposed annotator; current author decisions and actual execution evidence are indexed in current",
+    "second_workstation": {
+      "status": "ssh_access_authorized_and_verified",
+      "logical_cpus": 8,
+      "memory_bytes": 16670982144,
+      "strict_resource_backend": "private XFS project quota and cgroup v2",
+      "llm_calls_for_R22": 0
+    }
+  },
+  "phase2_scope": {
+    "admitted": 2,
+    "audited": 6,
+    "R1.1": "partial; detection tools and RepeatsDB mapping move to F3",
+    "R1.4": "design implemented; empirical campaign not started",
+    "document_installed": true
+  },
+  "phase3_scope": {
+    "core_milestones": "H3.1-H3.6 complete for the admitted author-PDB geometry route",
+    "R1.1": "partial; detector admission and RepeatsDB mapping pending",
+    "R1.6": "partial; SIFTS/label/author and predicted-model mappings pending",
+    "empirical_evaluation": false,
+    "document_installed": true
+  },
+  "phase4_scope": {
+    "core_milestones": "H4.1-H4.6 implemented for admitted local route, including strict operator resource allocation",
+    "full_exit_gate_satisfied": true,
+    "R2.2": "Historical local XFS/cgroup engineering preserved; aggregate real-client plus remote cloud estimator/governance not demonstrated. Remote hard disk quota honestly refused.",
+    "R3.3": "Heuristic and UI records implemented; independent advisor selected; actual blind labels and kappa pending.",
+    "empirical_evaluation": false,
+    "document_installed": true,
+    "next_work": "Finalize scoped development resource contrast without asserting aggregate R2.2 or reserved scientific R2.4; independent annotations and final F6 evaluation",
+    "gate_scope": "engineering implementation; reserved empirical evaluation remains F6"
+  },
+  "implementation_dependencies": [
+    "Resolve ReUPred runtime and RepeatsDB locus coordinate/API contract for dependent routes",
+    "Extend strict resource governance to standalone detector and predicted routes where claimed"
+  ],
+  "phase5_scope": {
+    "core_milestones": "H5.1-H5.4 implemented and verified for bounded mechanical screening; full-domain exit gate remains open",
+    "full_exit_gate_satisfied": false,
+    "document_installed": true,
+    "empirical_evaluation": false,
+    "R3.5": "Nine controls documented with primary sources and explicit non-automatable modes",
+    "R3.6": "AFDB/ColabFold inspection and optional maintained CCTBX/FreeSASA observables integrated; full physical classifier and shared strict governance remain open",
+    "R3.7": "Per-instance reports and offline integrity; experimental report bound to Nextflow approval and methods",
+    "R3.8": "78 originals available; primary CCTBX 105/108 with 3 timeouts preserved, secondary 600 seconds recovered 3/3; FreeSASA 108/108 descriptive. Broad C9 not_evaluable, physical sensitivity/specificity null, no certified physical negatives.",
+    "next_work": "Strict shared resource governance for dedicated predicted/detector tools; remaining domain contracts and independent reserved corpus",
+    "local_parser_environment": "Operator-selected HELIX_TRP_PYTHON with pinned Gemmi0.7.5; environment outside repository; requirements in script/tesis/requirements-structural.txt",
+    "coordinate_progress": "Referencia remota SIFTS: 12 unidades, 206 residuos, CSV idéntico y 156 archivos; evidencia local anterior de 139 archivos histórica. Contraste público: 30 cadenas, 11751/11751 label/autor, parser SIFTS 30/30; 28 preparaciones y 11215 residuos, dos rechazos correctos sin CA. Lector léxico Gemmi compartido; uniones/identidad/coordenadas aparte. Cero inserciones observadas no valida ese dominio; desarrollo sin anotación humana ni reserva.",
+    "R3_6_note": "AFDB geometry integrated through dedicated trp_predicted_geometry agent tool; real Question.Service-driven development reference passed on 3 supplied segments/21 residues; full shared resource admission remains pending",
+    "development_observations_executed": true
+  },
+  "author_closed_sections": {
+    "problem_statement": true,
+    "conceptual_framework": true,
+    "state_of_art": true,
+    "source": "user instruction 2026-09-21; do not reopen bibliography screening"
+  },
+  "technical_closure": {
+    "catalog_admitted": 3,
+    "catalog_audited": 6,
+    "regression_pass": 500,
+    "regression_skip": 1,
+    "python_pass": 78,
+    "typecheck": true,
+    "reserved_evaluation_started": false,
+    "document_installed": true,
+    "detector_tool_reference": "evaluation/trp/reference/detector-tool-20260921/summary.json"
+  },
+  "identifier_version": "2026-09-23",
+  "identifier_propagation": {
+    "date": "2026-09-23",
+    "word_installed": true,
+    "docx_sha256": "8fb6e5aa20482b6f45a94ee5286fb6b1a65036bfc51b1fb40a740dc5b296392a",
+    "causes": 3,
+    "objectives": 3,
+    "results": 21
+  },
+  "verification_20260923": {
+    "source_tests_pass": 519,
+    "python_tests_pass": 78,
+    "released_remote_version": "0.3.0",
+    "predicted_tool_integrated": true,
+    "reserved_evaluation_started": false,
+    "llm_calls": 0,
+    "document_installed": true
+  },
+  "annotation_preparation": {
+    "meeting_date": "2026-09-28",
+    "materials": "docs/tesis/reunion-asesora-20260928/README.md",
+    "external_labels_received": false,
+    "pilot_requests": 12,
+    "pilot_turns": 12,
+    "real_materials": "docs/tesis/evaluacion-experta-20260930/README.md",
+    "real_requests": 70,
+    "expert": "Layla Hirsh, advisor selected independently by author declaration",
+    "actual_intervention_turns_received": false
+  },
+  "pratt_20261001": {
+    "original_models": 78,
+    "original_files": 234,
+    "explicit_published_problem_examples": 5,
+    "primary_mechanical_alarms": 78,
+    "physical_evaluable": 0,
+    "sensitivity": null,
+    "specificity": null,
+    "model_calls": 0,
+    "source": "evaluation/trp/reference/pratt-author-20261001/summary.json"
+  },
+  "history": [
+    {
+      "snapshot_as_of": "2026-10-01",
+      "superseded_by": "2026-10-12",
+      "data": {
+        "project": "Helix Agent — tesis TRP",
+        "updated": "2026-10-01",
+        "phases_completed": [
+          "F1",
+          "F2",
+          "F3",
+          "F4"
+        ],
+        "next_phase": "F6",
+        "schedule": {
+          "defense_month": "2027-07",
+          "defense_month_status": "confirmed_by_user",
+          "complete_draft_before_defense": true,
+          "complete_draft_target": "2027-06-04",
+          "draft_target_status": "planned",
+          "review_window": {
+            "start": "2027-06-05",
+            "end": "2027-06-30"
+          },
+          "defense_day": null,
+          "weekly_hours_status": "unconfirmed",
+          "budget_status": "unconfirmed"
+        },
+        "thesis_complete": false,
+        "implementation_complete": false,
+        "phases": {
+          "F1": "complete",
+          "F2": "complete",
+          "F3": "complete_initial_scope",
+          "F4": "complete_engineering_scope_with_reserved_evaluation_pending",
+          "F5": "complete_initial_scope_with_domain_gate_open",
+          "F6": "preparation_not_frozen",
+          "F7": "planned"
+        },
+        "artifacts": {
+          "plan": "docs/tesis/PLAN.md",
+          "status": "docs/tesis/ESTADO.md",
+          "traceability": "docs/tesis/trazabilidad.json",
+          "document_content": "script/tesis/update_pratt_originals_docx.py",
+          "engineering_evidence": "docs/tesis/evidencia/r32.json",
+          "document_evidence": "evaluation/trp/reference/pratt-author-20261001/document-checks.json",
+          "docx": "/home/webiwabou/Projects/Tesis.docx",
+          "pdf": "/home/webiwabou/Projects/Tesis-Pratt-20261001.pdf",
+          "verifier": "script/tesis/verify_snapshot.py",
+          "catalogue": "packages/helix/src/trp/catalog.json",
+          "protocol": "evaluation/trp/PROTOCOL.md",
+          "annotation_guide": "evaluation/trp/ANNOTATION.md",
+          "algorithm": "docs/tesis/F5-CONTROLES.md",
+          "nextflow_reference": "evaluation/trp/reference/nextflow-f5/engineering-reference.json",
+          "execution_verifier": "packages/helix/src/trp/verify_bundle.py.txt",
+          "structural_reference": "evaluation/trp/reference/structural-f5/engineering-reference.json",
+          "resource_executor": "script/tesis/trp_sandbox.py",
+          "resource_audit": "script/tesis/audit_resource_runs.py",
+          "remaining_decisions": "docs/tesis/DECISIONES-PENDIENTES.md",
+          "coordinate_reference": "evaluation/trp/reference/coordinate-integrated-20260921/summary.json",
+          "resumed_nextflow_reference": "evaluation/trp/reference/nextflow-20260921/engineering-reference.json",
+          "technical_plan": "docs/tesis/PLAN-CIERRE-TECNICO.md",
+          "technical_evidence": "docs/tesis/evidencia/cierre-tecnico-20260921.json",
+          "traceability_readable": "docs/tesis/trazabilidad.md",
+          "f6_draft": "evaluation/trp/f6-readiness-20260921/technical-draft/freeze.draft.json",
+          "identifier_mapping": "docs/tesis/renumeracion-20260923/equivalencias.json",
+          "helix_verification": "evaluation/trp/verification-20260923/README.md",
+          "pratt_originals": "evaluation/trp/reference/pratt-author-20261001/README.md"
+        },
+        "external_dependencies": [
+          "Authentic FCI approval document and official title",
+          "Independent annotator for R1.3 and R3.3",
+          "Confirmed cluster access if the cluster execution claim is retained",
+          "Confirmed evaluation model, compute and API budget",
+          "Independent structural failure references and at least 30 pertinent reviewed negative controls; Table S1 rank-1 originals recovered"
+        ],
+        "provider_connection": {
+          "provider": "OpenAI",
+          "status": "connected_user_confirmed",
+          "verification": "User confirmed in this session; no inference call performed in F1",
+          "model_id": null,
+          "evaluation_budget": null
+        },
+        "current_phase": "F6 preparation alongside remaining F5 domain work",
+        "resource_availability": {
+          "annotator": "advisor_proposed_by_author; acceptance, independence_role_and_schedule_pending",
+          "cluster": "unconfirmed_user_confirmed_pending",
+          "reason": "User explicitly asked to register both as pending dependencies",
+          "second_workstation": {
+            "status": "ssh_access_authorized_and_verified",
+            "logical_cpus": 8,
+            "memory_bytes": 16670982144,
+            "strict_resource_backend": "private XFS project quota and cgroup v2",
+            "llm_calls_for_R22": 0
+          }
+        },
+        "phase2_scope": {
+          "admitted": 2,
+          "audited": 6,
+          "R1.1": "partial; detection tools and RepeatsDB mapping move to F3",
+          "R1.4": "design implemented; empirical campaign not started",
+          "document_installed": true
+        },
+        "phase3_scope": {
+          "core_milestones": "H3.1-H3.6 complete for the admitted author-PDB geometry route",
+          "R1.1": "partial; detector admission and RepeatsDB mapping pending",
+          "R1.6": "partial; SIFTS/label/author and predicted-model mappings pending",
+          "empirical_evaluation": false,
+          "document_installed": true
+        },
+        "phase4_scope": {
+          "core_milestones": "H4.1-H4.6 implemented for admitted local route, including strict operator resource allocation",
+          "full_exit_gate_satisfied": true,
+          "R2.2": "implemented and verified on second Linux workstation; seven final development runs, no observed underestimation or budget excess, median overestimate 0.13538732394366204; T-RESOURCE reserved campaign pending",
+          "R3.3": "Spanish/English heuristic implemented; independent annotation and kappa pending",
+          "empirical_evaluation": false,
+          "document_installed": true,
+          "next_work": "F5 detector/coordinate/predicted execution contracts; independent annotation and final F6 evaluation",
+          "gate_scope": "engineering implementation; reserved empirical evaluation remains F6"
+        },
+        "implementation_dependencies": [
+          "Resolve ReUPred runtime and RepeatsDB locus coordinate/API contract for dependent routes",
+          "Extend strict resource governance to standalone detector and predicted routes where claimed"
+        ],
+        "phase5_scope": {
+          "core_milestones": "H5.1-H5.4 implemented and verified for bounded mechanical screening; full-domain exit gate remains open",
+          "full_exit_gate_satisfied": false,
+          "document_installed": true,
+          "empirical_evaluation": false,
+          "R3.5": "Nine controls documented with primary sources and explicit non-automatable modes",
+          "R3.6": "Semantic mmCIF, AFDB confidence/PAE and explicit frames; admitted execution remains experimental PDB. Construct interpretation, genomic and physical validation incomplete or non-evaluable.",
+          "R3.7": "Per-instance reports and offline integrity; experimental report bound to Nextflow approval and methods",
+          "R3.8": "78 original Pratt rank-1 models recovered and screened; five explicitly problematic caption-matched examples flagged mechanically. Full physical sensitivity/specificity unmeasured; physical coverage 0%, no confirmed negative controls.",
+          "next_work": "Strict shared resource governance for dedicated predicted/detector tools; remaining domain contracts and independent reserved corpus",
+          "local_parser_environment": ".bioinformatica/trp-python (Gemmi 0.7.5; untracked; requirements in script/tesis/requirements-structural.txt)",
+          "coordinate_progress": "Integrated label/author and SIFTS/UniProt mapping; real 206 residues and 12 units; portable verification of 139 files",
+          "R3_6_note": "AFDB geometry integrated through dedicated trp_predicted_geometry agent tool; real Question.Service-driven development reference passed on 3 supplied segments/21 residues; full shared resource admission remains pending"
+        },
+        "author_closed_sections": {
+          "problem_statement": true,
+          "conceptual_framework": true,
+          "state_of_art": true,
+          "source": "user instruction 2026-09-21; do not reopen bibliography screening"
+        },
+        "technical_closure": {
+          "catalog_admitted": 3,
+          "catalog_audited": 6,
+          "regression_pass": 500,
+          "regression_skip": 1,
+          "python_pass": 78,
+          "typecheck": true,
+          "reserved_evaluation_started": false,
+          "document_installed": true,
+          "detector_tool_reference": "evaluation/trp/reference/detector-tool-20260921/summary.json"
+        },
+        "identifier_version": "2026-09-23",
+        "identifier_propagation": {
+          "date": "2026-09-23",
+          "word_installed": true,
+          "docx_sha256": "8fb6e5aa20482b6f45a94ee5286fb6b1a65036bfc51b1fb40a740dc5b296392a",
+          "causes": 3,
+          "objectives": 3,
+          "results": 21
+        },
+        "verification_20260923": {
+          "source_tests_pass": 519,
+          "python_tests_pass": 78,
+          "released_remote_version": "0.3.0",
+          "predicted_tool_integrated": true,
+          "reserved_evaluation_started": false,
+          "llm_calls": 0,
+          "document_installed": true
+        },
+        "annotation_preparation": {
+          "meeting_date": "2026-09-28",
+          "materials": "docs/tesis/reunion-asesora-20260928/README.md",
+          "external_labels_received": false,
+          "pilot_requests": 12,
+          "pilot_turns": 12
+        },
+        "pratt_20261001": {
+          "original_models": 78,
+          "original_files": 234,
+          "explicit_published_problem_examples": 5,
+          "primary_mechanical_alarms": 78,
+          "physical_evaluable": 0,
+          "sensitivity": null,
+          "specificity": null,
+          "model_calls": 0,
+          "source": "evaluation/trp/reference/pratt-author-20261001/summary.json"
+        }
+      }
+    }
+  ],
+  "updated_at_utc": "2026-10-13T03:01:41.594265+00:00",
+  "current": {
+    "date": "2026-10-12",
+    "updated_at_utc": "2026-10-13T03:27:35.827670+00:00",
+    "scope": "campaña técnica de desarrollo 20261012, no evaluación científica reservada",
+    "ids": [
+      "R1.1",
+      "R1.2",
+      "R1.3",
+      "R1.4",
+      "R1.5",
+      "R1.6",
+      "R1.7",
+      "R1.8",
+      "R1.9",
+      "R2.1",
+      "R2.2",
+      "R2.3",
+      "R2.4",
+      "R3.1",
+      "R3.2",
+      "R3.3",
+      "R3.4",
+      "R3.5",
+      "R3.6",
+      "R3.7",
+      "R3.8"
+    ],
+    "criteria": [
+      "Implementado describe software o diseño verificado en un alcance, no la satisfacción de un indicador científico.",
+      "Las 50 variantes de grafos proceden de una proteína de desarrollo, 2XQH/A; no son 50 proteínas ni 50 intenciones humanas reservadas.",
+      "Los dos fallos iniciales y sus reintentos se cuentan como 52 intentos, sin borrar fallos ni convertir 50 éxitos finales en la tasa científica de R1.5.",
+      "Aprobaciones sintéticas y permisos automáticos no son intervenciones anotadas por una experta.",
+      "Observables estéricos y de superficie no constituyen un clasificador de plausibilidad física; sensibilidad, especificidad y kappa permanecen ausentes.",
+      "Los límites efectivos de tareas Docker, tamaños finales por carpeta y telemetría de procesos no demuestran un límite agregado cliente/controlador/clúster ni un pico de almacenamiento.",
+      "El contraste head R2.4 original 40 y la extensión posterior 6 se informan por separado; falso rechazo 6/26 y acierto 34/40 sólo describen ese alcance. No son tasa científica ni prueba agregada del cliente real.",
+      "Se conservan los 21 identificadores y el cierre autoral de los capítulos 1 a 3.",
+      "Las 30 cadenas públicas contrastan numeración: 11751 correspondencias label/autor y 11215 residuos preparados en 28 cadenas, con dos rechazos correctos conservados. Gemmi léxico compartido y cero inserciones observadas limitan la independencia y cobertura; no es evaluación reservada ni anotación biológica."
+    ],
+    "evidence_index": {
+      "workflows": {
+        "path": "evaluation/trp/campaign-20261012/cloud/workflow-summary.json",
+        "sha256": "ae68aac93c5d9b7809804bf0f40c44e462e0e19005df0e9e73661913dc7310ae"
+      },
+      "pilot": {
+        "path": "evaluation/trp/campaign-20261012/model-pilot/audit.json",
+        "sha256": "e778d2350f295051bb01b1c3efe40de079b112a84b8dafaab6893ff424b00c9c"
+      },
+      "pilot_settings": {
+        "path": "evaluation/trp/campaign-20261012/model-pilot/settings-probe-request/audit.json",
+        "sha256": "075eaa90a92bae795e8dd0051d80bdd683c546d4f2727edc79cd3a31ce00340c"
+      },
+      "steric_primary": {
+        "path": "evaluation/trp/campaign-20261012/structural/summary.json",
+        "sha256": "a019bdf4e65abb960735df52907ec25e8105eebfffe313be35c9abc4933e622b"
+      },
+      "steric_secondary": {
+        "path": "evaluation/trp/campaign-20261012/structural/runtime-600/summary.json",
+        "sha256": "48c315caededc16f411133782baca20f0838f7e2e831baa5871b29f68c8da04f"
+      },
+      "surface": {
+        "path": "evaluation/trp/campaign-20261012/structural/freesasa/summary.json",
+        "sha256": "2b05c768cac199c8177e4f974846b1f6fe0eef84c98097a12cef0384951e3397"
+      },
+      "surface_integration": {
+        "path": "evaluation/trp/campaign-20261012/structural/freesasa/integration/agent-reference.json",
+        "sha256": "1db0ac3dbf1c09a3dc4e0f5304ae4e82b6668261f638744813627623e3741b99"
+      },
+      "mapped": {
+        "path": "evaluation/trp/campaign-20261012/cloud/lab1/mapped-reference-protocol/driver-terminal.json",
+        "sha256": "0e88b189344616302cbf89a028f3689f9ba6a03f88dd12b0b49fb76dfe19490a"
+      },
+      "mapped_audit": {
+        "path": "evaluation/trp/campaign-20261012/trace/mapped-reference.json",
+        "sha256": "38ff44a16ad47bfa35cfa7d6c0c5098ba1ef8182e76aad691ec086a7d582e1bd"
+      },
+      "mapped_copy": {
+        "path": "evaluation/trp/campaign-20261012/trace/mapped-reference-copy.json",
+        "sha256": "81f3d3fa9dde72c2eeb0e729c52bebf066aaa73723ffe7e353716ca1a6f19315"
+      },
+      "cancel": {
+        "path": "evaluation/trp/campaign-20261012/cloud/lab1/cancellation/next-ctx-abort/driver-terminal.json",
+        "sha256": "a8771640649d57c46b63f6c97f59368b96c2c6b1b921a73118cb44d6cff2a37f"
+      },
+      "cancel_audit": {
+        "path": "evaluation/trp/campaign-20261012/trace/running-cancellation-clean.json",
+        "sha256": "002f23614d2333ecc510127e9afcd68c5cc8d73e2668c767b1b7d01a7d5ee08b"
+      },
+      "lab1_stop": {
+        "path": "evaluation/trp/campaign-20261012/cloud/lab1/stop-state.json",
+        "sha256": "5071d46182badb1be98833bf884241b96cb4922d03bc87a727477cab5ebb043e"
+      },
+      "regression": {
+        "path": "evaluation/trp/campaign-20261012/checks/final-regression/summary.json",
+        "sha256": "a3cddb172872b1f63c6fb172998ef4a09ff414dab69391a3df9e17476978715a"
+      },
+      "r24_observation": {
+        "path": "evaluation/trp/campaign-20261012/trace/r24-initial-checkpoint-independent-audit.json",
+        "sha256": "b077d7bd28de3d62b6ba4a9ca48c853eac27cdd6478fbf47546d57176824de5d"
+      },
+      "annotation": {
+        "path": "docs/tesis/evaluacion-experta-20260930/README.md",
+        "sha256": "378e70e07016a8e8c8f5d3545ab6b2774d05b77481ef9d3deb5c8a6468a85738"
+      },
+      "annotation_workbook": {
+        "path": "docs/tesis/evaluacion-experta-20260930/para-asesora/evaluacion.xlsx",
+        "sha256": "d0e61be48192abea4f3b6cef6f8561fc42b0aeb2132dfac6c9eb1e71a69ef91a"
+      },
+      "graph_corpus": {
+        "path": "evaluation/trp/campaign-20261012/contract-corpus/graphs.json",
+        "sha256": "3d20eda715833d882a7ff8e0e5b10180c3fecec4f20012eb74f266062bfc9e7d"
+      },
+      "steric_integration": {
+        "path": "evaluation/trp/campaign-20261012/structural/agent-reference.json",
+        "sha256": "d88bab81f38e786288cd42d47548a81afd68a304a73910a4e7391e36a966d0c5"
+      },
+      "operator_window": {
+        "path": "evaluation/trp/campaign-20261012/cloud/lab2/prepare-window/prepare-status.json",
+        "sha256": "b12e8b71517939d663af4816dc9027b9040d2b6380d8ffe30be3bdfd1911ad5e"
+      },
+      "operator_window_helper": {
+        "path": "script/tesis/aws_academy_prepare_remote.py",
+        "sha256": "af16699cf13f285dfb53e8fbc9cab8ce7c95e0e43ff35748922870bdd51f9739"
+      },
+      "public_mapping_summary": {
+        "path": "evaluation/trp/campaign-20261012/mapping-public-contrasts/summary.json",
+        "sha256": "7388b1eb7f776d7a092a6c4f7f3641b586db428fb63eb471b79a93909846591c"
+      },
+      "public_mapping_audit": {
+        "path": "evaluation/trp/campaign-20261012/mapping-public-contrasts/audit.json",
+        "sha256": "b9c5b98fcac3464eb2bbe4d1e93ce112d272c93ce000bd6a856f0c7a3c61da6c"
+      },
+      "public_mapping_manifest": {
+        "path": "evaluation/trp/campaign-20261012/mapping-public-contrasts/manifest.json",
+        "sha256": "baedd3702e605efb04eabe803294b7368771bd0f2c07ac7427f2f2b2b4474ac6"
+      },
+      "public_mapping_protocol": {
+        "path": "evaluation/trp/campaign-20261012/mapping-public-contrasts/protocol.json",
+        "sha256": "81bf8e5bf0a151c63df779b8036490e04ba18c2e4c1d5baf6b1defdbd425b6b1"
+      },
+      "public_mapping_freeze": {
+        "path": "evaluation/trp/campaign-20261012/mapping-public-contrasts/oracle-freeze.json",
+        "sha256": "86e81898e53fed7208323e4609d8aa7fb155718a675da3e00f4d5fdf99cd314d"
+      },
+      "public_mapping_root_review": {
+        "path": "evaluation/trp/campaign-20261012/checks/root-review-20261013/public-mapping.json",
+        "sha256": "7ad1eac7a9fb0545e1caf6e1139363f56f5045d0bf5b5cfee2269897eb93b021"
+      },
+      "r24_head_final": {
+        "path": "evaluation/trp/campaign-20261012/cloud/lab2/r24-summary.json",
+        "sha256": "a36bee8d3bd32538550d16eda6d5e3392d3e8061b3148c62248815faee9a687b"
+      },
+      "r24_head_source_review": {
+        "path": "evaluation/trp/campaign-20261012/trace/r24-canonical-source-review.json",
+        "sha256": "d159b1b7cb63c195d55856aa479430a2f81d29569b37250853e547ffbc8316a7"
+      },
+      "event_negative": {
+        "path": "evaluation/trp/campaign-20261012/event-negative-contrasts/audit.json",
+        "sha256": "f25e63cfcd6f6f92e091aeaf687641ed3ff479c59e078be174076cc555cd7c24"
+      },
+      "event_negative_second_review": {
+        "path": "evaluation/trp/campaign-20261012/trace/event-negative-second-review.json",
+        "sha256": "e47908f6f5c18661c4054005330f78e3d78872745c7358aa67b63baeaed514c5"
+      }
+    },
+    "annotation": {
+      "expert": "asesora Layla Hirsh, seleccionada por el autor",
+      "independence": "el autor declara que no participó en el desarrollo; revisó parte del informe",
+      "requests_prepared": 70,
+      "candidate_feasible_requests": 50,
+      "scope_limit_requests": 20,
+      "external_labels_received": false,
+      "external_paraphrases_received": false,
+      "real_intervention_annotation_received": false,
+      "kappa": null
+    },
+    "model": {
+      "requested_model": "openai/gpt-6-sol",
+      "reasoning_effort": "medium",
+      "auth": "OAuth existente del operador",
+      "development_pilot_cases": 4,
+      "scientific_execution_in_pilot": false,
+      "hard_8192_output_token_cap_enforced": false,
+      "actual_billing": null,
+      "actual_provider_revision": null,
+      "source": "evaluation/trp/campaign-20261012/model-pilot/settings-probe-request/audit.json"
+    },
+    "cloud": {
+      "independent_labs": 2,
+      "nodes_per_cluster": 3,
+      "scheduler": "Slurm",
+      "executor": "SSH + Nextflow + Docker",
+      "accounts_credits_pooled": false,
+      "image": "sha256:1dd91e70acb153a0bd9a51346fc001dd5025f851c9598697cdd37f07d9490b0a",
+      "numerical_profile": "haswell-single-thread",
+      "workflow_attempts": 52,
+      "unique_development_graphs_verified": 50,
+      "unique_proteins": 1,
+      "first_attempt_successes": 48,
+      "first_attempt_failures_retained": 2,
+      "scientific_R1_5_rate": null,
+      "lab1_state": "stopped, independently observed 2026-10-13T02:43:25.831083+00:00",
+      "lab2_state": "Contraste head cerrado; parada observada 2026-10-13T03:52:19.780068+00:00. Estado de la próxima campaña agregada a cargo de root.",
+      "task_effective_cpu_quota": 2,
+      "task_effective_memory_bytes": 2147483648,
+      "task_effective_swap_bytes": 0,
+      "aggregate_client_remote_R2_2_demonstrated": false,
+      "hard_controller_limit_verified": false,
+      "hard_aggregate_disk_quota_verified": false,
+      "strict_remote_disk_quota_request": "refused honestly because unavailable",
+      "R2_4_status": "head_development_original40_and_separate_extension6_complete",
+      "R2_4_final_accuracy": null,
+      "R2_4_final_false_rejection_rate": null,
+      "admission_deadline_binding": "minimum of Academy session expiry and observed 180 minute boot-stop guards on all three required guests, written to operator private config",
+      "operator_window_evidence": "evaluation/trp/campaign-20261012/cloud/lab2/prepare-window/prepare-status.json",
+      "R2_4_head_development": {
+        "scope": "head_workspace_desarrollo_no_cliente_real_no_reserva",
+        "originales": {
+          "casos": 40,
+          "factibles": 26,
+          "inviables": 14,
+          "aciertos": 34,
+          "falsos_rechazos": 6,
+          "falso_rechazo": 0.23076923076923078,
+          "acierto": 0.85,
+          "intentos_enviados": 42,
+          "intentos_desconocidos_historicos_conservados": 2,
+          "casos_unicos_sin_resolver": 0,
+          "IC95_Wilson_falso_rechazo": [
+            0.11033849405783291,
+            0.42051554078943687
+          ],
+          "IC95_Wilson_acierto": [
+            0.709276756335103,
+            0.9293881228267964
+          ],
+          "umbral_falso_rechazo": 0.05,
+          "umbral_alcanzado": false
+        },
+        "extension_separada": {
+          "casos": 6,
+          "factibles": 0,
+          "inviables": 6,
+          "aciertos": 6,
+          "escogida_tras_observar_originales": true,
+          "falso_rechazo": null
+        },
+        "gobernanza_agregada_cliente_real_remoto_demostrada": false,
+        "tasa_cientifica_R2_4": null,
+        "intervalos": "Descriptivos bajo convención binomial; variantes de una proteína no sustentan generalización entre proteínas."
+      }
+    },
+    "structural": {
+      "pratt_original_models_available": 78,
+      "reviewed_experimental_repeat_references": 30,
+      "physical_negatives_confirmed": 0,
+      "CCTBX_primary_evaluable": 105,
+      "CCTBX_primary_total": 108,
+      "CCTBX_primary_timeouts": 3,
+      "CCTBX_primary_timeout_seconds": 180,
+      "CCTBX_secondary_timeout_seconds": 600,
+      "CCTBX_secondary_retried": 3,
+      "CCTBX_secondary_recovered": 3,
+      "primary_failures_preserved": true,
+      "FreeSASA_evaluable": 108,
+      "FreeSASA_total": 108,
+      "optional_observables_integrated": true,
+      "fold_classifier_validated": false,
+      "C9_broad_fold_verdict": "not_evaluable",
+      "physical_sensitivity": null,
+      "physical_specificity": null
+    },
+    "portable": {
+      "mapped_SIFTS_units": 12,
+      "mapped_files": 156,
+      "mapped_manifest_sha256": "b400c54428684c5d1f767324154388f906f466c849736bf28394241fabed80aa",
+      "mapped_copy_verified_outside_checkout": true,
+      "mapped_offline_faults_detected": 320,
+      "mapped_offline_faults_injected": 320,
+      "clean_cancellation_native_job": "128",
+      "clean_cancellation_native_state": "CANCELLED",
+      "clean_cancellation_files": 143,
+      "clean_cancellation_manifest_sha256": "62cf9fba9e9a2e23cb4e4e55f30bd50a36000976c438b8d4387d7468a7b735e6",
+      "clean_cancellation_automatic_final_event": true,
+      "R3_2_negative_contrasts": {
+        "scope": "cuatro_sesiones_locales_de_ingenieria_con_callbacks_sinteticos",
+        "casos_unicos": 4,
+        "registros_exigibles": 13,
+        "registros_coincidentes": 13,
+        "por_fuente": {
+          "admision": {
+            "coincidentes": 4,
+            "exigibles": 4
+          },
+          "protocolo": {
+            "coincidentes": 3,
+            "exigibles": 3
+          },
+          "permisos": {
+            "coincidentes": 4,
+            "exigibles": 4
+          },
+          "aprobacion": {
+            "coincidentes": 2,
+            "exigibles": 2
+          }
+        },
+        "paquetes_fallidos_verificados_en_frio": 2,
+        "archivos_por_paquete": 25,
+        "expectativas_congeladas_antes_del_productor": true,
+        "observaciones_acciones_todas_antes_de_crear_ledger": false,
+        "observaciones_antes_de_leer_registros_productor": true,
+        "callback_sintetico": true,
+        "anotador_humano_independiente": false,
+        "kappa": null
+      }
+    },
+    "documentation": {
+      "chapters_1_to_3_closed_by_author": true,
+      "original_word_managed_by_root": true,
+      "this_update_touched_original_word": false,
+      "final_render_verification_in_this_update": null,
+      "initial_documentation_owned_by_author_not_agent_pending": true
+    },
+    "implementation_revision": "a951d73",
+    "regression": {
+      "passed": 532,
+      "skipped_opt_in": 59,
+      "failed": 0,
+      "assertions": 1562,
+      "source": "evaluation/trp/campaign-20261012/checks/final-regression/summary.json"
+    },
+    "r24_checkpoint_observation_is_final_metric": false,
+    "public_mapping": {
+      "scope": "public_development_numbering_contrasts_not_held_out_or_biological_annotation",
+      "chains": 30,
+      "label_positions": 11751,
+      "label_to_author_mapped": 11751,
+      "sifts_parser_chains": 30,
+      "prepared_admitted_chains": 28,
+      "prepared_residues": 11215,
+      "prepared_correct_rejected_chains": 2,
+      "observed_sifts_accession_rows": 11749,
+      "unobserved_sifts_accession_rows": 265,
+      "observed_ca_without_selected_sifts": 4,
+      "source_insertions_observed": 0,
+      "source_alternates_observed": 0,
+      "real_insertion_domain_validated": false,
+      "gemmi_lexical_parser_shared": true,
+      "independent_join_identity_coordinate_logic": true,
+      "oracle_agreement": true,
+      "reproduced_cases": 3,
+      "reproduction_byte_identical": true,
+      "human_reference": false,
+      "reserved_scientific_evaluation": false,
+      "biological_validity": "not_established",
+      "evidence_index_keys": [
+        "public_mapping_summary",
+        "public_mapping_audit",
+        "public_mapping_manifest",
+        "public_mapping_protocol",
+        "public_mapping_freeze",
+        "public_mapping_root_review"
+      ],
+      "missing_ca_correct_rejections": [
+        {
+          "case": "2bm4-A",
+          "residue": "GLY",
+          "author": "182",
+          "uniprot": "182"
+        },
+        {
+          "case": "1o8i-A",
+          "residue": "LYS",
+          "author": "353",
+          "uniprot": "375"
+        }
+      ]
+    },
+    "actualizaciones_acotadas": [
+      {
+        "at_utc": "2026-10-13T04:22:44.307820+00:00",
+        "ids": [
+          "R2.4",
+          "R3.2"
+        ],
+        "previous_document_snapshot": "evaluation/trp/campaign-20261012/checks/canonical-r24-events-update-20261013/before/docs/tesis/checkpoint.json",
+        "scope": "head y negativas; root conserva ownership de la próxima evaluación agregada"
+      }
+    ]
+  },
+  "historical_fields_note": "phase2_scope, phase3_scope, technical_closure, dated verification/pratt blocks and old document artifact paths retain historical snapshots. current plus the updated operative fields govern present claims; no new Word render is certified by this update.",
+  "implementation_revision": "a951d73"
+}

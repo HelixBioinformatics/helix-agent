@@ -1,0 +1,20 @@
+{
+  "status": "prepared-not-applied-to-production",
+  "isolatedStage": "/tmp/helix-status-polling-repair-20261013",
+  "originalSha256": "0853e2e4cbbb1a80f44b0c1073ad605147f59701ca3d6d503e07e434f2b9312e",
+  "repairedSha256": "476b39447e7da4b7d3753a6fd5db4f69d064c1fe3a166e221676f3e9fcae1f1c",
+  "baselineRegression": "2pass3fail; actual non-json error masks transport diagnostic",
+  "repairedRegression": "5pass0fail30assertions",
+  "isolatedTypecheck": "tsgo --noEmit passed",
+  "patchAppliesCleanly": true,
+  "patchCheckError": null,
+  "changes": [
+    "JSON-null unknown terminal state",
+    "classify and preserve concrete SSH255 diagnostics",
+    "up to3 status attempts with1second waits on recognized transient transport errors only",
+    "never retry launch/submission, auth/hostkey failures or explicit abort"
+  ],
+  "scientificProtocolChanged": false,
+  "runnerChanged": false,
+  "activeBatchesChanged": false
+}

@@ -1,0 +1,80 @@
+{
+  "case": "AGG-19-generous",
+  "status": "succeeded",
+  "executionOracleForcedOnly": false,
+  "realDecision": {
+    "version": "trp-resources/1.2.0",
+    "decidedAt": "2026-10-13T07:37:08.283Z",
+    "accepted": true,
+    "inventoryHash": "01beefc86cda03a78fc39e91a65cd4c6b71e3b3d072d130799404efe7424f1e0",
+    "budgetHash": "1e7e6b647717c1505f70d83c2ab596371ef89edd11865084c81884ce1d8c0067",
+    "demand": {
+      "version": "trp-resources/1.2.0",
+      "sourceBytes": 359397,
+      "selectionBytes": 150911,
+      "bundleBytes": 1158153,
+      "counts": {
+        "scientificTasks": 2,
+        "stubTasks": 2,
+        "remoteScientificCalls": 2,
+        "retries": 0
+      },
+      "cpus": 3,
+      "memoryBytes": 4294967296,
+      "workBytes": 42266624,
+      "wallSeconds": 1080,
+      "storage": {
+        "kind": "estimate",
+        "formula": "ceil((32*1048576 + 7*bundleBytes + 4*selectionBytes)/4096)*4096",
+        "hardLimit": false,
+        "profile": "trp-colocated-client-storage/1.0.0"
+      },
+      "assumptions": [
+        "Verified co-located Slurm profile: the real Helix client and Python/Nextflow controller share a root-controlled 1 CPU/2 GiB/swap-zero cgroup. All declared client work/temp/state/cache/export and remote workspace paths inherit one kernel XFS project quota. Worker tasks remain separate 2 CPU/2 GiB Docker allocations; no memory pooling.",
+        "Storage profile trp-colocated-client-storage/1.0.0 reserves32MiB overhead plus working-copy terms. This covers the real client/bootstrap/cache and portable export scope, calibrated on one development pilot before the aggregate campaign freeze; it is not a universal peak guarantee.",
+        "Two sequential tasks per traversal; one stub traversal then one real traversal; no retry or resume.",
+        "Task allocation: 2 CPUs/2 GiB. Controller allocation: 1 CPU/2 GiB; cgroup enforcement requires an independently verified operator sandbox. CPU bandwidth is not an exclusive core reservation.",
+        "Each traversal has an 8 minute watchdog; probes/configuration reserve another 120 seconds. This is a configured timeout, not a runtime prediction.",
+        "Storage estimates allocated workspace bytes including working copies, logs and portable evidence; an independently observed XFS project quota enforces an approved budget only inside an operator allocation.",
+        "The exact image and Nextflow distribution must already be cached. Image pulls/builds and shared Docker/Nextflow caches are outside workBytes.",
+        "Two remote scientific tasks are planned; SSH probes, controller commands and stub jobs are not scientific calls. Agent provider tokens, cost and conversation calls are not measured here."
+      ]
+    },
+    "rejections": []
+  },
+  "gateRecords": [],
+  "terminal": {
+    "prepared": {
+      "id": "5374741f-1518-43a3-a557-5dc0c2c75fc9",
+      "digest": "c45f7f05999abbdaeebdf8fca26dd658d2ce83cbdef6cec14ab794bff63ecd79",
+      "truncated": false
+    },
+    "executed": {
+      "directory": "/shared/helix-strict/hrs6c749967b0cf4cb2/client/.helix/trp/c45f7f05999a-5374741f-1518-43a3-a557-5dc0c2c75fc9",
+      "digest": "c45f7f05999abbdaeebdf8fca26dd658d2ce83cbdef6cec14ab794bff63ecd79",
+      "manifestSha256": "2d7bf65932a99be9e7e55c97f4be37da34743709c8dd94d3dddd6704e7c1ee88",
+      "truncated": false
+    }
+  },
+  "actualCsvSha256": "6991c353fde77a3d2c9de430b9ef96bdbdbe284f46365bd6ec61f5cd0ff068eb",
+  "goldCsvSha256": "6991c353fde77a3d2c9de430b9ef96bdbdbe284f46365bd6ec61f5cd0ff068eb",
+  "numericalEqual": true,
+  "portableExportDirectory": "/shared/helix-strict/hrs6c749967b0cf4cb2/export/portable-evidence",
+  "portableVerification": {
+    "ok": true,
+    "files": 150,
+    "bytes": 6101501,
+    "manifestSha256": "2d7bf65932a99be9e7e55c97f4be37da34743709c8dd94d3dddd6704e7c1ee88",
+    "status": "succeeded",
+    "externallyAnchored": false,
+    "scope": "integrity, declared links and cold counts; not biological accuracy or authorship"
+  },
+  "portableVerifierExitCode": 0,
+  "portableVerifierStderr": "",
+  "ordinaryExportRequired": true,
+  "independentCounterfactualAuditRequired": false,
+  "syntheticApproval": true,
+  "humanEvaluation": false,
+  "persistentSqliteExpected": true,
+  "fullSourceSha256": "552940cd3a4521edcd75f1a5212a0580cb4969f74fd7108781c3939af5f861d5"
+}

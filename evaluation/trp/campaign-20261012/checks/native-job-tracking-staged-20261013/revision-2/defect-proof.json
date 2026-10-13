@@ -1,0 +1,67 @@
+{
+  "historicalMutation": false,
+  "capturedScontrolFailed312": false,
+  "syntheticTransition": "FAILED with ExitCode53:0; additional0:53 controller cleanup test",
+  "sources": [
+    {
+      "path": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/aggregate-resource-contrasts/checkpoint-1/worker2-daemon-diagnostic.json",
+      "sha256": "7a9c3517e2f30b658118410f6929f8aafa68a967501eb21ba90cbe21c0f63272",
+      "bytes": 21395,
+      "excerpts": [
+        {
+          "jsonField": "/stdout/decoded/daemonFile/stdout",
+          "line": "[2026-10-13T06:20:51.180] [312.batch] error: Could not open stdout file /shared/helix-strict/hrsb40f55c1826c4c12/remote/trp-8703dfca7b1a-a8a4d2eb-8601-4c0a-a1c9-ba96d1abcf87/dry-run/work/e0/5e1d06623358bd7909bef90d3c33f3/.command.log: Stale file handle"
+        },
+        {
+          "jsonField": "/stdout/decoded/daemonFile/stdout",
+          "line": "[2026-10-13T06:20:51.180] [312.batch] error: _fork_all_tasks: IO setup failed: Slurmd could not connect IO"
+        },
+        {
+          "jsonField": "/stdout/decoded/daemonFile/stdout",
+          "line": "[2026-10-13T06:20:51.181] [312.batch] get_exit_code task 0 died by signal: 53"
+        }
+      ]
+    },
+    {
+      "path": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/aggregate-resource-contrasts/checkpoint-1/controller-accounting-diagnostic.json",
+      "sha256": "dbef997cfb61071e70421066f2b267a4499ce84c6629bd7fae54d237eeea7751",
+      "bytes": 25287,
+      "excerpts": [
+        {
+          "jsonField": "/stdout/decoded/controllerJournal/stdout",
+          "line": "Oct 13 06:20:51 helix-head slurmctld[716]: slurmctld: _job_complete: JobId=312 WTERMSIG 53"
+        },
+        {
+          "jsonField": "/stdout/decoded/controllerJournal/stdout",
+          "line": "Oct 13 06:20:51 helix-head slurmctld[716]: slurmctld: _job_complete: JobId=312 done"
+        },
+        {
+          "jsonField": "/stdout/decoded/controllerFile/stdout",
+          "line": "[2026-10-13T06:20:51.185] _job_complete: JobId=312 WTERMSIG 53"
+        },
+        {
+          "jsonField": "/stdout/decoded/controllerFile/stdout",
+          "line": "[2026-10-13T06:20:51.185] _job_complete: JobId=312 done"
+        }
+      ]
+    }
+  ],
+  "observer": {
+    "path": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/aggregate-resource-contrasts/campaign-outcomes/AGG-13-generous/recovered/campaign-50000-AGG-13-generous/retained-allocation/remote/trp-8703dfca7b1a-a8a4d2eb-8601-4c0a-a1c9-ba96d1abcf87/remote-native-jobs.jsonl",
+    "sha256": "255095feec2b992932fd13020c5de328d638a3dee4a8c7a78898b5246c9d23f9",
+    "bytes": 244913,
+    "totalSnapshots": 131,
+    "captured312Snapshots": 11,
+    "captured312States": [
+      "PENDING"
+    ],
+    "lastObserved312At": "2026-10-13T06:20:48.871979+00:00",
+    "firstLaterSnapshot": {
+      "at": "2026-10-13T06:20:51.256725+00:00",
+      "ids": [
+        "311"
+      ]
+    },
+    "exactOwnerComment": "helix:a8a4d2eb-8601-4c0a-a1c9-ba96d1abcf87"
+  }
+}

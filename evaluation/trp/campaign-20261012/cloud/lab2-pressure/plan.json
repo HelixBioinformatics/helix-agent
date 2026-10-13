@@ -1,0 +1,338 @@
+{
+  "version": "academy-pressure/1.0.0",
+  "frozen_at": "2026-10-13T00:21:34.935619+00:00",
+  "lab": "185395",
+  "kind": "engineering_capacity_contrasts",
+  "scientific_cases": false,
+  "image": "sha256:1dd91e70acb153a0bd9a51346fc001dd5025f851c9598697cdd37f07d9490b0a",
+  "cases": [
+    {
+      "id": "helix-worker1-cpu-0.25",
+      "node": "helix-worker1",
+      "mode": "cpu",
+      "cpus": 0.25,
+      "memory_mib": 256,
+      "expected": "feasible"
+    },
+    {
+      "id": "helix-worker1-cpu-0.5",
+      "node": "helix-worker1",
+      "mode": "cpu",
+      "cpus": 0.5,
+      "memory_mib": 256,
+      "expected": "feasible"
+    },
+    {
+      "id": "helix-worker1-cpu-1",
+      "node": "helix-worker1",
+      "mode": "cpu",
+      "cpus": 1,
+      "memory_mib": 256,
+      "expected": "feasible"
+    },
+    {
+      "id": "helix-worker1-cpu-1.5",
+      "node": "helix-worker1",
+      "mode": "cpu",
+      "cpus": 1.5,
+      "memory_mib": 256,
+      "expected": "feasible"
+    },
+    {
+      "id": "helix-worker1-cpu-2",
+      "node": "helix-worker1",
+      "mode": "cpu",
+      "cpus": 2,
+      "memory_mib": 256,
+      "expected": "feasible"
+    },
+    {
+      "id": "helix-worker1-memory-128",
+      "node": "helix-worker1",
+      "mode": "memory",
+      "cpus": 1,
+      "memory_mib": 128,
+      "expected": "feasible"
+    },
+    {
+      "id": "helix-worker1-memory-256",
+      "node": "helix-worker1",
+      "mode": "memory",
+      "cpus": 1,
+      "memory_mib": 256,
+      "expected": "feasible"
+    },
+    {
+      "id": "helix-worker1-memory-512",
+      "node": "helix-worker1",
+      "mode": "memory",
+      "cpus": 1,
+      "memory_mib": 512,
+      "expected": "feasible"
+    },
+    {
+      "id": "helix-worker1-memory-1024",
+      "node": "helix-worker1",
+      "mode": "memory",
+      "cpus": 1,
+      "memory_mib": 1024,
+      "expected": "feasible"
+    },
+    {
+      "id": "helix-worker1-memory-2048",
+      "node": "helix-worker1",
+      "mode": "memory",
+      "cpus": 1,
+      "memory_mib": 2048,
+      "expected": "feasible"
+    },
+    {
+      "id": "helix-worker1-unavailable-cpu-3",
+      "node": "helix-worker1",
+      "mode": "scheduler",
+      "requested_cpus": 3,
+      "memory_mib": 512,
+      "expected": "infeasible_node_capacity"
+    },
+    {
+      "id": "helix-worker1-unavailable-cpu-4",
+      "node": "helix-worker1",
+      "mode": "scheduler",
+      "requested_cpus": 4,
+      "memory_mib": 512,
+      "expected": "infeasible_node_capacity"
+    },
+    {
+      "id": "helix-worker1-unavailable-cpu-5",
+      "node": "helix-worker1",
+      "mode": "scheduler",
+      "requested_cpus": 5,
+      "memory_mib": 512,
+      "expected": "infeasible_node_capacity"
+    },
+    {
+      "id": "helix-worker1-unavailable-cpu-6",
+      "node": "helix-worker1",
+      "mode": "scheduler",
+      "requested_cpus": 6,
+      "memory_mib": 512,
+      "expected": "infeasible_node_capacity"
+    },
+    {
+      "id": "helix-worker1-unavailable-cpu-7",
+      "node": "helix-worker1",
+      "mode": "scheduler",
+      "requested_cpus": 7,
+      "memory_mib": 512,
+      "expected": "infeasible_node_capacity"
+    },
+    {
+      "id": "helix-worker1-unavailable-memory-7500",
+      "node": "helix-worker1",
+      "mode": "scheduler",
+      "requested_cpus": 1,
+      "memory_mib": 7500,
+      "expected": "infeasible_node_capacity"
+    },
+    {
+      "id": "helix-worker1-unavailable-memory-8192",
+      "node": "helix-worker1",
+      "mode": "scheduler",
+      "requested_cpus": 1,
+      "memory_mib": 8192,
+      "expected": "infeasible_node_capacity"
+    },
+    {
+      "id": "helix-worker1-unavailable-memory-9216",
+      "node": "helix-worker1",
+      "mode": "scheduler",
+      "requested_cpus": 1,
+      "memory_mib": 9216,
+      "expected": "infeasible_node_capacity"
+    },
+    {
+      "id": "helix-worker1-unavailable-memory-10240",
+      "node": "helix-worker1",
+      "mode": "scheduler",
+      "requested_cpus": 1,
+      "memory_mib": 10240,
+      "expected": "infeasible_node_capacity"
+    },
+    {
+      "id": "helix-worker1-unavailable-memory-11264",
+      "node": "helix-worker1",
+      "mode": "scheduler",
+      "requested_cpus": 1,
+      "memory_mib": 11264,
+      "expected": "infeasible_node_capacity"
+    },
+    {
+      "id": "helix-worker2-cpu-0.25",
+      "node": "helix-worker2",
+      "mode": "cpu",
+      "cpus": 0.25,
+      "memory_mib": 256,
+      "expected": "feasible"
+    },
+    {
+      "id": "helix-worker2-cpu-0.5",
+      "node": "helix-worker2",
+      "mode": "cpu",
+      "cpus": 0.5,
+      "memory_mib": 256,
+      "expected": "feasible"
+    },
+    {
+      "id": "helix-worker2-cpu-1",
+      "node": "helix-worker2",
+      "mode": "cpu",
+      "cpus": 1,
+      "memory_mib": 256,
+      "expected": "feasible"
+    },
+    {
+      "id": "helix-worker2-cpu-1.5",
+      "node": "helix-worker2",
+      "mode": "cpu",
+      "cpus": 1.5,
+      "memory_mib": 256,
+      "expected": "feasible"
+    },
+    {
+      "id": "helix-worker2-cpu-2",
+      "node": "helix-worker2",
+      "mode": "cpu",
+      "cpus": 2,
+      "memory_mib": 256,
+      "expected": "feasible"
+    },
+    {
+      "id": "helix-worker2-memory-128",
+      "node": "helix-worker2",
+      "mode": "memory",
+      "cpus": 1,
+      "memory_mib": 128,
+      "expected": "feasible"
+    },
+    {
+      "id": "helix-worker2-memory-256",
+      "node": "helix-worker2",
+      "mode": "memory",
+      "cpus": 1,
+      "memory_mib": 256,
+      "expected": "feasible"
+    },
+    {
+      "id": "helix-worker2-memory-512",
+      "node": "helix-worker2",
+      "mode": "memory",
+      "cpus": 1,
+      "memory_mib": 512,
+      "expected": "feasible"
+    },
+    {
+      "id": "helix-worker2-memory-1024",
+      "node": "helix-worker2",
+      "mode": "memory",
+      "cpus": 1,
+      "memory_mib": 1024,
+      "expected": "feasible"
+    },
+    {
+      "id": "helix-worker2-memory-2048",
+      "node": "helix-worker2",
+      "mode": "memory",
+      "cpus": 1,
+      "memory_mib": 2048,
+      "expected": "feasible"
+    },
+    {
+      "id": "helix-worker2-unavailable-cpu-3",
+      "node": "helix-worker2",
+      "mode": "scheduler",
+      "requested_cpus": 3,
+      "memory_mib": 512,
+      "expected": "infeasible_node_capacity"
+    },
+    {
+      "id": "helix-worker2-unavailable-cpu-4",
+      "node": "helix-worker2",
+      "mode": "scheduler",
+      "requested_cpus": 4,
+      "memory_mib": 512,
+      "expected": "infeasible_node_capacity"
+    },
+    {
+      "id": "helix-worker2-unavailable-cpu-5",
+      "node": "helix-worker2",
+      "mode": "scheduler",
+      "requested_cpus": 5,
+      "memory_mib": 512,
+      "expected": "infeasible_node_capacity"
+    },
+    {
+      "id": "helix-worker2-unavailable-cpu-6",
+      "node": "helix-worker2",
+      "mode": "scheduler",
+      "requested_cpus": 6,
+      "memory_mib": 512,
+      "expected": "infeasible_node_capacity"
+    },
+    {
+      "id": "helix-worker2-unavailable-cpu-7",
+      "node": "helix-worker2",
+      "mode": "scheduler",
+      "requested_cpus": 7,
+      "memory_mib": 512,
+      "expected": "infeasible_node_capacity"
+    },
+    {
+      "id": "helix-worker2-unavailable-memory-7500",
+      "node": "helix-worker2",
+      "mode": "scheduler",
+      "requested_cpus": 1,
+      "memory_mib": 7500,
+      "expected": "infeasible_node_capacity"
+    },
+    {
+      "id": "helix-worker2-unavailable-memory-8192",
+      "node": "helix-worker2",
+      "mode": "scheduler",
+      "requested_cpus": 1,
+      "memory_mib": 8192,
+      "expected": "infeasible_node_capacity"
+    },
+    {
+      "id": "helix-worker2-unavailable-memory-9216",
+      "node": "helix-worker2",
+      "mode": "scheduler",
+      "requested_cpus": 1,
+      "memory_mib": 9216,
+      "expected": "infeasible_node_capacity"
+    },
+    {
+      "id": "helix-worker2-unavailable-memory-10240",
+      "node": "helix-worker2",
+      "mode": "scheduler",
+      "requested_cpus": 1,
+      "memory_mib": 10240,
+      "expected": "infeasible_node_capacity"
+    },
+    {
+      "id": "helix-worker2-unavailable-memory-11264",
+      "node": "helix-worker2",
+      "mode": "scheduler",
+      "requested_cpus": 1,
+      "memory_mib": 11264,
+      "expected": "infeasible_node_capacity"
+    }
+  ],
+  "definitions": {
+    "feasible": "A permitted Slurm allocation with a real bounded container; not feasibility of any biological workflow",
+    "infeasible": "Requested per-node CPU or RAM exceeds independently observed configured capacity"
+  },
+  "limits": [
+    "Does not validate per-workflow storage estimates or physical biology",
+    "CPU quota is not exclusive cores"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "version": "structural-runtime-amendment/1.0.0",
+  "date": "2026-10-12",
+  "freezeSha256": "3e5d9e2a6385dbc099a2bc2f989262b0dbd28d62f43df2be77015aa5c7d742ca",
+  "beforeSuccessfulPhysicalOutcome": true,
+  "problem": "The CCTBX wheel omits the external CCP4 monomer library, so the first preflight failed before producing any score.",
+  "change": "Supply pinned official MonomerLibrary resources through CLIBD_MON; record exact SHA-256 values. No parameter, threshold, candidate or label changes.",
+  "monomerLibrarySha256": "b2db132f63c49cfde99a0739ff65543f377e27e3f8d5ef89ec68c80e14da8144",
+  "scoringTimeoutSeconds": 180,
+  "parallelWorkers": 2,
+  "selectionPagination": "The frozen script traverses pages of 100 in API order until 30 eligible references or the available 791 rows are exhausted. This clarifies the initial query shown in protocol.json."
+}

@@ -1,0 +1,814 @@
+bun test v1.3.14 (0d9b296a)
+
+test/bio/databases.test.ts:
+(pass) bio.ensembl > parses a gene with location and strand [0.27ms]
+(pass) bio.ensembl > returns undefined for a non-gene payload [2.17ms]
+(pass) bio.uniprot > parses accession, name, gene, organism, and function [0.45ms]
+(pass) bio.pdb > parses title, method, resolution, and release date [0.23ms]
+(pass) bio.kegg > parses the flat id\tname pathway list [0.37ms]
+
+test/bio/entrez.test.ts:
+(pass) bio.entrez citation > formats a complete, deduplicated-period citation [0.23ms]
+(pass) bio.entrez citation > a single-author paper drops 'et al' [0.09ms]
+(pass) bio.entrez citation > handles a missing author [0.04ms]
+(pass) bio.entrez summarize > lists numbered citations with the total count [0.11ms]
+(pass) bio.entrez summarize > reports no results cleanly [0.04ms]
+
+test/bio/glue.test.ts:
+(pass) bio.glue > ships the three coordinate-bookkeeping scripts with real content [0.90ms]
+(pass) bio.glue > the cutter never uses Dice.extract [0.23ms]
+(pass) bio.glue > the cutter keys on (resseq, icode), not the residue number alone [0.07ms]
+(pass) bio.glue > the cutter keeps modified residues [0.04ms]
+(pass) bio.glue > the mapper reads SEQRES from the author-chain field, not SeqIO's label ids [0.05ms]
+(pass) bio.glue > the mapper uses the modern aligner and derives the map from aligned blocks [0.10ms]
+(pass) bio.glue > propagation refuses to cross a length difference [0.05ms]
+(pass) bio.glue > every script states what it guards against [0.14ms]
+
+test/bio/http.test.ts:
+(pass) bio.http > a short download fails rather than becoming the answer [0.53ms]
+(pass) bio.http > the incompleteness message names both numbers [0.07ms]
+(pass) bio.http > a failed request is explicitly not an empty result [0.10ms]
+(pass) bio.http > only transient statuses are retried [0.05ms]
+(pass) bio.http > GraphQL errors arriving with a 200 are detected [0.10ms]
+
+test/bio/pdb-corpus.test.ts:
+(pass) bio.pdb corpus retrieval > reads ids from compact responses (bare strings) [0.11ms]
+(pass) bio.pdb corpus retrieval > reads ids from default responses (objects with .identifier) [0.04ms]
+(pass) bio.pdb corpus retrieval > a missing result_set is an empty page, not a crash [0.03ms]
+(pass) bio.pdb corpus retrieval > SEQRES is per ENTITY and must be fanned out across author chains [0.20ms]
+(pass) bio.pdb corpus retrieval > the chain key uses the AUTHOR chain, matching RepeatsDB and SIFTS [0.05ms]
+(pass) bio.pdb corpus retrieval > the GraphQL id cap is encoded and the batch stays well under it [0.02ms]
+(pass) bio.pdb corpus retrieval > the mining fields exclude the one that is always null [0.02ms]
+
+test/bio/repeatsdb.test.ts:
+(pass) bio.repeatsdb parsing > items is an OBJECT keyed by index, not an array [0.30ms]
+(pass) bio.repeatsdb parsing > keys are read in numeric order [0.06ms]
+(pass) bio.repeatsdb parsing > coordinates arrive as strings and are preserved verbatim [0.04ms]
+(pass) bio.repeatsdb parsing > UniProt accessions are lifted out of the prefixed feature keys [0.05ms]
+(pass) bio.repeatsdb parsing > the join key is lowercase pdb id plus author chain [0.04ms]
+(pass) bio.repeatsdb parsing > an AlphaFoldDB record carries a UniProt accession in the structure field [0.04ms]
+(pass) bio.repeatsdb parsing > an unrecognised body is rejected rather than read as empty [0.03ms]
+(pass) bio.repeatsdb parsing > the API's hard page cap is encoded, not assumed [0.02ms]
+
+test/bio/sifts.test.ts:
+(pass) bio.sifts > captures the release stamp, which is the file's only version identity [0.20ms]
+(pass) bio.sifts > the provenance line is not a data row [0.03ms]
+(pass) bio.sifts > parses a table, skipping the comment and the column header [0.21ms]
+(pass) bio.sifts > refuses a file with no version stamp instead of inventing one [0.05ms]
+(pass) bio.sifts > PDB ids are normalised to lowercase so the join key matches RepeatsDB [0.05ms]
+(pass) bio.sifts > CRLF line endings do not contaminate the last field [0.05ms]
+(pass) bio.sifts > an empty column is preserved as empty, not shifted away [0.03ms]
+(pass) bio.sifts > short or malformed lines are skipped, not half-parsed [0.02ms]
+
+test/bio/snapshot.test.ts:
+(pass) bio.snapshot > NDJSON is one record per line and ends with a newline [0.11ms]
+(pass) bio.snapshot > an empty corpus writes no trailing newline, so rows==0 is unambiguous [0.02ms]
+(pass) bio.snapshot > the checksum is stable and content-dependent [0.25ms]
+(pass) bio.snapshot > a missing upstream release is stated, not hidden [0.09ms]
+(pass) bio.snapshot > a release stamp is surfaced verbatim when the source has one [0.04ms]
+
+test/bio/uniprot-bulk.test.ts:
+(pass) bio.uniprot bulk retrieval > cursor pagination follows the Link header verbatim [0.07ms]
+(pass) bio.uniprot bulk retrieval > the ABSENCE of a Link header is the only termination signal [0.03ms]
+(pass) bio.uniprot bulk retrieval > the page size is set explicitly because the default silently truncates [0.01ms]
+(pass) bio.uniprot bulk retrieval > the mining projection requests the fields that carry free text and the PDB join [1.47ms]
+
+test/bio/independent-verify.test.ts:
+(pass) independent snapshot verification > Python agrees with the TypeScript writer after the package is moved [55.37ms]
+(pass) independent snapshot verification > rejects a plausible data edit that preserves file size and row count [51.49ms]
+(pass) independent snapshot verification > rejects a wrong rows count even when the digest matches [51.81ms]
+(pass) independent snapshot verification > rejects a wrong bytes count even when the digest matches [51.70ms]
+(pass) independent snapshot verification > rejects absent data [122.35ms]
+(pass) independent snapshot verification > rejects invalid NDJSON even with matching digest: "{\"x\":NaN}\n" [51.09ms]
+(pass) independent snapshot verification > rejects invalid NDJSON even with matching digest: "{\"x\":1,\"x\":2}\n" [49.51ms]
+(pass) independent snapshot verification > rejects invalid NDJSON even with matching digest: "{broken}\n" [49.86ms]
+(pass) independent snapshot verification > rejects invalid NDJSON even with matching digest: "\n" [51.82ms]
+(pass) independent snapshot verification > rejects an escaping symlink even when it targets valid corpus data [49.82ms]
+(pass) independent snapshot verification > accepts an explicitly empty corpus [51.59ms]
+(pass) independent snapshot verification > never reports successful verification when no manifest was supplied [48.90ms]
+
+test/nfcore/ablation.test.ts:
+(pass) nfcore.ablation spec parsing > the default is the full stack — an unset flag never silently ablates [0.22ms]
+(pass) nfcore.ablation spec parsing > 'all' disables every layer [0.08ms]
+(pass) nfcore.ablation spec parsing > layers are disabled independently [0.05ms]
+(pass) nfcore.ablation spec parsing > a typo is reported, never silently ignored [0.03ms]
+(pass) nfcore.ablation spec parsing > spec() round-trips, so the configuration can be recorded and replayed [0.13ms]
+(pass) nfcore.ablation tool classification > the specialization set is listed explicitly, not matched by prefix [0.06ms]
+(pass) nfcore.ablation tool classification > base coding-agent tools are never ablated [0.04ms]
+(pass) nfcore.ablation fingerprint > hashing is order-independent, so tool-registration order cannot fake a difference [0.10ms]
+(pass) nfcore.ablation fingerprint > the receipt says what the hashes are and what a difference means [0.16ms]
+(pass) nfcore.ablation fingerprint > two contexts differing only in client do not hash the same [0.05ms]
+(pass) nfcore.ablation fingerprint > an MCP or plugin tool changes the context hash, so a differing custom surface is visible [0.06ms]
+(pass) nfcore.ablation fingerprint > the receipt names the settings outside the ablation, not just the layers [0.06ms]
+(pass) nfcore.ablation resolve refuses a spec it does not understand > a typo in a layer name throws instead of running the wrong configuration [0.14ms]
+(pass) nfcore.ablation resolve refuses a spec it does not understand > the error names every unknown token, not just the first [0.09ms]
+(pass) nfcore.ablation resolve refuses a spec it does not understand > a valid spec resolves to exactly what parse would have returned [0.10ms]
+(pass) nfcore.ablation resolve refuses a spec it does not understand > undefined is the full stack, because no spec means no ablation [0.03ms]
+(pass) nfcore.ablation SPECIALIZATION_TOOLS matches the real tool ids > the source tree really does declare tools this way [0.02ms]
+(pass) nfcore.ablation SPECIALIZATION_TOOLS matches the real tool ids > every ablated tool id exists as a declared tool [0.05ms]
+(pass) nfcore.ablation SPECIALIZATION_TOOLS matches the real tool ids > the base coding tools are deliberately absent, so the bare configuration keeps them [0.04ms]
+(pass) nfcore.ablation leak check > a bare prompt still carrying the persona is a leak [0.11ms]
+(pass) nfcore.ablation leak check > a bare prompt still naming an ablated skill or tool is a leak [0.04ms]
+(pass) nfcore.ablation leak check > a genuinely bare prompt is clean [0.03ms]
+(pass) nfcore.ablation leak check > nothing is a leak when the layer is ON [0.02ms]
+
+test/nfcore/authoring.test.ts:
+(pass) nfcore.authoring.parseLintJson > counts passed/warned/failed/ignored and keeps the version [0.36ms]
+(pass) nfcore.authoring.parseLintJson > is defensive about entry shape (object and bare-string forms) [0.07ms]
+(pass) nfcore.authoring.parseLintJson > empty or non-object input yields an empty report [0.02ms]
+(pass) nfcore.authoring.readiness > not ready when any check fails [0.09ms]
+(pass) nfcore.authoring.readiness > ready with caveats when only warnings remain [0.04ms]
+(pass) nfcore.authoring.readiness > cleanly ready when nothing failed or warned [0.03ms]
+(pass) nfcore.authoring.summarizeLint > shows the tally and lists failures and warnings [0.12ms]
+(pass) nfcore.authoring.inspectModule > recognises a conformant module layout [0.18ms]
+(pass) nfcore.authoring.inspectModule > reports what a bare module is missing (per the nf-core spec) [0.04ms]
+(pass) nfcore.authoring.inspectModule > environment.yml is mandatory per the spec (a module without it is not conformant) [0.03ms]
+
+test/nfcore/census.test.ts:
+(pass) nfcore.census parseSamplesheet > finds the id column by header name, not by position [0.64ms]
+(pass) nfcore.census parseSamplesheet > accepts the other names pipelines use for the id column [0.19ms]
+(pass) nfcore.census parseSamplesheet > N is distinct samples, not rows: a multi-lane sample is one sample [2.97ms]
+(pass) nfcore.census parseSamplesheet > a sheet with no id column is a stated failure, never an empty cohort [8.48ms]
+(pass) nfcore.census parseSamplesheet > quoted fields with commas do not shift the column [0.27ms]
+(pass) nfcore.census parseSamplesheet > rows with an empty id are counted, not silently dropped [0.08ms]
+(pass) nfcore.census parseTrace > reads columns by header name and splits the parenthesised tag off the process [0.22ms]
+(pass) nfcore.census parseTrace > a header without the columns it needs is a stated failure, not zero tasks [0.07ms]
+(pass) nfcore.census parseTrace > truncated lines are counted rather than parsed into half a task [0.16ms]
+(pass) nfcore.census parseTrace > picks the newest execution trace, so a -resume run is not censused from the old one [0.21ms]
+(pass) nfcore.census matchTag > a meta-id suffix still identifies the sample [0.14ms]
+(pass) nfcore.census matchTag > SAMPLE1 does not claim SAMPLE10's tasks [0.09ms]
+(pass) nfcore.census matchTag > the more specific id wins when both explain the same part of the tag [0.11ms]
+(pass) nfcore.census matchTag > a tag naming two samples credits both [0.09ms]
+(pass) nfcore.census matchTag > a numeric tag is a task index and identifies no sample [0.04ms]
+(pass) nfcore.census matchTag > an id longer than the tag does not match it [0.04ms]
+(pass) nfcore.census matchTag > ids that differ only by separator are ambiguous, and neither is credited [0.07ms]
+(pass) nfcore.census attribution > declared N in, per-stage headcount out [0.71ms]
+(pass) nfcore.census attribution > names the dropped sample AND the last process that saw it [6.14ms]
+(pass) nfcore.census attribution > a sample absent from the whole trace is named as never having entered [1.00ms]
+(pass) nfcore.census attribution > samples that finished are not reported as attrition [0.66ms]
+(pass) nfcore.census attribution > an untagged aggregation step is never blamed for a drop [0.96ms]
+(pass) nfcore.census attribution > tasks numbered by index are not read as sample evidence [0.43ms]
+(pass) nfcore.census attribution > a trace with no per-sample tag anywhere says so instead of condemning everyone [0.34ms]
+(pass) nfcore.census attribution > a failed task is attributed as a failure, not as a silent drop [0.69ms]
+(pass) nfcore.census attribution > CACHED counts as having been seen, so -resume does not invent attrition [0.33ms]
+(pass) nfcore.census attribution > a run still in flight is said to be in flight, not declared a loss [0.46ms]
+(pass) nfcore.census attribution > a trace tag matching no declared sample is reported as a disagreement [0.22ms]
+(pass) nfcore.census attribution > stage order comes from submission order, not from the order tasks finished [14.96ms]
+(pass) nfcore.census format > puts the sample, the stage counts and the guilty process in the text [0.52ms]
+(pass) nfcore.census format > a clean run says so without inventing attrition [0.23ms]
+(pass) nfcore.census service > censuses a run from its outdir and names where each sample was last seen [71.74ms]
+(pass) nfcore.census service > a missing input fails loudly instead of censusing an empty cohort [27.21ms]
+(pass) nfcore.census service > a trace directory with no execution trace is named as such [24.75ms]
+
+test/nfcore/command.test.ts:
+(pass) nfcore.command build > test mode uses the test profile with the backend and pins the release [0.35ms]
+(pass) nfcore.command build > test mode never adds --input even if one is passed (the test profile bundles its data) [0.06ms]
+(pass) nfcore.command build > run mode adds the samplesheet as --input [0.04ms]
+(pass) nfcore.command build > strips an nf-core/ prefix from the pipeline name [0.08ms]
+(pass) nfcore.command build > extra params become --key value and resume adds -resume [0.07ms]
+(pass) nfcore.command build > quotes values that contain spaces [0.06ms]
+(pass) nfcore.command build > notes flag compute/approval and the missing samplesheet on a real run [0.06ms]
+(pass) nfcore.command build > extra profiles are inserted before the backend [0.04ms]
+
+test/nfcore/critique.test.ts:
+(pass) nfcore.critique.classifyAnalysis > maps descriptions and pipeline names to analysis types [4.26ms]
+(pass) nfcore.critique.critiqueFor > puts the base concerns first and adds type-specific ones, deduped [0.26ms]
+(pass) nfcore.critique.critiqueFor > general has only the base concerns [0.04ms]
+(pass) nfcore.critique.critiqueFor > each analysis type carries its own distinctive concern [0.05ms]
+(pass) nfcore.critique.gates > soft-blocks a differential analysis with too few replicates [0.10ms]
+(pass) nfcore.critique.gates > does not fire with adequate replication, unknown replication, or non-comparative types [0.03ms]
+(pass) nfcore.critique.summarize > shows the soft block when a gate trips [0.20ms]
+(pass) nfcore.critique.summarize > says no gate tripped when the design is adequate [0.05ms]
+
+test/nfcore/failure.test.ts:
+(pass) nfcore.failure classify > out-of-memory (exit 137) is a reparable, resumable resource failure [0.25ms]
+(pass) nfcore.failure classify > exit code passed explicitly is honored for OOM [0.03ms]
+(pass) nfcore.failure classify > docker daemon unreachable is a container failure [0.09ms]
+(pass) nfcore.failure classify > nextflow version mismatch is detected [0.15ms]
+(pass) nfcore.failure classify > parameter validation failure is an input problem [0.06ms]
+(pass) nfcore.failure classify > unknown parameter is a params problem [0.03ms]
+(pass) nfcore.failure classify > a missing revision is a non-resumable pipeline reference problem [0.04ms]
+(pass) nfcore.failure classify > network/download issues are external and not Helix-reparable [0.05ms]
+(pass) nfcore.failure classify > a generic process error is honest about limits but resumable [0.06ms]
+(pass) nfcore.failure classify > an unrecognized failure is classified unknown, not guessed [0.02ms]
+(pass) nfcore.failure helpers > extractWorkDir pulls the failed task's work directory [0.08ms]
+(pass) nfcore.failure helpers > summarize states reparability and resume guidance [0.06ms]
+
+test/nfcore/fork.test.ts:
+(pass) nfcore.fork.plan > pins the clone to a release and targets a visible fork folder [0.08ms]
+(pass) nfcore.fork.parseStatus > parses git status --porcelain into typed changes [0.12ms]
+(pass) nfcore.fork.parseStatus > an empty status is no changes [0.05ms]
+(pass) nfcore.fork.parseDiffStat > reads files/insertions/deletions from --shortstat [0.14ms]
+(pass) nfcore.fork.parseDiffStat > handles a single-file, insertions-only stat [0.03ms]
+(pass) nfcore.fork.summarizeStatus > reports a modified fork with its divergence [0.11ms]
+(pass) nfcore.fork.summarizeStatus > reports a clean fork as identical to upstream [0.04ms]
+
+test/nfcore/handcount.test.ts:
+hand-count agreement: 43/43 = 100.0%
+(pass) nfcore.handcount classifier > agrees with the hand labels [1.33ms]
+(pass) nfcore.handcount classifier > the labelled set has no majority class, so a constant classifier cannot pass [0.09ms]
+(pass) nfcore.handcount classifier > is deterministic and stateless across calls [1.69ms]
+(pass) nfcore.handcount classifier > a factual correction wins over a co-occurring refusal [0.04ms]
+(pass) nfcore.handcount classifier > stronger evidence beats a higher-precedence weak cue [0.06ms]
+(pass) nfcore.handcount classifier > a redirection wins over an opening pleasantry [0.03ms]
+(pass) nfcore.handcount classifier > pasted logs cannot manufacture interventions [0.05ms]
+(pass) nfcore.handcount classifier > quoted agent text is not read as the human's own words [0.02ms]
+(pass) nfcore.handcount classifier > a single weak cue is not enough to count as an intervention [0.04ms]
+(pass) nfcore.handcount classifier > empty and whitespace turns are other, not a crash [0.04ms]
+(pass) nfcore.handcount classifier > records the cues behind a label so a disputed count is traceable [0.04ms]
+(pass) nfcore.handcount tally > counts every turn exactly once [0.12ms]
+(pass) nfcore.handcount tally > interventions exclude other [0.06ms]
+(pass) nfcore.handcount tally > entries keep the turn's position so the ledger reads against the transcript [0.08ms]
+(pass) nfcore.handcount tally > an empty campaign tallies to zero rather than failing [0.02ms]
+(pass) nfcore.handcount methods paragraph > states the counts a committee would ask for [0.17ms]
+(pass) nfcore.handcount methods paragraph > says the classifier is a heuristic and not a human or a model [0.04ms]
+(pass) nfcore.handcount methods paragraph > refuses to let 'other' read as 'no intervention' [0.02ms]
+(pass) nfcore.handcount methods paragraph > names the frozen taxonomy and the classifier version, so the count is comparable later [0.03ms]
+(pass) nfcore.handcount methods paragraph > points at the per-turn ledger [0.05ms]
+(pass) nfcore.handcount methods paragraph > singular and plural counts read correctly [0.06ms]
+(pass) nfcore.handcount methods paragraph > optional context is stated when given and omitted when not [0.07ms]
+(pass) nfcore.handcount methods paragraph > a campaign with no interventions is stated honestly, not as autonomy [0.06ms]
+(pass) nfcore.handcount turn extraction > takes only human turns [0.17ms]
+(pass) nfcore.handcount turn extraction > drops synthetic and injected text so the scientist is not credited with it [0.03ms]
+(pass) nfcore.handcount turn extraction > strips system reminders that arrive inside a user turn [0.04ms]
+(pass) nfcore.handcount ledger record > the persisted record carries the taxonomy, the counts and the paragraph together [0.86ms]
+(pass) nfcore.handcount ledger record > the ledger is project-local and keyed on the directory [0.04ms]
+(pass) nfcore.handcount persistence > a ledger round-trips through disk [25.97ms]
+(pass) nfcore.handcount persistence > a ledger that exists but cannot be stat'd is NOT reported as missing [22.28ms]
+
+test/nfcore/hypothesis.test.ts:
+(pass) nfcore.hypothesis.score > a fully grounded, testable, plausible, novel hypothesis scores the maximum [0.17ms]
+(pass) nfcore.hypothesis.score > grounding dominates: cited/computed start far above model-inferred [0.06ms]
+(pass) nfcore.hypothesis.score > out-of-range self-assessments are clamped to 1-5 [0.03ms]
+(pass) nfcore.hypothesis.rank > a grounded, testable hypothesis outranks a novel but ungrounded one [0.17ms]
+(pass) nfcore.hypothesis.rank > ties keep input order and ranks are 1..n [0.08ms]
+(pass) nfcore.hypothesis.summarize > labels the output as speculative and explains the weighting [0.17ms]
+
+test/nfcore/params.test.ts:
+(pass) nfcore.params parseParams > flattens groups into parameters with type, default, enum and required [0.09ms]
+(pass) nfcore.params parseParams > tolerates a schema without $defs [0.02ms]
+(pass) nfcore.params find and summarize > a name query surfaces the matching parameter [0.21ms]
+(pass) nfcore.params find and summarize > an empty query returns the required parameters [0.05ms]
+(pass) nfcore.params find and summarize > summarize shows the flag, constraints and description [0.11ms]
+
+test/nfcore/protocol.test.ts:
+(pass) nfcore.protocol paths > the commitment and its ledgers live project-locally under .helix/protocol/ [0.10ms]
+(pass) nfcore.protocol default posture > an uncommitted campaign is not bound and refuses nothing [0.14ms]
+(pass) nfcore.protocol default posture > render is silent when nothing is committed, so an unbound campaign carries no prompt weight [0.07ms]
+(pass) nfcore.protocol default posture > an advisory protocol reports the conflict but does not refuse [0.29ms]
+(pass) nfcore.protocol check > a request that trips a trigger is refused, and says which constraint and why [0.06ms]
+(pass) nfcore.protocol check > a constraint no string can decide is UNEVALUATED, never cleared [0.09ms]
+(pass) nfcore.protocol check > a caller that names the constraint gets a refusal even with no trigger to match [0.06ms]
+(pass) nfcore.protocol check > matching ignores case and whitespace, so re-typing the request does not slip past [0.03ms]
+(pass) nfcore.protocol amendments > a signed waiver clears the exact request it names — and nothing else [0.12ms]
+(pass) nfcore.protocol amendments > retiring a constraint takes it out of force and keeps it in the record [0.08ms]
+(pass) nfcore.protocol amendments > replace changes the text in force without losing what it replaced [0.06ms]
+(pass) nfcore.protocol amendments > an amendment that changes nothing is surfaced, not silently dropped [0.04ms]
+(pass) nfcore.protocol rendering > a refusal quotes the request verbatim and names the one legitimate way forward [0.23ms]
+(pass) nfcore.protocol rendering > the standing reminder restates what is binding without re-arguing it [0.06ms]
+(pass) nfcore.protocol rendering > the report section ships the protocol, every amendment and every refusal [0.25ms]
+(pass) nfcore.protocol rendering > an uncommitted campaign says so in the report rather than printing an empty section [0.03ms]
+(pass) nfcore.protocol parsing > a constraint spec takes an explicit id or derives one [0.20ms]
+(pass) nfcore.protocol parsing > unparseable ledger lines are kept as lines, not discarded [0.14ms]
+(pass) nfcore.protocol service > a refusal is written to the ledger and survives a session restart [23.69ms]
+(pass) nfcore.protocol service > refusals accumulate; recording one never overwrites the last [22.10ms]
+(pass) nfcore.protocol service > proceeding takes a signed amendment; an unsigned one is rejected [22.96ms]
+(pass) nfcore.protocol service > committing twice is refused; the commitment changes only by amendment [18.91ms]
+(pass) nfcore.protocol service > an unreadable ledger line is reported, not counted as an empty record [19.80ms]
+(pass) nfcore.protocol service > a protocol file that exists but does not decode fails loudly instead of unbinding the campaign [17.95ms]
+(pass) nfcore.protocol service > nothing is written, and nothing refused, before a protocol is committed [17.32ms]
+
+test/nfcore/record.test.ts:
+(pass) nfcore.record > logs a granted approval to .helix/approvals.jsonl [606.99ms]
+(pass) nfcore.record > records a run to .helix/runs/ and lists it back [12.58ms]
+(pass) nfcore.record says who authored it > a record written today is stamped model-reported [0.11ms]
+(pass) nfcore.record says who authored it > a record written before this field existed still decodes [0.05ms]
+(pass) nfcore.record says who authored it > finishedAt is gone, not merely unwritten [0.03ms]
+
+test/nfcore/registry.test.ts:
+(pass) nfcore.registry parse > parses the fields Helix reasons about and ignores the rest [0.05ms]
+(pass) nfcore.registry parse > latest stable release skips the dev tag and carries its Nextflow requirement [0.04ms]
+(pass) nfcore.registry parse > a dev-only pipeline has no stable release [0.01ms]
+(pass) nfcore.registry parse > tolerates a non-object input [0.02ms]
+(pass) nfcore.registry ranking > an exact name query ranks that pipeline first [0.24ms]
+(pass) nfcore.registry ranking > topic and description terms find relevant pipelines [0.05ms]
+(pass) nfcore.registry ranking > dev-only and archived pipelines are deprioritized [0.04ms]
+(pass) nfcore.registry ranking > an unrelated query returns nothing [0.03ms]
+(pass) nfcore.registry confidence floor > a real match clears the floor and is reported as a fit [0.30ms]
+(pass) nfcore.registry confidence floor > an objective no pipeline serves returns a negative verdict, not the closest entry [0.08ms]
+(pass) nfcore.registry confidence floor > the negative verdict tells the model what to do instead [0.07ms]
+(pass) nfcore.registry confidence floor > near misses are rendered as context, explicitly not as candidates [0.04ms]
+(pass) nfcore.registry confidence floor > coverage, not absolute score, is what separates a fit from a coincidence [0.04ms]
+(pass) nfcore.registry confidence floor > stopwords cannot score: 'not' must not match 'annotator' [0.07ms]
+(pass) nfcore.registry confidence floor > hyphenated queries still match the unhyphenated pipeline name [0.02ms]
+(pass) nfcore.registry confidence floor > limit applies to matches [0.06ms]
+(pass) nfcore.registry summarize > shows the latest stable release and Nextflow requirement [0.04ms]
+(pass) nfcore.registry summarize > flags dev-only and archived pipelines [0.03ms]
+(pass) nfcore.registry summarize > reports when there are no matches [0.01ms]
+(pass) nfcore.registry frozen catalogue contract > a workflow survives the ndjson round trip the freezer and the reader share [0.11ms]
+(pass) nfcore.registry frozen catalogue contract > the pinned form parses identically to the live document form [0.04ms]
+
+test/nfcore/report.test.ts:
+(pass) nfcore.report.analyzeClaims > counts each canonical claim type [0.30ms]
+(pass) nfcore.report.analyzeClaims > flags a report with no typed claims [0.04ms]
+(pass) nfcore.report.analyzeClaims > flags a mis-spelled tag and suggests the canonical one [0.08ms]
+(pass) nfcore.report.analyzeClaims > does not flag markdown links or numeric reference markers [0.03ms]
+(pass) nfcore.report.analyzeClaims > is case-insensitive on the canonical tags [0.03ms]
+(pass) nfcore.report.render > includes the title, a provenance stamp, the legend, and the body verbatim [0.09ms]
+(pass) nfcore.report.render > analyzes the body only — the legend's own tag names never count [0.05ms]
+(pass) nfcore.report.summarizeAnalysis > summarizes counts and appends issues [0.07ms]
+
+test/nfcore/samplesheet.test.ts:
+(pass) nfcore.samplesheet parseColumns > reads columns, required flags, enums and formats from the schema [0.09ms]
+(pass) nfcore.samplesheet parseColumns > tolerates a schema without items/properties [0.03ms]
+(pass) nfcore.samplesheet validate > a correct paired-end samplesheet passes [0.37ms]
+(pass) nfcore.samplesheet validate > single-end (no fastq_2) is fine because fastq_2 is optional [0.06ms]
+(pass) nfcore.samplesheet validate > flags a missing required column [5.23ms]
+(pass) nfcore.samplesheet validate > flags a value outside an enum [0.14ms]
+(pass) nfcore.samplesheet validate > flags a file that does not match the required extension pattern [0.06ms]
+(pass) nfcore.samplesheet validate > flags an unknown column that is not in the schema [0.06ms]
+(pass) nfcore.samplesheet validate > summaries read clearly for pass and fail [0.15ms]
+
+test/nfcore/validation.test.ts:
+(pass) nfcore.validation curated set > is a sizeable, domain-diverse sample [0.07ms]
+(pass) nfcore.validation critique check > the adaptive critique classifies every curated pipeline as its expected type [0.24ms]
+(pass) nfcore.validation critique check > the specialised analysis types are represented in the sample [0.04ms]
+(pass) nfcore.validation critique check > a mismatch is reported with the expected type [0.03ms]
+(pass) nfcore.validation result and matrix > a pipeline passes only when every check passes [0.11ms]
+(pass) nfcore.validation result and matrix > the matrix marks each pipeline and summarizes pass/fail [0.19ms]
+
+test/nfcore/verify.test.ts:
+(pass) nfcore.verify pure checks > counts NDJSON records, ignoring the trailing newline [0.09ms]
+(pass) nfcore.verify pure checks > intact data passes and the receipt names what was compared [0.27ms]
+(pass) nfcore.verify pure checks > one altered byte fails, even when the length is unchanged [0.09ms]
+(pass) nfcore.verify pure checks > a row count that disagrees fails on its own terms [0.05ms]
+(pass) nfcore.verify pure checks > a missing data file is a failure, never a skip [0.05ms]
+(pass) nfcore.verify pure checks > an empty data file is not the same evidence as an unreadable one [0.06ms]
+(pass) nfcore.verify pure checks > a manifest that cannot be decoded fails rather than disappearing [0.08ms]
+(pass) nfcore.verify pure checks > staged and vendored trees are not this project's records [0.10ms]
+(pass) nfcore.verify report and receipt > no manifests means nothing to verify, and says so instead of claiming a pass [0.19ms]
+(pass) nfcore.verify report and receipt > one failure sinks the report regardless of how many passed [0.12ms]
+(pass) nfcore.verify report and receipt > plain output carries no escape codes; colour is opt-in [0.05ms]
+(pass) nfcore.verify against real files > an untouched project verifies without touching the network [28.87ms]
+(pass) nfcore.verify against real files > one flipped byte in the NDJSON makes the project fail [19.67ms]
+(pass) nfcore.verify against real files > a manifest whose data file was deleted fails; it is not a missing snapshot [18.87ms]
+(pass) nfcore.verify against real files > a project with no snapshots has nothing to verify and stays ok [18.15ms]
+
+test/nfcore/objective.test.ts:
+(pass) nfcore.objective > lives project-locally under .helix/, keyed on the directory [0.07ms]
+(pass) nfcore.objective > renders the statement inside a delimited block [0.12ms]
+(pass) nfcore.objective > always restates the handoff obligation [0.03ms]
+(pass) nfcore.objective > fixed decisions are marked as settled, so a long stage never re-opens them [0.04ms]
+(pass) nfcore.objective > optional sections are omitted rather than rendered empty [0.03ms]
+(pass) nfcore.objective > success criteria and stages render when present [0.04ms]
+
+test/nfcore/persona.test.ts:
+(pass) nfcore.persona > persona text is a non-empty nf-core identity block [0.05ms]
+(pass) nfcore.persona > ships the foundational built-in nf-core skills [0.05ms]
+(pass) nfcore.persona > ships the discovery-campaign skill for questions no pipeline answers [0.03ms]
+(pass) nfcore.persona > the campaign skill is discoverable from a NO_SUITABLE_PIPELINE verdict [0.03ms]
+(pass) nfcore.persona > only the hypothesis skill is fenced as speculative [0.10ms]
+(pass) nfcore.persona > the persona admits a non-pipeline shape of work [0.03ms]
+(pass) nfcore.persona > the persona forbids ending a reply without a handoff [0.02ms]
+(pass) nfcore.persona > ships the recipe skills for running work outside the nf-core catalogue [0.03ms]
+(pass) nfcore.persona > the tooling skill carries the shell facts that silently waste a stage [0.08ms]
+(pass) nfcore.persona > the tooling skill tells the agent to check obtainability before building [0.02ms]
+(pass) nfcore.persona > the data skill treats an empty result as a failure mode, not a finding [0.02ms]
+(pass) nfcore.persona > the structural skill carries both silent data corruptions [0.03ms]
+(pass) nfcore.persona > the structural skill refuses to call a conditioned test independent [0.02ms]
+(pass) nfcore.persona > every built-in skill has a valid name, a description, and content [0.08ms]
+
+test/nfcore/dossier.test.ts:
+(pass) nfcore.dossier receipt > an intact dossier verifies with no Helix and no network [13.12ms]
+CHANGED  corpus/a.ndjson
+         recorded bb157861a164e35cdde9d726b0af9ce2765a8f530c35d9e45732b94ee65e9557
+         on disk  feb939020e9d63a4e5671c2fee3621703f45dcd172d5ab9380cec70a163dea5d
+
+FAILED — 1 file(s) do not match what this dossier records.
+(pass) nfcore.dossier receipt > a changed byte in any carried file fails [7.53ms]
+MISSING  corpus/a.ndjson
+
+FAILED — 1 file(s) do not match what this dossier records.
+(pass) nfcore.dossier receipt > a removed file fails rather than being skipped [5.57ms]
+CHANGED  corpus/a.ndjson
+         recorded bb157861a164e35cdde9d726b0af9ce2765a8f530c35d9e45732b94ee65e9557
+         on disk  665e6c72bd9bcbb99fc9304c76702de80e33dc59b54589ee8217b27c20a4cee0
+CHANGED  index.json
+         recorded 650bb99a6b90c75f9ab47cd963ec1e2857dd091974eeb831b266bdec9b981641
+         on disk  93def49f115eeae79689e238862708515d371e01d268ef0ebee19675e1589f2c
+
+FAILED — 2 file(s) do not match what this dossier records.
+(pass) nfcore.dossier receipt > editing a file AND its recorded digest still fails, because the index is covered [6.79ms]
+(pass) nfcore.dossier receipt > the digest is taken over exactly the bytes written, not a different serialisation [0.22ms]
+(pass) nfcore.dossier receipt > a path with a quote or a space in it cannot break out of the receipt [6.78ms]
+(pass) nfcore.dossier limits > every declared limit points at evidence that exists [0.22ms]
+(pass) nfcore.dossier limits > every limit says in words what would retire it, or says it is inherent [0.06ms]
+(pass) nfcore.dossier limits > the first limit is the expensive one, stated plainly [0.02ms]
+REFUSED  the project this dossier was assembled from did not verify
+         1 check(s) failed at assembly time:
+           corpus/a.manifest.json: sha256 mismatch
+
+(pass) nfcore.dossier refuses on a project that did not verify > a recorded verification failure makes the receipt refuse, whatever the digests say [3.29ms]
+
+test/nfcore/manifest.test.ts:
+(pass) nfcore.manifest classifyArtifact > classifies nf-core pipeline_info files [0.11ms]
+(pass) nfcore.manifest classifyArtifact > classifies nf-prov provenance files [0.03ms]
+(pass) nfcore.manifest parseSoftwareVersions > flattens process -> tool:version leaves into a version list [0.30ms]
+(pass) nfcore.manifest parseSoftwareVersions > tolerates empty or junk input [0.04ms]
+(pass) nfcore.manifest summarize > reports referenced artifacts, native provenance, and the Helix layer [0.20ms]
+
+test/plugin/codex.test.ts:
+(pass) plugin.codex > preserves integer and decimal GPT generations in the OAuth model filter [0.70ms]
+(pass) plugin.codex > escapes provider errors in callback HTML [0.17ms]
+(pass) plugin.codex > parseJwtClaims > parses valid JWT with claims [0.12ms]
+(pass) plugin.codex > parseJwtClaims > returns undefined for JWT with less than 3 parts [0.03ms]
+(pass) plugin.codex > parseJwtClaims > returns undefined for invalid base64 [0.04ms]
+(pass) plugin.codex > parseJwtClaims > returns undefined for invalid JSON payload [0.03ms]
+(pass) plugin.codex > extractAccountIdFromClaims > extracts chatgpt_account_id from root [0.03ms]
+(pass) plugin.codex > extractAccountIdFromClaims > extracts chatgpt_account_id from nested https://api.openai.com/auth [0.03ms]
+(pass) plugin.codex > extractAccountIdFromClaims > prefers root over nested [0.02ms]
+(pass) plugin.codex > extractAccountIdFromClaims > extracts from organizations array as fallback [0.01ms]
+(pass) plugin.codex > extractAccountIdFromClaims > returns undefined when no accountId found [0.01ms]
+(pass) plugin.codex > extractAccountId > extracts from id_token first [0.06ms]
+(pass) plugin.codex > extractAccountId > falls back to access_token when id_token has no accountId [0.04ms]
+(pass) plugin.codex > extractAccountId > returns undefined when no tokens have accountId [0.03ms]
+(pass) plugin.codex > extractAccountId > handles missing id_token [0.03ms]
+(pass) plugin.codex > installs websocket transport only when experimental websockets are enabled [0.51ms]
+(pass) plugin.codex > deduplicates concurrent Codex token refreshes [12.48ms]
+
+test/tool/trp-detect.test.ts:
+(pass) rejected preprocessing and forged model approval never launch a process [1.76ms]
+(pass) a free-text or multiple answer is not scientific approval [0.37ms]
+(pass) source mutation while awaiting first approval prevents preprocessing [0.40ms]
+(pass) second approval rejected saves failure without launching detector [1.46ms]
+(pass) changed source during detector approval cannot run [0.95ms]
+(pass) approval is session-bound and consumed before a single run invocation [1.46ms]
+(pass) workspace symlink input escape is rejected without process launch [0.29ms]
+(pass) symlinked output directory rejected before a process starts [0.46ms]
+(pass) abort before invocation launches nothing [0.19ms]
+(pass) scientific failure cannot produce a success result [4.70ms]
+(pass) bundled Python guard exactly matches the audited adapter [0.44ms]
+
+test/tool/trp-detect-question.test.ts:
+(pass) real Question.Service rejects STRPsearch before any preparation or subprocess [47.19ms]
+
+test/tool/trp-predicted.test.ts:
+(pass) forged model approvals and escaping files are refused [7.72ms]
+(pass) human rejection never starts scientific process [129.00ms]
+(pass) changed original input.cif invalidates approval [106.70ms]
+(pass) changed original pae.json invalidates approval [105.96ms]
+(pass) changed original api.json invalidates approval [104.36ms]
+(pass) mismatched AFDB identity and insufficient units fail before approval [172.72ms]
+(pass) tampered adapter or proposal cannot execute [95.45ms]
+(pass) cancellation during approval never starts geometry [95.09ms]
+(pass) modified prepared proposal cannot execute [95.75ms]
+(skip) real pinned geometry through agent execution path
+
+test/trp/catalog.test.ts:
+(pass) TRP catalog admission > admitted resources resolve from the recorded bytes, without network or Docker [16.74ms]
+(pass) TRP catalog admission > the reference remains verifiable after moving the evidence directory [7.24ms]
+(pass) TRP catalog admission > tampered scientific output cannot pass on a stored success flag [3.14ms]
+(pass) TRP catalog admission > missing input is a failure even when all outputs exist [1.83ms]
+(pass) TRP catalog admission > a reference symlink cannot escape the supplied evidence root [1.61ms]
+(pass) TRP catalog admission > candidates and web comparators cannot be selected for execution [1.83ms]
+(pass) TRP catalog admission > a candidate cannot be promoted by changing its status alone [1.16ms]
+(pass) TRP catalog admission > changing the pinned tool revision invalidates its reference [0.34ms]
+(pass) TRP catalog admission > a human-readable image tag cannot replace a digest [0.27ms]
+(pass) TRP catalog admission > unknown or mislabeled EDAM terms are rejected [0.25ms]
+(pass) TRP catalog admission > duplicate operation identifiers cannot shadow a reference [0.44ms]
+(pass) TRP catalog admission > invalid digest and traversal are rejected before reading files [0.47ms]
+(pass) TRP port contracts > opaque RepeatsDB coordinates cannot feed a known frame [0.17ms]
+(pass) TRP port contracts > format equality does not erase residue, chain or confidence differences [0.15ms]
+(pass) TRP port contracts > radians and degrees, or TM-score and pLDDT, are not interchangeable [0.36ms]
+(pass) TRP port contracts > raw retrieval does not imply the selected chain satisfies geometric preconditions [0.11ms]
+
+test/trp/graph.test.ts:
+(pass) TRP graph development corpus (not held-out evaluation) > accepts observed 2xqh author residues and reports omitted checks [6.59ms]
+(pass) TRP graph development corpus (not held-out evaluation) > cycle-1 [4.72ms]
+(pass) TRP graph development corpus (not held-out evaluation) > missing-step-1 [4.63ms]
+(pass) TRP graph development corpus (not held-out evaluation) > excluded-1 [4.55ms]
+(pass) TRP graph development corpus (not held-out evaluation) > format-1 [4.22ms]
+(pass) TRP graph development corpus (not held-out evaluation) > protein-1 [5.04ms]
+(pass) TRP graph development corpus (not held-out evaluation) > chain-1 [4.21ms]
+(pass) TRP graph development corpus (not held-out evaluation) > numbering-1 [4.09ms]
+(pass) TRP graph development corpus (not held-out evaluation) > insertions-1 [4.23ms]
+(pass) TRP graph development corpus (not held-out evaluation) > confidence-1 [4.31ms]
+(pass) TRP graph development corpus (not held-out evaluation) > scale-1 [4.35ms]
+(pass) TRP graph development corpus (not held-out evaluation) > missing-parameter-1 [0.93ms]
+(pass) TRP graph development corpus (not held-out evaluation) > cycle-2 [4.40ms]
+(pass) TRP graph development corpus (not held-out evaluation) > missing-step-2 [4.40ms]
+(pass) TRP graph development corpus (not held-out evaluation) > excluded-2 [4.87ms]
+(pass) TRP graph development corpus (not held-out evaluation) > format-2 [4.67ms]
+(pass) TRP graph development corpus (not held-out evaluation) > protein-2 [7.23ms]
+(pass) TRP graph development corpus (not held-out evaluation) > chain-2 [4.85ms]
+(pass) TRP graph development corpus (not held-out evaluation) > numbering-2 [4.59ms]
+(pass) TRP graph development corpus (not held-out evaluation) > insertions-2 [4.21ms]
+(pass) TRP graph development corpus (not held-out evaluation) > confidence-2 [4.46ms]
+(pass) TRP graph development corpus (not held-out evaluation) > scale-2 [4.52ms]
+(pass) TRP graph development corpus (not held-out evaluation) > missing-parameter-2 [0.50ms]
+(pass) TRP graph development corpus (not held-out evaluation) > cycle-3 [4.31ms]
+(pass) TRP graph development corpus (not held-out evaluation) > missing-step-3 [4.41ms]
+(pass) TRP graph development corpus (not held-out evaluation) > excluded-3 [4.35ms]
+(pass) TRP graph development corpus (not held-out evaluation) > format-3 [4.25ms]
+(pass) TRP graph development corpus (not held-out evaluation) > protein-3 [4.23ms]
+(pass) TRP graph development corpus (not held-out evaluation) > chain-3 [4.30ms]
+(pass) TRP graph development corpus (not held-out evaluation) > numbering-3 [5.19ms]
+(pass) TRP graph development corpus (not held-out evaluation) > insertions-3 [4.43ms]
+(pass) TRP graph development corpus (not held-out evaluation) > confidence-3 [4.62ms]
+(pass) TRP graph development corpus (not held-out evaluation) > scale-3 [4.35ms]
+(pass) TRP graph development corpus (not held-out evaluation) > missing-parameter-3 [0.33ms]
+(pass) TRP graph development corpus (not held-out evaluation) > chain not observed [1.77ms]
+(pass) TRP graph development corpus (not held-out evaluation) > model not observed [1.43ms]
+(pass) TRP graph development corpus (not held-out evaluation) > empty attribution [4.53ms]
+(pass) TRP graph development corpus (not held-out evaluation) > overlapping units [4.39ms]
+(pass) TRP graph development corpus (not held-out evaluation) > missing observed residue [4.52ms]
+(pass) TRP graph development corpus (not held-out evaluation) > insertion overlaps unit [4.72ms]
+(pass) TRP graph development corpus (not held-out evaluation) > too few units [8.75ms]
+(pass) TRP graph development corpus (not held-out evaluation) > two centers cannot fit GeomeTRe circle [4.11ms]
+(pass) TRP graph development corpus (not held-out evaluation) > fractional endpoint [4.04ms]
+(pass) TRP graph development corpus (not held-out evaluation) > wrong input hash [3.51ms]
+(pass) TRP graph development corpus (not held-out evaluation) > wrong annotation identity [3.51ms]
+(pass) TRP graph development corpus (not held-out evaluation) > wrong annotation frame [3.52ms]
+(pass) TRP graph development corpus (not held-out evaluation) > rejects protein identity in bytes even when the input hash is updated [4.58ms]
+(pass) TRP graph development corpus (not held-out evaluation) > rejects insertion code in bytes even when the input hash is updated [4.44ms]
+(pass) TRP graph development corpus (not held-out evaluation) > rejects alternate conformer in bytes even when the input hash is updated [4.50ms]
+(pass) TRP graph development corpus (not held-out evaluation) > rejects nonfinite coordinate even when the input hash is updated [3.35ms]
+(pass) immutable Nextflow composition > canonical digest ignores object key order but not parameters or provenance [0.45ms]
+(pass) immutable Nextflow composition > emits the validated graph using data files without executing free text [121.18ms]
+(pass) immutable Nextflow composition > rejects unsupported operation before materialization [4.85ms]
+(pass) immutable Nextflow composition > a modified or replaced materialized adapter fails verification [70.19ms]
+(pass) immutable Nextflow composition > structure symlinks cannot escape the current workspace [0.94ms]
+(pass) immutable Nextflow composition > CSV needs unit boundaries, identity, scale and real numeric output [0.78ms]
+
+test/trp/workflow.test.ts:
+(pass) TRP approval through the actual question service > auto-allowed permissions cannot replace a human answer [607.87ms]
+(pass) TRP approval through the actual question service > a changed parameter invalidates the outstanding approval [165.13ms]
+(pass) TRP approval through the actual question service > changed file bytes are rechecked after approval [113.12ms]
+(pass) TRP approval through the actual question service > a failed revision also invalidates an earlier proposal [96.47ms]
+(pass) TRP approval through the actual question service > session binding and exact digest reject forged requests [94.50ms]
+(pass) TRP approval through the actual question service > agent tool adapters use the same approval gate [533.85ms]
+
+test/trp/reference.live.test.ts:
+(skip) real Nextflow geometry through the agent tools (synthetic approval driver)
+
+test/trp/preflight.test.ts:
+(pass) a image preflight failure blocks the real analysis and records failure [3872.83ms]
+(pass) a config preflight failure blocks the real analysis and records failure [202.16ms]
+(pass) a dry-run preflight failure blocks the real analysis and records failure [206.50ms]
+(pass) a missing-marker preflight failure blocks the real analysis and records failure [189.75ms]
+
+test/trp/resources.test.ts:
+(pass) resource admission, development contrasts > counts UTF-8 bytes and channels separately from four tasks [0.06ms]
+(pass) resource admission, development contrasts > exact threshold accepted and inventory hash is deterministic [0.24ms]
+(pass) resource admission, development contrasts > budget cpus below demand is rejected before execution [0.16ms]
+(pass) resource admission, development contrasts > budget memoryBytes below demand is rejected before execution [0.05ms]
+(pass) resource admission, development contrasts > budget workBytes below demand is rejected before execution [0.06ms]
+(pass) resource admission, development contrasts > budget wallSeconds below demand is rejected before execution [0.06ms]
+(pass) resource admission, development contrasts > observed cpus below demand is rejected [0.12ms]
+(pass) resource admission, development contrasts > observed memoryBytes below demand is rejected [0.09ms]
+(pass) resource admission, development contrasts > observed freeBytes below demand is rejected [0.06ms]
+(pass) resource admission, development contrasts > missing inventory never grants admission [0.39ms]
+(pass) resource admission, development contrasts > empty inventory never grants admission [0.10ms]
+(pass) resource admission, development contrasts > partial inventory never grants admission [0.04ms]
+(pass) resource admission, development contrasts > extra fields inventory never grants admission [0.04ms]
+(pass) resource admission, development contrasts > invalid budget undefined is rejected [0.09ms]
+(pass) resource admission, development contrasts > invalid budget {} is rejected [0.07ms]
+(pass) resource admission, development contrasts > invalid budget {"cpus":3,"memoryBytes":4294967296,"workBytes":268435456,"wallSeconds":1080,"requireHardStorageLimit":false,"origin":""} is rejected [0.04ms]
+(pass) resource admission, development contrasts > invalid budget {"cpus":-1,"memoryBytes":4294967296,"workBytes":268435456,"wallSeconds":1080,"requireHardStorageLimit":false,"origin":"Explicit engineering reference fixture; synthetic approval driver; not the thesis evaluation or provider budget"} is rejected [0.04ms]
+(pass) resource admission, development contrasts > invalid budget {"cpus":3,"memoryBytes":1.5,"workBytes":268435456,"wallSeconds":1080,"requireHardStorageLimit":false,"origin":"Explicit engineering reference fixture; synthetic approval driver; not the thesis evaluation or provider budget"} is rejected [0.03ms]
+(pass) resource admission, development contrasts > inventory timestamp invalid rejected [0.10ms]
+(pass) resource admission, development contrasts > inventory timestamp 2026-09-15T11:54:59.999Z rejected [0.04ms]
+(pass) resource admission, development contrasts > inventory timestamp 2026-09-15T12:00:00.001Z rejected [0.04ms]
+(pass) resource admission, development contrasts > a requested hard quota never becomes an estimate approval [0.10ms]
+
+test/trp/interventions.test.ts:
+(pass) Spanish development cue: Eso es incorrecto: la cadena correcta es B [0.37ms]
+(pass) Spanish development cue: No apruebo esta ejecución [0.14ms]
+(pass) Spanish development cue: De acuerdo, pero mejor usa la cadena B [0.05ms]
+(pass) Spanish development cue: Para aclarar: me refiero a la primera opción [0.06ms]
+(pass) Spanish development cue: Aprobar y ejecutar [0.08ms]
+(pass) Spanish development cue: ¿Qué significa curvatura? [0.04ms]
+(pass) Spanish development cue: > no ejecutes
+Gracias [0.02ms]
+(pass) Spanish development cue: `rechazar` [0.02ms]
+(pass) Spanish development cue: <system-reminder>no ejecutes</system-reminder>Gracias [0.02ms]
+(pass) all provided turns retained; zero external agreement is never fabricated [0.14ms]
+
+test/trp/admission.test.ts:
+(pass) missing-budget records a typed refusal without approval or process launch [79.13ms]
+(pass) hard-quota records a typed refusal without approval or process launch [55.60ms]
+(pass) unreadable records a typed refusal without approval or process launch [62.51ms]
+(pass) insufficient records a typed refusal without approval or process launch [55.36ms]
+(pass) capacity lost during approval rejects before the first probe [124.93ms]
+(pass) binding protocol with unevaluated constraint blocks preparation [59.25ms]
+(pass) binding protocol with matching constraint blocks preparation [63.68ms]
+(pass) a protocol amendment after preparation invalidates approval [123.66ms]
+
+test/trp/structural.test.ts:
+(pass) preparation binds structural report, catalogue and exact parser to approval [44.28ms]
+(pass) unestablished experimental method cannot be admitted by legacy preparation [38.65ms]
+(pass) model ordinal selects second model without flattening it [36.67ms]
+(pass) aborted inspection cannot return a report [1.30ms]
+(pass) input symlinks cannot escape workspace [1.12ms]
+(pass) local ColabFold inspection archives original sidecars and verifies their hashes [201.52ms]
+(pass) agent inspection writes portable evidence that detects every changed or missing artifact [769.94ms]
+
+test/trp/enforcement.test.ts:
+(pass) operator resource allocation > hard budget accepts observed enforcement and rejects a larger effective quota [0.43ms]
+(pass) operator resource allocation > an invented yes/no enforcement flag never grants admission [0.18ms]
+(pass) operator resource allocation > untrusted state path cannot assert kernel limits [0.26ms]
+(pass) operator resource allocation > allocation cannot be reused by another preparation [0.83ms]
+
+test/trp/coordinates.test.ts:
+(pass) SIFTS refuses entity declarations, ambiguous residue joins and unobserved-only mapping [86.02ms]
+(pass) label conversion is automatically bound to approved bundle and remains stable on re-preparation [312.71ms]
+(pass) mapping hash and path changes are refused before preparation [1.99ms]
+(pass) archived SIFTS maps every Q9MCI8 residue without segment interpolation [551.30ms]
+(pass) residue mapping rejects identity, coordinate and interval mismatches [154.41ms]
+
+test/trp/predicted.live.test.ts:
+(skip) AFDB geometry through registered agent tool and authenticated question service
+
+test/trp/remote.test.ts:
+(pass) TRP remote infrastructure admission > Slurm topology and exact runtime code enter the approval digest [0.41ms]
+(pass) TRP remote infrastructure admission > per-worker memory cannot be pooled to admit a task [0.58ms]
+(pass) TRP remote infrastructure admission > a depleted required worker is refused even if another worker could fit [0.16ms]
+(pass) TRP remote infrastructure admission > controller and session capacity are separate admission requirements [0.14ms]
+(pass) TRP remote infrastructure admission > operator config rejects permissive credentials and binds SSH trust [3.96ms]
+(pass) TRP remote transfer and lifecycle > fiber interruption runs owner-scoped native cancellation [3.54ms]
+(pass) TRP remote transfer and lifecycle > retrieval refuses escaped filenames, wrong bytes and changed approved inputs [0.36ms]
+(pass) TRP remote transfer and lifecycle > ssh-status-lost cancels owned jobs and retrieves evidence without resubmission [1.90ms]
+(pass) TRP remote transfer and lifecycle > native-failure cancels owned jobs and retrieves evidence without resubmission [0.84ms]
+(pass) TRP remote transfer and lifecycle > abort cancels owned jobs and retrieves evidence without resubmission [0.62ms]
+(pass) TRP remote transfer and lifecycle > analysis-rejected cancels owned jobs and retrieves evidence without resubmission [1.36ms]
+
+test/trp/remote-approval.test.ts:
+(pass) remote reject refuses execution through the production workflow gate [79.55ms]
+(pass) remote source-changed refuses execution through the production workflow gate [83.94ms]
+(pass) remote target-changed refuses execution through the production workflow gate [74.44ms]
+(pass) remote hard-quota refuses execution through the production workflow gate [73.23ms]
+
+test/trp/steric.test.ts:
+(pass) missing operator-configured steric runtime preserves explicit uncertainty [41.46ms]
+(skip) maintained steric measurement is deterministic, source-bound and portable without asserting fold validity
+
+test/trp/remote-campaign.live.test.ts:
+(skip) remote frozen development workflow G-valid-001
+(skip) remote frozen development workflow G-valid-002
+(skip) remote frozen development workflow G-valid-003
+(skip) remote frozen development workflow G-valid-004
+(skip) remote frozen development workflow G-valid-005
+(skip) remote frozen development workflow G-valid-006
+(skip) remote frozen development workflow G-valid-007
+(skip) remote frozen development workflow G-valid-008
+(skip) remote frozen development workflow G-valid-009
+(skip) remote frozen development workflow G-valid-010
+(skip) remote frozen development workflow G-valid-011
+(skip) remote frozen development workflow G-valid-012
+(skip) remote frozen development workflow G-valid-013
+(skip) remote frozen development workflow G-valid-014
+(skip) remote frozen development workflow G-valid-015
+(skip) remote frozen development workflow G-valid-016
+(skip) remote frozen development workflow G-valid-017
+(skip) remote frozen development workflow G-valid-018
+(skip) remote frozen development workflow G-valid-019
+(skip) remote frozen development workflow G-valid-020
+(skip) remote frozen development workflow G-valid-021
+(skip) remote frozen development workflow G-valid-022
+(skip) remote frozen development workflow G-valid-023
+(skip) remote frozen development workflow G-valid-024
+(skip) remote frozen development workflow G-valid-025
+(skip) remote frozen development workflow G-valid-026
+(skip) remote frozen development workflow G-valid-027
+(skip) remote frozen development workflow G-valid-028
+(skip) remote frozen development workflow G-valid-029
+(skip) remote frozen development workflow G-valid-030
+(skip) remote frozen development workflow G-valid-031
+(skip) remote frozen development workflow G-valid-032
+(skip) remote frozen development workflow G-valid-033
+(skip) remote frozen development workflow G-valid-034
+(skip) remote frozen development workflow G-valid-035
+(skip) remote frozen development workflow G-valid-036
+(skip) remote frozen development workflow G-valid-037
+(skip) remote frozen development workflow G-valid-038
+(skip) remote frozen development workflow G-valid-039
+(skip) remote frozen development workflow G-valid-040
+(skip) remote frozen development workflow G-valid-041
+(skip) remote frozen development workflow G-valid-042
+(skip) remote frozen development workflow G-valid-043
+(skip) remote frozen development workflow G-valid-044
+(skip) remote frozen development workflow G-valid-045
+(skip) remote frozen development workflow G-valid-046
+(skip) remote frozen development workflow G-valid-047
+(skip) remote frozen development workflow G-valid-048
+(skip) remote frozen development workflow G-valid-049
+(skip) remote frozen development workflow G-valid-050
+
+test/trp/remote-cancellation.live.test.ts:
+(skip) cancel an independently observed native RUNNING job through the production tool
+(skip) a nonexistent live Slurm partition is refused before approval/submission
+
+test/trp/remote-status-repair.test.ts:
+(pass) one transient status reset recovers same controller with zero scientific resubmissions [1012.37ms]
+(pass) two transient status resets remain bounded and do not cancel a recovered controller [2016.52ms]
+(pass) persistent transport failure keeps JSON-safe unknown terminal and primary diagnostic [2016.34ms]
+(pass) host-key and authentication errors are never retried [4.88ms]
+(pass) an explicit abort bypasses status retries and cleans up owned jobs [1.38ms]
+
+test/trp/surface.test.ts:
+(pass) missing operator-configured surface runtime preserves explicit uncertainty [38.71ms]
+(skip) surface measurement is deterministic and portable without a fold verdict
+(skip) prepared workflow binds the configured surface wrapper without claiming physical admission
+(skip) missing sidechain coordinates remain incomplete and absent charge identities remain non applicable
+
+test/trp/event-negative.campaign.test.ts:
+(skip) independent negative action oracle: permission-denied
+(skip) independent negative action oracle: approval-rejected
+(skip) independent negative action oracle: protocol-rejected
+(skip) independent negative action oracle: admission-rejected
+
+test/trp/remote-strict.test.ts:
+(pass) optional co-located Slurm strict allocation > dedicated controller entitlement is not its remaining headroom [1.70ms]
+(pass) optional co-located Slurm strict allocation > one worker cannot borrow the second worker's memory [0.44ms]
+(pass) optional co-located Slurm strict allocation > receipts with stale sources, changed project flags or incomplete source evidence are refused [1.95ms]
+(pass) optional co-located Slurm strict allocation > an unbound target or enlarged effective quota is rejected [0.76ms]
+(pass) optional co-located Slurm strict allocation > booleans, partial strict policy and a policy without a Slurm inventory never authorize a quota [0.49ms]
+(pass) optional co-located Slurm strict allocation > the local-only sandbox pointer cannot authorize a remote deployment [0.16ms]
+(pass) optional co-located Slurm strict allocation > an arbitrary user policy path fails before any process or filesystem allocation [0.45ms]
+(pass) optional co-located Slurm strict allocation > one preparation claims an allocation exactly once [3.75ms]
+(pass) optional co-located Slurm strict allocation > the strict policy and checker enter the digest with an explicit local transport backend [0.49ms]
+
+test/trp/workflow-backend.test.ts:
+(pass) actual workflow/tool writes SSH backend from verified execution [208.49ms]
+(pass) actual workflow/tool writes co-located strict backend from verified execution [189.68ms]
+
+63 tests skipped:
+(skip) real pinned geometry through agent execution path
+(skip) real Nextflow geometry through the agent tools (synthetic approval driver)
+(skip) AFDB geometry through registered agent tool and authenticated question service
+(skip) maintained steric measurement is deterministic, source-bound and portable without asserting fold validity
+(skip) remote frozen development workflow G-valid-001
+(skip) remote frozen development workflow G-valid-002
+(skip) remote frozen development workflow G-valid-003
+(skip) remote frozen development workflow G-valid-004
+(skip) remote frozen development workflow G-valid-005
+(skip) remote frozen development workflow G-valid-006
+(skip) remote frozen development workflow G-valid-007
+(skip) remote frozen development workflow G-valid-008
+(skip) remote frozen development workflow G-valid-009
+(skip) remote frozen development workflow G-valid-010
+(skip) remote frozen development workflow G-valid-011
+(skip) remote frozen development workflow G-valid-012
+(skip) remote frozen development workflow G-valid-013
+(skip) remote frozen development workflow G-valid-014
+(skip) remote frozen development workflow G-valid-015
+(skip) remote frozen development workflow G-valid-016
+(skip) remote frozen development workflow G-valid-017
+(skip) remote frozen development workflow G-valid-018
+(skip) remote frozen development workflow G-valid-019
+(skip) remote frozen development workflow G-valid-020
+(skip) remote frozen development workflow G-valid-021
+(skip) remote frozen development workflow G-valid-022
+(skip) remote frozen development workflow G-valid-023
+(skip) remote frozen development workflow G-valid-024
+(skip) remote frozen development workflow G-valid-025
+(skip) remote frozen development workflow G-valid-026
+(skip) remote frozen development workflow G-valid-027
+(skip) remote frozen development workflow G-valid-028
+(skip) remote frozen development workflow G-valid-029
+(skip) remote frozen development workflow G-valid-030
+(skip) remote frozen development workflow G-valid-031
+(skip) remote frozen development workflow G-valid-032
+(skip) remote frozen development workflow G-valid-033
+(skip) remote frozen development workflow G-valid-034
+(skip) remote frozen development workflow G-valid-035
+(skip) remote frozen development workflow G-valid-036
+(skip) remote frozen development workflow G-valid-037
+(skip) remote frozen development workflow G-valid-038
+(skip) remote frozen development workflow G-valid-039
+(skip) remote frozen development workflow G-valid-040
+(skip) remote frozen development workflow G-valid-041
+(skip) remote frozen development workflow G-valid-042
+(skip) remote frozen development workflow G-valid-043
+(skip) remote frozen development workflow G-valid-044
+(skip) remote frozen development workflow G-valid-045
+(skip) remote frozen development workflow G-valid-046
+(skip) remote frozen development workflow G-valid-047
+(skip) remote frozen development workflow G-valid-048
+(skip) remote frozen development workflow G-valid-049
+(skip) remote frozen development workflow G-valid-050
+(skip) cancel an independently observed native RUNNING job through the production tool
+(skip) a nonexistent live Slurm partition is refused before approval/submission
+(skip) surface measurement is deterministic and portable without a fold verdict
+(skip) prepared workflow binds the configured surface wrapper without claiming physical admission
+(skip) missing sidechain coordinates remain incomplete and absent charge identities remain non applicable
+(skip) independent negative action oracle: permission-denied
+(skip) independent negative action oracle: approval-rejected
+(skip) independent negative action oracle: protocol-rejected
+(skip) independent negative action oracle: admission-rejected
+
+ 543 pass
+ 63 skip
+ 0 fail
+ 1601 expect() calls
+Ran 606 tests across 57 files. [20.15s]

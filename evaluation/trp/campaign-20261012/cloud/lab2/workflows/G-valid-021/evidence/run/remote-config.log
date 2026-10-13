@@ -1,0 +1,19 @@
+manifest.nextflowVersion = '25.10.4'
+process.executor = 'slurm'
+process.queue = 'helix'
+process.container = 'sha256:1dd91e70acb153a0bd9a51346fc001dd5025f851c9598697cdd37f07d9490b0a'
+process.cpus = 2
+process.memory = '2 GB'
+process.time = '3 min'
+process.errorStrategy = 'terminate'
+process.maxRetries = 0
+process.maxForks = 1
+process.clusterOptions = '--comment=helix:7086fe90-38ae-45e7-bcfa-9e4acd6a4d5e'
+process.'withName:SELECT'.clusterOptions = '--comment=helix:7086fe90-38ae-45e7-bcfa-9e4acd6a4d5e --nodelist=helix-worker1'
+process.'withName:GEOMETRY'.clusterOptions = '--comment=helix:7086fe90-38ae-45e7-bcfa-9e4acd6a4d5e --nodelist=helix-worker2'
+docker.enabled = true
+docker.runOptions = '--entrypoint="" --user $(id -u):$(id -g) --network none --read-only --cap-drop ALL --security-opt no-new-privileges --pids-limit 128 --cpus 2 --memory=2g --memory-swap=2g --tmpfs /tmp:rw,nosuid,size=256m'
+env.OPENBLAS_NUM_THREADS = '1'
+env.OMP_NUM_THREADS = '1'
+env.MKL_NUM_THREADS = '1'
+env.OPENBLAS_CORETYPE = 'Haswell'

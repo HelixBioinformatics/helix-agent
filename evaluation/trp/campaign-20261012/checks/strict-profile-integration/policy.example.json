@@ -1,0 +1,51 @@
+{
+  "version": "trp-remote-strict/1.0.0",
+  "id": "hrs0123456789abcdef",
+  "uid": 1000,
+  "hostname": "helix-head",
+  "bootId": "REPLACE_WITH_PROC_BOOT_ID",
+  "target": {
+    "host": "127.0.0.1",
+    "port": 22,
+    "user": "ubuntu",
+    "hostKeyAlias": "helix-lab2",
+    "root": "/shared/helix-strict/allocation/remote",
+    "partition": "helix",
+    "selectNode": "helix-worker1",
+    "geometryNode": "helix-worker2",
+    "numericalProfile": "haswell-single-thread"
+  },
+  "filesystem": {
+    "mountPoint": "/shared/helix-strict",
+    "uuid": "REPLACE_XFS_UUID",
+    "device": 0,
+    "projectId": 142,
+    "hardBytes": 67108864
+  },
+  "paths": {
+    "allocationRoot": "/shared/helix-strict/allocation",
+    "clientWorkspace": "/shared/helix-strict/allocation/client",
+    "temporaryRoot": "/shared/helix-strict/allocation/tmp",
+    "exportRoot": "/shared/helix-strict/allocation/export",
+    "clientStateRoot": "/shared/helix-strict/allocation/state",
+    "clientCacheRoot": "/shared/helix-strict/allocation/cache",
+    "remoteRoot": "/shared/helix-strict/allocation/remote"
+  },
+  "controller": {
+    "cgroup": "helix-strict-hrs0123456789abcdef.service",
+    "cpus": 1,
+    "memoryBytes": 2147483648,
+    "swapBytes": 0
+  },
+  "entitlement": {
+    "cpus": 3,
+    "memoryBytes": 4294967296,
+    "workBytes": 67108864,
+    "wallSeconds": 1080
+  },
+  "checker": {
+    "path": "/usr/local/libexec/helix-remote-strict-check.py",
+    "sha256": "REPLACE_WITH_FINAL_CHECKER_SHA256"
+  },
+  "samplePath": "/run/helix-remote-strict/hrs0123456789abcdef.sample.json"
+}

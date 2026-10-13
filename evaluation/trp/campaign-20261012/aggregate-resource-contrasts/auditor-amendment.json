@@ -1,0 +1,28 @@
+{
+  "schema": "helix-aggregate-auditor-post-observation-amendment/1.0",
+  "recordedAt": "2026-10-13T06:10:11.958910+00:00",
+  "frozenSourceSha256": "ebbbfcc9cebf0d9506d5a74d59358a02b5b4ea72627c7e5b4005b6fac9a93b53",
+  "reviewSourceSha256": "0acc1922dd3c9ed4816f79bbaeb49bb6c380e54caec65e7bb406bd8b2c1e1089",
+  "rawOutcomesOrExecutionChanged": false,
+  "firstAuditOutputsPreserved": true,
+  "rules": [
+    {
+      "name": "timestamp-quantization",
+      "minimumDifferenceSeconds": -0.001,
+      "maximumDifferenceSeconds": 5,
+      "reason": "Date.now reports integral milliseconds while strace reports microseconds. This allows one millisecond of measurement quantization only."
+    },
+    {
+      "name": "sqlite-cantopen-causal-kernel-link",
+      "terminalCode": "SQLITE_CANTOPEN",
+      "terminalMessage": "unable to open database file",
+      "requiredPath": "Assigned clientStateRoot/data/helix/helix-local.db",
+      "requiredKernelObservation": "Same actual assigned SQLite pathname with EDQUOT or independently qualified ENOSPC, within the unchanged five-second causal window, global filesystem healthy, exact enforced project, controller/scheduler EOF. Generic SQLite errors or ignored optional cache failures remain unknown."
+    }
+  ],
+  "knownMotivatingCases": [
+    "AGG-04-small",
+    "AGG-07-small"
+  ],
+  "interpretation": "Post-observation causal audit correction. Keep the prospective original auditor and its unknowns separately; this is not a prospective biological classifier and does not alter producer decisions or thresholds."
+}

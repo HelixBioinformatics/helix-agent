@@ -1,0 +1,37 @@
+{
+  "appliedToProduction": false,
+  "isolatedPath": "/home/webiwabou/.local/state/helix/surface-integration-20261012",
+  "tests": {
+    "passed": 3,
+    "failed": 0,
+    "assertions": 30
+  },
+  "files": [
+    {
+      "target": "packages/helix/src/trp/structural.ts",
+      "baselineSha256": "d4c7cd6b3b20c887b73733b31c182be05b9a71ca950b269de11bc8d3091e770b",
+      "candidateSha256": "54fc5cff7a5a2e7cd7d96bf13b9236a7122a28a2d41da35c8a301399872a8f5d"
+    },
+    {
+      "target": "packages/helix/src/trp/nextflow.ts",
+      "baselineSha256": "5030c3d3157c02f55e224afb4b53f705e3640b0dcbe082468012b84701fc2bd0",
+      "candidateSha256": "3729bf84120a359ba5efb68349bca85d7d80be579638bbb4810c018554458309"
+    },
+    {
+      "target": "packages/helix/src/trp/verify_inspection.py.txt",
+      "baselineSha256": "f4cb72dda74523f3242b8fc645c64f26081cdc309446637e324947152d83a0d6",
+      "candidateSha256": "9922cc49279f2539452875d398557db00cc53c02751db7c370d93b76c16e0d38"
+    },
+    {
+      "target": "packages/helix/src/trp/verify_bundle.py.txt",
+      "baselineSha256": "5a60afbfd245f2b06ebcec5e409b971d7131a8faaa2f01b136f40de2283378a6",
+      "candidateSha256": "69b88a192d44707c82358814d61ae83f2d46c579e93d8cf3afe6882b52382187"
+    },
+    {
+      "target": "packages/helix/src/trp/surface_diagnostic.py.txt",
+      "baselineSha256": null,
+      "candidateSha256": "772b5e3d0b7b52dc6b163b1d90a2a0ad0a279c1a48de4018f506be225cd1ea99"
+    }
+  ],
+  "scope": "optional surface observable; no fold verdict; await both positive cloud batches complete before applying"
+}

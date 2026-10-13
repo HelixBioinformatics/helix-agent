@@ -1,0 +1,17 @@
+{
+  "at": "2026-10-13T05:00:56.091213+00:00",
+  "guest": "/srv/helix-strict-results/smoke-40030-SMOKE-01-generous",
+  "allocationSha256": "ac243264b7f62d897de1a31ebbb0ebeb0776366c43ea52f8fc5d24a1d41cb0f1",
+  "freezeSha256": "f1cc37dc5757ec91572f2ab8cd4c3ae88e217ac2b34cec9b1042d6f164f47e5e",
+  "command": "sudo env NXF_HOME=/home/ubuntu/.nextflow HELIX_MODELS_PATH=/opt/helix-strict-runtime/packages/core/test/plugin/fixtures/models-dev.json HELIX_TRP_PYTHON=/opt/helix-strict-runtime/python/bin/python nohup python3 /opt/helix-strict-runtime/script/tesis/provision_remote_strict_profile.py guest-supervise --allocation /srv/helix-strict-results/smoke-40030-SMOKE-01-generous-allocation.json --deadline 1791874140.0 --output /srv/helix-strict-results/smoke-40030-SMOKE-01-generous -- /usr/bin/strace -f -Z -yy -e trace=write,pwrite64,writev,pwritev,openat,ftruncate,copy_file_range -s 256 /usr/local/bin/helix-strict-bun /opt/helix-strict-runtime/evaluation/trp/campaign-20261012/aggregate-resource-contrasts/full_client.ts /opt/helix-strict-runtime/campaign/smoke6/SMOKE-01-generous.json >/tmp/SMOKE-01-generous-40030.supervisor.stdout 2>/tmp/SMOKE-01-generous-40030.supervisor.stderr < /dev/null &",
+  "case": "SMOKE-01-generous",
+  "budget": {
+    "cpus": 3,
+    "memoryBytes": 4294967296,
+    "workBytes": 134217728,
+    "wallSeconds": 1080,
+    "requireHardStorageLimit": true,
+    "origin": "Prospectively bounded aggregate Helix client/controller and Slurm development contrast"
+  },
+  "retryForbiddenOnUnknownTransport": true
+}

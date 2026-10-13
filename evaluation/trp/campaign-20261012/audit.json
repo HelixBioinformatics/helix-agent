@@ -1,0 +1,419 @@
+{
+  "schema": "helix-thesis-campaign-audit/1.0",
+  "audited_at": "2026-10-13T00:27:05.735189+00:00",
+  "status": "audit_of_current_state_not_final_evaluation",
+  "observed_commit": "b2462be19cebbe908330a0c2f38b5fe4708c230c",
+  "word": {
+    "path": "/home/webiwabou/Projects/Tesis.docx",
+    "sha256_at_audit": "0b5e1e0c7a74f4dd3468656b6f9abef945bfeaf19b791c033bdc0c8cc573b28d",
+    "paragraphs": 807,
+    "results": [
+      {
+        "id": "R1.1",
+        "definition": {
+          "paragraph_index_zero_based": 67,
+          "text": "R1.1. Catálogo del dominio en formato declarativo legible por máquina, Recoge los recursos identificados en la revisión del Capítulo 3 y describe, para cada uno, la operación que realiza, el tipo de dato y el formato que consume y produce, con anclaje en los vocabularios establecidos de la bioinformática, y tres atributos que esos vocabularios no contemplan y que el dominio exige: espacio de identificadores, marco de numeración de residuos y escala de la métrica de confianza. Un recurso entra en el catálogo únicamente si expone una interfaz invocable por programa, y los que solo ofrecen formulario web se conservan como comparadores declarados. Cada entrada se incorpora tras una invocación de referencia efectivamente ejecutada, acompañada de su caso de prueba y de la identificación de versión de la herramienta y de su entorno de ejecución."
+        },
+        "occurrences": 3
+      },
+      {
+        "id": "R1.2",
+        "definition": {
+          "paragraph_index_zero_based": 68,
+          "text": "R1.2. Módulo de elicitación. Produce una especificación de análisis estructurada a partir de un enunciado en lenguaje natural, distinguiendo en el registro los valores fijados por el usuario de los asumidos por defecto."
+        },
+        "occurrences": 3
+      },
+      {
+        "id": "R1.3",
+        "definition": {
+          "paragraph_index_zero_based": 69,
+          "text": "R1.3. Corpus de enunciados con su especificación esperada. El patrón de referencia lo elabora un anotador externo al desarrollo, y la evaluación puntúa la admisibilidad de la especificación producida y no su igualdad literal, con el criterio de admisibilidad registrado antes de conocer los resultados."
+        },
+        "occurrences": 3
+      },
+      {
+        "id": "R1.4",
+        "definition": {
+          "paragraph_index_zero_based": 71,
+          "text": "R1.4. Protocolo de evaluación. Documento fechado que fija, antes de ejecutar cualquier medición, los umbrales de todos los indicadores para la verificación, el criterio por el cual una especificación se considera admisible y los modos de incompatibilidad que el validador debe rechazar."
+        },
+        "occurrences": 3
+      },
+      {
+        "id": "R1.5",
+        "definition": {
+          "paragraph_index_zero_based": 72,
+          "text": "R1.5. Motor de composición. Emite un flujo ejecutable sobre el sustrato de producción a partir de la especificación aprobada."
+        },
+        "occurrences": 3
+      },
+      {
+        "id": "R1.6",
+        "definition": {
+          "paragraph_index_zero_based": 73,
+          "text": "R1.6. Recurso de correspondencia entre espacios de identificadores y marcos de numeración de residuos. Se construye a partir de fuentes públicas de correspondencia, restringido a los residuos con coordenadas resueltas para no reclamar geometría sobre residuos que el modelo no resuelve, y se completa con una regla propia para las estructuras predichas, que esas fuentes no cubren."
+        },
+        "occurrences": 3
+      },
+      {
+        "id": "R1.7",
+        "definition": {
+          "paragraph_index_zero_based": 74,
+          "text": "R1.7. Validador estático. Comprueba la compatibilidad de tipos y formatos entre pasos consecutivos, con atención específica al espacio de identificadores y al marco de numeración de residuos, y que recorre el grafo de ejecución completo sin datos reales."
+        },
+        "occurrences": 3
+      },
+      {
+        "id": "R1.8",
+        "definition": {
+          "paragraph_index_zero_based": 75,
+          "text": "R1.8. Informe de validación legible. Declara de forma explícita qué se comprobó y qué quedó sin comprobar. Es el artefacto que hace auditable la diferencia entre lo verificado y lo supuesto."
+        },
+        "occurrences": 3
+      },
+      {
+        "id": "R1.9",
+        "definition": {
+          "paragraph_index_zero_based": 76,
+          "text": "R1.9. Corpus de composiciones inválidas y medición de la tasa de aceptación indebida. Instrumento con que se mide el validador estático con al menos un caso por cada modo de incompatibilidad declarado. Depende de los umbrales del Resultado 1.4 para fijar los modos."
+        },
+        "occurrences": 3
+      },
+      {
+        "id": "R2.1",
+        "definition": {
+          "paragraph_index_zero_based": 79,
+          "text": "R2.1. Declaración de los recursos disponibles del entorno. Inventario legible por máquina del presupuesto de cómputo, almacenamiento y llamadas a servicios externos con que cuenta la ejecución."
+        },
+        "occurrences": 3
+      },
+      {
+        "id": "R2.2",
+        "definition": {
+          "paragraph_index_zero_based": 80,
+          "text": "R2.2. Contador de demanda. Cuantifica estructuras, llamadas por servicio, espacio en disco, tareas y el tiempo mínimo que impone el límite de tasa declarado de cada servicio de terceros. La cuenta se deriva por aritmética del flujo compuesto antes de ejecutarlo, y el manifiesto de ejecución permite después que un tercero la reproduzca."
+        },
+        "occurrences": 3
+      },
+      {
+        "id": "R2.3",
+        "definition": {
+          "paragraph_index_zero_based": 81,
+          "text": "R2.3. Mecanismo de rechazo tipificado y accionable. Informa al usuario antes de ejecutar en lugar de fallar durante la ejecución."
+        },
+        "occurrences": 3
+      },
+      {
+        "id": "R2.4",
+        "definition": {
+          "paragraph_index_zero_based": 82,
+          "text": "R2.4. Medición del acierto del rechazo frente al resultado observado, reportando la tasa de falso rechazo con la misma visibilidad que la de acierto."
+        },
+        "occurrences": 3
+      },
+      {
+        "id": "R3.1",
+        "definition": {
+          "paragraph_index_zero_based": 85,
+          "text": "R3.1. Manifiesto de ejecución verificable en frío, comprobable sin el modelo, sin conexión de red y sin la plataforma que lo generó. Se emite en un formato de texto estructurado y abierto, con resumen criptográfico, número de filas y tamaño por artefacto, de modo que sea comprobable con utilidades de propósito general ajenas al proyecto. Los formatos estándar de proveniencia de flujo que el sustrato de ejecución ya emita se referencian y se detectan, no se construyen de nuevo."
+        },
+        "occurrences": 3
+      },
+      {
+        "id": "R3.2",
+        "definition": {
+          "paragraph_index_zero_based": 86,
+          "text": "R3.2. Registro de decisiones y rechazos, alimentado por tres fuentes: las aprobaciones del flujo de permisos, las negativas tipificadas de la capa de admisión y las violaciones de protocolo registradas durante las campañas de evaluación."
+        },
+        "occurrences": 3
+      },
+      {
+        "id": "R3.3",
+        "definition": {
+          "paragraph_index_zero_based": 87,
+          "text": "R3.3. Conteo de intervenciones humanas, reportado siempre junto a la corrección del resultado y contrastado mediante un coeficiente de acuerdo entre observadores. Reportar el conteo de forma aislada premiaría al sistema que evita consultar al usuario incluso cuando debería hacerlo, de modo que la métrica solo es interpretable emparejada con la corrección."
+        },
+        "occurrences": 3
+      },
+      {
+        "id": "R3.4",
+        "definition": {
+          "paragraph_index_zero_based": 88,
+          "text": "R3.4. Documentación de métodos con identificador de revisión y resumen criptográfico de imagen por cada herramienta invocada, exportable sin edición manual y generada íntegramente a partir del manifiesto, sin campos redactados por el modelo."
+        },
+        "occurrences": 3
+      },
+      {
+        "id": "R3.5",
+        "definition": {
+          "paragraph_index_zero_based": 90,
+          "text": "R3.5. Catálogo de modos de fallo silencioso del dominio, cada uno con su referencia bibliográfica, su criterio mecánico de detección, su umbral registrado de antemano y sus posibles veredictos. Un modo entra en el catálogo únicamente si admite un criterio mecánico, y el que se reconoce en la literatura pero no se deja reducir a una comprobación automática queda fuera y se declara como tal."
+        },
+        "occurrences": 3
+      },
+      {
+        "id": "R3.6",
+        "definition": {
+          "paragraph_index_zero_based": 91,
+          "text": "R3.6. Batería de controles cuyo veredicto negativo incorpora el valor medido y el umbral aplicado, de modo que sea interpretable por el usuario. Un control debe informar el valor concreto que motivó el rechazo y el umbral contra el que se comparó."
+        },
+        "occurrences": 3
+      },
+      {
+        "id": "R3.7",
+        "definition": {
+          "paragraph_index_zero_based": 92,
+          "text": "R3.7. Artefacto de controles legible por máquina, con una fila por instancia analizada que registra la fuente de la estructura, la versión del modelo empleado, la métrica de confianza con su escala y el veredicto de cada control."
+        },
+        "occurrences": 3
+      },
+      {
+        "id": "R3.8",
+        "definition": {
+          "paragraph_index_zero_based": 93,
+          "text": "R3.8. Sensibilidad y especificidad de los controles, medidas sobre casos publicados de fallo conocido y sobre anotación de referencia del dominio, y reportadas de forma conjunta."
+        },
+        "occurrences": 3
+      }
+    ],
+    "historical_or_stale_status_candidates": [
+      {
+        "paragraph_index_zero_based": 382,
+        "text": "Se mantienen pendientes la autenticación externa de las fuentes, la detección admitida de repeticiones y la anotación independiente. F4 añadió admisión y proveniencia; el cierre R2.2 habilita límites estrictos dentro de una asignación comprobada. F5 añade el reporte estructural de la ruta experimental y la inspección separada mmCIF/AFDB con pLDDT/PAE. Un control no evaluable no cuenta como aprobado. La verificación del CSV exige identidad, límites, cantidad de unidades, valores finitos, escala TM-score, relleno inicial y resúmenes etiquetados.",
+        "review_action": "Reconcile current status or explicitly retain as dated history; do not erase prior failures."
+      },
+      {
+        "paragraph_index_zero_based": 449,
+        "text": "La configuración limita cada tarea a dos CPU, 2 GB y tres minutos, sin reintentos ni red en el contenedor. Estos límites no acreditan por sí solos admisión presupuestaria ni viabilidad en un clúster. El anotador y el acceso a clúster siguen sin confirmación; la sustentación permanece en julio de 2027 y el borrador completo tiene como fecha objetivo el 4 de junio.",
+        "review_action": "Reconcile current status or explicitly retain as dated history; do not erase prior failures."
+      },
+      {
+        "paragraph_index_zero_based": 600,
+        "text": "La segunda fase verificó localmente la recuperación de una estructura PDB y la geometría de unidades conocidas con GeomeTRe. La detección mediante ReUPred o STRPsearch y el mapeo de las anotaciones actuales de RepeatsDB conservan dependencias técnicas explícitas. El usuario confirmó que el agente está conectado con OpenAI y que el anotador externo y el clúster todavía no están disponibles de forma confirmada. La validación externa de R1.3/R3.3 y una eventual afirmación de ejecución en clúster dependen de resolver esos puntos.",
+        "review_action": "Reconcile current status or explicitly retain as dated history; do not erase prior failures."
+      },
+      {
+        "paragraph_index_zero_based": 740,
+        "text": "Permanecen pendientes ampliación del catálogo, mapeos SIFTS/UniProt, ejecución admitida sobre modelos predichos y evaluación reservada. F4 implementó inventario, presupuesto y copia portable (A.18); F5 incorpora inspección semántica y controles (A.19); el cierre R2.2 implementa límites de recursos y contraste de ingeniería (A.20). STRPsearch continúa candidato: su admisión requiere revisar transformación, contratos y propagación de fallos.",
+        "review_action": "Reconcile current status or explicitly retain as dated history; do not erase prior failures."
+      },
+      {
+        "paragraph_index_zero_based": 755,
+        "text": "R2.1 y R2.3 cuentan con mecanismos verificados en la ruta local. R2.2 reproduce conteos y estimaciones, pero conserva pendiente la cota de almacenamiento y la evaluación de su margen. R2.4, la cobertura independiente de R3.2 y el kappa de R3.3 requieren los corpus reservados. El anotador, el clúster y el modelo y presupuesto de evaluación continúan sin confirmación; no se sustituyen por las respuestas sintéticas de los ensayos.",
+        "review_action": "Reconcile current status or explicitly retain as dated history; do not erase prior failures."
+      }
+    ]
+  },
+  "protocol_version": "1.0.1",
+  "result_ids": [
+    "R1.1",
+    "R1.2",
+    "R1.3",
+    "R1.4",
+    "R1.5",
+    "R1.6",
+    "R1.7",
+    "R1.8",
+    "R1.9",
+    "R2.1",
+    "R2.2",
+    "R2.3",
+    "R2.4",
+    "R3.1",
+    "R3.2",
+    "R3.3",
+    "R3.4",
+    "R3.5",
+    "R3.6",
+    "R3.7",
+    "R3.8"
+  ],
+  "protocol_sample_minima": {
+    "heldout_feasible_intents": 50,
+    "paraphrases_per_intent": 2,
+    "heldout_out_of_scope": 20,
+    "valid_graphs": 50,
+    "invalid_graphs": 30,
+    "feasible_resource_scenarios": 20,
+    "infeasible_resource_scenarios": 20,
+    "human_turns": 100,
+    "reviewed_structural_controls": 30
+  },
+  "protocol_thresholds": {
+    "specification_admissibility_min": 0.85,
+    "paraphrase_stability_min": 0.85,
+    "workflow_execution_min": 0.95,
+    "invalid_acceptance_max": 0.05,
+    "kappa_min": 0.7,
+    "false_rejection_max": 0.05,
+    "accepted_budget_exceedance_max": 0,
+    "median_storage_overestimate_max": 0.25,
+    "deterministic_count_difference_max": 0,
+    "sensitivity_min": 0.8,
+    "specificity_min": 0.9,
+    "structural_evaluability_min": 0.9
+  },
+  "expert_workbook": {
+    "path": "docs/tesis/evaluacion-experta-20260930/para-asesora/evaluacion.xlsx",
+    "sha256": "d0e61be48192abea4f3b6cef6f8561fc42b0aeb2132dfac6c9eb1e71a69ef91a",
+    "worksheet": "Solicitudes",
+    "cases": 70,
+    "nonempty_response_fields": {
+      "Solicitud definitiva": 0,
+      "Objetivo esperado": 0,
+      "Factibilidad": 0,
+      "Paráfrasis 1": 0,
+      "Paráfrasis 2": 0
+    },
+    "scope": "Cell availability, not authentication or scientific validation of any entered annotation."
+  },
+  "model_decision": {
+    "provider": "openai",
+    "id": "gpt-6-sol",
+    "reasoning_effort": "medium",
+    "service_tier": "standard",
+    "authorized_total_usd": 100,
+    "development_pilot_cap_usd": 10,
+    "pilot_included_in_total": true,
+    "available_on": "office workstation via existing SSH connection, reported by author",
+    "exact_provider_revision": null,
+    "effective_settings_verified": false,
+    "paid_calls_in_this_preparation": 0
+  },
+  "observed_model_access": {
+    "baseline_listing": {
+      "kind": "read_only_provider_configuration",
+      "office_ssh": "timed_out",
+      "office_tailscale_peer_visible": false,
+      "local_auth_type": "oauth",
+      "requested_model": "openai/gpt-6-sol",
+      "model_list_exit_code": 0,
+      "requested_model_listed": false,
+      "listed_models": [
+        "openai/gpt-5.3-codex-spark",
+        "openai/gpt-5.4",
+        "openai/gpt-5.4-fast",
+        "openai/gpt-5.4-mini",
+        "openai/gpt-5.4-mini-fast",
+        "openai/gpt-5.4-mini-flex",
+        "openai/gpt-5.5",
+        "openai/gpt-5.5-fast",
+        "openai/gpt-5.6",
+        "openai/gpt-5.6-fast",
+        "openai/gpt-5.6-luna",
+        "openai/gpt-5.6-luna-fast",
+        "openai/gpt-5.6-luna-pro",
+        "openai/gpt-5.6-pro",
+        "openai/gpt-5.6-sol",
+        "openai/gpt-5.6-sol-fast",
+        "openai/gpt-5.6-sol-pro",
+        "openai/gpt-5.6-terra",
+        "openai/gpt-5.6-terra-fast",
+        "openai/gpt-5.6-terra-pro",
+        "openai/gpt-6.1-sol",
+        "openai/gpt-6.1-sol-fast",
+        "openai/gpt-6.1-sol-pro",
+        "openai/gpt-6.1-sol-ultrafast"
+      ],
+      "inference_calls": 0,
+      "api_keys_present": false,
+      "stderr_tail": ""
+    },
+    "development_probe": {
+      "kind": "development_model_access_probe",
+      "requested_model": "openai/gpt-6-sol",
+      "requested_effort": "medium",
+      "requested_tier": "default (standard)",
+      "provider_auth": "existing local OAuth",
+      "observed_at": "2026-10-13T00:26:30.837697+00:00",
+      "exit_code": 0,
+      "stdout": "{\"type\":\"step_start\",\"timestamp\":1791851184422,\"sessionID\":\"ses_ecd58cd70ffeqeMffhRvpP2LB7\",\"part\":{\"id\":\"prt_132a74123001qr51rkMqsfUh8c\",\"messageID\":\"msg_132a7349d001Lf4MKne5wBTvYw\",\"sessionID\":\"ses_ecd58cd70ffeqeMffhRvpP2LB7\",\"snapshot\":\"0339193ec9ae695b50ba1e9c905613fc82421e6d\",\"type\":\"step-start\"}}\n{\"type\":\"text\",\"timestamp\":1791851190697,\"sessionID\":\"ses_ecd58cd70ffeqeMffhRvpP2LB7\",\"part\":{\"id\":\"prt_132a7579d001SPfLeHm1LdvuOS\",\"messageID\":\"msg_132a7349d001Lf4MKne5wBTvYw\",\"sessionID\":\"ses_ecd58cd70ffeqeMffhRvpP2LB7\",\"type\":\"text\",\"text\":\"HELIX_PILOT_OK\",\"time\":{\"start\":1791851190173,\"end\":1791851190694},\"metadata\":{\"openai\":{\"itemId\":\"msg_0c72da420d824329016acd7ab60f7887d2855ad37bc006bd19\",\"phase\":\"final_answer\"}}}}\n{\"type\":\"step_finish\",\"timestamp\":1791851190747,\"sessionID\":\"ses_ecd58cd70ffeqeMffhRvpP2LB7\",\"part\":{\"id\":\"prt_132a759d6001dPwLwe5aSnbWUA\",\"reason\":\"stop\",\"snapshot\":\"0339193ec9ae695b50ba1e9c905613fc82421e6d\",\"messageID\":\"msg_132a7349d001Lf4MKne5wBTvYw\",\"sessionID\":\"ses_ecd58cd70ffeqeMffhRvpP2LB7\",\"type\":\"step-finish\",\"tokens\":{\"total\":3844,\"input\":3707,\"output\":12,\"reasoning\":125,\"cache\":{\"write\":0,\"read\":0}},\"cost\":0}}\n",
+      "stderr": "",
+      "intended_prompt_count": 1,
+      "human_evaluation": false,
+      "is_reserved_case": false,
+      "API_billing_not_observed": true
+    }
+  },
+  "source_hashes": [
+    {
+      "path": "evaluation/trp/protocol.json",
+      "sha256": "edd4e3f89c0a0c0f37b7acfba385d46a25780f3c06d68395bb975dbf0add5c72"
+    },
+    {
+      "path": "evaluation/trp/PROTOCOL.md",
+      "sha256": "c09b7858309d88b3a95b6027d8d62022522b52e3a21662cc8e6a7ab374262055"
+    },
+    {
+      "path": "evaluation/trp/ANNOTATION.md",
+      "sha256": "49004adf7d2a230aeab36aa035c2c209b23c20cf5fd7171a7dd0696cb8e05c3a"
+    },
+    {
+      "path": "evaluation/trp/corpus-20260930/decisions.json",
+      "sha256": "0f952a70541e1ff71058fd1d4127d7523da1cadc5b06a537a21cdc79c708d558"
+    },
+    {
+      "path": "evaluation/trp/corpus-20260930/validation.json",
+      "sha256": "53449d4fd061161d4baf33a2c273631d54cb4b85179cf281b15fc9aeae32c525"
+    },
+    {
+      "path": "docs/tesis/trazabilidad.json",
+      "sha256": "b2b4ec096d9bf06dd894d9b78ccda167cb35c3408c50fcdd01ba4dde4df05542"
+    },
+    {
+      "path": "docs/tesis/checkpoint.json",
+      "sha256": "2cfb5f4a4c8e446b42eef9314c8dae1ea9f52059676f611cb036944dc1a40b90"
+    },
+    {
+      "path": "evaluation/trp/reference/pratt-author-20261001/summary.json",
+      "sha256": "060f9d9f7de4ca858fddac941359d54c98d72c4dfd8d002d63922831f8f84357"
+    },
+    {
+      "path": "evaluation/trp/reference/resources-r32/freeze.json",
+      "sha256": "a382e9d9a827fcc4b82e0dabcef4025dc9f28f2836a0baa14cb5d871cb60cd81"
+    },
+    {
+      "path": "evaluation/trp/aws-academy-cluster-20261012/report.json",
+      "sha256": "2a96ed2e7d6cf07d2d71d3eb30508451f537caa83ec56b81e19902e8dd78458d"
+    }
+  ],
+  "verification": [
+    {
+      "name": "traceability-index",
+      "passed": true,
+      "path": "evaluation/trp/campaign-20261012/checks/traceability-index.json",
+      "sha256": "ebc2a22e9442ac1459c26ac29a06182707fa9109b1784422c36e4d330469552c"
+    },
+    {
+      "name": "local-resource-archives",
+      "passed": true,
+      "path": "evaluation/trp/campaign-20261012/checks/local-resource-archives.json",
+      "sha256": "3fb49a8be80631a644dc7aa6e627253e9348bd3328356cc5ff5fefde2138f44c"
+    },
+    {
+      "name": "aws-infrastructure-evidence",
+      "passed": true,
+      "path": "evaluation/trp/campaign-20261012/checks/aws-infrastructure-evidence.json",
+      "sha256": "61723c741fff41dc17ee146d9b7566900ab86bfd48ba5df89ee7f04330eb46a8"
+    },
+    {
+      "name": "pratt-original-integrity",
+      "passed": true,
+      "path": "evaluation/trp/campaign-20261012/checks/pratt-original-integrity.json",
+      "sha256": "57fdcf5453b8a2d7abc1f424faad67df2952ddc5c3beb0478927913f8dd4ab6b"
+    },
+    {
+      "name": "development-invalid-graphs",
+      "passed": true,
+      "path": "evaluation/trp/campaign-20261012/checks/development-invalid-graphs.json",
+      "sha256": "005b40c0b3c22e5c4d39394fbcf3550045c519018180c23e9b557a632cb8ee65"
+    }
+  ],
+  "prohibited_inferences": [
+    "Passing historical engineering checks does not prove completion of the held-out campaign.",
+    "An infrastructure-only workflow does not prove Helix submitted or governed Slurm work.",
+    "78 mechanical alarms and five illustrated problems do not establish physical sensitivity or specificity.",
+    "A blank expert workbook does not provide independent labels, human paraphrases, or kappa."
+  ]
+}

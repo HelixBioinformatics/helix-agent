@@ -1,0 +1,195 @@
+{
+  "schema": "helix-event-negative-post-observation-review/1.0",
+  "reviewedAtUtc": "2026-10-13T04:18:37.661892+00:00",
+  "verified": true,
+  "liveTestsReexecuted": false,
+  "productionSourcesMutated": false,
+  "frozenArtifactsMutated": false,
+  "awsOrModelOperations": false,
+  "scope": "Data-only second calculation independent of the earlier auditor totals and producer event ledger. The reviewer also authored the engineering harness; this is not a separate human annotator or evidence of inter-rater independence.",
+  "protocolSha256": "e35b57d0e9e81eaf0055281df856bf9226aefbd25529332e728e731b00b1e7bd",
+  "allTenFrozenSourceCopiesUnchanged": true,
+  "cases": [
+    {
+      "id": "permission-denied",
+      "protocolBeforeActions": true,
+      "independentObservedPermissions": 2,
+      "independentObservedQuestions": 0,
+      "independentObservedProtocolGuards": 1,
+      "causesPresent": true,
+      "typesCountsOrderMatch": true,
+      "automaticTerminalFailure": true,
+      "syntheticCallbacks": true,
+      "liveActionsAllBeforeLedgerCreation": false,
+      "expectedTypesFrozenBeforeLedgerCreation": true,
+      "coldVerifier": {
+        "ok": true,
+        "files": 25,
+        "bytes": 1144656,
+        "manifestSha256": "b31280372dfecb4341172aac63e1e5aca5f3bca5c3cac0f1302fbfb5189adfcb",
+        "status": "failed",
+        "externallyAnchored": true,
+        "scope": "integrity, declared links and cold counts; not biological accuracy or authorship"
+      },
+      "anchorOutsidePortableBundle": "evaluation/trp/campaign-20261012/event-negative-contrasts/primary/permission-denied/producer/trp/1864530bf3a8-71fcbcf9-bf3c-4281-9dc7-f9f01c4bd2f7/evidence-location.json"
+    },
+    {
+      "id": "approval-rejected",
+      "protocolBeforeActions": true,
+      "independentObservedPermissions": 2,
+      "independentObservedQuestions": 2,
+      "independentObservedProtocolGuards": 1,
+      "causesPresent": true,
+      "typesCountsOrderMatch": true,
+      "automaticTerminalFailure": true,
+      "syntheticCallbacks": true,
+      "liveActionsAllBeforeLedgerCreation": false,
+      "expectedTypesFrozenBeforeLedgerCreation": true,
+      "coldVerifier": {
+        "ok": true,
+        "files": 25,
+        "bytes": 1145301,
+        "manifestSha256": "960b056dd9b818fa678df16bad1a63de8f11ca9de7e52489db1dc183d49d0fdd",
+        "status": "failed",
+        "externallyAnchored": true,
+        "scope": "integrity, declared links and cold counts; not biological accuracy or authorship"
+      },
+      "anchorOutsidePortableBundle": "evaluation/trp/campaign-20261012/event-negative-contrasts/primary/approval-rejected/producer/trp/7e480375ebbd-7330d8bd-2d5b-4a76-adc2-e5f5c7ca2332/evidence-location.json"
+    },
+    {
+      "id": "protocol-rejected",
+      "protocolBeforeActions": true,
+      "independentObservedPermissions": 0,
+      "independentObservedQuestions": 0,
+      "independentObservedProtocolGuards": 1,
+      "causesPresent": true,
+      "typesCountsOrderMatch": true,
+      "automaticTerminalFailure": true,
+      "syntheticCallbacks": true,
+      "producerRecord": "rejected.json plus protocol.refusals when applicable"
+    },
+    {
+      "id": "admission-rejected",
+      "protocolBeforeActions": true,
+      "independentObservedPermissions": 0,
+      "independentObservedQuestions": 0,
+      "independentObservedProtocolGuards": 0,
+      "causesPresent": true,
+      "typesCountsOrderMatch": true,
+      "automaticTerminalFailure": true,
+      "syntheticCallbacks": true,
+      "producerRecord": "rejected.json plus protocol.refusals when applicable"
+    }
+  ],
+  "eligibleRecords": 13,
+  "matchedRecords": 13,
+  "perSource": {
+    "admission": 4,
+    "protocol": 3,
+    "permission": 4,
+    "approval": 2
+  },
+  "anchors": [
+    {
+      "case": "permission-denied",
+      "manifestSha256": "b31280372dfecb4341172aac63e1e5aca5f3bca5c3cac0f1302fbfb5189adfcb",
+      "manifest": "evaluation/trp/campaign-20261012/event-negative-contrasts/primary/permission-denied/producer/trp/1864530bf3a8-71fcbcf9-bf3c-4281-9dc7-f9f01c4bd2f7/evidence/manifest.json"
+    },
+    {
+      "case": "approval-rejected",
+      "manifestSha256": "960b056dd9b818fa678df16bad1a63de8f11ca9de7e52489db1dc183d49d0fdd",
+      "manifest": "evaluation/trp/campaign-20261012/event-negative-contrasts/primary/approval-rejected/producer/trp/7e480375ebbd-7330d8bd-2d5b-4a76-adc2-e5f5c7ca2332/evidence/manifest.json"
+    }
+  ],
+  "temporalInterpretation": "The expected action inventory was frozen before producer execution. Actual callback observations were captured live and collected before the harness read producer records. They are interleaved with producer events, so actions-before-ledger-creation is FALSE and is not claimed. A requested producer event naturally precedes its permission callback. This does not derive expectations from the same ledger.",
+  "humanLabels": 0,
+  "syntheticPermissionAndUIActors": true,
+  "kappa": null,
+  "fullUniversalHumanSessionCoverage": false,
+  "sources": [
+    {
+      "path": "evaluation/trp/campaign-20261012/event-negative-contrasts/primary/permission-denied/producer/trp/1864530bf3a8-71fcbcf9-bf3c-4281-9dc7-f9f01c4bd2f7/events.jsonl",
+      "sha256": "a0c83dfc53fb7fe27d4b50a42908ae397a08bc895d4af6301e4e427768122d08"
+    },
+    {
+      "path": "evaluation/trp/campaign-20261012/event-negative-contrasts/primary/permission-denied/producer/trp/1864530bf3a8-71fcbcf9-bf3c-4281-9dc7-f9f01c4bd2f7/evidence-location.json",
+      "sha256": "5d52f37e6c2483ce6afef02c5cffecc3ec2e29b042b070f9d9fd0fb7320dc420"
+    },
+    {
+      "path": "evaluation/trp/campaign-20261012/event-negative-contrasts/primary/permission-denied/producer/trp/1864530bf3a8-71fcbcf9-bf3c-4281-9dc7-f9f01c4bd2f7/evidence/manifest.json",
+      "sha256": "b31280372dfecb4341172aac63e1e5aca5f3bca5c3cac0f1302fbfb5189adfcb"
+    },
+    {
+      "path": "evaluation/trp/campaign-20261012/event-negative-contrasts/primary/permission-denied/actions.json",
+      "sha256": "75b0bbab1e168fca4a891508277d119de2e8b8e06798f0c08986a6c248a73989"
+    },
+    {
+      "path": "evaluation/trp/campaign-20261012/event-negative-contrasts/primary/permission-denied/case.json",
+      "sha256": "f642c217a34d98b296c731d6e4a9e52c212735842d5f23e059e08f310e6aa239"
+    },
+    {
+      "path": "evaluation/trp/campaign-20261012/event-negative-contrasts/primary/approval-rejected/producer/trp/7e480375ebbd-7330d8bd-2d5b-4a76-adc2-e5f5c7ca2332/events.jsonl",
+      "sha256": "8c835944439dbf75c0538a1c59437adb38c7224b9cc0397b5ea29107136a9f9b"
+    },
+    {
+      "path": "evaluation/trp/campaign-20261012/event-negative-contrasts/primary/approval-rejected/producer/trp/7e480375ebbd-7330d8bd-2d5b-4a76-adc2-e5f5c7ca2332/evidence-location.json",
+      "sha256": "14ddaec5247e18bf6ed07a249cff03bd129d250178467bf2e59ed181f777b69b"
+    },
+    {
+      "path": "evaluation/trp/campaign-20261012/event-negative-contrasts/primary/approval-rejected/producer/trp/7e480375ebbd-7330d8bd-2d5b-4a76-adc2-e5f5c7ca2332/evidence/manifest.json",
+      "sha256": "960b056dd9b818fa678df16bad1a63de8f11ca9de7e52489db1dc183d49d0fdd"
+    },
+    {
+      "path": "evaluation/trp/campaign-20261012/event-negative-contrasts/primary/approval-rejected/actions.json",
+      "sha256": "bcf43fc6b5cd78c57535c6800926861a6c072a58a855347f8295e3139be22283"
+    },
+    {
+      "path": "evaluation/trp/campaign-20261012/event-negative-contrasts/primary/approval-rejected/case.json",
+      "sha256": "44ce0539f7ac8d9ebfe0a84a734e8c6089b294ed636ce20920af6b3fb19624b3"
+    },
+    {
+      "path": "evaluation/trp/campaign-20261012/event-negative-contrasts/primary/protocol-rejected/producer/trp/rejected-6b8f6088-fd80-4613-bfd6-4c0230dc476c.json",
+      "sha256": "3553656c3b1f59ea9226787592b64c60026cc1bf4709da51e4d232bbe6e1f617"
+    },
+    {
+      "path": "evaluation/trp/campaign-20261012/event-negative-contrasts/primary/protocol-rejected/actions.json",
+      "sha256": "eabaa4517227ee052dde20a3eec7387f019dfe79a663719c0f2875a631ab873a"
+    },
+    {
+      "path": "evaluation/trp/campaign-20261012/event-negative-contrasts/primary/protocol-rejected/case.json",
+      "sha256": "c47c8203682660df069ded478f828ca0460e3f650b500025e9c78f8a8aed7b1c"
+    },
+    {
+      "path": "evaluation/trp/campaign-20261012/event-negative-contrasts/primary/admission-rejected/producer/trp/rejected-efbb7ec4-e1f1-4a2a-a24f-5ff0273e7472.json",
+      "sha256": "a6e89c6e8fd4fd5423b7ea5e89ff96d229eb6bf24988b564d6532ff1985aae83"
+    },
+    {
+      "path": "evaluation/trp/campaign-20261012/event-negative-contrasts/primary/admission-rejected/actions.json",
+      "sha256": "8dbbef7907c6cc16a74648131c724eb0f8fb13ead8e215a4dbd45e3bb7f37699"
+    },
+    {
+      "path": "evaluation/trp/campaign-20261012/event-negative-contrasts/primary/admission-rejected/case.json",
+      "sha256": "2528a5fcf692760568c9199a728c7ddee89da63c50219e3e6b1c7fee27eef2a7"
+    },
+    {
+      "path": "evaluation/trp/campaign-20261012/event-negative-contrasts/protocol.json",
+      "sha256": "e35b57d0e9e81eaf0055281df856bf9226aefbd25529332e728e731b00b1e7bd"
+    },
+    {
+      "path": "evaluation/trp/campaign-20261012/event-negative-contrasts/source-snapshot.json",
+      "sha256": "b815af1c77bd517995e654b8de14f92ed31882b3c05100683aaa46fe88715909"
+    },
+    {
+      "path": "evaluation/trp/campaign-20261012/event-negative-contrasts/audit.json",
+      "sha256": "f25e63cfcd6f6f92e091aeaf687641ed3ff479c59e078be174076cc555cd7c24"
+    },
+    {
+      "path": "evaluation/trp/campaign-20261012/event-negative-contrasts/driver-terminal.json",
+      "sha256": "496f58365be43b18acc660174718ea10c8d2cbcb6aab9ef5251382e994cc8cf2"
+    },
+    {
+      "path": "packages/helix/src/trp/verify_bundle.py.txt",
+      "sha256": "69b88a192d44707c82358814d61ae83f2d46c579e93d8cf3afe6882b52382187"
+    }
+  ]
+}

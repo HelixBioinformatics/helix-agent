@@ -1,0 +1,177 @@
+{
+  "version": "trp-spec/1.0.0",
+  "catalogHash": "e1c049cf4e4922d22d9f9f285582158b2f215170efa6520182007b990cf54815",
+  "intent": {
+    "value": "Calcular la geometría de las unidades suministradas para 2xqh, cadena A.",
+    "origin": {
+      "kind": "reference",
+      "reference": "evaluation/trp/reference/geometre/units.json",
+      "detail": "Published GeomeTRe 1.0 example for 2xqh A; development reference, excluded from held-out evaluation"
+    }
+  },
+  "structure": {
+    "value": {
+      "path": "evaluation/trp/reference/geometre/2xqh.pdb",
+      "sha256": "f674267d0ef4752a3d4da00497947bfc09f441a5c36d39593b72bc2ba390df0b",
+      "pdb": "2xqh"
+    },
+    "origin": {
+      "kind": "reference",
+      "reference": "evaluation/trp/reference/geometre/units.json",
+      "detail": "Published GeomeTRe 1.0 example for 2xqh A; development reference, excluded from held-out evaluation"
+    }
+  },
+  "chain": {
+    "value": "A",
+    "origin": {
+      "kind": "reference",
+      "reference": "evaluation/trp/reference/geometre/units.json",
+      "detail": "Published GeomeTRe 1.0 example for 2xqh A; development reference, excluded from held-out evaluation"
+    }
+  },
+  "model": {
+    "value": 1,
+    "origin": {
+      "kind": "reference",
+      "reference": "evaluation/trp/reference/geometre/units.json",
+      "detail": "Published GeomeTRe 1.0 example for 2xqh A; development reference, excluded from held-out evaluation"
+    }
+  },
+  "units": {
+    "value": {
+      "contract": {
+        "protein": "2xqh",
+        "chain": "A",
+        "format": "json",
+        "numbering": "pdb-author",
+        "insertionCodes": "excluded",
+        "confidence": "none",
+        "scale": "author-residue-interval"
+      },
+      "ranges": [
+        {
+          "start": 161,
+          "end": 175
+        },
+        {
+          "start": 176,
+          "end": 189
+        },
+        {
+          "start": 190,
+          "end": 203
+        },
+        {
+          "start": 204,
+          "end": 217
+        },
+        {
+          "start": 234,
+          "end": 249
+        },
+        {
+          "start": 250,
+          "end": 263
+        },
+        {
+          "start": 264,
+          "end": 276
+        },
+        {
+          "start": 305,
+          "end": 326
+        },
+        {
+          "start": 327,
+          "end": 350
+        },
+        {
+          "start": 373,
+          "end": 392
+        }
+      ]
+    },
+    "origin": {
+      "kind": "derived",
+      "reference": "evaluation/trp/reference/geometre/units.json",
+      "detail": "Fixed subset of published development units, not an independent biological annotation."
+    }
+  },
+  "insertions": {
+    "value": [
+      {
+        "start": 351,
+        "end": 372
+      }
+    ],
+    "origin": {
+      "kind": "reference",
+      "reference": "evaluation/trp/reference/geometre/units.json",
+      "detail": "Published GeomeTRe 1.0 example for 2xqh A; development reference, excluded from held-out evaluation"
+    }
+  },
+  "graph": {
+    "nodes": [
+      {
+        "id": "structure",
+        "operation": "input.structure"
+      },
+      {
+        "id": "units",
+        "operation": "input.units"
+      },
+      {
+        "id": "select",
+        "operation": "pdb.select"
+      },
+      {
+        "id": "geometry",
+        "operation": "geometre.geometry"
+      }
+    ],
+    "edges": [
+      {
+        "from": "structure",
+        "to": "select",
+        "input": "structure",
+        "contract": {
+          "protein": "2xqh",
+          "chain": "A",
+          "numbering": "pdb-author",
+          "confidence": "none",
+          "format": "pdb",
+          "insertionCodes": "preserved",
+          "scale": "xyz:angstrom;B:angstrom^2"
+        }
+      },
+      {
+        "from": "select",
+        "to": "geometry",
+        "input": "structure",
+        "contract": {
+          "protein": "2xqh",
+          "chain": "A",
+          "numbering": "pdb-author",
+          "confidence": "none",
+          "format": "pdb",
+          "insertionCodes": "excluded",
+          "scale": "xyz:angstrom;B:angstrom^2"
+        }
+      },
+      {
+        "from": "units",
+        "to": "geometry",
+        "input": "units",
+        "contract": {
+          "protein": "2xqh",
+          "chain": "A",
+          "numbering": "pdb-author",
+          "confidence": "none",
+          "format": "json",
+          "insertionCodes": "excluded",
+          "scale": "author-residue-interval"
+        }
+      }
+    ]
+  }
+}

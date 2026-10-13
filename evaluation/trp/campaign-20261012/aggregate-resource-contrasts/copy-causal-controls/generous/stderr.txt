@@ -1,0 +1,17 @@
+1791869525.888844 openat(AT_FDCWD</shared/helix-strict/hrs0b533a1b116b42d5/client>, "/shared/helix-strict/hrs0b533a1b116b42d5/client/bunfig.toml", O_RDONLY) = -1 ENOENT (No such file or directory)
+1791869525.888972 openat(AT_FDCWD</shared/helix-strict/hrs0b533a1b116b42d5/client>, "bunfig.toml", O_RDONLY) = -1 ENOENT (No such file or directory)
+1791869525.889176 openat(AT_FDCWD</shared/helix-strict/hrs0b533a1b116b42d5/client>, "bunfig.toml", O_RDONLY) = -1 ENOENT (No such file or directory)
+/usr/bin/strace: Process 19042 attached
+[pid 19039] 1791869525.891462 openat(AT_FDCWD</shared/helix-strict/hrs0b533a1b116b42d5/client>, "/sys/fs/cgroup/cpu.max", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+[pid 19039] 1791869525.894808 openat(AT_FDCWD</shared/helix-strict/hrs0b533a1b116b42d5/client>, "/sys/kernel/debug/tracing/trace_marker", O_WRONLY) = -1 EACCES (Permission denied)
+[pid 19039] 1791869525.896691 openat(AT_FDCWD</shared/helix-strict/hrs0b533a1b116b42d5/client>, "/sys/fs/cgroup/memory.max", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+[pid 19039] 1791869525.896773 openat(AT_FDCWD</shared/helix-strict/hrs0b533a1b116b42d5/client>, "/sys/fs/cgroup/memory.high", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+/usr/bin/strace: Process 19043 attached
+/usr/bin/strace: Process 19044 attached
+/usr/bin/strace: Process 19045 attached
+[pid 19045] 1791869525.933075 copy_file_range(11</opt/helix-strict-runtime/campaign/smoke7/G-valid-001/source.pdb>, [0], 12</shared/helix-strict/hrs0b533a1b116b42d5/client/input.pdb>, [0], 359397, 0) = -1 EXDEV (Invalid cross-device link)
+[pid 19045] 1791869525.936808 +++ exited with 0 +++
+[pid 19042] 1791869525.936823 +++ exited with 0 +++
+[pid 19043] 1791869525.936842 +++ exited with 0 +++
+[pid 19044] 1791869525.937859 +++ exited with 0 +++
+1791869525.937870 +++ exited with 0 +++

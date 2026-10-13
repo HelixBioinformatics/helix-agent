@@ -1,0 +1,18 @@
+158 |     return false
+159 |   }
+160 | }
+161 | 
+162 | function fail(message: string): never {
+163 |   throw new S.WorkflowError("remote-strict-unverified", message)
+                    ^
+WorkflowError: Kernel/root policy verification failed: {"ok": false, "code": "remote-strict-unverified", "error": "Strict remote allocation unverified: root recursive project inheritance check failed"}
+
+ code: "remote-strict-unverified"
+
+      at fail (/opt/helix-strict-runtime/packages/helix/src/trp/remote-enforcement.ts:163:15)
+      at observe (/opt/helix-strict-runtime/packages/helix/src/trp/remote-enforcement.ts:215:35)
+      at configured (/opt/helix-strict-runtime/packages/helix/src/trp/remote.ts:122:5)
+      at main (/opt/helix-strict-runtime/evaluation/trp/campaign-20261012/aggregate-resource-contrasts/full_client.ts:25:73)
+      at processTicksAndRejections (native:7:39)
+
+Bun v1.3.14 (Linux x64)

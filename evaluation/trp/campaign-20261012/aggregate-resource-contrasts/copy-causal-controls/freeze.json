@@ -1,0 +1,26 @@
+{
+  "schema": "helix-kernel-quota-copy-mechanism/1.0",
+  "frozenAt": "2026-10-13T05:31:41.451891+00:00",
+  "programSha256": "cec145045bee4a05df616a5c97dffec7a0882281fad801418a93c39319c2df6d",
+  "sourceSha256": "f674267d0ef4752a3d4da00497947bfc09f441a5c36d39593b72bc2ba390df0b",
+  "sourceBytes": 359397,
+  "operation": "Exact node:fs/promises.copyFile used by full client",
+  "cases": [
+    {
+      "id": "low64",
+      "workBytes": 65536,
+      "project": 41000
+    },
+    {
+      "id": "generous",
+      "workBytes": 134217728,
+      "project": 41001
+    }
+  ],
+  "labelsBeforeOutputs": null,
+  "fullWorkflowOracle": false,
+  "sourceFiles": {
+    "typescript": "31996965a7d9490732e0e0d5ef3cce891b5ed24310d58e3b8a6948ba02b177e3",
+    "driver": "eeb83b8e2dafbd7224694ce5cea9e4c64bab352896246078134621e1b03215ef"
+  }
+}

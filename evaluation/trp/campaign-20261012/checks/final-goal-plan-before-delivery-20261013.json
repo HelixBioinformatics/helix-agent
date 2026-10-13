@@ -1,0 +1,724 @@
+{
+  "schema": "helix-campaign-plan/1.0",
+  "planned_at": "2026-10-13T00:24:52.741470+00:00",
+  "status": "active_plan_not_completion_claim",
+  "scope": "All 21 expected results, both Academy labs, thesis results/conclusions/annex and reproducible evidence.",
+  "constraints": {
+    "academys_are_independent": true,
+    "approved_labs": [
+      "183928",
+      "185395"
+    ],
+    "api_model": "gpt-6-sol",
+    "api_reasoning": "medium",
+    "api_service_tier": "standard",
+    "authorized_api_total_usd": 100,
+    "pilot_cap_usd_included": 10,
+    "session_minutes": 240,
+    "guest_stop_minutes_per_boot": 180,
+    "provider_revision": "must_record_observed_revision_or_explicit_nonavailability",
+    "no_user_secrets_in_evidence": true,
+    "no_em_dash_in_word": true
+  },
+  "guardrails": [
+    "Do not touch protected T-LANG examples to tune the system before human references and freeze.",
+    "Do not substitute synthetic human turns or LLM labels for independent annotation.",
+    "Do not treat a contract boundary test as observed scientific workflow infeasibility.",
+    "Do not lower thresholds after seeing outputs, hide failures, or reuse development proteins as an intact held-out set.",
+    "Use scoped clean evaluation checkouts or an explicit source snapshot without discarding unrelated user edits.",
+    "More accounts add credits but do not remove provider permission or per-instance capacity limits."
+  ],
+  "milestones": [
+    {
+      "id": "M1",
+      "name": "Current-state audit and preservation",
+      "status": "completed_for_baseline",
+      "evidence": [
+        "audit.json",
+        "checks/traceability-index.json",
+        "checks/local-resource-archives.json",
+        "checks/aws-infrastructure-evidence.json",
+        "checks/pratt-original-integrity.json",
+        "checks/development-invalid-graphs.json"
+      ],
+      "requirements": [
+        "21 current result IDs verified in Word and protocol.",
+        "Direct check of current workbook cells finds no expert references/paraphrases.",
+        "Historical failures retained; previous green checks are not final scientific evaluation."
+      ]
+    },
+    {
+      "id": "M2",
+      "name": "Helix automatic Slurm integration",
+      "status": "actual_remote_workflows_and_clean_cancellation_verified_engineering_scope",
+      "results": [
+        "R1.2",
+        "R1.5",
+        "R1.6",
+        "R1.7",
+        "R1.8",
+        "R2.1",
+        "R2.2",
+        "R2.3",
+        "R3.1",
+        "R3.2",
+        "R3.4"
+      ],
+      "requirements": [
+        "Target identity and per-node resource request included before digest approval.",
+        "Transfer inputs by hash, enforce image digest and profile, reject altered or unavailable inputs.",
+        "Submit real Slurm jobs through Helix, observe native IDs, assigned nodes, failures/cancellation.",
+        "Recover outputs and emit portable manifest/methods; preserve resource scopes and missing quota honestly.",
+        "Run fixed local/remote comparison and confirm explicit OpenBLAS numerical profile, not universal reproducibility."
+      ],
+      "completion_proof": [
+        "Helix invocation log",
+        "Native Slurm job IDs/states/nodes",
+        "Input/config/image hashes",
+        "Captured runtime limits",
+        "Portable bundle cold verification",
+        "Matched numerical CSV and preserved mismatch if any"
+      ],
+      "actual_evidence": [
+        "cloud/lab1/helix-reference/evidence/manifest.json",
+        "trace/lab1-helix-reference.json",
+        "trace/lab1-helix-reference.anchor.json",
+        "trace/first-remote-failure.json",
+        "trace/first-remote-failure-diagnostics.json"
+      ],
+      "verified_case_scope": {
+        "development_input": "2xqh/A with12suppliedunits",
+        "native_jobs": [
+          16,
+          17,
+          18,
+          19
+        ],
+        "workers": [
+          "helix-worker1",
+          "helix-worker2"
+        ],
+        "stub_tasks": 2,
+        "scientific_tasks": 2,
+        "csv_rows": 14,
+        "matching_gold_sha256": "7e8393ba3d8cd1035b2e7b8a790fd896f3e8748038c52233e3ae4fc7aff41e0f",
+        "fault_injections_detected": 296,
+        "prior_startup_failure_retained": true,
+        "human_scientific_approval": "Harness response via Question.Service; not a human annotation"
+      },
+      "baseline_status_preserved": "one_actual_Helix_Slurm_development_workflow_independently_verified_remaining_adversarial_cases_pending",
+      "latest_evidence": [
+        "cloud/workflow-summary.json",
+        "cloud/lab1/cancellation/next-ctx-abort/driver-terminal.json",
+        "cloud/lab1/mapped-reference-protocol/driver-terminal.json"
+      ],
+      "not_claimed": [
+        "aggregate head/client disk quota",
+        "hard production controller cap",
+        "independent human approvals",
+        "scientific R1.5 held-out execution rate"
+      ]
+    },
+    {
+      "id": "M3",
+      "name": "Prospective deterministic contract and trace campaign",
+      "status": "static_graphs_all50_runtime_variants_and_cold_bundle_audits_verified_engineering_scope",
+      "results": [
+        "R1.4",
+        "R1.6",
+        "R1.7",
+        "R1.8",
+        "R1.9",
+        "R3.1",
+        "R3.2",
+        "R3.4"
+      ],
+      "already_executed": {
+        "valid_static_graphs": 50,
+        "accepted_valid": 50,
+        "invalid_static_graphs": 30,
+        "accepted_invalid": 0,
+        "expected_reasons_detected": 30,
+        "control_exceptions": 0,
+        "unique_proteins": 1,
+        "portable_files": 139,
+        "injected_faults": 286,
+        "detected_faults": 286
+      },
+      "evidence": [
+        "contract-corpus/freeze.json",
+        "checks/contract-graphs.json",
+        "checks/portable-fault-injection.json"
+      ],
+      "reproduce_commands": [
+        "bun evaluation/trp/campaign-20261012/run_contract_graphs.ts",
+        "python script/tesis/audit_trp_bundle.py evaluation/trp/reference/coordinate-integrated-20260921/evidence evaluation/trp/campaign-20261012/checks/portable-fault-injection.json"
+      ],
+      "remaining": [
+        "Execute Nextflow dry traversal and approved scientific workflows over graph variants where required; static positives alone do not prove R1.5.",
+        "Create independent event oracle from test actions, compare permission/admission/protocol ledger including rejection cases.",
+        "Generate/export methods solely from complete manifests; verify mandatory fields and unknown-value rejection.",
+        "Repeat portable fault injection on newly generated remote bundles."
+      ],
+      "limit": "Prospective contract labels on one known development protein; not held-out biological annotation or language understanding.",
+      "remote_bundle_fault_checks": {
+        "success_bundle_files": 144,
+        "success_injected_and_detected": 296,
+        "startup_failure_bundle_files": 91,
+        "startup_failure_injected_and_detected": 190,
+        "path_events_checked_and_recorded": 10,
+        "source_backed_methods_fields": 20
+      },
+      "baseline_status_preserved": "static_graphs_and_cold_fault_injection_completed_engineering_scope",
+      "latest_evidence": [
+        "cloud/workflow-summary.json",
+        "trace/workflow-summary-audits/"
+      ],
+      "original_remaining_list_is_baseline": true
+    },
+    {
+      "id": "M4",
+      "name": "Both-account resource and failure contrasts",
+      "status": "hardware_pressure_verified_independent_workspace_admission_campaign_running",
+      "results": [
+        "R2.1",
+        "R2.2",
+        "R2.3",
+        "R2.4",
+        "R3.1",
+        "R3.2"
+      ],
+      "existing_plan": "cloud/lab2-pressure/plan.json",
+      "existing_runner": "script/tesis/aws_academy_pressure.py",
+      "cases": {
+        "cpu_pressure_on_workers": 10,
+        "memory_containment_on_workers": 10,
+        "scheduler_cpu_excess": 10,
+        "scheduler_memory_excess": 10
+      },
+      "requirements": [
+        "Compare actual Academy capacities and resource observations independently of Helix admission decisions.",
+        "Run equivalent fixed workflow/image/profile on both labs with recovered evidence.",
+        "Report CPU quotas versus exclusive cores, observed memory versus declared allocation, per-node capacities versus aggregates.",
+        "Keep cgroup OOM containment success separate from scientific task success.",
+        "Use real limited execution or scheduler capacity contradiction to label feasibility."
+      ],
+      "completion_proof": [
+        "Frozen cases before output",
+        "Native scheduler test or job output",
+        "Measured cgroup configuration and OOM/CPU observables",
+        "Both-lab inventory",
+        "Helix decisions matched to independent contrasts",
+        "Denominators including failures",
+        "Cost/reserve and final stopped/deleted resource states"
+      ],
+      "separate_contract_fixtures": "contract-corpus/resources.json",
+      "contract_fixture_counts": {
+        "expected_admitted": 20,
+        "expected_rejected": 20,
+        "physical_feasibility_labels": 0
+      },
+      "limit": "40 engineering hardware/contract contrasts do not substitute for 40 scientifically diverse TRP workflows; state adaptation scope before inference.",
+      "actual_evidence": [
+        "cloud/lab2-pressure/summary.json",
+        "trace/lab2-pressure-evidence.json"
+      ],
+      "scope_limit": "20 permitted container pressure/containment tests and20 independently capacity-infeasible scheduler requests do not estimate biological workflow false-rejection rate.",
+      "baseline_status_preserved": "40_hardware_kernel_scheduler_contrasts_independently_rechecked_workflow_admission_rate_pending",
+      "latest_evidence": [
+        "cloud/lab2-pressure/summary.json",
+        "cloud/lab2/r24-campaign/progress.json"
+      ]
+    },
+    {
+      "id": "M5",
+      "name": "Effective model configuration and development pilot",
+      "status": "four_development_cases_verified_effective_settings_limits_recorded",
+      "results": [
+        "R1.2",
+        "R1.4"
+      ],
+      "requirements": [
+        "Verify actual configured provider/model/reasoning at office or equivalent authorized local login.",
+        "Run only D-LANG/development inputs, not the 70 held-out drafts.",
+        "Use US$10 pilot within US$100 total; record actual calls, token limits, response model/revision, instructions and provider IDs.",
+        "Set operational caps from pilot and freeze before reserved inference.",
+        "If SSH/provider unavailable, preserve observed errors and continue other milestones; do not silently use another model."
+      ],
+      "evidence": [
+        "model-access.json",
+        "model-access-probe.json"
+      ],
+      "observed_access_baseline": {
+        "kind": "read_only_provider_configuration",
+        "office_ssh": "timed_out",
+        "office_tailscale_peer_visible": false,
+        "local_auth_type": "oauth",
+        "requested_model": "openai/gpt-6-sol",
+        "model_list_exit_code": 0,
+        "requested_model_listed": false,
+        "listed_models": [
+          "openai/gpt-5.3-codex-spark",
+          "openai/gpt-5.4",
+          "openai/gpt-5.4-fast",
+          "openai/gpt-5.4-mini",
+          "openai/gpt-5.4-mini-fast",
+          "openai/gpt-5.4-mini-flex",
+          "openai/gpt-5.5",
+          "openai/gpt-5.5-fast",
+          "openai/gpt-5.6",
+          "openai/gpt-5.6-fast",
+          "openai/gpt-5.6-luna",
+          "openai/gpt-5.6-luna-fast",
+          "openai/gpt-5.6-luna-pro",
+          "openai/gpt-5.6-pro",
+          "openai/gpt-5.6-sol",
+          "openai/gpt-5.6-sol-fast",
+          "openai/gpt-5.6-sol-pro",
+          "openai/gpt-5.6-terra",
+          "openai/gpt-5.6-terra-fast",
+          "openai/gpt-5.6-terra-pro",
+          "openai/gpt-6.1-sol",
+          "openai/gpt-6.1-sol-fast",
+          "openai/gpt-6.1-sol-pro",
+          "openai/gpt-6.1-sol-ultrafast"
+        ],
+        "inference_calls": 0,
+        "api_keys_present": false,
+        "stderr_tail": ""
+      },
+      "observed_access_probe": {
+        "kind": "development_model_access_probe",
+        "requested_model": "openai/gpt-6-sol",
+        "requested_effort": "medium",
+        "requested_tier": "default (standard)",
+        "provider_auth": "existing local OAuth",
+        "observed_at": "2026-10-13T00:26:30.837697+00:00",
+        "exit_code": 0,
+        "stdout": "{\"type\":\"step_start\",\"timestamp\":1791851184422,\"sessionID\":\"ses_ecd58cd70ffeqeMffhRvpP2LB7\",\"part\":{\"id\":\"prt_132a74123001qr51rkMqsfUh8c\",\"messageID\":\"msg_132a7349d001Lf4MKne5wBTvYw\",\"sessionID\":\"ses_ecd58cd70ffeqeMffhRvpP2LB7\",\"snapshot\":\"0339193ec9ae695b50ba1e9c905613fc82421e6d\",\"type\":\"step-start\"}}\n{\"type\":\"text\",\"timestamp\":1791851190697,\"sessionID\":\"ses_ecd58cd70ffeqeMffhRvpP2LB7\",\"part\":{\"id\":\"prt_132a7579d001SPfLeHm1LdvuOS\",\"messageID\":\"msg_132a7349d001Lf4MKne5wBTvYw\",\"sessionID\":\"ses_ecd58cd70ffeqeMffhRvpP2LB7\",\"type\":\"text\",\"text\":\"HELIX_PILOT_OK\",\"time\":{\"start\":1791851190173,\"end\":1791851190694},\"metadata\":{\"openai\":{\"itemId\":\"msg_0c72da420d824329016acd7ab60f7887d2855ad37bc006bd19\",\"phase\":\"final_answer\"}}}}\n{\"type\":\"step_finish\",\"timestamp\":1791851190747,\"sessionID\":\"ses_ecd58cd70ffeqeMffhRvpP2LB7\",\"part\":{\"id\":\"prt_132a759d6001dPwLwe5aSnbWUA\",\"reason\":\"stop\",\"snapshot\":\"0339193ec9ae695b50ba1e9c905613fc82421e6d\",\"messageID\":\"msg_132a7349d001Lf4MKne5wBTvYw\",\"sessionID\":\"ses_ecd58cd70ffeqeMffhRvpP2LB7\",\"type\":\"step-finish\",\"tokens\":{\"total\":3844,\"input\":3707,\"output\":12,\"reasoning\":125,\"cache\":{\"write\":0,\"read\":0}},\"cost\":0}}\n",
+        "stderr": "",
+        "intended_prompt_count": 1,
+        "human_evaluation": false,
+        "is_reserved_case": false,
+        "API_billing_not_observed": true
+      },
+      "baseline_status_preserved": "requested_model_development_access_verified_effective_settings_and_pilot_pending",
+      "latest_evidence": [
+        "model-pilot/audit.json",
+        "model-pilot/settings-probe-request/audit.json"
+      ],
+      "provider_observed_output_cap": null,
+      "billing_observed": false
+    },
+    {
+      "id": "M6",
+      "name": "Reserved human-dependent language and intervention evaluation",
+      "status": "external_inputs_pending_continue_preparation",
+      "results": [
+        "R1.3",
+        "R1.5",
+        "R3.3"
+      ],
+      "requirements": [
+        "Receive and hash first expert workbook delivery; freeze 50 feasible intentions, 100 human paraphrases and 20 out-of-scope requests.",
+        "Run three fresh-session replicates in frozen seed orders 20260915/20260916/20260917; retain failures and max3 clarification rounds.",
+        "Admissibility/stability≥85% per replicate; actual execution≥95% on50 approved feasible specifications.",
+        "Collect≥100 real human turns with context, select whole sessions before classification, send blinded task when real sessions exist.",
+        "Compute Cohen kappa≥0.70 using first nonadjudicated independent labels and clustered intervals, paired with task correctness."
+      ],
+      "current_observed": {
+        "expert_requests_with_definitive_text": 0,
+        "expected_objectives": 0,
+        "human_paraphrase_1": 0,
+        "human_paraphrase_2": 0,
+        "real_human_turns_in_delivered_corpus": 0
+      },
+      "completion_proof": [
+        "Immutable independent first labels and participant agreement",
+        "Frozen case/reference/assignment/instruction/environment hashes",
+        "450baseline requests plus logged clarifications/retries",
+        "Per-replicate numerator/denominator/Wilson intervals",
+        "Session-clustered kappa bootstrap and confusion matrix",
+        "Actual task correctness and intervention counts together"
+      ]
+    },
+    {
+      "id": "M7",
+      "name": "Structural silent-failure evaluation",
+      "status": "steric_and_solvent_observables_verified_physical_classifier_and_independent_labels_pending",
+      "results": [
+        "R3.5",
+        "R3.6",
+        "R3.7",
+        "R3.8"
+      ],
+      "current_observed": {
+        "original_models": 78,
+        "verified_original_files": 234,
+        "verified_reports": 156,
+        "primary_mechanical_alarms": 78,
+        "illustrated_published_problems": 5,
+        "physical_coverage": 0,
+        "physical_sensitivity": null,
+        "specificity": null,
+        "confirmed_pertinent_negative_controls": 0
+      },
+      "requirements": [
+        "Preserve recovered author originals and their unchanged hashes; no publication of private bundle without redistribution basis.",
+        "Develop and validate physical plausibility control independently of confidence alarms; document nonautomatable aspects.",
+        "Obtain≥30 pertinent independently reviewed negative controls with comparable check eligibility.",
+        "Separate calibration cases/families from reserved structural evaluation; any reuse of observed Pratt outputs for control design is exploratory.",
+        "Report sensitivity≥80%, specificity≥90%, evaluable coverage≥90% per group plus conservative detection accounting for missing cases."
+      ],
+      "limit": "The32beta-solenoid classifications in TableS1 are not32demonstrated failures. All78alarms do not demonstrate discrimination.",
+      "baseline_status_preserved": "original_data_verified_physical_reference_dependencies_open",
+      "latest_evidence": [
+        "structural/summary.json",
+        "structural/runtime-600/summary.json",
+        "structural/freesasa/summary.json"
+      ],
+      "reviewed_experimental_annotations_are_not_physical_negative_labels": true
+    },
+    {
+      "id": "M8",
+      "name": "Integrated report, reproducibility and completion audit",
+      "status": "candidate_word_generated_integration_and_final_lifecycle_pending",
+      "results": [
+        "R1.1",
+        "R1.2",
+        "R1.3",
+        "R1.4",
+        "R1.5",
+        "R1.6",
+        "R1.7",
+        "R1.8",
+        "R1.9",
+        "R2.1",
+        "R2.2",
+        "R2.3",
+        "R2.4",
+        "R3.1",
+        "R3.2",
+        "R3.3",
+        "R3.4",
+        "R3.5",
+        "R3.6",
+        "R3.7",
+        "R3.8"
+      ],
+      "requirements": [
+        "Update chapter4results, chapter5conclusions, annex and21result traceability from current Word.",
+        "Reconcile stale dependency statements and use red notes for unresolved methodological limitations.",
+        "Retain approved background/state-of-art/problem sections except strictly necessary current-ID references.",
+        "Report measured rates with exact denominators and intervals; use null/non-evaluable for missing metrics.",
+        "English title-only commits without coauthor, no unrelated changes staged.",
+        "Confirm both accounts compute stopped or safe teardown after local evidence copies; report residual EBS cost and billing lag.",
+        "Do requirement-by-requirement completion audit; keep thesis incomplete while mandatory independent validations remain."
+      ],
+      "baseline_status_preserved": "pending_current_campaign_results",
+      "latest_evidence": [
+        "document/checks.json",
+        "cloud/lab1/stop-state.json"
+      ]
+    }
+  ],
+  "scope_adaptations_to_record_before_new_evaluation": [
+    {
+      "id": "A1",
+      "reason": "Academy instance/IAM/session limits",
+      "original": "Managed AWS ParallelCluster or unconstrained cluster proposal",
+      "adapted": "Manually configured permitted three-node Slurm cluster within each independent Academy lab",
+      "preserved": "Local and actual clustered CPU batch execution, approval/provenance and per-node capacity",
+      "not_claimed": "GPU or large-node capability, MPI validation, performance advantage, or universal capacity"
+    },
+    {
+      "id": "A2",
+      "reason": "Independent language/turn/structural labels pending",
+      "original": "One complete held-out F6 campaign",
+      "adapted": "Separately frozen deterministic engineering campaigns now; human-dependent subcampaigns later",
+      "preserved": "Original metric thresholds, mandatory expert validations and honest denominators",
+      "not_claimed": "Engineering corpus as reserved scientific evidence"
+    },
+    {
+      "id": "A3",
+      "reason": "Earlier runtime numerical discrepancy between OpenBLAS CPU kernels",
+      "original": "Automatic numerical kernel profile",
+      "adapted": "Explicit Haswell profile and single-threaded BLAS for the current x86 image",
+      "preserved": "Unchanged GeomeTRe algorithm and exact CSV comparison",
+      "not_claimed": "Bitwise equivalence for other architectures or all proteins"
+    },
+    {
+      "id": "A4",
+      "reason": "Readinesschecker trace scope unnecessarily couples technical evidence to annotator metadata",
+      "original": "One trace scope for all R3.1 to R3.4 checks",
+      "adapted": "Technical trace offline, event and method verification separate from human T-TURNS scope",
+      "preserved": "Independent labels required for R3.3; integrity and event completeness thresholds unchanged",
+      "not_claimed": "Gate hashes alone prove independent scientific truth"
+    }
+  ],
+  "result_requirements": [
+    {
+      "id": "R1.1",
+      "title": "Catálogo declarativo del dominio",
+      "protocol_measurement": "Entradas admitidas con referencia real, prueba, revisión, identidad de ejecución, hashes y contratos completos / todas las entradas admitidas; informar también admitidas / universo auditado",
+      "acceptance_unchanged": "100% en cobertura documental y referencia (**Word**). En servicios remotos registrar respuesta fechada y hash, y declarar imagen del servidor no observable; no inventar digest remoto",
+      "existing_state_claim": "parcial",
+      "remaining_scope_claim": "Catálogo 1.2.0: tres operaciones admitidas de seis auditadas. STRPsearch ejecutable mediante trp_detect con aprobación, contrato y propagación de fallos; dos entradas reales producen 7 unidades. ReUPred sin entorno/referencia validada; RepeatsDB con licencia CC BY4.0 declarada en sitio actual, pero alcance específico de API y marco de loci pendientes. No se afirma exactitud reservada.",
+      "current_actionable_scope": "engineering_and_protocol_verification",
+      "external_or_downstream_dependencies": [],
+      "complete_thesis_metric_verified": false
+    },
+    {
+      "id": "R1.2",
+      "title": "Módulo de elicitación",
+      "protocol_measurement": "Especificaciones con objetivo, datos, operaciones, parámetros, procedencia y aprobación ligada a su hash / todas las especificaciones emitidas",
+      "acceptance_unchanged": "100% (**Word**). La aprobación no prueba corrección",
+      "existing_state_claim": "implementado",
+      "remaining_scope_claim": "Implementado para la ruta PDB/GeomeTRe: fuentes declaradas, aprobación por Question.Service y digest del paquete. La autenticación de fuentes y el desempeño lingüístico externo no se deducen de esta implementación; R1.3 se evalúa en F6.",
+      "current_actionable_scope": "engineering_and_protocol_verification",
+      "external_or_downstream_dependencies": [],
+      "complete_thesis_metric_verified": false
+    },
+    {
+      "id": "R1.3",
+      "title": "Corpus de enunciados con patrón externo",
+      "protocol_measurement": "Especificaciones completas y admisibles según referencia externa / 50 originales factibles; pares con especificaciones equivalentes y ambas admisibles / 100 pares",
+      "acceptance_unchanged": "≥85% en ambas tasas (**Word**), en cada repetición. Equivalencia de objetivo, entradas, identidad/marco, operaciones y parámetros, no igualdad textual. Dos fallos iguales no son estabilidad",
+      "existing_state_claim": "sin_evidencia",
+      "remaining_scope_claim": "Guía y plantilla externas preparadas en F2. Construir el corpus reservado de 50 intenciones factibles y dos paráfrasis por intención; conseguir anotador, congelar etiquetas y medir las tres repeticiones. No hay juicios externos obtenidos.",
+      "current_actionable_scope": "independent_preparation_and_engineering_only",
+      "external_or_downstream_dependencies": [
+        "expert_references",
+        "100_human_paraphrases",
+        "effective_model_and_freeze"
+      ],
+      "complete_thesis_metric_verified": false
+    },
+    {
+      "id": "R1.4",
+      "title": "Protocolo de evaluación",
+      "protocol_measurement": "Indicadores con definiciones y reglas previas / 21; cambios registrados / cambios realizados",
+      "acceptance_unchanged": "100% (**formalización F2**); para cero cambios reportar “sin enmiendas”, no 0/0=100%",
+      "existing_state_claim": "implementado",
+      "remaining_scope_claim": "Protocolo 1.0.0 intacto; comprobador por campañas y siete artefactos técnicos recopilados en borrador. Falta corpus/particiones/revisión, configuración aplicable y congelación final; no se inició campaña reservada.",
+      "current_actionable_scope": "engineering_and_protocol_verification",
+      "external_or_downstream_dependencies": [],
+      "complete_thesis_metric_verified": false
+    },
+    {
+      "id": "R1.5",
+      "title": "Motor de composición",
+      "protocol_measurement": "Flujos que terminan y producen los artefactos previstos sin edición manual / 50 especificaciones factibles aprobadas",
+      "acceptance_unchanged": "≥95% (**Word**). Reportar aparte corrección de los artefactos y fallos por fase",
+      "existing_state_claim": "implementado",
+      "remaining_scope_claim": "Emisor DSL2 integrado y referencia real con CSV idéntico al anterior, dos tareas simuladas y dos reales. Falta ampliar más allá de la ruta admitida y medir la reserva de 50 especificaciones en F6.",
+      "current_actionable_scope": "independent_preparation_and_engineering_only",
+      "external_or_downstream_dependencies": [
+        "50_expert_admissible_approved_specs_for_final_rate"
+      ],
+      "complete_thesis_metric_verified": false
+    },
+    {
+      "id": "R1.6",
+      "title": "Correspondencia de identificadores y numeración",
+      "protocol_measurement": "Correspondencias de proteína, cadena y residuo correctas frente a mapeo de referencia / correspondencias requeridas",
+      "acceptance_unchanged": "100% (**Word**). No convertir `auth_seq_id` en `label_seq_id` por igualdad numérica",
+      "existing_state_claim": "parcial",
+      "remaining_scope_claim": "Ruta AFDB integrada mediante trp_predicted_geometry, con identidad, PAE, pLDDT, fuentes y aprobación ligada al digest. Referencia real de tres segmentos artificiales reproducida; no son etiquetas de repeticiones ni reserva. Continúan pendientes gobernanza estricta conjunta, contratos de dominio restantes y evaluación independiente de validez física.",
+      "current_actionable_scope": "engineering_and_protocol_verification",
+      "external_or_downstream_dependencies": [],
+      "complete_thesis_metric_verified": false
+    },
+    {
+      "id": "R1.7",
+      "title": "Validador estático y recorrido sin datos",
+      "protocol_measurement": "Composiciones para las que se ejecutan todos los controles estáticos y recorrido en seco exigibles antes de ejecución / composiciones",
+      "acceptance_unchanged": "100% (**Word**). Un error de sintaxis no acredita validación semántica",
+      "existing_state_claim": "implementado",
+      "remaining_scope_claim": "Preparación verifica SIFTS y mapeos antes de aprobación y revalida cambios. GeomeTRe rechaza menos de 3 unidades antes de ejecutar. La evaluación reservada y la ruta predicha integrada al agente permanecen pendientes.",
+      "current_actionable_scope": "engineering_and_protocol_verification",
+      "external_or_downstream_dependencies": [],
+      "complete_thesis_metric_verified": false
+    },
+    {
+      "id": "R1.8",
+      "title": "Informe de validación",
+      "protocol_measurement": "Informes con cada control ejecutado, omitido o no evaluable y motivo / composiciones",
+      "acceptance_unchanged": "100% (**Word**); un control omitido no cuenta como aprobado",
+      "existing_state_claim": "implementado",
+      "remaining_scope_claim": "Informes y evidencia portable completos para rutas ejecutadas, incluido mapeo/SIFTS con 139 archivos verificados. Falta campaña reservada; controles no evaluables se conservan.",
+      "current_actionable_scope": "engineering_and_protocol_verification",
+      "external_or_downstream_dependencies": [],
+      "complete_thesis_metric_verified": false
+    },
+    {
+      "id": "R1.9",
+      "title": "Corpus de composiciones inválidas",
+      "protocol_measurement": "Composiciones inválidas aceptadas / composiciones inválidas (n≥30)",
+      "acceptance_unchanged": "≤5% (**Word**). En n=30 se admite como máximo un falso positivo; una excepción del validador sin veredicto tipificado se cuenta como fallo del control y se informa",
+      "existing_state_claim": "parcial",
+      "remaining_scope_claim": "Corpus de desarrollo implementado: 33 casos inválidos, 0 aceptados y 33 motivos esperados detectados. La reserva T-GRAPH no está evaluada y permanece para F6.",
+      "current_actionable_scope": "engineering_and_protocol_verification",
+      "external_or_downstream_dependencies": [],
+      "complete_thesis_metric_verified": false
+    },
+    {
+      "id": "R2.1",
+      "title": "Inventario de recursos",
+      "protocol_measurement": "Decisiones con inventario completo, fechado y enlazado por hash / decisiones de admisión",
+      "acceptance_unchanged": "100% (**Word**)",
+      "existing_state_claim": "implementado",
+      "remaining_scope_claim": "Inventario, presupuesto y cuota XFS/cgroup disponibles para ruta trp_run; trp_detect declara límites Docker y almacenamiento sin cuota dura. Campaña reservada pendiente; no se acredita clúster.",
+      "current_actionable_scope": "engineering_and_protocol_verification",
+      "external_or_downstream_dependencies": [],
+      "complete_thesis_metric_verified": false
+    },
+    {
+      "id": "R2.2",
+      "title": "Contador de demanda",
+      "protocol_measurement": "Conteos reproducidos en frío / conteos; diferencia entre cantidades contadas y medidas",
+      "acceptance_unchanged": "100% reproducibles (**Word**). Tareas y llamadas deterministas: diferencia cero. En bytes presupuestados: ninguna ejecución admitida supera la cota; margen de sobreestimación mediano ≤25% sobre bytes observados positivos (**propuesta F2**). Memoria y duración medidas se reportan separadamente; el tiempo mínimo por tasa no es una cota superior",
+      "existing_state_claim": "implementado",
+      "remaining_scope_claim": "Ingeniería cerrada para la ruta local admitida: cuota XFS, controlador/tareas cgroup v2 y siete contrastes finales. Permanece evaluación reservada T-RESOURCE de F6; no generalizar siete variantes de 2xqh como proteínas independientes.",
+      "current_actionable_scope": "engineering_and_protocol_verification",
+      "external_or_downstream_dependencies": [],
+      "complete_thesis_metric_verified": false
+    },
+    {
+      "id": "R2.3",
+      "title": "Rechazo tipificado de admisión",
+      "protocol_measurement": "Rechazos previos a ejecutar con recurso, demanda, disponibilidad y código / rechazos",
+      "acceptance_unchanged": "100% (**Word**). Inventario ausente implica rechazo tipificado",
+      "existing_state_claim": "implementado",
+      "remaining_scope_claim": "Negativas previas con recurso, demanda, disponibilidad y código implementadas. Inventario ilegible, presupuesto ausente o insuficiente, pérdida de capacidad y cuota no disponible cubiertos. Contraste empírico independiente de viabilidad en F6.",
+      "current_actionable_scope": "engineering_and_protocol_verification",
+      "external_or_downstream_dependencies": [],
+      "complete_thesis_metric_verified": false
+    },
+    {
+      "id": "R2.4",
+      "title": "Acierto y falso rechazo",
+      "protocol_measurement": "Acierto=(aceptaciones factibles+rechazos inviables)/contrastes; falso rechazo=rechazos factibles/todos los factibles contrastados",
+      "acceptance_unchanged": "Reportar ambos (**Word**); falso rechazo ≤5% y cero aceptaciones que excedan presupuesto (**propuesta F2**). Un rechazo sin contraste no es “correcto” por defecto",
+      "existing_state_claim": "sin_evidencia",
+      "remaining_scope_claim": "F2 fija falso rechazo ≤5% y reporte conjunto de acierto con contraste observado. Falta construir escenarios y ejecutar evaluación; un rechazo sin contraste sigue no evaluado.",
+      "current_actionable_scope": "engineering_and_protocol_verification",
+      "external_or_downstream_dependencies": [],
+      "complete_thesis_metric_verified": false
+    },
+    {
+      "id": "R3.1",
+      "title": "Manifiesto verificable en frío",
+      "protocol_measurement": "Manifiestos verificables desde copia sin modelo ni red / ejecuciones; alteraciones o ausencias detectadas / alteraciones inyectadas",
+      "acceptance_unchanged": "100% en ambas coberturas (**Word**). Comprobar todos los artefactos, no solo corpus",
+      "existing_state_claim": "implementado",
+      "remaining_scope_claim": "Referencia integrada SIFTS: 139 archivos verificados con ancla externa conservada. Identifica imágenes sin empaquetar capas; no acredita autenticidad o reanudación universal. Campaña reservada pendiente.",
+      "current_actionable_scope": "engineering_and_protocol_verification",
+      "external_or_downstream_dependencies": [],
+      "complete_thesis_metric_verified": false
+    },
+    {
+      "id": "R3.2",
+      "title": "Registro de decisiones y rechazos",
+      "protocol_measurement": "Eventos de permisos, admisión y protocolo presentes con su causa / eventos observados independientemente en la sesión",
+      "acceptance_unchanged": "100% (**Word**) por cada fuente",
+      "existing_state_claim": "implementado",
+      "remaining_scope_claim": "Permisos, recursos, protocolo, aprobación y ejecución integrados con secuencia, hash anterior y causas. Se conserva estado y libro del protocolo. Falta contraste independiente de cobertura de eventos por sesión en F6; no se atribuye un permiso automático a una persona.",
+      "current_actionable_scope": "engineering_and_protocol_verification",
+      "external_or_downstream_dependencies": [],
+      "complete_thesis_metric_verified": false
+    },
+    {
+      "id": "R3.3",
+      "title": "Conteo de intervenciones",
+      "protocol_measurement": "Kappa de Cohen entre clase automática y etiqueta externa no adjudicada; matriz de confusión y conteos por clase",
+      "acceptance_unchanged": "κ≥0,70 (**Word**). Reportar junto a corrección de la tarea; reducir intervenciones no implica mayor calidad",
+      "existing_state_claim": "parcial",
+      "remaining_scope_claim": "Clasificador determinista español/inglés y texto/señales versionados sobre instantánea de mensajes; respuestas de UI separadas. Anotador externo, cobertura de sesión, etiquetas no adjudicadas, kappa y corrección emparejada pendientes.",
+      "current_actionable_scope": "independent_preparation_and_engineering_only",
+      "external_or_downstream_dependencies": [
+        "100_real_human_turns",
+        "independent_first_labels"
+      ],
+      "complete_thesis_metric_verified": false
+    },
+    {
+      "id": "R3.4",
+      "title": "Métodos derivados del manifiesto",
+      "protocol_measurement": "Campos del apartado de métodos respaldados por manifiesto / campos afirmados; campos obligatorios presentes / campos requeridos",
+      "acceptance_unchanged": "100% (**Word**); no rellenar versiones desconocidas con valores supuestos",
+      "existing_state_claim": "implementado",
+      "remaining_scope_claim": "Métodos por plantilla con campos obligatorios enlazados a archivos y claves del paquete; incluye revisión, imagen, parámetros, marco, conteos y versión observada o ausencia explícita. Evaluación sobre la campaña completa pendiente.",
+      "current_actionable_scope": "engineering_and_protocol_verification",
+      "external_or_downstream_dependencies": [],
+      "complete_thesis_metric_verified": false
+    },
+    {
+      "id": "R3.5",
+      "title": "Catálogo de fallos silenciosos",
+      "protocol_measurement": "Modos de fallo con fuente, observable, criterio, umbral y veredicto / modos identificados en el inventario fijado",
+      "acceptance_unchanged": "100% documentados (**Word**), distinguiendo los no automatizables",
+      "existing_state_claim": "implementado",
+      "remaining_scope_claim": "Inventario inicial de nueve controles documentado; no implica detección de todos los fallos físicos ni evaluación de sensibilidad.",
+      "current_actionable_scope": "engineering_and_protocol_verification",
+      "external_or_downstream_dependencies": [],
+      "complete_thesis_metric_verified": false
+    },
+    {
+      "id": "R3.6",
+      "title": "Batería de controles",
+      "protocol_measurement": "Controles exigibles ejecutados con valor y umbral / controles exigibles por instancia",
+      "acceptance_unchanged": "100% (**Word**); conservar los no evaluables por separado",
+      "existing_state_claim": "parcial",
+      "remaining_scope_claim": "Ruta AFDB integrada mediante trp_predicted_geometry, con identidad, PAE, pLDDT, fuentes y aprobación ligada al digest. Referencia real de tres segmentos artificiales reproducida; no son etiquetas de repeticiones ni reserva. Continúan pendientes gobernanza estricta conjunta, contratos de dominio restantes y evaluación independiente de validez física. Originales locales ColabFold admitidos para inspección mediante contrato de hashes, secuencia, pLDDT y PAE; 78 modelos de Pratt inspeccionados, sin establecer validez física.",
+      "current_actionable_scope": "engineering_and_protocol_verification",
+      "external_or_downstream_dependencies": [],
+      "complete_thesis_metric_verified": false
+    },
+    {
+      "id": "R3.7",
+      "title": "Artefacto de controles por instancia",
+      "protocol_measurement": "Instancias con procedencia, versión, marco, escala y veredictos / instancias analizadas",
+      "acceptance_unchanged": "100% (**Word**); confianza experimental, pLDDT y PAE no se intercambian",
+      "existing_state_claim": "implementado",
+      "remaining_scope_claim": "Ruta AFDB integrada mediante trp_predicted_geometry, con identidad, PAE, pLDDT, fuentes y aprobación ligada al digest. Referencia real de tres segmentos artificiales reproducida; no son etiquetas de repeticiones ni reserva. Continúan pendientes gobernanza estricta conjunta, contratos de dominio restantes y evaluación independiente de validez física.",
+      "current_actionable_scope": "engineering_and_protocol_verification",
+      "external_or_downstream_dependencies": [],
+      "complete_thesis_metric_verified": false
+    },
+    {
+      "id": "R3.8",
+      "title": "Sensibilidad y especificidad",
+      "protocol_measurement": "Sensibilidad=fallos conocidos detectados/fallos conocidos evaluables; especificidad=controles sin fallo aceptados/controles evaluables",
+      "acceptance_unchanged": "Reportar ambas (**Word**). Sensibilidad ≥80%, especificidad ≥90% y cobertura evaluable ≥90% en cada grupo (**propuesta F2**). Reportar también sensibilidad conservadora contando no evaluables como fallos de detección",
+      "existing_state_claim": "parcial",
+      "remaining_scope_claim": "Originales de rango 1 de las 78 filas de Tabla S1 recuperados, emparejados e inspeccionados. Alarmas mecánicas 78/78 y 5/5 ejemplos problemáticos explícitos; no identifican la causa física. Cobertura física 0%; sensibilidad física y especificidad sin calcular. Requiere control físico validado, al menos 30 negativos pertinentes revisados y evaluación independiente; los modelos de figuras 1/S1 y 14 y los rangos 2–5 no están en este envío. Metas F2 intactas.",
+      "current_actionable_scope": "independent_preparation_and_engineering_only",
+      "external_or_downstream_dependencies": [
+        "validated_physical_control",
+        "30_pertinent_reviewed_negative_controls",
+        "independent_reference_review"
+      ],
+      "complete_thesis_metric_verified": false
+    }
+  ],
+  "request_more_accounts_only_if": {
+    "condition": "Actual measured/projected remaining permitted execution cannot fit conservative remaining credits after available alternatives.",
+    "report": [
+      "Number of additional US$50 accounts needed",
+      "Unfinished campaigns and estimated resource hours",
+      "Why current credits are insufficient",
+      "Permission and capacity restrictions that more accounts do not resolve"
+    ],
+    "never": "Ask for extra accounts just to replace missing human labels or evade service restrictions."
+  },
+  "final_metrics_requirements": {
+    "simple_proportion_interval": "Wilson95%",
+    "clustered_bootstrap_replicates": 2000,
+    "clustered_bootstrap_seed": 20260915,
+    "resampling_unit": "Intention, session or family as appropriate",
+    "decision_rule": "predefinedpointestimate,reportintervalsandallfailures",
+    "undefined_kappa": "nullwhen1−expectedagreement=0"
+  },
+  "updated_at_utc": "2026-10-13T02:51:01.136553+00:00"
+}

@@ -1,0 +1,29 @@
+{
+  "kind": "applied production SSH status repair",
+  "appliedAt": "2026-10-13T02:06:35.561965Z",
+  "verifiedAt": "2026-10-13T02:07:23.367563+00:00",
+  "preApplicationSnapshot": "pre-application-source-snapshot.json",
+  "patchSha256": "85c71fc6e90c2bee63c7c5bc752ca98b2fcfc3e7cdedda67a0c435eeca3cca8d",
+  "unformattedPreparedSha256": "476b39447e7da4b7d3753a6fd5db4f69d064c1fe3a166e221676f3e9fcae1f1c",
+  "formattedProductionSha256": "21826043bd1806383ae712af8bfb8fd92f529e1d589e03d8d886b57cac896caf",
+  "regressionTestSha256": "b1975c6dd01ff650b50421f8d69a7967adfee89e04fe119d8a78da0e3d5a030c",
+  "regression": {
+    "passed": 60,
+    "failed": 0,
+    "assertions": 269,
+    "files": 7,
+    "durationSeconds": 15.67,
+    "log": "production-regression.log",
+    "sha256": "f985fbbf5f9f65deb27a3d8c4499010908907eca046a266247205b3a6503d44e"
+  },
+  "typecheck": {
+    "exitCode": 0,
+    "log": "production-typecheck.log",
+    "sha256": "ae47736bb2a9401aa9743893f2f64b9a605e65a99d78cd991a8021e0f7722d87"
+  },
+  "scientificProtocolChanged": false,
+  "remotePythonRunnerChanged": false,
+  "originalAttemptsPreserved": true,
+  "onlyStatusObservationRetry": true,
+  "noScientificResubmission": true
+}

@@ -1,0 +1,371 @@
+{
+  "command": [
+    "bun",
+    "script/tesis/check_trp_graph.ts"
+  ],
+  "exit_code": 0,
+  "stdout": {
+    "kind": "development-regression",
+    "heldOut": false,
+    "validReference": true,
+    "denominator": 33,
+    "acceptedInvalid": 0,
+    "expectedReasonDetected": 33,
+    "results": [
+      {
+        "id": "cycle-1",
+        "expected": "cycle",
+        "accepted": false,
+        "detected": true,
+        "specificationSha256": "2c50a2b63310d9c9738b243e488784b63a726832722c425053f6cb7f3fad62d3",
+        "failures": [
+          "port-binding",
+          "edge-insertionCodes",
+          "cycle"
+        ]
+      },
+      {
+        "id": "missing-step-1",
+        "expected": "required-step",
+        "accepted": false,
+        "detected": true,
+        "specificationSha256": "960816994b34e977db2369c13b81a1394c23a7ec3dae805a54815ac6adcf2d7d",
+        "failures": [
+          "required-step",
+          "missing-dependency",
+          "required-input"
+        ]
+      },
+      {
+        "id": "excluded-1",
+        "expected": "excluded-operation",
+        "accepted": false,
+        "detected": true,
+        "specificationSha256": "323c27ff2c83e300efdc53ed0fb16c0cf0f77e0a57a6033515d7624825998242",
+        "failures": [
+          "excluded-operation",
+          "required-step",
+          "port-binding",
+          "port-binding"
+        ]
+      },
+      {
+        "id": "format-1",
+        "expected": "edge-format",
+        "accepted": false,
+        "detected": true,
+        "specificationSha256": "89c50de920bf6b3c15b34e36a2408cb015b1ad35dd6cdc9d7888e9c69eea113f",
+        "failures": [
+          "edge-format"
+        ]
+      },
+      {
+        "id": "protein-1",
+        "expected": "edge-protein",
+        "accepted": false,
+        "detected": true,
+        "specificationSha256": "a7d79215d3980459d9b2a4b558b7c3678284a4dcde9a61595b439b24ea72f966",
+        "failures": [
+          "edge-protein"
+        ]
+      },
+      {
+        "id": "chain-1",
+        "expected": "edge-chain",
+        "accepted": false,
+        "detected": true,
+        "specificationSha256": "efb3c9e221a793933340241bfd6d0dd4da3e0985e0bb57f802d7527f4f9476ba",
+        "failures": [
+          "edge-chain"
+        ]
+      },
+      {
+        "id": "numbering-1",
+        "expected": "edge-numbering",
+        "accepted": false,
+        "detected": true,
+        "specificationSha256": "3d98ea1e667adb20c84440205d91e4ef16005723db9363da66d3e8688107ea19",
+        "failures": [
+          "edge-numbering"
+        ]
+      },
+      {
+        "id": "insertions-1",
+        "expected": "edge-insertionCodes",
+        "accepted": false,
+        "detected": true,
+        "specificationSha256": "77f61c488b69f6d2eb35059dfd43d302398edbdeb3d8323ee666dbae37a8bdf4",
+        "failures": [
+          "edge-insertionCodes"
+        ]
+      },
+      {
+        "id": "confidence-1",
+        "expected": "edge-confidence",
+        "accepted": false,
+        "detected": true,
+        "specificationSha256": "33beb1d16cacf77c111901ac189e27b21ff7fa213a9520af49c2aed9b0c60af3",
+        "failures": [
+          "edge-confidence"
+        ]
+      },
+      {
+        "id": "scale-1",
+        "expected": "edge-scale",
+        "accepted": false,
+        "detected": true,
+        "specificationSha256": "d659e6e618cc51f208a5f9475eeb64dd0f2106bf19b9d12140391c81086f4b5a",
+        "failures": [
+          "edge-scale"
+        ]
+      },
+      {
+        "id": "missing-parameter-1",
+        "expected": "schema",
+        "accepted": false,
+        "detected": true,
+        "specificationSha256": "b154e4ce2a12f50f647aca6e51563999b0042888e24a1c12531ab3a3293a4f73",
+        "failures": [
+          "schema"
+        ]
+      },
+      {
+        "id": "cycle-2",
+        "expected": "cycle",
+        "accepted": false,
+        "detected": true,
+        "specificationSha256": "a57e028387324f4a7d7c09e5c644b1a909f3e7d1c11d33fa9b00b51e5a42ffcc",
+        "failures": [
+          "port-binding",
+          "cycle"
+        ]
+      },
+      {
+        "id": "missing-step-2",
+        "expected": "required-step",
+        "accepted": false,
+        "detected": true,
+        "specificationSha256": "ecacbd459d2d5fed98dee487d6106b723bac3f332c2e282d291b47453118cc7d",
+        "failures": [
+          "required-step",
+          "missing-dependency",
+          "required-input"
+        ]
+      },
+      {
+        "id": "excluded-2",
+        "expected": "excluded-operation",
+        "accepted": false,
+        "detected": true,
+        "specificationSha256": "0f5a9f00ea651c5cd198e7d5d7be29e28f4080332723384549ed7657d6fa1e2b",
+        "failures": [
+          "excluded-operation",
+          "required-step",
+          "port-binding",
+          "port-binding"
+        ]
+      },
+      {
+        "id": "format-2",
+        "expected": "edge-format",
+        "accepted": false,
+        "detected": true,
+        "specificationSha256": "e072d4bd06637401955676884f1a5b277dcb15d486468bca1907fa224a448ad0",
+        "failures": [
+          "edge-format"
+        ]
+      },
+      {
+        "id": "protein-2",
+        "expected": "edge-protein",
+        "accepted": false,
+        "detected": true,
+        "specificationSha256": "a32599f06529d2258d21825fcae4ad3a23a38f33b6a8187d2f72ac80b52d30c3",
+        "failures": [
+          "edge-protein"
+        ]
+      },
+      {
+        "id": "chain-2",
+        "expected": "edge-chain",
+        "accepted": false,
+        "detected": true,
+        "specificationSha256": "73f86be93ecd0b564fd90f580258db9c1ed9a44f6023447bf534a5346e5420cd",
+        "failures": [
+          "edge-chain"
+        ]
+      },
+      {
+        "id": "numbering-2",
+        "expected": "edge-numbering",
+        "accepted": false,
+        "detected": true,
+        "specificationSha256": "904c81e746b59dd277e4f7011bcd70c099dc807741666c1d7cb7e2474a9c63b4",
+        "failures": [
+          "edge-numbering"
+        ]
+      },
+      {
+        "id": "insertions-2",
+        "expected": "edge-insertionCodes",
+        "accepted": false,
+        "detected": true,
+        "specificationSha256": "a1d4b23c344a02121e91215c884c975a2c21fb6143b8adafb3412e11565537bf",
+        "failures": [
+          "edge-insertionCodes"
+        ]
+      },
+      {
+        "id": "confidence-2",
+        "expected": "edge-confidence",
+        "accepted": false,
+        "detected": true,
+        "specificationSha256": "4927c7571130a1074715028ce4133bc854272288b58bb9128cc40d9cf5c411e8",
+        "failures": [
+          "edge-confidence"
+        ]
+      },
+      {
+        "id": "scale-2",
+        "expected": "edge-scale",
+        "accepted": false,
+        "detected": true,
+        "specificationSha256": "fe2a20e179f388586ad3a1cffa64606496ebab3546e97fbc00e6b5fbaf2b2d47",
+        "failures": [
+          "edge-scale"
+        ]
+      },
+      {
+        "id": "missing-parameter-2",
+        "expected": "schema",
+        "accepted": false,
+        "detected": true,
+        "specificationSha256": "aec7feae6d228893c47c010006dbfbdc248ea61b754cd2476cfb063000a3e42b",
+        "failures": [
+          "schema"
+        ]
+      },
+      {
+        "id": "cycle-3",
+        "expected": "cycle",
+        "accepted": false,
+        "detected": true,
+        "specificationSha256": "08a36fb56dcdded36d3515d0ca232510f0de8a60a76c31d554925d769ca53b8d",
+        "failures": [
+          "port-binding",
+          "edge-format",
+          "edge-scale",
+          "cycle"
+        ]
+      },
+      {
+        "id": "missing-step-3",
+        "expected": "required-step",
+        "accepted": false,
+        "detected": true,
+        "specificationSha256": "e807aabf9040efbe3be24835db42916ece4b72bcc2eb185e66b6d1560eb729d9",
+        "failures": [
+          "required-step",
+          "missing-dependency",
+          "missing-dependency",
+          "required-input"
+        ]
+      },
+      {
+        "id": "excluded-3",
+        "expected": "excluded-operation",
+        "accepted": false,
+        "detected": true,
+        "specificationSha256": "43fa24888b91fa4692c2001ff55de4ae31f21116adb38f50ae5d8bf273cca4ba",
+        "failures": [
+          "excluded-operation",
+          "required-step",
+          "port-binding",
+          "port-binding"
+        ]
+      },
+      {
+        "id": "format-3",
+        "expected": "edge-format",
+        "accepted": false,
+        "detected": true,
+        "specificationSha256": "87319bc9172702a133c8c4422d6e52660ec249b90ae6a65dbfc23bbf9971281b",
+        "failures": [
+          "edge-format"
+        ]
+      },
+      {
+        "id": "protein-3",
+        "expected": "edge-protein",
+        "accepted": false,
+        "detected": true,
+        "specificationSha256": "38b705aaa413f74b9e3def85423cc8c8c209700c7cffddb6fe54a4432a2c4278",
+        "failures": [
+          "edge-protein"
+        ]
+      },
+      {
+        "id": "chain-3",
+        "expected": "edge-chain",
+        "accepted": false,
+        "detected": true,
+        "specificationSha256": "d1daa6a01bbf6c735b02cd34f36d8dd79ed249ccdfc1857ef6e394e521b8193c",
+        "failures": [
+          "edge-chain"
+        ]
+      },
+      {
+        "id": "numbering-3",
+        "expected": "edge-numbering",
+        "accepted": false,
+        "detected": true,
+        "specificationSha256": "fae6d964f6128dabe19fe28739aeee79a2e4c70ccc2bc3f5e3e080ea31064d49",
+        "failures": [
+          "edge-numbering"
+        ]
+      },
+      {
+        "id": "insertions-3",
+        "expected": "edge-insertionCodes",
+        "accepted": false,
+        "detected": true,
+        "specificationSha256": "516aa4c11bac3dda98e23dcbc871807d17b379186290860bbb9ad94c992d0aee",
+        "failures": [
+          "edge-insertionCodes"
+        ]
+      },
+      {
+        "id": "confidence-3",
+        "expected": "edge-confidence",
+        "accepted": false,
+        "detected": true,
+        "specificationSha256": "5b544150da9cd8a6afc9144ec2482acd278bb9a387852ca76063b7e86dbce93d",
+        "failures": [
+          "edge-confidence"
+        ]
+      },
+      {
+        "id": "scale-3",
+        "expected": "edge-scale",
+        "accepted": false,
+        "detected": true,
+        "specificationSha256": "b95711f58b231e79979a111935d0378f3c33d1d44121fd3d5e2ae9c0a5024494",
+        "failures": [
+          "edge-scale"
+        ]
+      },
+      {
+        "id": "missing-parameter-3",
+        "expected": "schema",
+        "accepted": false,
+        "detected": true,
+        "specificationSha256": "f5b6ffcd2148e484b6393bdf2f8ea48d537276b981cbab43d013f9dfa06a34e9",
+        "failures": [
+          "schema"
+        ]
+      }
+    ]
+  },
+  "stderr": "",
+  "read_only_sources": true
+}

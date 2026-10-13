@@ -1,0 +1,63 @@
+{
+  "lab": "185395",
+  "observed_at_utc": "2026-10-13T01:52:20.071501+00:00",
+  "image": "sha256:1dd91e70acb153a0bd9a51346fc001dd5025f851c9598697cdd37f07d9490b0a",
+  "nodes": [
+    {
+      "node": "helix-head",
+      "instance_type": "t3.medium",
+      "id": "i-04339a8d8aad24c6e",
+      "checks_exit": 0,
+      "checks_stdout": "active\nactive\nactive\nenabled\n",
+      "checks_stderr": "",
+      "guest_stop_guard": {
+        "active": true,
+        "boot_epoch_seconds": 1791850747,
+        "stop_epoch_seconds": 1791861547,
+        "observed_epoch_seconds": 1791856343.5955157,
+        "guard_minutes_after_boot": 180
+      }
+    },
+    {
+      "node": "helix-worker1",
+      "instance_type": "m5.large",
+      "id": "i-06ebae4bcd7f51a00",
+      "checks_exit": 0,
+      "checks_stdout": "active\nactive\nactive\nenabled\n",
+      "checks_stderr": "",
+      "guest_stop_guard": {
+        "active": true,
+        "boot_epoch_seconds": 1791850747,
+        "stop_epoch_seconds": 1791861547,
+        "observed_epoch_seconds": 1791856347.1001039,
+        "guard_minutes_after_boot": 180
+      }
+    },
+    {
+      "node": "helix-worker2",
+      "instance_type": "m5.large",
+      "id": "i-0656b76c4b22adfb8",
+      "checks_exit": 0,
+      "checks_stdout": "active\nactive\nactive\nenabled\n",
+      "checks_stderr": "",
+      "guest_stop_guard": {
+        "active": true,
+        "boot_epoch_seconds": 1791850749,
+        "stop_epoch_seconds": 1791861549,
+        "observed_epoch_seconds": 1791856350.3428571,
+        "guard_minutes_after_boot": 180
+      }
+    }
+  ],
+  "execution_window": {
+    "academy_session_end": "2026-10-12T21:18:18-07:00",
+    "earliest_guest_stop": "2026-10-13T03:19:07+00:00",
+    "effective_admission_deadline": "2026-10-13T03:19:07+00:00",
+    "policy": "Minimum of Academy expiry and verified180minute boot guard on all required nodes"
+  },
+  "cluster_status_stdout": "NODELIST CPUS MEMORY STATE\nhelix-worker1 2 7400 idle\nhelix-worker2 2 7400 idle\nFilesystem       1B-blocks       Used   Available Use% Mounted on\n/dev/root      50884108288 4292677632 46574653440   9% /shared/helix\n\n      N E X T F L O W\n      version 25.10.4 build 11177\n      created 10-02-2026 17:12 UTC \n      cite doi:10.1038/nbt.3820\n      http://nextflow.io\n\n{\n  \"boot_status_code\": \"enabled-by-generator\",\n  \"datasource\": \"ec2local\",\n  \"detail\": \"DataSourceEc2Local\",\n  \"errors\": [],\n  \"extended_status\": \"done\",\n  \"init\": {\n    \"errors\": [],\n    \"finished\": 10.94,\n    \"recoverable_errors\": {},\n    \"start\": 9.43\n  },\n  \"init-local\": {\n    \"errors\": [],\n    \"finished\": 7.49,\n    \"recoverable_errors\": {},\n    \"start\": 5.24\n  },\n  \"last_update\": \"Thu, 01 Jan 1970 00:02:19 +0000\",\n  \"modules-config\": {\n    \"errors\": [],\n    \"finished\": 12.85,\n    \"recoverable_errors\": {},\n    \"start\": 12.71\n  },\n  \"modules-final\": {\n    \"errors\": [],\n    \"finished\": 139.06,\n    \"recoverable_errors\": {},\n    \"start\": 16.8\n  },\n  \"recoverable_errors\": {},\n  \"stage\": null,\n  \"status\": \"done\"\n}\n",
+  "cluster_status_stderr": "",
+  "cluster_status_exit": 0,
+  "ready": true,
+  "private_config_written": true
+}

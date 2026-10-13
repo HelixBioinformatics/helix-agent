@@ -1,0 +1,50 @@
+{
+  "ready": true,
+  "native": [
+    {
+      "id": "375",
+      "work": "/shared/helix-strict/preflight-409e7e343424/worker1",
+      "node": "helix-worker1",
+      "comment": "helix-preflight:preflight-409e7e343424:1",
+      "exitCode": 0,
+      "stdout": "JobId=375 JobName=job.sh UserId=ubuntu(1000) GroupId=ubuntu(1000) MCS_label=N/A Priority=1 Nice=0 Account=(null) QOS=(null) JobState=COMPLETED Reason=None Dependency=(null) Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:01 TimeLimit=00:01:00 TimeMin=N/A SubmitTime=2026-10-13T16:55:15 EligibleTime=2026-10-13T16:55:15 AccrueTime=2026-10-13T16:55:15 StartTime=2026-10-13T16:55:15 EndTime=2026-10-13T16:55:16 Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-10-13T16:55:15 Scheduler=Backfill Partition=helix AllocNode:Sid=helix-head:1869 ReqNodeList=helix-worker1 ExcNodeList=(null) NodeList=helix-worker1 BatchHost=helix-worker1 NumNodes=1 NumCPUs=2 NumTasks=1 CPUs/Task=2 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=2,mem=2G,node=1,billing=2 AllocTRES=cpu=2,mem=2G,node=1,billing=2 Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=2 MinMemoryNode=2G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null) Command=/shared/helix-strict/preflight-409e7e343424/worker1/job.sh WorkDir=/shared/helix-strict/preflight-409e7e343424/worker1 Comment=helix-preflight:preflight-409e7e343424:1  StdErr=/shared/helix-strict/preflight-409e7e343424/worker1/.command.err StdIn=/dev/null StdOut=/shared/helix-strict/preflight-409e7e343424/worker1/.command.log Power= TresPerTask=cpu:2 \n",
+      "stderr": ""
+    },
+    {
+      "id": "376",
+      "work": "/shared/helix-strict/preflight-409e7e343424/worker2",
+      "node": "helix-worker2",
+      "comment": "helix-preflight:preflight-409e7e343424:2",
+      "exitCode": 0,
+      "stdout": "JobId=376 JobName=job.sh UserId=ubuntu(1000) GroupId=ubuntu(1000) MCS_label=N/A Priority=1 Nice=0 Account=(null) QOS=(null) JobState=COMPLETED Reason=None Dependency=(null) Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:01 TimeLimit=00:01:00 TimeMin=N/A SubmitTime=2026-10-13T16:55:16 EligibleTime=2026-10-13T16:55:16 AccrueTime=2026-10-13T16:55:16 StartTime=2026-10-13T16:55:45 EndTime=2026-10-13T16:55:46 Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-10-13T16:55:45 Scheduler=Backfill Partition=helix AllocNode:Sid=helix-head:1928 ReqNodeList=helix-worker2 ExcNodeList=(null) NodeList=helix-worker2 BatchHost=helix-worker2 NumNodes=1 NumCPUs=2 NumTasks=1 CPUs/Task=2 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=2,mem=2G,node=1,billing=2 AllocTRES=cpu=2,mem=2G,node=1,billing=2 Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=2 MinMemoryNode=2G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null) Command=/shared/helix-strict/preflight-409e7e343424/worker2/job.sh WorkDir=/shared/helix-strict/preflight-409e7e343424/worker2 Comment=helix-preflight:preflight-409e7e343424:2  StdErr=/shared/helix-strict/preflight-409e7e343424/worker2/.command.err StdIn=/dev/null StdOut=/shared/helix-strict/preflight-409e7e343424/worker2/.command.log Power= TresPerTask=cpu:2 \n",
+      "stderr": ""
+    }
+  ],
+  "io": [
+    {
+      "node": "helix-worker1",
+      "exitcode": "0",
+      "log": "{\"cpuMax\": \"200000 100000\", \"memoryMax\": \"2147483648\", \"swapMax\": \"0\", \"inputHash\": \"049b785b33c577ac6f4141f2f744cbcf261b2389ceed2c08ba1f0cc4bde809ae\"}\nhelix-worker1\nHELIX_NATIVE_NFS_OK\n",
+      "stderr": "",
+      "result": "HELIX_NATIVE_NFS_OK\n",
+      "dockerResult": "HELIX_NATIVE_DOCKER_OK",
+      "inputHash": "049b785b33c577ac6f4141f2f744cbcf261b2389ceed2c08ba1f0cc4bde809ae"
+    },
+    {
+      "node": "helix-worker2",
+      "exitcode": "0",
+      "log": "{\"cpuMax\": \"200000 100000\", \"memoryMax\": \"2147483648\", \"swapMax\": \"0\", \"inputHash\": \"049b785b33c577ac6f4141f2f744cbcf261b2389ceed2c08ba1f0cc4bde809ae\"}\nhelix-worker2\nHELIX_NATIVE_NFS_OK\n",
+      "stderr": "",
+      "result": "HELIX_NATIVE_NFS_OK\n",
+      "dockerResult": "HELIX_NATIVE_DOCKER_OK",
+      "inputHash": "049b785b33c577ac6f4141f2f744cbcf261b2389ceed2c08ba1f0cc4bde809ae"
+    }
+  ],
+  "stepsSha256": "3079acb6046dae788f8410d7af75eda075088a59e113fb6350c9b2ff93b7b9d6",
+  "sourceSha256": "7b17d547a77e12b242d4dd6f4cc65227de0da17c97d8e3cfe97c413e5f3e4974",
+  "directory": "/shared/helix-strict/preflight-409e7e343424",
+  "operationalPreflightOnly": true,
+  "originalCasesRetried": false,
+  "producerUnchanged": true,
+  "scope": "Native two-CPU/two-GiB Slurm tasks read and write the restored NFS export on both workers, including Slurm stdout/err and explicit exitcode. This preflight is not a Helix full-client resource case."
+}

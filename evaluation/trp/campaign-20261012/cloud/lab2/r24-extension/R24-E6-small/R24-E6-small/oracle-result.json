@@ -1,0 +1,85 @@
+{
+  "case": "R24-E6-small",
+  "graphId": "G-valid-026",
+  "planSha256": "0b80457b6566cd2f7e742a59c62d6a7fdfa77b164ea6d345fae1c97752f8a536",
+  "helixDecision": {
+    "case": "R24-E6-small",
+    "planSha256": "0b80457b6566cd2f7e742a59c62d6a7fdfa77b164ea6d345fae1c97752f8a536",
+    "observerSnapshotSha256": "3b5882413b23a1573b0ffaf9b16fee6b3237a1d8061ca9ffb4a2a820639602f5",
+    "actualResourceSourceSha256": "c920fbb81914f2d8f15051ef45ef7c898bcae0c72ab4ee4e5e38a1ea5c55b5b2",
+    "decision": {
+      "version": "trp-resources/1.2.0",
+      "decidedAt": "2026-10-13T03:43:53.528Z",
+      "accepted": false,
+      "inventoryHash": "e7847afa4ef3a667d88467a7f7d7748de6e77386e1fa0bd3fa0ca549c98aadd5",
+      "budgetHash": "d34a5a59c4b9123f77ed9acf47351eece99de7f9b9ce7d5a4d3bb5937e30da2f",
+      "demand": {
+        "version": "trp-resources/1.2.0",
+        "sourceBytes": 359397,
+        "selectionBytes": 150911,
+        "bundleBytes": 1135869,
+        "counts": {
+          "scientificTasks": 2,
+          "stubTasks": 2,
+          "remoteScientificCalls": 2,
+          "retries": 0
+        },
+        "cpus": 3,
+        "memoryBytes": 4294967296,
+        "workBytes": 21139456,
+        "wallSeconds": 1080,
+        "storage": {
+          "kind": "estimate",
+          "formula": "ceil((12*1048576 + 7*bundleBytes + 4*selectionBytes)/4096)*4096",
+          "hardLimit": false
+        },
+        "assumptions": [
+          "SSH/Slurm backend: controller and worker capacity are checked separately. A 2 CPU/2 GiB task must fit one eligible worker; memory is never pooled across workers. Docker effective task cgroup limits are checked in scientific adapters; aggregate storage and controller enforcement remain unavailable.",
+          "Two sequential tasks per traversal; one stub traversal then one real traversal; no retry or resume.",
+          "Task allocation: 2 CPUs/2 GiB. Controller allocation: 1 CPU/2 GiB; cgroup enforcement requires an independently verified operator sandbox. CPU bandwidth is not an exclusive core reservation.",
+          "Each traversal has an 8 minute watchdog; probes/configuration reserve another 120 seconds. This is a configured timeout, not a runtime prediction.",
+          "Storage estimates allocated workspace bytes including working copies, logs and portable evidence; an independently observed XFS project quota enforces an approved budget only inside an operator allocation.",
+          "The exact image and Nextflow distribution must already be cached. Image pulls/builds and shared Docker/Nextflow caches are outside workBytes.",
+          "Two remote scientific tasks are planned; SSH probes, controller commands and stub jobs are not scientific calls. Agent provider tokens, cost and conversation calls are not measured here."
+        ]
+      },
+      "rejections": [
+        {
+          "code": "budget-insufficient",
+          "resource": "workBytes",
+          "demand": 21139456,
+          "available": 65536
+        }
+      ]
+    },
+    "source": "Actual production TrpResources.admit, not independent feasibility oracle",
+    "physicalFeasibilityLabel": null
+  },
+  "budget": {
+    "cpus": 3,
+    "memoryBytes": 4294967296,
+    "workBytes": 65536,
+    "wallSeconds": 1080,
+    "requireHardStorageLimit": false,
+    "origin": "Separate prospective engineering extension after observed original grid group shortfall"
+  },
+  "physicalFeasibilityLabel": false,
+  "scope": "Development admission contrast of the exact frozen Nextflow task graph in an independently limited head workspace; not held-out scientific R2.4 or aggregate client plus remote R2.2.",
+  "storageUnit": "XFS allocated project blocks including staged inputs, work/logs and materialized portable run copy. Operator supervisor evidence and pre-existing image/Nextflow caches are outside this scope.",
+  "scientificR24Complete": false,
+  "oracleError": "[Errno 28] No space left on device: '/shared/helix-r24/r24-extension-1/R24-E6-small/catalogue.json'",
+  "errno": 28,
+  "oracleStatus": "infeasible-observed-staging-quota",
+  "nativeCleanup": {
+    "requested": [],
+    "remaining": []
+  },
+  "finalQuota": {
+    "usedBytes": 0,
+    "hardBytes": 65536,
+    "raw": "Project quota on /shared/helix-r24 (/dev/loop3)\n                               Blocks                     \nProject ID       Used       Soft       Hard    Warn/Grace     \n---------- -------------------------------------------------- \n#0                  20          0          0     00 [--------]\n#10000            6996          0      65536     00 [--------]\n#10001               0          0         64     00 [--------]\n#10002            6996          0      65536     00 [--------]\n#10003               0          0        128     00 [--------]\n#10004            6996          0      65536     00 [--------]\n#10005              20          0        256     00 [--------]\n#10006            6996          0      65536     00 [--------]\n#10007              20          0        512     00 [--------]\n#10008            6996          0      65536     00 [--------]\n#10009             956          0       1024     00 [--------]\n#10010            6996          0      65536     00 [--------]\n#10011            2016          0       2048     00 [--------]\n#10012            6996          0      65536     00 [--------]\n#10013            3940          0       4096     00 [--------]\n#10014            6996          0      65536     00 [--------]\n#10015            6996          0       8192     00 [--------]\n#10016            7004          0      65536     00 [--------]\n#10017            7004          0      12288     00 [--------]\n#10018            6996          0      65536     00 [--------]\n#10019            6996          0      16384     00 [--------]\n#10020            7004          0      65536     00 [--------]\n#10021               0          0         64     00 [--------]\n#10022            7004          0      65536     00 [--------]\n#10023               0          0        128     00 [--------]\n#10024            2556          0      65536     00 [--------]\n#20000            7004          0      65536     00 [--------]\n#20001              20          0        256     00 [--------]\n#20002            7004          0      65536     00 [--------]\n#20003              20          0        512     00 [--------]\n#20004            7004          0      65536     00 [--------]\n#20005             956          0       1024     00 [--------]\n#20006            7004          0      65536     00 [--------]\n#20007            2016          0       2048     00 [--------]\n#20008            7004          0      65536     00 [--------]\n#20009            3944          0       4096     00 [--------]\n#20010            7004          0      65536     00 [--------]\n#20011            7004          0       8192     00 [--------]\n#20012            7004          0      65536     00 [--------]\n#20013            7004          0      12288     00 [--------]\n#20014            7004          0      65536     00 [--------]\n#20015            7004          0      16384     00 [--------]\n#30000               0          0         64     00 [--------]\n#30001               0          0         64     00 [--------]\n#30002               0          0         64     00 [--------]\n#30003               0          0         64     00 [--------]\n#30004               0          0         64     00 [--------]\n#30005               0          0         64     00 [--------]\n\n",
+    "state": "Project quota state on /shared/helix-r24 (/dev/loop3)\n  Accounting: ON\n  Enforcement: ON\n  Inode: #131 (6 blocks, 6 extents)\nBlocks grace time: [7 days]\nBlocks max warnings: 0\nInodes grace time: [7 days]\nInodes max warnings: 0\nRealtime Blocks grace time: [7 days]\n"
+  },
+  "elapsedSeconds": 0.027180302000033407,
+  "samples": []
+}

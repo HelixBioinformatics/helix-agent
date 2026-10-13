@@ -1,0 +1,297 @@
+{
+  "schema": "helix-scope-gap-audit/1.0",
+  "audited_at_utc": "2026-10-13T01:58:25.562503+00:00",
+  "mutations": {
+    "production": false,
+    "cloud": false,
+    "word": false,
+    "new_runner_and_plan_sources_only": true
+  },
+  "sources": [
+    {
+      "path": "evaluation/trp/protocol.json",
+      "sha256": "edd4e3f89c0a0c0f37b7acfba385d46a25780f3c06d68395bb975dbf0add5c72"
+    },
+    {
+      "path": "packages/helix/src/trp/resources.ts",
+      "sha256": "c920fbb81914f2d8f15051ef45ef7c898bcae0c72ab4ee4e5e38a1ea5c55b5b2"
+    },
+    {
+      "path": "packages/helix/src/trp/remote.ts",
+      "sha256": "0853e2e4cbbb1a80f44b0c1073ad605147f59701ca3d6d503e07e434f2b9312e"
+    },
+    {
+      "path": "packages/helix/src/trp/remote_runner.py.txt",
+      "sha256": "06dfce19be2f73d3c2cd984f53dfd0bc3809d3671c6b705ad915ec40d63f8c0f"
+    },
+    {
+      "path": "packages/helix/src/trp/enforcement.ts",
+      "sha256": "9b624ff112a57948e074efbae2a6818e97b7e21cee289379956190b84684e383"
+    },
+    {
+      "path": "script/tesis/summarize_remote_workflows.py",
+      "sha256": "46d48dadad87bf81a941a28ae9374cdcec4e92a6168bc04da0c317fd4398db9b"
+    },
+    {
+      "path": "evaluation/trp/campaign-20261012/cloud/lab2-pressure/plan.json",
+      "sha256": "6886c30ab8f02030f9860e78bc38cc101b5e3560f1a3766124e89558efeb06fa"
+    },
+    {
+      "path": "evaluation/trp/campaign-20261012/cloud/workflow-progress.json",
+      "sha256": "25d2225ab928e6e3861f56024c65ee7235a89f4ee810c2fa23a07286c8e3d174"
+    }
+  ],
+  "metric_ids": [
+    "R1.1",
+    "R1.2",
+    "R1.3",
+    "R1.4",
+    "R1.5",
+    "R1.6",
+    "R1.7",
+    "R1.8",
+    "R1.9",
+    "R2.1",
+    "R2.2",
+    "R2.3",
+    "R2.4",
+    "R3.1",
+    "R3.2",
+    "R3.3",
+    "R3.4",
+    "R3.5",
+    "R3.6",
+    "R3.7",
+    "R3.8"
+  ],
+  "protocol_actual_pending": [
+    "R1.3 external reference plus 100 paraphrases and three replicates",
+    "R1.5 fifty external approved feasible specifications; current graph runs remain development",
+    "R1.6 independent required protein/chain/residue correspondence corpus",
+    "R2.2 remote measured allocated footprint and budget margin; remote controller/storage enforcement unavailable in current production",
+    "R2.4 twenty empirically feasible and twenty empirically infeasible actual workflow budget contrasts",
+    "R3.2 exhaustive sessions including failed-path terminal events",
+    "R3.3 at least 100 human turns and first independent labels",
+    "R3.8 validated physical decision rule and applicable independent physical positive/negative labels"
+  ],
+  "current_hardware_40": {
+    "observed": 40,
+    "permitted": 20,
+    "per_node_capacity_excess": 20,
+    "helix_workflow_decisions_observed": 0,
+    "scientific_R2_4_complete": false
+  },
+  "viable_actions": [
+    {
+      "priority": 0,
+      "id": "resource-decision-independent-oracle",
+      "metrics": [
+        "R2.1",
+        "R2.3",
+        "R2.4"
+      ],
+      "files": [
+        "trace/prepare_r24_resource_cases.ts",
+        "trace/decide_r24_resource_case.ts",
+        "trace/run_r24_independent.py",
+        "trace/R24-RESOURCE-CONTRAST.md"
+      ],
+      "physical_labels_before_run": null,
+      "planned_cases": 40,
+      "scope": "Head-workspace development contrast; partial adaptation explicitly excludes actual remote-client copies, not complete reserved R2.4",
+      "required_proof": [
+        "fresh actual production observation and decision before oracle",
+        "immutable graph/input/image/profile hashes",
+        "kernel project quota measured in allocated blocks",
+        "actual controller CPU/memory/swap and scientific container caps",
+        "four native Slurm jobs and exact input-specific numeric CSV for feasible labels",
+        "typed observed EDQUOT/ENOSPC for insufficient staging/workspace",
+        "unknown remains unknown, all original outcomes retained",
+        "counts by actual empirical label and first attempt; no cohort-name oracle"
+      ],
+      "estimated_minutes": [
+        45,
+        90
+      ],
+      "additional_vm_count": 0,
+      "additional_model_calls": 0,
+      "estimated_cluster_vm_hours": [
+        2.25,
+        4.5
+      ],
+      "price_or_billing_claim": null
+    },
+    {
+      "priority": 0,
+      "id": "remote-native-failure-and-ledger-coverage",
+      "metrics": [
+        "R3.1",
+        "R3.2",
+        "R3.4"
+      ],
+      "required_proof": [
+        "retain G011/G014 original directories",
+        "independent inventory/action oracle for failure branch and actual producer failed/cancelled event",
+        "portable recoveries clearly distinguished from original automatic export",
+        "clean ctx.abort only after running-native independent observation"
+      ],
+      "estimated_minutes": [
+        10,
+        30
+      ],
+      "status": "Parent/remote executor owns actual repair and test"
+    },
+    {
+      "priority": 1,
+      "id": "hard-controller-budget",
+      "metrics": [
+        "R2.2",
+        "R2.4"
+      ],
+      "technically_possible": true,
+      "requires_new_aws_permission": false,
+      "required_change": "operator-controlled per-run head service with CPUQuota100%, MemoryMax2G, swap0, RuntimeMaxSec; attest actual service cgroup to inventory separately from SSH observation",
+      "required_proof": [
+        "same approved controller destination/limits hashed before approval",
+        "PID/cgroup, effective caps and memory peak",
+        "pressure/forced OOM containment in same service",
+        "native owned-job cancellation after controller/transport failure"
+      ],
+      "implementation_caveat": "Current observe subtracts memory.current from memory.max; introducing a 2GiB cap makes post-stub availability <2GiB. Distinguish assigned entitlement from own usage rather than falsifying free memory. Local single-host enforcement schema cannot authorize remote nodes.",
+      "estimated_implementation_minutes": [
+        60,
+        180
+      ],
+      "status": "Not implemented or required for unchanged ordinary remote route; feasibility must not be denied because of Academy IAM"
+    },
+    {
+      "priority": 1,
+      "id": "hard-remote-project-quota",
+      "metrics": [
+        "R2.2",
+        "R2.4"
+      ],
+      "technically_possible": true,
+      "requires_new_aws_permission": false,
+      "required_change": "new operator-controlled XFS loop filesystem and quota tree exported only for this run scope; no existing NFS changes during positive runs",
+      "required_proof": [
+        "actual XFS device/project/hard blocks/inheritance on head and writes from both workers",
+        "entire declared work/evidence footprint in same project",
+        "forced two-writer quota exhaustion and no accepted-budget exceedance",
+        "demand compared with measured allocated blocks, not logical export bytes"
+      ],
+      "implementation_caveat": "Current export maxBytes is a late logical-byte export bound, not runtime disk quota. Normal remote path puts client preparation/portable output in a different filesystem; head-only quota does not enforce the combined count.",
+      "estimated_implementation_minutes": [
+        90,
+        240
+      ],
+      "status": "Isolated experimental runner proposed; production remote quota not implemented"
+    },
+    {
+      "priority": 1,
+      "id": "inventory-time-across-all-nodes",
+      "metrics": [
+        "R2.1",
+        "R2.3"
+      ],
+      "required_proof": [
+        "actual per-boot timers and BootTime for head and both required workers",
+        "private expiry=min(Academy expiry, all guest deadlines), newly hashed before approval",
+        "refusal below demand.wallSeconds+120; do not treat null or missing timer as unlimited Academy time"
+      ],
+      "estimated_minutes": [
+        10,
+        25
+      ],
+      "status": "Root implementing new private config; prior config/attempts retained"
+    },
+    {
+      "priority": 2,
+      "id": "independent-residue-mappings",
+      "metrics": [
+        "R1.6"
+      ],
+      "required_proof": [
+        "prospective public PDB/SIFTS cases beyond development protein, chain/insertion/auth-label examples",
+        "separate source maps, expected correspondences and actual translated outputs",
+        "per-residue denominator with all ambiguous/unmappable records retained"
+      ],
+      "external_human_required": false,
+      "estimated_minutes": [
+        30,
+        90
+      ],
+      "status": "Viable additional engineering coverage; full intended domain can remain limited"
+    },
+    {
+      "priority": 2,
+      "id": "model-output-bound",
+      "metrics": [
+        "R1.4"
+      ],
+      "required_proof": [
+        "actual provider request cap or clearly documented absent cap",
+        "call/step hard guard and token accounting including cache",
+        "OAuth pricing equivalent separated from actual billing"
+      ],
+      "status": "Current OAuth removes maximumOutputTokens; under8192 observed outputs do not prove hard cap",
+      "external_human_required": false
+    }
+  ],
+  "workflow_summary_independent_review": {
+    "progress_counts": {
+      "attempts": 36,
+      "first_attempts": 36,
+      "first_attempt_succeeded": 34,
+      "first_attempt_failed": 2,
+      "first_attempt_unverified_success": 0,
+      "retry_attempts": 0,
+      "unique_cases_verified": 34,
+      "unique_cases_not_observed": 14
+    },
+    "recomputed_current_snapshot": {
+      "attempts": 36,
+      "unique_cases_observed": 36,
+      "verified_unique": 34,
+      "failed_attempts": 2
+    },
+    "hash_link_errors": [],
+    "current_blocking_bug_found": false,
+    "strengths": [
+      "input/source/hash and exact standalone argv binding",
+      "same image/profile/subset gold only",
+      "trusted offline native/runtime/gate/method audit",
+      "first failures retained and retries do not add unique cases",
+      "scientific R1.5 null"
+    ],
+    "nonblocking_hardening_gaps": [
+      {
+        "id": "freeze-hash-not-enforced-here",
+        "location": "summarize_remote_workflows.py: main corpus load",
+        "finding": "The summarizer loads graphs.json without checking its original freeze hash; other campaign runners and Word generator check it. Add or independently verify the frozen file hash in final summary."
+      },
+      {
+        "id": "first-attempt-order-assumption",
+        "location": "summarize_remote_workflows.py: first list",
+        "finding": "First means revision_directory=workflows, otherwise lexical first row. This is correct for current preserved base cases and no duplicates, but can misorder same-ID base attempts from two labs or a missing base attempt; use explicit attempt order/timestamps or reject ambiguity."
+      },
+      {
+        "id": "failed-folder-preservation-not-integrity",
+        "location": "summarize_remote_workflows.py: raw failed branch",
+        "finding": "failure_preserved checks directory existence only; failed raw artifacts are not hashed/audited by that branch. G011/G014 originals do exist. Preserve an external integrity index for originals and recovered packages before final reporting."
+      },
+      {
+        "id": "historical-audit-overwrite",
+        "location": "summarize_remote_workflows.py: save report_path",
+        "finding": "Repeated progress audits overwrite the same report paths and change their timestamp hashes. Keep final snapshot stable when the Word reads it, or separate progress/final artifacts to preserve older snapshot validity."
+      }
+    ]
+  },
+  "external_labels_not_substituted": [
+    "Kappa cannot be computed from synthetic approvals or provider access",
+    "Reviewed repeat annotations are not physically flawless negatives",
+    "C9/SASA numerical observables have no validated broad molecule cutoff",
+    "Static valid subsets are not independent biological intentions"
+  ],
+  "official_method_source": "https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/7/html/storage_administration_guide/xfsquota"
+}

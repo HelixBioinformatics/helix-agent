@@ -1,0 +1,12 @@
+{
+  "schema": "helix-aggregate-auditor-fatal-descriptor-amendment/1.0",
+  "recordedAt": "2026-10-13T06:19:52.779097+00:00",
+  "reviewSourceSha256": "ececa8c4da4f066d87a506d8670991b16abc0ba40ab0aa8d19e3fcf1840ced4f",
+  "priorAmendmentSha256": "6b0e7d66cac51d9f6b8dcde4f833b41a3a70676a005c3f7852d82f58e3ab02f0",
+  "frozenAuditorUnchanged": true,
+  "motivatingCase": "AGG-09-small",
+  "rule": "Only a fatal Bun ENOSPC write with explicit fd metadata may be joined to the identical descriptor and actual pathname exposed by strace -yy, in the exclusively owned traced client/descendant tree and unchanged five-second causal window. Exact assigned project/caps, global filesystem health and quiescence remain mandatory. A mismatched directory operation, generic SQLite error or ignored cache write remains unknown.",
+  "rawOrExecutionChanged": false,
+  "producerThresholdsChanged": false,
+  "postObservationReview": true
+}

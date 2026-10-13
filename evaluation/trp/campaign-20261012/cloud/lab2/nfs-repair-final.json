@@ -1,0 +1,19 @@
+{
+  "kind": "bootstrap_mount_race_repair",
+  "observed_at": "2026-10-13T00:29:39.192984+00:00",
+  "previous_attempt": "nfs-repair.json",
+  "nodes": [
+    {
+      "node": "helix-worker1",
+      "exit_code": 0,
+      "stdout": "TARGET        SOURCE                  FSTYPE OPTIONS\n/shared/helix systemd-1               autofs rw,relatime,fd=92,pgrp=1,timeout=0,minproto=5,maxproto=5,direct,pipe_ino=22938\n/shared/helix 172.31.0.220:/srv/helix nfs4   rw,relatime,vers=4.2,rsize=524288,wsize=524288,namlen=255,hard,fatal_neterrors=none,proto=tcp,timeo=600,retrans=2,sec=sys,clientaddr=172.31.0.221,local_lock=none,addr=172.31.0.220\nactive\nactive\n  File: /shared/helix/images/helix-geometre-image.tar.gz\n  Size: 205530642 \tBlocks: 401440     IO Block: 524288 regular file\nDevice: 0,53\tInode: 524812      Links: 1\nAccess: (0644/-rw-r--r--)  Uid: ( 1000/  ubuntu)   Gid: ( 1000/  ubuntu)\nAccess: 2026-10-13 00:24:45.874213680 +0000\nModify: 2026-10-13 00:24:43.291186567 +0000\nChange: 2026-10-13 00:24:43.291186567 +0000\n Birth: 2026-10-13 00:23:49.259629457 +0000\n",
+      "stderr": ""
+    },
+    {
+      "node": "helix-worker2",
+      "exit_code": 0,
+      "stdout": "TARGET        SOURCE                  FSTYPE OPTIONS\n/shared/helix systemd-1               autofs rw,relatime,fd=79,pgrp=1,timeout=0,minproto=5,maxproto=5,direct,pipe_ino=22276\n/shared/helix 172.31.0.220:/srv/helix nfs4   rw,relatime,vers=4.2,rsize=524288,wsize=524288,namlen=255,hard,fatal_neterrors=none,proto=tcp,timeo=600,retrans=2,sec=sys,clientaddr=172.31.0.222,local_lock=none,addr=172.31.0.220\nactive\nactive\n  File: /shared/helix/images/helix-geometre-image.tar.gz\n  Size: 205530642 \tBlocks: 401440     IO Block: 524288 regular file\nDevice: 0,53\tInode: 524812      Links: 1\nAccess: (0644/-rw-r--r--)  Uid: ( 1000/  ubuntu)   Gid: ( 1000/  ubuntu)\nAccess: 2026-10-13 00:24:45.874213680 +0000\nModify: 2026-10-13 00:24:43.291186567 +0000\nChange: 2026-10-13 00:24:43.291186567 +0000\n Birth: 2026-10-13 00:23:49.259629457 +0000\n",
+      "stderr": ""
+    }
+  ]
+}

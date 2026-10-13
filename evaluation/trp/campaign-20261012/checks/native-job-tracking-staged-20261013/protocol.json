@@ -1,0 +1,46 @@
+{
+  "stage": "offline-native-job-tracking",
+  "originalSourceSha256": "d1d86992a0922fe2511622e70c4e770914a669324b3b59f99a55808637f5fa2e",
+  "sources": [
+    {
+      "path": "/home/webiwabou/Projects/bioinformatica-org/packages/helix/src/trp/remote_runner.py.txt",
+      "sha256": "d1d86992a0922fe2511622e70c4e770914a669324b3b59f99a55808637f5fa2e",
+      "bytes": 26383
+    },
+    {
+      "path": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/aggregate-resource-contrasts/checkpoint-1/worker2-daemon-diagnostic.json",
+      "sha256": "7a9c3517e2f30b658118410f6929f8aafa68a967501eb21ba90cbe21c0f63272",
+      "bytes": 21395
+    },
+    {
+      "path": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/aggregate-resource-contrasts/checkpoint-1/controller-accounting-diagnostic.json",
+      "sha256": "dbef997cfb61071e70421066f2b267a4499ce84c6629bd7fae54d237eeea7751",
+      "bytes": 25287
+    },
+    {
+      "path": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/aggregate-resource-contrasts/checkpoint-1/all-nodes-docker-journal.json",
+      "sha256": "73d955ab86ec9341ce6f67dee8f3ddee13ca63832027b709cb19eb779edda33e",
+      "bytes": 5442
+    },
+    {
+      "path": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/aggregate-resource-contrasts/campaign-outcomes/AGG-13-generous/recovered/campaign-50000-AGG-13-generous/retained-allocation/remote/trp-8703dfca7b1a-a8a4d2eb-8601-4c0a-a1c9-ba96d1abcf87/remote-native-jobs.jsonl",
+      "sha256": "255095feec2b992932fd13020c5de328d638a3dee4a8c7a78898b5246c9d23f9",
+      "bytes": 244913
+    }
+  ],
+  "restrictions": [
+    "No production apply",
+    "No AWS calls or jobs",
+    "No changes to frozen evidence or scanner",
+    "FAILED53 native state transition is synthetic; original job312 native tracking only retained PENDING"
+  ],
+  "requiredCases": [
+    "pending to synthetic FAILED53 without squeue or trace",
+    "unknown missing terminal",
+    "foreign Comment or UID reject",
+    "pending InvalidAccount no false failure",
+    "real captured ownership migration",
+    "monitored Nextflow process stops early on verified native failure",
+    "bounded cancellation only owned jobs"
+  ]
+}

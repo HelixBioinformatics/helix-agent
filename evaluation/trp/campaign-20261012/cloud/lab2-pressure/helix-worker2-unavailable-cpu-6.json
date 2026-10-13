@@ -1,0 +1,16 @@
+{
+  "case": {
+    "id": "helix-worker2-unavailable-cpu-6",
+    "node": "helix-worker2",
+    "mode": "scheduler",
+    "requested_cpus": 6,
+    "memory_mib": 512,
+    "expected": "infeasible_node_capacity"
+  },
+  "command": "sbatch --test-only --partition=helix --nodelist=helix-worker2 --cpus-per-task=6 --mem=512M --time=00:01:00 --wrap=true",
+  "observed_at": "2026-10-13T00:36:07.192867+00:00",
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "allocation failure: Requested node configuration is not available\n",
+  "passed": true
+}

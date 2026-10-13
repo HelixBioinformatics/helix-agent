@@ -1,0 +1,222 @@
+{
+  "schema": "helix-backend-verifier-staging-test/1.0",
+  "at": "2026-10-13T16:52:57.822135+00:00",
+  "tests": 9,
+  "successful": true,
+  "errors": [],
+  "failures": [],
+  "cases": [
+    {
+      "case": "CLI:default",
+      "exitCode": 1,
+      "output": {
+        "ok": false,
+        "error": "remote run/completion backend differs from verified execution"
+      },
+      "stderr": ""
+    },
+    {
+      "case": "CLI:qualified",
+      "exitCode": 0,
+      "output": {
+        "ok": true,
+        "files": 150,
+        "bytes": 5750935,
+        "manifestSha256": "a2fb5c236fbac84746aabaee6d44db4bd7844904764fe9aa2741a48f387c78c0",
+        "status": "succeeded",
+        "externallyAnchored": true,
+        "legacyBackendMetadata": true,
+        "scope": "integrity, declared links and cold counts; not biological accuracy or authorship"
+      },
+      "stderr": ""
+    },
+    {
+      "case": "CLI:missinganchor",
+      "exitCode": 1,
+      "output": {
+        "ok": false,
+        "error": "legacy strict backend compatibility requires an external manifest anchor"
+      },
+      "stderr": ""
+    },
+    {
+      "case": "modern-metadata-unitfixture-default",
+      "result": {
+        "ok": true,
+        "files": 150,
+        "bytes": 5750960,
+        "manifestSha256": "d480211c50e836c59f6a6ed8b43edba46b33f342834a358a1ceb860ad37bf089",
+        "status": "succeeded",
+        "externallyAnchored": true,
+        "legacyBackendMetadata": false,
+        "scope": "integrity, declared links and cold counts; not biological accuracy or authorship"
+      },
+      "scientificOutputRegenerated": false
+    },
+    {
+      "case": "historical-strict150-default",
+      "rejected": true,
+      "legacyOption": false,
+      "error": "remote run/completion backend differs from verified execution"
+    },
+    {
+      "case": "historical-qualified150",
+      "result": {
+        "ok": true,
+        "files": 150,
+        "bytes": 5750935,
+        "manifestSha256": "a2fb5c236fbac84746aabaee6d44db4bd7844904764fe9aa2741a48f387c78c0",
+        "status": "succeeded",
+        "externallyAnchored": true,
+        "legacyBackendMetadata": true,
+        "scope": "integrity, declared links and cold counts; not biological accuracy or authorship"
+      }
+    },
+    {
+      "case": "run:unknown:False",
+      "rejected": true,
+      "legacyOption": false,
+      "error": "remote run/completion backend differs from verified execution"
+    },
+    {
+      "case": "run:unknown:True",
+      "rejected": true,
+      "legacyOption": true,
+      "error": "remote run/completion backend differs from verified execution"
+    },
+    {
+      "case": "completion:unknown:False",
+      "rejected": true,
+      "legacyOption": false,
+      "error": "remote run/completion backend differs from verified execution"
+    },
+    {
+      "case": "completion:unknown:True",
+      "rejected": true,
+      "legacyOption": true,
+      "error": "remote run/completion backend differs from verified execution"
+    },
+    {
+      "case": "run:trp-slurm-ssh/1.0.0:False",
+      "rejected": true,
+      "legacyOption": false,
+      "error": "remote run/completion backend differs from verified execution"
+    },
+    {
+      "case": "run:trp-slurm-ssh/1.0.0:True",
+      "rejected": true,
+      "legacyOption": true,
+      "error": "remote run/completion backend differs from verified execution"
+    },
+    {
+      "case": "completion:trp-slurm-ssh/1.0.0:False",
+      "rejected": true,
+      "legacyOption": false,
+      "error": "remote run/completion backend differs from verified execution"
+    },
+    {
+      "case": "completion:trp-slurm-ssh/1.0.0:True",
+      "rejected": true,
+      "legacyOption": true,
+      "error": "remote run/completion backend differs from verified execution"
+    },
+    {
+      "case": "legacy-without-external-anchor",
+      "rejected": true,
+      "legacyOption": true,
+      "error": "legacy strict backend compatibility requires an external manifest anchor"
+    },
+    {
+      "case": "ordinary144",
+      "result": {
+        "ok": true,
+        "files": 144,
+        "bytes": 4235638,
+        "manifestSha256": "4eab519601e8f1d56e39a0c42714d2dd814c0f93cf12f3e11d90266e743a4bab",
+        "status": "succeeded",
+        "externallyAnchored": true,
+        "legacyBackendMetadata": false,
+        "scope": "integrity, declared links and cold counts; not biological accuracy or authorship"
+      }
+    },
+    {
+      "case": "mapped156",
+      "result": {
+        "ok": true,
+        "files": 156,
+        "bytes": 5748810,
+        "manifestSha256": "b400c54428684c5d1f767324154388f906f466c849736bf28394241fabed80aa",
+        "status": "succeeded",
+        "externallyAnchored": true,
+        "legacyBackendMetadata": false,
+        "scope": "integrity, declared links and cold counts; not biological accuracy or authorship"
+      }
+    },
+    {
+      "case": "clean143",
+      "result": {
+        "ok": true,
+        "files": 143,
+        "bytes": 9028934,
+        "manifestSha256": "62cf9fba9e9a2e23cb4e4e55f30bd50a36000976c438b8d4387d7468a7b735e6",
+        "status": "failed",
+        "externallyAnchored": true,
+        "legacyBackendMetadata": false,
+        "scope": "integrity, declared links and cold counts; not biological accuracy or authorship"
+      }
+    },
+    {
+      "case": "permission-denied25",
+      "result": {
+        "ok": true,
+        "files": 25,
+        "bytes": 1144656,
+        "manifestSha256": "b31280372dfecb4341172aac63e1e5aca5f3bca5c3cac0f1302fbfb5189adfcb",
+        "status": "failed",
+        "externallyAnchored": true,
+        "legacyBackendMetadata": false,
+        "scope": "integrity, declared links and cold counts; not biological accuracy or authorship"
+      }
+    },
+    {
+      "case": "approval-rejected25",
+      "result": {
+        "ok": true,
+        "files": 25,
+        "bytes": 1145301,
+        "manifestSha256": "960b056dd9b818fa678df16bad1a63de8f11ca9de7e52489db1dc183d49d0fdd",
+        "status": "failed",
+        "externallyAnchored": true,
+        "legacyBackendMetadata": false,
+        "scope": "integrity, declared links and cold counts; not biological accuracy or authorship"
+      }
+    },
+    {
+      "case": "semantic:missingstrict",
+      "rejected": true,
+      "legacyOption": false,
+      "error": "strict methods required fields absent/duplicated/unsupported"
+    },
+    {
+      "case": "semantic:prose",
+      "rejected": true,
+      "legacyOption": false,
+      "error": "strict methods prose differs from source-backed template"
+    },
+    {
+      "case": "semantic:missingrequest",
+      "rejected": true,
+      "legacyOption": false,
+      "error": "strict successful gate missing/duplicated: ('permission', 'requested')"
+    },
+    {
+      "case": "unsupported-execution-backend",
+      "rejected": true,
+      "legacyOption": false,
+      "error": "unsupported execution backend"
+    }
+  ],
+  "candidateSha256": "952e79d5cecae707954ed667d231838569323dffdd068ab43edd770284841eb9",
+  "patchSha256": "997d8377172d9eeb62b42a766cb901b6865d0f0ba9892b2f0ffaf494cd34e40e",
+  "scienceOrCloudReruns": 0
+}

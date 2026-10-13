@@ -1,0 +1,93 @@
+{
+  "schema": "helix-post-repair-independent-quiescence/1.0",
+  "verified": true,
+  "at": "2026-10-13T17:43:06.333692+00:00",
+  "nodes": [
+    {
+      "role": "head",
+      "instanceId": "i-04339a8d8aad24c6e",
+      "exitCode": 0,
+      "stdout": "{\"at\": \"2026-10-13T17:43:00.167509+00:00\", \"hostname\": \"helix-head\", \"ownedProcesses\": [], \"cgroups\": [{\"path\": \"/sys/fs/cgroup/helix-strict-hrs29b34f328a884afa.service\", \"procs\": \"\", \"events\": \"populated 0\\nfrozen 0\"}, {\"path\": \"/sys/fs/cgroup/helix-strict-hrsa318720b708e4f72.service\", \"procs\": \"\", \"events\": \"populated 0\\nfrozen 0\"}, {\"path\": \"/sys/fs/cgroup/helix-strict-hrs007323ed057f4a9c.service\", \"procs\": \"\", \"events\": \"populated 0\\nfrozen 0\"}, {\"path\": \"/sys/fs/cgroup/helix-strict-hrs79682fa83a8649bb.service\", \"procs\": \"\", \"events\": \"populated 0\\nfrozen 0\"}], \"containers\": {\"exitCode\": 0, \"stdout\": \"\", \"stderr\": \"\"}}\n",
+      "stderr": "",
+      "observation": {
+        "at": "2026-10-13T17:43:00.167509+00:00",
+        "hostname": "helix-head",
+        "ownedProcesses": [],
+        "cgroups": [
+          {
+            "path": "/sys/fs/cgroup/helix-strict-hrs29b34f328a884afa.service",
+            "procs": "",
+            "events": "populated 0\nfrozen 0"
+          },
+          {
+            "path": "/sys/fs/cgroup/helix-strict-hrsa318720b708e4f72.service",
+            "procs": "",
+            "events": "populated 0\nfrozen 0"
+          },
+          {
+            "path": "/sys/fs/cgroup/helix-strict-hrs007323ed057f4a9c.service",
+            "procs": "",
+            "events": "populated 0\nfrozen 0"
+          },
+          {
+            "path": "/sys/fs/cgroup/helix-strict-hrs79682fa83a8649bb.service",
+            "procs": "",
+            "events": "populated 0\nfrozen 0"
+          }
+        ],
+        "containers": {
+          "exitCode": 0,
+          "stdout": "",
+          "stderr": ""
+        }
+      }
+    },
+    {
+      "role": "worker",
+      "instanceId": "i-06ebae4bcd7f51a00",
+      "exitCode": 0,
+      "stdout": "{\"at\": \"2026-10-13T17:43:03.934938+00:00\", \"hostname\": \"helix-worker1\", \"ownedProcesses\": [], \"cgroups\": [], \"containers\": {\"exitCode\": 0, \"stdout\": \"\", \"stderr\": \"\"}}\n",
+      "stderr": "",
+      "observation": {
+        "at": "2026-10-13T17:43:03.934938+00:00",
+        "hostname": "helix-worker1",
+        "ownedProcesses": [],
+        "cgroups": [],
+        "containers": {
+          "exitCode": 0,
+          "stdout": "",
+          "stderr": ""
+        }
+      }
+    },
+    {
+      "role": "worker",
+      "instanceId": "i-0656b76c4b22adfb8",
+      "exitCode": 0,
+      "stdout": "{\"at\": \"2026-10-13T17:43:06.244370+00:00\", \"hostname\": \"helix-worker2\", \"ownedProcesses\": [], \"cgroups\": [], \"containers\": {\"exitCode\": 0, \"stdout\": \"\", \"stderr\": \"\"}}\n",
+      "stderr": "",
+      "observation": {
+        "at": "2026-10-13T17:43:06.244370+00:00",
+        "hostname": "helix-worker2",
+        "ownedProcesses": [],
+        "cgroups": [],
+        "containers": {
+          "exitCode": 0,
+          "stdout": "",
+          "stderr": ""
+        }
+      }
+    }
+  ],
+  "queue": {
+    "exitCode": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  "allNativeJobsEmpty": true,
+  "allContainersEmpty": true,
+  "ownedProcessesEmpty": true,
+  "controllerCgroupsEmpty": true,
+  "sourceSha256": "26d56ef3db57c2910bff1af0b8a59f1f035069688791f67631be6a2aa1a607f1",
+  "readOnly": true
+}

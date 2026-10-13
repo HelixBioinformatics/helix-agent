@@ -1,0 +1,26 @@
+{
+  "observedAtUtc": "2026-10-13T04:29:07.323926+00:00",
+  "command": [
+    "bun",
+    "test",
+    "test/trp",
+    "test/bio",
+    "test/nfcore",
+    "test/tool/trp-detect.test.ts",
+    "test/tool/trp-detect-question.test.ts",
+    "test/tool/trp-predicted.test.ts",
+    "test/plugin/codex.test.ts",
+    "--timeout",
+    "30000"
+  ],
+  "cwd": "packages/helix",
+  "exit_code": 1,
+  "elapsed_seconds": 24.61532282600092,
+  "log_sha256": "03073cec6739aa25ef2adca104c6236e822ce5f0cd1a3fd96f2a48cb9628af22",
+  "scope": "Relevant TRP, bio, nfcore, detector, predicted tools and Codex regression after optional strict Slurm integration; all live switches removed",
+  "passed": 538,
+  "skipped_opt_in": 63,
+  "failed": 3,
+  "assertions": 1566,
+  "files": 56
+}

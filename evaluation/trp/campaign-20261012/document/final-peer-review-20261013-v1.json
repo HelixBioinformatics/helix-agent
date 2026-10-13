@@ -1,0 +1,134 @@
+{
+  "schema": "helix-final-word-peer-visual-review/1.0",
+  "revision": 1,
+  "reviewedAt": "2026-10-13T17:58:41.098858+00:00",
+  "reviewType": "Visual review of selected rasterized PDF pages plus numeric/source correspondence; not all155pages reviewed visually",
+  "pdfPages": 155,
+  "reviewedPdfPages": [
+    99,
+    100,
+    101,
+    104,
+    105,
+    106,
+    107,
+    108,
+    149,
+    150,
+    151,
+    152,
+    153,
+    154,
+    155
+  ],
+  "docxSha256": "b801c4d9cff088296a11f160241de9409574dab22e531743d71ec73a47d27f16",
+  "pdfSha256": "386697e16b3afd4b52be0a7ce1caf8179cec9d3805085a0ef762857fbb5814a9",
+  "noWordPdfOrPrimaryEvidenceMutations": true,
+  "rootRenderedAuditReused": {
+    "verified": true,
+    "protectedOriginalBlocks": 349,
+    "rootGateChecks": 261,
+    "newRedNotes": 10
+  },
+  "visualChecks": [
+    {
+      "element": "Illustration4",
+      "pdfPage": 99,
+      "ok": true,
+      "detail": "Both panels, log quota scale, physical feasibility symbols, decision colors, reference lines, legend and full caption visible.18/18/4 and3/6boundary agree selected final summary; original interpretations remain preserved."
+    },
+    {
+      "element": "Post-campaign corrections and actual new integration",
+      "pdfPages": [
+        100,
+        101
+      ],
+      "ok": true,
+      "detail": "All paragraphs and red note remain readable. Native actual statuses are distinguished from synthetic transitions, old baselines and latency claims."
+    },
+    {
+      "element": "Illustration5",
+      "pdfPage": 104,
+      "ok": true,
+      "detail": "All three distributions, denominators, five labels and leader lines, axis and full caption legible and inside page. No broad physical classifier claim."
+    },
+    {
+      "element": "Illustration6",
+      "pdfPages": [
+        105,
+        106
+      ],
+      "ok": true,
+      "detail": "Both panels, four series legend, units and labels visible. Full caption readable but final sentence continues on nextpage; nonblocking pagination issue requested for v2."
+    },
+    {
+      "element": "Table4.2 all21IDs",
+      "pdfPages": [
+        106,
+        107,
+        108
+      ],
+      "ok": true,
+      "detail": "Twenty-one current IDs, evidence/status columns and repeated headers complete; no rows/text cropped. Continued top header108 checked additionally from PDF word bounds."
+    },
+    {
+      "element": "AnexoA.25",
+      "pdfPages": [
+        149,
+        150,
+        151,
+        152,
+        153,
+        154,
+        155
+      ],
+      "ok": true,
+      "detail": "Section begins149; reproducibility paths, CLIlegacy instructions, measured scopes, controls and red note readable. Last page has expected whitespace and no lost content."
+    }
+  ],
+  "sourceBackedNumbers": {
+    "independentPostIntegrationChecks": 89,
+    "successfulDefaultPackageFiles": 152,
+    "failedDefaultPackageFiles": 151,
+    "nativeCancelledId": "384",
+    "nativeTerminal": "CANCELLED",
+    "nativeExitCode": "0:9",
+    "boundaryFalseRejections": "3/6",
+    "originalSelectedFeasible": 18,
+    "originalSelectedInfeasible": 18,
+    "originalSelectedUnknown": 4,
+    "firstFrozenCountsMustRemainSeparate": true
+  },
+  "observations": [
+    {
+      "severity": "minor-pagination",
+      "location": "Illustration6 caption PDF105–106",
+      "detail": "Caption paragraph splits after its first part. All wording is present; keep caption lines together with image if pagination allows. Root confirmed v2 formatting correction."
+    }
+  ],
+  "substantiveDefects": [],
+  "decision": "Content and legibility acceptable; v2 pagination-only recheck pending. This v1doesnotauthorizeclaimof final v2 reviewed or installed Word.",
+  "sources": [
+    {
+      "path": "/tmp/helix-word-final-review-20261013/Tesis-AWS-20261012-candidate.docx",
+      "sha256": "b801c4d9cff088296a11f160241de9409574dab22e531743d71ec73a47d27f16"
+    },
+    {
+      "path": "/tmp/helix-word-final-review-20261013/Tesis-AWS-20261012-candidate.pdf",
+      "sha256": "386697e16b3afd4b52be0a7ce1caf8179cec9d3805085a0ef762857fbb5814a9"
+    },
+    {
+      "path": "evaluation/trp/campaign-20261012/checks/post-campaign-production-20261013/cloud/summary.json",
+      "sha256": "79d058fee282b559e7133ce43d602b3633484d6f5829a4d5e1bd4dae0df6530f"
+    },
+    {
+      "path": "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/summary.json",
+      "sha256": "a53095ee21ad8a1a4ba2efcfb7245e3e082cf5d1b1a33419685150f7026970e4"
+    },
+    {
+      "path": "evaluation/trp/campaign-20261012/document/final-rendered-audit.json",
+      "sha256": "5ca7f95e61d00ee8edba850d4730b9c1845845a982d475071dce43f8010e3356"
+    }
+  ],
+  "scannerFinalOrGitSelectionAuditExecuted": false
+}

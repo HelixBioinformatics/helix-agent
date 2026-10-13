@@ -1,0 +1,1692 @@
+{
+  "schema": "helix-r24-all-original-attempts-summary/1.0",
+  "verified": true,
+  "summarizedAtUtc": "2026-10-13T03:42:13.267144+00:00",
+  "originalFreezeSha256": "16872909f574519c35c31d9f9045b3ee464e471da0444ae630f2a0c96a5cff8e",
+  "plannedOriginalCases": 40,
+  "actualDispatchedAttempts": 42,
+  "preservedUnknownAttempts": 2,
+  "empiricallyFeasible": 26,
+  "empiricallyInfeasible": 14,
+  "originalCasesUnresolved": 0,
+  "scopedFalseRejections": 6,
+  "scopedFalseRejectionRate": 0.23076923076923078,
+  "scopedAccuracy": 0.85,
+  "actualGroupMinimaSatisfied": false,
+  "scope": "Development admission contrast of the exact frozen Nextflow task graph in an independently limited head workspace; not held-out scientific R2.4 or aggregate client plus remote R2.2.",
+  "storageUnit": "XFS allocated project blocks including staged inputs, work/logs and materialized portable run copy. Operator supervisor evidence and pre-existing image/Nextflow caches are outside this scope.",
+  "uniqueProteins": 1,
+  "scientificR24Complete": false,
+  "aggregateRemotePlusRealClientR22Enforced": false,
+  "scientificR24FalseRejectionRate": null,
+  "allOriginalCasesEmpiricallyObserved": true,
+  "threshold": 0.05,
+  "scopedThresholdMet": false,
+  "interpretation": "Independent head-workspace oracle includes portable duplication but excludes actual client preparation/export. Its counterfactual matrix diagnoses admission conservatism for this adapted scope; it does not establish a protocol end-to-end false-rejection metric. All original attempts and unknowns are retained.",
+  "independentAudits": [
+    {
+      "directory": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-campaign",
+      "report": {
+        "schema": "helix-r24-independent-offline-audit/1.0",
+        "verified": true,
+        "auditedAtUtc": "2026-10-13T03:42:13.051362+00:00",
+        "freezeSha256": "16872909f574519c35c31d9f9045b3ee464e471da0444ae630f2a0c96a5cff8e",
+        "progressSnapshotSha256": "243fa545e9e575a6f4ab87ef68dff5e4899a1a96c703aed21e9f604262ab7845",
+        "planned": 40,
+        "recorded": 40,
+        "empiricallyFeasible": 15,
+        "empiricallyInfeasible": 9,
+        "unknownOrNotYetObserved": 16,
+        "falseRejections": 3,
+        "scopedFalseRejectionRate": 0.2,
+        "scopedAccuracy": 0.875,
+        "actualGroupMinimaSatisfied": false,
+        "scientificR24Complete": false,
+        "aggregateRemotePlusRealClientR22Enforced": false,
+        "scope": "Development admission contrast of the exact frozen Nextflow task graph in an independently limited head workspace; not held-out scientific R2.4 or aggregate client plus remote R2.2.",
+        "unit": "XFS allocated project blocks including staged inputs, work/logs and materialized portable run copy. Operator supervisor evidence and pre-existing image/Nextflow caches are outside this scope.",
+        "cases": [
+          {
+            "id": "R24-1-generous",
+            "state": "recovered",
+            "physicalFeasibilityLabel": true,
+            "helixAccepted": true,
+            "oracleScope": "head-workspace-development",
+            "oracleResultSha256": "56c5b32a5bb7d43250113f6f3f7a49f978fe5b1be8ae98a30654a9c6fc761088",
+            "usedProjectBytes": 7163904,
+            "budgetProjectBytes": 67108864,
+            "elapsedSeconds": 110.15679367299981
+          },
+          {
+            "id": "R24-1-small",
+            "state": "recovered",
+            "physicalFeasibilityLabel": false,
+            "helixAccepted": false,
+            "oracleScope": "head-workspace-development",
+            "oracleResultSha256": "6a512e0b44793fd2181f60b993954560f341827294d7d5d97bf7df8a4592c04e",
+            "usedProjectBytes": 0,
+            "budgetProjectBytes": 65536,
+            "elapsedSeconds": 0.030544305000148597
+          },
+          {
+            "id": "R24-2-generous",
+            "state": "recovered",
+            "physicalFeasibilityLabel": true,
+            "helixAccepted": true,
+            "oracleScope": "head-workspace-development",
+            "oracleResultSha256": "f3bc4e5c55f8674304eb9260042c5417e70105d3f3c570cc2a039f36d0280575",
+            "usedProjectBytes": 7163904,
+            "budgetProjectBytes": 67108864,
+            "elapsedSeconds": 110.16803737800001
+          },
+          {
+            "id": "R24-2-small",
+            "state": "recovered",
+            "physicalFeasibilityLabel": false,
+            "helixAccepted": false,
+            "oracleScope": "head-workspace-development",
+            "oracleResultSha256": "f584b006aefc2125f299e2d051da07b94be511c6ca2ad7d3197debd49c4fe03b",
+            "usedProjectBytes": 0,
+            "budgetProjectBytes": 131072,
+            "elapsedSeconds": 0.02952411999922333
+          },
+          {
+            "id": "R24-3-generous",
+            "state": "recovered",
+            "physicalFeasibilityLabel": true,
+            "helixAccepted": true,
+            "oracleScope": "head-workspace-development",
+            "oracleResultSha256": "61e3b077c42703ccacbb37151a69929adf075f80b76e8f3b466f0808c503ccf5",
+            "usedProjectBytes": 7163904,
+            "budgetProjectBytes": 67108864,
+            "elapsedSeconds": 129.83440625500043
+          },
+          {
+            "id": "R24-3-small",
+            "state": "recovered",
+            "physicalFeasibilityLabel": false,
+            "helixAccepted": false,
+            "oracleScope": "head-workspace-development",
+            "oracleResultSha256": "a49bb0327bb76ac1ff489e08c735a0a66fc6d5634761ad87d7b9da38daffece0",
+            "usedProjectBytes": 20480,
+            "budgetProjectBytes": 262144,
+            "elapsedSeconds": 0.029759344999547466
+          },
+          {
+            "id": "R24-4-generous",
+            "state": "recovered",
+            "physicalFeasibilityLabel": true,
+            "helixAccepted": true,
+            "oracleScope": "head-workspace-development",
+            "oracleResultSha256": "464f5c3609e5f64258eccf116d06ced22f58ba042d9f59b94f96211814fa7e68",
+            "usedProjectBytes": 7163904,
+            "budgetProjectBytes": 67108864,
+            "elapsedSeconds": 111.6374168960001
+          },
+          {
+            "id": "R24-4-small",
+            "state": "recovered",
+            "physicalFeasibilityLabel": false,
+            "helixAccepted": false,
+            "oracleScope": "head-workspace-development",
+            "oracleResultSha256": "683a37c972283cf6292bc5b5b9acdf23b7207b0f0b8870fde4b7db229d2b9a94",
+            "usedProjectBytes": 20480,
+            "budgetProjectBytes": 524288,
+            "elapsedSeconds": 0.03151339200030634
+          },
+          {
+            "id": "R24-5-generous",
+            "state": "recovered",
+            "physicalFeasibilityLabel": true,
+            "helixAccepted": true,
+            "oracleScope": "head-workspace-development",
+            "oracleResultSha256": "69b6d8b832cd76e972f1c6712db8221cc04401e5c45b6cdf34c4572665a29716",
+            "usedProjectBytes": 7163904,
+            "budgetProjectBytes": 67108864,
+            "elapsedSeconds": 109.99905804599985
+          },
+          {
+            "id": "R24-5-small",
+            "state": "recovered",
+            "physicalFeasibilityLabel": false,
+            "helixAccepted": false,
+            "oracleScope": "head-workspace-development",
+            "oracleResultSha256": "de28b825e3177c283aadee647bf3f2a31b91f37d53f0d77a05b7845422c766fb",
+            "usedProjectBytes": 978944,
+            "budgetProjectBytes": 1048576,
+            "elapsedSeconds": 0.03370091200031311
+          },
+          {
+            "id": "R24-6-generous",
+            "state": "recovered",
+            "physicalFeasibilityLabel": true,
+            "helixAccepted": true,
+            "oracleScope": "head-workspace-development",
+            "oracleResultSha256": "1fd69f147e3756042df5a2c00126f6c4699bd83ef3a1857cd5c1b6cf8483eea0",
+            "usedProjectBytes": 7163904,
+            "budgetProjectBytes": 67108864,
+            "elapsedSeconds": 130.44139130700023
+          },
+          {
+            "id": "R24-6-small",
+            "state": "recovered",
+            "physicalFeasibilityLabel": false,
+            "helixAccepted": false,
+            "oracleScope": "head-workspace-development",
+            "causalArchivedLogs": [
+              "R24-6-small/retained-workspace/controller.stderr"
+            ],
+            "oracleResultSha256": "afb3de015da00616d0ab13d5dec90d94a186de6d2855d51321f0d745acb9c54a",
+            "usedProjectBytes": 2064384,
+            "budgetProjectBytes": 2097152,
+            "elapsedSeconds": 0.3100122249998094
+          },
+          {
+            "id": "R24-7-generous",
+            "state": "recovered",
+            "physicalFeasibilityLabel": true,
+            "helixAccepted": true,
+            "oracleScope": "head-workspace-development",
+            "oracleResultSha256": "73f975bad1a7a87d7bf1c27b6d31c5472346ea6db5205e0dde5d629ab895d4c5",
+            "usedProjectBytes": 7163904,
+            "budgetProjectBytes": 67108864,
+            "elapsedSeconds": 124.90387796899995
+          },
+          {
+            "id": "R24-7-small",
+            "state": "recovered",
+            "physicalFeasibilityLabel": false,
+            "helixAccepted": false,
+            "oracleScope": "head-workspace-development",
+            "causalArchivedLogs": [
+              "R24-7-small/retained-workspace/controller.stderr"
+            ],
+            "oracleResultSha256": "17c3905adcd4bf57087d79569e4915f38f64d0176bd8e9cd1fa13763f1820f74",
+            "usedProjectBytes": 4034560,
+            "budgetProjectBytes": 4194304,
+            "elapsedSeconds": 120.72241225800099
+          },
+          {
+            "id": "R24-8-generous",
+            "state": "recovered",
+            "physicalFeasibilityLabel": true,
+            "helixAccepted": true,
+            "oracleScope": "head-workspace-development",
+            "oracleResultSha256": "267bf02361cbcdba841168f7a4617ca16f056523a39e026a13d11a25731f5de4",
+            "usedProjectBytes": 7163904,
+            "budgetProjectBytes": 67108864,
+            "elapsedSeconds": 120.1979085740004
+          },
+          {
+            "id": "R24-8-small",
+            "state": "recovered",
+            "physicalFeasibilityLabel": true,
+            "helixAccepted": false,
+            "oracleScope": "head-workspace-development",
+            "oracleResultSha256": "ad081dc30a00e16dd6103059ff59aa53788cee6b9ddb175c627419616a6c8526",
+            "usedProjectBytes": 7163904,
+            "budgetProjectBytes": 8388608,
+            "elapsedSeconds": 124.7596190839995
+          },
+          {
+            "id": "R24-9-generous",
+            "state": "recovered",
+            "physicalFeasibilityLabel": true,
+            "helixAccepted": true,
+            "oracleScope": "head-workspace-development",
+            "oracleResultSha256": "6b639d6204b5b1244ba5af0990dadba0a7eeaca68b1d565f1ce3567a54eb9504",
+            "usedProjectBytes": 7172096,
+            "budgetProjectBytes": 67108864,
+            "elapsedSeconds": 124.90208439700109
+          },
+          {
+            "id": "R24-9-small",
+            "state": "recovered",
+            "physicalFeasibilityLabel": true,
+            "helixAccepted": false,
+            "oracleScope": "head-workspace-development",
+            "oracleResultSha256": "874ed905da3ccdb741f981621e2d6d9c0eacd9e8219786e9526bd001db52eb44",
+            "usedProjectBytes": 7172096,
+            "budgetProjectBytes": 12582912,
+            "elapsedSeconds": 120.8263883870004
+          },
+          {
+            "id": "R24-10-generous",
+            "state": "recovered",
+            "physicalFeasibilityLabel": true,
+            "helixAccepted": true,
+            "oracleScope": "head-workspace-development",
+            "oracleResultSha256": "893cfe7a4eca4cba948ed9d5460dc822db167dd3f6c5f60dc5d9af378d54eeb9",
+            "usedProjectBytes": 7163904,
+            "budgetProjectBytes": 67108864,
+            "elapsedSeconds": 125.35678268500124
+          },
+          {
+            "id": "R24-10-small",
+            "state": "recovered",
+            "physicalFeasibilityLabel": true,
+            "helixAccepted": false,
+            "oracleScope": "head-workspace-development",
+            "oracleResultSha256": "07ecf25c88bb20dd60bd1f27bb079a46f071e6e9a2ee00f69bbbf1fd077a1255",
+            "usedProjectBytes": 7163904,
+            "budgetProjectBytes": 16777216,
+            "elapsedSeconds": 124.97714612600066
+          },
+          {
+            "id": "R24-11-generous",
+            "state": "recovered",
+            "physicalFeasibilityLabel": true,
+            "helixAccepted": true,
+            "oracleScope": "head-workspace-development",
+            "oracleResultSha256": "fb5f506a7fcc8d953ed23f99af664661db9e419230aebd304cf34095dae02125",
+            "usedProjectBytes": 7172096,
+            "budgetProjectBytes": 67108864,
+            "elapsedSeconds": 124.90047434400003
+          },
+          {
+            "id": "R24-11-small",
+            "state": "recovered",
+            "physicalFeasibilityLabel": false,
+            "helixAccepted": false,
+            "oracleScope": "head-workspace-development",
+            "oracleResultSha256": "49e271c05e8f49709800663cfd1f5abb6d07b9977d696d9dc6960ce9fce407ee",
+            "usedProjectBytes": 0,
+            "budgetProjectBytes": 65536,
+            "elapsedSeconds": 0.025163170999803697
+          },
+          {
+            "id": "R24-12-generous",
+            "state": "recovered",
+            "physicalFeasibilityLabel": true,
+            "helixAccepted": true,
+            "oracleScope": "head-workspace-development",
+            "oracleResultSha256": "cdee8ecacf2dfc60c5a06a7a9c5e99abd0d21bff4834dd645b7b7729f8265537",
+            "usedProjectBytes": 7172096,
+            "budgetProjectBytes": 67108864,
+            "elapsedSeconds": 120.31801216799977
+          },
+          {
+            "id": "R24-12-small",
+            "state": "recovered",
+            "physicalFeasibilityLabel": false,
+            "helixAccepted": false,
+            "oracleScope": "head-workspace-development",
+            "oracleResultSha256": "c4318a2be5931616efebc4a229481859693d9a6b798da8b71cda91a3cda0e134",
+            "usedProjectBytes": 0,
+            "budgetProjectBytes": 131072,
+            "elapsedSeconds": 0.035522648999176454
+          },
+          {
+            "id": "R24-13-generous",
+            "state": "recovered",
+            "physicalFeasibilityLabel": null,
+            "helixAccepted": true,
+            "oracleScope": "head-workspace-development",
+            "oracleResultSha256": "c5d5f5580b827c71d82ed4598246a61b3502d72bc156c966fb93f335a133a019",
+            "usedProjectBytes": 2617344,
+            "budgetProjectBytes": 67108864,
+            "elapsedSeconds": 71.26257658500072
+          },
+          {
+            "id": "R24-13-small",
+            "state": "unknown-supervisor-stopped-without-result",
+            "physicalFeasibilityLabel": null,
+            "helixAccepted": false,
+            "oracleScope": "head-workspace-development"
+          },
+          {
+            "id": "R24-14-generous",
+            "state": "not-started-global-checkpoint",
+            "physicalFeasibilityLabel": null,
+            "helixAccepted": null,
+            "oracleScope": "head-workspace-development"
+          },
+          {
+            "id": "R24-14-small",
+            "state": "not-started-global-checkpoint",
+            "physicalFeasibilityLabel": null,
+            "helixAccepted": null,
+            "oracleScope": "head-workspace-development"
+          },
+          {
+            "id": "R24-15-generous",
+            "state": "not-started-global-checkpoint",
+            "physicalFeasibilityLabel": null,
+            "helixAccepted": null,
+            "oracleScope": "head-workspace-development"
+          },
+          {
+            "id": "R24-15-small",
+            "state": "not-started-global-checkpoint",
+            "physicalFeasibilityLabel": null,
+            "helixAccepted": null,
+            "oracleScope": "head-workspace-development"
+          },
+          {
+            "id": "R24-16-generous",
+            "state": "not-started-global-checkpoint",
+            "physicalFeasibilityLabel": null,
+            "helixAccepted": null,
+            "oracleScope": "head-workspace-development"
+          },
+          {
+            "id": "R24-16-small",
+            "state": "not-started-global-checkpoint",
+            "physicalFeasibilityLabel": null,
+            "helixAccepted": null,
+            "oracleScope": "head-workspace-development"
+          },
+          {
+            "id": "R24-17-generous",
+            "state": "not-started-global-checkpoint",
+            "physicalFeasibilityLabel": null,
+            "helixAccepted": null,
+            "oracleScope": "head-workspace-development"
+          },
+          {
+            "id": "R24-17-small",
+            "state": "not-started-global-checkpoint",
+            "physicalFeasibilityLabel": null,
+            "helixAccepted": null,
+            "oracleScope": "head-workspace-development"
+          },
+          {
+            "id": "R24-18-generous",
+            "state": "not-started-global-checkpoint",
+            "physicalFeasibilityLabel": null,
+            "helixAccepted": null,
+            "oracleScope": "head-workspace-development"
+          },
+          {
+            "id": "R24-18-small",
+            "state": "not-started-global-checkpoint",
+            "physicalFeasibilityLabel": null,
+            "helixAccepted": null,
+            "oracleScope": "head-workspace-development"
+          },
+          {
+            "id": "R24-19-generous",
+            "state": "not-started-global-checkpoint",
+            "physicalFeasibilityLabel": null,
+            "helixAccepted": null,
+            "oracleScope": "head-workspace-development"
+          },
+          {
+            "id": "R24-19-small",
+            "state": "not-started-global-checkpoint",
+            "physicalFeasibilityLabel": null,
+            "helixAccepted": null,
+            "oracleScope": "head-workspace-development"
+          },
+          {
+            "id": "R24-20-generous",
+            "state": "not-started-global-checkpoint",
+            "physicalFeasibilityLabel": null,
+            "helixAccepted": null,
+            "oracleScope": "head-workspace-development"
+          },
+          {
+            "id": "R24-20-small",
+            "state": "not-started-global-checkpoint",
+            "physicalFeasibilityLabel": null,
+            "helixAccepted": null,
+            "oracleScope": "head-workspace-development"
+          }
+        ],
+        "interpretation": "Same-input execution supplies scoped empirical labels, not the admisor or cohort names. Actual local-client preparation/export is outside this oracle, so scoped false rejections do not establish estimator error on an identical end-to-end storage scope."
+      }
+    },
+    {
+      "directory": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-continuation",
+      "report": {
+        "schema": "helix-r24-continuation-independent-audit/1.0",
+        "originalFreezeSha256": "16872909f574519c35c31d9f9045b3ee464e471da0444ae630f2a0c96a5cff8e",
+        "verified": true,
+        "auditedAtUtc": "2026-10-13T03:42:13.265060+00:00",
+        "freezeSha256": "cf54a7812c8a65e5f9d4b86365de8f2196eca02609f9c6021aa3d241794840cf",
+        "progressSnapshotSha256": "9ac5a283e4c86b2e3ee5ddb773229e7506d391549cf7abf937490085d73e1a0c",
+        "planned": 16,
+        "recorded": 16,
+        "empiricallyFeasible": 11,
+        "empiricallyInfeasible": 5,
+        "unknownOrNotYetObserved": 0,
+        "falseRejections": 3,
+        "scopedFalseRejectionRate": 0.2727272727272727,
+        "scopedAccuracy": 0.8125,
+        "actualGroupMinimaSatisfied": false,
+        "scientificR24Complete": false,
+        "aggregateRemotePlusRealClientR22Enforced": false,
+        "scope": "Development admission contrast of the exact frozen Nextflow task graph in an independently limited head workspace; not held-out scientific R2.4 or aggregate client plus remote R2.2.",
+        "unit": "XFS allocated project blocks including staged inputs, work/logs and materialized portable run copy. Operator supervisor evidence and pre-existing image/Nextflow caches are outside this scope.",
+        "cases": [
+          {
+            "id": "R24-13-generous",
+            "state": "recovered",
+            "physicalFeasibilityLabel": true,
+            "helixAccepted": true,
+            "oracleScope": "head-workspace-development",
+            "oracleResultSha256": "fb0776eaebbc57fa926e5334eed9ded4e7eef0b5b08e7636c1b896d154e39807",
+            "usedProjectBytes": 7172096,
+            "budgetProjectBytes": 67108864,
+            "elapsedSeconds": 115.96215673800003
+          },
+          {
+            "id": "R24-13-small",
+            "state": "recovered",
+            "physicalFeasibilityLabel": false,
+            "helixAccepted": false,
+            "oracleScope": "head-workspace-development",
+            "oracleResultSha256": "f62123c00e949e891f1c5865c0f9004ac5a96f49c6a12341933f10b83d6559b7",
+            "usedProjectBytes": 20480,
+            "budgetProjectBytes": 262144,
+            "elapsedSeconds": 0.03231346699999449
+          },
+          {
+            "id": "R24-14-generous",
+            "state": "recovered",
+            "physicalFeasibilityLabel": true,
+            "helixAccepted": true,
+            "oracleScope": "head-workspace-development",
+            "oracleResultSha256": "72bc8f953e692f6aacfb255f8a6cffd75c698f126eebf383e2b4089223932397",
+            "usedProjectBytes": 7172096,
+            "budgetProjectBytes": 67108864,
+            "elapsedSeconds": 113.18644158500001
+          },
+          {
+            "id": "R24-14-small",
+            "state": "recovered",
+            "physicalFeasibilityLabel": false,
+            "helixAccepted": false,
+            "oracleScope": "head-workspace-development",
+            "oracleResultSha256": "b99c961b592a805ec6bcea373567c657beabff70922e4efb50ede51d3b8946ab",
+            "usedProjectBytes": 20480,
+            "budgetProjectBytes": 524288,
+            "elapsedSeconds": 0.027073169999994207
+          },
+          {
+            "id": "R24-15-generous",
+            "state": "recovered",
+            "physicalFeasibilityLabel": true,
+            "helixAccepted": true,
+            "oracleScope": "head-workspace-development",
+            "oracleResultSha256": "1f069987c41a5dc73485ade268bac7ee4bfa4814aa229be52978633e756319e2",
+            "usedProjectBytes": 7172096,
+            "budgetProjectBytes": 67108864,
+            "elapsedSeconds": 131.009348027
+          },
+          {
+            "id": "R24-15-small",
+            "state": "recovered",
+            "physicalFeasibilityLabel": false,
+            "helixAccepted": false,
+            "oracleScope": "head-workspace-development",
+            "oracleResultSha256": "376ac6f92c33009cb21d679e0b9c9f6cd9f582ac753be562d4367e8dd4347918",
+            "usedProjectBytes": 978944,
+            "budgetProjectBytes": 1048576,
+            "elapsedSeconds": 0.03624460500009263
+          },
+          {
+            "id": "R24-16-generous",
+            "state": "recovered",
+            "physicalFeasibilityLabel": true,
+            "helixAccepted": true,
+            "oracleScope": "head-workspace-development",
+            "oracleResultSha256": "6420b09a314a93598051bb5afa30dba745a6206c8e252c2b3a3b5305a0650182",
+            "usedProjectBytes": 7172096,
+            "budgetProjectBytes": 67108864,
+            "elapsedSeconds": 125.492551714
+          },
+          {
+            "id": "R24-16-small",
+            "state": "recovered",
+            "physicalFeasibilityLabel": false,
+            "helixAccepted": false,
+            "oracleScope": "head-workspace-development",
+            "causalArchivedLogs": [
+              "R24-16-small/retained-workspace/controller.stderr"
+            ],
+            "oracleResultSha256": "826c00b6231a2a052e08cddc4dc4204872933794c2c12e8fc3d26356f52851dc",
+            "usedProjectBytes": 2064384,
+            "budgetProjectBytes": 2097152,
+            "elapsedSeconds": 0.30825503899995965
+          },
+          {
+            "id": "R24-17-generous",
+            "state": "recovered",
+            "physicalFeasibilityLabel": true,
+            "helixAccepted": true,
+            "oracleScope": "head-workspace-development",
+            "oracleResultSha256": "76adf36a33bf9c88653e33b7403606f8a85a5540e8b0af608fb3d90b9f4cd548",
+            "usedProjectBytes": 7172096,
+            "budgetProjectBytes": 67108864,
+            "elapsedSeconds": 125.33544304800012
+          },
+          {
+            "id": "R24-17-small",
+            "state": "recovered",
+            "physicalFeasibilityLabel": false,
+            "helixAccepted": false,
+            "oracleScope": "head-workspace-development",
+            "causalArchivedLogs": [
+              "R24-17-small/retained-workspace/controller.stderr"
+            ],
+            "oracleResultSha256": "935cb352709dd8eac2a96f0be723be16f1433fa93b27aac8e14ac29a36e7e696",
+            "usedProjectBytes": 4038656,
+            "budgetProjectBytes": 4194304,
+            "elapsedSeconds": 129.54385733999993
+          },
+          {
+            "id": "R24-18-generous",
+            "state": "recovered",
+            "physicalFeasibilityLabel": true,
+            "helixAccepted": true,
+            "oracleScope": "head-workspace-development",
+            "oracleResultSha256": "af55261de9eaab75797ec7f82e634b42ad1ad06431aa76ea40d593a103c560e6",
+            "usedProjectBytes": 7172096,
+            "budgetProjectBytes": 67108864,
+            "elapsedSeconds": 131.19461103000003
+          },
+          {
+            "id": "R24-18-small",
+            "state": "recovered",
+            "physicalFeasibilityLabel": true,
+            "helixAccepted": false,
+            "oracleScope": "head-workspace-development",
+            "oracleResultSha256": "ab52393163ef33a7fecb9d3d9d15bc56fec763d82e0ad0f0a1a21f1c09682c53",
+            "usedProjectBytes": 7172096,
+            "budgetProjectBytes": 8388608,
+            "elapsedSeconds": 130.061767939
+          },
+          {
+            "id": "R24-19-generous",
+            "state": "recovered",
+            "physicalFeasibilityLabel": true,
+            "helixAccepted": true,
+            "oracleScope": "head-workspace-development",
+            "oracleResultSha256": "29559c1acb29bc4b625990c92e7ebda2047a10c1b250ea35c3e5a1a938a9b4c4",
+            "usedProjectBytes": 7172096,
+            "budgetProjectBytes": 67108864,
+            "elapsedSeconds": 130.19149184499997
+          },
+          {
+            "id": "R24-19-small",
+            "state": "recovered",
+            "physicalFeasibilityLabel": true,
+            "helixAccepted": false,
+            "oracleScope": "head-workspace-development",
+            "oracleResultSha256": "54e1a21603ef2bcaae10d8b60538f01dfabddd203d454666aba4362fd30751fd",
+            "usedProjectBytes": 7172096,
+            "budgetProjectBytes": 12582912,
+            "elapsedSeconds": 130.310131878
+          },
+          {
+            "id": "R24-20-generous",
+            "state": "recovered",
+            "physicalFeasibilityLabel": true,
+            "helixAccepted": true,
+            "oracleScope": "head-workspace-development",
+            "oracleResultSha256": "8af23f659dd599ddd7c0a332131e891fcb198b372fa9a4e0b404337938a96ea6",
+            "usedProjectBytes": 7172096,
+            "budgetProjectBytes": 67108864,
+            "elapsedSeconds": 131.94471852100014
+          },
+          {
+            "id": "R24-20-small",
+            "state": "recovered",
+            "physicalFeasibilityLabel": true,
+            "helixAccepted": false,
+            "oracleScope": "head-workspace-development",
+            "oracleResultSha256": "b084626cc46107b2f6218fa7ece537001899772bcf577d95a2bf4f29efef0fb0",
+            "usedProjectBytes": 7172096,
+            "budgetProjectBytes": 16777216,
+            "elapsedSeconds": 125.55491496200011
+          }
+        ],
+        "interpretation": "Same-input execution supplies scoped empirical labels, not the admisor or cohort names. Actual local-client preparation/export is outside this oracle, so scoped false rejections do not establish estimator error on an identical end-to-end storage scope."
+      }
+    }
+  ],
+  "cases": [
+    {
+      "id": "R24-1-generous",
+      "physicalFeasibilityLabel": true,
+      "helixAccepted": true,
+      "attempts": [
+        {
+          "id": "R24-1-generous",
+          "state": "recovered",
+          "physicalFeasibilityLabel": true,
+          "helixAccepted": true,
+          "oracleScope": "head-workspace-development",
+          "oracleResultSha256": "56c5b32a5bb7d43250113f6f3f7a49f978fe5b1be8ae98a30654a9c6fc761088",
+          "usedProjectBytes": 7163904,
+          "budgetProjectBytes": 67108864,
+          "elapsedSeconds": 110.15679367299981,
+          "revisionDirectory": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-campaign",
+          "attemptDispatched": true
+        }
+      ],
+      "conclusiveRevision": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-campaign",
+      "oracleResultSha256": "56c5b32a5bb7d43250113f6f3f7a49f978fe5b1be8ae98a30654a9c6fc761088"
+    },
+    {
+      "id": "R24-1-small",
+      "physicalFeasibilityLabel": false,
+      "helixAccepted": false,
+      "attempts": [
+        {
+          "id": "R24-1-small",
+          "state": "recovered",
+          "physicalFeasibilityLabel": false,
+          "helixAccepted": false,
+          "oracleScope": "head-workspace-development",
+          "oracleResultSha256": "6a512e0b44793fd2181f60b993954560f341827294d7d5d97bf7df8a4592c04e",
+          "usedProjectBytes": 0,
+          "budgetProjectBytes": 65536,
+          "elapsedSeconds": 0.030544305000148597,
+          "revisionDirectory": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-campaign",
+          "attemptDispatched": true
+        }
+      ],
+      "conclusiveRevision": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-campaign",
+      "oracleResultSha256": "6a512e0b44793fd2181f60b993954560f341827294d7d5d97bf7df8a4592c04e"
+    },
+    {
+      "id": "R24-2-generous",
+      "physicalFeasibilityLabel": true,
+      "helixAccepted": true,
+      "attempts": [
+        {
+          "id": "R24-2-generous",
+          "state": "recovered",
+          "physicalFeasibilityLabel": true,
+          "helixAccepted": true,
+          "oracleScope": "head-workspace-development",
+          "oracleResultSha256": "f3bc4e5c55f8674304eb9260042c5417e70105d3f3c570cc2a039f36d0280575",
+          "usedProjectBytes": 7163904,
+          "budgetProjectBytes": 67108864,
+          "elapsedSeconds": 110.16803737800001,
+          "revisionDirectory": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-campaign",
+          "attemptDispatched": true
+        }
+      ],
+      "conclusiveRevision": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-campaign",
+      "oracleResultSha256": "f3bc4e5c55f8674304eb9260042c5417e70105d3f3c570cc2a039f36d0280575"
+    },
+    {
+      "id": "R24-2-small",
+      "physicalFeasibilityLabel": false,
+      "helixAccepted": false,
+      "attempts": [
+        {
+          "id": "R24-2-small",
+          "state": "recovered",
+          "physicalFeasibilityLabel": false,
+          "helixAccepted": false,
+          "oracleScope": "head-workspace-development",
+          "oracleResultSha256": "f584b006aefc2125f299e2d051da07b94be511c6ca2ad7d3197debd49c4fe03b",
+          "usedProjectBytes": 0,
+          "budgetProjectBytes": 131072,
+          "elapsedSeconds": 0.02952411999922333,
+          "revisionDirectory": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-campaign",
+          "attemptDispatched": true
+        }
+      ],
+      "conclusiveRevision": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-campaign",
+      "oracleResultSha256": "f584b006aefc2125f299e2d051da07b94be511c6ca2ad7d3197debd49c4fe03b"
+    },
+    {
+      "id": "R24-3-generous",
+      "physicalFeasibilityLabel": true,
+      "helixAccepted": true,
+      "attempts": [
+        {
+          "id": "R24-3-generous",
+          "state": "recovered",
+          "physicalFeasibilityLabel": true,
+          "helixAccepted": true,
+          "oracleScope": "head-workspace-development",
+          "oracleResultSha256": "61e3b077c42703ccacbb37151a69929adf075f80b76e8f3b466f0808c503ccf5",
+          "usedProjectBytes": 7163904,
+          "budgetProjectBytes": 67108864,
+          "elapsedSeconds": 129.83440625500043,
+          "revisionDirectory": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-campaign",
+          "attemptDispatched": true
+        }
+      ],
+      "conclusiveRevision": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-campaign",
+      "oracleResultSha256": "61e3b077c42703ccacbb37151a69929adf075f80b76e8f3b466f0808c503ccf5"
+    },
+    {
+      "id": "R24-3-small",
+      "physicalFeasibilityLabel": false,
+      "helixAccepted": false,
+      "attempts": [
+        {
+          "id": "R24-3-small",
+          "state": "recovered",
+          "physicalFeasibilityLabel": false,
+          "helixAccepted": false,
+          "oracleScope": "head-workspace-development",
+          "oracleResultSha256": "a49bb0327bb76ac1ff489e08c735a0a66fc6d5634761ad87d7b9da38daffece0",
+          "usedProjectBytes": 20480,
+          "budgetProjectBytes": 262144,
+          "elapsedSeconds": 0.029759344999547466,
+          "revisionDirectory": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-campaign",
+          "attemptDispatched": true
+        }
+      ],
+      "conclusiveRevision": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-campaign",
+      "oracleResultSha256": "a49bb0327bb76ac1ff489e08c735a0a66fc6d5634761ad87d7b9da38daffece0"
+    },
+    {
+      "id": "R24-4-generous",
+      "physicalFeasibilityLabel": true,
+      "helixAccepted": true,
+      "attempts": [
+        {
+          "id": "R24-4-generous",
+          "state": "recovered",
+          "physicalFeasibilityLabel": true,
+          "helixAccepted": true,
+          "oracleScope": "head-workspace-development",
+          "oracleResultSha256": "464f5c3609e5f64258eccf116d06ced22f58ba042d9f59b94f96211814fa7e68",
+          "usedProjectBytes": 7163904,
+          "budgetProjectBytes": 67108864,
+          "elapsedSeconds": 111.6374168960001,
+          "revisionDirectory": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-campaign",
+          "attemptDispatched": true
+        }
+      ],
+      "conclusiveRevision": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-campaign",
+      "oracleResultSha256": "464f5c3609e5f64258eccf116d06ced22f58ba042d9f59b94f96211814fa7e68"
+    },
+    {
+      "id": "R24-4-small",
+      "physicalFeasibilityLabel": false,
+      "helixAccepted": false,
+      "attempts": [
+        {
+          "id": "R24-4-small",
+          "state": "recovered",
+          "physicalFeasibilityLabel": false,
+          "helixAccepted": false,
+          "oracleScope": "head-workspace-development",
+          "oracleResultSha256": "683a37c972283cf6292bc5b5b9acdf23b7207b0f0b8870fde4b7db229d2b9a94",
+          "usedProjectBytes": 20480,
+          "budgetProjectBytes": 524288,
+          "elapsedSeconds": 0.03151339200030634,
+          "revisionDirectory": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-campaign",
+          "attemptDispatched": true
+        }
+      ],
+      "conclusiveRevision": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-campaign",
+      "oracleResultSha256": "683a37c972283cf6292bc5b5b9acdf23b7207b0f0b8870fde4b7db229d2b9a94"
+    },
+    {
+      "id": "R24-5-generous",
+      "physicalFeasibilityLabel": true,
+      "helixAccepted": true,
+      "attempts": [
+        {
+          "id": "R24-5-generous",
+          "state": "recovered",
+          "physicalFeasibilityLabel": true,
+          "helixAccepted": true,
+          "oracleScope": "head-workspace-development",
+          "oracleResultSha256": "69b6d8b832cd76e972f1c6712db8221cc04401e5c45b6cdf34c4572665a29716",
+          "usedProjectBytes": 7163904,
+          "budgetProjectBytes": 67108864,
+          "elapsedSeconds": 109.99905804599985,
+          "revisionDirectory": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-campaign",
+          "attemptDispatched": true
+        }
+      ],
+      "conclusiveRevision": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-campaign",
+      "oracleResultSha256": "69b6d8b832cd76e972f1c6712db8221cc04401e5c45b6cdf34c4572665a29716"
+    },
+    {
+      "id": "R24-5-small",
+      "physicalFeasibilityLabel": false,
+      "helixAccepted": false,
+      "attempts": [
+        {
+          "id": "R24-5-small",
+          "state": "recovered",
+          "physicalFeasibilityLabel": false,
+          "helixAccepted": false,
+          "oracleScope": "head-workspace-development",
+          "oracleResultSha256": "de28b825e3177c283aadee647bf3f2a31b91f37d53f0d77a05b7845422c766fb",
+          "usedProjectBytes": 978944,
+          "budgetProjectBytes": 1048576,
+          "elapsedSeconds": 0.03370091200031311,
+          "revisionDirectory": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-campaign",
+          "attemptDispatched": true
+        }
+      ],
+      "conclusiveRevision": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-campaign",
+      "oracleResultSha256": "de28b825e3177c283aadee647bf3f2a31b91f37d53f0d77a05b7845422c766fb"
+    },
+    {
+      "id": "R24-6-generous",
+      "physicalFeasibilityLabel": true,
+      "helixAccepted": true,
+      "attempts": [
+        {
+          "id": "R24-6-generous",
+          "state": "recovered",
+          "physicalFeasibilityLabel": true,
+          "helixAccepted": true,
+          "oracleScope": "head-workspace-development",
+          "oracleResultSha256": "1fd69f147e3756042df5a2c00126f6c4699bd83ef3a1857cd5c1b6cf8483eea0",
+          "usedProjectBytes": 7163904,
+          "budgetProjectBytes": 67108864,
+          "elapsedSeconds": 130.44139130700023,
+          "revisionDirectory": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-campaign",
+          "attemptDispatched": true
+        }
+      ],
+      "conclusiveRevision": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-campaign",
+      "oracleResultSha256": "1fd69f147e3756042df5a2c00126f6c4699bd83ef3a1857cd5c1b6cf8483eea0"
+    },
+    {
+      "id": "R24-6-small",
+      "physicalFeasibilityLabel": false,
+      "helixAccepted": false,
+      "attempts": [
+        {
+          "id": "R24-6-small",
+          "state": "recovered",
+          "physicalFeasibilityLabel": false,
+          "helixAccepted": false,
+          "oracleScope": "head-workspace-development",
+          "causalArchivedLogs": [
+            "R24-6-small/retained-workspace/controller.stderr"
+          ],
+          "oracleResultSha256": "afb3de015da00616d0ab13d5dec90d94a186de6d2855d51321f0d745acb9c54a",
+          "usedProjectBytes": 2064384,
+          "budgetProjectBytes": 2097152,
+          "elapsedSeconds": 0.3100122249998094,
+          "revisionDirectory": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-campaign",
+          "attemptDispatched": true
+        }
+      ],
+      "conclusiveRevision": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-campaign",
+      "oracleResultSha256": "afb3de015da00616d0ab13d5dec90d94a186de6d2855d51321f0d745acb9c54a"
+    },
+    {
+      "id": "R24-7-generous",
+      "physicalFeasibilityLabel": true,
+      "helixAccepted": true,
+      "attempts": [
+        {
+          "id": "R24-7-generous",
+          "state": "recovered",
+          "physicalFeasibilityLabel": true,
+          "helixAccepted": true,
+          "oracleScope": "head-workspace-development",
+          "oracleResultSha256": "73f975bad1a7a87d7bf1c27b6d31c5472346ea6db5205e0dde5d629ab895d4c5",
+          "usedProjectBytes": 7163904,
+          "budgetProjectBytes": 67108864,
+          "elapsedSeconds": 124.90387796899995,
+          "revisionDirectory": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-campaign",
+          "attemptDispatched": true
+        }
+      ],
+      "conclusiveRevision": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-campaign",
+      "oracleResultSha256": "73f975bad1a7a87d7bf1c27b6d31c5472346ea6db5205e0dde5d629ab895d4c5"
+    },
+    {
+      "id": "R24-7-small",
+      "physicalFeasibilityLabel": false,
+      "helixAccepted": false,
+      "attempts": [
+        {
+          "id": "R24-7-small",
+          "state": "recovered",
+          "physicalFeasibilityLabel": false,
+          "helixAccepted": false,
+          "oracleScope": "head-workspace-development",
+          "causalArchivedLogs": [
+            "R24-7-small/retained-workspace/controller.stderr"
+          ],
+          "oracleResultSha256": "17c3905adcd4bf57087d79569e4915f38f64d0176bd8e9cd1fa13763f1820f74",
+          "usedProjectBytes": 4034560,
+          "budgetProjectBytes": 4194304,
+          "elapsedSeconds": 120.72241225800099,
+          "revisionDirectory": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-campaign",
+          "attemptDispatched": true
+        }
+      ],
+      "conclusiveRevision": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-campaign",
+      "oracleResultSha256": "17c3905adcd4bf57087d79569e4915f38f64d0176bd8e9cd1fa13763f1820f74"
+    },
+    {
+      "id": "R24-8-generous",
+      "physicalFeasibilityLabel": true,
+      "helixAccepted": true,
+      "attempts": [
+        {
+          "id": "R24-8-generous",
+          "state": "recovered",
+          "physicalFeasibilityLabel": true,
+          "helixAccepted": true,
+          "oracleScope": "head-workspace-development",
+          "oracleResultSha256": "267bf02361cbcdba841168f7a4617ca16f056523a39e026a13d11a25731f5de4",
+          "usedProjectBytes": 7163904,
+          "budgetProjectBytes": 67108864,
+          "elapsedSeconds": 120.1979085740004,
+          "revisionDirectory": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-campaign",
+          "attemptDispatched": true
+        }
+      ],
+      "conclusiveRevision": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-campaign",
+      "oracleResultSha256": "267bf02361cbcdba841168f7a4617ca16f056523a39e026a13d11a25731f5de4"
+    },
+    {
+      "id": "R24-8-small",
+      "physicalFeasibilityLabel": true,
+      "helixAccepted": false,
+      "attempts": [
+        {
+          "id": "R24-8-small",
+          "state": "recovered",
+          "physicalFeasibilityLabel": true,
+          "helixAccepted": false,
+          "oracleScope": "head-workspace-development",
+          "oracleResultSha256": "ad081dc30a00e16dd6103059ff59aa53788cee6b9ddb175c627419616a6c8526",
+          "usedProjectBytes": 7163904,
+          "budgetProjectBytes": 8388608,
+          "elapsedSeconds": 124.7596190839995,
+          "revisionDirectory": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-campaign",
+          "attemptDispatched": true
+        }
+      ],
+      "conclusiveRevision": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-campaign",
+      "oracleResultSha256": "ad081dc30a00e16dd6103059ff59aa53788cee6b9ddb175c627419616a6c8526"
+    },
+    {
+      "id": "R24-9-generous",
+      "physicalFeasibilityLabel": true,
+      "helixAccepted": true,
+      "attempts": [
+        {
+          "id": "R24-9-generous",
+          "state": "recovered",
+          "physicalFeasibilityLabel": true,
+          "helixAccepted": true,
+          "oracleScope": "head-workspace-development",
+          "oracleResultSha256": "6b639d6204b5b1244ba5af0990dadba0a7eeaca68b1d565f1ce3567a54eb9504",
+          "usedProjectBytes": 7172096,
+          "budgetProjectBytes": 67108864,
+          "elapsedSeconds": 124.90208439700109,
+          "revisionDirectory": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-campaign",
+          "attemptDispatched": true
+        }
+      ],
+      "conclusiveRevision": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-campaign",
+      "oracleResultSha256": "6b639d6204b5b1244ba5af0990dadba0a7eeaca68b1d565f1ce3567a54eb9504"
+    },
+    {
+      "id": "R24-9-small",
+      "physicalFeasibilityLabel": true,
+      "helixAccepted": false,
+      "attempts": [
+        {
+          "id": "R24-9-small",
+          "state": "recovered",
+          "physicalFeasibilityLabel": true,
+          "helixAccepted": false,
+          "oracleScope": "head-workspace-development",
+          "oracleResultSha256": "874ed905da3ccdb741f981621e2d6d9c0eacd9e8219786e9526bd001db52eb44",
+          "usedProjectBytes": 7172096,
+          "budgetProjectBytes": 12582912,
+          "elapsedSeconds": 120.8263883870004,
+          "revisionDirectory": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-campaign",
+          "attemptDispatched": true
+        }
+      ],
+      "conclusiveRevision": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-campaign",
+      "oracleResultSha256": "874ed905da3ccdb741f981621e2d6d9c0eacd9e8219786e9526bd001db52eb44"
+    },
+    {
+      "id": "R24-10-generous",
+      "physicalFeasibilityLabel": true,
+      "helixAccepted": true,
+      "attempts": [
+        {
+          "id": "R24-10-generous",
+          "state": "recovered",
+          "physicalFeasibilityLabel": true,
+          "helixAccepted": true,
+          "oracleScope": "head-workspace-development",
+          "oracleResultSha256": "893cfe7a4eca4cba948ed9d5460dc822db167dd3f6c5f60dc5d9af378d54eeb9",
+          "usedProjectBytes": 7163904,
+          "budgetProjectBytes": 67108864,
+          "elapsedSeconds": 125.35678268500124,
+          "revisionDirectory": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-campaign",
+          "attemptDispatched": true
+        }
+      ],
+      "conclusiveRevision": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-campaign",
+      "oracleResultSha256": "893cfe7a4eca4cba948ed9d5460dc822db167dd3f6c5f60dc5d9af378d54eeb9"
+    },
+    {
+      "id": "R24-10-small",
+      "physicalFeasibilityLabel": true,
+      "helixAccepted": false,
+      "attempts": [
+        {
+          "id": "R24-10-small",
+          "state": "recovered",
+          "physicalFeasibilityLabel": true,
+          "helixAccepted": false,
+          "oracleScope": "head-workspace-development",
+          "oracleResultSha256": "07ecf25c88bb20dd60bd1f27bb079a46f071e6e9a2ee00f69bbbf1fd077a1255",
+          "usedProjectBytes": 7163904,
+          "budgetProjectBytes": 16777216,
+          "elapsedSeconds": 124.97714612600066,
+          "revisionDirectory": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-campaign",
+          "attemptDispatched": true
+        }
+      ],
+      "conclusiveRevision": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-campaign",
+      "oracleResultSha256": "07ecf25c88bb20dd60bd1f27bb079a46f071e6e9a2ee00f69bbbf1fd077a1255"
+    },
+    {
+      "id": "R24-11-generous",
+      "physicalFeasibilityLabel": true,
+      "helixAccepted": true,
+      "attempts": [
+        {
+          "id": "R24-11-generous",
+          "state": "recovered",
+          "physicalFeasibilityLabel": true,
+          "helixAccepted": true,
+          "oracleScope": "head-workspace-development",
+          "oracleResultSha256": "fb5f506a7fcc8d953ed23f99af664661db9e419230aebd304cf34095dae02125",
+          "usedProjectBytes": 7172096,
+          "budgetProjectBytes": 67108864,
+          "elapsedSeconds": 124.90047434400003,
+          "revisionDirectory": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-campaign",
+          "attemptDispatched": true
+        }
+      ],
+      "conclusiveRevision": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-campaign",
+      "oracleResultSha256": "fb5f506a7fcc8d953ed23f99af664661db9e419230aebd304cf34095dae02125"
+    },
+    {
+      "id": "R24-11-small",
+      "physicalFeasibilityLabel": false,
+      "helixAccepted": false,
+      "attempts": [
+        {
+          "id": "R24-11-small",
+          "state": "recovered",
+          "physicalFeasibilityLabel": false,
+          "helixAccepted": false,
+          "oracleScope": "head-workspace-development",
+          "oracleResultSha256": "49e271c05e8f49709800663cfd1f5abb6d07b9977d696d9dc6960ce9fce407ee",
+          "usedProjectBytes": 0,
+          "budgetProjectBytes": 65536,
+          "elapsedSeconds": 0.025163170999803697,
+          "revisionDirectory": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-campaign",
+          "attemptDispatched": true
+        }
+      ],
+      "conclusiveRevision": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-campaign",
+      "oracleResultSha256": "49e271c05e8f49709800663cfd1f5abb6d07b9977d696d9dc6960ce9fce407ee"
+    },
+    {
+      "id": "R24-12-generous",
+      "physicalFeasibilityLabel": true,
+      "helixAccepted": true,
+      "attempts": [
+        {
+          "id": "R24-12-generous",
+          "state": "recovered",
+          "physicalFeasibilityLabel": true,
+          "helixAccepted": true,
+          "oracleScope": "head-workspace-development",
+          "oracleResultSha256": "cdee8ecacf2dfc60c5a06a7a9c5e99abd0d21bff4834dd645b7b7729f8265537",
+          "usedProjectBytes": 7172096,
+          "budgetProjectBytes": 67108864,
+          "elapsedSeconds": 120.31801216799977,
+          "revisionDirectory": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-campaign",
+          "attemptDispatched": true
+        }
+      ],
+      "conclusiveRevision": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-campaign",
+      "oracleResultSha256": "cdee8ecacf2dfc60c5a06a7a9c5e99abd0d21bff4834dd645b7b7729f8265537"
+    },
+    {
+      "id": "R24-12-small",
+      "physicalFeasibilityLabel": false,
+      "helixAccepted": false,
+      "attempts": [
+        {
+          "id": "R24-12-small",
+          "state": "recovered",
+          "physicalFeasibilityLabel": false,
+          "helixAccepted": false,
+          "oracleScope": "head-workspace-development",
+          "oracleResultSha256": "c4318a2be5931616efebc4a229481859693d9a6b798da8b71cda91a3cda0e134",
+          "usedProjectBytes": 0,
+          "budgetProjectBytes": 131072,
+          "elapsedSeconds": 0.035522648999176454,
+          "revisionDirectory": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-campaign",
+          "attemptDispatched": true
+        }
+      ],
+      "conclusiveRevision": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-campaign",
+      "oracleResultSha256": "c4318a2be5931616efebc4a229481859693d9a6b798da8b71cda91a3cda0e134"
+    },
+    {
+      "id": "R24-13-generous",
+      "physicalFeasibilityLabel": true,
+      "helixAccepted": true,
+      "attempts": [
+        {
+          "id": "R24-13-generous",
+          "state": "recovered",
+          "physicalFeasibilityLabel": null,
+          "helixAccepted": true,
+          "oracleScope": "head-workspace-development",
+          "oracleResultSha256": "c5d5f5580b827c71d82ed4598246a61b3502d72bc156c966fb93f335a133a019",
+          "usedProjectBytes": 2617344,
+          "budgetProjectBytes": 67108864,
+          "elapsedSeconds": 71.26257658500072,
+          "revisionDirectory": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-campaign",
+          "attemptDispatched": true
+        },
+        {
+          "id": "R24-13-generous",
+          "state": "recovered",
+          "physicalFeasibilityLabel": true,
+          "helixAccepted": true,
+          "oracleScope": "head-workspace-development",
+          "oracleResultSha256": "fb0776eaebbc57fa926e5334eed9ded4e7eef0b5b08e7636c1b896d154e39807",
+          "usedProjectBytes": 7172096,
+          "budgetProjectBytes": 67108864,
+          "elapsedSeconds": 115.96215673800003,
+          "revisionDirectory": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-continuation",
+          "attemptDispatched": true
+        }
+      ],
+      "conclusiveRevision": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-continuation",
+      "oracleResultSha256": "fb0776eaebbc57fa926e5334eed9ded4e7eef0b5b08e7636c1b896d154e39807"
+    },
+    {
+      "id": "R24-13-small",
+      "physicalFeasibilityLabel": false,
+      "helixAccepted": false,
+      "attempts": [
+        {
+          "id": "R24-13-small",
+          "state": "unknown-supervisor-stopped-without-result",
+          "physicalFeasibilityLabel": null,
+          "helixAccepted": false,
+          "oracleScope": "head-workspace-development",
+          "revisionDirectory": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-campaign",
+          "attemptDispatched": true
+        },
+        {
+          "id": "R24-13-small",
+          "state": "recovered",
+          "physicalFeasibilityLabel": false,
+          "helixAccepted": false,
+          "oracleScope": "head-workspace-development",
+          "oracleResultSha256": "f62123c00e949e891f1c5865c0f9004ac5a96f49c6a12341933f10b83d6559b7",
+          "usedProjectBytes": 20480,
+          "budgetProjectBytes": 262144,
+          "elapsedSeconds": 0.03231346699999449,
+          "revisionDirectory": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-continuation",
+          "attemptDispatched": true
+        }
+      ],
+      "conclusiveRevision": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-continuation",
+      "oracleResultSha256": "f62123c00e949e891f1c5865c0f9004ac5a96f49c6a12341933f10b83d6559b7"
+    },
+    {
+      "id": "R24-14-generous",
+      "physicalFeasibilityLabel": true,
+      "helixAccepted": true,
+      "attempts": [
+        {
+          "id": "R24-14-generous",
+          "state": "not-started-global-checkpoint",
+          "physicalFeasibilityLabel": null,
+          "helixAccepted": null,
+          "oracleScope": "head-workspace-development",
+          "revisionDirectory": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-campaign",
+          "attemptDispatched": false
+        },
+        {
+          "id": "R24-14-generous",
+          "state": "recovered",
+          "physicalFeasibilityLabel": true,
+          "helixAccepted": true,
+          "oracleScope": "head-workspace-development",
+          "oracleResultSha256": "72bc8f953e692f6aacfb255f8a6cffd75c698f126eebf383e2b4089223932397",
+          "usedProjectBytes": 7172096,
+          "budgetProjectBytes": 67108864,
+          "elapsedSeconds": 113.18644158500001,
+          "revisionDirectory": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-continuation",
+          "attemptDispatched": true
+        }
+      ],
+      "conclusiveRevision": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-continuation",
+      "oracleResultSha256": "72bc8f953e692f6aacfb255f8a6cffd75c698f126eebf383e2b4089223932397"
+    },
+    {
+      "id": "R24-14-small",
+      "physicalFeasibilityLabel": false,
+      "helixAccepted": false,
+      "attempts": [
+        {
+          "id": "R24-14-small",
+          "state": "not-started-global-checkpoint",
+          "physicalFeasibilityLabel": null,
+          "helixAccepted": null,
+          "oracleScope": "head-workspace-development",
+          "revisionDirectory": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-campaign",
+          "attemptDispatched": false
+        },
+        {
+          "id": "R24-14-small",
+          "state": "recovered",
+          "physicalFeasibilityLabel": false,
+          "helixAccepted": false,
+          "oracleScope": "head-workspace-development",
+          "oracleResultSha256": "b99c961b592a805ec6bcea373567c657beabff70922e4efb50ede51d3b8946ab",
+          "usedProjectBytes": 20480,
+          "budgetProjectBytes": 524288,
+          "elapsedSeconds": 0.027073169999994207,
+          "revisionDirectory": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-continuation",
+          "attemptDispatched": true
+        }
+      ],
+      "conclusiveRevision": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-continuation",
+      "oracleResultSha256": "b99c961b592a805ec6bcea373567c657beabff70922e4efb50ede51d3b8946ab"
+    },
+    {
+      "id": "R24-15-generous",
+      "physicalFeasibilityLabel": true,
+      "helixAccepted": true,
+      "attempts": [
+        {
+          "id": "R24-15-generous",
+          "state": "not-started-global-checkpoint",
+          "physicalFeasibilityLabel": null,
+          "helixAccepted": null,
+          "oracleScope": "head-workspace-development",
+          "revisionDirectory": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-campaign",
+          "attemptDispatched": false
+        },
+        {
+          "id": "R24-15-generous",
+          "state": "recovered",
+          "physicalFeasibilityLabel": true,
+          "helixAccepted": true,
+          "oracleScope": "head-workspace-development",
+          "oracleResultSha256": "1f069987c41a5dc73485ade268bac7ee4bfa4814aa229be52978633e756319e2",
+          "usedProjectBytes": 7172096,
+          "budgetProjectBytes": 67108864,
+          "elapsedSeconds": 131.009348027,
+          "revisionDirectory": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-continuation",
+          "attemptDispatched": true
+        }
+      ],
+      "conclusiveRevision": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-continuation",
+      "oracleResultSha256": "1f069987c41a5dc73485ade268bac7ee4bfa4814aa229be52978633e756319e2"
+    },
+    {
+      "id": "R24-15-small",
+      "physicalFeasibilityLabel": false,
+      "helixAccepted": false,
+      "attempts": [
+        {
+          "id": "R24-15-small",
+          "state": "not-started-global-checkpoint",
+          "physicalFeasibilityLabel": null,
+          "helixAccepted": null,
+          "oracleScope": "head-workspace-development",
+          "revisionDirectory": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-campaign",
+          "attemptDispatched": false
+        },
+        {
+          "id": "R24-15-small",
+          "state": "recovered",
+          "physicalFeasibilityLabel": false,
+          "helixAccepted": false,
+          "oracleScope": "head-workspace-development",
+          "oracleResultSha256": "376ac6f92c33009cb21d679e0b9c9f6cd9f582ac753be562d4367e8dd4347918",
+          "usedProjectBytes": 978944,
+          "budgetProjectBytes": 1048576,
+          "elapsedSeconds": 0.03624460500009263,
+          "revisionDirectory": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-continuation",
+          "attemptDispatched": true
+        }
+      ],
+      "conclusiveRevision": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-continuation",
+      "oracleResultSha256": "376ac6f92c33009cb21d679e0b9c9f6cd9f582ac753be562d4367e8dd4347918"
+    },
+    {
+      "id": "R24-16-generous",
+      "physicalFeasibilityLabel": true,
+      "helixAccepted": true,
+      "attempts": [
+        {
+          "id": "R24-16-generous",
+          "state": "not-started-global-checkpoint",
+          "physicalFeasibilityLabel": null,
+          "helixAccepted": null,
+          "oracleScope": "head-workspace-development",
+          "revisionDirectory": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-campaign",
+          "attemptDispatched": false
+        },
+        {
+          "id": "R24-16-generous",
+          "state": "recovered",
+          "physicalFeasibilityLabel": true,
+          "helixAccepted": true,
+          "oracleScope": "head-workspace-development",
+          "oracleResultSha256": "6420b09a314a93598051bb5afa30dba745a6206c8e252c2b3a3b5305a0650182",
+          "usedProjectBytes": 7172096,
+          "budgetProjectBytes": 67108864,
+          "elapsedSeconds": 125.492551714,
+          "revisionDirectory": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-continuation",
+          "attemptDispatched": true
+        }
+      ],
+      "conclusiveRevision": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-continuation",
+      "oracleResultSha256": "6420b09a314a93598051bb5afa30dba745a6206c8e252c2b3a3b5305a0650182"
+    },
+    {
+      "id": "R24-16-small",
+      "physicalFeasibilityLabel": false,
+      "helixAccepted": false,
+      "attempts": [
+        {
+          "id": "R24-16-small",
+          "state": "not-started-global-checkpoint",
+          "physicalFeasibilityLabel": null,
+          "helixAccepted": null,
+          "oracleScope": "head-workspace-development",
+          "revisionDirectory": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-campaign",
+          "attemptDispatched": false
+        },
+        {
+          "id": "R24-16-small",
+          "state": "recovered",
+          "physicalFeasibilityLabel": false,
+          "helixAccepted": false,
+          "oracleScope": "head-workspace-development",
+          "causalArchivedLogs": [
+            "R24-16-small/retained-workspace/controller.stderr"
+          ],
+          "oracleResultSha256": "826c00b6231a2a052e08cddc4dc4204872933794c2c12e8fc3d26356f52851dc",
+          "usedProjectBytes": 2064384,
+          "budgetProjectBytes": 2097152,
+          "elapsedSeconds": 0.30825503899995965,
+          "revisionDirectory": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-continuation",
+          "attemptDispatched": true
+        }
+      ],
+      "conclusiveRevision": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-continuation",
+      "oracleResultSha256": "826c00b6231a2a052e08cddc4dc4204872933794c2c12e8fc3d26356f52851dc"
+    },
+    {
+      "id": "R24-17-generous",
+      "physicalFeasibilityLabel": true,
+      "helixAccepted": true,
+      "attempts": [
+        {
+          "id": "R24-17-generous",
+          "state": "not-started-global-checkpoint",
+          "physicalFeasibilityLabel": null,
+          "helixAccepted": null,
+          "oracleScope": "head-workspace-development",
+          "revisionDirectory": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-campaign",
+          "attemptDispatched": false
+        },
+        {
+          "id": "R24-17-generous",
+          "state": "recovered",
+          "physicalFeasibilityLabel": true,
+          "helixAccepted": true,
+          "oracleScope": "head-workspace-development",
+          "oracleResultSha256": "76adf36a33bf9c88653e33b7403606f8a85a5540e8b0af608fb3d90b9f4cd548",
+          "usedProjectBytes": 7172096,
+          "budgetProjectBytes": 67108864,
+          "elapsedSeconds": 125.33544304800012,
+          "revisionDirectory": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-continuation",
+          "attemptDispatched": true
+        }
+      ],
+      "conclusiveRevision": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-continuation",
+      "oracleResultSha256": "76adf36a33bf9c88653e33b7403606f8a85a5540e8b0af608fb3d90b9f4cd548"
+    },
+    {
+      "id": "R24-17-small",
+      "physicalFeasibilityLabel": false,
+      "helixAccepted": false,
+      "attempts": [
+        {
+          "id": "R24-17-small",
+          "state": "not-started-global-checkpoint",
+          "physicalFeasibilityLabel": null,
+          "helixAccepted": null,
+          "oracleScope": "head-workspace-development",
+          "revisionDirectory": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-campaign",
+          "attemptDispatched": false
+        },
+        {
+          "id": "R24-17-small",
+          "state": "recovered",
+          "physicalFeasibilityLabel": false,
+          "helixAccepted": false,
+          "oracleScope": "head-workspace-development",
+          "causalArchivedLogs": [
+            "R24-17-small/retained-workspace/controller.stderr"
+          ],
+          "oracleResultSha256": "935cb352709dd8eac2a96f0be723be16f1433fa93b27aac8e14ac29a36e7e696",
+          "usedProjectBytes": 4038656,
+          "budgetProjectBytes": 4194304,
+          "elapsedSeconds": 129.54385733999993,
+          "revisionDirectory": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-continuation",
+          "attemptDispatched": true
+        }
+      ],
+      "conclusiveRevision": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-continuation",
+      "oracleResultSha256": "935cb352709dd8eac2a96f0be723be16f1433fa93b27aac8e14ac29a36e7e696"
+    },
+    {
+      "id": "R24-18-generous",
+      "physicalFeasibilityLabel": true,
+      "helixAccepted": true,
+      "attempts": [
+        {
+          "id": "R24-18-generous",
+          "state": "not-started-global-checkpoint",
+          "physicalFeasibilityLabel": null,
+          "helixAccepted": null,
+          "oracleScope": "head-workspace-development",
+          "revisionDirectory": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-campaign",
+          "attemptDispatched": false
+        },
+        {
+          "id": "R24-18-generous",
+          "state": "recovered",
+          "physicalFeasibilityLabel": true,
+          "helixAccepted": true,
+          "oracleScope": "head-workspace-development",
+          "oracleResultSha256": "af55261de9eaab75797ec7f82e634b42ad1ad06431aa76ea40d593a103c560e6",
+          "usedProjectBytes": 7172096,
+          "budgetProjectBytes": 67108864,
+          "elapsedSeconds": 131.19461103000003,
+          "revisionDirectory": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-continuation",
+          "attemptDispatched": true
+        }
+      ],
+      "conclusiveRevision": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-continuation",
+      "oracleResultSha256": "af55261de9eaab75797ec7f82e634b42ad1ad06431aa76ea40d593a103c560e6"
+    },
+    {
+      "id": "R24-18-small",
+      "physicalFeasibilityLabel": true,
+      "helixAccepted": false,
+      "attempts": [
+        {
+          "id": "R24-18-small",
+          "state": "not-started-global-checkpoint",
+          "physicalFeasibilityLabel": null,
+          "helixAccepted": null,
+          "oracleScope": "head-workspace-development",
+          "revisionDirectory": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-campaign",
+          "attemptDispatched": false
+        },
+        {
+          "id": "R24-18-small",
+          "state": "recovered",
+          "physicalFeasibilityLabel": true,
+          "helixAccepted": false,
+          "oracleScope": "head-workspace-development",
+          "oracleResultSha256": "ab52393163ef33a7fecb9d3d9d15bc56fec763d82e0ad0f0a1a21f1c09682c53",
+          "usedProjectBytes": 7172096,
+          "budgetProjectBytes": 8388608,
+          "elapsedSeconds": 130.061767939,
+          "revisionDirectory": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-continuation",
+          "attemptDispatched": true
+        }
+      ],
+      "conclusiveRevision": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-continuation",
+      "oracleResultSha256": "ab52393163ef33a7fecb9d3d9d15bc56fec763d82e0ad0f0a1a21f1c09682c53"
+    },
+    {
+      "id": "R24-19-generous",
+      "physicalFeasibilityLabel": true,
+      "helixAccepted": true,
+      "attempts": [
+        {
+          "id": "R24-19-generous",
+          "state": "not-started-global-checkpoint",
+          "physicalFeasibilityLabel": null,
+          "helixAccepted": null,
+          "oracleScope": "head-workspace-development",
+          "revisionDirectory": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-campaign",
+          "attemptDispatched": false
+        },
+        {
+          "id": "R24-19-generous",
+          "state": "recovered",
+          "physicalFeasibilityLabel": true,
+          "helixAccepted": true,
+          "oracleScope": "head-workspace-development",
+          "oracleResultSha256": "29559c1acb29bc4b625990c92e7ebda2047a10c1b250ea35c3e5a1a938a9b4c4",
+          "usedProjectBytes": 7172096,
+          "budgetProjectBytes": 67108864,
+          "elapsedSeconds": 130.19149184499997,
+          "revisionDirectory": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-continuation",
+          "attemptDispatched": true
+        }
+      ],
+      "conclusiveRevision": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-continuation",
+      "oracleResultSha256": "29559c1acb29bc4b625990c92e7ebda2047a10c1b250ea35c3e5a1a938a9b4c4"
+    },
+    {
+      "id": "R24-19-small",
+      "physicalFeasibilityLabel": true,
+      "helixAccepted": false,
+      "attempts": [
+        {
+          "id": "R24-19-small",
+          "state": "not-started-global-checkpoint",
+          "physicalFeasibilityLabel": null,
+          "helixAccepted": null,
+          "oracleScope": "head-workspace-development",
+          "revisionDirectory": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-campaign",
+          "attemptDispatched": false
+        },
+        {
+          "id": "R24-19-small",
+          "state": "recovered",
+          "physicalFeasibilityLabel": true,
+          "helixAccepted": false,
+          "oracleScope": "head-workspace-development",
+          "oracleResultSha256": "54e1a21603ef2bcaae10d8b60538f01dfabddd203d454666aba4362fd30751fd",
+          "usedProjectBytes": 7172096,
+          "budgetProjectBytes": 12582912,
+          "elapsedSeconds": 130.310131878,
+          "revisionDirectory": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-continuation",
+          "attemptDispatched": true
+        }
+      ],
+      "conclusiveRevision": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-continuation",
+      "oracleResultSha256": "54e1a21603ef2bcaae10d8b60538f01dfabddd203d454666aba4362fd30751fd"
+    },
+    {
+      "id": "R24-20-generous",
+      "physicalFeasibilityLabel": true,
+      "helixAccepted": true,
+      "attempts": [
+        {
+          "id": "R24-20-generous",
+          "state": "not-started-global-checkpoint",
+          "physicalFeasibilityLabel": null,
+          "helixAccepted": null,
+          "oracleScope": "head-workspace-development",
+          "revisionDirectory": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-campaign",
+          "attemptDispatched": false
+        },
+        {
+          "id": "R24-20-generous",
+          "state": "recovered",
+          "physicalFeasibilityLabel": true,
+          "helixAccepted": true,
+          "oracleScope": "head-workspace-development",
+          "oracleResultSha256": "8af23f659dd599ddd7c0a332131e891fcb198b372fa9a4e0b404337938a96ea6",
+          "usedProjectBytes": 7172096,
+          "budgetProjectBytes": 67108864,
+          "elapsedSeconds": 131.94471852100014,
+          "revisionDirectory": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-continuation",
+          "attemptDispatched": true
+        }
+      ],
+      "conclusiveRevision": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-continuation",
+      "oracleResultSha256": "8af23f659dd599ddd7c0a332131e891fcb198b372fa9a4e0b404337938a96ea6"
+    },
+    {
+      "id": "R24-20-small",
+      "physicalFeasibilityLabel": true,
+      "helixAccepted": false,
+      "attempts": [
+        {
+          "id": "R24-20-small",
+          "state": "not-started-global-checkpoint",
+          "physicalFeasibilityLabel": null,
+          "helixAccepted": null,
+          "oracleScope": "head-workspace-development",
+          "revisionDirectory": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-campaign",
+          "attemptDispatched": false
+        },
+        {
+          "id": "R24-20-small",
+          "state": "recovered",
+          "physicalFeasibilityLabel": true,
+          "helixAccepted": false,
+          "oracleScope": "head-workspace-development",
+          "oracleResultSha256": "b084626cc46107b2f6218fa7ece537001899772bcf577d95a2bf4f29efef0fb0",
+          "usedProjectBytes": 7172096,
+          "budgetProjectBytes": 16777216,
+          "elapsedSeconds": 125.55491496200011,
+          "revisionDirectory": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-continuation",
+          "attemptDispatched": true
+        }
+      ],
+      "conclusiveRevision": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-continuation",
+      "oracleResultSha256": "b084626cc46107b2f6218fa7ece537001899772bcf577d95a2bf4f29efef0fb0"
+    }
+  ],
+  "summarySourceSha256": "3fec958c1a8392243395e0672edf29d9a837460d0d514988c1123ff4c4978436"
+}

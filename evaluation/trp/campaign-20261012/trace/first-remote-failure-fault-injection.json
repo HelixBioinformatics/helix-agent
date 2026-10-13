@@ -1,0 +1,786 @@
+{
+  "kind": "engineering-fault-injection; not held-out evaluation",
+  "baseline": {
+    "ok": true,
+    "files": 91,
+    "bytes": 2884825,
+    "manifestSha256": "0802926c48f1e20817975686b1bf32fea2cb9a9faf2dc013b01cfbd3250bdc90",
+    "status": "failed",
+    "externallyAnchored": true,
+    "scope": "integrity, declared links and cold counts; not biological accuracy or authorship"
+  },
+  "restored": {
+    "ok": true,
+    "files": 91,
+    "bytes": 2884825,
+    "manifestSha256": "0802926c48f1e20817975686b1bf32fea2cb9a9faf2dc013b01cfbd3250bdc90",
+    "status": "failed",
+    "externallyAnchored": true,
+    "scope": "integrity, declared links and cold counts; not biological accuracy or authorship"
+  },
+  "injected": 190,
+  "detected": 190,
+  "checks": [
+    {
+      "case": "missing:run/admission.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/admission.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/approval.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/approval.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/budget.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/budget.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/catalogue_evidence.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/catalogue_evidence.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/catalogue.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/catalogue.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/docker-endpoint.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/docker-endpoint.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/.nextflow/cache/214b7027-1cdf-4f3c-a7fd-423ce93821ef/db/000003.log",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/.nextflow/cache/214b7027-1cdf-4f3c-a7fd-423ce93821ef/db/000003.log",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/.nextflow/cache/214b7027-1cdf-4f3c-a7fd-423ce93821ef/db/CURRENT",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/.nextflow/cache/214b7027-1cdf-4f3c-a7fd-423ce93821ef/db/CURRENT",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/.nextflow/cache/214b7027-1cdf-4f3c-a7fd-423ce93821ef/db/LOCK",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/.nextflow/cache/214b7027-1cdf-4f3c-a7fd-423ce93821ef/db/LOCK",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/.nextflow/cache/214b7027-1cdf-4f3c-a7fd-423ce93821ef/db/MANIFEST-000002",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/.nextflow/cache/214b7027-1cdf-4f3c-a7fd-423ce93821ef/db/MANIFEST-000002",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/.nextflow/cache/214b7027-1cdf-4f3c-a7fd-423ce93821ef/index.ecstatic_pike",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/.nextflow/cache/214b7027-1cdf-4f3c-a7fd-423ce93821ef/index.ecstatic_pike",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/.nextflow/history",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/.nextflow/history",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/.nextflow.log",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/.nextflow.log",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/admission.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/admission.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/budget.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/budget.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/catalogue_evidence.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/catalogue_evidence.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/catalogue.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/catalogue.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/execution.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/execution.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/inspect_structure.py",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/inspect_structure.py",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/inventory.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/inventory.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/main.nf",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/main.nf",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/nextflow.config",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/nextflow.config",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/protocol.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/protocol.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/remote_runner.py",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/remote_runner.py",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/remote_target.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/remote_target.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/remote-stderr.stderr",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/remote-stderr.stderr",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/remote-stdout.log",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/remote-stdout.log",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/selection.pdb",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/selection.pdb",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/settings.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/settings.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/source.pdb",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/source.pdb",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/specification.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/specification.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/structural_catalogue.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/structural_catalogue.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/structural_report.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/structural_report.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/trace.tsv",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/trace.tsv",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/trp_geometry.py",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/trp_geometry.py",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/trp_select.py",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/trp_select.py",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/validation.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/validation.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/work/b3/2259d51f460a495f5ef938ce0866c6/.command.begin",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/work/b3/2259d51f460a495f5ef938ce0866c6/.command.begin",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/work/b3/2259d51f460a495f5ef938ce0866c6/.command.err",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/work/b3/2259d51f460a495f5ef938ce0866c6/.command.err",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/work/b3/2259d51f460a495f5ef938ce0866c6/.command.log",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/work/b3/2259d51f460a495f5ef938ce0866c6/.command.log",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/work/b3/2259d51f460a495f5ef938ce0866c6/.command.out",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/work/b3/2259d51f460a495f5ef938ce0866c6/.command.out",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/work/b3/2259d51f460a495f5ef938ce0866c6/.command.run",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/work/b3/2259d51f460a495f5ef938ce0866c6/.command.run",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/work/b3/2259d51f460a495f5ef938ce0866c6/.command.sh",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/work/b3/2259d51f460a495f5ef938ce0866c6/.command.sh",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/work/b3/2259d51f460a495f5ef938ce0866c6/.exitcode",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/work/b3/2259d51f460a495f5ef938ce0866c6/.exitcode",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/work/b3/2259d51f460a495f5ef938ce0866c6/selection.pdb",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/work/b3/2259d51f460a495f5ef938ce0866c6/selection.pdb",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/work/b3/2259d51f460a495f5ef938ce0866c6/settings.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/work/b3/2259d51f460a495f5ef938ce0866c6/settings.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/work/b3/2259d51f460a495f5ef938ce0866c6/source.pdb",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/work/b3/2259d51f460a495f5ef938ce0866c6/source.pdb",
+      "detected": true
+    },
+    {
+      "case": "missing:run/dry-run/work/b3/2259d51f460a495f5ef938ce0866c6/trp_select.py",
+      "detected": true
+    },
+    {
+      "case": "changed:run/dry-run/work/b3/2259d51f460a495f5ef938ce0866c6/trp_select.py",
+      "detected": true
+    },
+    {
+      "case": "missing:run/events.jsonl",
+      "detected": true
+    },
+    {
+      "case": "changed:run/events.jsonl",
+      "detected": true
+    },
+    {
+      "case": "missing:run/execution.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/execution.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/inspect_structure.py",
+      "detected": true
+    },
+    {
+      "case": "changed:run/inspect_structure.py",
+      "detected": true
+    },
+    {
+      "case": "missing:run/interventions.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/interventions.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/inventory.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/inventory.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/main.nf",
+      "detected": true
+    },
+    {
+      "case": "changed:run/main.nf",
+      "detected": true
+    },
+    {
+      "case": "missing:run/methods.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/methods.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/methods.md",
+      "detected": true
+    },
+    {
+      "case": "changed:run/methods.md",
+      "detected": true
+    },
+    {
+      "case": "missing:run/nextflow.config",
+      "detected": true
+    },
+    {
+      "case": "changed:run/nextflow.config",
+      "detected": true
+    },
+    {
+      "case": "missing:run/processes.jsonl",
+      "detected": true
+    },
+    {
+      "case": "changed:run/processes.jsonl",
+      "detected": true
+    },
+    {
+      "case": "missing:run/protocol.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/protocol.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/recheck.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/recheck.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/remote_runner.py",
+      "detected": true
+    },
+    {
+      "case": "changed:run/remote_runner.py",
+      "detected": true
+    },
+    {
+      "case": "missing:run/remote_target.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/remote_target.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/remote-approved.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/remote-approved.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/remote-cancel-request.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/remote-cancel-request.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/remote-cancellation.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/remote-cancellation.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/remote-config.log",
+      "detected": true
+    },
+    {
+      "case": "changed:run/remote-config.log",
+      "detected": true
+    },
+    {
+      "case": "missing:run/remote-config.stderr",
+      "detected": true
+    },
+    {
+      "case": "changed:run/remote-config.stderr",
+      "detected": true
+    },
+    {
+      "case": "missing:run/remote-controller-identity.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/remote-controller-identity.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/remote-controller.log",
+      "detected": true
+    },
+    {
+      "case": "changed:run/remote-controller.log",
+      "detected": true
+    },
+    {
+      "case": "missing:run/remote-controller.stderr",
+      "detected": true
+    },
+    {
+      "case": "changed:run/remote-controller.stderr",
+      "detected": true
+    },
+    {
+      "case": "missing:run/remote-head-observation.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/remote-head-observation.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/remote-job-cancellation.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/remote-job-cancellation.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/remote-native-jobs.jsonl",
+      "detected": true
+    },
+    {
+      "case": "changed:run/remote-native-jobs.jsonl",
+      "detected": true
+    },
+    {
+      "case": "missing:run/remote-observation.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/remote-observation.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/remote-processes.jsonl",
+      "detected": true
+    },
+    {
+      "case": "changed:run/remote-processes.jsonl",
+      "detected": true
+    },
+    {
+      "case": "missing:run/remote-terminal.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/remote-terminal.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/remote-transfer.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/remote-transfer.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/remote-version.log",
+      "detected": true
+    },
+    {
+      "case": "changed:run/remote-version.log",
+      "detected": true
+    },
+    {
+      "case": "missing:run/remote-version.stderr",
+      "detected": true
+    },
+    {
+      "case": "changed:run/remote-version.stderr",
+      "detected": true
+    },
+    {
+      "case": "missing:run/run.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/run.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/selection.pdb",
+      "detected": true
+    },
+    {
+      "case": "changed:run/selection.pdb",
+      "detected": true
+    },
+    {
+      "case": "missing:run/settings.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/settings.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/software.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/software.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/source.pdb",
+      "detected": true
+    },
+    {
+      "case": "changed:run/source.pdb",
+      "detected": true
+    },
+    {
+      "case": "missing:run/specification.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/specification.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/structural_catalogue.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/structural_catalogue.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/structural_report.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/structural_report.json",
+      "detected": true
+    },
+    {
+      "case": "missing:run/trp_geometry.py",
+      "detected": true
+    },
+    {
+      "case": "changed:run/trp_geometry.py",
+      "detected": true
+    },
+    {
+      "case": "missing:run/trp_select.py",
+      "detected": true
+    },
+    {
+      "case": "changed:run/trp_select.py",
+      "detected": true
+    },
+    {
+      "case": "missing:run/validation.json",
+      "detected": true
+    },
+    {
+      "case": "changed:run/validation.json",
+      "detected": true
+    },
+    {
+      "case": "missing:verify.py",
+      "detected": true
+    },
+    {
+      "case": "changed:verify.py",
+      "detected": true
+    },
+    {
+      "case": "path:../escape",
+      "detected": true
+    },
+    {
+      "case": "path:/tmp/escape",
+      "detected": true
+    },
+    {
+      "case": "path:run/../escape",
+      "detected": true
+    },
+    {
+      "case": "path:C:\\escape",
+      "detected": true
+    },
+    {
+      "case": "path:run//source.pdb",
+      "detected": true
+    },
+    {
+      "case": "unlisted-file",
+      "detected": true
+    },
+    {
+      "case": "external-symlink",
+      "detected": true
+    },
+    {
+      "case": "wrong-anchor",
+      "detected": true
+    }
+  ],
+  "verifierSha256": "5a60afbfd245f2b06ebcec5e409b971d7131a8faaa2f01b136f40de2283378a6"
+}

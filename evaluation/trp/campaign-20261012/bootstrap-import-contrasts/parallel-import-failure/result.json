@@ -1,0 +1,9 @@
+{
+  "scratch": "/tmp/helix-bootstrap-parallel-probe-ossjb0od",
+  "mode": "parallel",
+  "exitCode": 1,
+  "elapsedSeconds": 0.6981913419949706,
+  "stdout": "STEP:application-imports\n",
+  "stderr": "278 | \n279 |       return Service.of({ acquire, withLock })\n280 |     }),\n281 |   )\n282 | \n283 |   export const node = makeGlobalNode({ service: Service, layer: layer, deps: [Global.node, FSUtil.node] })\n                                                                                    ^\nReferenceError: Cannot access 'node' before initialization.\n      at <anonymous> (/home/webiwabou/Projects/bioinformatica-org/packages/core/src/util/effect-flock.ts:283:79)\n      at /home/webiwabou/Projects/bioinformatica-org/packages/core/src/util/effect-flock.ts:283:106\n\nBun v1.3.14 (Linux x64)\n",
+  "guardSeconds": 12
+}

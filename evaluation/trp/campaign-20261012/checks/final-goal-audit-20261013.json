@@ -1,0 +1,735 @@
+{
+  "schema": "helix-final-goal-requirement-audit/1.0",
+  "auditedAt": "2026-10-13T18:09:41.230035+00:00",
+  "author": "independent_evaluation_audit_agent",
+  "readOnlyExceptThisReport": true,
+  "newCloudCalls": 0,
+  "newBroadTests": 0,
+  "scope": "Final requirement audit of the authorized adapted technical campaign. It does not certify all 21 thesis metrics.",
+  "sources": {
+    "user_goal": {
+      "path": "/home/webiwabou/.codex/attachments/6fb1e6f3-caa6-490f-bf80-bd1ed8726787/pasted-text-1.txt",
+      "sha256": "93644be29e1ca152b47cce94dbec1804d99e7b3e9ea2e2ab13c8ef00edc3b301"
+    },
+    "plan": {
+      "path": "evaluation/trp/campaign-20261012/campaign-plan.json",
+      "sha256": "29b55ed207f1ef8f006ede5582bdf4819ed1d1960967a9d3ea715d8dfaa180bf"
+    },
+    "protocol": {
+      "path": "evaluation/trp/protocol.json",
+      "sha256": "edd4e3f89c0a0c0f37b7acfba385d46a25780f3c06d68395bb975dbf0add5c72"
+    },
+    "traceability": {
+      "path": "docs/tesis/trazabilidad.json",
+      "sha256": "3498e7f3f1a8be4a23be28fe3824df2de7379ff6bb712415d6731b5a499b3166"
+    },
+    "checkpoint": {
+      "path": "docs/tesis/checkpoint.json",
+      "sha256": "4f2c9c8cd0aac0f3a3508a442492dff2988199ec67b0477c4ad47313ebaa3b2d"
+    },
+    "resource_summary": {
+      "path": "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/summary.json",
+      "sha256": "a53095ee21ad8a1a4ba2efcfb7245e3e082cf5d1b1a33419685150f7026970e4"
+    },
+    "post_integration": {
+      "path": "evaluation/trp/campaign-20261012/checks/post-campaign-production-20261013/cloud/summary.json",
+      "sha256": "79d058fee282b559e7133ce43d602b3633484d6f5829a4d5e1bd4dae0df6530f"
+    },
+    "installed_document": {
+      "path": "evaluation/trp/campaign-20261012/document/installation.json",
+      "sha256": "9c85c3ac0b2ce658801c087dcb195a31c076b968ffd5781b4faf56229d53e828"
+    },
+    "lab1_stop": {
+      "path": "evaluation/trp/campaign-20261012/cloud/lab1/final-stopped-post-corrections-20261013.json",
+      "sha256": "9175710c5605bdaa353e89a49feb59ef05f6faf40a6d4a848cb4b470161f9fb7"
+    },
+    "lab2_stop": {
+      "path": "evaluation/trp/campaign-20261012/cloud/lab2/final-stopped-post-corrections-20261013.json",
+      "sha256": "20feafae4b138f28fb6e23c3ccb4587f681407293154ae8c5b091fd95848ff17"
+    },
+    "prior_plan_snapshot": {
+      "path": "evaluation/trp/campaign-20261012/checks/final-goal-plan-before-delivery-20261013.json",
+      "sha256": "8e5ef5b8e8b975b159030c647f6e0bf75cc5a05a1bf4115277dcd2647d745b93"
+    },
+    "final_readme": {
+      "path": "evaluation/trp/campaign-20261012/README.md",
+      "sha256": "cd41e4a979c6001afbccb19e841d5fab786119bd341ebae655587d611045e794"
+    },
+    "progress_at_audit": {
+      "path": "evaluation/trp/campaign-20261012/progress.json",
+      "sha256": "15ad8b62765bad92cf5da1b50e68d253e746e362886b36934a658d47df3b7077"
+    }
+  },
+  "checks": [
+    {
+      "id": "same_21_result_ids_and_protocol",
+      "passed": true
+    },
+    {
+      "id": "model_and_human_metrics_explicitly_separate",
+      "passed": true
+    },
+    {
+      "id": "static_invalid30_all_expected",
+      "passed": true
+    },
+    {
+      "id": "50_graphs_observed",
+      "passed": true
+    },
+    {
+      "id": "original_matrix_fixed_anchor",
+      "passed": true
+    },
+    {
+      "id": "original40_unknowns_retained",
+      "passed": true
+    },
+    {
+      "id": "boundary_failure_retained",
+      "passed": true
+    },
+    {
+      "id": "post_repair_current_default_verified",
+      "passed": true
+    },
+    {
+      "id": "post_repair_positive_and_negative_truth",
+      "passed": true
+    },
+    {
+      "id": "post_repair_quiescent",
+      "passed": true
+    },
+    {
+      "id": "six_ec2_stopped_fresh_sdk",
+      "passed": true
+    },
+    {
+      "id": "installed_word_direct_hash",
+      "passed": true
+    },
+    {
+      "id": "installed_pdf_direct_hash",
+      "passed": true
+    },
+    {
+      "id": "installed_authorBackup_direct_hash",
+      "passed": true
+    },
+    {
+      "id": "installed_document_qualification",
+      "passed": true
+    },
+    {
+      "id": "sdk_untouched",
+      "passed": true
+    }
+  ],
+  "checksPassed": 16,
+  "technicalExecutionClosureBlockers": [],
+  "requiredViableExperimentLeftUnexecutedInAdaptedCampaign": false,
+  "additionalAwsAccountsNeeded": 0,
+  "campaignAllObservationsRecovered": true,
+  "all21ThesisMetricsCompleted": false,
+  "canonicalSoftwareStates": {
+    "parcial": 8,
+    "implementado": 13
+  },
+  "requirements": [
+    {
+      "id": "G1",
+      "requirement": "Auditar estado, 21 IDs y dependencias",
+      "status": "achieved",
+      "conclusion": "Baseline audit and current canonical 21-result map retain implementation vs empirical distinctions.",
+      "evidence": [
+        "audit.json",
+        "campaign-plan.json"
+      ]
+    },
+    {
+      "id": "G2",
+      "requirement": "Integrar Helix con Slurm, aprobación, transferencia y procedencia",
+      "status": "achieved_engineering_scope",
+      "conclusion": "Real approved remote execution, file hash transfer, image/profile binding, four native jobs, copied results and cold manifests; ordinary SSH and optional same-scope strict backend are qualified separately.",
+      "evidence": [
+        "cloud/workflow-summary.json",
+        "checks/post-campaign-production-20261013/cloud/summary.json"
+      ]
+    },
+    {
+      "id": "G3",
+      "requirement": "Ejecutar fallos, límites, recuperación y todas las pruebas viables de la campaña adaptada",
+      "status": "achieved_with_failed_endpoint_and_unknowns",
+      "conclusion": "All defined engineering observations were performed: 50 valid and 30 invalid static contracts, 40 kernel/scheduler contrasts, independent head workspace contrasts, and full-client original 40, boundary six and supplement four. Failed attempts and four unknown labels remain. The boundary false-rejection endpoint fails the unchanged 5% threshold. This is an observed failed endpoint, not an unperformed test.",
+      "evidence": [
+        "checks/contract-graphs.json",
+        "cloud/lab2-pressure/summary.json",
+        "aggregate-resource-contrasts/summary.json",
+        "event-negative-contrasts/audit.json"
+      ]
+    },
+    {
+      "id": "G4",
+      "requirement": "Estudiar originales Pratt sin inventar clasificación física",
+      "status": "descriptive_scope_achieved_scientific_dependency_open",
+      "conclusion": "The 78 original models remain preserved. CCTBX yielded 105/108 primary observables and a separately frozen follow-up recovered 3/3 timeouts. FreeSASA yielded 108/108 descriptive observations; real adapter references match the external engines. Physical classification and certified negative labels are still absent.",
+      "evidence": [
+        "structural/summary.json",
+        "structural/runtime-600/summary.json",
+        "structural/freesasa/summary.json"
+      ]
+    },
+    {
+      "id": "G5",
+      "requirement": "Usar el modelo y límites acordados",
+      "status": "configuration_and_bounded_development_pilot_achieved_with_provider_limits",
+      "conclusion": "The existing OAuth login used gpt-6-sol with configured medium reasoning in four development cases. The configured step cap was observed. The requested 8192 output cap is removed by the OAuth plugin; effective billing and provider revision remain unobserved and qualified. No substitute model or reserved scientific inference was used.",
+      "evidence": [
+        "model-pilot/audit.json",
+        "model-pilot/settings-probe-request/audit.json"
+      ]
+    },
+    {
+      "id": "G6",
+      "requirement": "Laboratorios independientes, presupuesto y tiempo",
+      "status": "achieved_with_billing_qualification",
+      "conclusion": "Both three-node labs were tested independently, without pooling memory or credits. Session and guest 180-minute deadlines were bound prospectively. Legitimate continuations preserved earlier attempts. Fresh SDK observations confirm six stopped instances. Each lab retains 90 GiB storage; credit reports have billing lag and are not final invoices.",
+      "evidence": [
+        "cloud/lab2/prepare-post-campaign-corrections/prepare-status.json",
+        "cloud/lab1/final-stopped-post-corrections-20261013.json",
+        "cloud/lab2/final-stopped-post-corrections-20261013.json"
+      ]
+    },
+    {
+      "id": "G7",
+      "requirement": "Adaptar antes de medir, no rebajar umbrales ni borrar fallos",
+      "status": "achieved",
+      "conclusion": "The manual Slurm and strict-profile protocols were frozen before their outputs. Calibration preceded the final original 40. Original, boundary and later supplement cohorts remain separate, with the supplement selected after the original and frozen before its own outputs. No threshold was changed to obtain a favorable result.",
+      "evidence": [
+        "aggregate-resource-contrasts/campaign-inputs/freeze.json",
+        "aggregate-resource-contrasts/boundary-inputs/freeze.json",
+        "aggregate-resource-contrasts/extension-inputs/freeze.json",
+        "aggregate-resource-contrasts/calibration-before-final-campaign.json"
+      ]
+    },
+    {
+      "id": "G8",
+      "requirement": "Actualizar Word, anexos, resultados, trazabilidad y reproducción",
+      "status": "installed_and_verified_delivery_metadata_pending",
+      "conclusion": "Word and PDF are installed and directly verified: 155 pages, 261 render checks, ten new red notes, protected Chapters 1 to 3 and exact author-source backup. The 21 IDs and missing scientific metrics remain explicit. Root owns the final evidence archives and selected Git delivery.",
+      "evidence": [
+        "document/installation.json",
+        "document/final-rendered-audit.json"
+      ]
+    },
+    {
+      "id": "G9",
+      "requirement": "Preservar branding, trabajo del autor y commits permitidos",
+      "status": "verified_current_sources_final_delivery_pending",
+      "conclusion": "Helix branding is preserved. The author Word source has an exact backup, and the user SDK file hash is unchanged. Existing production/helper commits have English titles and no body. Final documentation and evidence commit selection belongs to root.",
+      "evidence": [
+        "document/installation.json",
+        "checks/post-campaign-production-20261013/source-amendment.json"
+      ]
+    }
+  ],
+  "milestones": [
+    {
+      "id": "M1",
+      "name": "Current-state audit and preservation",
+      "audited_current_status": "baseline_and_current_state_verified",
+      "required_viable_test_remaining": false,
+      "prior_plan_status": "completed_for_baseline",
+      "current_delivery_plan_status": "completed_for_baseline"
+    },
+    {
+      "id": "M2",
+      "name": "Helix automatic Slurm integration",
+      "audited_current_status": "remote_integration_verified_engineering_scope",
+      "required_viable_test_remaining": false,
+      "prior_plan_status": "actual_remote_workflows_and_clean_cancellation_verified_engineering_scope",
+      "current_delivery_plan_status": "actual_remote_workflows_and_clean_cancellation_verified_engineering_scope"
+    },
+    {
+      "id": "M3",
+      "name": "Prospective deterministic contract and trace campaign",
+      "audited_current_status": "static_runtime_trace_and_cold_checks_verified_engineering_scope",
+      "required_viable_test_remaining": false,
+      "prior_plan_status": "static_graphs_all50_runtime_variants_and_cold_bundle_audits_verified_engineering_scope",
+      "current_delivery_plan_status": "static_graphs_all50_runtime_variants_and_cold_bundle_audits_verified_engineering_scope"
+    },
+    {
+      "id": "M4",
+      "name": "Both-account resource and failure contrasts",
+      "audited_current_status": "all_defined_resource_contrasts_observed_boundary_endpoint_failed",
+      "required_viable_test_remaining": false,
+      "prior_plan_status": "hardware_pressure_verified_independent_workspace_admission_campaign_running",
+      "current_delivery_plan_status": "all50_resource_contrasts_terminal_selected_interpretations_verified_boundary_threshold_failed_unknowns_preserved"
+    },
+    {
+      "id": "M5",
+      "name": "Effective model configuration and development pilot",
+      "audited_current_status": "development_model_verified_provider_output_cap_and_billing_unobserved",
+      "required_viable_test_remaining": false,
+      "prior_plan_status": "four_development_cases_verified_effective_settings_limits_recorded",
+      "current_delivery_plan_status": "four_development_cases_verified_effective_settings_limits_recorded"
+    },
+    {
+      "id": "M6",
+      "name": "Reserved human-dependent language and intervention evaluation",
+      "audited_current_status": "independent_references_and_turns_pending",
+      "required_viable_test_remaining": false,
+      "prior_plan_status": "external_inputs_pending_continue_preparation",
+      "current_delivery_plan_status": "external_inputs_pending_continue_preparation"
+    },
+    {
+      "id": "M7",
+      "name": "Structural silent-failure evaluation",
+      "audited_current_status": "descriptive_controls_completed_physical_rule_classifier_and_labels_pending",
+      "required_viable_test_remaining": false,
+      "prior_plan_status": "steric_and_solvent_observables_verified_physical_classifier_and_independent_labels_pending",
+      "current_delivery_plan_status": "steric_and_solvent_observables_verified_physical_classifier_and_independent_labels_pending"
+    },
+    {
+      "id": "M8",
+      "name": "Integrated report, reproducibility and completion audit",
+      "audited_current_status": "document_installed_lifecycle_verified_root_archives_git_delivery_pending",
+      "required_viable_test_remaining": false,
+      "prior_plan_status": "candidate_word_generated_integration_and_final_lifecycle_pending",
+      "current_delivery_plan_status": "word_pdf_installed_render_and_visual_verified_six_compute_nodes_stopped_final_archive_and_git_delivery_finishing"
+    }
+  ],
+  "expectedResults": [
+    {
+      "id": "R1.1",
+      "deliverable": null,
+      "canonical_state": "parcial",
+      "interpreted_state": "partial_explicit_limit_or_pending_metric",
+      "scope_and_pending": "Catálogo 1.2.0 con tres operaciones admitidas de seis auditadas. Se conserva STRPsearch; ReUPred y el contrato de loci/API de RepeatsDB siguen pendientes. Los observables CCTBX/FreeSASA no amplían por sí solos el catálogo de composición.",
+      "independent_scientific_metric_not_imputed": true,
+      "evidence": []
+    },
+    {
+      "id": "R1.2",
+      "deliverable": null,
+      "canonical_state": "implementado",
+      "interpreted_state": "software_or_design_verified_in_declared_scope",
+      "scope_and_pending": "Fuentes, elicitación y aprobación por digest verificadas para la ruta admitida local y SSH/Slurm. Cuatro pilotos reales de gpt-6-sol/medium probaron preparación o límites de alcance, con hechos suministrados; no acreditan comprensión lingüística externa.",
+      "independent_scientific_metric_not_imputed": true,
+      "evidence": [
+        "evaluation/trp/campaign-20261012/model-pilot/audit.json",
+        "evaluation/trp/campaign-20261012/model-pilot/settings-probe-request/audit.json"
+      ]
+    },
+    {
+      "id": "R1.3",
+      "deliverable": null,
+      "canonical_state": "parcial",
+      "interpreted_state": "partial_explicit_limit_or_pending_metric",
+      "scope_and_pending": "Asesora seleccionada como experta independiente según declaración del autor. Entrega real de 70 solicitudes preparada, con 50 propuestas factibles y 20 límites. Referencias humanas, factibilidad definitiva y dos paráfrasis por intención siguen sin recibir; estabilidad reservada no medida.",
+      "independent_scientific_metric_not_imputed": true,
+      "evidence": [
+        "docs/tesis/evaluacion-experta-20260930/README.md",
+        "docs/tesis/evaluacion-experta-20260930/para-asesora/evaluacion.xlsx"
+      ]
+    },
+    {
+      "id": "R1.4",
+      "deliverable": null,
+      "canonical_state": "implementado",
+      "interpreted_state": "software_or_design_verified_in_declared_scope",
+      "scope_and_pending": "Protocolo y congelaciones por campaña disponibles; se ejecutó desarrollo técnico en dos clústeres y cuatro pilotos del modelo. Falta congelar la evaluación científica con referencias/particiones independientes. El límite solicitado de 8192 tokens no se aplica como cap duro bajo OAuth; factura efectiva desconocida.",
+      "independent_scientific_metric_not_imputed": true,
+      "evidence": [
+        "evaluation/trp/campaign-20261012/cloud/workflow-summary.json",
+        "evaluation/trp/campaign-20261012/model-pilot/settings-probe-request/audit.json"
+      ]
+    },
+    {
+      "id": "R1.5",
+      "deliverable": null,
+      "canonical_state": "implementado",
+      "interpreted_state": "software_or_design_verified_in_declared_scope",
+      "scope_and_pending": "Motor ejecutado sobre 50 variantes congeladas de 2XQH/A: 52 intentos, 48 éxitos y dos fallos iniciales conservados, dos reintentos reparados y 50 casos finalmente verificados. Es ingeniería con aprobación sintética sobre una proteína; tasa científica de R1.5 y reserva de intenciones permanecen sin medir.",
+      "independent_scientific_metric_not_imputed": true,
+      "evidence": [
+        "evaluation/trp/campaign-20261012/cloud/workflow-summary.json"
+      ]
+    },
+    {
+      "id": "R1.6",
+      "deliverable": null,
+      "canonical_state": "parcial",
+      "interpreted_state": "partial_explicit_limit_or_pending_metric",
+      "scope_and_pending": "SIFTS/UniProt y numeración label/autor integrados. Referencia remota: 12 unidades, CSV idéntico y 156 archivos verificados. Contraste público de 30 cadenas: 11751/11751 correspondencias label/autor y parser SIFTS 30/30; 28 preparaciones con 11215 residuos y dos rechazos correctos por ausencia de CA. Gemmi léxico compartido, uniones independientes; cero inserciones observadas no valida ese dominio. Es desarrollo, no reserva ni anotación biológica. Ruta AFDB integrada; contratos restantes, gobernanza estricta conjunta y evaluación humana reservada siguen abiertos.",
+      "independent_scientific_metric_not_imputed": true,
+      "evidence": [
+        "evaluation/trp/campaign-20261012/cloud/lab1/mapped-reference-protocol/driver-terminal.json",
+        "evaluation/trp/campaign-20261012/trace/mapped-reference.json",
+        "evaluation/trp/campaign-20261012/mapping-public-contrasts/summary.json",
+        "evaluation/trp/campaign-20261012/mapping-public-contrasts/audit.json",
+        "evaluation/trp/campaign-20261012/mapping-public-contrasts/manifest.json",
+        "evaluation/trp/campaign-20261012/mapping-public-contrasts/protocol.json",
+        "evaluation/trp/campaign-20261012/mapping-public-contrasts/oracle-freeze.json",
+        "evaluation/trp/campaign-20261012/checks/root-review-20261013/public-mapping.json"
+      ]
+    },
+    {
+      "id": "R1.7",
+      "deliverable": null,
+      "canonical_state": "implementado",
+      "interpreted_state": "software_or_design_verified_in_declared_scope",
+      "scope_and_pending": "Validación, aprobación y revalidación de entradas/configuración preceden al envío. Recorridos stub y reales verificados en Slurm y SIFTS; no se presupone pendiente la integración AFDB ya existente. Falta ampliar dominios y contrastar la reserva independiente.",
+      "independent_scientific_metric_not_imputed": true,
+      "evidence": [
+        "evaluation/trp/campaign-20261012/trace/mapped-reference.json",
+        "evaluation/trp/campaign-20261012/cloud/workflow-summary.json"
+      ]
+    },
+    {
+      "id": "R1.8",
+      "deliverable": null,
+      "canonical_state": "implementado",
+      "interpreted_state": "software_or_design_verified_in_declared_scope",
+      "scope_and_pending": "Informes, estados no evaluables y motivos conservados en paquetes actuales: 156 archivos en la referencia SIFTS y 143 en la cancelación limpia. La auditoría comprueba el contenido técnico; cobertura científica completa permanece abierta.",
+      "independent_scientific_metric_not_imputed": true,
+      "evidence": [
+        "evaluation/trp/campaign-20261012/trace/mapped-reference.json",
+        "evaluation/trp/campaign-20261012/trace/running-cancellation-clean.json"
+      ]
+    },
+    {
+      "id": "R1.9",
+      "deliverable": null,
+      "canonical_state": "parcial",
+      "interpreted_state": "partial_explicit_limit_or_pending_metric",
+      "scope_and_pending": "Se conservan las 33 pruebas inválidas anteriores. Nuevo corpus técnico congelado prepara 30 composiciones inválidas y 50 variantes válidas sobre 2XQH/A; los conteos de preparación no son una tasa de rechazo reservada. T-GRAPH independiente sigue pendiente.",
+      "independent_scientific_metric_not_imputed": true,
+      "evidence": [
+        "evaluation/trp/campaign-20261012/contract-corpus/graphs.json"
+      ]
+    },
+    {
+      "id": "R2.1",
+      "deliverable": null,
+      "canonical_state": "implementado",
+      "interpreted_state": "software_or_design_verified_in_declared_scope",
+      "scope_and_pending": "Inventario remoto real en dos clústeres de tres nodos: controlador y cada trabajador se admiten por separado, sin sumar RAM entre nodos. Se reobservan capacidad y ventanas temporales antes del análisis. La estación local y el clúster son scopes distintos.",
+      "independent_scientific_metric_not_imputed": true,
+      "evidence": [
+        "evaluation/trp/campaign-20261012/cloud/workflow-summary.json",
+        "evaluation/trp/campaign-20261012/cloud/lab1/mapped-reference-protocol/driver-terminal.json"
+      ]
+    },
+    {
+      "id": "R2.2",
+      "deliverable": null,
+      "canonical_state": "implementado",
+      "interpreted_state": "software_or_design_verified_in_declared_scope",
+      "scope_and_pending": "Perfil opcional co-localizado verificado con el cliente real, SQLite, cachés, temporales, trabajo NFS y exportación bajo una cuota XFS, y cliente/controlador bajo cgroup compartido. Los 26 flujos completos reprodujeron los conteos sin diferencias; no se observaron excesos de cuota ni de predicción en casos admitidos. Mediana de sobreestimación: 13,90 % en los 18 positivos originales, 11,20 % en frontera y 12,64 % en el suplemento. La subestimación inicial de 16 084 992 bytes se conserva; la reserva de 32 MiB se calibró antes de congelar los casos. Son bloques asignados muestreados cada 0,5 s; software instalado, cachés compartidas y telemetría externa quedan fuera. No demuestra el indicador científico reservado ni las mismas garantías en la ruta SSH ordinaria o todas las rutas del dominio.",
+      "independent_scientific_metric_not_imputed": true,
+      "evidence": [
+        "evaluation/trp/campaign-20261012/cloud/lab1/mapped-reference-protocol/driver-terminal.json",
+        "evaluation/trp/campaign-20261012/trace/r24-progress-independent-audit.json",
+        "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/summary.json",
+        "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/final-package-verification.json"
+      ]
+    },
+    {
+      "id": "R2.3",
+      "deliverable": null,
+      "canonical_state": "implementado",
+      "interpreted_state": "software_or_design_verified_in_declared_scope",
+      "scope_and_pending": "Decisiones originales de admisión por capacidad, presupuesto, ventana y configuración conservadas para los 50 contrastes del cliente completo. El contrafactual sólo fuerza rechazos exclusivos de estimación workBytes, sin cambiar la decisión real ni saltar cuotas, cgroups, permisos, propiedad o plazo. En frontera, tres flujos rechazados completaron la ejecución y demostraron falsos rechazos. La ruta SSH ordinaria mantiene garantías diferentes.",
+      "independent_scientific_metric_not_imputed": true,
+      "evidence": [
+        "evaluation/trp/campaign-20261012/cloud/lab1/cancellation/next-ctx-abort/driver-terminal.json",
+        "evaluation/trp/campaign-20261012/trace/r24-progress-independent-audit.json",
+        "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/summary.json",
+        "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/final-package-verification.json"
+      ]
+    },
+    {
+      "id": "R2.4",
+      "deliverable": null,
+      "canonical_state": "parcial",
+      "interpreted_state": "partial_explicit_limit_or_pending_metric",
+      "scope_and_pending": "Campaña del cliente completo terminada: originales 40 con 18 factibles, 18 inviables y 4 desconocidos; 0/18 falsos rechazos y 36/40 aciertos comprobados, sin contar los desconocidos como correctos. Frontera separada: 6 factibles, 3/6 falsos rechazos (50 %), por lo que falla el umbral de 5 %. Suplemento posterior separado: 2 factibles y 2 inviables. Sólo la unión de originales y suplemento, 44 observados con 4 desconocidos, alcanza 20/20 reales; los 40 originales no alcanzan ese mínimo. Todas las variantes proceden de una proteína de desarrollo. El contraste anterior limitado al head se conserva con su alcance propio; la tasa científica de R2.4 permanece sin medir.",
+      "independent_scientific_metric_not_imputed": true,
+      "evidence": [
+        "evaluation/trp/campaign-20261012/cloud/lab2/r24-summary.json",
+        "evaluation/trp/campaign-20261012/cloud/lab2/r24-campaign/all-original-attempts.json",
+        "evaluation/trp/campaign-20261012/cloud/lab2/r24-extension/summary.json",
+        "evaluation/trp/campaign-20261012/cloud/lab2/r24-evidence-manifest.json",
+        "evaluation/trp/campaign-20261012/trace/r24-canonical-source-review.json",
+        "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/summary.json",
+        "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/final-package-verification.json"
+      ]
+    },
+    {
+      "id": "R3.1",
+      "deliverable": null,
+      "canonical_state": "implementado",
+      "interpreted_state": "software_or_design_verified_in_declared_scope",
+      "scope_and_pending": "Integridad y reproducción en frío verificadas con anclas externas. La matriz original conserva sus 1766 controles y 21 059 archivos; no se reescribió. La corrección 9ada336 refuerza métodos y compuertas. Dos paquetes nuevos verifican por defecto sin legacy: positivo de 152 archivos y negativo automático de 151. No certifica autoría, verdad biológica ni satisfacción científica de los 21 indicadores.",
+      "independent_scientific_metric_not_imputed": true,
+      "evidence": [
+        "evaluation/trp/campaign-20261012/trace/mapped-reference.json",
+        "evaluation/trp/campaign-20261012/trace/mapped-reference-copy.json",
+        "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/summary.json",
+        "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/final-package-verification.json",
+        "evaluation/trp/campaign-20261012/checks/post-campaign-production-20261013/cloud/summary.json"
+      ]
+    },
+    {
+      "id": "R3.2",
+      "deliverable": null,
+      "canonical_state": "implementado",
+      "interpreted_state": "software_or_design_verified_in_declared_scope",
+      "scope_and_pending": "Decisiones y negativas conservadas; cuatro sesiones locales contrastan 13/13 registros y una revisión independiente aporta 31 controles. Después de reparar el seguimiento, una inyección única sobre el trabajo propio 384 observado RUNNING terminó CANCELLED, ExitCode 0:9; el ledger conservó el terminal tras pérdida de cola y Helix archivó automáticamente el fallo. Auditoría conjunta: 89 controles; tres nodos sin trabajos, contenedores ni procesos propios antes de detenerlos. Aprobación sintética no es anotación humana ni kappa; no hay P95 medido.",
+      "independent_scientific_metric_not_imputed": true,
+      "evidence": [
+        "evaluation/trp/campaign-20261012/cloud/lab1/cancellation/next-ctx-abort/driver-terminal.json",
+        "evaluation/trp/campaign-20261012/trace/running-cancellation-clean.json",
+        "evaluation/trp/campaign-20261012/cloud/workflow-summary.json",
+        "evaluation/trp/campaign-20261012/event-negative-contrasts/audit.json",
+        "evaluation/trp/campaign-20261012/event-negative-contrasts/driver-terminal.json",
+        "evaluation/trp/campaign-20261012/trace/event-negative-second-review.json",
+        "evaluation/trp/campaign-20261012/trace/event-negative-independent-agent-review.json",
+        "evaluation/trp/campaign-20261012/checks/post-campaign-production-20261013/cloud/summary.json"
+      ]
+    },
+    {
+      "id": "R3.3",
+      "deliverable": null,
+      "canonical_state": "parcial",
+      "interpreted_state": "partial_explicit_limit_or_pending_metric",
+      "scope_and_pending": "Conteo heurístico y respuestas UI diferenciados. Asesora independiente seleccionada y material real preparado, pero aún faltan conversaciones reales anotadas sin adjudicar, cobertura de sesión, concordancia kappa y comparación emparejada. Las aprobaciones sintéticas no sustituyen esas etiquetas.",
+      "independent_scientific_metric_not_imputed": true,
+      "evidence": [
+        "docs/tesis/evaluacion-experta-20260930/README.md",
+        "evaluation/trp/campaign-20261012/cloud/lab1/cancellation/next-ctx-abort/driver-terminal.json"
+      ]
+    },
+    {
+      "id": "R3.4",
+      "deliverable": null,
+      "canonical_state": "implementado",
+      "interpreted_state": "software_or_design_verified_in_declared_scope",
+      "scope_and_pending": "Backend corregido en 9ada336 y derivado de la ejecución real: registro de ejecución, Run y evento de finalización coinciden en la nueva integración. El verificador por defecto contrasta métodos y compuertas; los paquetes históricos con metadatos anteriores conservan su calificación explícita, fuentes y anclas. Los 89 controles nuevos no borran afirmaciones históricas ni demuestran corrección científica sobre una reserva independiente.",
+      "independent_scientific_metric_not_imputed": true,
+      "evidence": [
+        "evaluation/trp/campaign-20261012/cloud/workflow-summary.json",
+        "evaluation/trp/campaign-20261012/trace/mapped-reference.json",
+        "evaluation/trp/campaign-20261012/trace/running-cancellation-clean.json",
+        "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/summary.json",
+        "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/final-package-verification.json",
+        "evaluation/trp/campaign-20261012/checks/post-campaign-production-20261013/cloud/summary.json"
+      ]
+    },
+    {
+      "id": "R3.5",
+      "deliverable": null,
+      "canonical_state": "implementado",
+      "interpreted_state": "software_or_design_verified_in_declared_scope",
+      "scope_and_pending": "Nueve controles documentados. C9 incorpora opcionalmente observables estéricos CCTBX y de superficie FreeSASA con fuentes/hash, manteniendo el veredicto amplio not_evaluable. No añade un clasificador validado de fallos físicos.",
+      "independent_scientific_metric_not_imputed": true,
+      "evidence": [
+        "evaluation/trp/campaign-20261012/structural/summary.json",
+        "evaluation/trp/campaign-20261012/structural/freesasa/integration/agent-reference.json"
+      ]
+    },
+    {
+      "id": "R3.6",
+      "deliverable": null,
+      "canonical_state": "parcial",
+      "interpreted_state": "partial_explicit_limit_or_pending_metric",
+      "scope_and_pending": "AFDB/ColabFold, confianza y PAE locales admitidos para inspección; 78 originales Pratt disponibles. CCTBX produjo observables en 105/108 casos al límite 180 s; tres timeouts conservados y recuperados en contraste 600 s. FreeSASA descriptivo evaluó 108/108. Batería física completa y gobernanza común de todas las rutas siguen pendientes.",
+      "independent_scientific_metric_not_imputed": true,
+      "evidence": [
+        "evaluation/trp/campaign-20261012/structural/summary.json",
+        "evaluation/trp/campaign-20261012/structural/runtime-600/summary.json",
+        "evaluation/trp/campaign-20261012/structural/freesasa/summary.json",
+        "evaluation/trp/campaign-20261012/structural/freesasa/integration/agent-reference.json"
+      ]
+    },
+    {
+      "id": "R3.7",
+      "deliverable": null,
+      "canonical_state": "implementado",
+      "interpreted_state": "software_or_design_verified_in_declared_scope",
+      "scope_and_pending": "Artefactos por instancia y envolturas opcionales de diagnóstico se ligan al digest y al paquete cuando se activan; referencia real de integración conservada. Los timeouts primarios, cambios de límite y valores no aplicables se mantienen distintos; evidencia por instancia no certifica validez física.",
+      "independent_scientific_metric_not_imputed": true,
+      "evidence": [
+        "evaluation/trp/campaign-20261012/structural/summary.json",
+        "evaluation/trp/campaign-20261012/structural/runtime-600/summary.json",
+        "evaluation/trp/campaign-20261012/structural/freesasa/integration/agent-reference.json"
+      ]
+    },
+    {
+      "id": "R3.8",
+      "deliverable": null,
+      "canonical_state": "parcial",
+      "interpreted_state": "partial_explicit_limit_or_pending_metric",
+      "scope_and_pending": "Las 78 coordenadas/PAE originales Pratt están recuperadas. Hay 30 referencias experimentales revisadas como proteínas de repeticiones, que no son negativos físicos certificados. CCTBX y FreeSASA son observables descriptivos, con C9 amplio no evaluable; no hay clasificador/umbral validado, sensibilidad ni especificidad física. Hace falta criterio externo y controles negativos pertinentes.",
+      "independent_scientific_metric_not_imputed": true,
+      "evidence": [
+        "evaluation/trp/campaign-20261012/structural/summary.json",
+        "evaluation/trp/campaign-20261012/structural/runtime-600/summary.json",
+        "evaluation/trp/campaign-20261012/structural/freesasa/summary.json"
+      ]
+    }
+  ],
+  "failedEndpoint": {
+    "id": "R2.4",
+    "boundaryFeasible": 6,
+    "falseRejections": 3,
+    "rate": 0.5,
+    "unchangedMaximum": 0.05,
+    "thresholdMet": false,
+    "original40FeasibleInfeasibleUnknown": [
+      18,
+      18,
+      4
+    ],
+    "twentyPerClassOnlyOriginalPlusSupplement44": true,
+    "remedialFutureCalibrationIsNewStudyNotSuppressionOfThisOutcome": true
+  },
+  "dependenciesPending": [
+    {
+      "id": "R1.3/R1.5",
+      "input": "First independent expert references, definitive feasibility and two human paraphrases per feasible intention; then freeze the reserved corpus and partitions.",
+      "notCurrentCloudExecutionBlocker": true
+    },
+    {
+      "id": "R3.3",
+      "input": "Real conversations and at least 100 blind, non-adjudicated turn labels before kappa and its confusion matrix.",
+      "notCurrentCloudExecutionBlocker": true
+    },
+    {
+      "id": "R3.8",
+      "input": "An independent physical failure criterion, classifier calibration and pertinent physical negative labels. Reviewed repeat annotation does not certify atomic validity.",
+      "notCurrentCloudExecutionBlocker": true
+    }
+  ],
+  "knownImplementationLimitsNotClaimedComplete": [
+    {
+      "ids": [
+        "R1.1",
+        "R1.6"
+      ],
+      "limit": "ReUPred runtime/reference and RepeatsDB API/locus contracts are not admitted. These exclusions are documented in the tested catalog scope."
+    },
+    {
+      "ids": [
+        "R2.2",
+        "R3.6"
+      ],
+      "limit": "The strict co-located geometry client profile alone has verified shared quota and controller cgroup. Dedicated detector/predicted tools and ordinary SSH do not inherit all those guarantees. Further implementation is required for all-domain completeness, which this campaign does not claim."
+    },
+    {
+      "id": "R1.9",
+      "limit": "The 30 invalid static graphs are prospective deterministic contract cases on one development protein. They do not establish independent held-out biological or language accuracy."
+    },
+    {
+      "id": "R2.4",
+      "limit": "Designed budgets on one protein, with three separately reported cohorts, do not estimate a scientific population admission rate. The boundary threshold failure remains visible."
+    }
+  ],
+  "materialScientificContradictionsFound": [],
+  "deliveryMetadataCorrectionsNeeded": [
+    {
+      "id": "C1",
+      "severity": "delivery_metadata_cleanup",
+      "file": "campaign-plan.json",
+      "finding": "M4 still says the campaign is running; M8 still says lifecycle is pending. All defined contrasts are observed, and current integration plus six-instance stop proofs exist. The plan statuses are stale metadata, not remaining live science.",
+      "action_owner": "root",
+      "blocks_new_experiment": false,
+      "status": "closed_by_root_delivery_metadata_update",
+      "resolution": "Current milestone statuses and final_status_update now reflect actual completion; historical progress fields are explicitly enumerated and separate from current regression 543 and cloud 89. Original plan snapshot retained."
+    },
+    {
+      "id": "C2",
+      "severity": "historical_metadata_qualification",
+      "file": "evaluation/trp/protocol.json",
+      "finding": "Design version 1.0.1, dated 2026-09-23, retains pending cluster/annotator fields and a null model. Current dated decisions and campaign freezes supersede operational availability. These design fields must not be presented as fresh account or cluster blockers.",
+      "action_owner": "root_documentation_qualification",
+      "blocks_new_experiment": false,
+      "status": "closed_by_readme_historical_design_qualification",
+      "resolution": "README explicitly distinguishes the September design snapshot from current annotation/model/infrastructure availability, without rewriting the frozen protocol."
+    },
+    {
+      "id": "C3",
+      "severity": "raw_pilot_semantics_qualification",
+      "file": "model-pilot/audit.json",
+      "finding": "The historical output_token_cap_observed check says observed outputs were below 8192. It is not proof of an enforced cap. The separate settings probe and final Word/canonical declarations explicitly report null maximumOutputTokens and absence of a demonstrated hard cap.",
+      "action_owner": "none_raw_data_preserved_qualification_present",
+      "blocks_new_experiment": false,
+      "status": "qualified_in_current_documentation_raw_evidence_retained"
+    },
+    {
+      "id": "C4",
+      "severity": "retained_historical_progress_fields",
+      "file": "progress.json",
+      "finding": "Earlier regression 541, a staged/not-applied patch field and checkpoint remaining-case fields coexist with later completion keys. Final root status must distinguish those snapshots from current regression 543, applied repairs and terminal original cases.",
+      "action_owner": "root",
+      "blocks_new_experiment": false,
+      "status": "closed_by_root_delivery_metadata_update",
+      "resolution": "Current milestone statuses and final_status_update now reflect actual completion; historical progress fields are explicitly enumerated and separate from current regression 543 and cloud 89. Original plan snapshot retained."
+    },
+    {
+      "id": "C5",
+      "severity": "denominator_qualification_present",
+      "file": "aggregate-resource-contrasts/summary.json",
+      "finding": "The original classificationAccuracy value 1.0 uses only the 36 cases with an observed class. The all-observed denominator is 40, with four unknowns, so verified correct cases are 36/40. Current Word and canonical text explicitly preserve both counts and do not call unknowns correct. The frozen summary must not be silently rewritten.",
+      "action_owner": "none_current_document_qualification_present",
+      "blocks_new_experiment": false,
+      "status": "qualified_in_current_documentation_raw_evidence_retained"
+    }
+  ],
+  "deliverablesPending": [
+    {
+      "owner": "root",
+      "deliverable": "Local full-evidence and private scientific-source archive manifests and verification. Preserve author coordinates outside Git.",
+      "status": "not_certified_by_this_audit"
+    },
+    {
+      "owner": "root",
+      "deliverable": "Final selected readable documentation/source/evidence commit with an English title and no coauthor. Exclude the user SDK, secrets and private derived coordinates.",
+      "status": "not_yet_observed"
+    },
+    {
+      "owner": "root",
+      "deliverable": "Refresh campaign plan/progress/README delivery metadata and complete the goal after required archives and Git delivery.",
+      "status": "pending_final_delivery"
+    }
+  ],
+  "wordInstallationPending": false,
+  "wordInstalledHashesIndependentlyVerified": true,
+  "allSixComputeNodesStoppedFreshSdk": true,
+  "retainedStorageGiBPerLab": 90,
+  "retainedStorageCostZeroClaimed": false,
+  "userSdkUnchanged": true,
+  "conclusion": "No required cloud or local experiment remains unperformed in the declared adapted engineering campaign. Root still owns archive verification, delivery metadata and Git packaging. Mandatory independent scientific validations, the failed R2.4 boundary endpoint and partial domain coverage prevent declaring the thesis or all-domain implementation complete for 21/21.",
+  "latencyRequirementAudit": {
+    "WordChecked": "Installed Tesis.docx, current expected-result rows and full text, read from XML without editing.",
+    "R2_1ActualRequirement": "All admission decisions use the declared machine-readable execution inventory; no decision uses an undeclared budget.",
+    "R3_4ActualRequirement": "All method fields derive from the manifest, with no fields drafted by the model.",
+    "protocolAndEightMilestonePlanContainMandatoryP95": false,
+    "P95Measured": false,
+    "oneObservedTimestampDifferenceMilliseconds": 30418.009,
+    "measurementQualification": "One head-observer timestamp interval, not internal scheduler latency, an upper bound or a percentile.",
+    "additionalRequiredViableLatencyExperimentOmitted": false,
+    "optionalFutureLatencyBenchmark": "Possible after defining start/end boundaries, repetition unit and instrumentation. It would be a new endpoint, not an existing obligation of this campaign.",
+    "scopeCaution": "Account dashboard update latency and effective billing were not independently established."
+  },
+  "routeScopeReview": {
+    "strictGeometryPipeline": "Verified full-client, controller and declared temporary/state/cache/work/export paths under one quota, with separate worker caps and no pooled memory.",
+    "dedicatedPredictedAndDetectorTools": "Already implemented for their declared operations, with existing independent references. Common strict resource governance across all dedicated routes remains a product limit. It cannot be claimed by transferring the geometry results.",
+    "remainingContracts": "ReUPred runtime/reference and RepeatsDB locus/API contract remain outside the admitted tested catalog.",
+    "newCloudExperimentRequiredToCloseDeclaredAdaptedCampaign": false,
+    "allDomainImplementationComplete": false
+  },
+  "remainingDeliveryMetadataFindings": []
+}

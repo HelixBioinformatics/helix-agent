@@ -1,0 +1,36 @@
+{
+  "frozen_at_utc": "2026-10-13T01:34:33.785154+00:00",
+  "config": {
+    "model": "openai/gpt-6-sol",
+    "share": "disabled",
+    "permission": {
+      "*": "deny"
+    },
+    "provider": {
+      "openai": {
+        "options": {
+          "experimentalWebSockets": false
+        }
+      }
+    },
+    "plugin": [
+      "file:///home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/model-pilot/observe-settings.ts"
+    ],
+    "agent": {
+      "settings-probe": {
+        "mode": "primary",
+        "model": "openai/gpt-6-sol",
+        "variant": "medium",
+        "steps": 1,
+        "permission": {
+          "*": "deny"
+        }
+      }
+    }
+  },
+  "prompt": "This is an isolated development settings probe. Reply with exactly HELIX_SETTINGS_OK. Do not call tools.",
+  "output_token_max_environment": 8192,
+  "observer_sha256": "1b025457f470d11a63823766a365efe2fc5b646bc31115bfeec08caf5549329b",
+  "no_reserved_case": true,
+  "no_headers_or_input_content_observed": true
+}

@@ -1,0 +1,2109 @@
+{
+  "schema": "helix-r24-operational-continuation/1.0",
+  "frozenAt": "2026-10-13T03:08:43.957Z",
+  "graphCorpusSha256": "3d20eda715833d882a7ff8e0e5b10180c3fecec4f20012eb74f266062bfc9e7d",
+  "uniqueProteins": 1,
+  "target": {
+    "version": "trp-slurm-ssh/1.0.0",
+    "host": "100.53.109.87",
+    "port": 22,
+    "user": "ubuntu",
+    "hostKeyAlias": "i-04339a8d8aad24c6e",
+    "root": "/shared/helix",
+    "partition": "helix",
+    "selectNode": "helix-worker1",
+    "geometryNode": "helix-worker2",
+    "numericalProfile": "haswell-single-thread",
+    "sessionExpiresAt": "2026-10-13T04:18:18+00:00",
+    "fingerprint": "abf5433e393fddccede637119d681db73d5da9ff4470aa9c429937e83cffe270",
+    "hostKeyVerification": "strict",
+    "credentialBytes": "excluded"
+  },
+  "cases": [
+    {
+      "id": "R24-13-generous",
+      "graphId": "G-valid-013",
+      "cohort": "generous",
+      "inputDirectory": "R24-13-generous",
+      "runComment": "helix:538c5ff8-2ee9-4cae-a47d-ab65068ac4cb",
+      "files": {
+        "catalogue.json": "97684486814a24bc435353bda9477d852032538e4662468b13fa16c1192fc8df",
+        "catalogue_evidence.json": "d4563219e99d42068a057b1c1e8a718db1cba3e9391260aba2f954436d880249",
+        "execution.json": "1469bc847db3aee9895dba14df4d05357cbc7da20431f5884540c04143b10069",
+        "specification.json": "ab06ce3fa44e79ea0f8f327925c4002dac34992ed9cf89b73b611c98136e431c",
+        "validation.json": "e02f8e009e658df42d9ff70baec4d5091c73964c47349e451900a186c641d5dd",
+        "structural_report.json": "898c5812995a8c5b8ea4356c70024365a0131e27f371713fbf6188dcd6e33430",
+        "structural_catalogue.json": "2536d668520fcd19f2d8fea5377e47dbcb839d6307ed216eaaeaa5cf294c2cb5",
+        "inspect_structure.py": "10e3f2224213fbb6718023348e243605fd71afcd6b1b3bfdf1feb14f8822993b",
+        "source.pdb": "f674267d0ef4752a3d4da00497947bfc09f441a5c36d39593b72bc2ba390df0b",
+        "selection.pdb": "e126fdcfaec095bf8a874bf0f5c35af98162fb5258ee42c91b1258b157b5fceb",
+        "settings.json": "bd307425b985062bd2682d0ad130189aa2e9ef0305da0571d4685c3e8f37d76b",
+        "trp_select.py": "2e554cd310a4ffbd09a6c197f9dbf027cff8c20de310efeacea39ad8010ba527",
+        "trp_geometry.py": "ce6ccf6e7abfda81bd1928914f7c8a6f835671ff094f8d5c1cc17985f37f7114",
+        "main.nf": "93f4e5ae23ec27a7fc5b671bb396b854c5381eb4441e15dff2997809de2e8be5",
+        "nextflow.config": "01683426ecf80d7c0627fb87e82cc741b0a913f9f50c023ebc35547a6ed6fdbf",
+        "remote_target.json": "3608c5b85cb93f4d19793e8854636101197d8b98eb1bab42c28fd13dc8a084a3",
+        "remote_runner.py": "06dfce19be2f73d3c2cd984f53dfd0bc3809d3671c6b705ad915ec40d63f8c0f"
+      },
+      "goldCsvPath": "gold/G-valid-013/geometry.csv",
+      "goldCsvSha256": "720b03a2ede39e802a6546684316d20b5b7c513fd0aa11d29c99c384035d5b7d",
+      "demand": {
+        "version": "trp-resources/1.2.0",
+        "sourceBytes": 359397,
+        "selectionBytes": 150911,
+        "bundleBytes": 1135770,
+        "counts": {
+          "scientificTasks": 2,
+          "stubTasks": 2,
+          "remoteScientificCalls": 2,
+          "retries": 0
+        },
+        "cpus": 3,
+        "memoryBytes": 4294967296,
+        "workBytes": 21139456,
+        "wallSeconds": 1080,
+        "storage": {
+          "kind": "estimate",
+          "formula": "ceil((12*1048576 + 7*bundleBytes + 4*selectionBytes)/4096)*4096",
+          "hardLimit": false
+        },
+        "assumptions": [
+          "SSH/Slurm backend: controller and worker capacity are checked separately. A 2 CPU/2 GiB task must fit one eligible worker; memory is never pooled across workers. Docker effective task cgroup limits are checked in scientific adapters; aggregate storage and controller enforcement remain unavailable.",
+          "Two sequential tasks per traversal; one stub traversal then one real traversal; no retry or resume.",
+          "Task allocation: 2 CPUs/2 GiB. Controller allocation: 1 CPU/2 GiB; cgroup enforcement requires an independently verified operator sandbox. CPU bandwidth is not an exclusive core reservation.",
+          "Each traversal has an 8 minute watchdog; probes/configuration reserve another 120 seconds. This is a configured timeout, not a runtime prediction.",
+          "Storage estimates allocated workspace bytes including working copies, logs and portable evidence; an independently observed XFS project quota enforces an approved budget only inside an operator allocation.",
+          "The exact image and Nextflow distribution must already be cached. Image pulls/builds and shared Docker/Nextflow caches are outside workBytes.",
+          "Two remote scientific tasks are planned; SSH probes, controller commands and stub jobs are not scientific calls. Agent provider tokens, cost and conversation calls are not measured here."
+        ]
+      },
+      "budget": {
+        "cpus": 3,
+        "memoryBytes": 4294967296,
+        "workBytes": 67108864,
+        "wallSeconds": 1080,
+        "requireHardStorageLimit": false,
+        "origin": "Prospective operator-controlled resource contrast"
+      },
+      "physicalFeasibilityLabel": null,
+      "helixDecision": null,
+      "oracleResult": null,
+      "previousInputHashes": {
+        "catalogue.json": "97684486814a24bc435353bda9477d852032538e4662468b13fa16c1192fc8df",
+        "catalogue_evidence.json": "d4563219e99d42068a057b1c1e8a718db1cba3e9391260aba2f954436d880249",
+        "execution.json": "59f612cca5599cdfc09142954dd7f0d2b9ac4de3d96bd4bfbc43dcb74ef29644",
+        "specification.json": "ab06ce3fa44e79ea0f8f327925c4002dac34992ed9cf89b73b611c98136e431c",
+        "validation.json": "e02f8e009e658df42d9ff70baec4d5091c73964c47349e451900a186c641d5dd",
+        "structural_report.json": "898c5812995a8c5b8ea4356c70024365a0131e27f371713fbf6188dcd6e33430",
+        "structural_catalogue.json": "2536d668520fcd19f2d8fea5377e47dbcb839d6307ed216eaaeaa5cf294c2cb5",
+        "inspect_structure.py": "10e3f2224213fbb6718023348e243605fd71afcd6b1b3bfdf1feb14f8822993b",
+        "source.pdb": "f674267d0ef4752a3d4da00497947bfc09f441a5c36d39593b72bc2ba390df0b",
+        "selection.pdb": "e126fdcfaec095bf8a874bf0f5c35af98162fb5258ee42c91b1258b157b5fceb",
+        "settings.json": "bd307425b985062bd2682d0ad130189aa2e9ef0305da0571d4685c3e8f37d76b",
+        "trp_select.py": "2e554cd310a4ffbd09a6c197f9dbf027cff8c20de310efeacea39ad8010ba527",
+        "trp_geometry.py": "ce6ccf6e7abfda81bd1928914f7c8a6f835671ff094f8d5c1cc17985f37f7114",
+        "main.nf": "93f4e5ae23ec27a7fc5b671bb396b854c5381eb4441e15dff2997809de2e8be5",
+        "nextflow.config": "0dcb1e23894b1ae66c72e1ea5ded41f2e9a4ca733e606cd662998c96ed480f08",
+        "remote_target.json": "b5d423525d055c42808d538c5a8fc7126acc046824ff30d728182ec5eb9631f2",
+        "remote_runner.py": "06dfce19be2f73d3c2cd984f53dfd0bc3809d3671c6b705ad915ec40d63f8c0f"
+      },
+      "previousDemand": {
+        "version": "trp-resources/1.2.0",
+        "sourceBytes": 359397,
+        "selectionBytes": 150911,
+        "bundleBytes": 1135768,
+        "counts": {
+          "scientificTasks": 2,
+          "stubTasks": 2,
+          "remoteScientificCalls": 2,
+          "retries": 0
+        },
+        "cpus": 3,
+        "memoryBytes": 4294967296,
+        "workBytes": 21139456,
+        "wallSeconds": 1080,
+        "storage": {
+          "kind": "estimate",
+          "formula": "ceil((12*1048576 + 7*bundleBytes + 4*selectionBytes)/4096)*4096",
+          "hardLimit": false
+        },
+        "assumptions": [
+          "SSH/Slurm backend: controller and worker capacity are checked separately. A 2 CPU/2 GiB task must fit one eligible worker; memory is never pooled across workers. Docker effective task cgroup limits are checked in scientific adapters; aggregate storage and controller enforcement remain unavailable.",
+          "Two sequential tasks per traversal; one stub traversal then one real traversal; no retry or resume.",
+          "Task allocation: 2 CPUs/2 GiB. Controller allocation: 1 CPU/2 GiB; cgroup enforcement requires an independently verified operator sandbox. CPU bandwidth is not an exclusive core reservation.",
+          "Each traversal has an 8 minute watchdog; probes/configuration reserve another 120 seconds. This is a configured timeout, not a runtime prediction.",
+          "Storage estimates allocated workspace bytes including working copies, logs and portable evidence; an independently observed XFS project quota enforces an approved budget only inside an operator allocation.",
+          "The exact image and Nextflow distribution must already be cached. Image pulls/builds and shared Docker/Nextflow caches are outside workBytes.",
+          "Two remote scientific tasks are planned; SSH probes, controller commands and stub jobs are not scientific calls. Agent provider tokens, cost and conversation calls are not measured here."
+        ]
+      },
+      "originalAttempt": {
+        "id": "R24-13-generous",
+        "physicalFeasibilityLabel": null,
+        "status": "recovered",
+        "helixAccepted": true,
+        "dispatched": true,
+        "dispatchAtUtc": "2026-10-13T02:57:26.448130+00:00",
+        "oracleStatus": "unknown-other-execution-failure",
+        "resultArchiveSha256": "369bd9a911842c758b50ddc3ef84299291a2d68fe1d9af0fca80099041c20e70",
+        "oracleResultSha256": "c5d5f5580b827c71d82ed4598246a61b3502d72bc156c966fb93f335a133a019"
+      }
+    },
+    {
+      "id": "R24-13-small",
+      "graphId": "G-valid-013",
+      "cohort": "small",
+      "inputDirectory": "R24-13-small",
+      "runComment": "helix:c668c629-bdcb-4a66-9f43-ba8ffd8be3df",
+      "files": {
+        "catalogue.json": "97684486814a24bc435353bda9477d852032538e4662468b13fa16c1192fc8df",
+        "catalogue_evidence.json": "d4563219e99d42068a057b1c1e8a718db1cba3e9391260aba2f954436d880249",
+        "execution.json": "1469bc847db3aee9895dba14df4d05357cbc7da20431f5884540c04143b10069",
+        "specification.json": "ab06ce3fa44e79ea0f8f327925c4002dac34992ed9cf89b73b611c98136e431c",
+        "validation.json": "e02f8e009e658df42d9ff70baec4d5091c73964c47349e451900a186c641d5dd",
+        "structural_report.json": "898c5812995a8c5b8ea4356c70024365a0131e27f371713fbf6188dcd6e33430",
+        "structural_catalogue.json": "2536d668520fcd19f2d8fea5377e47dbcb839d6307ed216eaaeaa5cf294c2cb5",
+        "inspect_structure.py": "10e3f2224213fbb6718023348e243605fd71afcd6b1b3bfdf1feb14f8822993b",
+        "source.pdb": "f674267d0ef4752a3d4da00497947bfc09f441a5c36d39593b72bc2ba390df0b",
+        "selection.pdb": "e126fdcfaec095bf8a874bf0f5c35af98162fb5258ee42c91b1258b157b5fceb",
+        "settings.json": "bd307425b985062bd2682d0ad130189aa2e9ef0305da0571d4685c3e8f37d76b",
+        "trp_select.py": "2e554cd310a4ffbd09a6c197f9dbf027cff8c20de310efeacea39ad8010ba527",
+        "trp_geometry.py": "ce6ccf6e7abfda81bd1928914f7c8a6f835671ff094f8d5c1cc17985f37f7114",
+        "main.nf": "93f4e5ae23ec27a7fc5b671bb396b854c5381eb4441e15dff2997809de2e8be5",
+        "nextflow.config": "b0e00ad0dfd7e42f9f1d282bd0f756f30d103e59026a549ee1042e9e24b914f1",
+        "remote_target.json": "3608c5b85cb93f4d19793e8854636101197d8b98eb1bab42c28fd13dc8a084a3",
+        "remote_runner.py": "06dfce19be2f73d3c2cd984f53dfd0bc3809d3671c6b705ad915ec40d63f8c0f"
+      },
+      "goldCsvPath": "gold/G-valid-013/geometry.csv",
+      "goldCsvSha256": "720b03a2ede39e802a6546684316d20b5b7c513fd0aa11d29c99c384035d5b7d",
+      "demand": {
+        "version": "trp-resources/1.2.0",
+        "sourceBytes": 359397,
+        "selectionBytes": 150911,
+        "bundleBytes": 1135770,
+        "counts": {
+          "scientificTasks": 2,
+          "stubTasks": 2,
+          "remoteScientificCalls": 2,
+          "retries": 0
+        },
+        "cpus": 3,
+        "memoryBytes": 4294967296,
+        "workBytes": 21139456,
+        "wallSeconds": 1080,
+        "storage": {
+          "kind": "estimate",
+          "formula": "ceil((12*1048576 + 7*bundleBytes + 4*selectionBytes)/4096)*4096",
+          "hardLimit": false
+        },
+        "assumptions": [
+          "SSH/Slurm backend: controller and worker capacity are checked separately. A 2 CPU/2 GiB task must fit one eligible worker; memory is never pooled across workers. Docker effective task cgroup limits are checked in scientific adapters; aggregate storage and controller enforcement remain unavailable.",
+          "Two sequential tasks per traversal; one stub traversal then one real traversal; no retry or resume.",
+          "Task allocation: 2 CPUs/2 GiB. Controller allocation: 1 CPU/2 GiB; cgroup enforcement requires an independently verified operator sandbox. CPU bandwidth is not an exclusive core reservation.",
+          "Each traversal has an 8 minute watchdog; probes/configuration reserve another 120 seconds. This is a configured timeout, not a runtime prediction.",
+          "Storage estimates allocated workspace bytes including working copies, logs and portable evidence; an independently observed XFS project quota enforces an approved budget only inside an operator allocation.",
+          "The exact image and Nextflow distribution must already be cached. Image pulls/builds and shared Docker/Nextflow caches are outside workBytes.",
+          "Two remote scientific tasks are planned; SSH probes, controller commands and stub jobs are not scientific calls. Agent provider tokens, cost and conversation calls are not measured here."
+        ]
+      },
+      "budget": {
+        "cpus": 3,
+        "memoryBytes": 4294967296,
+        "workBytes": 262144,
+        "wallSeconds": 1080,
+        "requireHardStorageLimit": false,
+        "origin": "Prospective operator-controlled resource contrast"
+      },
+      "physicalFeasibilityLabel": null,
+      "helixDecision": null,
+      "oracleResult": null,
+      "previousInputHashes": {
+        "catalogue.json": "97684486814a24bc435353bda9477d852032538e4662468b13fa16c1192fc8df",
+        "catalogue_evidence.json": "d4563219e99d42068a057b1c1e8a718db1cba3e9391260aba2f954436d880249",
+        "execution.json": "59f612cca5599cdfc09142954dd7f0d2b9ac4de3d96bd4bfbc43dcb74ef29644",
+        "specification.json": "ab06ce3fa44e79ea0f8f327925c4002dac34992ed9cf89b73b611c98136e431c",
+        "validation.json": "e02f8e009e658df42d9ff70baec4d5091c73964c47349e451900a186c641d5dd",
+        "structural_report.json": "898c5812995a8c5b8ea4356c70024365a0131e27f371713fbf6188dcd6e33430",
+        "structural_catalogue.json": "2536d668520fcd19f2d8fea5377e47dbcb839d6307ed216eaaeaa5cf294c2cb5",
+        "inspect_structure.py": "10e3f2224213fbb6718023348e243605fd71afcd6b1b3bfdf1feb14f8822993b",
+        "source.pdb": "f674267d0ef4752a3d4da00497947bfc09f441a5c36d39593b72bc2ba390df0b",
+        "selection.pdb": "e126fdcfaec095bf8a874bf0f5c35af98162fb5258ee42c91b1258b157b5fceb",
+        "settings.json": "bd307425b985062bd2682d0ad130189aa2e9ef0305da0571d4685c3e8f37d76b",
+        "trp_select.py": "2e554cd310a4ffbd09a6c197f9dbf027cff8c20de310efeacea39ad8010ba527",
+        "trp_geometry.py": "ce6ccf6e7abfda81bd1928914f7c8a6f835671ff094f8d5c1cc17985f37f7114",
+        "main.nf": "93f4e5ae23ec27a7fc5b671bb396b854c5381eb4441e15dff2997809de2e8be5",
+        "nextflow.config": "0962c503933abb79245de87424f9a1dd4ce1e99623eabe5830d0073036ef8a80",
+        "remote_target.json": "b5d423525d055c42808d538c5a8fc7126acc046824ff30d728182ec5eb9631f2",
+        "remote_runner.py": "06dfce19be2f73d3c2cd984f53dfd0bc3809d3671c6b705ad915ec40d63f8c0f"
+      },
+      "previousDemand": {
+        "version": "trp-resources/1.2.0",
+        "sourceBytes": 359397,
+        "selectionBytes": 150911,
+        "bundleBytes": 1135768,
+        "counts": {
+          "scientificTasks": 2,
+          "stubTasks": 2,
+          "remoteScientificCalls": 2,
+          "retries": 0
+        },
+        "cpus": 3,
+        "memoryBytes": 4294967296,
+        "workBytes": 21139456,
+        "wallSeconds": 1080,
+        "storage": {
+          "kind": "estimate",
+          "formula": "ceil((12*1048576 + 7*bundleBytes + 4*selectionBytes)/4096)*4096",
+          "hardLimit": false
+        },
+        "assumptions": [
+          "SSH/Slurm backend: controller and worker capacity are checked separately. A 2 CPU/2 GiB task must fit one eligible worker; memory is never pooled across workers. Docker effective task cgroup limits are checked in scientific adapters; aggregate storage and controller enforcement remain unavailable.",
+          "Two sequential tasks per traversal; one stub traversal then one real traversal; no retry or resume.",
+          "Task allocation: 2 CPUs/2 GiB. Controller allocation: 1 CPU/2 GiB; cgroup enforcement requires an independently verified operator sandbox. CPU bandwidth is not an exclusive core reservation.",
+          "Each traversal has an 8 minute watchdog; probes/configuration reserve another 120 seconds. This is a configured timeout, not a runtime prediction.",
+          "Storage estimates allocated workspace bytes including working copies, logs and portable evidence; an independently observed XFS project quota enforces an approved budget only inside an operator allocation.",
+          "The exact image and Nextflow distribution must already be cached. Image pulls/builds and shared Docker/Nextflow caches are outside workBytes.",
+          "Two remote scientific tasks are planned; SSH probes, controller commands and stub jobs are not scientific calls. Agent provider tokens, cost and conversation calls are not measured here."
+        ]
+      },
+      "originalAttempt": {
+        "id": "R24-13-small",
+        "physicalFeasibilityLabel": null,
+        "status": "unknown-supervisor-stopped-without-result",
+        "helixAccepted": false,
+        "dispatched": true,
+        "dispatchAtUtc": "2026-10-13T02:59:06.995445+00:00"
+      }
+    },
+    {
+      "id": "R24-14-generous",
+      "graphId": "G-valid-014",
+      "cohort": "generous",
+      "inputDirectory": "R24-14-generous",
+      "runComment": "helix:28a4f37e-782f-4642-8462-4ca385b353b9",
+      "files": {
+        "catalogue.json": "97684486814a24bc435353bda9477d852032538e4662468b13fa16c1192fc8df",
+        "catalogue_evidence.json": "d4563219e99d42068a057b1c1e8a718db1cba3e9391260aba2f954436d880249",
+        "execution.json": "1469bc847db3aee9895dba14df4d05357cbc7da20431f5884540c04143b10069",
+        "specification.json": "5786edddf73be7665b0c2ac41ca605013966876c15cf7e68f305c512dacb7c74",
+        "validation.json": "e02f8e009e658df42d9ff70baec4d5091c73964c47349e451900a186c641d5dd",
+        "structural_report.json": "4fcb97eeebe609f9548235282f8898c171261e29e497bafbf505b8ac66c59abe",
+        "structural_catalogue.json": "2536d668520fcd19f2d8fea5377e47dbcb839d6307ed216eaaeaa5cf294c2cb5",
+        "inspect_structure.py": "10e3f2224213fbb6718023348e243605fd71afcd6b1b3bfdf1feb14f8822993b",
+        "source.pdb": "f674267d0ef4752a3d4da00497947bfc09f441a5c36d39593b72bc2ba390df0b",
+        "selection.pdb": "e126fdcfaec095bf8a874bf0f5c35af98162fb5258ee42c91b1258b157b5fceb",
+        "settings.json": "bd1701f59e52ff88b8d105437d39eacddb91641537d72f9b4cd79341544bbe9c",
+        "trp_select.py": "2e554cd310a4ffbd09a6c197f9dbf027cff8c20de310efeacea39ad8010ba527",
+        "trp_geometry.py": "ce6ccf6e7abfda81bd1928914f7c8a6f835671ff094f8d5c1cc17985f37f7114",
+        "main.nf": "93f4e5ae23ec27a7fc5b671bb396b854c5381eb4441e15dff2997809de2e8be5",
+        "nextflow.config": "db683fca5733d540ac08603398c02a0ae5841fb37203e0f6c89441420b9b10af",
+        "remote_target.json": "3608c5b85cb93f4d19793e8854636101197d8b98eb1bab42c28fd13dc8a084a3",
+        "remote_runner.py": "06dfce19be2f73d3c2cd984f53dfd0bc3809d3671c6b705ad915ec40d63f8c0f"
+      },
+      "goldCsvPath": "gold/G-valid-014/geometry.csv",
+      "goldCsvSha256": "cda65c4f381cdd0dd0b4b99d468bde95b31038b202ea165c2b0cf206724412e7",
+      "demand": {
+        "version": "trp-resources/1.2.0",
+        "sourceBytes": 359397,
+        "selectionBytes": 150911,
+        "bundleBytes": 1135770,
+        "counts": {
+          "scientificTasks": 2,
+          "stubTasks": 2,
+          "remoteScientificCalls": 2,
+          "retries": 0
+        },
+        "cpus": 3,
+        "memoryBytes": 4294967296,
+        "workBytes": 21139456,
+        "wallSeconds": 1080,
+        "storage": {
+          "kind": "estimate",
+          "formula": "ceil((12*1048576 + 7*bundleBytes + 4*selectionBytes)/4096)*4096",
+          "hardLimit": false
+        },
+        "assumptions": [
+          "SSH/Slurm backend: controller and worker capacity are checked separately. A 2 CPU/2 GiB task must fit one eligible worker; memory is never pooled across workers. Docker effective task cgroup limits are checked in scientific adapters; aggregate storage and controller enforcement remain unavailable.",
+          "Two sequential tasks per traversal; one stub traversal then one real traversal; no retry or resume.",
+          "Task allocation: 2 CPUs/2 GiB. Controller allocation: 1 CPU/2 GiB; cgroup enforcement requires an independently verified operator sandbox. CPU bandwidth is not an exclusive core reservation.",
+          "Each traversal has an 8 minute watchdog; probes/configuration reserve another 120 seconds. This is a configured timeout, not a runtime prediction.",
+          "Storage estimates allocated workspace bytes including working copies, logs and portable evidence; an independently observed XFS project quota enforces an approved budget only inside an operator allocation.",
+          "The exact image and Nextflow distribution must already be cached. Image pulls/builds and shared Docker/Nextflow caches are outside workBytes.",
+          "Two remote scientific tasks are planned; SSH probes, controller commands and stub jobs are not scientific calls. Agent provider tokens, cost and conversation calls are not measured here."
+        ]
+      },
+      "budget": {
+        "cpus": 3,
+        "memoryBytes": 4294967296,
+        "workBytes": 67108864,
+        "wallSeconds": 1080,
+        "requireHardStorageLimit": false,
+        "origin": "Prospective operator-controlled resource contrast"
+      },
+      "physicalFeasibilityLabel": null,
+      "helixDecision": null,
+      "oracleResult": null,
+      "previousInputHashes": {
+        "catalogue.json": "97684486814a24bc435353bda9477d852032538e4662468b13fa16c1192fc8df",
+        "catalogue_evidence.json": "d4563219e99d42068a057b1c1e8a718db1cba3e9391260aba2f954436d880249",
+        "execution.json": "59f612cca5599cdfc09142954dd7f0d2b9ac4de3d96bd4bfbc43dcb74ef29644",
+        "specification.json": "5786edddf73be7665b0c2ac41ca605013966876c15cf7e68f305c512dacb7c74",
+        "validation.json": "e02f8e009e658df42d9ff70baec4d5091c73964c47349e451900a186c641d5dd",
+        "structural_report.json": "4fcb97eeebe609f9548235282f8898c171261e29e497bafbf505b8ac66c59abe",
+        "structural_catalogue.json": "2536d668520fcd19f2d8fea5377e47dbcb839d6307ed216eaaeaa5cf294c2cb5",
+        "inspect_structure.py": "10e3f2224213fbb6718023348e243605fd71afcd6b1b3bfdf1feb14f8822993b",
+        "source.pdb": "f674267d0ef4752a3d4da00497947bfc09f441a5c36d39593b72bc2ba390df0b",
+        "selection.pdb": "e126fdcfaec095bf8a874bf0f5c35af98162fb5258ee42c91b1258b157b5fceb",
+        "settings.json": "bd1701f59e52ff88b8d105437d39eacddb91641537d72f9b4cd79341544bbe9c",
+        "trp_select.py": "2e554cd310a4ffbd09a6c197f9dbf027cff8c20de310efeacea39ad8010ba527",
+        "trp_geometry.py": "ce6ccf6e7abfda81bd1928914f7c8a6f835671ff094f8d5c1cc17985f37f7114",
+        "main.nf": "93f4e5ae23ec27a7fc5b671bb396b854c5381eb4441e15dff2997809de2e8be5",
+        "nextflow.config": "617939cec6d7a8ddd34c3a5dce5e7b3876b7262de377fd3d686be70050733e37",
+        "remote_target.json": "b5d423525d055c42808d538c5a8fc7126acc046824ff30d728182ec5eb9631f2",
+        "remote_runner.py": "06dfce19be2f73d3c2cd984f53dfd0bc3809d3671c6b705ad915ec40d63f8c0f"
+      },
+      "previousDemand": {
+        "version": "trp-resources/1.2.0",
+        "sourceBytes": 359397,
+        "selectionBytes": 150911,
+        "bundleBytes": 1135768,
+        "counts": {
+          "scientificTasks": 2,
+          "stubTasks": 2,
+          "remoteScientificCalls": 2,
+          "retries": 0
+        },
+        "cpus": 3,
+        "memoryBytes": 4294967296,
+        "workBytes": 21139456,
+        "wallSeconds": 1080,
+        "storage": {
+          "kind": "estimate",
+          "formula": "ceil((12*1048576 + 7*bundleBytes + 4*selectionBytes)/4096)*4096",
+          "hardLimit": false
+        },
+        "assumptions": [
+          "SSH/Slurm backend: controller and worker capacity are checked separately. A 2 CPU/2 GiB task must fit one eligible worker; memory is never pooled across workers. Docker effective task cgroup limits are checked in scientific adapters; aggregate storage and controller enforcement remain unavailable.",
+          "Two sequential tasks per traversal; one stub traversal then one real traversal; no retry or resume.",
+          "Task allocation: 2 CPUs/2 GiB. Controller allocation: 1 CPU/2 GiB; cgroup enforcement requires an independently verified operator sandbox. CPU bandwidth is not an exclusive core reservation.",
+          "Each traversal has an 8 minute watchdog; probes/configuration reserve another 120 seconds. This is a configured timeout, not a runtime prediction.",
+          "Storage estimates allocated workspace bytes including working copies, logs and portable evidence; an independently observed XFS project quota enforces an approved budget only inside an operator allocation.",
+          "The exact image and Nextflow distribution must already be cached. Image pulls/builds and shared Docker/Nextflow caches are outside workBytes.",
+          "Two remote scientific tasks are planned; SSH probes, controller commands and stub jobs are not scientific calls. Agent provider tokens, cost and conversation calls are not measured here."
+        ]
+      },
+      "originalAttempt": {
+        "id": "R24-14-generous",
+        "status": "not-started-global-checkpoint",
+        "physicalFeasibilityLabel": null
+      }
+    },
+    {
+      "id": "R24-14-small",
+      "graphId": "G-valid-014",
+      "cohort": "small",
+      "inputDirectory": "R24-14-small",
+      "runComment": "helix:474e4665-99bf-4440-a4b5-af89689c2b8d",
+      "files": {
+        "catalogue.json": "97684486814a24bc435353bda9477d852032538e4662468b13fa16c1192fc8df",
+        "catalogue_evidence.json": "d4563219e99d42068a057b1c1e8a718db1cba3e9391260aba2f954436d880249",
+        "execution.json": "1469bc847db3aee9895dba14df4d05357cbc7da20431f5884540c04143b10069",
+        "specification.json": "5786edddf73be7665b0c2ac41ca605013966876c15cf7e68f305c512dacb7c74",
+        "validation.json": "e02f8e009e658df42d9ff70baec4d5091c73964c47349e451900a186c641d5dd",
+        "structural_report.json": "4fcb97eeebe609f9548235282f8898c171261e29e497bafbf505b8ac66c59abe",
+        "structural_catalogue.json": "2536d668520fcd19f2d8fea5377e47dbcb839d6307ed216eaaeaa5cf294c2cb5",
+        "inspect_structure.py": "10e3f2224213fbb6718023348e243605fd71afcd6b1b3bfdf1feb14f8822993b",
+        "source.pdb": "f674267d0ef4752a3d4da00497947bfc09f441a5c36d39593b72bc2ba390df0b",
+        "selection.pdb": "e126fdcfaec095bf8a874bf0f5c35af98162fb5258ee42c91b1258b157b5fceb",
+        "settings.json": "bd1701f59e52ff88b8d105437d39eacddb91641537d72f9b4cd79341544bbe9c",
+        "trp_select.py": "2e554cd310a4ffbd09a6c197f9dbf027cff8c20de310efeacea39ad8010ba527",
+        "trp_geometry.py": "ce6ccf6e7abfda81bd1928914f7c8a6f835671ff094f8d5c1cc17985f37f7114",
+        "main.nf": "93f4e5ae23ec27a7fc5b671bb396b854c5381eb4441e15dff2997809de2e8be5",
+        "nextflow.config": "820957cce0030d8244661629fee41c2bc902b52f709fd4d95b67a4347c5db45c",
+        "remote_target.json": "3608c5b85cb93f4d19793e8854636101197d8b98eb1bab42c28fd13dc8a084a3",
+        "remote_runner.py": "06dfce19be2f73d3c2cd984f53dfd0bc3809d3671c6b705ad915ec40d63f8c0f"
+      },
+      "goldCsvPath": "gold/G-valid-014/geometry.csv",
+      "goldCsvSha256": "cda65c4f381cdd0dd0b4b99d468bde95b31038b202ea165c2b0cf206724412e7",
+      "demand": {
+        "version": "trp-resources/1.2.0",
+        "sourceBytes": 359397,
+        "selectionBytes": 150911,
+        "bundleBytes": 1135770,
+        "counts": {
+          "scientificTasks": 2,
+          "stubTasks": 2,
+          "remoteScientificCalls": 2,
+          "retries": 0
+        },
+        "cpus": 3,
+        "memoryBytes": 4294967296,
+        "workBytes": 21139456,
+        "wallSeconds": 1080,
+        "storage": {
+          "kind": "estimate",
+          "formula": "ceil((12*1048576 + 7*bundleBytes + 4*selectionBytes)/4096)*4096",
+          "hardLimit": false
+        },
+        "assumptions": [
+          "SSH/Slurm backend: controller and worker capacity are checked separately. A 2 CPU/2 GiB task must fit one eligible worker; memory is never pooled across workers. Docker effective task cgroup limits are checked in scientific adapters; aggregate storage and controller enforcement remain unavailable.",
+          "Two sequential tasks per traversal; one stub traversal then one real traversal; no retry or resume.",
+          "Task allocation: 2 CPUs/2 GiB. Controller allocation: 1 CPU/2 GiB; cgroup enforcement requires an independently verified operator sandbox. CPU bandwidth is not an exclusive core reservation.",
+          "Each traversal has an 8 minute watchdog; probes/configuration reserve another 120 seconds. This is a configured timeout, not a runtime prediction.",
+          "Storage estimates allocated workspace bytes including working copies, logs and portable evidence; an independently observed XFS project quota enforces an approved budget only inside an operator allocation.",
+          "The exact image and Nextflow distribution must already be cached. Image pulls/builds and shared Docker/Nextflow caches are outside workBytes.",
+          "Two remote scientific tasks are planned; SSH probes, controller commands and stub jobs are not scientific calls. Agent provider tokens, cost and conversation calls are not measured here."
+        ]
+      },
+      "budget": {
+        "cpus": 3,
+        "memoryBytes": 4294967296,
+        "workBytes": 524288,
+        "wallSeconds": 1080,
+        "requireHardStorageLimit": false,
+        "origin": "Prospective operator-controlled resource contrast"
+      },
+      "physicalFeasibilityLabel": null,
+      "helixDecision": null,
+      "oracleResult": null,
+      "previousInputHashes": {
+        "catalogue.json": "97684486814a24bc435353bda9477d852032538e4662468b13fa16c1192fc8df",
+        "catalogue_evidence.json": "d4563219e99d42068a057b1c1e8a718db1cba3e9391260aba2f954436d880249",
+        "execution.json": "59f612cca5599cdfc09142954dd7f0d2b9ac4de3d96bd4bfbc43dcb74ef29644",
+        "specification.json": "5786edddf73be7665b0c2ac41ca605013966876c15cf7e68f305c512dacb7c74",
+        "validation.json": "e02f8e009e658df42d9ff70baec4d5091c73964c47349e451900a186c641d5dd",
+        "structural_report.json": "4fcb97eeebe609f9548235282f8898c171261e29e497bafbf505b8ac66c59abe",
+        "structural_catalogue.json": "2536d668520fcd19f2d8fea5377e47dbcb839d6307ed216eaaeaa5cf294c2cb5",
+        "inspect_structure.py": "10e3f2224213fbb6718023348e243605fd71afcd6b1b3bfdf1feb14f8822993b",
+        "source.pdb": "f674267d0ef4752a3d4da00497947bfc09f441a5c36d39593b72bc2ba390df0b",
+        "selection.pdb": "e126fdcfaec095bf8a874bf0f5c35af98162fb5258ee42c91b1258b157b5fceb",
+        "settings.json": "bd1701f59e52ff88b8d105437d39eacddb91641537d72f9b4cd79341544bbe9c",
+        "trp_select.py": "2e554cd310a4ffbd09a6c197f9dbf027cff8c20de310efeacea39ad8010ba527",
+        "trp_geometry.py": "ce6ccf6e7abfda81bd1928914f7c8a6f835671ff094f8d5c1cc17985f37f7114",
+        "main.nf": "93f4e5ae23ec27a7fc5b671bb396b854c5381eb4441e15dff2997809de2e8be5",
+        "nextflow.config": "daa63362f6f199c6c84cf00afbb2ec066ab2a48a7b464753e939610184974ce9",
+        "remote_target.json": "b5d423525d055c42808d538c5a8fc7126acc046824ff30d728182ec5eb9631f2",
+        "remote_runner.py": "06dfce19be2f73d3c2cd984f53dfd0bc3809d3671c6b705ad915ec40d63f8c0f"
+      },
+      "previousDemand": {
+        "version": "trp-resources/1.2.0",
+        "sourceBytes": 359397,
+        "selectionBytes": 150911,
+        "bundleBytes": 1135768,
+        "counts": {
+          "scientificTasks": 2,
+          "stubTasks": 2,
+          "remoteScientificCalls": 2,
+          "retries": 0
+        },
+        "cpus": 3,
+        "memoryBytes": 4294967296,
+        "workBytes": 21139456,
+        "wallSeconds": 1080,
+        "storage": {
+          "kind": "estimate",
+          "formula": "ceil((12*1048576 + 7*bundleBytes + 4*selectionBytes)/4096)*4096",
+          "hardLimit": false
+        },
+        "assumptions": [
+          "SSH/Slurm backend: controller and worker capacity are checked separately. A 2 CPU/2 GiB task must fit one eligible worker; memory is never pooled across workers. Docker effective task cgroup limits are checked in scientific adapters; aggregate storage and controller enforcement remain unavailable.",
+          "Two sequential tasks per traversal; one stub traversal then one real traversal; no retry or resume.",
+          "Task allocation: 2 CPUs/2 GiB. Controller allocation: 1 CPU/2 GiB; cgroup enforcement requires an independently verified operator sandbox. CPU bandwidth is not an exclusive core reservation.",
+          "Each traversal has an 8 minute watchdog; probes/configuration reserve another 120 seconds. This is a configured timeout, not a runtime prediction.",
+          "Storage estimates allocated workspace bytes including working copies, logs and portable evidence; an independently observed XFS project quota enforces an approved budget only inside an operator allocation.",
+          "The exact image and Nextflow distribution must already be cached. Image pulls/builds and shared Docker/Nextflow caches are outside workBytes.",
+          "Two remote scientific tasks are planned; SSH probes, controller commands and stub jobs are not scientific calls. Agent provider tokens, cost and conversation calls are not measured here."
+        ]
+      },
+      "originalAttempt": {
+        "id": "R24-14-small",
+        "status": "not-started-global-checkpoint",
+        "physicalFeasibilityLabel": null
+      }
+    },
+    {
+      "id": "R24-15-generous",
+      "graphId": "G-valid-015",
+      "cohort": "generous",
+      "inputDirectory": "R24-15-generous",
+      "runComment": "helix:354361f6-15ab-44ab-b136-bef67fdb88b2",
+      "files": {
+        "catalogue.json": "97684486814a24bc435353bda9477d852032538e4662468b13fa16c1192fc8df",
+        "catalogue_evidence.json": "d4563219e99d42068a057b1c1e8a718db1cba3e9391260aba2f954436d880249",
+        "execution.json": "1469bc847db3aee9895dba14df4d05357cbc7da20431f5884540c04143b10069",
+        "specification.json": "0a667b43d9073e39ec4c0aa8b32805589dbadadee5a0c04da4f9ff4cfb9c9db3",
+        "validation.json": "e02f8e009e658df42d9ff70baec4d5091c73964c47349e451900a186c641d5dd",
+        "structural_report.json": "fd1140cda5a0916223af40393b59656f65f0ee9bc97779ba886f39c6ca6bc531",
+        "structural_catalogue.json": "2536d668520fcd19f2d8fea5377e47dbcb839d6307ed216eaaeaa5cf294c2cb5",
+        "inspect_structure.py": "10e3f2224213fbb6718023348e243605fd71afcd6b1b3bfdf1feb14f8822993b",
+        "source.pdb": "f674267d0ef4752a3d4da00497947bfc09f441a5c36d39593b72bc2ba390df0b",
+        "selection.pdb": "e126fdcfaec095bf8a874bf0f5c35af98162fb5258ee42c91b1258b157b5fceb",
+        "settings.json": "f57214ae0c02bb6e4d8a477e6c6e0984a5c089737c6405c77c633342c58075a5",
+        "trp_select.py": "2e554cd310a4ffbd09a6c197f9dbf027cff8c20de310efeacea39ad8010ba527",
+        "trp_geometry.py": "ce6ccf6e7abfda81bd1928914f7c8a6f835671ff094f8d5c1cc17985f37f7114",
+        "main.nf": "93f4e5ae23ec27a7fc5b671bb396b854c5381eb4441e15dff2997809de2e8be5",
+        "nextflow.config": "70c7d3fa55b101f814ed1cfafaa6917bbaa36c831fe36f2264d8d2cf88930ca7",
+        "remote_target.json": "3608c5b85cb93f4d19793e8854636101197d8b98eb1bab42c28fd13dc8a084a3",
+        "remote_runner.py": "06dfce19be2f73d3c2cd984f53dfd0bc3809d3671c6b705ad915ec40d63f8c0f"
+      },
+      "goldCsvPath": "gold/G-valid-015/geometry.csv",
+      "goldCsvSha256": "6b8263242be875e84e0dbdd0f0bf5277c7bf98b65a0f4fe6e5fc4bd26a449974",
+      "demand": {
+        "version": "trp-resources/1.2.0",
+        "sourceBytes": 359397,
+        "selectionBytes": 150911,
+        "bundleBytes": 1135770,
+        "counts": {
+          "scientificTasks": 2,
+          "stubTasks": 2,
+          "remoteScientificCalls": 2,
+          "retries": 0
+        },
+        "cpus": 3,
+        "memoryBytes": 4294967296,
+        "workBytes": 21139456,
+        "wallSeconds": 1080,
+        "storage": {
+          "kind": "estimate",
+          "formula": "ceil((12*1048576 + 7*bundleBytes + 4*selectionBytes)/4096)*4096",
+          "hardLimit": false
+        },
+        "assumptions": [
+          "SSH/Slurm backend: controller and worker capacity are checked separately. A 2 CPU/2 GiB task must fit one eligible worker; memory is never pooled across workers. Docker effective task cgroup limits are checked in scientific adapters; aggregate storage and controller enforcement remain unavailable.",
+          "Two sequential tasks per traversal; one stub traversal then one real traversal; no retry or resume.",
+          "Task allocation: 2 CPUs/2 GiB. Controller allocation: 1 CPU/2 GiB; cgroup enforcement requires an independently verified operator sandbox. CPU bandwidth is not an exclusive core reservation.",
+          "Each traversal has an 8 minute watchdog; probes/configuration reserve another 120 seconds. This is a configured timeout, not a runtime prediction.",
+          "Storage estimates allocated workspace bytes including working copies, logs and portable evidence; an independently observed XFS project quota enforces an approved budget only inside an operator allocation.",
+          "The exact image and Nextflow distribution must already be cached. Image pulls/builds and shared Docker/Nextflow caches are outside workBytes.",
+          "Two remote scientific tasks are planned; SSH probes, controller commands and stub jobs are not scientific calls. Agent provider tokens, cost and conversation calls are not measured here."
+        ]
+      },
+      "budget": {
+        "cpus": 3,
+        "memoryBytes": 4294967296,
+        "workBytes": 67108864,
+        "wallSeconds": 1080,
+        "requireHardStorageLimit": false,
+        "origin": "Prospective operator-controlled resource contrast"
+      },
+      "physicalFeasibilityLabel": null,
+      "helixDecision": null,
+      "oracleResult": null,
+      "previousInputHashes": {
+        "catalogue.json": "97684486814a24bc435353bda9477d852032538e4662468b13fa16c1192fc8df",
+        "catalogue_evidence.json": "d4563219e99d42068a057b1c1e8a718db1cba3e9391260aba2f954436d880249",
+        "execution.json": "59f612cca5599cdfc09142954dd7f0d2b9ac4de3d96bd4bfbc43dcb74ef29644",
+        "specification.json": "0a667b43d9073e39ec4c0aa8b32805589dbadadee5a0c04da4f9ff4cfb9c9db3",
+        "validation.json": "e02f8e009e658df42d9ff70baec4d5091c73964c47349e451900a186c641d5dd",
+        "structural_report.json": "fd1140cda5a0916223af40393b59656f65f0ee9bc97779ba886f39c6ca6bc531",
+        "structural_catalogue.json": "2536d668520fcd19f2d8fea5377e47dbcb839d6307ed216eaaeaa5cf294c2cb5",
+        "inspect_structure.py": "10e3f2224213fbb6718023348e243605fd71afcd6b1b3bfdf1feb14f8822993b",
+        "source.pdb": "f674267d0ef4752a3d4da00497947bfc09f441a5c36d39593b72bc2ba390df0b",
+        "selection.pdb": "e126fdcfaec095bf8a874bf0f5c35af98162fb5258ee42c91b1258b157b5fceb",
+        "settings.json": "f57214ae0c02bb6e4d8a477e6c6e0984a5c089737c6405c77c633342c58075a5",
+        "trp_select.py": "2e554cd310a4ffbd09a6c197f9dbf027cff8c20de310efeacea39ad8010ba527",
+        "trp_geometry.py": "ce6ccf6e7abfda81bd1928914f7c8a6f835671ff094f8d5c1cc17985f37f7114",
+        "main.nf": "93f4e5ae23ec27a7fc5b671bb396b854c5381eb4441e15dff2997809de2e8be5",
+        "nextflow.config": "8cf781110bce649f42c0894b3091cde504c4aa5802023703aebfd1b801392569",
+        "remote_target.json": "b5d423525d055c42808d538c5a8fc7126acc046824ff30d728182ec5eb9631f2",
+        "remote_runner.py": "06dfce19be2f73d3c2cd984f53dfd0bc3809d3671c6b705ad915ec40d63f8c0f"
+      },
+      "previousDemand": {
+        "version": "trp-resources/1.2.0",
+        "sourceBytes": 359397,
+        "selectionBytes": 150911,
+        "bundleBytes": 1135768,
+        "counts": {
+          "scientificTasks": 2,
+          "stubTasks": 2,
+          "remoteScientificCalls": 2,
+          "retries": 0
+        },
+        "cpus": 3,
+        "memoryBytes": 4294967296,
+        "workBytes": 21139456,
+        "wallSeconds": 1080,
+        "storage": {
+          "kind": "estimate",
+          "formula": "ceil((12*1048576 + 7*bundleBytes + 4*selectionBytes)/4096)*4096",
+          "hardLimit": false
+        },
+        "assumptions": [
+          "SSH/Slurm backend: controller and worker capacity are checked separately. A 2 CPU/2 GiB task must fit one eligible worker; memory is never pooled across workers. Docker effective task cgroup limits are checked in scientific adapters; aggregate storage and controller enforcement remain unavailable.",
+          "Two sequential tasks per traversal; one stub traversal then one real traversal; no retry or resume.",
+          "Task allocation: 2 CPUs/2 GiB. Controller allocation: 1 CPU/2 GiB; cgroup enforcement requires an independently verified operator sandbox. CPU bandwidth is not an exclusive core reservation.",
+          "Each traversal has an 8 minute watchdog; probes/configuration reserve another 120 seconds. This is a configured timeout, not a runtime prediction.",
+          "Storage estimates allocated workspace bytes including working copies, logs and portable evidence; an independently observed XFS project quota enforces an approved budget only inside an operator allocation.",
+          "The exact image and Nextflow distribution must already be cached. Image pulls/builds and shared Docker/Nextflow caches are outside workBytes.",
+          "Two remote scientific tasks are planned; SSH probes, controller commands and stub jobs are not scientific calls. Agent provider tokens, cost and conversation calls are not measured here."
+        ]
+      },
+      "originalAttempt": {
+        "id": "R24-15-generous",
+        "status": "not-started-global-checkpoint",
+        "physicalFeasibilityLabel": null
+      }
+    },
+    {
+      "id": "R24-15-small",
+      "graphId": "G-valid-015",
+      "cohort": "small",
+      "inputDirectory": "R24-15-small",
+      "runComment": "helix:966594bc-0d8a-4f24-9a5c-1dd56c4e3790",
+      "files": {
+        "catalogue.json": "97684486814a24bc435353bda9477d852032538e4662468b13fa16c1192fc8df",
+        "catalogue_evidence.json": "d4563219e99d42068a057b1c1e8a718db1cba3e9391260aba2f954436d880249",
+        "execution.json": "1469bc847db3aee9895dba14df4d05357cbc7da20431f5884540c04143b10069",
+        "specification.json": "0a667b43d9073e39ec4c0aa8b32805589dbadadee5a0c04da4f9ff4cfb9c9db3",
+        "validation.json": "e02f8e009e658df42d9ff70baec4d5091c73964c47349e451900a186c641d5dd",
+        "structural_report.json": "fd1140cda5a0916223af40393b59656f65f0ee9bc97779ba886f39c6ca6bc531",
+        "structural_catalogue.json": "2536d668520fcd19f2d8fea5377e47dbcb839d6307ed216eaaeaa5cf294c2cb5",
+        "inspect_structure.py": "10e3f2224213fbb6718023348e243605fd71afcd6b1b3bfdf1feb14f8822993b",
+        "source.pdb": "f674267d0ef4752a3d4da00497947bfc09f441a5c36d39593b72bc2ba390df0b",
+        "selection.pdb": "e126fdcfaec095bf8a874bf0f5c35af98162fb5258ee42c91b1258b157b5fceb",
+        "settings.json": "f57214ae0c02bb6e4d8a477e6c6e0984a5c089737c6405c77c633342c58075a5",
+        "trp_select.py": "2e554cd310a4ffbd09a6c197f9dbf027cff8c20de310efeacea39ad8010ba527",
+        "trp_geometry.py": "ce6ccf6e7abfda81bd1928914f7c8a6f835671ff094f8d5c1cc17985f37f7114",
+        "main.nf": "93f4e5ae23ec27a7fc5b671bb396b854c5381eb4441e15dff2997809de2e8be5",
+        "nextflow.config": "314dfce690293f780d66909fb1c9a0915cae15ab7cf5a2d70bd80224fac03215",
+        "remote_target.json": "3608c5b85cb93f4d19793e8854636101197d8b98eb1bab42c28fd13dc8a084a3",
+        "remote_runner.py": "06dfce19be2f73d3c2cd984f53dfd0bc3809d3671c6b705ad915ec40d63f8c0f"
+      },
+      "goldCsvPath": "gold/G-valid-015/geometry.csv",
+      "goldCsvSha256": "6b8263242be875e84e0dbdd0f0bf5277c7bf98b65a0f4fe6e5fc4bd26a449974",
+      "demand": {
+        "version": "trp-resources/1.2.0",
+        "sourceBytes": 359397,
+        "selectionBytes": 150911,
+        "bundleBytes": 1135770,
+        "counts": {
+          "scientificTasks": 2,
+          "stubTasks": 2,
+          "remoteScientificCalls": 2,
+          "retries": 0
+        },
+        "cpus": 3,
+        "memoryBytes": 4294967296,
+        "workBytes": 21139456,
+        "wallSeconds": 1080,
+        "storage": {
+          "kind": "estimate",
+          "formula": "ceil((12*1048576 + 7*bundleBytes + 4*selectionBytes)/4096)*4096",
+          "hardLimit": false
+        },
+        "assumptions": [
+          "SSH/Slurm backend: controller and worker capacity are checked separately. A 2 CPU/2 GiB task must fit one eligible worker; memory is never pooled across workers. Docker effective task cgroup limits are checked in scientific adapters; aggregate storage and controller enforcement remain unavailable.",
+          "Two sequential tasks per traversal; one stub traversal then one real traversal; no retry or resume.",
+          "Task allocation: 2 CPUs/2 GiB. Controller allocation: 1 CPU/2 GiB; cgroup enforcement requires an independently verified operator sandbox. CPU bandwidth is not an exclusive core reservation.",
+          "Each traversal has an 8 minute watchdog; probes/configuration reserve another 120 seconds. This is a configured timeout, not a runtime prediction.",
+          "Storage estimates allocated workspace bytes including working copies, logs and portable evidence; an independently observed XFS project quota enforces an approved budget only inside an operator allocation.",
+          "The exact image and Nextflow distribution must already be cached. Image pulls/builds and shared Docker/Nextflow caches are outside workBytes.",
+          "Two remote scientific tasks are planned; SSH probes, controller commands and stub jobs are not scientific calls. Agent provider tokens, cost and conversation calls are not measured here."
+        ]
+      },
+      "budget": {
+        "cpus": 3,
+        "memoryBytes": 4294967296,
+        "workBytes": 1048576,
+        "wallSeconds": 1080,
+        "requireHardStorageLimit": false,
+        "origin": "Prospective operator-controlled resource contrast"
+      },
+      "physicalFeasibilityLabel": null,
+      "helixDecision": null,
+      "oracleResult": null,
+      "previousInputHashes": {
+        "catalogue.json": "97684486814a24bc435353bda9477d852032538e4662468b13fa16c1192fc8df",
+        "catalogue_evidence.json": "d4563219e99d42068a057b1c1e8a718db1cba3e9391260aba2f954436d880249",
+        "execution.json": "59f612cca5599cdfc09142954dd7f0d2b9ac4de3d96bd4bfbc43dcb74ef29644",
+        "specification.json": "0a667b43d9073e39ec4c0aa8b32805589dbadadee5a0c04da4f9ff4cfb9c9db3",
+        "validation.json": "e02f8e009e658df42d9ff70baec4d5091c73964c47349e451900a186c641d5dd",
+        "structural_report.json": "fd1140cda5a0916223af40393b59656f65f0ee9bc97779ba886f39c6ca6bc531",
+        "structural_catalogue.json": "2536d668520fcd19f2d8fea5377e47dbcb839d6307ed216eaaeaa5cf294c2cb5",
+        "inspect_structure.py": "10e3f2224213fbb6718023348e243605fd71afcd6b1b3bfdf1feb14f8822993b",
+        "source.pdb": "f674267d0ef4752a3d4da00497947bfc09f441a5c36d39593b72bc2ba390df0b",
+        "selection.pdb": "e126fdcfaec095bf8a874bf0f5c35af98162fb5258ee42c91b1258b157b5fceb",
+        "settings.json": "f57214ae0c02bb6e4d8a477e6c6e0984a5c089737c6405c77c633342c58075a5",
+        "trp_select.py": "2e554cd310a4ffbd09a6c197f9dbf027cff8c20de310efeacea39ad8010ba527",
+        "trp_geometry.py": "ce6ccf6e7abfda81bd1928914f7c8a6f835671ff094f8d5c1cc17985f37f7114",
+        "main.nf": "93f4e5ae23ec27a7fc5b671bb396b854c5381eb4441e15dff2997809de2e8be5",
+        "nextflow.config": "33f2502a926262940ec493a413c1dc902eb66c97015d1594a36cdef93263b7a8",
+        "remote_target.json": "b5d423525d055c42808d538c5a8fc7126acc046824ff30d728182ec5eb9631f2",
+        "remote_runner.py": "06dfce19be2f73d3c2cd984f53dfd0bc3809d3671c6b705ad915ec40d63f8c0f"
+      },
+      "previousDemand": {
+        "version": "trp-resources/1.2.0",
+        "sourceBytes": 359397,
+        "selectionBytes": 150911,
+        "bundleBytes": 1135768,
+        "counts": {
+          "scientificTasks": 2,
+          "stubTasks": 2,
+          "remoteScientificCalls": 2,
+          "retries": 0
+        },
+        "cpus": 3,
+        "memoryBytes": 4294967296,
+        "workBytes": 21139456,
+        "wallSeconds": 1080,
+        "storage": {
+          "kind": "estimate",
+          "formula": "ceil((12*1048576 + 7*bundleBytes + 4*selectionBytes)/4096)*4096",
+          "hardLimit": false
+        },
+        "assumptions": [
+          "SSH/Slurm backend: controller and worker capacity are checked separately. A 2 CPU/2 GiB task must fit one eligible worker; memory is never pooled across workers. Docker effective task cgroup limits are checked in scientific adapters; aggregate storage and controller enforcement remain unavailable.",
+          "Two sequential tasks per traversal; one stub traversal then one real traversal; no retry or resume.",
+          "Task allocation: 2 CPUs/2 GiB. Controller allocation: 1 CPU/2 GiB; cgroup enforcement requires an independently verified operator sandbox. CPU bandwidth is not an exclusive core reservation.",
+          "Each traversal has an 8 minute watchdog; probes/configuration reserve another 120 seconds. This is a configured timeout, not a runtime prediction.",
+          "Storage estimates allocated workspace bytes including working copies, logs and portable evidence; an independently observed XFS project quota enforces an approved budget only inside an operator allocation.",
+          "The exact image and Nextflow distribution must already be cached. Image pulls/builds and shared Docker/Nextflow caches are outside workBytes.",
+          "Two remote scientific tasks are planned; SSH probes, controller commands and stub jobs are not scientific calls. Agent provider tokens, cost and conversation calls are not measured here."
+        ]
+      },
+      "originalAttempt": {
+        "id": "R24-15-small",
+        "status": "not-started-global-checkpoint",
+        "physicalFeasibilityLabel": null
+      }
+    },
+    {
+      "id": "R24-16-generous",
+      "graphId": "G-valid-016",
+      "cohort": "generous",
+      "inputDirectory": "R24-16-generous",
+      "runComment": "helix:1dc3c6ad-e5fc-498a-a4cd-bb9aefb77516",
+      "files": {
+        "catalogue.json": "97684486814a24bc435353bda9477d852032538e4662468b13fa16c1192fc8df",
+        "catalogue_evidence.json": "d4563219e99d42068a057b1c1e8a718db1cba3e9391260aba2f954436d880249",
+        "execution.json": "1469bc847db3aee9895dba14df4d05357cbc7da20431f5884540c04143b10069",
+        "specification.json": "68219b99fb36bc47f69b0973febad7cf0420da18a5834986e822269dda55edd1",
+        "validation.json": "e02f8e009e658df42d9ff70baec4d5091c73964c47349e451900a186c641d5dd",
+        "structural_report.json": "72dedf9bd12cf842515d052d02f9c9fbfa8b92d8d915d92650a4beab56ae3b1f",
+        "structural_catalogue.json": "2536d668520fcd19f2d8fea5377e47dbcb839d6307ed216eaaeaa5cf294c2cb5",
+        "inspect_structure.py": "10e3f2224213fbb6718023348e243605fd71afcd6b1b3bfdf1feb14f8822993b",
+        "source.pdb": "f674267d0ef4752a3d4da00497947bfc09f441a5c36d39593b72bc2ba390df0b",
+        "selection.pdb": "e126fdcfaec095bf8a874bf0f5c35af98162fb5258ee42c91b1258b157b5fceb",
+        "settings.json": "4712a203c958ff8e3149b5cfc4b3d765447c3acdbef5087542ea89e2b6b9c1c5",
+        "trp_select.py": "2e554cd310a4ffbd09a6c197f9dbf027cff8c20de310efeacea39ad8010ba527",
+        "trp_geometry.py": "ce6ccf6e7abfda81bd1928914f7c8a6f835671ff094f8d5c1cc17985f37f7114",
+        "main.nf": "93f4e5ae23ec27a7fc5b671bb396b854c5381eb4441e15dff2997809de2e8be5",
+        "nextflow.config": "21af725857972fbcee03caec7c35abec481fabd5690d59c2618946e3f7fe256e",
+        "remote_target.json": "3608c5b85cb93f4d19793e8854636101197d8b98eb1bab42c28fd13dc8a084a3",
+        "remote_runner.py": "06dfce19be2f73d3c2cd984f53dfd0bc3809d3671c6b705ad915ec40d63f8c0f"
+      },
+      "goldCsvPath": "gold/G-valid-016/geometry.csv",
+      "goldCsvSha256": "ee87ec76c76dc5973b6b43f99eaaa1336528701be32d2bb58c139c2185155e33",
+      "demand": {
+        "version": "trp-resources/1.2.0",
+        "sourceBytes": 359397,
+        "selectionBytes": 150911,
+        "bundleBytes": 1135770,
+        "counts": {
+          "scientificTasks": 2,
+          "stubTasks": 2,
+          "remoteScientificCalls": 2,
+          "retries": 0
+        },
+        "cpus": 3,
+        "memoryBytes": 4294967296,
+        "workBytes": 21139456,
+        "wallSeconds": 1080,
+        "storage": {
+          "kind": "estimate",
+          "formula": "ceil((12*1048576 + 7*bundleBytes + 4*selectionBytes)/4096)*4096",
+          "hardLimit": false
+        },
+        "assumptions": [
+          "SSH/Slurm backend: controller and worker capacity are checked separately. A 2 CPU/2 GiB task must fit one eligible worker; memory is never pooled across workers. Docker effective task cgroup limits are checked in scientific adapters; aggregate storage and controller enforcement remain unavailable.",
+          "Two sequential tasks per traversal; one stub traversal then one real traversal; no retry or resume.",
+          "Task allocation: 2 CPUs/2 GiB. Controller allocation: 1 CPU/2 GiB; cgroup enforcement requires an independently verified operator sandbox. CPU bandwidth is not an exclusive core reservation.",
+          "Each traversal has an 8 minute watchdog; probes/configuration reserve another 120 seconds. This is a configured timeout, not a runtime prediction.",
+          "Storage estimates allocated workspace bytes including working copies, logs and portable evidence; an independently observed XFS project quota enforces an approved budget only inside an operator allocation.",
+          "The exact image and Nextflow distribution must already be cached. Image pulls/builds and shared Docker/Nextflow caches are outside workBytes.",
+          "Two remote scientific tasks are planned; SSH probes, controller commands and stub jobs are not scientific calls. Agent provider tokens, cost and conversation calls are not measured here."
+        ]
+      },
+      "budget": {
+        "cpus": 3,
+        "memoryBytes": 4294967296,
+        "workBytes": 67108864,
+        "wallSeconds": 1080,
+        "requireHardStorageLimit": false,
+        "origin": "Prospective operator-controlled resource contrast"
+      },
+      "physicalFeasibilityLabel": null,
+      "helixDecision": null,
+      "oracleResult": null,
+      "previousInputHashes": {
+        "catalogue.json": "97684486814a24bc435353bda9477d852032538e4662468b13fa16c1192fc8df",
+        "catalogue_evidence.json": "d4563219e99d42068a057b1c1e8a718db1cba3e9391260aba2f954436d880249",
+        "execution.json": "59f612cca5599cdfc09142954dd7f0d2b9ac4de3d96bd4bfbc43dcb74ef29644",
+        "specification.json": "68219b99fb36bc47f69b0973febad7cf0420da18a5834986e822269dda55edd1",
+        "validation.json": "e02f8e009e658df42d9ff70baec4d5091c73964c47349e451900a186c641d5dd",
+        "structural_report.json": "72dedf9bd12cf842515d052d02f9c9fbfa8b92d8d915d92650a4beab56ae3b1f",
+        "structural_catalogue.json": "2536d668520fcd19f2d8fea5377e47dbcb839d6307ed216eaaeaa5cf294c2cb5",
+        "inspect_structure.py": "10e3f2224213fbb6718023348e243605fd71afcd6b1b3bfdf1feb14f8822993b",
+        "source.pdb": "f674267d0ef4752a3d4da00497947bfc09f441a5c36d39593b72bc2ba390df0b",
+        "selection.pdb": "e126fdcfaec095bf8a874bf0f5c35af98162fb5258ee42c91b1258b157b5fceb",
+        "settings.json": "4712a203c958ff8e3149b5cfc4b3d765447c3acdbef5087542ea89e2b6b9c1c5",
+        "trp_select.py": "2e554cd310a4ffbd09a6c197f9dbf027cff8c20de310efeacea39ad8010ba527",
+        "trp_geometry.py": "ce6ccf6e7abfda81bd1928914f7c8a6f835671ff094f8d5c1cc17985f37f7114",
+        "main.nf": "93f4e5ae23ec27a7fc5b671bb396b854c5381eb4441e15dff2997809de2e8be5",
+        "nextflow.config": "9375874a1981ac5536b21adab3e4fee3eb6d37a74d9e28832c8bad0013ac1b7c",
+        "remote_target.json": "b5d423525d055c42808d538c5a8fc7126acc046824ff30d728182ec5eb9631f2",
+        "remote_runner.py": "06dfce19be2f73d3c2cd984f53dfd0bc3809d3671c6b705ad915ec40d63f8c0f"
+      },
+      "previousDemand": {
+        "version": "trp-resources/1.2.0",
+        "sourceBytes": 359397,
+        "selectionBytes": 150911,
+        "bundleBytes": 1135768,
+        "counts": {
+          "scientificTasks": 2,
+          "stubTasks": 2,
+          "remoteScientificCalls": 2,
+          "retries": 0
+        },
+        "cpus": 3,
+        "memoryBytes": 4294967296,
+        "workBytes": 21139456,
+        "wallSeconds": 1080,
+        "storage": {
+          "kind": "estimate",
+          "formula": "ceil((12*1048576 + 7*bundleBytes + 4*selectionBytes)/4096)*4096",
+          "hardLimit": false
+        },
+        "assumptions": [
+          "SSH/Slurm backend: controller and worker capacity are checked separately. A 2 CPU/2 GiB task must fit one eligible worker; memory is never pooled across workers. Docker effective task cgroup limits are checked in scientific adapters; aggregate storage and controller enforcement remain unavailable.",
+          "Two sequential tasks per traversal; one stub traversal then one real traversal; no retry or resume.",
+          "Task allocation: 2 CPUs/2 GiB. Controller allocation: 1 CPU/2 GiB; cgroup enforcement requires an independently verified operator sandbox. CPU bandwidth is not an exclusive core reservation.",
+          "Each traversal has an 8 minute watchdog; probes/configuration reserve another 120 seconds. This is a configured timeout, not a runtime prediction.",
+          "Storage estimates allocated workspace bytes including working copies, logs and portable evidence; an independently observed XFS project quota enforces an approved budget only inside an operator allocation.",
+          "The exact image and Nextflow distribution must already be cached. Image pulls/builds and shared Docker/Nextflow caches are outside workBytes.",
+          "Two remote scientific tasks are planned; SSH probes, controller commands and stub jobs are not scientific calls. Agent provider tokens, cost and conversation calls are not measured here."
+        ]
+      },
+      "originalAttempt": {
+        "id": "R24-16-generous",
+        "status": "not-started-global-checkpoint",
+        "physicalFeasibilityLabel": null
+      }
+    },
+    {
+      "id": "R24-16-small",
+      "graphId": "G-valid-016",
+      "cohort": "small",
+      "inputDirectory": "R24-16-small",
+      "runComment": "helix:e8661ebe-0d4e-4ac3-bf28-1b682cf6a49f",
+      "files": {
+        "catalogue.json": "97684486814a24bc435353bda9477d852032538e4662468b13fa16c1192fc8df",
+        "catalogue_evidence.json": "d4563219e99d42068a057b1c1e8a718db1cba3e9391260aba2f954436d880249",
+        "execution.json": "1469bc847db3aee9895dba14df4d05357cbc7da20431f5884540c04143b10069",
+        "specification.json": "68219b99fb36bc47f69b0973febad7cf0420da18a5834986e822269dda55edd1",
+        "validation.json": "e02f8e009e658df42d9ff70baec4d5091c73964c47349e451900a186c641d5dd",
+        "structural_report.json": "72dedf9bd12cf842515d052d02f9c9fbfa8b92d8d915d92650a4beab56ae3b1f",
+        "structural_catalogue.json": "2536d668520fcd19f2d8fea5377e47dbcb839d6307ed216eaaeaa5cf294c2cb5",
+        "inspect_structure.py": "10e3f2224213fbb6718023348e243605fd71afcd6b1b3bfdf1feb14f8822993b",
+        "source.pdb": "f674267d0ef4752a3d4da00497947bfc09f441a5c36d39593b72bc2ba390df0b",
+        "selection.pdb": "e126fdcfaec095bf8a874bf0f5c35af98162fb5258ee42c91b1258b157b5fceb",
+        "settings.json": "4712a203c958ff8e3149b5cfc4b3d765447c3acdbef5087542ea89e2b6b9c1c5",
+        "trp_select.py": "2e554cd310a4ffbd09a6c197f9dbf027cff8c20de310efeacea39ad8010ba527",
+        "trp_geometry.py": "ce6ccf6e7abfda81bd1928914f7c8a6f835671ff094f8d5c1cc17985f37f7114",
+        "main.nf": "93f4e5ae23ec27a7fc5b671bb396b854c5381eb4441e15dff2997809de2e8be5",
+        "nextflow.config": "e05f055452c63353646653166d82a5a6ed0de679da0694041c7029172d650f27",
+        "remote_target.json": "3608c5b85cb93f4d19793e8854636101197d8b98eb1bab42c28fd13dc8a084a3",
+        "remote_runner.py": "06dfce19be2f73d3c2cd984f53dfd0bc3809d3671c6b705ad915ec40d63f8c0f"
+      },
+      "goldCsvPath": "gold/G-valid-016/geometry.csv",
+      "goldCsvSha256": "ee87ec76c76dc5973b6b43f99eaaa1336528701be32d2bb58c139c2185155e33",
+      "demand": {
+        "version": "trp-resources/1.2.0",
+        "sourceBytes": 359397,
+        "selectionBytes": 150911,
+        "bundleBytes": 1135770,
+        "counts": {
+          "scientificTasks": 2,
+          "stubTasks": 2,
+          "remoteScientificCalls": 2,
+          "retries": 0
+        },
+        "cpus": 3,
+        "memoryBytes": 4294967296,
+        "workBytes": 21139456,
+        "wallSeconds": 1080,
+        "storage": {
+          "kind": "estimate",
+          "formula": "ceil((12*1048576 + 7*bundleBytes + 4*selectionBytes)/4096)*4096",
+          "hardLimit": false
+        },
+        "assumptions": [
+          "SSH/Slurm backend: controller and worker capacity are checked separately. A 2 CPU/2 GiB task must fit one eligible worker; memory is never pooled across workers. Docker effective task cgroup limits are checked in scientific adapters; aggregate storage and controller enforcement remain unavailable.",
+          "Two sequential tasks per traversal; one stub traversal then one real traversal; no retry or resume.",
+          "Task allocation: 2 CPUs/2 GiB. Controller allocation: 1 CPU/2 GiB; cgroup enforcement requires an independently verified operator sandbox. CPU bandwidth is not an exclusive core reservation.",
+          "Each traversal has an 8 minute watchdog; probes/configuration reserve another 120 seconds. This is a configured timeout, not a runtime prediction.",
+          "Storage estimates allocated workspace bytes including working copies, logs and portable evidence; an independently observed XFS project quota enforces an approved budget only inside an operator allocation.",
+          "The exact image and Nextflow distribution must already be cached. Image pulls/builds and shared Docker/Nextflow caches are outside workBytes.",
+          "Two remote scientific tasks are planned; SSH probes, controller commands and stub jobs are not scientific calls. Agent provider tokens, cost and conversation calls are not measured here."
+        ]
+      },
+      "budget": {
+        "cpus": 3,
+        "memoryBytes": 4294967296,
+        "workBytes": 2097152,
+        "wallSeconds": 1080,
+        "requireHardStorageLimit": false,
+        "origin": "Prospective operator-controlled resource contrast"
+      },
+      "physicalFeasibilityLabel": null,
+      "helixDecision": null,
+      "oracleResult": null,
+      "previousInputHashes": {
+        "catalogue.json": "97684486814a24bc435353bda9477d852032538e4662468b13fa16c1192fc8df",
+        "catalogue_evidence.json": "d4563219e99d42068a057b1c1e8a718db1cba3e9391260aba2f954436d880249",
+        "execution.json": "59f612cca5599cdfc09142954dd7f0d2b9ac4de3d96bd4bfbc43dcb74ef29644",
+        "specification.json": "68219b99fb36bc47f69b0973febad7cf0420da18a5834986e822269dda55edd1",
+        "validation.json": "e02f8e009e658df42d9ff70baec4d5091c73964c47349e451900a186c641d5dd",
+        "structural_report.json": "72dedf9bd12cf842515d052d02f9c9fbfa8b92d8d915d92650a4beab56ae3b1f",
+        "structural_catalogue.json": "2536d668520fcd19f2d8fea5377e47dbcb839d6307ed216eaaeaa5cf294c2cb5",
+        "inspect_structure.py": "10e3f2224213fbb6718023348e243605fd71afcd6b1b3bfdf1feb14f8822993b",
+        "source.pdb": "f674267d0ef4752a3d4da00497947bfc09f441a5c36d39593b72bc2ba390df0b",
+        "selection.pdb": "e126fdcfaec095bf8a874bf0f5c35af98162fb5258ee42c91b1258b157b5fceb",
+        "settings.json": "4712a203c958ff8e3149b5cfc4b3d765447c3acdbef5087542ea89e2b6b9c1c5",
+        "trp_select.py": "2e554cd310a4ffbd09a6c197f9dbf027cff8c20de310efeacea39ad8010ba527",
+        "trp_geometry.py": "ce6ccf6e7abfda81bd1928914f7c8a6f835671ff094f8d5c1cc17985f37f7114",
+        "main.nf": "93f4e5ae23ec27a7fc5b671bb396b854c5381eb4441e15dff2997809de2e8be5",
+        "nextflow.config": "fb3b02ff6dc07a6657573fa5a7d432096131416ba6ba231bb6db2847d6136b5d",
+        "remote_target.json": "b5d423525d055c42808d538c5a8fc7126acc046824ff30d728182ec5eb9631f2",
+        "remote_runner.py": "06dfce19be2f73d3c2cd984f53dfd0bc3809d3671c6b705ad915ec40d63f8c0f"
+      },
+      "previousDemand": {
+        "version": "trp-resources/1.2.0",
+        "sourceBytes": 359397,
+        "selectionBytes": 150911,
+        "bundleBytes": 1135768,
+        "counts": {
+          "scientificTasks": 2,
+          "stubTasks": 2,
+          "remoteScientificCalls": 2,
+          "retries": 0
+        },
+        "cpus": 3,
+        "memoryBytes": 4294967296,
+        "workBytes": 21139456,
+        "wallSeconds": 1080,
+        "storage": {
+          "kind": "estimate",
+          "formula": "ceil((12*1048576 + 7*bundleBytes + 4*selectionBytes)/4096)*4096",
+          "hardLimit": false
+        },
+        "assumptions": [
+          "SSH/Slurm backend: controller and worker capacity are checked separately. A 2 CPU/2 GiB task must fit one eligible worker; memory is never pooled across workers. Docker effective task cgroup limits are checked in scientific adapters; aggregate storage and controller enforcement remain unavailable.",
+          "Two sequential tasks per traversal; one stub traversal then one real traversal; no retry or resume.",
+          "Task allocation: 2 CPUs/2 GiB. Controller allocation: 1 CPU/2 GiB; cgroup enforcement requires an independently verified operator sandbox. CPU bandwidth is not an exclusive core reservation.",
+          "Each traversal has an 8 minute watchdog; probes/configuration reserve another 120 seconds. This is a configured timeout, not a runtime prediction.",
+          "Storage estimates allocated workspace bytes including working copies, logs and portable evidence; an independently observed XFS project quota enforces an approved budget only inside an operator allocation.",
+          "The exact image and Nextflow distribution must already be cached. Image pulls/builds and shared Docker/Nextflow caches are outside workBytes.",
+          "Two remote scientific tasks are planned; SSH probes, controller commands and stub jobs are not scientific calls. Agent provider tokens, cost and conversation calls are not measured here."
+        ]
+      },
+      "originalAttempt": {
+        "id": "R24-16-small",
+        "status": "not-started-global-checkpoint",
+        "physicalFeasibilityLabel": null
+      }
+    },
+    {
+      "id": "R24-17-generous",
+      "graphId": "G-valid-017",
+      "cohort": "generous",
+      "inputDirectory": "R24-17-generous",
+      "runComment": "helix:6e00d228-2842-4bc7-90a5-d08a3eee4512",
+      "files": {
+        "catalogue.json": "97684486814a24bc435353bda9477d852032538e4662468b13fa16c1192fc8df",
+        "catalogue_evidence.json": "d4563219e99d42068a057b1c1e8a718db1cba3e9391260aba2f954436d880249",
+        "execution.json": "1469bc847db3aee9895dba14df4d05357cbc7da20431f5884540c04143b10069",
+        "specification.json": "c3f8bcae6e856d939182558736d421b3f30d2d202c2dd88382dacd41b059f044",
+        "validation.json": "e02f8e009e658df42d9ff70baec4d5091c73964c47349e451900a186c641d5dd",
+        "structural_report.json": "d07df7a85344568e72abf1e361d83f9e69a8308c80b20fa32ba46f4f23b628d0",
+        "structural_catalogue.json": "2536d668520fcd19f2d8fea5377e47dbcb839d6307ed216eaaeaa5cf294c2cb5",
+        "inspect_structure.py": "10e3f2224213fbb6718023348e243605fd71afcd6b1b3bfdf1feb14f8822993b",
+        "source.pdb": "f674267d0ef4752a3d4da00497947bfc09f441a5c36d39593b72bc2ba390df0b",
+        "selection.pdb": "e126fdcfaec095bf8a874bf0f5c35af98162fb5258ee42c91b1258b157b5fceb",
+        "settings.json": "53ad3e9dfa096e41f91113f57c835a38f1797f8a13202adf514e4d86602f4f3d",
+        "trp_select.py": "2e554cd310a4ffbd09a6c197f9dbf027cff8c20de310efeacea39ad8010ba527",
+        "trp_geometry.py": "ce6ccf6e7abfda81bd1928914f7c8a6f835671ff094f8d5c1cc17985f37f7114",
+        "main.nf": "93f4e5ae23ec27a7fc5b671bb396b854c5381eb4441e15dff2997809de2e8be5",
+        "nextflow.config": "8290baa2fd65312728c59b130a71dffc1c265899d7015d2ed3aa684ba02f0e63",
+        "remote_target.json": "3608c5b85cb93f4d19793e8854636101197d8b98eb1bab42c28fd13dc8a084a3",
+        "remote_runner.py": "06dfce19be2f73d3c2cd984f53dfd0bc3809d3671c6b705ad915ec40d63f8c0f"
+      },
+      "goldCsvPath": "gold/G-valid-017/geometry.csv",
+      "goldCsvSha256": "e83a46744bd29477b1feaccfe6d9b07c4175682b17e6de0dbb6c4c1ac5debec5",
+      "demand": {
+        "version": "trp-resources/1.2.0",
+        "sourceBytes": 359397,
+        "selectionBytes": 150911,
+        "bundleBytes": 1135770,
+        "counts": {
+          "scientificTasks": 2,
+          "stubTasks": 2,
+          "remoteScientificCalls": 2,
+          "retries": 0
+        },
+        "cpus": 3,
+        "memoryBytes": 4294967296,
+        "workBytes": 21139456,
+        "wallSeconds": 1080,
+        "storage": {
+          "kind": "estimate",
+          "formula": "ceil((12*1048576 + 7*bundleBytes + 4*selectionBytes)/4096)*4096",
+          "hardLimit": false
+        },
+        "assumptions": [
+          "SSH/Slurm backend: controller and worker capacity are checked separately. A 2 CPU/2 GiB task must fit one eligible worker; memory is never pooled across workers. Docker effective task cgroup limits are checked in scientific adapters; aggregate storage and controller enforcement remain unavailable.",
+          "Two sequential tasks per traversal; one stub traversal then one real traversal; no retry or resume.",
+          "Task allocation: 2 CPUs/2 GiB. Controller allocation: 1 CPU/2 GiB; cgroup enforcement requires an independently verified operator sandbox. CPU bandwidth is not an exclusive core reservation.",
+          "Each traversal has an 8 minute watchdog; probes/configuration reserve another 120 seconds. This is a configured timeout, not a runtime prediction.",
+          "Storage estimates allocated workspace bytes including working copies, logs and portable evidence; an independently observed XFS project quota enforces an approved budget only inside an operator allocation.",
+          "The exact image and Nextflow distribution must already be cached. Image pulls/builds and shared Docker/Nextflow caches are outside workBytes.",
+          "Two remote scientific tasks are planned; SSH probes, controller commands and stub jobs are not scientific calls. Agent provider tokens, cost and conversation calls are not measured here."
+        ]
+      },
+      "budget": {
+        "cpus": 3,
+        "memoryBytes": 4294967296,
+        "workBytes": 67108864,
+        "wallSeconds": 1080,
+        "requireHardStorageLimit": false,
+        "origin": "Prospective operator-controlled resource contrast"
+      },
+      "physicalFeasibilityLabel": null,
+      "helixDecision": null,
+      "oracleResult": null,
+      "previousInputHashes": {
+        "catalogue.json": "97684486814a24bc435353bda9477d852032538e4662468b13fa16c1192fc8df",
+        "catalogue_evidence.json": "d4563219e99d42068a057b1c1e8a718db1cba3e9391260aba2f954436d880249",
+        "execution.json": "59f612cca5599cdfc09142954dd7f0d2b9ac4de3d96bd4bfbc43dcb74ef29644",
+        "specification.json": "c3f8bcae6e856d939182558736d421b3f30d2d202c2dd88382dacd41b059f044",
+        "validation.json": "e02f8e009e658df42d9ff70baec4d5091c73964c47349e451900a186c641d5dd",
+        "structural_report.json": "d07df7a85344568e72abf1e361d83f9e69a8308c80b20fa32ba46f4f23b628d0",
+        "structural_catalogue.json": "2536d668520fcd19f2d8fea5377e47dbcb839d6307ed216eaaeaa5cf294c2cb5",
+        "inspect_structure.py": "10e3f2224213fbb6718023348e243605fd71afcd6b1b3bfdf1feb14f8822993b",
+        "source.pdb": "f674267d0ef4752a3d4da00497947bfc09f441a5c36d39593b72bc2ba390df0b",
+        "selection.pdb": "e126fdcfaec095bf8a874bf0f5c35af98162fb5258ee42c91b1258b157b5fceb",
+        "settings.json": "53ad3e9dfa096e41f91113f57c835a38f1797f8a13202adf514e4d86602f4f3d",
+        "trp_select.py": "2e554cd310a4ffbd09a6c197f9dbf027cff8c20de310efeacea39ad8010ba527",
+        "trp_geometry.py": "ce6ccf6e7abfda81bd1928914f7c8a6f835671ff094f8d5c1cc17985f37f7114",
+        "main.nf": "93f4e5ae23ec27a7fc5b671bb396b854c5381eb4441e15dff2997809de2e8be5",
+        "nextflow.config": "a3dbe6476fed38270df8e2a83e73cae6887360d25ea6a8ffd7af6772fbb2eb32",
+        "remote_target.json": "b5d423525d055c42808d538c5a8fc7126acc046824ff30d728182ec5eb9631f2",
+        "remote_runner.py": "06dfce19be2f73d3c2cd984f53dfd0bc3809d3671c6b705ad915ec40d63f8c0f"
+      },
+      "previousDemand": {
+        "version": "trp-resources/1.2.0",
+        "sourceBytes": 359397,
+        "selectionBytes": 150911,
+        "bundleBytes": 1135768,
+        "counts": {
+          "scientificTasks": 2,
+          "stubTasks": 2,
+          "remoteScientificCalls": 2,
+          "retries": 0
+        },
+        "cpus": 3,
+        "memoryBytes": 4294967296,
+        "workBytes": 21139456,
+        "wallSeconds": 1080,
+        "storage": {
+          "kind": "estimate",
+          "formula": "ceil((12*1048576 + 7*bundleBytes + 4*selectionBytes)/4096)*4096",
+          "hardLimit": false
+        },
+        "assumptions": [
+          "SSH/Slurm backend: controller and worker capacity are checked separately. A 2 CPU/2 GiB task must fit one eligible worker; memory is never pooled across workers. Docker effective task cgroup limits are checked in scientific adapters; aggregate storage and controller enforcement remain unavailable.",
+          "Two sequential tasks per traversal; one stub traversal then one real traversal; no retry or resume.",
+          "Task allocation: 2 CPUs/2 GiB. Controller allocation: 1 CPU/2 GiB; cgroup enforcement requires an independently verified operator sandbox. CPU bandwidth is not an exclusive core reservation.",
+          "Each traversal has an 8 minute watchdog; probes/configuration reserve another 120 seconds. This is a configured timeout, not a runtime prediction.",
+          "Storage estimates allocated workspace bytes including working copies, logs and portable evidence; an independently observed XFS project quota enforces an approved budget only inside an operator allocation.",
+          "The exact image and Nextflow distribution must already be cached. Image pulls/builds and shared Docker/Nextflow caches are outside workBytes.",
+          "Two remote scientific tasks are planned; SSH probes, controller commands and stub jobs are not scientific calls. Agent provider tokens, cost and conversation calls are not measured here."
+        ]
+      },
+      "originalAttempt": {
+        "id": "R24-17-generous",
+        "status": "not-started-global-checkpoint",
+        "physicalFeasibilityLabel": null
+      }
+    },
+    {
+      "id": "R24-17-small",
+      "graphId": "G-valid-017",
+      "cohort": "small",
+      "inputDirectory": "R24-17-small",
+      "runComment": "helix:38ec6caa-d4f4-4b61-bd32-c01a4b2363be",
+      "files": {
+        "catalogue.json": "97684486814a24bc435353bda9477d852032538e4662468b13fa16c1192fc8df",
+        "catalogue_evidence.json": "d4563219e99d42068a057b1c1e8a718db1cba3e9391260aba2f954436d880249",
+        "execution.json": "1469bc847db3aee9895dba14df4d05357cbc7da20431f5884540c04143b10069",
+        "specification.json": "c3f8bcae6e856d939182558736d421b3f30d2d202c2dd88382dacd41b059f044",
+        "validation.json": "e02f8e009e658df42d9ff70baec4d5091c73964c47349e451900a186c641d5dd",
+        "structural_report.json": "d07df7a85344568e72abf1e361d83f9e69a8308c80b20fa32ba46f4f23b628d0",
+        "structural_catalogue.json": "2536d668520fcd19f2d8fea5377e47dbcb839d6307ed216eaaeaa5cf294c2cb5",
+        "inspect_structure.py": "10e3f2224213fbb6718023348e243605fd71afcd6b1b3bfdf1feb14f8822993b",
+        "source.pdb": "f674267d0ef4752a3d4da00497947bfc09f441a5c36d39593b72bc2ba390df0b",
+        "selection.pdb": "e126fdcfaec095bf8a874bf0f5c35af98162fb5258ee42c91b1258b157b5fceb",
+        "settings.json": "53ad3e9dfa096e41f91113f57c835a38f1797f8a13202adf514e4d86602f4f3d",
+        "trp_select.py": "2e554cd310a4ffbd09a6c197f9dbf027cff8c20de310efeacea39ad8010ba527",
+        "trp_geometry.py": "ce6ccf6e7abfda81bd1928914f7c8a6f835671ff094f8d5c1cc17985f37f7114",
+        "main.nf": "93f4e5ae23ec27a7fc5b671bb396b854c5381eb4441e15dff2997809de2e8be5",
+        "nextflow.config": "7ac8238e174a51a1ab73dac1aa00b1ff6cd7d268fa0de3ffb417e9c5f4f3d812",
+        "remote_target.json": "3608c5b85cb93f4d19793e8854636101197d8b98eb1bab42c28fd13dc8a084a3",
+        "remote_runner.py": "06dfce19be2f73d3c2cd984f53dfd0bc3809d3671c6b705ad915ec40d63f8c0f"
+      },
+      "goldCsvPath": "gold/G-valid-017/geometry.csv",
+      "goldCsvSha256": "e83a46744bd29477b1feaccfe6d9b07c4175682b17e6de0dbb6c4c1ac5debec5",
+      "demand": {
+        "version": "trp-resources/1.2.0",
+        "sourceBytes": 359397,
+        "selectionBytes": 150911,
+        "bundleBytes": 1135770,
+        "counts": {
+          "scientificTasks": 2,
+          "stubTasks": 2,
+          "remoteScientificCalls": 2,
+          "retries": 0
+        },
+        "cpus": 3,
+        "memoryBytes": 4294967296,
+        "workBytes": 21139456,
+        "wallSeconds": 1080,
+        "storage": {
+          "kind": "estimate",
+          "formula": "ceil((12*1048576 + 7*bundleBytes + 4*selectionBytes)/4096)*4096",
+          "hardLimit": false
+        },
+        "assumptions": [
+          "SSH/Slurm backend: controller and worker capacity are checked separately. A 2 CPU/2 GiB task must fit one eligible worker; memory is never pooled across workers. Docker effective task cgroup limits are checked in scientific adapters; aggregate storage and controller enforcement remain unavailable.",
+          "Two sequential tasks per traversal; one stub traversal then one real traversal; no retry or resume.",
+          "Task allocation: 2 CPUs/2 GiB. Controller allocation: 1 CPU/2 GiB; cgroup enforcement requires an independently verified operator sandbox. CPU bandwidth is not an exclusive core reservation.",
+          "Each traversal has an 8 minute watchdog; probes/configuration reserve another 120 seconds. This is a configured timeout, not a runtime prediction.",
+          "Storage estimates allocated workspace bytes including working copies, logs and portable evidence; an independently observed XFS project quota enforces an approved budget only inside an operator allocation.",
+          "The exact image and Nextflow distribution must already be cached. Image pulls/builds and shared Docker/Nextflow caches are outside workBytes.",
+          "Two remote scientific tasks are planned; SSH probes, controller commands and stub jobs are not scientific calls. Agent provider tokens, cost and conversation calls are not measured here."
+        ]
+      },
+      "budget": {
+        "cpus": 3,
+        "memoryBytes": 4294967296,
+        "workBytes": 4194304,
+        "wallSeconds": 1080,
+        "requireHardStorageLimit": false,
+        "origin": "Prospective operator-controlled resource contrast"
+      },
+      "physicalFeasibilityLabel": null,
+      "helixDecision": null,
+      "oracleResult": null,
+      "previousInputHashes": {
+        "catalogue.json": "97684486814a24bc435353bda9477d852032538e4662468b13fa16c1192fc8df",
+        "catalogue_evidence.json": "d4563219e99d42068a057b1c1e8a718db1cba3e9391260aba2f954436d880249",
+        "execution.json": "59f612cca5599cdfc09142954dd7f0d2b9ac4de3d96bd4bfbc43dcb74ef29644",
+        "specification.json": "c3f8bcae6e856d939182558736d421b3f30d2d202c2dd88382dacd41b059f044",
+        "validation.json": "e02f8e009e658df42d9ff70baec4d5091c73964c47349e451900a186c641d5dd",
+        "structural_report.json": "d07df7a85344568e72abf1e361d83f9e69a8308c80b20fa32ba46f4f23b628d0",
+        "structural_catalogue.json": "2536d668520fcd19f2d8fea5377e47dbcb839d6307ed216eaaeaa5cf294c2cb5",
+        "inspect_structure.py": "10e3f2224213fbb6718023348e243605fd71afcd6b1b3bfdf1feb14f8822993b",
+        "source.pdb": "f674267d0ef4752a3d4da00497947bfc09f441a5c36d39593b72bc2ba390df0b",
+        "selection.pdb": "e126fdcfaec095bf8a874bf0f5c35af98162fb5258ee42c91b1258b157b5fceb",
+        "settings.json": "53ad3e9dfa096e41f91113f57c835a38f1797f8a13202adf514e4d86602f4f3d",
+        "trp_select.py": "2e554cd310a4ffbd09a6c197f9dbf027cff8c20de310efeacea39ad8010ba527",
+        "trp_geometry.py": "ce6ccf6e7abfda81bd1928914f7c8a6f835671ff094f8d5c1cc17985f37f7114",
+        "main.nf": "93f4e5ae23ec27a7fc5b671bb396b854c5381eb4441e15dff2997809de2e8be5",
+        "nextflow.config": "2f943ab5465073702dafe2f04e9414194527d63f8f0ecceac4513130be633ae1",
+        "remote_target.json": "b5d423525d055c42808d538c5a8fc7126acc046824ff30d728182ec5eb9631f2",
+        "remote_runner.py": "06dfce19be2f73d3c2cd984f53dfd0bc3809d3671c6b705ad915ec40d63f8c0f"
+      },
+      "previousDemand": {
+        "version": "trp-resources/1.2.0",
+        "sourceBytes": 359397,
+        "selectionBytes": 150911,
+        "bundleBytes": 1135768,
+        "counts": {
+          "scientificTasks": 2,
+          "stubTasks": 2,
+          "remoteScientificCalls": 2,
+          "retries": 0
+        },
+        "cpus": 3,
+        "memoryBytes": 4294967296,
+        "workBytes": 21139456,
+        "wallSeconds": 1080,
+        "storage": {
+          "kind": "estimate",
+          "formula": "ceil((12*1048576 + 7*bundleBytes + 4*selectionBytes)/4096)*4096",
+          "hardLimit": false
+        },
+        "assumptions": [
+          "SSH/Slurm backend: controller and worker capacity are checked separately. A 2 CPU/2 GiB task must fit one eligible worker; memory is never pooled across workers. Docker effective task cgroup limits are checked in scientific adapters; aggregate storage and controller enforcement remain unavailable.",
+          "Two sequential tasks per traversal; one stub traversal then one real traversal; no retry or resume.",
+          "Task allocation: 2 CPUs/2 GiB. Controller allocation: 1 CPU/2 GiB; cgroup enforcement requires an independently verified operator sandbox. CPU bandwidth is not an exclusive core reservation.",
+          "Each traversal has an 8 minute watchdog; probes/configuration reserve another 120 seconds. This is a configured timeout, not a runtime prediction.",
+          "Storage estimates allocated workspace bytes including working copies, logs and portable evidence; an independently observed XFS project quota enforces an approved budget only inside an operator allocation.",
+          "The exact image and Nextflow distribution must already be cached. Image pulls/builds and shared Docker/Nextflow caches are outside workBytes.",
+          "Two remote scientific tasks are planned; SSH probes, controller commands and stub jobs are not scientific calls. Agent provider tokens, cost and conversation calls are not measured here."
+        ]
+      },
+      "originalAttempt": {
+        "id": "R24-17-small",
+        "status": "not-started-global-checkpoint",
+        "physicalFeasibilityLabel": null
+      }
+    },
+    {
+      "id": "R24-18-generous",
+      "graphId": "G-valid-018",
+      "cohort": "generous",
+      "inputDirectory": "R24-18-generous",
+      "runComment": "helix:42d3c66e-45af-4c37-8e7c-cc15eb1cbbc3",
+      "files": {
+        "catalogue.json": "97684486814a24bc435353bda9477d852032538e4662468b13fa16c1192fc8df",
+        "catalogue_evidence.json": "d4563219e99d42068a057b1c1e8a718db1cba3e9391260aba2f954436d880249",
+        "execution.json": "1469bc847db3aee9895dba14df4d05357cbc7da20431f5884540c04143b10069",
+        "specification.json": "fd92f4a9cd44d0e764931eb78bcee825b1e1dab85332fe2f38aacbd02b55b87c",
+        "validation.json": "e02f8e009e658df42d9ff70baec4d5091c73964c47349e451900a186c641d5dd",
+        "structural_report.json": "0817f933c8901926ffc4ab41bd25eb2395af413fb28e46885ea0cfa6c6a72e75",
+        "structural_catalogue.json": "2536d668520fcd19f2d8fea5377e47dbcb839d6307ed216eaaeaa5cf294c2cb5",
+        "inspect_structure.py": "10e3f2224213fbb6718023348e243605fd71afcd6b1b3bfdf1feb14f8822993b",
+        "source.pdb": "f674267d0ef4752a3d4da00497947bfc09f441a5c36d39593b72bc2ba390df0b",
+        "selection.pdb": "e126fdcfaec095bf8a874bf0f5c35af98162fb5258ee42c91b1258b157b5fceb",
+        "settings.json": "6bd76a24701dd82552be9b6490d02ce94efd3e26d42abf25a0aa52819b72e715",
+        "trp_select.py": "2e554cd310a4ffbd09a6c197f9dbf027cff8c20de310efeacea39ad8010ba527",
+        "trp_geometry.py": "ce6ccf6e7abfda81bd1928914f7c8a6f835671ff094f8d5c1cc17985f37f7114",
+        "main.nf": "93f4e5ae23ec27a7fc5b671bb396b854c5381eb4441e15dff2997809de2e8be5",
+        "nextflow.config": "e6ac916b5c4844793db475e353f8409231ca62f340400eb1deacdc810b2b8fe3",
+        "remote_target.json": "3608c5b85cb93f4d19793e8854636101197d8b98eb1bab42c28fd13dc8a084a3",
+        "remote_runner.py": "06dfce19be2f73d3c2cd984f53dfd0bc3809d3671c6b705ad915ec40d63f8c0f"
+      },
+      "goldCsvPath": "gold/G-valid-018/geometry.csv",
+      "goldCsvSha256": "a094e22b36e0cb88f29d5f7040ae44e4ec1685b57074fbed6bd6a27924967efd",
+      "demand": {
+        "version": "trp-resources/1.2.0",
+        "sourceBytes": 359397,
+        "selectionBytes": 150911,
+        "bundleBytes": 1135770,
+        "counts": {
+          "scientificTasks": 2,
+          "stubTasks": 2,
+          "remoteScientificCalls": 2,
+          "retries": 0
+        },
+        "cpus": 3,
+        "memoryBytes": 4294967296,
+        "workBytes": 21139456,
+        "wallSeconds": 1080,
+        "storage": {
+          "kind": "estimate",
+          "formula": "ceil((12*1048576 + 7*bundleBytes + 4*selectionBytes)/4096)*4096",
+          "hardLimit": false
+        },
+        "assumptions": [
+          "SSH/Slurm backend: controller and worker capacity are checked separately. A 2 CPU/2 GiB task must fit one eligible worker; memory is never pooled across workers. Docker effective task cgroup limits are checked in scientific adapters; aggregate storage and controller enforcement remain unavailable.",
+          "Two sequential tasks per traversal; one stub traversal then one real traversal; no retry or resume.",
+          "Task allocation: 2 CPUs/2 GiB. Controller allocation: 1 CPU/2 GiB; cgroup enforcement requires an independently verified operator sandbox. CPU bandwidth is not an exclusive core reservation.",
+          "Each traversal has an 8 minute watchdog; probes/configuration reserve another 120 seconds. This is a configured timeout, not a runtime prediction.",
+          "Storage estimates allocated workspace bytes including working copies, logs and portable evidence; an independently observed XFS project quota enforces an approved budget only inside an operator allocation.",
+          "The exact image and Nextflow distribution must already be cached. Image pulls/builds and shared Docker/Nextflow caches are outside workBytes.",
+          "Two remote scientific tasks are planned; SSH probes, controller commands and stub jobs are not scientific calls. Agent provider tokens, cost and conversation calls are not measured here."
+        ]
+      },
+      "budget": {
+        "cpus": 3,
+        "memoryBytes": 4294967296,
+        "workBytes": 67108864,
+        "wallSeconds": 1080,
+        "requireHardStorageLimit": false,
+        "origin": "Prospective operator-controlled resource contrast"
+      },
+      "physicalFeasibilityLabel": null,
+      "helixDecision": null,
+      "oracleResult": null,
+      "previousInputHashes": {
+        "catalogue.json": "97684486814a24bc435353bda9477d852032538e4662468b13fa16c1192fc8df",
+        "catalogue_evidence.json": "d4563219e99d42068a057b1c1e8a718db1cba3e9391260aba2f954436d880249",
+        "execution.json": "59f612cca5599cdfc09142954dd7f0d2b9ac4de3d96bd4bfbc43dcb74ef29644",
+        "specification.json": "fd92f4a9cd44d0e764931eb78bcee825b1e1dab85332fe2f38aacbd02b55b87c",
+        "validation.json": "e02f8e009e658df42d9ff70baec4d5091c73964c47349e451900a186c641d5dd",
+        "structural_report.json": "0817f933c8901926ffc4ab41bd25eb2395af413fb28e46885ea0cfa6c6a72e75",
+        "structural_catalogue.json": "2536d668520fcd19f2d8fea5377e47dbcb839d6307ed216eaaeaa5cf294c2cb5",
+        "inspect_structure.py": "10e3f2224213fbb6718023348e243605fd71afcd6b1b3bfdf1feb14f8822993b",
+        "source.pdb": "f674267d0ef4752a3d4da00497947bfc09f441a5c36d39593b72bc2ba390df0b",
+        "selection.pdb": "e126fdcfaec095bf8a874bf0f5c35af98162fb5258ee42c91b1258b157b5fceb",
+        "settings.json": "6bd76a24701dd82552be9b6490d02ce94efd3e26d42abf25a0aa52819b72e715",
+        "trp_select.py": "2e554cd310a4ffbd09a6c197f9dbf027cff8c20de310efeacea39ad8010ba527",
+        "trp_geometry.py": "ce6ccf6e7abfda81bd1928914f7c8a6f835671ff094f8d5c1cc17985f37f7114",
+        "main.nf": "93f4e5ae23ec27a7fc5b671bb396b854c5381eb4441e15dff2997809de2e8be5",
+        "nextflow.config": "213fb632ab321b19154506c866add79b9a3a9594c4e64d7fdf66950ba792731e",
+        "remote_target.json": "b5d423525d055c42808d538c5a8fc7126acc046824ff30d728182ec5eb9631f2",
+        "remote_runner.py": "06dfce19be2f73d3c2cd984f53dfd0bc3809d3671c6b705ad915ec40d63f8c0f"
+      },
+      "previousDemand": {
+        "version": "trp-resources/1.2.0",
+        "sourceBytes": 359397,
+        "selectionBytes": 150911,
+        "bundleBytes": 1135768,
+        "counts": {
+          "scientificTasks": 2,
+          "stubTasks": 2,
+          "remoteScientificCalls": 2,
+          "retries": 0
+        },
+        "cpus": 3,
+        "memoryBytes": 4294967296,
+        "workBytes": 21139456,
+        "wallSeconds": 1080,
+        "storage": {
+          "kind": "estimate",
+          "formula": "ceil((12*1048576 + 7*bundleBytes + 4*selectionBytes)/4096)*4096",
+          "hardLimit": false
+        },
+        "assumptions": [
+          "SSH/Slurm backend: controller and worker capacity are checked separately. A 2 CPU/2 GiB task must fit one eligible worker; memory is never pooled across workers. Docker effective task cgroup limits are checked in scientific adapters; aggregate storage and controller enforcement remain unavailable.",
+          "Two sequential tasks per traversal; one stub traversal then one real traversal; no retry or resume.",
+          "Task allocation: 2 CPUs/2 GiB. Controller allocation: 1 CPU/2 GiB; cgroup enforcement requires an independently verified operator sandbox. CPU bandwidth is not an exclusive core reservation.",
+          "Each traversal has an 8 minute watchdog; probes/configuration reserve another 120 seconds. This is a configured timeout, not a runtime prediction.",
+          "Storage estimates allocated workspace bytes including working copies, logs and portable evidence; an independently observed XFS project quota enforces an approved budget only inside an operator allocation.",
+          "The exact image and Nextflow distribution must already be cached. Image pulls/builds and shared Docker/Nextflow caches are outside workBytes.",
+          "Two remote scientific tasks are planned; SSH probes, controller commands and stub jobs are not scientific calls. Agent provider tokens, cost and conversation calls are not measured here."
+        ]
+      },
+      "originalAttempt": {
+        "id": "R24-18-generous",
+        "status": "not-started-global-checkpoint",
+        "physicalFeasibilityLabel": null
+      }
+    },
+    {
+      "id": "R24-18-small",
+      "graphId": "G-valid-018",
+      "cohort": "small",
+      "inputDirectory": "R24-18-small",
+      "runComment": "helix:55b0fbc5-a3c3-4044-bdba-61b5ca172c35",
+      "files": {
+        "catalogue.json": "97684486814a24bc435353bda9477d852032538e4662468b13fa16c1192fc8df",
+        "catalogue_evidence.json": "d4563219e99d42068a057b1c1e8a718db1cba3e9391260aba2f954436d880249",
+        "execution.json": "1469bc847db3aee9895dba14df4d05357cbc7da20431f5884540c04143b10069",
+        "specification.json": "fd92f4a9cd44d0e764931eb78bcee825b1e1dab85332fe2f38aacbd02b55b87c",
+        "validation.json": "e02f8e009e658df42d9ff70baec4d5091c73964c47349e451900a186c641d5dd",
+        "structural_report.json": "0817f933c8901926ffc4ab41bd25eb2395af413fb28e46885ea0cfa6c6a72e75",
+        "structural_catalogue.json": "2536d668520fcd19f2d8fea5377e47dbcb839d6307ed216eaaeaa5cf294c2cb5",
+        "inspect_structure.py": "10e3f2224213fbb6718023348e243605fd71afcd6b1b3bfdf1feb14f8822993b",
+        "source.pdb": "f674267d0ef4752a3d4da00497947bfc09f441a5c36d39593b72bc2ba390df0b",
+        "selection.pdb": "e126fdcfaec095bf8a874bf0f5c35af98162fb5258ee42c91b1258b157b5fceb",
+        "settings.json": "6bd76a24701dd82552be9b6490d02ce94efd3e26d42abf25a0aa52819b72e715",
+        "trp_select.py": "2e554cd310a4ffbd09a6c197f9dbf027cff8c20de310efeacea39ad8010ba527",
+        "trp_geometry.py": "ce6ccf6e7abfda81bd1928914f7c8a6f835671ff094f8d5c1cc17985f37f7114",
+        "main.nf": "93f4e5ae23ec27a7fc5b671bb396b854c5381eb4441e15dff2997809de2e8be5",
+        "nextflow.config": "b1acdf06adafd7261d6029996403e50cefc85b0e19555bcc58fa1878c286baca",
+        "remote_target.json": "3608c5b85cb93f4d19793e8854636101197d8b98eb1bab42c28fd13dc8a084a3",
+        "remote_runner.py": "06dfce19be2f73d3c2cd984f53dfd0bc3809d3671c6b705ad915ec40d63f8c0f"
+      },
+      "goldCsvPath": "gold/G-valid-018/geometry.csv",
+      "goldCsvSha256": "a094e22b36e0cb88f29d5f7040ae44e4ec1685b57074fbed6bd6a27924967efd",
+      "demand": {
+        "version": "trp-resources/1.2.0",
+        "sourceBytes": 359397,
+        "selectionBytes": 150911,
+        "bundleBytes": 1135770,
+        "counts": {
+          "scientificTasks": 2,
+          "stubTasks": 2,
+          "remoteScientificCalls": 2,
+          "retries": 0
+        },
+        "cpus": 3,
+        "memoryBytes": 4294967296,
+        "workBytes": 21139456,
+        "wallSeconds": 1080,
+        "storage": {
+          "kind": "estimate",
+          "formula": "ceil((12*1048576 + 7*bundleBytes + 4*selectionBytes)/4096)*4096",
+          "hardLimit": false
+        },
+        "assumptions": [
+          "SSH/Slurm backend: controller and worker capacity are checked separately. A 2 CPU/2 GiB task must fit one eligible worker; memory is never pooled across workers. Docker effective task cgroup limits are checked in scientific adapters; aggregate storage and controller enforcement remain unavailable.",
+          "Two sequential tasks per traversal; one stub traversal then one real traversal; no retry or resume.",
+          "Task allocation: 2 CPUs/2 GiB. Controller allocation: 1 CPU/2 GiB; cgroup enforcement requires an independently verified operator sandbox. CPU bandwidth is not an exclusive core reservation.",
+          "Each traversal has an 8 minute watchdog; probes/configuration reserve another 120 seconds. This is a configured timeout, not a runtime prediction.",
+          "Storage estimates allocated workspace bytes including working copies, logs and portable evidence; an independently observed XFS project quota enforces an approved budget only inside an operator allocation.",
+          "The exact image and Nextflow distribution must already be cached. Image pulls/builds and shared Docker/Nextflow caches are outside workBytes.",
+          "Two remote scientific tasks are planned; SSH probes, controller commands and stub jobs are not scientific calls. Agent provider tokens, cost and conversation calls are not measured here."
+        ]
+      },
+      "budget": {
+        "cpus": 3,
+        "memoryBytes": 4294967296,
+        "workBytes": 8388608,
+        "wallSeconds": 1080,
+        "requireHardStorageLimit": false,
+        "origin": "Prospective operator-controlled resource contrast"
+      },
+      "physicalFeasibilityLabel": null,
+      "helixDecision": null,
+      "oracleResult": null,
+      "previousInputHashes": {
+        "catalogue.json": "97684486814a24bc435353bda9477d852032538e4662468b13fa16c1192fc8df",
+        "catalogue_evidence.json": "d4563219e99d42068a057b1c1e8a718db1cba3e9391260aba2f954436d880249",
+        "execution.json": "59f612cca5599cdfc09142954dd7f0d2b9ac4de3d96bd4bfbc43dcb74ef29644",
+        "specification.json": "fd92f4a9cd44d0e764931eb78bcee825b1e1dab85332fe2f38aacbd02b55b87c",
+        "validation.json": "e02f8e009e658df42d9ff70baec4d5091c73964c47349e451900a186c641d5dd",
+        "structural_report.json": "0817f933c8901926ffc4ab41bd25eb2395af413fb28e46885ea0cfa6c6a72e75",
+        "structural_catalogue.json": "2536d668520fcd19f2d8fea5377e47dbcb839d6307ed216eaaeaa5cf294c2cb5",
+        "inspect_structure.py": "10e3f2224213fbb6718023348e243605fd71afcd6b1b3bfdf1feb14f8822993b",
+        "source.pdb": "f674267d0ef4752a3d4da00497947bfc09f441a5c36d39593b72bc2ba390df0b",
+        "selection.pdb": "e126fdcfaec095bf8a874bf0f5c35af98162fb5258ee42c91b1258b157b5fceb",
+        "settings.json": "6bd76a24701dd82552be9b6490d02ce94efd3e26d42abf25a0aa52819b72e715",
+        "trp_select.py": "2e554cd310a4ffbd09a6c197f9dbf027cff8c20de310efeacea39ad8010ba527",
+        "trp_geometry.py": "ce6ccf6e7abfda81bd1928914f7c8a6f835671ff094f8d5c1cc17985f37f7114",
+        "main.nf": "93f4e5ae23ec27a7fc5b671bb396b854c5381eb4441e15dff2997809de2e8be5",
+        "nextflow.config": "e34dd06e04928f7f8be8c861304bf21fe19b14033ba4c1e6cd9c60184800a384",
+        "remote_target.json": "b5d423525d055c42808d538c5a8fc7126acc046824ff30d728182ec5eb9631f2",
+        "remote_runner.py": "06dfce19be2f73d3c2cd984f53dfd0bc3809d3671c6b705ad915ec40d63f8c0f"
+      },
+      "previousDemand": {
+        "version": "trp-resources/1.2.0",
+        "sourceBytes": 359397,
+        "selectionBytes": 150911,
+        "bundleBytes": 1135768,
+        "counts": {
+          "scientificTasks": 2,
+          "stubTasks": 2,
+          "remoteScientificCalls": 2,
+          "retries": 0
+        },
+        "cpus": 3,
+        "memoryBytes": 4294967296,
+        "workBytes": 21139456,
+        "wallSeconds": 1080,
+        "storage": {
+          "kind": "estimate",
+          "formula": "ceil((12*1048576 + 7*bundleBytes + 4*selectionBytes)/4096)*4096",
+          "hardLimit": false
+        },
+        "assumptions": [
+          "SSH/Slurm backend: controller and worker capacity are checked separately. A 2 CPU/2 GiB task must fit one eligible worker; memory is never pooled across workers. Docker effective task cgroup limits are checked in scientific adapters; aggregate storage and controller enforcement remain unavailable.",
+          "Two sequential tasks per traversal; one stub traversal then one real traversal; no retry or resume.",
+          "Task allocation: 2 CPUs/2 GiB. Controller allocation: 1 CPU/2 GiB; cgroup enforcement requires an independently verified operator sandbox. CPU bandwidth is not an exclusive core reservation.",
+          "Each traversal has an 8 minute watchdog; probes/configuration reserve another 120 seconds. This is a configured timeout, not a runtime prediction.",
+          "Storage estimates allocated workspace bytes including working copies, logs and portable evidence; an independently observed XFS project quota enforces an approved budget only inside an operator allocation.",
+          "The exact image and Nextflow distribution must already be cached. Image pulls/builds and shared Docker/Nextflow caches are outside workBytes.",
+          "Two remote scientific tasks are planned; SSH probes, controller commands and stub jobs are not scientific calls. Agent provider tokens, cost and conversation calls are not measured here."
+        ]
+      },
+      "originalAttempt": {
+        "id": "R24-18-small",
+        "status": "not-started-global-checkpoint",
+        "physicalFeasibilityLabel": null
+      }
+    },
+    {
+      "id": "R24-19-generous",
+      "graphId": "G-valid-019",
+      "cohort": "generous",
+      "inputDirectory": "R24-19-generous",
+      "runComment": "helix:b43a27c7-4ae5-4a74-9ff5-4298bf43ddf3",
+      "files": {
+        "catalogue.json": "97684486814a24bc435353bda9477d852032538e4662468b13fa16c1192fc8df",
+        "catalogue_evidence.json": "d4563219e99d42068a057b1c1e8a718db1cba3e9391260aba2f954436d880249",
+        "execution.json": "1469bc847db3aee9895dba14df4d05357cbc7da20431f5884540c04143b10069",
+        "specification.json": "8ea1b354400c9c41fade55232546760b076baaec7ab4a219a952c942f84276ae",
+        "validation.json": "e02f8e009e658df42d9ff70baec4d5091c73964c47349e451900a186c641d5dd",
+        "structural_report.json": "7b5a44c5404bc22e36e6989ec0a2bbcb23b4e438a87f7c84f9d6752c0c143768",
+        "structural_catalogue.json": "2536d668520fcd19f2d8fea5377e47dbcb839d6307ed216eaaeaa5cf294c2cb5",
+        "inspect_structure.py": "10e3f2224213fbb6718023348e243605fd71afcd6b1b3bfdf1feb14f8822993b",
+        "source.pdb": "f674267d0ef4752a3d4da00497947bfc09f441a5c36d39593b72bc2ba390df0b",
+        "selection.pdb": "e126fdcfaec095bf8a874bf0f5c35af98162fb5258ee42c91b1258b157b5fceb",
+        "settings.json": "0727143f9dde7933fc6184e9a53dc3e8e605a8a0ecd23c7731b2494f5d859265",
+        "trp_select.py": "2e554cd310a4ffbd09a6c197f9dbf027cff8c20de310efeacea39ad8010ba527",
+        "trp_geometry.py": "ce6ccf6e7abfda81bd1928914f7c8a6f835671ff094f8d5c1cc17985f37f7114",
+        "main.nf": "93f4e5ae23ec27a7fc5b671bb396b854c5381eb4441e15dff2997809de2e8be5",
+        "nextflow.config": "e7b9b8577b606d966cb8dfbec3201c837c25dfb0bd552619d732d976b9506076",
+        "remote_target.json": "3608c5b85cb93f4d19793e8854636101197d8b98eb1bab42c28fd13dc8a084a3",
+        "remote_runner.py": "06dfce19be2f73d3c2cd984f53dfd0bc3809d3671c6b705ad915ec40d63f8c0f"
+      },
+      "goldCsvPath": "gold/G-valid-019/geometry.csv",
+      "goldCsvSha256": "6991c353fde77a3d2c9de430b9ef96bdbdbe284f46365bd6ec61f5cd0ff068eb",
+      "demand": {
+        "version": "trp-resources/1.2.0",
+        "sourceBytes": 359397,
+        "selectionBytes": 150911,
+        "bundleBytes": 1135770,
+        "counts": {
+          "scientificTasks": 2,
+          "stubTasks": 2,
+          "remoteScientificCalls": 2,
+          "retries": 0
+        },
+        "cpus": 3,
+        "memoryBytes": 4294967296,
+        "workBytes": 21139456,
+        "wallSeconds": 1080,
+        "storage": {
+          "kind": "estimate",
+          "formula": "ceil((12*1048576 + 7*bundleBytes + 4*selectionBytes)/4096)*4096",
+          "hardLimit": false
+        },
+        "assumptions": [
+          "SSH/Slurm backend: controller and worker capacity are checked separately. A 2 CPU/2 GiB task must fit one eligible worker; memory is never pooled across workers. Docker effective task cgroup limits are checked in scientific adapters; aggregate storage and controller enforcement remain unavailable.",
+          "Two sequential tasks per traversal; one stub traversal then one real traversal; no retry or resume.",
+          "Task allocation: 2 CPUs/2 GiB. Controller allocation: 1 CPU/2 GiB; cgroup enforcement requires an independently verified operator sandbox. CPU bandwidth is not an exclusive core reservation.",
+          "Each traversal has an 8 minute watchdog; probes/configuration reserve another 120 seconds. This is a configured timeout, not a runtime prediction.",
+          "Storage estimates allocated workspace bytes including working copies, logs and portable evidence; an independently observed XFS project quota enforces an approved budget only inside an operator allocation.",
+          "The exact image and Nextflow distribution must already be cached. Image pulls/builds and shared Docker/Nextflow caches are outside workBytes.",
+          "Two remote scientific tasks are planned; SSH probes, controller commands and stub jobs are not scientific calls. Agent provider tokens, cost and conversation calls are not measured here."
+        ]
+      },
+      "budget": {
+        "cpus": 3,
+        "memoryBytes": 4294967296,
+        "workBytes": 67108864,
+        "wallSeconds": 1080,
+        "requireHardStorageLimit": false,
+        "origin": "Prospective operator-controlled resource contrast"
+      },
+      "physicalFeasibilityLabel": null,
+      "helixDecision": null,
+      "oracleResult": null,
+      "previousInputHashes": {
+        "catalogue.json": "97684486814a24bc435353bda9477d852032538e4662468b13fa16c1192fc8df",
+        "catalogue_evidence.json": "d4563219e99d42068a057b1c1e8a718db1cba3e9391260aba2f954436d880249",
+        "execution.json": "59f612cca5599cdfc09142954dd7f0d2b9ac4de3d96bd4bfbc43dcb74ef29644",
+        "specification.json": "8ea1b354400c9c41fade55232546760b076baaec7ab4a219a952c942f84276ae",
+        "validation.json": "e02f8e009e658df42d9ff70baec4d5091c73964c47349e451900a186c641d5dd",
+        "structural_report.json": "7b5a44c5404bc22e36e6989ec0a2bbcb23b4e438a87f7c84f9d6752c0c143768",
+        "structural_catalogue.json": "2536d668520fcd19f2d8fea5377e47dbcb839d6307ed216eaaeaa5cf294c2cb5",
+        "inspect_structure.py": "10e3f2224213fbb6718023348e243605fd71afcd6b1b3bfdf1feb14f8822993b",
+        "source.pdb": "f674267d0ef4752a3d4da00497947bfc09f441a5c36d39593b72bc2ba390df0b",
+        "selection.pdb": "e126fdcfaec095bf8a874bf0f5c35af98162fb5258ee42c91b1258b157b5fceb",
+        "settings.json": "0727143f9dde7933fc6184e9a53dc3e8e605a8a0ecd23c7731b2494f5d859265",
+        "trp_select.py": "2e554cd310a4ffbd09a6c197f9dbf027cff8c20de310efeacea39ad8010ba527",
+        "trp_geometry.py": "ce6ccf6e7abfda81bd1928914f7c8a6f835671ff094f8d5c1cc17985f37f7114",
+        "main.nf": "93f4e5ae23ec27a7fc5b671bb396b854c5381eb4441e15dff2997809de2e8be5",
+        "nextflow.config": "abb99a930a38ba6e638f89f3afa4d84db01ccc745143e2a887eda3a440f6a36c",
+        "remote_target.json": "b5d423525d055c42808d538c5a8fc7126acc046824ff30d728182ec5eb9631f2",
+        "remote_runner.py": "06dfce19be2f73d3c2cd984f53dfd0bc3809d3671c6b705ad915ec40d63f8c0f"
+      },
+      "previousDemand": {
+        "version": "trp-resources/1.2.0",
+        "sourceBytes": 359397,
+        "selectionBytes": 150911,
+        "bundleBytes": 1135768,
+        "counts": {
+          "scientificTasks": 2,
+          "stubTasks": 2,
+          "remoteScientificCalls": 2,
+          "retries": 0
+        },
+        "cpus": 3,
+        "memoryBytes": 4294967296,
+        "workBytes": 21139456,
+        "wallSeconds": 1080,
+        "storage": {
+          "kind": "estimate",
+          "formula": "ceil((12*1048576 + 7*bundleBytes + 4*selectionBytes)/4096)*4096",
+          "hardLimit": false
+        },
+        "assumptions": [
+          "SSH/Slurm backend: controller and worker capacity are checked separately. A 2 CPU/2 GiB task must fit one eligible worker; memory is never pooled across workers. Docker effective task cgroup limits are checked in scientific adapters; aggregate storage and controller enforcement remain unavailable.",
+          "Two sequential tasks per traversal; one stub traversal then one real traversal; no retry or resume.",
+          "Task allocation: 2 CPUs/2 GiB. Controller allocation: 1 CPU/2 GiB; cgroup enforcement requires an independently verified operator sandbox. CPU bandwidth is not an exclusive core reservation.",
+          "Each traversal has an 8 minute watchdog; probes/configuration reserve another 120 seconds. This is a configured timeout, not a runtime prediction.",
+          "Storage estimates allocated workspace bytes including working copies, logs and portable evidence; an independently observed XFS project quota enforces an approved budget only inside an operator allocation.",
+          "The exact image and Nextflow distribution must already be cached. Image pulls/builds and shared Docker/Nextflow caches are outside workBytes.",
+          "Two remote scientific tasks are planned; SSH probes, controller commands and stub jobs are not scientific calls. Agent provider tokens, cost and conversation calls are not measured here."
+        ]
+      },
+      "originalAttempt": {
+        "id": "R24-19-generous",
+        "status": "not-started-global-checkpoint",
+        "physicalFeasibilityLabel": null
+      }
+    },
+    {
+      "id": "R24-19-small",
+      "graphId": "G-valid-019",
+      "cohort": "small",
+      "inputDirectory": "R24-19-small",
+      "runComment": "helix:8f2b4c83-12c6-4bd2-816d-344a0eafee03",
+      "files": {
+        "catalogue.json": "97684486814a24bc435353bda9477d852032538e4662468b13fa16c1192fc8df",
+        "catalogue_evidence.json": "d4563219e99d42068a057b1c1e8a718db1cba3e9391260aba2f954436d880249",
+        "execution.json": "1469bc847db3aee9895dba14df4d05357cbc7da20431f5884540c04143b10069",
+        "specification.json": "8ea1b354400c9c41fade55232546760b076baaec7ab4a219a952c942f84276ae",
+        "validation.json": "e02f8e009e658df42d9ff70baec4d5091c73964c47349e451900a186c641d5dd",
+        "structural_report.json": "7b5a44c5404bc22e36e6989ec0a2bbcb23b4e438a87f7c84f9d6752c0c143768",
+        "structural_catalogue.json": "2536d668520fcd19f2d8fea5377e47dbcb839d6307ed216eaaeaa5cf294c2cb5",
+        "inspect_structure.py": "10e3f2224213fbb6718023348e243605fd71afcd6b1b3bfdf1feb14f8822993b",
+        "source.pdb": "f674267d0ef4752a3d4da00497947bfc09f441a5c36d39593b72bc2ba390df0b",
+        "selection.pdb": "e126fdcfaec095bf8a874bf0f5c35af98162fb5258ee42c91b1258b157b5fceb",
+        "settings.json": "0727143f9dde7933fc6184e9a53dc3e8e605a8a0ecd23c7731b2494f5d859265",
+        "trp_select.py": "2e554cd310a4ffbd09a6c197f9dbf027cff8c20de310efeacea39ad8010ba527",
+        "trp_geometry.py": "ce6ccf6e7abfda81bd1928914f7c8a6f835671ff094f8d5c1cc17985f37f7114",
+        "main.nf": "93f4e5ae23ec27a7fc5b671bb396b854c5381eb4441e15dff2997809de2e8be5",
+        "nextflow.config": "0c6a372f0e988d4aaefb52db2ee3260f00c55b51974a31672baf9ee375646e25",
+        "remote_target.json": "3608c5b85cb93f4d19793e8854636101197d8b98eb1bab42c28fd13dc8a084a3",
+        "remote_runner.py": "06dfce19be2f73d3c2cd984f53dfd0bc3809d3671c6b705ad915ec40d63f8c0f"
+      },
+      "goldCsvPath": "gold/G-valid-019/geometry.csv",
+      "goldCsvSha256": "6991c353fde77a3d2c9de430b9ef96bdbdbe284f46365bd6ec61f5cd0ff068eb",
+      "demand": {
+        "version": "trp-resources/1.2.0",
+        "sourceBytes": 359397,
+        "selectionBytes": 150911,
+        "bundleBytes": 1135770,
+        "counts": {
+          "scientificTasks": 2,
+          "stubTasks": 2,
+          "remoteScientificCalls": 2,
+          "retries": 0
+        },
+        "cpus": 3,
+        "memoryBytes": 4294967296,
+        "workBytes": 21139456,
+        "wallSeconds": 1080,
+        "storage": {
+          "kind": "estimate",
+          "formula": "ceil((12*1048576 + 7*bundleBytes + 4*selectionBytes)/4096)*4096",
+          "hardLimit": false
+        },
+        "assumptions": [
+          "SSH/Slurm backend: controller and worker capacity are checked separately. A 2 CPU/2 GiB task must fit one eligible worker; memory is never pooled across workers. Docker effective task cgroup limits are checked in scientific adapters; aggregate storage and controller enforcement remain unavailable.",
+          "Two sequential tasks per traversal; one stub traversal then one real traversal; no retry or resume.",
+          "Task allocation: 2 CPUs/2 GiB. Controller allocation: 1 CPU/2 GiB; cgroup enforcement requires an independently verified operator sandbox. CPU bandwidth is not an exclusive core reservation.",
+          "Each traversal has an 8 minute watchdog; probes/configuration reserve another 120 seconds. This is a configured timeout, not a runtime prediction.",
+          "Storage estimates allocated workspace bytes including working copies, logs and portable evidence; an independently observed XFS project quota enforces an approved budget only inside an operator allocation.",
+          "The exact image and Nextflow distribution must already be cached. Image pulls/builds and shared Docker/Nextflow caches are outside workBytes.",
+          "Two remote scientific tasks are planned; SSH probes, controller commands and stub jobs are not scientific calls. Agent provider tokens, cost and conversation calls are not measured here."
+        ]
+      },
+      "budget": {
+        "cpus": 3,
+        "memoryBytes": 4294967296,
+        "workBytes": 12582912,
+        "wallSeconds": 1080,
+        "requireHardStorageLimit": false,
+        "origin": "Prospective operator-controlled resource contrast"
+      },
+      "physicalFeasibilityLabel": null,
+      "helixDecision": null,
+      "oracleResult": null,
+      "previousInputHashes": {
+        "catalogue.json": "97684486814a24bc435353bda9477d852032538e4662468b13fa16c1192fc8df",
+        "catalogue_evidence.json": "d4563219e99d42068a057b1c1e8a718db1cba3e9391260aba2f954436d880249",
+        "execution.json": "59f612cca5599cdfc09142954dd7f0d2b9ac4de3d96bd4bfbc43dcb74ef29644",
+        "specification.json": "8ea1b354400c9c41fade55232546760b076baaec7ab4a219a952c942f84276ae",
+        "validation.json": "e02f8e009e658df42d9ff70baec4d5091c73964c47349e451900a186c641d5dd",
+        "structural_report.json": "7b5a44c5404bc22e36e6989ec0a2bbcb23b4e438a87f7c84f9d6752c0c143768",
+        "structural_catalogue.json": "2536d668520fcd19f2d8fea5377e47dbcb839d6307ed216eaaeaa5cf294c2cb5",
+        "inspect_structure.py": "10e3f2224213fbb6718023348e243605fd71afcd6b1b3bfdf1feb14f8822993b",
+        "source.pdb": "f674267d0ef4752a3d4da00497947bfc09f441a5c36d39593b72bc2ba390df0b",
+        "selection.pdb": "e126fdcfaec095bf8a874bf0f5c35af98162fb5258ee42c91b1258b157b5fceb",
+        "settings.json": "0727143f9dde7933fc6184e9a53dc3e8e605a8a0ecd23c7731b2494f5d859265",
+        "trp_select.py": "2e554cd310a4ffbd09a6c197f9dbf027cff8c20de310efeacea39ad8010ba527",
+        "trp_geometry.py": "ce6ccf6e7abfda81bd1928914f7c8a6f835671ff094f8d5c1cc17985f37f7114",
+        "main.nf": "93f4e5ae23ec27a7fc5b671bb396b854c5381eb4441e15dff2997809de2e8be5",
+        "nextflow.config": "f87ce3f402d0c9993959ee06138bc6619b4ac46b543ce2a0730f6f271c2559c8",
+        "remote_target.json": "b5d423525d055c42808d538c5a8fc7126acc046824ff30d728182ec5eb9631f2",
+        "remote_runner.py": "06dfce19be2f73d3c2cd984f53dfd0bc3809d3671c6b705ad915ec40d63f8c0f"
+      },
+      "previousDemand": {
+        "version": "trp-resources/1.2.0",
+        "sourceBytes": 359397,
+        "selectionBytes": 150911,
+        "bundleBytes": 1135768,
+        "counts": {
+          "scientificTasks": 2,
+          "stubTasks": 2,
+          "remoteScientificCalls": 2,
+          "retries": 0
+        },
+        "cpus": 3,
+        "memoryBytes": 4294967296,
+        "workBytes": 21139456,
+        "wallSeconds": 1080,
+        "storage": {
+          "kind": "estimate",
+          "formula": "ceil((12*1048576 + 7*bundleBytes + 4*selectionBytes)/4096)*4096",
+          "hardLimit": false
+        },
+        "assumptions": [
+          "SSH/Slurm backend: controller and worker capacity are checked separately. A 2 CPU/2 GiB task must fit one eligible worker; memory is never pooled across workers. Docker effective task cgroup limits are checked in scientific adapters; aggregate storage and controller enforcement remain unavailable.",
+          "Two sequential tasks per traversal; one stub traversal then one real traversal; no retry or resume.",
+          "Task allocation: 2 CPUs/2 GiB. Controller allocation: 1 CPU/2 GiB; cgroup enforcement requires an independently verified operator sandbox. CPU bandwidth is not an exclusive core reservation.",
+          "Each traversal has an 8 minute watchdog; probes/configuration reserve another 120 seconds. This is a configured timeout, not a runtime prediction.",
+          "Storage estimates allocated workspace bytes including working copies, logs and portable evidence; an independently observed XFS project quota enforces an approved budget only inside an operator allocation.",
+          "The exact image and Nextflow distribution must already be cached. Image pulls/builds and shared Docker/Nextflow caches are outside workBytes.",
+          "Two remote scientific tasks are planned; SSH probes, controller commands and stub jobs are not scientific calls. Agent provider tokens, cost and conversation calls are not measured here."
+        ]
+      },
+      "originalAttempt": {
+        "id": "R24-19-small",
+        "status": "not-started-global-checkpoint",
+        "physicalFeasibilityLabel": null
+      }
+    },
+    {
+      "id": "R24-20-generous",
+      "graphId": "G-valid-020",
+      "cohort": "generous",
+      "inputDirectory": "R24-20-generous",
+      "runComment": "helix:e12d0ad1-e63c-4dc5-ade9-505593c8c137",
+      "files": {
+        "catalogue.json": "97684486814a24bc435353bda9477d852032538e4662468b13fa16c1192fc8df",
+        "catalogue_evidence.json": "d4563219e99d42068a057b1c1e8a718db1cba3e9391260aba2f954436d880249",
+        "execution.json": "1469bc847db3aee9895dba14df4d05357cbc7da20431f5884540c04143b10069",
+        "specification.json": "fe9ac0b459029b05158164bda7e286e896074cf4526f7458cf22ba01349767e2",
+        "validation.json": "e02f8e009e658df42d9ff70baec4d5091c73964c47349e451900a186c641d5dd",
+        "structural_report.json": "5400c2a6e13cae87f93000398b3ba78390166b9c38f13c80aa29e4c755682fd4",
+        "structural_catalogue.json": "2536d668520fcd19f2d8fea5377e47dbcb839d6307ed216eaaeaa5cf294c2cb5",
+        "inspect_structure.py": "10e3f2224213fbb6718023348e243605fd71afcd6b1b3bfdf1feb14f8822993b",
+        "source.pdb": "f674267d0ef4752a3d4da00497947bfc09f441a5c36d39593b72bc2ba390df0b",
+        "selection.pdb": "e126fdcfaec095bf8a874bf0f5c35af98162fb5258ee42c91b1258b157b5fceb",
+        "settings.json": "2a0ab0c638b2869816747426b0ae33d5e393422deb4c5cab7cea652529e4e9b2",
+        "trp_select.py": "2e554cd310a4ffbd09a6c197f9dbf027cff8c20de310efeacea39ad8010ba527",
+        "trp_geometry.py": "ce6ccf6e7abfda81bd1928914f7c8a6f835671ff094f8d5c1cc17985f37f7114",
+        "main.nf": "93f4e5ae23ec27a7fc5b671bb396b854c5381eb4441e15dff2997809de2e8be5",
+        "nextflow.config": "0c6476a9e15489a769c6524654c2caa11db6b58dd91d9b85e588ce9dac52cc39",
+        "remote_target.json": "3608c5b85cb93f4d19793e8854636101197d8b98eb1bab42c28fd13dc8a084a3",
+        "remote_runner.py": "06dfce19be2f73d3c2cd984f53dfd0bc3809d3671c6b705ad915ec40d63f8c0f"
+      },
+      "goldCsvPath": "gold/G-valid-020/geometry.csv",
+      "goldCsvSha256": "27effab9cc1f16f52a3f4c55c80443a711288536ced0c202587f8932420bb2bc",
+      "demand": {
+        "version": "trp-resources/1.2.0",
+        "sourceBytes": 359397,
+        "selectionBytes": 150911,
+        "bundleBytes": 1135770,
+        "counts": {
+          "scientificTasks": 2,
+          "stubTasks": 2,
+          "remoteScientificCalls": 2,
+          "retries": 0
+        },
+        "cpus": 3,
+        "memoryBytes": 4294967296,
+        "workBytes": 21139456,
+        "wallSeconds": 1080,
+        "storage": {
+          "kind": "estimate",
+          "formula": "ceil((12*1048576 + 7*bundleBytes + 4*selectionBytes)/4096)*4096",
+          "hardLimit": false
+        },
+        "assumptions": [
+          "SSH/Slurm backend: controller and worker capacity are checked separately. A 2 CPU/2 GiB task must fit one eligible worker; memory is never pooled across workers. Docker effective task cgroup limits are checked in scientific adapters; aggregate storage and controller enforcement remain unavailable.",
+          "Two sequential tasks per traversal; one stub traversal then one real traversal; no retry or resume.",
+          "Task allocation: 2 CPUs/2 GiB. Controller allocation: 1 CPU/2 GiB; cgroup enforcement requires an independently verified operator sandbox. CPU bandwidth is not an exclusive core reservation.",
+          "Each traversal has an 8 minute watchdog; probes/configuration reserve another 120 seconds. This is a configured timeout, not a runtime prediction.",
+          "Storage estimates allocated workspace bytes including working copies, logs and portable evidence; an independently observed XFS project quota enforces an approved budget only inside an operator allocation.",
+          "The exact image and Nextflow distribution must already be cached. Image pulls/builds and shared Docker/Nextflow caches are outside workBytes.",
+          "Two remote scientific tasks are planned; SSH probes, controller commands and stub jobs are not scientific calls. Agent provider tokens, cost and conversation calls are not measured here."
+        ]
+      },
+      "budget": {
+        "cpus": 3,
+        "memoryBytes": 4294967296,
+        "workBytes": 67108864,
+        "wallSeconds": 1080,
+        "requireHardStorageLimit": false,
+        "origin": "Prospective operator-controlled resource contrast"
+      },
+      "physicalFeasibilityLabel": null,
+      "helixDecision": null,
+      "oracleResult": null,
+      "previousInputHashes": {
+        "catalogue.json": "97684486814a24bc435353bda9477d852032538e4662468b13fa16c1192fc8df",
+        "catalogue_evidence.json": "d4563219e99d42068a057b1c1e8a718db1cba3e9391260aba2f954436d880249",
+        "execution.json": "59f612cca5599cdfc09142954dd7f0d2b9ac4de3d96bd4bfbc43dcb74ef29644",
+        "specification.json": "fe9ac0b459029b05158164bda7e286e896074cf4526f7458cf22ba01349767e2",
+        "validation.json": "e02f8e009e658df42d9ff70baec4d5091c73964c47349e451900a186c641d5dd",
+        "structural_report.json": "5400c2a6e13cae87f93000398b3ba78390166b9c38f13c80aa29e4c755682fd4",
+        "structural_catalogue.json": "2536d668520fcd19f2d8fea5377e47dbcb839d6307ed216eaaeaa5cf294c2cb5",
+        "inspect_structure.py": "10e3f2224213fbb6718023348e243605fd71afcd6b1b3bfdf1feb14f8822993b",
+        "source.pdb": "f674267d0ef4752a3d4da00497947bfc09f441a5c36d39593b72bc2ba390df0b",
+        "selection.pdb": "e126fdcfaec095bf8a874bf0f5c35af98162fb5258ee42c91b1258b157b5fceb",
+        "settings.json": "2a0ab0c638b2869816747426b0ae33d5e393422deb4c5cab7cea652529e4e9b2",
+        "trp_select.py": "2e554cd310a4ffbd09a6c197f9dbf027cff8c20de310efeacea39ad8010ba527",
+        "trp_geometry.py": "ce6ccf6e7abfda81bd1928914f7c8a6f835671ff094f8d5c1cc17985f37f7114",
+        "main.nf": "93f4e5ae23ec27a7fc5b671bb396b854c5381eb4441e15dff2997809de2e8be5",
+        "nextflow.config": "11f7567d698cc13aed29ec8e1b1eef1c437543feb4a4dba16f39a6a03f5154fb",
+        "remote_target.json": "b5d423525d055c42808d538c5a8fc7126acc046824ff30d728182ec5eb9631f2",
+        "remote_runner.py": "06dfce19be2f73d3c2cd984f53dfd0bc3809d3671c6b705ad915ec40d63f8c0f"
+      },
+      "previousDemand": {
+        "version": "trp-resources/1.2.0",
+        "sourceBytes": 359397,
+        "selectionBytes": 150911,
+        "bundleBytes": 1135768,
+        "counts": {
+          "scientificTasks": 2,
+          "stubTasks": 2,
+          "remoteScientificCalls": 2,
+          "retries": 0
+        },
+        "cpus": 3,
+        "memoryBytes": 4294967296,
+        "workBytes": 21139456,
+        "wallSeconds": 1080,
+        "storage": {
+          "kind": "estimate",
+          "formula": "ceil((12*1048576 + 7*bundleBytes + 4*selectionBytes)/4096)*4096",
+          "hardLimit": false
+        },
+        "assumptions": [
+          "SSH/Slurm backend: controller and worker capacity are checked separately. A 2 CPU/2 GiB task must fit one eligible worker; memory is never pooled across workers. Docker effective task cgroup limits are checked in scientific adapters; aggregate storage and controller enforcement remain unavailable.",
+          "Two sequential tasks per traversal; one stub traversal then one real traversal; no retry or resume.",
+          "Task allocation: 2 CPUs/2 GiB. Controller allocation: 1 CPU/2 GiB; cgroup enforcement requires an independently verified operator sandbox. CPU bandwidth is not an exclusive core reservation.",
+          "Each traversal has an 8 minute watchdog; probes/configuration reserve another 120 seconds. This is a configured timeout, not a runtime prediction.",
+          "Storage estimates allocated workspace bytes including working copies, logs and portable evidence; an independently observed XFS project quota enforces an approved budget only inside an operator allocation.",
+          "The exact image and Nextflow distribution must already be cached. Image pulls/builds and shared Docker/Nextflow caches are outside workBytes.",
+          "Two remote scientific tasks are planned; SSH probes, controller commands and stub jobs are not scientific calls. Agent provider tokens, cost and conversation calls are not measured here."
+        ]
+      },
+      "originalAttempt": {
+        "id": "R24-20-generous",
+        "status": "not-started-global-checkpoint",
+        "physicalFeasibilityLabel": null
+      }
+    },
+    {
+      "id": "R24-20-small",
+      "graphId": "G-valid-020",
+      "cohort": "small",
+      "inputDirectory": "R24-20-small",
+      "runComment": "helix:9b2e0d35-457c-44b1-b994-4919575104a8",
+      "files": {
+        "catalogue.json": "97684486814a24bc435353bda9477d852032538e4662468b13fa16c1192fc8df",
+        "catalogue_evidence.json": "d4563219e99d42068a057b1c1e8a718db1cba3e9391260aba2f954436d880249",
+        "execution.json": "1469bc847db3aee9895dba14df4d05357cbc7da20431f5884540c04143b10069",
+        "specification.json": "fe9ac0b459029b05158164bda7e286e896074cf4526f7458cf22ba01349767e2",
+        "validation.json": "e02f8e009e658df42d9ff70baec4d5091c73964c47349e451900a186c641d5dd",
+        "structural_report.json": "5400c2a6e13cae87f93000398b3ba78390166b9c38f13c80aa29e4c755682fd4",
+        "structural_catalogue.json": "2536d668520fcd19f2d8fea5377e47dbcb839d6307ed216eaaeaa5cf294c2cb5",
+        "inspect_structure.py": "10e3f2224213fbb6718023348e243605fd71afcd6b1b3bfdf1feb14f8822993b",
+        "source.pdb": "f674267d0ef4752a3d4da00497947bfc09f441a5c36d39593b72bc2ba390df0b",
+        "selection.pdb": "e126fdcfaec095bf8a874bf0f5c35af98162fb5258ee42c91b1258b157b5fceb",
+        "settings.json": "2a0ab0c638b2869816747426b0ae33d5e393422deb4c5cab7cea652529e4e9b2",
+        "trp_select.py": "2e554cd310a4ffbd09a6c197f9dbf027cff8c20de310efeacea39ad8010ba527",
+        "trp_geometry.py": "ce6ccf6e7abfda81bd1928914f7c8a6f835671ff094f8d5c1cc17985f37f7114",
+        "main.nf": "93f4e5ae23ec27a7fc5b671bb396b854c5381eb4441e15dff2997809de2e8be5",
+        "nextflow.config": "d36a4392c59d663afc4fe8350d176b8783c83083bb294e1907177c1e3d397eb5",
+        "remote_target.json": "3608c5b85cb93f4d19793e8854636101197d8b98eb1bab42c28fd13dc8a084a3",
+        "remote_runner.py": "06dfce19be2f73d3c2cd984f53dfd0bc3809d3671c6b705ad915ec40d63f8c0f"
+      },
+      "goldCsvPath": "gold/G-valid-020/geometry.csv",
+      "goldCsvSha256": "27effab9cc1f16f52a3f4c55c80443a711288536ced0c202587f8932420bb2bc",
+      "demand": {
+        "version": "trp-resources/1.2.0",
+        "sourceBytes": 359397,
+        "selectionBytes": 150911,
+        "bundleBytes": 1135770,
+        "counts": {
+          "scientificTasks": 2,
+          "stubTasks": 2,
+          "remoteScientificCalls": 2,
+          "retries": 0
+        },
+        "cpus": 3,
+        "memoryBytes": 4294967296,
+        "workBytes": 21139456,
+        "wallSeconds": 1080,
+        "storage": {
+          "kind": "estimate",
+          "formula": "ceil((12*1048576 + 7*bundleBytes + 4*selectionBytes)/4096)*4096",
+          "hardLimit": false
+        },
+        "assumptions": [
+          "SSH/Slurm backend: controller and worker capacity are checked separately. A 2 CPU/2 GiB task must fit one eligible worker; memory is never pooled across workers. Docker effective task cgroup limits are checked in scientific adapters; aggregate storage and controller enforcement remain unavailable.",
+          "Two sequential tasks per traversal; one stub traversal then one real traversal; no retry or resume.",
+          "Task allocation: 2 CPUs/2 GiB. Controller allocation: 1 CPU/2 GiB; cgroup enforcement requires an independently verified operator sandbox. CPU bandwidth is not an exclusive core reservation.",
+          "Each traversal has an 8 minute watchdog; probes/configuration reserve another 120 seconds. This is a configured timeout, not a runtime prediction.",
+          "Storage estimates allocated workspace bytes including working copies, logs and portable evidence; an independently observed XFS project quota enforces an approved budget only inside an operator allocation.",
+          "The exact image and Nextflow distribution must already be cached. Image pulls/builds and shared Docker/Nextflow caches are outside workBytes.",
+          "Two remote scientific tasks are planned; SSH probes, controller commands and stub jobs are not scientific calls. Agent provider tokens, cost and conversation calls are not measured here."
+        ]
+      },
+      "budget": {
+        "cpus": 3,
+        "memoryBytes": 4294967296,
+        "workBytes": 16777216,
+        "wallSeconds": 1080,
+        "requireHardStorageLimit": false,
+        "origin": "Prospective operator-controlled resource contrast"
+      },
+      "physicalFeasibilityLabel": null,
+      "helixDecision": null,
+      "oracleResult": null,
+      "previousInputHashes": {
+        "catalogue.json": "97684486814a24bc435353bda9477d852032538e4662468b13fa16c1192fc8df",
+        "catalogue_evidence.json": "d4563219e99d42068a057b1c1e8a718db1cba3e9391260aba2f954436d880249",
+        "execution.json": "59f612cca5599cdfc09142954dd7f0d2b9ac4de3d96bd4bfbc43dcb74ef29644",
+        "specification.json": "fe9ac0b459029b05158164bda7e286e896074cf4526f7458cf22ba01349767e2",
+        "validation.json": "e02f8e009e658df42d9ff70baec4d5091c73964c47349e451900a186c641d5dd",
+        "structural_report.json": "5400c2a6e13cae87f93000398b3ba78390166b9c38f13c80aa29e4c755682fd4",
+        "structural_catalogue.json": "2536d668520fcd19f2d8fea5377e47dbcb839d6307ed216eaaeaa5cf294c2cb5",
+        "inspect_structure.py": "10e3f2224213fbb6718023348e243605fd71afcd6b1b3bfdf1feb14f8822993b",
+        "source.pdb": "f674267d0ef4752a3d4da00497947bfc09f441a5c36d39593b72bc2ba390df0b",
+        "selection.pdb": "e126fdcfaec095bf8a874bf0f5c35af98162fb5258ee42c91b1258b157b5fceb",
+        "settings.json": "2a0ab0c638b2869816747426b0ae33d5e393422deb4c5cab7cea652529e4e9b2",
+        "trp_select.py": "2e554cd310a4ffbd09a6c197f9dbf027cff8c20de310efeacea39ad8010ba527",
+        "trp_geometry.py": "ce6ccf6e7abfda81bd1928914f7c8a6f835671ff094f8d5c1cc17985f37f7114",
+        "main.nf": "93f4e5ae23ec27a7fc5b671bb396b854c5381eb4441e15dff2997809de2e8be5",
+        "nextflow.config": "9e01bbce24a51951dca79cce15dd9e6f2110b0f6de3a8f4ac15ae973d308eb39",
+        "remote_target.json": "b5d423525d055c42808d538c5a8fc7126acc046824ff30d728182ec5eb9631f2",
+        "remote_runner.py": "06dfce19be2f73d3c2cd984f53dfd0bc3809d3671c6b705ad915ec40d63f8c0f"
+      },
+      "previousDemand": {
+        "version": "trp-resources/1.2.0",
+        "sourceBytes": 359397,
+        "selectionBytes": 150911,
+        "bundleBytes": 1135768,
+        "counts": {
+          "scientificTasks": 2,
+          "stubTasks": 2,
+          "remoteScientificCalls": 2,
+          "retries": 0
+        },
+        "cpus": 3,
+        "memoryBytes": 4294967296,
+        "workBytes": 21139456,
+        "wallSeconds": 1080,
+        "storage": {
+          "kind": "estimate",
+          "formula": "ceil((12*1048576 + 7*bundleBytes + 4*selectionBytes)/4096)*4096",
+          "hardLimit": false
+        },
+        "assumptions": [
+          "SSH/Slurm backend: controller and worker capacity are checked separately. A 2 CPU/2 GiB task must fit one eligible worker; memory is never pooled across workers. Docker effective task cgroup limits are checked in scientific adapters; aggregate storage and controller enforcement remain unavailable.",
+          "Two sequential tasks per traversal; one stub traversal then one real traversal; no retry or resume.",
+          "Task allocation: 2 CPUs/2 GiB. Controller allocation: 1 CPU/2 GiB; cgroup enforcement requires an independently verified operator sandbox. CPU bandwidth is not an exclusive core reservation.",
+          "Each traversal has an 8 minute watchdog; probes/configuration reserve another 120 seconds. This is a configured timeout, not a runtime prediction.",
+          "Storage estimates allocated workspace bytes including working copies, logs and portable evidence; an independently observed XFS project quota enforces an approved budget only inside an operator allocation.",
+          "The exact image and Nextflow distribution must already be cached. Image pulls/builds and shared Docker/Nextflow caches are outside workBytes.",
+          "Two remote scientific tasks are planned; SSH probes, controller commands and stub jobs are not scientific calls. Agent provider tokens, cost and conversation calls are not measured here."
+        ]
+      },
+      "originalAttempt": {
+        "id": "R24-20-small",
+        "status": "not-started-global-checkpoint",
+        "physicalFeasibilityLabel": null
+      }
+    }
+  ],
+  "sources": {
+    "packages/helix/src/trp/catalog.ts": "e30d5e78c7c0e601f73b767868e5a6c70b25f48b84876c6fe5dac420b51c593c",
+    "packages/helix/src/trp/catalog.json": "10aeb85d21e0f124173c615e61924c665b6d69fd0c799ae70d05b810003842c0",
+    "packages/helix/src/trp/specification.ts": "7203ac6634be723b8d88ca9efefa0df7b6141486c60a2b6bd62fb7a42f0155ff",
+    "packages/helix/src/trp/graph.ts": "31d66a12fc902e1a7219e45751ade36a13f720c73c45cf6059567f8c2db7ff18",
+    "packages/helix/src/trp/nextflow.ts": "3729bf84120a359ba5efb68349bca85d7d80be579638bbb4810c018554458309",
+    "packages/helix/src/trp/workflow.ts": "a0d24c572ed0a4dc52ecfa600ca83693ecf76a2d6bd538e0817d88176ce5872b",
+    "packages/helix/src/trp/resources.ts": "c920fbb81914f2d8f15051ef45ef7c898bcae0c72ab4ee4e5e38a1ea5c55b5b2",
+    "packages/helix/src/trp/verify_bundle.py.txt": "69b88a192d44707c82358814d61ae83f2d46c579e93d8cf3afe6882b52382187",
+    "packages/helix/src/trp/evidence.ts": "6159acfa99371f2228f23405bb71c1ff36a183a62641803c969a229b7326fb73",
+    "packages/helix/src/trp/interventions.ts": "99b20265751966910521db0eda32ddf38c3a5133928e2d6546ab6c0d2a122542",
+    "packages/helix/src/trp/inspect_structure.py.txt": "10e3f2224213fbb6718023348e243605fd71afcd6b1b3bfdf1feb14f8822993b",
+    "packages/helix/src/trp/structural.ts": "54fc5cff7a5a2e7cd7d96bf13b9236a7122a28a2d41da35c8a301399872a8f5d",
+    "packages/helix/src/trp/verify_inspection.py.txt": "9922cc49279f2539452875d398557db00cc53c02751db7c370d93b76c16e0d38",
+    "packages/helix/src/trp/enforcement.ts": "9b624ff112a57948e074efbae2a6818e97b7e21cee289379956190b84684e383",
+    "packages/helix/src/trp/coordinates.ts": "ffaca8f54d37f69bb5bf8f0618ab729a4d7e398b519a03b4595cf02beb088db5",
+    "packages/helix/src/trp/sifts_residues.py.txt": "6bdf0e763daf4e8100cb9c65eb0428e0e08c10fb07ab66c0e2b9de8c862e0a0b",
+    "packages/helix/src/trp/strpsearch_guard.py.txt": "5d7b075e50998577299d15ca11be64454d83ec9bd79c7f7b23c6ef97ed6d013a",
+    "packages/helix/src/trp/predicted_geometry.py.txt": "f4b7d728c54e3a0a3e2eba91914c3ec26b25ec6d5740ddf0adce7ef50e671d0e",
+    "packages/helix/src/trp/verify_predicted.py.txt": "ffc3a233d08bfa948df019a07fa6289c0093912582fac3cfe10477bc031175a0",
+    "packages/helix/src/trp/remote_runner.py.txt": "06dfce19be2f73d3c2cd984f53dfd0bc3809d3671c6b705ad915ec40d63f8c0f",
+    "packages/helix/src/trp/steric_diagnostic.py.txt": "b84956c0b451be20843e46930bc89bf4c1dc2446e807969fb8a78d8cdb41a676",
+    "packages/helix/src/trp/remote.ts": "21826043bd1806383ae712af8bfb8fd92f529e1d589e03d8d886b57cac896caf",
+    "packages/helix/src/trp/surface_diagnostic.py.txt": "881566e1f18083801deafea9d6a0218e1df5698208217bced08aefc957250e64",
+    "evaluation/trp/campaign-20261012/trace/prepare_r24_resource_cases.ts": "c7d68fc112b64c71a9d2476a97e89499b80a92fa11fe60eebf18a4ee0533d5e9",
+    "evaluation/trp/campaign-20261012/trace/decide_r24_resource_case.ts": "f6b9f5894486d94b07c0f098e8b7bfbd157c79bea0b22491e964fdd0aff11773",
+    "evaluation/trp/campaign-20261012/trace/run_r24_independent.py": "1d11c5cb19eda163da79f6872d033f7d5354baafa04fd9e5e659425198292036",
+    "evaluation/trp/campaign-20261012/trace/drive_r24_campaign.py": "645d1411f57e10e5fffc307f94694f8faea538af38887d6c3b39798ad671bfd9",
+    "evaluation/trp/campaign-20261012/trace/prepare_r24_continuation.ts": "b7f7675daf6c31274fb1d133044afe66b10ba32219415234ff81939d53cc51d6",
+    "evaluation/trp/campaign-20261012/trace/drive_r24_continuation.py": "4c9a53631d7d9eabbbae88669acf12005d7994a3543dec2a9d19ccda31a21ac4",
+    "evaluation/trp/campaign-20261012/trace/run_r24_continuation.py": "bdafdb991e8f1d0f8d57417e539bb0715cf7a4b301b1afd08598f0ac46387c26",
+    "script/tesis/aws_academy_cluster.py": "7c6d2b004425bb3a396922dacc27e7d4445c55aa015fc4cce696998e95221da9",
+    "script/tesis/aws_academy_prepare_remote.py": "af16699cf13f285dfb53e8fbc9cab8ce7c95e0e43ff35748922870bdd51f9739",
+    "script/tesis/resume_r24_workspace.py": "351bf4bc0cef043b92fbc1b67a88d040ab7f139f899119df31abd96454295281"
+  },
+  "physicalLabelsObservedBeforeFreeze": false,
+  "scope": "Development admission contrast of the exact frozen Nextflow task graph in an independently limited head workspace; not held-out scientific R2.4 or aggregate client plus remote R2.2.",
+  "storageUnit": "XFS allocated project blocks including staged inputs, work/logs and materialized portable run copy. Operator supervisor evidence and pre-existing image/Nextflow caches are outside this scope.",
+  "oracle": "Execute under the quota even after Helix rejection; classify only from exact CSV, effective limits and quota/runtime outcomes. No label from estimator or cohort name.",
+  "protocolThresholdsRetained": {
+    "falseRejectionMax": 0.05,
+    "acceptedBudgetExceedanceMax": 0
+  },
+  "prospectiveCohorts": {
+    "generous": 20,
+    "small": 20
+  },
+  "actualFeasibleMinimum": 20,
+  "actualInfeasibleMinimum": 20,
+  "insufficientActualGroupRule": "Report missing minimum; any extension must be a new prospectively frozen batch, preserving every initial outcome.",
+  "executionOrder": [
+    "R24-13-generous",
+    "R24-13-small",
+    "R24-14-generous",
+    "R24-14-small",
+    "R24-15-generous",
+    "R24-15-small",
+    "R24-16-generous",
+    "R24-16-small",
+    "R24-17-generous",
+    "R24-17-small",
+    "R24-18-generous",
+    "R24-18-small",
+    "R24-19-generous",
+    "R24-19-small",
+    "R24-20-generous",
+    "R24-20-small"
+  ],
+  "globalDeadlineUtc": "2026-10-13T03:58:00Z",
+  "biologicalCorrectness": "not_established",
+  "scientificR24Complete": false,
+  "originalFreezeSha256": "16872909f574519c35c31d9f9045b3ee464e471da0444ae630f2a0c96a5cff8e",
+  "originalProgressSha256": "243fa545e9e575a6f4ab87ef68dff5e4899a1a96c703aed21e9f604262ab7845",
+  "originalCleanupSha256": "2c8900fd57d2cf62c37e603b685b7beef3c7aac3cd74b42cdaded32067d66a2a",
+  "originalCaseCount": 40,
+  "operationalAmendment": {
+    "reason": "Checkpoint preserved and owned jobs cleaned before legitimate guest restart; unchanged original scientific scenarios rebound to observed renewed target.",
+    "workspaceNamespace": "r24-continuation-1",
+    "projectIdBase": 20000,
+    "unitPrefix": "helix-r24-continuation-1-",
+    "changedScientificInputs": false,
+    "changedBudgetOrGold": false,
+    "originalLabelsRewritten": false,
+    "automaticResubmissionOnTimeout": false,
+    "permittedInputChanges": [
+      "target binding",
+      "unique run comment"
+    ],
+    "scopePreserved": true,
+    "pendingOriginalIds": [
+      "R24-13-generous",
+      "R24-13-small",
+      "R24-14-generous",
+      "R24-14-small",
+      "R24-15-generous",
+      "R24-15-small",
+      "R24-16-generous",
+      "R24-16-small",
+      "R24-17-generous",
+      "R24-17-small",
+      "R24-18-generous",
+      "R24-18-small",
+      "R24-19-generous",
+      "R24-19-small",
+      "R24-20-generous",
+      "R24-20-small"
+    ]
+  }
+}

@@ -1,0 +1,437 @@
+{
+  "case": "AGG-08-small",
+  "physicalFeasibilityLabel": null,
+  "labelReason": "Not established from terminal production or causal kernel evidence",
+  "actualDecision": {
+    "version": "trp-resources/1.2.0",
+    "decidedAt": "2026-10-13T06:04:51.552Z",
+    "accepted": false,
+    "inventoryHash": "db110cca2b85cb7912c2ff62e986fc79ef3909ae6b231a3625356d59267aa01a",
+    "budgetHash": "c4ec3dcaea61e94360e27089ea680533682227f5171c4a4da10f9a3b29c3ca4d",
+    "demand": {
+      "version": "trp-resources/1.2.0",
+      "sourceBytes": 359397,
+      "selectionBytes": 150911,
+      "bundleBytes": 1158093,
+      "counts": {
+        "scientificTasks": 2,
+        "stubTasks": 2,
+        "remoteScientificCalls": 2,
+        "retries": 0
+      },
+      "cpus": 3,
+      "memoryBytes": 4294967296,
+      "workBytes": 42266624,
+      "wallSeconds": 1080,
+      "storage": {
+        "kind": "estimate",
+        "formula": "ceil((32*1048576 + 7*bundleBytes + 4*selectionBytes)/4096)*4096",
+        "hardLimit": false,
+        "profile": "trp-colocated-client-storage/1.0.0"
+      },
+      "assumptions": [
+        "Verified co-located Slurm profile: the real Helix client and Python/Nextflow controller share a root-controlled 1 CPU/2 GiB/swap-zero cgroup. All declared client work/temp/state/cache/export and remote workspace paths inherit one kernel XFS project quota. Worker tasks remain separate 2 CPU/2 GiB Docker allocations; no memory pooling.",
+        "Storage profile trp-colocated-client-storage/1.0.0 reserves32MiB overhead plus working-copy terms. This covers the real client/bootstrap/cache and portable export scope, calibrated on one development pilot before the aggregate campaign freeze; it is not a universal peak guarantee.",
+        "Two sequential tasks per traversal; one stub traversal then one real traversal; no retry or resume.",
+        "Task allocation: 2 CPUs/2 GiB. Controller allocation: 1 CPU/2 GiB; cgroup enforcement requires an independently verified operator sandbox. CPU bandwidth is not an exclusive core reservation.",
+        "Each traversal has an 8 minute watchdog; probes/configuration reserve another 120 seconds. This is a configured timeout, not a runtime prediction.",
+        "Storage estimates allocated workspace bytes including working copies, logs and portable evidence; an independently observed XFS project quota enforces an approved budget only inside an operator allocation.",
+        "The exact image and Nextflow distribution must already be cached. Image pulls/builds and shared Docker/Nextflow caches are outside workBytes.",
+        "Two remote scientific tasks are planned; SSH probes, controller commands and stub jobs are not scientific calls. Agent provider tokens, cost and conversation calls are not measured here."
+      ]
+    },
+    "rejections": [
+      {
+        "code": "capacity-insufficient",
+        "resource": "workBytes",
+        "demand": 42266624,
+        "available": 8388608
+      },
+      {
+        "code": "budget-insufficient",
+        "resource": "workBytes",
+        "demand": 42266624,
+        "available": 8388608
+      }
+    ]
+  },
+  "defaultPortableVerifier": null,
+  "executionOracleForcedOnly": true,
+  "allocatedBlockBytesObservedPeak": 8388608,
+  "allocatedBlockBytesFinal": 8388608,
+  "predictedWorkBytes": 42266624,
+  "observedUnderestimateBytes": 0,
+  "observedOverestimationFraction": null,
+  "kernelMemoryPeak": 364793856,
+  "causalKernelQuotaFailures": [
+    "[pid 59880] 1791871496.175063 openat(19</shared/helix-strict/hrsc584662329ef4440/cache/transpiler>, \".78df41a5edfaff5e-0000002D..pile\", O_WRONLY|O_CREAT|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 59881] 1791871496.260576 openat(18</shared/helix-strict/hrsc584662329ef4440/cache/transpiler>, \".98dea1fbf5daae3e-0000002E..pile\", O_WRONLY|O_CREAT|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 59881] 1791871496.452235 openat(17</shared/helix-strict/hrsc584662329ef4440/cache/transpiler>, \".f9fe17fddfaebbfe-0000002F..pile\", O_WRONLY|O_CREAT|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 59880] 1791871496.520859 openat(18</shared/helix-strict/hrsc584662329ef4440/cache/transpiler>, \".d9df11a9e745f3ee-00000030..pile\", O_WRONLY|O_CREAT|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 59876] 1791871496.682595 openat(17</shared/helix-strict/hrsc584662329ef4440/cache/transpiler>, \".7dff3fbffeedbeff-00000031..pile\", O_WRONLY|O_CREAT|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 59876] 1791871497.937590 pwrite64(13</shared/helix-strict/hrsc584662329ef4440/state/data/helix/helix-local.db>, \"\\r\\0\\0\\0\\0\\20\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\"..., 4096, 20480) = -1 ENOSPC (No space left on device)"
+  ],
+  "causallyLinkedTerminalIoFailures": [],
+  "actualExitCode": 1,
+  "terminationCause": null,
+  "elapsedSeconds": 9.277087708000181,
+  "persistentSqlite": [
+    {
+      "path": "state/data/helix/helix-local.db",
+      "bytes": 20480,
+      "sha256": "ccf6a44688173a0d081c2dc58a24412ed6355bc859a4fed3557e239270e5a034"
+    }
+  ],
+  "checks": [
+    {
+      "name": "root-allocation-policy-binding",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "exact-kernel-budget",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "owner-quiescence",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "real-controller-and-tracer-reaped",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-0",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-0",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-1",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-1",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-2",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-2",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-3",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-3",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-4",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-4",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-5",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-5",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-6",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-6",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-7",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-7",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-8",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-8",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-9",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-9",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-10",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-10",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-11",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-11",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-12",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-12",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-13",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-13",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-14",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-14",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-15",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-15",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-16",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-16",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-17",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-17",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-18",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-18",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-19",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-19",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-20",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-20",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-0",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-1",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-2",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-3",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-4",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-5",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-6",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-7",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-8",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-9",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-10",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-11",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-12",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-13",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-14",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-15",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-16",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-17",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-18",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "actual-unmodified-decision-source",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "actual-bound-decision-policy",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "actual-decision-budget-hash",
+      "ok": true,
+      "detail": null
+    }
+  ],
+  "checksPassed": 68,
+  "checksTotal": 68,
+  "supervisionSha256": "69a4232b38043da45bb117a6759466ee3722d67afff70cf38d81a89c81af1b86",
+  "retainedArchiveSha256": "6087bb9cbef98ee92866e03fcf8e91aa7656136e7d5c9a37c1593097d828fcb0",
+  "causalTimestampQuantizationToleranceSeconds": 0.001,
+  "scientificR24Rate": null,
+  "scope": "Engineering, one development protein, actual aggregate client/head declared paths plus sequential worker tasks; infrastructure/runtime/Docker caches and experiment-only root telemetry excluded",
+  "frozenAuditSha256": "436e940205e98d1b527cdbdea50b67e8cf397966113fc8f7a4b6f030cd56a647",
+  "reviewSourceSha256": "ececa8c4da4f066d87a506d8670991b16abc0ba40ab0aa8d19e3fcf1840ced4f",
+  "amendmentSha256": "c7cdcdff37a7b4de0f4f50dd5a0748002c33f3d899ca1455b14379daa80939a9"
+}

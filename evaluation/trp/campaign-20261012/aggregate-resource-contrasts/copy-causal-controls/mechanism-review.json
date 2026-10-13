@@ -1,0 +1,23 @@
+{
+  "schema": "helix-quota-copy-mechanism-scope-correction/1.0",
+  "recordedAtUtc": "2026-10-13T05:35:39.837594+00:00",
+  "originalSummaryPreserved": true,
+  "originalSummarySha256": "f679d4257785e61daec8ade19d66c59b913e09e822ee01e9958ff0e118989c0f",
+  "originalFieldMeaningCorrection": "Rows.before.globalFreeBytes was quota-clipped path availability; original values retained. Actual global health is measured at unassigned XFS mount root.",
+  "exitCode": 0,
+  "command": "sudo python3 -c 'import os,json,pathlib,subprocess;root=pathlib.Path('\"'\"'/shared/helix-strict'\"'\"');s=os.statvfs(root);print(json.dumps({'\"'\"'path'\"'\"':str(root),'\"'\"'device'\"'\"':root.stat().st_dev,'\"'\"'globalFreeBytes'\"'\"':s.f_bavail*s.f_frsize,'\"'\"'globalFreeInodes'\"'\"':s.f_favail,'\"'\"'freeObservationFromUnassignedMountRoot'\"'\"':True,'\"'\"'dfRaw'\"'\"':subprocess.check_output(['\"'\"'df'\"'\"','\"'\"'-B1'\"'\"',str(root)],text=True),'\"'\"'dfInodesRaw'\"'\"':subprocess.check_output(['\"'\"'df'\"'\"','\"'\"'-i'\"'\"',str(root)],text=True)}))'",
+  "stderr": "",
+  "actualGlobalHealth": {
+    "path": "/shared/helix-strict",
+    "device": 1795,
+    "globalFreeBytes": 1922064384,
+    "globalFreeInodes": 1046347,
+    "freeObservationFromUnassignedMountRoot": true,
+    "dfRaw": "Filesystem      1B-blocks      Used  Available Use% Mounted on\n/dev/loop3     2080374784 158310400 1922064384   8% /shared/helix-strict\n",
+    "dfInodesRaw": "Filesystem      Inodes IUsed   IFree IUse% Mounted on\n/dev/loop3     1048576  2229 1046347    1% /shared/helix-strict\n"
+  },
+  "mechanismQualified": true,
+  "sourceOfNegativeCause": "Actual same copyfile kernel openat returned ENOSPC under65536B hard project cap; same dense bytes copied with exact hash under134217728B, no global disk/inode exhaustion, same FS/device and operator policy profile",
+  "classificationScope": "Independent syscall mechanism control, not two full workflow labels",
+  "rowDevicesMatchGlobal": true
+}

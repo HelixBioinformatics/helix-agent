@@ -1,0 +1,613 @@
+{
+  "kind": "engineering-admission-boundaries",
+  "demand": {
+    "cpus": 3,
+    "memoryBytes": 4294967296,
+    "workBytes": 21135360,
+    "wallSeconds": 1080
+  },
+  "formula": "ceil((12*1048576 + 7*bundleBytes + 4*selectionBytes)/4096)*4096",
+  "input_materialization": "Frozen directory snapshot; not a new approved Helix proposal.",
+  "cases": [
+    {
+      "id": "R-contract-cpus-admit-1",
+      "varied_resource": "cpus",
+      "offset": 0,
+      "declared_budget": {
+        "cpus": 3,
+        "memoryBytes": 4294967296,
+        "workBytes": 21135360,
+        "wallSeconds": 1080
+      },
+      "expected_contract_admission": true,
+      "physical_feasibility": null,
+      "observed_execution": null,
+      "scope": "Synthetic admission boundary; excluded from R2.4 observed-feasibility rate until contrasted independently."
+    },
+    {
+      "id": "R-contract-cpus-admit-2",
+      "varied_resource": "cpus",
+      "offset": 1,
+      "declared_budget": {
+        "cpus": 4,
+        "memoryBytes": 4294967296,
+        "workBytes": 21135360,
+        "wallSeconds": 1080
+      },
+      "expected_contract_admission": true,
+      "physical_feasibility": null,
+      "observed_execution": null,
+      "scope": "Synthetic admission boundary; excluded from R2.4 observed-feasibility rate until contrasted independently."
+    },
+    {
+      "id": "R-contract-cpus-admit-3",
+      "varied_resource": "cpus",
+      "offset": 2,
+      "declared_budget": {
+        "cpus": 5,
+        "memoryBytes": 4294967296,
+        "workBytes": 21135360,
+        "wallSeconds": 1080
+      },
+      "expected_contract_admission": true,
+      "physical_feasibility": null,
+      "observed_execution": null,
+      "scope": "Synthetic admission boundary; excluded from R2.4 observed-feasibility rate until contrasted independently."
+    },
+    {
+      "id": "R-contract-cpus-admit-4",
+      "varied_resource": "cpus",
+      "offset": 3,
+      "declared_budget": {
+        "cpus": 6,
+        "memoryBytes": 4294967296,
+        "workBytes": 21135360,
+        "wallSeconds": 1080
+      },
+      "expected_contract_admission": true,
+      "physical_feasibility": null,
+      "observed_execution": null,
+      "scope": "Synthetic admission boundary; excluded from R2.4 observed-feasibility rate until contrasted independently."
+    },
+    {
+      "id": "R-contract-cpus-admit-5",
+      "varied_resource": "cpus",
+      "offset": 4,
+      "declared_budget": {
+        "cpus": 7,
+        "memoryBytes": 4294967296,
+        "workBytes": 21135360,
+        "wallSeconds": 1080
+      },
+      "expected_contract_admission": true,
+      "physical_feasibility": null,
+      "observed_execution": null,
+      "scope": "Synthetic admission boundary; excluded from R2.4 observed-feasibility rate until contrasted independently."
+    },
+    {
+      "id": "R-contract-cpus-reject-1",
+      "varied_resource": "cpus",
+      "offset": -1,
+      "declared_budget": {
+        "cpus": 2,
+        "memoryBytes": 4294967296,
+        "workBytes": 21135360,
+        "wallSeconds": 1080
+      },
+      "expected_contract_admission": false,
+      "physical_feasibility": null,
+      "observed_execution": null,
+      "scope": "Synthetic admission boundary; excluded from R2.4 observed-feasibility rate until contrasted independently."
+    },
+    {
+      "id": "R-contract-cpus-reject-2",
+      "varied_resource": "cpus",
+      "offset": -2,
+      "declared_budget": {
+        "cpus": 1,
+        "memoryBytes": 4294967296,
+        "workBytes": 21135360,
+        "wallSeconds": 1080
+      },
+      "expected_contract_admission": false,
+      "physical_feasibility": null,
+      "observed_execution": null,
+      "scope": "Synthetic admission boundary; excluded from R2.4 observed-feasibility rate until contrasted independently."
+    },
+    {
+      "id": "R-contract-cpus-reject-3",
+      "varied_resource": "cpus",
+      "offset": -3,
+      "declared_budget": {
+        "cpus": 0,
+        "memoryBytes": 4294967296,
+        "workBytes": 21135360,
+        "wallSeconds": 1080
+      },
+      "expected_contract_admission": false,
+      "physical_feasibility": null,
+      "observed_execution": null,
+      "scope": "Synthetic admission boundary; excluded from R2.4 observed-feasibility rate until contrasted independently."
+    },
+    {
+      "id": "R-contract-cpus-reject-4",
+      "varied_resource": "cpus",
+      "offset": -4,
+      "declared_budget": {
+        "cpus": -1,
+        "memoryBytes": 4294967296,
+        "workBytes": 21135360,
+        "wallSeconds": 1080
+      },
+      "expected_contract_admission": false,
+      "physical_feasibility": null,
+      "observed_execution": null,
+      "scope": "Synthetic admission boundary; excluded from R2.4 observed-feasibility rate until contrasted independently."
+    },
+    {
+      "id": "R-contract-cpus-reject-5",
+      "varied_resource": "cpus",
+      "offset": -5,
+      "declared_budget": {
+        "cpus": -2,
+        "memoryBytes": 4294967296,
+        "workBytes": 21135360,
+        "wallSeconds": 1080
+      },
+      "expected_contract_admission": false,
+      "physical_feasibility": null,
+      "observed_execution": null,
+      "scope": "Synthetic admission boundary; excluded from R2.4 observed-feasibility rate until contrasted independently."
+    },
+    {
+      "id": "R-contract-memoryBytes-admit-1",
+      "varied_resource": "memoryBytes",
+      "offset": 0,
+      "declared_budget": {
+        "cpus": 3,
+        "memoryBytes": 4294967296,
+        "workBytes": 21135360,
+        "wallSeconds": 1080
+      },
+      "expected_contract_admission": true,
+      "physical_feasibility": null,
+      "observed_execution": null,
+      "scope": "Synthetic admission boundary; excluded from R2.4 observed-feasibility rate until contrasted independently."
+    },
+    {
+      "id": "R-contract-memoryBytes-admit-2",
+      "varied_resource": "memoryBytes",
+      "offset": 1048576,
+      "declared_budget": {
+        "cpus": 3,
+        "memoryBytes": 4296015872,
+        "workBytes": 21135360,
+        "wallSeconds": 1080
+      },
+      "expected_contract_admission": true,
+      "physical_feasibility": null,
+      "observed_execution": null,
+      "scope": "Synthetic admission boundary; excluded from R2.4 observed-feasibility rate until contrasted independently."
+    },
+    {
+      "id": "R-contract-memoryBytes-admit-3",
+      "varied_resource": "memoryBytes",
+      "offset": 2097152,
+      "declared_budget": {
+        "cpus": 3,
+        "memoryBytes": 4297064448,
+        "workBytes": 21135360,
+        "wallSeconds": 1080
+      },
+      "expected_contract_admission": true,
+      "physical_feasibility": null,
+      "observed_execution": null,
+      "scope": "Synthetic admission boundary; excluded from R2.4 observed-feasibility rate until contrasted independently."
+    },
+    {
+      "id": "R-contract-memoryBytes-admit-4",
+      "varied_resource": "memoryBytes",
+      "offset": 3145728,
+      "declared_budget": {
+        "cpus": 3,
+        "memoryBytes": 4298113024,
+        "workBytes": 21135360,
+        "wallSeconds": 1080
+      },
+      "expected_contract_admission": true,
+      "physical_feasibility": null,
+      "observed_execution": null,
+      "scope": "Synthetic admission boundary; excluded from R2.4 observed-feasibility rate until contrasted independently."
+    },
+    {
+      "id": "R-contract-memoryBytes-admit-5",
+      "varied_resource": "memoryBytes",
+      "offset": 4194304,
+      "declared_budget": {
+        "cpus": 3,
+        "memoryBytes": 4299161600,
+        "workBytes": 21135360,
+        "wallSeconds": 1080
+      },
+      "expected_contract_admission": true,
+      "physical_feasibility": null,
+      "observed_execution": null,
+      "scope": "Synthetic admission boundary; excluded from R2.4 observed-feasibility rate until contrasted independently."
+    },
+    {
+      "id": "R-contract-memoryBytes-reject-1",
+      "varied_resource": "memoryBytes",
+      "offset": -1048576,
+      "declared_budget": {
+        "cpus": 3,
+        "memoryBytes": 4293918720,
+        "workBytes": 21135360,
+        "wallSeconds": 1080
+      },
+      "expected_contract_admission": false,
+      "physical_feasibility": null,
+      "observed_execution": null,
+      "scope": "Synthetic admission boundary; excluded from R2.4 observed-feasibility rate until contrasted independently."
+    },
+    {
+      "id": "R-contract-memoryBytes-reject-2",
+      "varied_resource": "memoryBytes",
+      "offset": -2097152,
+      "declared_budget": {
+        "cpus": 3,
+        "memoryBytes": 4292870144,
+        "workBytes": 21135360,
+        "wallSeconds": 1080
+      },
+      "expected_contract_admission": false,
+      "physical_feasibility": null,
+      "observed_execution": null,
+      "scope": "Synthetic admission boundary; excluded from R2.4 observed-feasibility rate until contrasted independently."
+    },
+    {
+      "id": "R-contract-memoryBytes-reject-3",
+      "varied_resource": "memoryBytes",
+      "offset": -3145728,
+      "declared_budget": {
+        "cpus": 3,
+        "memoryBytes": 4291821568,
+        "workBytes": 21135360,
+        "wallSeconds": 1080
+      },
+      "expected_contract_admission": false,
+      "physical_feasibility": null,
+      "observed_execution": null,
+      "scope": "Synthetic admission boundary; excluded from R2.4 observed-feasibility rate until contrasted independently."
+    },
+    {
+      "id": "R-contract-memoryBytes-reject-4",
+      "varied_resource": "memoryBytes",
+      "offset": -4194304,
+      "declared_budget": {
+        "cpus": 3,
+        "memoryBytes": 4290772992,
+        "workBytes": 21135360,
+        "wallSeconds": 1080
+      },
+      "expected_contract_admission": false,
+      "physical_feasibility": null,
+      "observed_execution": null,
+      "scope": "Synthetic admission boundary; excluded from R2.4 observed-feasibility rate until contrasted independently."
+    },
+    {
+      "id": "R-contract-memoryBytes-reject-5",
+      "varied_resource": "memoryBytes",
+      "offset": -5242880,
+      "declared_budget": {
+        "cpus": 3,
+        "memoryBytes": 4289724416,
+        "workBytes": 21135360,
+        "wallSeconds": 1080
+      },
+      "expected_contract_admission": false,
+      "physical_feasibility": null,
+      "observed_execution": null,
+      "scope": "Synthetic admission boundary; excluded from R2.4 observed-feasibility rate until contrasted independently."
+    },
+    {
+      "id": "R-contract-workBytes-admit-1",
+      "varied_resource": "workBytes",
+      "offset": 0,
+      "declared_budget": {
+        "cpus": 3,
+        "memoryBytes": 4294967296,
+        "workBytes": 21135360,
+        "wallSeconds": 1080
+      },
+      "expected_contract_admission": true,
+      "physical_feasibility": null,
+      "observed_execution": null,
+      "scope": "Synthetic admission boundary; excluded from R2.4 observed-feasibility rate until contrasted independently."
+    },
+    {
+      "id": "R-contract-workBytes-admit-2",
+      "varied_resource": "workBytes",
+      "offset": 4096,
+      "declared_budget": {
+        "cpus": 3,
+        "memoryBytes": 4294967296,
+        "workBytes": 21139456,
+        "wallSeconds": 1080
+      },
+      "expected_contract_admission": true,
+      "physical_feasibility": null,
+      "observed_execution": null,
+      "scope": "Synthetic admission boundary; excluded from R2.4 observed-feasibility rate until contrasted independently."
+    },
+    {
+      "id": "R-contract-workBytes-admit-3",
+      "varied_resource": "workBytes",
+      "offset": 8192,
+      "declared_budget": {
+        "cpus": 3,
+        "memoryBytes": 4294967296,
+        "workBytes": 21143552,
+        "wallSeconds": 1080
+      },
+      "expected_contract_admission": true,
+      "physical_feasibility": null,
+      "observed_execution": null,
+      "scope": "Synthetic admission boundary; excluded from R2.4 observed-feasibility rate until contrasted independently."
+    },
+    {
+      "id": "R-contract-workBytes-admit-4",
+      "varied_resource": "workBytes",
+      "offset": 12288,
+      "declared_budget": {
+        "cpus": 3,
+        "memoryBytes": 4294967296,
+        "workBytes": 21147648,
+        "wallSeconds": 1080
+      },
+      "expected_contract_admission": true,
+      "physical_feasibility": null,
+      "observed_execution": null,
+      "scope": "Synthetic admission boundary; excluded from R2.4 observed-feasibility rate until contrasted independently."
+    },
+    {
+      "id": "R-contract-workBytes-admit-5",
+      "varied_resource": "workBytes",
+      "offset": 16384,
+      "declared_budget": {
+        "cpus": 3,
+        "memoryBytes": 4294967296,
+        "workBytes": 21151744,
+        "wallSeconds": 1080
+      },
+      "expected_contract_admission": true,
+      "physical_feasibility": null,
+      "observed_execution": null,
+      "scope": "Synthetic admission boundary; excluded from R2.4 observed-feasibility rate until contrasted independently."
+    },
+    {
+      "id": "R-contract-workBytes-reject-1",
+      "varied_resource": "workBytes",
+      "offset": -4096,
+      "declared_budget": {
+        "cpus": 3,
+        "memoryBytes": 4294967296,
+        "workBytes": 21131264,
+        "wallSeconds": 1080
+      },
+      "expected_contract_admission": false,
+      "physical_feasibility": null,
+      "observed_execution": null,
+      "scope": "Synthetic admission boundary; excluded from R2.4 observed-feasibility rate until contrasted independently."
+    },
+    {
+      "id": "R-contract-workBytes-reject-2",
+      "varied_resource": "workBytes",
+      "offset": -8192,
+      "declared_budget": {
+        "cpus": 3,
+        "memoryBytes": 4294967296,
+        "workBytes": 21127168,
+        "wallSeconds": 1080
+      },
+      "expected_contract_admission": false,
+      "physical_feasibility": null,
+      "observed_execution": null,
+      "scope": "Synthetic admission boundary; excluded from R2.4 observed-feasibility rate until contrasted independently."
+    },
+    {
+      "id": "R-contract-workBytes-reject-3",
+      "varied_resource": "workBytes",
+      "offset": -12288,
+      "declared_budget": {
+        "cpus": 3,
+        "memoryBytes": 4294967296,
+        "workBytes": 21123072,
+        "wallSeconds": 1080
+      },
+      "expected_contract_admission": false,
+      "physical_feasibility": null,
+      "observed_execution": null,
+      "scope": "Synthetic admission boundary; excluded from R2.4 observed-feasibility rate until contrasted independently."
+    },
+    {
+      "id": "R-contract-workBytes-reject-4",
+      "varied_resource": "workBytes",
+      "offset": -16384,
+      "declared_budget": {
+        "cpus": 3,
+        "memoryBytes": 4294967296,
+        "workBytes": 21118976,
+        "wallSeconds": 1080
+      },
+      "expected_contract_admission": false,
+      "physical_feasibility": null,
+      "observed_execution": null,
+      "scope": "Synthetic admission boundary; excluded from R2.4 observed-feasibility rate until contrasted independently."
+    },
+    {
+      "id": "R-contract-workBytes-reject-5",
+      "varied_resource": "workBytes",
+      "offset": -20480,
+      "declared_budget": {
+        "cpus": 3,
+        "memoryBytes": 4294967296,
+        "workBytes": 21114880,
+        "wallSeconds": 1080
+      },
+      "expected_contract_admission": false,
+      "physical_feasibility": null,
+      "observed_execution": null,
+      "scope": "Synthetic admission boundary; excluded from R2.4 observed-feasibility rate until contrasted independently."
+    },
+    {
+      "id": "R-contract-wallSeconds-admit-1",
+      "varied_resource": "wallSeconds",
+      "offset": 0,
+      "declared_budget": {
+        "cpus": 3,
+        "memoryBytes": 4294967296,
+        "workBytes": 21135360,
+        "wallSeconds": 1080
+      },
+      "expected_contract_admission": true,
+      "physical_feasibility": null,
+      "observed_execution": null,
+      "scope": "Synthetic admission boundary; excluded from R2.4 observed-feasibility rate until contrasted independently."
+    },
+    {
+      "id": "R-contract-wallSeconds-admit-2",
+      "varied_resource": "wallSeconds",
+      "offset": 1,
+      "declared_budget": {
+        "cpus": 3,
+        "memoryBytes": 4294967296,
+        "workBytes": 21135360,
+        "wallSeconds": 1081
+      },
+      "expected_contract_admission": true,
+      "physical_feasibility": null,
+      "observed_execution": null,
+      "scope": "Synthetic admission boundary; excluded from R2.4 observed-feasibility rate until contrasted independently."
+    },
+    {
+      "id": "R-contract-wallSeconds-admit-3",
+      "varied_resource": "wallSeconds",
+      "offset": 2,
+      "declared_budget": {
+        "cpus": 3,
+        "memoryBytes": 4294967296,
+        "workBytes": 21135360,
+        "wallSeconds": 1082
+      },
+      "expected_contract_admission": true,
+      "physical_feasibility": null,
+      "observed_execution": null,
+      "scope": "Synthetic admission boundary; excluded from R2.4 observed-feasibility rate until contrasted independently."
+    },
+    {
+      "id": "R-contract-wallSeconds-admit-4",
+      "varied_resource": "wallSeconds",
+      "offset": 3,
+      "declared_budget": {
+        "cpus": 3,
+        "memoryBytes": 4294967296,
+        "workBytes": 21135360,
+        "wallSeconds": 1083
+      },
+      "expected_contract_admission": true,
+      "physical_feasibility": null,
+      "observed_execution": null,
+      "scope": "Synthetic admission boundary; excluded from R2.4 observed-feasibility rate until contrasted independently."
+    },
+    {
+      "id": "R-contract-wallSeconds-admit-5",
+      "varied_resource": "wallSeconds",
+      "offset": 4,
+      "declared_budget": {
+        "cpus": 3,
+        "memoryBytes": 4294967296,
+        "workBytes": 21135360,
+        "wallSeconds": 1084
+      },
+      "expected_contract_admission": true,
+      "physical_feasibility": null,
+      "observed_execution": null,
+      "scope": "Synthetic admission boundary; excluded from R2.4 observed-feasibility rate until contrasted independently."
+    },
+    {
+      "id": "R-contract-wallSeconds-reject-1",
+      "varied_resource": "wallSeconds",
+      "offset": -1,
+      "declared_budget": {
+        "cpus": 3,
+        "memoryBytes": 4294967296,
+        "workBytes": 21135360,
+        "wallSeconds": 1079
+      },
+      "expected_contract_admission": false,
+      "physical_feasibility": null,
+      "observed_execution": null,
+      "scope": "Synthetic admission boundary; excluded from R2.4 observed-feasibility rate until contrasted independently."
+    },
+    {
+      "id": "R-contract-wallSeconds-reject-2",
+      "varied_resource": "wallSeconds",
+      "offset": -2,
+      "declared_budget": {
+        "cpus": 3,
+        "memoryBytes": 4294967296,
+        "workBytes": 21135360,
+        "wallSeconds": 1078
+      },
+      "expected_contract_admission": false,
+      "physical_feasibility": null,
+      "observed_execution": null,
+      "scope": "Synthetic admission boundary; excluded from R2.4 observed-feasibility rate until contrasted independently."
+    },
+    {
+      "id": "R-contract-wallSeconds-reject-3",
+      "varied_resource": "wallSeconds",
+      "offset": -3,
+      "declared_budget": {
+        "cpus": 3,
+        "memoryBytes": 4294967296,
+        "workBytes": 21135360,
+        "wallSeconds": 1077
+      },
+      "expected_contract_admission": false,
+      "physical_feasibility": null,
+      "observed_execution": null,
+      "scope": "Synthetic admission boundary; excluded from R2.4 observed-feasibility rate until contrasted independently."
+    },
+    {
+      "id": "R-contract-wallSeconds-reject-4",
+      "varied_resource": "wallSeconds",
+      "offset": -4,
+      "declared_budget": {
+        "cpus": 3,
+        "memoryBytes": 4294967296,
+        "workBytes": 21135360,
+        "wallSeconds": 1076
+      },
+      "expected_contract_admission": false,
+      "physical_feasibility": null,
+      "observed_execution": null,
+      "scope": "Synthetic admission boundary; excluded from R2.4 observed-feasibility rate until contrasted independently."
+    },
+    {
+      "id": "R-contract-wallSeconds-reject-5",
+      "varied_resource": "wallSeconds",
+      "offset": -5,
+      "declared_budget": {
+        "cpus": 3,
+        "memoryBytes": 4294967296,
+        "workBytes": 21135360,
+        "wallSeconds": 1075
+      },
+      "expected_contract_admission": false,
+      "physical_feasibility": null,
+      "observed_execution": null,
+      "scope": "Synthetic admission boundary; excluded from R2.4 observed-feasibility rate until contrasted independently."
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+bun test v1.3.14 (0d9b296a)
+
+status-repair.test.ts:
+(pass) one transient status reset recovers same controller with zero scientific resubmissions [1016.72ms]
+(pass) two transient status resets remain bounded and do not cancel a recovered controller [2008.01ms]
+(pass) persistent transport failure keeps JSON-safe unknown terminal and primary diagnostic [2010.39ms]
+(pass) host-key and authentication errors are never retried [5.08ms]
+(pass) an explicit abort bypasses status retries and cleans up owned jobs [1.33ms]
+
+ 5 pass
+ 0 fail
+ 30 expect() calls
+Ran 5 tests across 1 file. [5.28s]

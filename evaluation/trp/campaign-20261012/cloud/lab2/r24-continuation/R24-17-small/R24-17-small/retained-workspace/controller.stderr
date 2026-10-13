@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/home/ubuntu/helix-r24-cf54a7812c8a/run_r24_continuation.py", line 252, in <module>
+    main()
+  File "/home/ubuntu/helix-r24-cf54a7812c8a/run_r24_continuation.py", line 118, in main
+    controller(package, item, args.controller_workspace.resolve())
+  File "/home/ubuntu/helix-r24-cf54a7812c8a/run_r24_continuation.py", line 92, in controller
+    shutil.copyfile(file, target, follow_symlinks=True)
+  File "/usr/lib/python3.12/shutil.py", line 262, in copyfile
+    with open(dst, 'wb') as fdst:
+         ^^^^^^^^^^^^^^^
+OSError: [Errno 28] No space left on device: '/shared/helix-r24/r24-continuation-1/R24-17-small/portable-run/settings.json'

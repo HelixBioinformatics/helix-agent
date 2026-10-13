@@ -1,0 +1,57 @@
+Starting /home/webiwabou/Projects/bioinformatica-org/script/tesis/structural_campaign.py
+on Mon Oct 12 19:59:42 2026 by webiwabou
+===============================================================================
+
+Processing files:
+-------------------------------------------------------------------------------
+
+  Found model, /home/webiwabou/.local/state/helix/structural-20261012/controls/1jrg-A.pdb
+
+Processing PHIL parameters:
+-------------------------------------------------------------------------------
+
+  Adding command-line PHIL:
+  -------------------------
+    keep_hydrogens=False
+    do_flips=False
+    nuclear=False
+    b_factor_cutoff=None
+    fast=False
+    verbose=False
+    json=False
+
+Final processed PHIL parameters:
+-------------------------------------------------------------------------------
+  data_manager {
+    model {
+      file = "/home/webiwabou/.local/state/helix/structural-20261012/controls/1jrg-A.pdb"
+    }
+    default_model = "/home/webiwabou/.local/state/helix/structural-20261012/controls/1jrg-A.pdb"
+  }
+  verbose = False
+
+
+Starting job
+===============================================================================
+Number of hydrogen atoms added to the input model: 2545 
+
+
+The following H atoms were not placed because they could not be parameterized
+(not enough restraints information)
+ HB2 LYS A 135 
+ HB3 LYS A 135 
+ HB2 LYS A 223 
+ HB3 LYS A 223 
+ HB2 LYS A 225 
+ HB3 LYS A 225 
+ HB2 LYS A 299 
+ HB3 LYS A 299 
+
+Atom  HG  CYS A 298  was not placed because it is involved in SS BOND
+Atom  HG  CYS A 326  was not placed because it is involved in SS BOND
+17.85
+
+===============================================================================
+Job complete
+usr+sys time: 49.28 seconds
+wall clock time: 49.44 seconds

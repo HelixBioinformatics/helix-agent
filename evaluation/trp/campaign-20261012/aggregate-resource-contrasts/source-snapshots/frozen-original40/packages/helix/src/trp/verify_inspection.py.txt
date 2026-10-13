@@ -1,0 +1,66 @@
+"""Offline integrity/link verification of an inspection; Python stdlib only."""
+import argparse
+import hashlib
+import json
+from pathlib import Path
+
+def verify(directory, expected=None):
+    root=Path(directory)
+    manifest=root/'manifest.json'
+    if root.is_symlink() or manifest.is_symlink(): raise ValueError('symlink')
+    digest=lambda data:hashlib.sha256(data).hexdigest()
+    raw=manifest.read_bytes(); anchor=digest(raw)
+    if expected and anchor!=expected: raise ValueError('manifest anchor mismatch')
+    m=json.loads(raw)
+    if m.get('version')!='trp-inspection-evidence/1.0.0': raise ValueError('manifest version')
+    listed=set()
+    for entry in m['files']:
+        name=entry['path']
+        if not isinstance(name,str) or not name or Path(name).name!=name or '/' in name or '\\' in name or name in ('.','..','manifest.json') or name in listed: raise ValueError('unsafe or duplicate path')
+        p=root/name
+        if p.is_symlink() or not p.is_file(): raise ValueError('not a regular artifact')
+        data=p.read_bytes()
+        if len(data)!=entry['bytes'] or digest(data)!=entry['sha256']: raise ValueError('artifact mismatch: '+name)
+        listed.add(name)
+    if {p.name for p in root.iterdir()}!=listed|{'manifest.json'}: raise ValueError('unlisted or missing file')
+    if not {'structure.txt','options.json','report.json','catalogue.json','trp_inspect.py','verify.py'}<=listed: raise ValueError('required artifacts missing')
+    r=json.loads((root/'report.json').read_bytes()); o=json.loads((root/'options.json').read_bytes())
+    if r['version'] not in ('trp-structural/1.0.0','trp-structural/1.1.0') or r['provenance']['structureSha256']!=digest((root/'structure.txt').read_bytes()): raise ValueError('report source mismatch')
+    if r['provenance']['confidenceBinding'] and r['provenance']['confidenceBinding'].get('producer')=='ColabFold':
+        required={'colabfold-metadata.json','colabfold-scores.json','colabfold-pae.json'}
+        if not required<=listed: raise ValueError('missing local producer sidecars')
+        meta=json.loads((root/'colabfold-metadata.json').read_bytes())
+        for key,name in (('structureSha256','structure.txt'),('scoresSha256','colabfold-scores.json'),('paeSha256','colabfold-pae.json')):
+            if meta.get(key)!=digest((root/name).read_bytes()) or r['provenance']['confidenceBinding'].get(key)!=meta[key]: raise ValueError('local producer hash mismatch')
+    if r['provenance']['authorChain']!=o['chain'] or r['provenance']['frame']!=o['frame']: raise ValueError('report selection differs')
+    ids={c['id'] for c in json.loads((root/'catalogue.json').read_bytes())['controls']}
+    if len(r['checks'])!=len(ids) or {c['id'] for c in r['checks']}!=ids: raise ValueError('control inventory differs')
+    if any(c['status'] not in ('pass','fail','not_evaluable','not_applicable') or not c['reason'] for c in r['checks']): raise ValueError('invalid control verdict')
+    physical=next(c for c in r['checks'] if c['id']=='fold-plausibility')
+    if isinstance(physical.get('value'),dict) and 'stericDiagnostic' in physical['value']:
+        value=physical['value']; diagnostic=value['stericDiagnostic']
+        if 'steric_diagnostic.py' not in listed or value.get('wrapperSha256')!=digest((root/'steric_diagnostic.py').read_bytes()): raise ValueError('steric wrapper differs')
+        if physical['status']!='not_evaluable' or diagnostic.get('version')!='helix-steric-diagnostic/1.0.0' or diagnostic.get('status') not in ('measured','not_evaluable'): raise ValueError('unsupported physical classification')
+        if diagnostic['status']=='measured':
+            if diagnostic.get('sourceSha256')!=r['provenance']['structureSha256'] or diagnostic.get('scope',{}).get('authorChain')!=o['chain'] or diagnostic.get('scope',{}).get('modelOrdinal')!=o['model']: raise ValueError('steric selection differs')
+            if diagnostic.get('foldVerdict')!='not_established' or diagnostic.get('structureLevelThreshold') is not None: raise ValueError('unsupported fold verdict')
+    if isinstance(physical.get('value'),dict) and 'surfaceDiagnostic' in physical['value']:
+        value=physical['value']; diagnostic=value['surfaceDiagnostic']
+        if 'surface_diagnostic.py' not in listed or value.get('surfaceWrapperSha256')!=digest((root/'surface_diagnostic.py').read_bytes()): raise ValueError('surface wrapper differs')
+        if physical['status']!='not_evaluable' or diagnostic.get('version')!='helix-surface-diagnostic/1.0.0' or diagnostic.get('status') not in ('measured','not_evaluable'): raise ValueError('unsupported surface classification')
+        if diagnostic['status']=='measured':
+            if diagnostic.get('sourceSha256')!=r['provenance']['structureSha256'] or diagnostic.get('scope',{}).get('authorChain')!=o['chain'] or diagnostic.get('scope',{}).get('modelOrdinal')!=o['model']: raise ValueError('surface selection differs')
+            if diagnostic.get('foldVerdict')!='not_established' or diagnostic.get('burialThreshold') is not None or diagnostic.get('confidenceScoresUsed') is not False: raise ValueError('unsupported surface fold verdict')
+            metric=diagnostic['measurement']; residues=diagnostic['chargedResidueObservations']
+            if metric['chargedResidues']!=len(residues) or metric['completeChargedSidechains']+metric['incompleteChargedSidechains']!=len(residues): raise ValueError('surface denominator differs')
+            if any(row['completeSidechain']!=(not bool(row['missingSidechainAtoms'])) or (not row['completeSidechain'] and row['interpretableRelativeSidechainArea'] is not None) for row in residues): raise ValueError('surface incomplete sidechain differs')
+    failed=[c['id'] for c in r['checks'] if c['status']=='fail']
+    unknown=[c['id'] for c in r['checks'] if c['status']=='not_evaluable']
+    blocking=failed+[c for c in unknown if c in ('confidence-scale','filter-direction','interunit-pae')]
+    if r['summary']!={'failed':failed,'notEvaluable':unknown,'blocking':blocking,'mechanicalAdmission':not blocking,'biologicalValidity':'not_established'}: raise ValueError('summary differs')
+    return {'ok':True,'files':len(listed),'manifestSha256':anchor,'externallyAnchored':bool(expected),'scope':'integrity and declared links; no scientific re-execution or authorship certification'}
+
+if __name__=='__main__':
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument('directory');p.add_argument('--sha256');a=p.parse_args()
+    try: print(json.dumps(verify(a.directory,a.sha256),sort_keys=True))
+    except (OSError,ValueError,KeyError,TypeError) as e: p.exit(1,str(e)+'\n')

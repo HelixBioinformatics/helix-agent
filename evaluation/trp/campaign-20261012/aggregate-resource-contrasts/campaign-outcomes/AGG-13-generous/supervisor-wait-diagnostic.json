@@ -1,0 +1,7 @@
+{
+  "observedAt": "2026-10-13T06:26:27.472685+00:00",
+  "exitCode": 0,
+  "stdout": "  83743   83742 S hrtimer_nanosleep                python3 /opt/helix-strict-runtime/script/tesis/provision_remote_strict_profile.py guest-supervise --allocation /srv/helix-strict-results/campaign-50000-AGG-13-generous-allocation.json --deadline 1791874140.0 --output /srv/helix-strict-results/campaign-50000-AGG-13-generous -- /usr/bin/strace -f -Z -yy -ttt -e trace=write,pwrite64,writev,pwritev,openat,ftruncate,copy_file_range -s 256 /usr/local/bin/helix-strict-bun /opt/helix-strict-runtime/evaluation/trp/campaign-20261012/aggregate-resource-contrasts/full_client.ts /opt/helix-strict-runtime/campaign/original40/AGG-13-generous.json\n  83747   83743 S do_wait                          /usr/bin/strace -f -Z -yy -ttt -e trace=write,pwrite64,writev,pwritev,openat,ftruncate,copy_file_range -s 256 /usr/local/bin/helix-strict-bun /opt/helix-strict-runtime/evaluation/trp/campaign-20261012/aggregate-resource-contrasts/full_client.ts /opt/helix-strict-runtime/campaign/original40/AGG-13-generous.json\nhrtimer_nanosleep83747 ",
+  "stderr": "",
+  "noResubmission": true
+}

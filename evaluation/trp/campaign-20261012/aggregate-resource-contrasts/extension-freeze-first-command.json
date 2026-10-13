@@ -1,0 +1,8 @@
+{
+  "at": "2026-10-13T07:44:52.228174+00:00",
+  "exitCode": 1,
+  "stdout": "",
+  "stderr": " 99 |   // Blob transport works. Keep the Node transport for packaged Node clients.\n100 |   const stdout =\n101 |     typeof Bun !== \"undefined\"\n102 |       ? await (async () => {\n103 |           signal?.throwIfAborted()\n104 |           const child = Bun.spawn([python, \"-I\", \"-c\", script], {\n                                  ^\nENOENT: no such file or directory, posix_spawn '/home/webiwabou/.cache/uv/builds-v0/.tmpn6Xwgr/bin/python'\n    path: \"/home/webiwabou/.cache/uv/builds-v0/.tmpn6Xwgr/bin/python\",\n syscall: \"posix_spawn\",\n   errno: -2,\n    code: \"ENOENT\"\n\n      at <anonymous> (/home/webiwabou/Projects/bioinformatica-org/packages/helix/src/trp/structural.ts:104:29)\n      at runParser (/home/webiwabou/Projects/bioinformatica-org/packages/helix/src/trp/structural.ts:135:54)\n      at inspect (/home/webiwabou/Projects/bioinformatica-org/packages/helix/src/trp/structural.ts:191:12)\n      at legacy (/home/webiwabou/Projects/bioinformatica-org/packages/helix/src/trp/structural.ts:346:10)\n      at prepare (/home/webiwabou/Projects/bioinformatica-org/packages/helix/src/trp/nextflow.ts:50:42)\n\nBun v1.3.14 (Linux x64)\n",
+  "gemmiVersion": "0.7.5",
+  "frozenSourceSha256": "d4c2d75aa16cdc6d2e05cae3207ae8434821e7930aa45515fc75359c190aa2bd"
+}

@@ -1,0 +1,294 @@
+{
+  "date": "2026-10-12",
+  "kind": "source and label audit; not a new ground truth or a relabeling of frozen cases",
+  "sources": [
+    {
+      "path": "evaluation/trp/reference/structural-f5/pratt/pratt.xml",
+      "sha256": "2d9b5e2efd489cdda5948bbd0ec7703ce8393681475cdc665ab8bb464233f126"
+    },
+    {
+      "path": "evaluation/trp/reference/structural-f5/pratt/mmc1.docx",
+      "sha256": "7014ba25de4befa842f8a31599e25a3299f0704d7e5dc881192de742ecca0e12"
+    },
+    {
+      "path": "evaluation/trp/reference/structural-f5/pratt/mmc2.xlsx",
+      "sha256": "3df99d5ff9397f1db9c8496d5d131ada8967bfb1b85a064031e89c6d12e6848e"
+    }
+  ],
+  "publishedPositiveExamples": [
+    {
+      "id": "8b",
+      "sequenceRepeat": "FCTTCCIY",
+      "evidence": {
+        "articleFigureId": "fig0015",
+        "reason": "Figure 3A: exposed hydrophobic stacks and residue clashes",
+        "doi": "10.1016/j.csbj.2025.01.016",
+        "scope": "published physical/validation concern, not a new experimental determination"
+      }
+    },
+    {
+      "id": "12ab",
+      "sequenceRepeat": "CKMVKFQIQICF",
+      "evidence": {
+        "articleFigureId": "fig0035",
+        "reason": "Figure 7A: model identified as problematic by Verify3D",
+        "doi": "10.1016/j.csbj.2025.01.016",
+        "scope": "published physical/validation concern, not a new experimental determination"
+      }
+    },
+    {
+      "id": "19r",
+      "sequenceRepeat": "AVIHTPTYEAMNSVNKEHD",
+      "evidence": {
+        "articleFigureId": "fig0035",
+        "reason": "Figure 7B: model identified as problematic by Verify3D",
+        "doi": "10.1016/j.csbj.2025.01.016",
+        "scope": "published physical/validation concern, not a new experimental determination"
+      }
+    },
+    {
+      "id": "21r",
+      "sequenceRepeat": "QNGITTKTKYGGRSHRDDDYD",
+      "evidence": {
+        "articleFigureId": "fig0030",
+        "reason": "Figure 6: internal charges and lysine/histidine clashes",
+        "doi": "10.1016/j.csbj.2025.01.016",
+        "scope": "published physical/validation concern, not a new experimental determination"
+      }
+    },
+    {
+      "id": "22r",
+      "sequenceRepeat": "SMKLTDNQQDAAIIIIVDCFCI",
+      "evidence": {
+        "articleFigureId": "fig0015",
+        "reason": "Figure 3B: uncompensated internal aspartic-acid stacks",
+        "doi": "10.1016/j.csbj.2025.01.016",
+        "scope": "published physical/validation concern, not a new experimental determination"
+      }
+    }
+  ],
+  "tableS1Headers": [
+    {
+      "cell": "A1",
+      "text": "Identifier"
+    },
+    {
+      "cell": "B1",
+      "text": "Sequence repeat"
+    },
+    {
+      "cell": "C1",
+      "text": "Predicted_seq_disorder"
+    },
+    {
+      "cell": "D1",
+      "text": "Secondary_structure"
+    },
+    {
+      "cell": "E1",
+      "text": "AF2_pLDDT"
+    },
+    {
+      "cell": "F1",
+      "text": "AF2_fold"
+    },
+    {
+      "cell": "G1",
+      "text": "AF3_pLDDT"
+    },
+    {
+      "cell": "H1",
+      "text": "AF3_fold"
+    },
+    {
+      "cell": "I1",
+      "text": "RSMD_AF3_AF2"
+    },
+    {
+      "cell": "J1",
+      "text": "ESM_pLDDT"
+    },
+    {
+      "cell": "K1",
+      "text": "ESM_fold"
+    },
+    {
+      "cell": "L1",
+      "text": "RMSD_ESM_AF2"
+    },
+    {
+      "cell": "M1",
+      "text": "RFAA_pLDDT"
+    },
+    {
+      "cell": "N1",
+      "text": "RFAA_fold"
+    },
+    {
+      "cell": "O1",
+      "text": "RMSD_RFAA_AF2"
+    },
+    {
+      "cell": "P1",
+      "text": " BLAST UniRef90 top hit ID"
+    },
+    {
+      "cell": "Q1",
+      "text": " BLAST UniRef90 top hit e-value"
+    },
+    {
+      "cell": "R1",
+      "text": "BLAST UniRef90 number of matching sequences"
+    },
+    {
+      "cell": "S1",
+      "text": "BLAST PDB top hit ID"
+    },
+    {
+      "cell": "T1",
+      "text": "BLAST PDB top hit e-value"
+    },
+    {
+      "cell": "U1",
+      "text": "BLAST PDB number of matching sequences"
+    },
+    {
+      "cell": "V1",
+      "text": "AF2_Foldseek_PDB number of hits"
+    },
+    {
+      "cell": "W1",
+      "text": "AF2_Foldseek_PDB_top_hit"
+    },
+    {
+      "cell": "X1",
+      "text": "AF2_Foldseek_PDB_top_hit_tmscore"
+    },
+    {
+      "cell": "Y1",
+      "text": "AF2_Foldseek_AFDB_ number of hits"
+    },
+    {
+      "cell": "Z1",
+      "text": "AF2_Foldseek_AFDB_top_hit"
+    },
+    {
+      "cell": "AA1",
+      "text": "AF2_Foldseek_AFDB_top_hit_tmscore"
+    },
+    {
+      "cell": "AB1",
+      "text": "AF3_Foldseek_PDB number of hits"
+    },
+    {
+      "cell": "AC1",
+      "text": "AF3_Foldseek__PDB_top_hit"
+    },
+    {
+      "cell": "AD1",
+      "text": "AF3_Foldseek_PDB_top_hit_tmscore"
+    },
+    {
+      "cell": "AE1",
+      "text": "AF3_Foldseek_AFDB_ number of hits"
+    },
+    {
+      "cell": "AF1",
+      "text": "AF3_Foldseek_AFDB_top_hit"
+    },
+    {
+      "cell": "AG1",
+      "text": "AF3_Foldseek_AFDB_top_hit_tmscore"
+    },
+    {
+      "cell": "AH1",
+      "text": "RFAA_Foldseek_PDB number of hits"
+    },
+    {
+      "cell": "AI1",
+      "text": "RFAA_Foldseek__PDB_top_hit"
+    },
+    {
+      "cell": "AJ1",
+      "text": "RFAA_Foldseek_PDB_top_hit_tmscore"
+    },
+    {
+      "cell": "AK1",
+      "text": "RFAA_Foldseek_AFDB_ number of hits"
+    },
+    {
+      "cell": "AL1",
+      "text": "RFAA_Foldseek_AFDB_top_hit"
+    },
+    {
+      "cell": "AM1",
+      "text": "RFAA_Foldseek_AFDB_top_hit_tmscore"
+    },
+    {
+      "cell": "AN1",
+      "text": "ESM_Foldseek_PDB number of hits"
+    },
+    {
+      "cell": "AO1",
+      "text": "ESM_Foldseek__PDB_top_hit"
+    },
+    {
+      "cell": "AP1",
+      "text": "ESM_Foldseek_PDB_top_hit_tmscore"
+    },
+    {
+      "cell": "AQ1",
+      "text": "ESM_Foldseek_AFDB_ number of hits"
+    },
+    {
+      "cell": "AR1",
+      "text": "ESM_Foldseek_AFDB_top_hit"
+    },
+    {
+      "cell": "AS1",
+      "text": "ESM_Foldseek_AFDB_top_hit_tmscore"
+    }
+  ],
+  "verify3DColumnAvailable": false,
+  "paperOperationalProblemDefinition": {
+    "sourceDOI": "10.1016/j.csbj.2025.01.016",
+    "meanAF2pLDDTGreaterThan": 70,
+    "averageVerify3DLessThan": 0.1,
+    "additionalQualitativeCondition": "internal charged stacking",
+    "reportedScoreBasedHighConfidenceProblems": 16,
+    "betaSolenoidDenominator": 32,
+    "policy": "These are author-defined validation concerns, not experimental labels for all78. The16identities cannot be recovered uniquely from TableS1, which lacks Verify3D scores; do not guess or label all32asfailures."
+  },
+  "referenceCaution": {
+    "publicationExample": "Pratt reports categorical Verify3D failure on3of7beta-solenoid crystal references, despite mean scores above0.1.",
+    "meaning": "A generic validator categorical cutoff can yield false alarms in this domain; do not substitute it for independently justified fold ground truth."
+  },
+  "availableControls": {
+    "count": 30,
+    "source": "RepeatsDB reviewed=true experimental beta-solenoids",
+    "meaning": "Independent repeat annotation references, not certified absent every physical atom-level error."
+  },
+  "missingOriginals": {
+    "Figure1_S1": "QTSTVIGTIASTETSSSTGI",
+    "Figure14_model1": "TVCWCMIWQCEEKFVIVEVM",
+    "Figure14_model2": "GDDPIYTKDNINPIGPYMGN",
+    "additionalRanks": "rank2..5notpresent; parameterModel1..5doesnotindicatepredictionrank"
+  },
+  "feasibleNextActions": [
+    {
+      "action": "Frozen FreeSASA side-chain solvent-accessibility observables for Asp/Glu/Lys/Arg, with polarity decomposition",
+      "purpose": "Measure a published physical feature orthogonal to clashes, without declaring charge compensation, protonation, overall fold validity or fitting a cutoff to these groups.",
+      "status": "authorized by root; separate CPU-only diagnostic planned"
+    },
+    {
+      "action": "Separately frozen common preprocessing contrast for both groups",
+      "purpose": "Examine unrelaxed-versus-refined coordinate preparation; preserve originals and report derived structures separately.",
+      "status": "proposal only, no broad classifier or new labels"
+    },
+    {
+      "action": "Independent review of a specified physical failure with its own reference standard",
+      "purpose": "Validate a decision rule on data excluded from its design before reporting sensitivity/specificity.",
+      "status": "external domain review/data remain distinct from the70workflow-annotationtask"
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "schema": "helix-r24-workspace-resume/1.0",
+  "lab": "185395",
+  "started_at_utc": "2026-10-13T03:06:07.412440+00:00",
+  "format_performed": false,
+  "quotas_reset": false,
+  "steps": [
+    {
+      "node": "helix-head",
+      "command": "squeue --noheader --format='%i|%k'",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "node": "helix-head",
+      "command": "set -euo pipefail\ntest -d /shared/helix-r24\nsudo test -f /srv/helix-r24-store/disk.img\nsudo test ! -L /srv/helix-r24-store/disk.img\ntest \"$(sudo stat -c '%U:%G:%a:%s' /srv/helix-r24-store/disk.img)\" = 'root:root:600:2147483648'\nsudo blkid -p -o export /srv/helix-r24-store/disk.img\nif ! mountpoint -q /shared/helix-r24; then sudo mount -o loop,prjquota,allocsize=4k /srv/helix-r24-store/disk.img /shared/helix-r24; fi\ntest \"$(findmnt -n -M /shared/helix-r24 -o FSTYPE)\" = xfs\nsource=\"$(findmnt -n -M /shared/helix-r24 -o SOURCE)\"\ntest \"$(sudo losetup --noheadings --output BACK-FILE \"$source\")\" = /srv/helix-r24-store/disk.img\nfindmnt -n -M /shared/helix-r24 -o SOURCE,FSTYPE,OPTIONS\nsudo losetup -j /srv/helix-r24-store/disk.img\nsudo xfs_quota -x -c 'state -p' /shared/helix-r24\nsudo exportfs -o rw,sync,no_subtree_check,root_squash 172.31.0.221:/shared/helix-r24\nsudo exportfs -o rw,sync,no_subtree_check,root_squash 172.31.0.222:/shared/helix-r24\nsudo exportfs -v\nsha256sum /shared/helix-r24/operator-witness/*.txt",
+      "exit_code": 0,
+      "stdout": "DEVNAME=/srv/helix-r24-store/disk.img\nUUID=fceb32f6-0fbf-4b28-8930-6c98ba645f31\nFSSIZE=2080374784\nFSLASTBLOCK=524288\nFSBLOCKSIZE=4096\nBLOCK_SIZE=512\nTYPE=xfs\nUSAGE=filesystem\n/dev/loop3 xfs    rw,relatime,inode64,allocsize=4k,logbufs=8,logbsize=32k,prjquota\n/dev/loop3: [66305]:549833 (/srv/helix-r24-store/disk.img)\nProject quota state on /shared/helix-r24 (/dev/loop3)\n  Accounting: ON\n  Enforcement: ON\n  Inode: #131 (3 blocks, 3 extents)\nBlocks grace time: [7 days]\nBlocks max warnings: 0\nInodes grace time: [7 days]\nInodes max warnings: 0\nRealtime Blocks grace time: [7 days]\n/shared/helix-r24\n\t\t172.31.0.222(sync,wdelay,hide,no_subtree_check,sec=sys,rw,secure,root_squash,no_all_squash)\n/shared/helix-r24\n\t\t172.31.0.221(sync,wdelay,hide,no_subtree_check,sec=sys,rw,secure,root_squash,no_all_squash)\n/srv/helix    \t172.31.0.0/20(sync,wdelay,hide,no_subtree_check,sec=sys,rw,secure,root_squash,no_all_squash)\n25d81c905fabd22d3b6c1997423d72d589718c0d914f5eb0078c397d64cc78be  /shared/helix-r24/operator-witness/helix-worker1.txt\n8cc36cb7667e6ee211ed3f490d78a4b03fb0eee3b10b4fd7df5dedc90e73c978  /shared/helix-r24/operator-witness/helix-worker2.txt\n0c3fa90c06b777fe92689feb869e14c3fd15d58b32646ad4f9327e00a0885fd8  /shared/helix-r24/operator-witness/source.txt\n",
+      "stderr": ""
+    },
+    {
+      "node": "helix-worker1",
+      "command": "set -euo pipefail\ntest -d /shared/helix-r24\nif ! mountpoint -q /shared/helix-r24; then sudo mount -t nfs4 172.31.0.220:/shared/helix-r24 /shared/helix-r24; fi\ntest \"$(findmnt -n -M /shared/helix-r24 -o FSTYPE)\" = nfs4\ntest \"$(findmnt -n -M /shared/helix-r24 -o SOURCE)\" = 172.31.0.220:/shared/helix-r24\nfindmnt -n -M /shared/helix-r24 -o SOURCE,FSTYPE,OPTIONS\nsha256sum /shared/helix-r24/operator-witness/*.txt",
+      "exit_code": 0,
+      "stdout": "172.31.0.220:/shared/helix-r24 nfs4   rw,relatime,vers=4.2,rsize=524288,wsize=524288,namlen=255,hard,fatal_neterrors=none,proto=tcp,timeo=600,retrans=2,sec=sys,clientaddr=172.31.0.221,local_lock=none,addr=172.31.0.220\n25d81c905fabd22d3b6c1997423d72d589718c0d914f5eb0078c397d64cc78be  /shared/helix-r24/operator-witness/helix-worker1.txt\n8cc36cb7667e6ee211ed3f490d78a4b03fb0eee3b10b4fd7df5dedc90e73c978  /shared/helix-r24/operator-witness/helix-worker2.txt\n0c3fa90c06b777fe92689feb869e14c3fd15d58b32646ad4f9327e00a0885fd8  /shared/helix-r24/operator-witness/source.txt\n",
+      "stderr": ""
+    },
+    {
+      "node": "helix-worker2",
+      "command": "set -euo pipefail\ntest -d /shared/helix-r24\nif ! mountpoint -q /shared/helix-r24; then sudo mount -t nfs4 172.31.0.220:/shared/helix-r24 /shared/helix-r24; fi\ntest \"$(findmnt -n -M /shared/helix-r24 -o FSTYPE)\" = nfs4\ntest \"$(findmnt -n -M /shared/helix-r24 -o SOURCE)\" = 172.31.0.220:/shared/helix-r24\nfindmnt -n -M /shared/helix-r24 -o SOURCE,FSTYPE,OPTIONS\nsha256sum /shared/helix-r24/operator-witness/*.txt",
+      "exit_code": 0,
+      "stdout": "172.31.0.220:/shared/helix-r24 nfs4   rw,relatime,vers=4.2,rsize=524288,wsize=524288,namlen=255,hard,fatal_neterrors=none,proto=tcp,timeo=600,retrans=2,sec=sys,clientaddr=172.31.0.222,local_lock=none,addr=172.31.0.220\n25d81c905fabd22d3b6c1997423d72d589718c0d914f5eb0078c397d64cc78be  /shared/helix-r24/operator-witness/helix-worker1.txt\n8cc36cb7667e6ee211ed3f490d78a4b03fb0eee3b10b4fd7df5dedc90e73c978  /shared/helix-r24/operator-witness/helix-worker2.txt\n0c3fa90c06b777fe92689feb869e14c3fd15d58b32646ad4f9327e00a0885fd8  /shared/helix-r24/operator-witness/source.txt\n",
+      "stderr": ""
+    }
+  ],
+  "ready": true,
+  "completed_at_utc": "2026-10-13T03:06:19.582414+00:00"
+}

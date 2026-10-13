@@ -1,0 +1,503 @@
+{
+  "schema": "helix-strict-full-client-offline-review/1.0",
+  "at": "2026-10-13T06:21:18.974089+00:00",
+  "case": "AGG-01-generous",
+  "externalManifestSha256": "a2fb5c236fbac84746aabaee6d44db4bd7844904764fe9aa2741a48f387c78c0",
+  "trustedVerifierSha256": "86aec3f5034483c94fd814bf39df62e237f26ac91ea90d37dd0617872f80a3f5",
+  "freezeSha256": "c33fb8b69e6361fb90bac025ccbf62fb590122b93b5f78d8da754b3886d28f20",
+  "externalTelemetrySha256": "4c5f9eafc5e2ce8224d7bd0d160c9d96a13325b60b75da1e19742f78293ecc92",
+  "sourceBundlePath": "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/campaign-outcomes/AGG-01-generous/recovered/campaign-50000-AGG-01-generous/retained-allocation/export/portable-evidence",
+  "externalRootArchiveSha256": "f5d418a17106130ad520121bedd2b9608bbdee6d6f1b72f23a3bbd63ecaa9a05",
+  "checks": [
+    {
+      "name": "cold_portable_integrity_external_anchor",
+      "passed": true,
+      "result": {
+        "ok": true,
+        "files": 150,
+        "bytes": 5750935,
+        "manifestSha256": "a2fb5c236fbac84746aabaee6d44db4bd7844904764fe9aa2741a48f387c78c0",
+        "status": "succeeded",
+        "externallyAnchored": true,
+        "scope": "integrity, declared links and cold counts; not biological accuracy or authorship"
+      }
+    },
+    {
+      "name": "all24_methods_source_pointers_and_exact_template",
+      "passed": true,
+      "result": {
+        "fieldsChecked": 24,
+        "requiredFields": 24,
+        "fields": [
+          {
+            "name": "protein",
+            "artifact": "specification.json",
+            "pointer": [
+              "structure",
+              "value",
+              "pdb"
+            ],
+            "sourceSha256": "caf9c62666c785dd35f2a82ac7e8124373b29321e6344c8a935d22cc9524f1dd",
+            "equal": true
+          },
+          {
+            "name": "chain",
+            "artifact": "specification.json",
+            "pointer": [
+              "chain",
+              "value"
+            ],
+            "sourceSha256": "caf9c62666c785dd35f2a82ac7e8124373b29321e6344c8a935d22cc9524f1dd",
+            "equal": true
+          },
+          {
+            "name": "model",
+            "artifact": "specification.json",
+            "pointer": [
+              "model",
+              "value"
+            ],
+            "sourceSha256": "caf9c62666c785dd35f2a82ac7e8124373b29321e6344c8a935d22cc9524f1dd",
+            "equal": true
+          },
+          {
+            "name": "units",
+            "artifact": "specification.json",
+            "pointer": [
+              "units",
+              "value",
+              "ranges"
+            ],
+            "sourceSha256": "caf9c62666c785dd35f2a82ac7e8124373b29321e6344c8a935d22cc9524f1dd",
+            "equal": true
+          },
+          {
+            "name": "insertions",
+            "artifact": "specification.json",
+            "pointer": [
+              "insertions",
+              "value"
+            ],
+            "sourceSha256": "caf9c62666c785dd35f2a82ac7e8124373b29321e6344c8a935d22cc9524f1dd",
+            "equal": true
+          },
+          {
+            "name": "coordinate contract",
+            "artifact": "specification.json",
+            "pointer": [
+              "units",
+              "value",
+              "contract"
+            ],
+            "sourceSha256": "caf9c62666c785dd35f2a82ac7e8124373b29321e6344c8a935d22cc9524f1dd",
+            "equal": true
+          },
+          {
+            "name": "GeomeTRe revision",
+            "artifact": "catalogue.json",
+            "pointer": [
+              "entries",
+              1,
+              "source",
+              "revision"
+            ],
+            "sourceSha256": "97684486814a24bc435353bda9477d852032538e4662468b13fa16c1192fc8df",
+            "equal": true
+          },
+          {
+            "name": "parameter contract",
+            "artifact": "catalogue.json",
+            "pointer": [
+              "entries",
+              1,
+              "parameters"
+            ],
+            "sourceSha256": "97684486814a24bc435353bda9477d852032538e4662468b13fa16c1192fc8df",
+            "equal": true
+          },
+          {
+            "name": "input hash",
+            "artifact": "specification.json",
+            "pointer": [
+              "structure",
+              "value",
+              "sha256"
+            ],
+            "sourceSha256": "caf9c62666c785dd35f2a82ac7e8124373b29321e6344c8a935d22cc9524f1dd",
+            "equal": true
+          },
+          {
+            "name": "engine",
+            "artifact": "execution.json",
+            "pointer": [
+              "engine"
+            ],
+            "sourceSha256": "06351351de8be42d5dc6830dee051a5530c0d4a9085ca7dca72a9359687cc4f3",
+            "equal": true
+          },
+          {
+            "name": "image",
+            "artifact": "execution.json",
+            "pointer": [
+              "container"
+            ],
+            "sourceSha256": "06351351de8be42d5dc6830dee051a5530c0d4a9085ca7dca72a9359687cc4f3",
+            "equal": true
+          },
+          {
+            "name": "command",
+            "artifact": "execution.json",
+            "pointer": [
+              "run"
+            ],
+            "sourceSha256": "06351351de8be42d5dc6830dee051a5530c0d4a9085ca7dca72a9359687cc4f3",
+            "equal": true
+          },
+          {
+            "name": "counts",
+            "artifact": "admission.json",
+            "pointer": [
+              "demand",
+              "counts"
+            ],
+            "sourceSha256": "ecdfbaae56caa4c1e84a036ca204ac6c734a9aa319f63325dda84b0ac7e7196d",
+            "equal": true
+          },
+          {
+            "name": "storage estimate",
+            "artifact": "admission.json",
+            "pointer": [
+              "demand",
+              "workBytes"
+            ],
+            "sourceSha256": "ecdfbaae56caa4c1e84a036ca204ac6c734a9aa319f63325dda84b0ac7e7196d",
+            "equal": true
+          },
+          {
+            "name": "status",
+            "artifact": "run.json",
+            "pointer": [
+              "status"
+            ],
+            "sourceSha256": "35b5937ae7ace1553c20b10b005f06d4acd6aed823b6b9d26eb82d7775099066",
+            "equal": true
+          },
+          {
+            "name": "co-located Slurm transport",
+            "artifact": "execution.json",
+            "pointer": [
+              "transport"
+            ],
+            "sourceSha256": "06351351de8be42d5dc6830dee051a5530c0d4a9085ca7dca72a9359687cc4f3",
+            "equal": true
+          },
+          {
+            "name": "remote strict allocation",
+            "artifact": "remote_strict_policy.json",
+            "pointer": [],
+            "sourceSha256": "b4a649a00614471b4a91e00a87b6d6b42fea84de152a318c078457dd4d5a5649",
+            "equal": true
+          },
+          {
+            "name": "worker input staging",
+            "artifact": "execution.json",
+            "pointer": [
+              "inputStaging"
+            ],
+            "sourceSha256": "06351351de8be42d5dc6830dee051a5530c0d4a9085ca7dca72a9359687cc4f3",
+            "equal": true
+          },
+          {
+            "name": "client storage estimate",
+            "artifact": "admission.json",
+            "pointer": [
+              "demand",
+              "storage"
+            ],
+            "sourceSha256": "ecdfbaae56caa4c1e84a036ca204ac6c734a9aa319f63325dda84b0ac7e7196d",
+            "equal": true
+          },
+          {
+            "name": "structural controls",
+            "artifact": "structural_report.json",
+            "pointer": [
+              "summary"
+            ],
+            "sourceSha256": "f264053e7bb4538f92fe86c70eb4b4c6db3da7140287f73485bccfda9e61e439",
+            "equal": true
+          },
+          {
+            "name": "Nextflow version output",
+            "artifact": "software.json",
+            "pointer": [
+              "nextflowVersionOutput"
+            ],
+            "sourceSha256": "51f0de83c7db324a8a81ba8935c1b694cc5eac4490718199080c6b615eb3ee95",
+            "equal": true
+          },
+          {
+            "name": "execution backend",
+            "artifact": "execution.json",
+            "pointer": [
+              "backend"
+            ],
+            "sourceSha256": "06351351de8be42d5dc6830dee051a5530c0d4a9085ca7dca72a9359687cc4f3",
+            "equal": true
+          },
+          {
+            "name": "remote infrastructure",
+            "artifact": "execution.json",
+            "pointer": [
+              "target"
+            ],
+            "sourceSha256": "06351351de8be42d5dc6830dee051a5530c0d4a9085ca7dca72a9359687cc4f3",
+            "equal": true
+          },
+          {
+            "name": "numerical profile",
+            "artifact": "execution.json",
+            "pointer": [
+              "numericalProfile"
+            ],
+            "sourceSha256": "06351351de8be42d5dc6830dee051a5530c0d4a9085ca7dca72a9359687cc4f3",
+            "equal": true
+          }
+        ],
+        "markdownReconstructed": true,
+        "exactLimitations": true,
+        "scientificTruthEstablished": false
+      }
+    },
+    {
+      "name": "exact10_gates_sources_order_hash_chain",
+      "passed": true,
+      "result": {
+        "gatesChecked": 10,
+        "countBySource": {
+          "admission": 3,
+          "protocol": 1,
+          "permission": 2,
+          "approval": 2,
+          "execution": 2
+        },
+        "exactSequence": [
+          [
+            "admission",
+            "accepted-for-review"
+          ],
+          [
+            "protocol",
+            "not-committed"
+          ],
+          [
+            "permission",
+            "requested"
+          ],
+          [
+            "permission",
+            "returned-allowed"
+          ],
+          [
+            "approval",
+            "requested"
+          ],
+          [
+            "approval",
+            "answered"
+          ],
+          [
+            "admission",
+            "recheck-accepted"
+          ],
+          [
+            "execution",
+            "remote-started"
+          ],
+          [
+            "admission",
+            "analysis-accepted"
+          ],
+          [
+            "execution",
+            "completed"
+          ]
+        ],
+        "ledgerSourceBindings": true,
+        "callbackActionsIndependentlyCaptured": false,
+        "approval": "Synthetic engineering driver calling real Question.Service; no authenticated human",
+        "qualification": "Successful mandatory-path coverage. No live success-path callback action oracle was emitted (gateRecords=[]); separate negative13 action contrast provides action-versus-ledger comparisons.",
+        "legacyCompletionDetailBackend": "trp-slurm-ssh/1.0.0",
+        "actualExecutionBackend": "trp-slurm-colocated-strict/1.0.0"
+      }
+    },
+    {
+      "name": "strict_policy_quota_cgroup_client_worker_native_scope",
+      "passed": true,
+      "result": {
+        "strictReceipts": [
+          {
+            "artifact": "inventory.json",
+            "role": "client",
+            "pid": 20154,
+            "membership": "0::/helix-strict-hrsc6818980cdbe40d9.service",
+            "pathsWitnessed": 7,
+            "sampleAgeSeconds": 0.1488633155822754,
+            "valid": true
+          },
+          {
+            "artifact": "recheck.json",
+            "role": "client",
+            "pid": 20191,
+            "membership": "0::/helix-strict-hrsc6818980cdbe40d9.service",
+            "pathsWitnessed": 7,
+            "sampleAgeSeconds": 0.44380736351013184,
+            "valid": true
+          },
+          {
+            "artifact": "analysis-admission.json",
+            "role": "controller",
+            "pid": 20213,
+            "membership": "0::/helix-strict-hrsc6818980cdbe40d9.service",
+            "pathsWitnessed": 7,
+            "sampleAgeSeconds": 0.39180731773376465,
+            "valid": true
+          },
+          {
+            "artifact": "remote-strict-start.json",
+            "role": "client",
+            "pid": 20211,
+            "membership": "0::/helix-strict-hrsc6818980cdbe40d9.service",
+            "pathsWitnessed": 7,
+            "sampleAgeSeconds": 0.299515962600708,
+            "valid": true
+          },
+          {
+            "artifact": "remote-strict-before-science.json",
+            "role": "controller",
+            "pid": 20213,
+            "membership": "0::/helix-strict-hrsc6818980cdbe40d9.service",
+            "pathsWitnessed": 7,
+            "sampleAgeSeconds": 0.11408495903015137,
+            "valid": true
+          }
+        ],
+        "projectId": 50000,
+        "quotaHardBytes": 134217728,
+        "observedFinalProjectBytes": 36573184,
+        "controllerCgroup": {
+          "cgroup": "helix-strict-hrsc6818980cdbe40d9.service",
+          "cpus": 1,
+          "memoryBytes": 2147483648,
+          "swapBytes": 0
+        },
+        "actualFinalCgroup": {
+          "cgroup.events": "populated 0\nfrozen 0",
+          "cgroup.procs": "",
+          "cpu.max": "100000 100000",
+          "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\nsock_throttled 0",
+          "memory.max": "2147483648",
+          "memory.peak": "594710528",
+          "memory.swap.max": "0"
+        },
+        "workerRuntime": {
+          "observations": 2,
+          "cpus_per_task": 2,
+          "memory_bytes_per_task": 2147483648,
+          "swap_bytes_per_task": 0,
+          "cpu_quota_is_exclusive_cores": false
+        },
+        "nativeJobs": {
+          "tasks": [
+            {
+              "traversal": "scientific",
+              "process": "SELECT",
+              "native_id": "264",
+              "node": "helix-worker1",
+              "state": "COMPLETED"
+            },
+            {
+              "traversal": "scientific",
+              "process": "GEOMETRY",
+              "native_id": "265",
+              "node": "helix-worker2",
+              "state": "COMPLETED"
+            },
+            {
+              "traversal": "stub",
+              "process": "SELECT",
+              "native_id": "262",
+              "node": "helix-worker1",
+              "state": "COMPLETED"
+            },
+            {
+              "traversal": "stub",
+              "process": "GEOMETRY",
+              "native_id": "263",
+              "node": "helix-worker2",
+              "state": "COMPLETED"
+            }
+          ],
+          "native_ids": [
+            "262",
+            "263",
+            "264",
+            "265"
+          ],
+          "nodes": [
+            "helix-worker1",
+            "helix-worker2"
+          ],
+          "unique_native_jobs": 4
+        },
+        "persistentSqlite": {
+          "bytes": 249856,
+          "sha256": "48ee413c57a1500d1dd69dcd01f8883ccd0f0410d500df35e73b7210bdfa6ec2",
+          "tables": 20,
+          "readonlyInspection": true
+        },
+        "copyStaging": true,
+        "quotaScope": "Declared client/cache/state/temp/export+NFS work in one project; immutable preinstalled software/image caches and external root experiment telemetry excluded",
+        "globalCloudDiskQuotaClaim": false
+      }
+    },
+    {
+      "name": "independently_frozen_per_input_gold",
+      "passed": true,
+      "result": {
+        "sha256": "52b169a50ad1b2847e8a9e294ff93452e6e54d2c9d85d32f14d2aee4935b9c3f",
+        "goldSha256": "52b169a50ad1b2847e8a9e294ff93452e6e54d2c9d85d32f14d2aee4935b9c3f",
+        "byteIdentical": true,
+        "graph": "G-valid-001"
+      }
+    }
+  ],
+  "limits": [
+    "Engineering development case2XQH/A; supplied units and same-image exact numerical gold, no independent biological truth.",
+    "No model/human evaluator involved. Root-owned evidence is not third-party remote attestation.",
+    "Successful ten-gate sequence has no separately captured callback oracle; negative13 contrast is separately cited.",
+    "All artifacts are faulted as exported; artifacts absent from this profile (SIFTS/optional steric/SASA) are covered by their separate campaigns, not this one."
+  ],
+  "ordinarySshAuditorCompatibility": {
+    "exitCode": 1,
+    "coLocatedSupported": false,
+    "reason": "The old auditor fixes backend SSH and old limitations. Its reusable native/runtime readers are reused; new strict observer checks actual receipts/scope."
+  },
+  "faultInjection": {
+    "artifacts": 150,
+    "injected": 460,
+    "detected": 460,
+    "semanticInjected": 19,
+    "semanticDetected": 19,
+    "restored": {
+      "ok": true,
+      "files": 150,
+      "bytes": 5750935,
+      "manifestSha256": "a2fb5c236fbac84746aabaee6d44db4bd7844904764fe9aa2741a48f387c78c0",
+      "status": "succeeded",
+      "externallyAnchored": true,
+      "scope": "integrity, declared links and cold counts; not biological accuracy or authorship"
+    },
+    "originalUnchanged": true
+  },
+  "verified": true
+}

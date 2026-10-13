@@ -1,0 +1,129 @@
+--- a/packages/helix/src/trp/verify_bundle.py.txt
++++ b/packages/helix/src/trp/verify_bundle.py.txt
+@@ -86,6 +86,115 @@
+         raise ValueError('strict kernel quota source differs')
+     if 'Accounting: ON' not in q['stateSource'] or 'Enforcement: ON' not in q['stateSource'] or q['treeCheckExitCode'] != 0 or q['treeCheckStdout'].strip() or q['treeCheckStderr'].strip():
+         raise ValueError('strict kernel quota/inheritance was not enforced')
++
++
++
++def strict_methods(m, record, root):
++    """Check mandatory declared fields and deterministic prose for strict1.0 only.
++    Ordinary legacy templates are preserved rather than retroactively assumed.
++    """
++    methods = record('methods.json')
++    catalogue = record('catalogue.json')
++    indices = [i for i, entry in enumerate(catalogue['entries']) if entry['id'] == 'geometre.geometry']
++    if len(indices) != 1:
++        raise ValueError('strict GeomeTRe catalogue entry absent/duplicated')
++    index = indices[0]
++    expected = {
++        'protein': ('specification.json', ['structure', 'value', 'pdb']),
++        'chain': ('specification.json', ['chain', 'value']),
++        'model': ('specification.json', ['model', 'value']),
++        'units': ('specification.json', ['units', 'value', 'ranges']),
++        'insertions': ('specification.json', ['insertions', 'value']),
++        'coordinate contract': ('specification.json', ['units', 'value', 'contract']),
++        'GeomeTRe revision': ('catalogue.json', ['entries', index, 'source', 'revision']),
++        'parameter contract': ('catalogue.json', ['entries', index, 'parameters']),
++        'input hash': ('specification.json', ['structure', 'value', 'sha256']),
++        'engine': ('execution.json', ['engine']),
++        'image': ('execution.json', ['container']),
++        'command': ('execution.json', ['run']),
++        'counts': ('admission.json', ['demand', 'counts']),
++        'storage estimate': ('admission.json', ['demand', 'workBytes']),
++        'status': ('run.json', ['status']),
++        'co-located Slurm transport': ('execution.json', ['transport']),
++        'remote strict allocation': ('remote_strict_policy.json', []),
++        'worker input staging': ('execution.json', ['inputStaging']),
++        'client storage estimate': ('admission.json', ['demand', 'storage']),
++        'structural controls': ('structural_report.json', ['summary']),
++        'execution backend': ('execution.json', ['backend']),
++        'remote infrastructure': ('execution.json', ['target']),
++        'numerical profile': ('execution.json', ['numericalProfile']),
++    }
++    software = record('software.json') if (root/'run/software.json').is_file() else None
++    if software:
++        expected['Nextflow version output'] = ('software.json', ['nextflowVersionOutput'])
++    fields = methods['fields']
++    names = [field['name'] for field in fields]
++    if methods['version'] != 'trp-methods/1.0.0' or len(set(names)) != len(names) or set(names) != set(expected):
++        raise ValueError('strict methods required fields absent/duplicated/unsupported')
++    for field in fields:
++        if (field['artifact'], field['pointer']) != expected[field['name']]:
++            raise ValueError('strict methods source pointer differs: ' + field['name'])
++    limitations = [
++        'Author-PDB numbering; supplied units, not repeat detection; experimental B-factor is not pLDDT.',
++        'The real Helix client runs on the verified head. Local Python transport invokes the controller; Slurm executes worker jobs. This is not an SSH transport experiment.',
++        'Root-owned policy and kernel receipts bind one XFS project quota covering declared client work/temp/state/cache/export and NFS remote work. Real Helix and Python/Nextflow share 1 CPU/2 GiB/swap-zero controller cgroup; sequential worker containers use 2 CPU/2 GiB. Root sampler records current usage separately from total-run entitlement. Preloaded read-only software/image caches and external root-supervisor records are infrastructure outside workBytes.',
++        'Offline verification checks bytes and declared links, not scientific truth or an authenticated human identity.',
++        'Agent provider/model/cost are not observed by this workflow; task software is identified by the pinned catalogue reference and image.',
++    ]
++    unavailable = [] if software else ['Nextflow version probe did not complete successfully; see run.json and process records']
++    if methods['limitations'] != limitations or methods.get('unavailable') != unavailable:
++        raise ValueError('strict methods limitations/software availability differs')
++    spec, execution = record('specification.json'), record('execution.json')
++    admission, run = record('admission.json'), record('run.json')
++    compact = lambda v: json.dumps(v, ensure_ascii=False, separators=(',', ':'), allow_nan=False)
++    paragraph = [
++        '# Métodos de la ejecución registrada', '',
++        f"Se procesó {spec['structure']['value']['pdb']}, cadena autora {spec['chain']['value']}, modelo {spec['model']['value']}, con {len(spec['units']['value']['ranges'])} unidades suministradas. La entrada se identifica mediante SHA-256 {spec['structure']['value']['sha256']}.", '',
++        f"El adaptador {execution['engine']} generó la orden {compact(execution['run'])} y fijó la imagen {execution['container']}. La revisión de GeomeTRe es {catalogue['entries'][index]['source']['revision']}; su contrato de parámetros es {compact(catalogue['entries'][index]['parameters'])}. Se planificaron dos tareas simuladas y dos reales, sin reintentos; tareas científicas en infraestructura remota: {admission['demand']['counts']['remoteScientificCalls']}. Estado registrado: {run['status']}.", '',
++        f"Salida observada de la consulta de versión de Nextflow: {compact(software['nextflowVersionOutput'])}." if software else 'No se dispone de una consulta de versión de Nextflow completada correctamente.', '',
++        f"La reserva estimada de almacenamiento fue {admission['demand']['workBytes']} bytes. Los campos y sus fuentes se encuentran en methods.json; el inventario, el presupuesto, las decisiones y los eventos se conservan en archivos separados.", '',
++        *['- ' + line for line in limitations], '',
++    ]
++    if (root/'run/methods.md').read_text() != '\n'.join(paragraph):
++        raise ValueError('strict methods prose differs from source-backed template')
++
++
++def strict_success_gates(events, record, bundle):
++    """Require the declared workflow gates and their retained source records.
++    This is mandatory-path consistency, not an independent callback/human oracle.
++    """
++    protocol = record('protocol.json')
++    expected = [('admission', 'accepted-for-review'),
++                ('protocol', 'checked' if protocol['check']['committed'] else 'not-committed'),
++                ('permission', 'requested'), ('permission', 'returned-allowed'),
++                ('approval', 'requested'), ('approval', 'answered'),
++                ('admission', 'recheck-accepted'), ('execution', 'remote-started'),
++                ('admission', 'analysis-accepted'), ('execution', 'completed')]
++    sources = [(event['source'], event['outcome']) for event in events]
++    positions = []
++    for pair in expected:
++        if sources.count(pair) != 1:
++            raise ValueError('strict successful gate missing/duplicated: ' + repr(pair))
++        positions.append(sources.index(pair))
++    if positions != sorted(positions):
++        raise ValueError('strict successful gate order differs')
++    selected = [events[i] for i in positions]
++    for event in selected:
++        detail = event['detail']
++        if 'digest' in detail and detail['digest'] != bundle['digest']:
++            raise ValueError('strict event proposal digest differs')
++    approval = record('approval.json')
++    if approval['digest'] != bundle['digest'] or approval.get('channel') != 'Question.Service' or approval.get('answer') != 'Aprobar y ejecutar':
++        raise ValueError('strict approval channel/answer/digest differs')
++    if (selected[0]['detail'] != record('admission.json') or selected[1]['detail'] != protocol
++        or selected[5]['detail'].get('answers') != [['Aprobar y ejecutar']]
++        or selected[6]['detail'] != record('recheck.json')['decision']
++        or selected[8]['detail'] != record('analysis-admission.json')['decision']
++        or selected[7]['detail'].get('controller') != record('remote-controller-identity.json')):
++        raise ValueError('strict gate retained source differs')
++    run = record('run.json')
++    if selected[9]['detail'].get('geometry') != run['geometry'] or selected[9]['detail'].get('measuredTasks') != run['measuredTasks']:
++        raise ValueError('strict completion gate source differs')
+ 
+ 
+ def walk(root):
+@@ -362,6 +471,10 @@
+             status, exit_code = headers.index('status'), headers.index('exit')
+             if any(row.split('\t')[status] != 'COMPLETED' or row.split('\t')[exit_code] != '0' for row in rows[1:]):
+                 raise ValueError('trace task failed')
++    if strict:
++        strict_methods(m, record, root)
++        if run['status'] == 'succeeded':
++            strict_success_gates(events, record, bundle)
+     methods = record('methods.json')
+     required_methods = {'protein', 'chain', 'model', 'units', 'insertions', 'coordinate contract',
+                         'GeomeTRe revision', 'parameter contract', 'input hash', 'engine', 'image', 'command',

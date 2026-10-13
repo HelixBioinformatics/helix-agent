@@ -1,0 +1,630 @@
+{
+  "schema": "helix-post-campaign-default-integration/1.0",
+  "verified": true,
+  "auditedAt": "2026-10-13T17:44:13.121217+00:00",
+  "auditSourceSha256": "dd4b35b98dcb2408d95e3bc29c652731abdf3e4b6d42a421a041fdeb20dac939",
+  "positive": {
+    "verified": true,
+    "defaultCold": {
+      "ok": true,
+      "files": 152,
+      "bytes": 7035259,
+      "manifestSha256": "63d42002fbff8088b7ccf99c396c406a45bee83b991ed307eb8302f967ff8416",
+      "status": "succeeded",
+      "externallyAnchored": true,
+      "legacyBackendMetadata": false,
+      "scope": "integrity, declared links and cold counts; not biological accuracy or authorship"
+    },
+    "defaultColdFileCount": 152,
+    "manifestSha256": "63d42002fbff8088b7ccf99c396c406a45bee83b991ed307eb8302f967ff8416",
+    "backendConsistent": true,
+    "backend": "trp-slurm-colocated-strict/1.0.0",
+    "nativeIds": [
+      "377",
+      "378",
+      "379",
+      "380"
+    ],
+    "fourRealNativeTasks": true,
+    "ownInputGoldEqual": true,
+    "goldCsvSha256": "2d0ff6b22dfe2fed7cea441639223ac3e7481e7cc399bbfbc9c8d8e2e2ab93cb",
+    "actualExitCode": 0,
+    "elapsedSecondsObserved": 180.25981477799996,
+    "realPersistentSqlite": true,
+    "sourcePackage": "evaluation/trp/campaign-20261012/checks/post-campaign-production-20261013/cloud/outcomes/POST-01-positive/recovered/post-integration-80000-POST-01-positive/retained-allocation/export/portable-evidence",
+    "supervisionSha256": "af45aaadf0f952492c48f31ee9f69337b32516c62c5137c74d6c9e5242fc4fb8"
+  },
+  "negative": {
+    "verified": true,
+    "actualNativeId": "384",
+    "actualState": "CANCELLED",
+    "actualExitCode": "0:9",
+    "exactOwnerComment": "helix:067e12d9-bf55-4fdf-aff8-da024507c145",
+    "requestAt": "2026-10-13T17:41:09.579420+00:00",
+    "externalTerminalObservedAt": "2026-10-13T17:42:17.107210+00:00",
+    "producerTerminalObservedAt": "2026-10-13T17:41:39.997429+00:00",
+    "producerObservationDelayMilliseconds": 30418.009000000002,
+    "latencyScope": "Difference between recorded observer timestamps on this head, not an internal scheduler latency bound or P95. Slurm StartTime/EndTime retain seconds resolution.",
+    "automaticFailedPackage": true,
+    "defaultCold": {
+      "ok": true,
+      "files": 151,
+      "bytes": 11692027,
+      "manifestSha256": "37e56c8b53570b82b6ca668a9173ff95bb6a0aac78122ce065ee95919a104496",
+      "status": "failed",
+      "externallyAnchored": true,
+      "legacyBackendMetadata": false,
+      "scope": "integrity, declared links and cold counts; not biological accuracy or authorship"
+    },
+    "defaultColdFileCount": 151,
+    "manifestSha256": "37e56c8b53570b82b6ca668a9173ff95bb6a0aac78122ce065ee95919a104496",
+    "nativeLedgerFreshSourceConfirmed": true,
+    "actualClientExitCode": 1,
+    "elapsedSecondsObserved": 163.19581536000032,
+    "ownedControllerAndTracerReaped": true,
+    "sourcePackage": "evaluation/trp/campaign-20261012/checks/post-campaign-production-20261013/cloud/outcomes-amendment-r2/POST-04-native-cancellation-1000/recovered/post-integration-amendment-r2-80200-POST-04-native-cancellation-1000/retained-allocation/client/.helix/trp/a33828fe3cb6-067e12d9-bf55-4fdf-aff8-da024507c145/evidence",
+    "nativeFaultSha256": "063d717aa40639246b41958628efd4b9a8941bcbcee3ef9e368ab4564e929f6f",
+    "lateIndependentTerminalSha256": "2ec6cf83da7068031a2fc74b1e540879949872290843e1de176adabcc486e052",
+    "boundedFaultWatcherTerminalObserved": false,
+    "nativeLedgerSha256": "3533ba0bec210494d4aeb1205398ec6552b6c7a60efae2dba807c19987f710c3",
+    "supervisionSha256": "3b0fb4b89f66f6b3944486d3466379e88854014c6a450695461c84875ffca16e",
+    "inducedFaultOnly": true,
+    "physicalFeasibilityLabel": null
+  },
+  "checks": [
+    {
+      "name": "frozen-source:packages/helix/src/trp/catalog.ts",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "frozen-source:packages/helix/src/trp/catalog.json",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "frozen-source:packages/helix/src/trp/specification.ts",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "frozen-source:packages/helix/src/trp/graph.ts",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "frozen-source:packages/helix/src/trp/nextflow.ts",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "frozen-source:packages/helix/src/trp/interventions.ts",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "frozen-source:packages/helix/src/trp/inspect_structure.py.txt",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "frozen-source:packages/helix/src/trp/structural.ts",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "frozen-source:packages/helix/src/trp/verify_inspection.py.txt",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "frozen-source:packages/helix/src/trp/enforcement.ts",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "frozen-source:packages/helix/src/trp/coordinates.ts",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "frozen-source:packages/helix/src/trp/sifts_residues.py.txt",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "frozen-source:packages/helix/src/trp/strpsearch_guard.py.txt",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "frozen-source:packages/helix/src/trp/predicted_geometry.py.txt",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "frozen-source:packages/helix/src/trp/verify_predicted.py.txt",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "frozen-source:packages/helix/src/trp/steric_diagnostic.py.txt",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "frozen-source:packages/helix/src/trp/surface_diagnostic.py.txt",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "frozen-source:packages/helix/src/trp/evidence.ts",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "frozen-source:packages/helix/src/trp/remote.ts",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "frozen-source:packages/helix/src/trp/resources.ts",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "frozen-source:packages/helix/src/trp/remote-enforcement.ts",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "frozen-source:packages/helix/src/trp/remote_strict.py.txt",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "frozen-source:packages/helix/src/trp/workflow.ts",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "frozen-source:packages/helix/src/trp/verify_bundle.py.txt",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "frozen-source:packages/helix/src/trp/remote_runner.py.txt",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "frozen-source:evaluation/trp/campaign-20261012/checks/post-campaign-production-20261013/cloud/full_client.ts",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "frozen-source:evaluation/trp/campaign-20261012/checks/post-campaign-production-20261013/cloud/prepare_integration.ts",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "frozen-source:evaluation/trp/campaign-20261012/checks/post-campaign-production-20261013/cloud/fault_native.py",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "frozen-source:evaluation/trp/campaign-20261012/checks/post-campaign-production-20261013/cloud/prepare_runtime.py",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "frozen-source:evaluation/trp/campaign-20261012/checks/post-campaign-production-20261013/cloud/drive_integration.py",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "frozen-source:script/tesis/provision_remote_strict_profile.py",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "amended-frozen-source:packages/helix/src/trp/catalog.ts",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "amended-frozen-source:packages/helix/src/trp/catalog.json",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "amended-frozen-source:packages/helix/src/trp/specification.ts",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "amended-frozen-source:packages/helix/src/trp/graph.ts",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "amended-frozen-source:packages/helix/src/trp/nextflow.ts",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "amended-frozen-source:packages/helix/src/trp/interventions.ts",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "amended-frozen-source:packages/helix/src/trp/inspect_structure.py.txt",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "amended-frozen-source:packages/helix/src/trp/structural.ts",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "amended-frozen-source:packages/helix/src/trp/verify_inspection.py.txt",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "amended-frozen-source:packages/helix/src/trp/enforcement.ts",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "amended-frozen-source:packages/helix/src/trp/coordinates.ts",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "amended-frozen-source:packages/helix/src/trp/sifts_residues.py.txt",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "amended-frozen-source:packages/helix/src/trp/strpsearch_guard.py.txt",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "amended-frozen-source:packages/helix/src/trp/predicted_geometry.py.txt",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "amended-frozen-source:packages/helix/src/trp/verify_predicted.py.txt",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "amended-frozen-source:packages/helix/src/trp/steric_diagnostic.py.txt",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "amended-frozen-source:packages/helix/src/trp/surface_diagnostic.py.txt",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "amended-frozen-source:packages/helix/src/trp/evidence.ts",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "amended-frozen-source:packages/helix/src/trp/remote.ts",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "amended-frozen-source:packages/helix/src/trp/resources.ts",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "amended-frozen-source:packages/helix/src/trp/remote-enforcement.ts",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "amended-frozen-source:packages/helix/src/trp/remote_strict.py.txt",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "amended-frozen-source:packages/helix/src/trp/workflow.ts",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "amended-frozen-source:packages/helix/src/trp/verify_bundle.py.txt",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "amended-frozen-source:packages/helix/src/trp/remote_runner.py.txt",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "amended-frozen-source:evaluation/trp/campaign-20261012/checks/post-campaign-production-20261013/cloud/full_client_large.ts",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "amended-frozen-source:evaluation/trp/campaign-20261012/checks/post-campaign-production-20261013/cloud/prepare_amendment_r2.ts",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "amended-frozen-source:evaluation/trp/campaign-20261012/checks/post-campaign-production-20261013/cloud/fault_native.py",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "amended-frozen-source:evaluation/trp/campaign-20261012/checks/post-campaign-production-20261013/cloud/drive_integration_r3.py",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "amended-frozen-source:script/tesis/provision_remote_strict_profile.py",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "amendment-terminal",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "initial-harness-failure-preserved",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "large-display-parse-failure-preserved",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "durable-preparation-prospectively-verified",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-archive:POST-01-positive",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "same-observed-exit:POST-01-positive",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "owned-cleanup:POST-01-positive",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "positive-default-cold",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "positive-backend-consistency",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "positive-two-completed:trace.tsv",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "positive-two-completed:dry-run/trace.tsv",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "positive-four-owned-native",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "positive-own-input-gold",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "positive-real-sqlite",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-archive:POST-04-native-cancellation-1000",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "same-observed-exit:POST-04-native-cancellation-1000",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "owned-cleanup:POST-04-native-cancellation-1000",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "one-owned-injection",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "one-owned-production-run",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "negative-real-approval-hash-binding",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "negative-default-cold",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "negative-retained-native-terminal",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "negative-own-id-binding",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "negative-terminal-retained-after-queue-loss",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "negative-automatic-failed-event",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "negative-independent-late-terminal-confirmation",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "negative-external-terminal-confirmation",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "three-node-independent-final-quiescence",
+      "ok": true,
+      "detail": null
+    }
+  ],
+  "checksPassed": 89,
+  "freezeSha256": "df0d2a76e7434e3d9a9a907d0183f101c7afe466e5d1963b922f2230205a1a5d",
+  "amendmentFreezeSha256": "755a426294998a1a821ad47da98e6dd3b9e349a042421fe41ef0491f4dcd3948",
+  "producerCommit": "0dcb38aa97cd41883a3181ebda720cb0aeab5167",
+  "verifierSha256": "952e79d5cecae707954ed667d231838569323dffdd068ab43edd770284841eb9",
+  "sourceFrozenCount": 31,
+  "amendmentSourceFrozenCount": 30,
+  "legacyOptionUsed": false,
+  "initialHarnessPrelaunchFailurePreserved": true,
+  "largeDisplayParseFailurePreserved": true,
+  "offlineDurablePreparationVerified": true,
+  "newNativeFailureCaseId": "POST-04-native-cancellation-1000",
+  "original50Changed": false,
+  "reservedScientificMetrics": null,
+  "scope": "Two new integration runs after repairs; real co-located client and Slurm worker tasks, synthetic approval, one intentionally cancelled own task. Original resource matrix/calibration/thresholds untouched.",
+  "postQuiescence": {
+    "schema": "helix-post-repair-independent-quiescence/1.0",
+    "verified": true,
+    "at": "2026-10-13T17:43:06.333692+00:00",
+    "nodes": [
+      {
+        "role": "head",
+        "instanceId": "i-04339a8d8aad24c6e",
+        "exitCode": 0,
+        "stdout": "{\"at\": \"2026-10-13T17:43:00.167509+00:00\", \"hostname\": \"helix-head\", \"ownedProcesses\": [], \"cgroups\": [{\"path\": \"/sys/fs/cgroup/helix-strict-hrs29b34f328a884afa.service\", \"procs\": \"\", \"events\": \"populated 0\\nfrozen 0\"}, {\"path\": \"/sys/fs/cgroup/helix-strict-hrsa318720b708e4f72.service\", \"procs\": \"\", \"events\": \"populated 0\\nfrozen 0\"}, {\"path\": \"/sys/fs/cgroup/helix-strict-hrs007323ed057f4a9c.service\", \"procs\": \"\", \"events\": \"populated 0\\nfrozen 0\"}, {\"path\": \"/sys/fs/cgroup/helix-strict-hrs79682fa83a8649bb.service\", \"procs\": \"\", \"events\": \"populated 0\\nfrozen 0\"}], \"containers\": {\"exitCode\": 0, \"stdout\": \"\", \"stderr\": \"\"}}\n",
+        "stderr": "",
+        "observation": {
+          "at": "2026-10-13T17:43:00.167509+00:00",
+          "hostname": "helix-head",
+          "ownedProcesses": [],
+          "cgroups": [
+            {
+              "path": "/sys/fs/cgroup/helix-strict-hrs29b34f328a884afa.service",
+              "procs": "",
+              "events": "populated 0\nfrozen 0"
+            },
+            {
+              "path": "/sys/fs/cgroup/helix-strict-hrsa318720b708e4f72.service",
+              "procs": "",
+              "events": "populated 0\nfrozen 0"
+            },
+            {
+              "path": "/sys/fs/cgroup/helix-strict-hrs007323ed057f4a9c.service",
+              "procs": "",
+              "events": "populated 0\nfrozen 0"
+            },
+            {
+              "path": "/sys/fs/cgroup/helix-strict-hrs79682fa83a8649bb.service",
+              "procs": "",
+              "events": "populated 0\nfrozen 0"
+            }
+          ],
+          "containers": {
+            "exitCode": 0,
+            "stdout": "",
+            "stderr": ""
+          }
+        }
+      },
+      {
+        "role": "worker",
+        "instanceId": "i-06ebae4bcd7f51a00",
+        "exitCode": 0,
+        "stdout": "{\"at\": \"2026-10-13T17:43:03.934938+00:00\", \"hostname\": \"helix-worker1\", \"ownedProcesses\": [], \"cgroups\": [], \"containers\": {\"exitCode\": 0, \"stdout\": \"\", \"stderr\": \"\"}}\n",
+        "stderr": "",
+        "observation": {
+          "at": "2026-10-13T17:43:03.934938+00:00",
+          "hostname": "helix-worker1",
+          "ownedProcesses": [],
+          "cgroups": [],
+          "containers": {
+            "exitCode": 0,
+            "stdout": "",
+            "stderr": ""
+          }
+        }
+      },
+      {
+        "role": "worker",
+        "instanceId": "i-0656b76c4b22adfb8",
+        "exitCode": 0,
+        "stdout": "{\"at\": \"2026-10-13T17:43:06.244370+00:00\", \"hostname\": \"helix-worker2\", \"ownedProcesses\": [], \"cgroups\": [], \"containers\": {\"exitCode\": 0, \"stdout\": \"\", \"stderr\": \"\"}}\n",
+        "stderr": "",
+        "observation": {
+          "at": "2026-10-13T17:43:06.244370+00:00",
+          "hostname": "helix-worker2",
+          "ownedProcesses": [],
+          "cgroups": [],
+          "containers": {
+            "exitCode": 0,
+            "stdout": "",
+            "stderr": ""
+          }
+        }
+      }
+    ],
+    "queue": {
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "allNativeJobsEmpty": true,
+    "allContainersEmpty": true,
+    "ownedProcessesEmpty": true,
+    "controllerCgroupsEmpty": true,
+    "sourceSha256": "26d56ef3db57c2910bff1af0b8a59f1f035069688791f67631be6a2aa1a607f1",
+    "readOnly": true
+  },
+  "postQuiescenceSha256": "3511e2ef52679a46d77c508eb939c142f761b3b07b3783d46ce4e93c64403856"
+}

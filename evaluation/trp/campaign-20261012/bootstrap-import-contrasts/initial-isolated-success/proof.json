@@ -1,0 +1,48 @@
+{
+  "schema": "helix-local-persistent-bootstrap-probe/1.0",
+  "observedAtUtc": "2026-10-13T04:50:23.423653+00:00",
+  "scratch": "/tmp/helix-bootstrap-probe-pp0eq132",
+  "orderedImports": [
+    "packages/core/src/global.ts",
+    "packages/core/src/fs-util.ts",
+    "packages/helix/src/project/bootstrap.ts",
+    "concurrent application service modules only after those imports finish"
+  ],
+  "importAndFullStoreProvideExitCode": 0,
+  "elapsedSeconds": 3.8619992899984936,
+  "guardSeconds": 12,
+  "realBootstrapService": true,
+  "realDatabaseService": true,
+  "realWorkflowAgentQuestionServices": true,
+  "sqliteReadOnlyReopenIndependentPythonProcess": true,
+  "rowPersisted": "persistent-no-model-probe",
+  "sqliteTableCount": 21,
+  "databaseFiles": [
+    {
+      "path": "/tmp/helix-bootstrap-probe-pp0eq132/data/helix/helix-local.db",
+      "bytes": 4096,
+      "sha256": "40cf07c52bfaa52b334ef341456f970787f6dc701ffe18ad3c572cb5056dbd70"
+    },
+    {
+      "path": "/tmp/helix-bootstrap-probe-pp0eq132/data/helix/helix-local.db-shm",
+      "bytes": 32768,
+      "sha256": "46431442a437ce6b667dd63311b99ba532e9feee636d4dd1ec908548c9f2e38d"
+    },
+    {
+      "path": "/tmp/helix-bootstrap-probe-pp0eq132/data/helix/helix-local.db-wal",
+      "bytes": 284312,
+      "sha256": "38c6a0d4b419220014442681d6f1652bc3db71be5691da67ce8a36c9b9ca132b"
+    }
+  ],
+  "testPreload": false,
+  "DBmemory": false,
+  "HELIX_DB_defined": false,
+  "networkAttempts": 0,
+  "modelCalls": 0,
+  "productionMutation": false,
+  "cloudOperations": false,
+  "limitations": [
+    "Import/bootstrap only, not tool preparation or scientific execution.",
+    "Probe disables LSP, formatter and snapshots in normal project configuration to bound startup; no test-preload or no-op bootstrap service."
+  ]
+}

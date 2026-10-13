@@ -1,0 +1,103 @@
+test_all_mandatory_success_gates (__main__.Hardening.test_all_mandatory_success_gates) ... ok
+test_every_mandatory_method_field (__main__.Hardening.test_every_mandatory_method_field) ... ok
+test_final_restoration (__main__.Hardening.test_final_restoration) ... ERROR
+test_gate_sources_and_actual_approval (__main__.Hardening.test_gate_sources_and_actual_approval) ... ERROR
+test_original_anchored_fixtures_compatible (__main__.Hardening.test_original_anchored_fixtures_compatible) ... 
+  test_original_anchored_fixtures_compatible (__main__.Hardening.test_original_anchored_fixtures_compatible) (name='strict150') ... ERROR
+  test_original_anchored_fixtures_compatible (__main__.Hardening.test_original_anchored_fixtures_compatible) (name='ordinary144') ... ERROR
+  test_original_anchored_fixtures_compatible (__main__.Hardening.test_original_anchored_fixtures_compatible) (name='mapped156') ... ERROR
+  test_original_anchored_fixtures_compatible (__main__.Hardening.test_original_anchored_fixtures_compatible) (name='cancelled143') ... ERROR
+  test_original_anchored_fixtures_compatible (__main__.Hardening.test_original_anchored_fixtures_compatible) (name='permission-denied25') ... ERROR
+  test_original_anchored_fixtures_compatible (__main__.Hardening.test_original_anchored_fixtures_compatible) (name='approval-rejected25') ... ERROR
+test_three_real_semantic_gaps (__main__.Hardening.test_three_real_semantic_gaps) ... ERROR
+test_wrong_or_duplicate_method_source (__main__.Hardening.test_wrong_or_duplicate_method_source) ... ok
+
+======================================================================
+ERROR: test_final_restoration (__main__.Hardening.test_final_restoration)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/helix-strict-verifier-hardening-20261013/test_hardening.py", line 92, in test_final_restoration
+    self.assertTrue(self.patched(self.copy,sha(self.manifest))['ok'])
+                    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: verify() takes from 1 to 2 positional arguments but 3 were given
+
+======================================================================
+ERROR: test_gate_sources_and_actual_approval (__main__.Hardening.test_gate_sources_and_actual_approval)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/helix-strict-verifier-hardening-20261013/test_hardening.py", line 84, in test_gate_sources_and_actual_approval
+    self.rejects('approval-rejection-success-claim','approval.json',lambda p:self.cj(p,lambda d:d.__setitem__('answer','Rechazar')),old=True)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/helix-strict-verifier-hardening-20261013/test_hardening.py", line 49, in rejects
+    result=self.resealed(artifact,mutate,False);self.assertTrue(result['ok'])
+  File "/tmp/helix-strict-verifier-hardening-20261013/test_hardening.py", line 45, in resealed
+    return (self.patched if stage else self.original)(self.copy,anchor)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+TypeError: verify() takes from 1 to 2 positional arguments but 3 were given
+
+======================================================================
+ERROR: test_original_anchored_fixtures_compatible (__main__.Hardening.test_original_anchored_fixtures_compatible) (name='strict150')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/helix-strict-verifier-hardening-20261013/test_hardening.py", line 63, in test_original_anchored_fixtures_compatible
+    out=self.patched(target,anchor);self.assertTrue(out['ok']);reports.append({'case':'baseline:'+name,'externallyAnchored':out['externallyAnchored'],'files':out['files'],'detected':True})
+TypeError: verify() takes from 1 to 2 positional arguments but 3 were given
+
+======================================================================
+ERROR: test_original_anchored_fixtures_compatible (__main__.Hardening.test_original_anchored_fixtures_compatible) (name='ordinary144')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/helix-strict-verifier-hardening-20261013/test_hardening.py", line 63, in test_original_anchored_fixtures_compatible
+    out=self.patched(target,anchor);self.assertTrue(out['ok']);reports.append({'case':'baseline:'+name,'externallyAnchored':out['externallyAnchored'],'files':out['files'],'detected':True})
+TypeError: verify() takes from 1 to 2 positional arguments but 3 were given
+
+======================================================================
+ERROR: test_original_anchored_fixtures_compatible (__main__.Hardening.test_original_anchored_fixtures_compatible) (name='mapped156')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/helix-strict-verifier-hardening-20261013/test_hardening.py", line 63, in test_original_anchored_fixtures_compatible
+    out=self.patched(target,anchor);self.assertTrue(out['ok']);reports.append({'case':'baseline:'+name,'externallyAnchored':out['externallyAnchored'],'files':out['files'],'detected':True})
+TypeError: verify() takes from 1 to 2 positional arguments but 3 were given
+
+======================================================================
+ERROR: test_original_anchored_fixtures_compatible (__main__.Hardening.test_original_anchored_fixtures_compatible) (name='cancelled143')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/helix-strict-verifier-hardening-20261013/test_hardening.py", line 63, in test_original_anchored_fixtures_compatible
+    out=self.patched(target,anchor);self.assertTrue(out['ok']);reports.append({'case':'baseline:'+name,'externallyAnchored':out['externallyAnchored'],'files':out['files'],'detected':True})
+TypeError: verify() takes from 1 to 2 positional arguments but 3 were given
+
+======================================================================
+ERROR: test_original_anchored_fixtures_compatible (__main__.Hardening.test_original_anchored_fixtures_compatible) (name='permission-denied25')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/helix-strict-verifier-hardening-20261013/test_hardening.py", line 63, in test_original_anchored_fixtures_compatible
+    out=self.patched(target,anchor);self.assertTrue(out['ok']);reports.append({'case':'baseline:'+name,'externallyAnchored':out['externallyAnchored'],'files':out['files'],'detected':True})
+TypeError: verify() takes from 1 to 2 positional arguments but 3 were given
+
+======================================================================
+ERROR: test_original_anchored_fixtures_compatible (__main__.Hardening.test_original_anchored_fixtures_compatible) (name='approval-rejected25')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/helix-strict-verifier-hardening-20261013/test_hardening.py", line 63, in test_original_anchored_fixtures_compatible
+    out=self.patched(target,anchor);self.assertTrue(out['ok']);reports.append({'case':'baseline:'+name,'externallyAnchored':out['externallyAnchored'],'files':out['files'],'detected':True})
+TypeError: verify() takes from 1 to 2 positional arguments but 3 were given
+
+======================================================================
+ERROR: test_three_real_semantic_gaps (__main__.Hardening.test_three_real_semantic_gaps)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/helix-strict-verifier-hardening-20261013/test_hardening.py", line 65, in test_three_real_semantic_gaps
+    self.rejects('strict-field-removed','methods.json',lambda p:self.cj(p,lambda d:d['fields'].pop(16)),old=True)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/helix-strict-verifier-hardening-20261013/test_hardening.py", line 49, in rejects
+    result=self.resealed(artifact,mutate,False);self.assertTrue(result['ok'])
+  File "/tmp/helix-strict-verifier-hardening-20261013/test_hardening.py", line 45, in resealed
+    return (self.patched if stage else self.original)(self.copy,anchor)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+TypeError: verify() takes from 1 to 2 positional arguments but 3 were given
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.166s
+
+FAILED (errors=9)

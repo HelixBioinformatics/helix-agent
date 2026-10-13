@@ -1,0 +1,16 @@
+{
+  "case": {
+    "id": "helix-worker1-unavailable-memory-8192",
+    "node": "helix-worker1",
+    "mode": "scheduler",
+    "requested_cpus": 1,
+    "memory_mib": 8192,
+    "expected": "infeasible_node_capacity"
+  },
+  "command": "sbatch --test-only --partition=helix --nodelist=helix-worker1 --cpus-per-task=1 --mem=8192M --time=00:01:00 --wrap=true",
+  "observed_at": "2026-10-13T00:35:13.045200+00:00",
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "allocation failure: Requested node configuration is not available\n",
+  "passed": true
+}

@@ -1,0 +1,231 @@
+{
+  "kind": "completed SIFTS mapped development remote reference",
+  "recordedAt": "2026-10-13T02:36:10.642735+00:00",
+  "execSession": 94224,
+  "execExitCode": 0,
+  "tests": {
+    "pass": 1,
+    "fail": 0,
+    "assertions": 3,
+    "durationSeconds": 148.29
+  },
+  "sourcesUnchangedSinceProspectiveSnapshot": true,
+  "sourceSnapshotSha256": "50b6f90db26f2bb1685b5b26bbfb07ce4ffbdf87572c41de70dd7112ab0d1479",
+  "humanEvaluation": false,
+  "heldOutScientific": false,
+  "status": "succeeded",
+  "runId": "f1649dfa-8e3e-48e8-880e-c6aa0adde093",
+  "digest": "2a822b7cdb99470f048d61b02b1c530e4044046d46cb626a7eec1d34be55cc87",
+  "portable": {
+    "manifestSha256": "b400c54428684c5d1f767324154388f906f466c849736bf28394241fabed80aa",
+    "files": 156,
+    "bytes": 5748810,
+    "automatic": true,
+    "manualRecovery": false
+  },
+  "numerical": {
+    "kind": "development-reference",
+    "approvalDriver": "synthetic Question.Service.reply in reference.live.test.ts",
+    "humanEvaluation": false,
+    "expectedCsvSha256": "7e8393ba3d8cd1035b2e7b8a790fd896f3e8748038c52233e3ae4fc7aff41e0f",
+    "actualCsvSha256": "7e8393ba3d8cd1035b2e7b8a790fd896f3e8748038c52233e3ae4fc7aff41e0f",
+    "equal": true,
+    "toolPath": [
+      "trp_prepare",
+      "trp_run"
+    ],
+    "digest": "2a822b7cdb99470f048d61b02b1c530e4044046d46cb626a7eec1d34be55cc87"
+  },
+  "mapping": {
+    "sourceFrame": "uniprot",
+    "targetFrame": "pdb-author",
+    "sourceSha256": "7bbb3fb56d9998402f91c1356643ae7a6cde8687bde7e455e4b65bd931e5f74b",
+    "targetSha256": "f674267d0ef4752a3d4da00497947bfc09f441a5c36d39593b72bc2ba390df0b",
+    "inputUnits": 12,
+    "mappedUnits": 12,
+    "mappedResidues": 206,
+    "biologicalValidity": "not_established",
+    "accession": "Q9MCI8",
+    "siftsSha256": "941e66d081f476f1e801f53e7faf3ab070f590421c558d0970ea2367ed5fd391",
+    "siftsRows": 258
+  },
+  "nativeTasks": {
+    "tasks": [
+      {
+        "traversal": "scientific",
+        "process": "SELECT",
+        "native_id": "139",
+        "node": "helix-worker1",
+        "state": "COMPLETED"
+      },
+      {
+        "traversal": "scientific",
+        "process": "GEOMETRY",
+        "native_id": "140",
+        "node": "helix-worker2",
+        "state": "COMPLETED"
+      },
+      {
+        "traversal": "stub",
+        "process": "SELECT",
+        "native_id": "137",
+        "node": "helix-worker1",
+        "state": "COMPLETED"
+      },
+      {
+        "traversal": "stub",
+        "process": "GEOMETRY",
+        "native_id": "138",
+        "node": "helix-worker2",
+        "state": "COMPLETED"
+      }
+    ],
+    "native_ids": [
+      "137",
+      "138",
+      "139",
+      "140"
+    ],
+    "nodes": [
+      "helix-worker1",
+      "helix-worker2"
+    ],
+    "unique_native_jobs": 4
+  },
+  "effectiveContainerLimits": {
+    "observations": 2,
+    "cpus_per_task": 2,
+    "memory_bytes_per_task": 2147483648,
+    "swap_bytes_per_task": 0,
+    "cpu_quota_is_exclusive_cores": false,
+    "hard_controller_limit_verified": false,
+    "hard_aggregate_disk_quota_verified": false
+  },
+  "taskTelemetry": [
+    {
+      "process": "SELECT",
+      "nativeId": "139",
+      "node": "helix-worker1",
+      "nativeStart": "2026-10-13T02:27:04",
+      "nativeEnd": "2026-10-13T02:27:04",
+      "nativeWall": "00:00:00",
+      "nextflowDurationIncludingScheduling": "14.3s",
+      "nextflowCommandRealtime": "173ms",
+      "nextflowPeakRssFormatted": "11.7 MB",
+      "nextflowPeakVmemFormatted": "16.7 MB",
+      "rawTrace": {
+        "realtime": "173",
+        "%cpu": "811",
+        "cpu_model": "Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz",
+        "rchar": "4955592",
+        "wchar": "158275",
+        "syscr": "511",
+        "syscw": "17",
+        "read_bytes": "524288",
+        "write_bytes": "151552",
+        "%mem": "1",
+        "vmem": "17088",
+        "rss": "11988",
+        "peak_vmem": "17088",
+        "peak_rss": "11988",
+        "vol_ctxt": "10",
+        "inv_ctxt": "37"
+      },
+      "traceSource": "work/0f/e3a658093d31946022fedc9c8f5978/.command.trace",
+      "traceSourceSha256": "a88c010bad5f044209a5ee951ca7d4c498988f42b0777aa012544cbafd4fd68b",
+      "trackerSource": "work/0f/e3a658093d31946022fedc9c8f5978/.command.run",
+      "trackerSourceSha256": "da517f54d0ffbc23d56f5202e632650242102c62f9c6ef05aff2f53d179d9259"
+    },
+    {
+      "process": "GEOMETRY",
+      "nativeId": "140",
+      "node": "helix-worker2",
+      "nativeStart": "2026-10-13T02:27:34",
+      "nativeEnd": "2026-10-13T02:27:37",
+      "nativeWall": "00:00:03",
+      "nextflowDurationIncludingScheduling": "29.9s",
+      "nextflowCommandRealtime": "2.6s",
+      "nextflowPeakRssFormatted": "188.6 MB",
+      "nextflowPeakVmemFormatted": "499.7 MB",
+      "rawTrace": {
+        "realtime": "2552",
+        "%cpu": "953",
+        "cpu_model": "Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz",
+        "rchar": "37469429",
+        "wchar": "21912",
+        "syscr": "3210",
+        "syscw": "20",
+        "read_bytes": "163840",
+        "write_bytes": "20480",
+        "%mem": "24",
+        "vmem": "511704",
+        "rss": "193108",
+        "peak_vmem": "511704",
+        "peak_rss": "193108",
+        "vol_ctxt": "73",
+        "inv_ctxt": "54"
+      },
+      "traceSource": "work/f2/e5c13ebc9b9099d6de85402f3ef6ff/.command.trace",
+      "traceSourceSha256": "7cb3ee031a35edcaddbf339b6190c84c49df2760e4803ce15e9d480c7982cbef",
+      "trackerSource": "work/f2/e5c13ebc9b9099d6de85402f3ef6ff/.command.run",
+      "trackerSourceSha256": "66a504fb74c1ab909c9518c97b8869fff4319b47f65c516d53eca494bc0bfe80"
+    }
+  ],
+  "taskMemoryScope": "Nextflow wrapper samples /proc process-tree VmRSS/VmHWM and sums child metrics; reported peak RSS is retained as instrumentation output, not independent unique-physical-memory peak or total head/client/cluster peak. Prospective notMeasured RAM-peak claim applies to those unobserved aggregate scopes.",
+  "storageFinalScopes": {
+    "head": {
+      "scope": "final remote head run-root; excludes shared caches, logs outside run-root and other runs",
+      "path": "/shared/helix/trp-2a822b7cdb99-f1649dfa-8e3e-48e8-880e-c6aa0adde093",
+      "observedAt": "2026-10-13T02:30:27.781279+00:00",
+      "regularFiles": 130,
+      "regularFileBytes": 4331885,
+      "duAllocated": "4792320\t/shared/helix/trp-2a822b7cdb99-f1649dfa-8e3e-48e8-880e-c6aa0adde093\n",
+      "duApparent": "4333141\t/shared/helix/trp-2a822b7cdb99-f1649dfa-8e3e-48e8-880e-c6aa0adde093\n",
+      "ownedQueueRows": [],
+      "notPeak": true,
+      "hardQuota": false
+    },
+    "client": {
+      "scope": "final client archived output including top-level files plus duplicate portable run/evidence copy; excludes deleted ephemeral test workspace, caches, private credentials and other runs",
+      "path": "evaluation/trp/campaign-20261012/cloud/lab1/mapped-reference",
+      "observedAt": "2026-10-13T02:30:56.444783+00:00",
+      "regularFiles": 223,
+      "regularFileBytes": 7882950,
+      "duAllocated": "8417280\tevaluation/trp/campaign-20261012/cloud/lab1/mapped-reference\n",
+      "duApparent": "7882950\tevaluation/trp/campaign-20261012/cloud/lab1/mapped-reference\n",
+      "notPeak": true,
+      "hardQuota": false
+    }
+  },
+  "notMeasured": [
+    "peak client disk",
+    "peak head run-root disk",
+    "hard aggregate disk quota",
+    "aggregate head/client/cluster RAM peak",
+    "hard controller resources"
+  ],
+  "audit": {
+    "path": "evaluation/trp/campaign-20261012/trace/mapped-reference.json",
+    "sha256": "38ff44a16ad47bfa35cfa7d6c0c5098ba1ef8182e76aad691ec086a7d582e1bd",
+    "verified": true,
+    "checksPassed": 9,
+    "faultsInjected": 320,
+    "faultsDetected": 320
+  },
+  "portableCopy": {
+    "path": "evaluation/trp/campaign-20261012/trace/mapped-reference-copy.json",
+    "sha256": "81f3d3fa9dde72c2eeb0e729c52bebf066aaa73723ffe7e353716ca1a6f19315",
+    "verified": true,
+    "outsideCheckout": true,
+    "copiedVerifierBytesEqualTrustedSource": true,
+    "scientificExecutionRepeated": false
+  },
+  "sidecars": {
+    "evaluation/trp/campaign-20261012/cloud/lab1/mapped-reference-protocol/source-snapshot.json": "50b6f90db26f2bb1685b5b26bbfb07ce4ffbdf87572c41de70dd7112ab0d1479",
+    "evaluation/trp/campaign-20261012/cloud/lab1/mapped-reference-protocol/test-driver.log": "0af7f69a82782ccd37a2a42818616314fba30f6391e5c46da08a1d21fd2440eb",
+    "evaluation/trp/campaign-20261012/cloud/lab1/mapped-reference-protocol/head-final-scope.json": "13096d635cc19a0c45882a5466cdedd36cd5f0553ed6f07b1585b9d44e38fd94",
+    "evaluation/trp/campaign-20261012/cloud/lab1/mapped-reference-protocol/client-final-scope.json": "7960aaefd8f6bb513d042bed6146fd7692d18226706c9067a9458ecb167228bb"
+  },
+  "lab1ReleasedNoPendingJobs": true,
+  "scientificExecutionRepeated": false
+}

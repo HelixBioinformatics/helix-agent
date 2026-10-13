@@ -1,0 +1,89 @@
+{
+  "schema": "co-located-slurm-strict-stage/1.0",
+  "createdUTC": "2026-10-13T04:24:58.312917+00:00",
+  "productionMutated": false,
+  "originalRootSourcesUnchanged": true,
+  "noSSHJobsStarted": true,
+  "checkerSha256": "f7587626581f414ca8515b87997495f1f65785e07231e1a2151a33da395b9b50",
+  "files": [
+    {
+      "path": "packages/helix/src/trp/remote-enforcement.ts",
+      "sha256": "c34e9f86faf5d0e1d41679239d73212139f7c76be9b24a57ca62db1372e1eb92",
+      "bytes": 8665
+    },
+    {
+      "path": "packages/helix/src/trp/remote_strict.py.txt",
+      "sha256": "f7587626581f414ca8515b87997495f1f65785e07231e1a2151a33da395b9b50",
+      "bytes": 12372
+    },
+    {
+      "path": "packages/helix/src/trp/remote.ts",
+      "sha256": "5326e798708970cec38734227b77043035254800795d395682c4404cf9e3de46",
+      "bytes": 20376
+    },
+    {
+      "path": "packages/helix/src/trp/remote_runner.py.txt",
+      "sha256": "a02b904258ad58341c06ed2e1a885528caea30719524b10f201ad8a99a6ec558",
+      "bytes": 26383
+    },
+    {
+      "path": "packages/helix/src/trp/resources.ts",
+      "sha256": "e626c338bb0975de603e44194f3097b56d09665e90b7446a4d6dccb28908ddf3",
+      "bytes": 15493
+    },
+    {
+      "path": "packages/helix/src/trp/workflow.ts",
+      "sha256": "1a2e23517748532d62a44cb69b5502c5f97f6abfc068f48920ff0cd263715ccb",
+      "bytes": 32942
+    },
+    {
+      "path": "packages/helix/src/trp/evidence.ts",
+      "sha256": "3b642b58a3ed34b634c8047300bcf4984b9c1294d615e1fd7253d0de94fb74a1",
+      "bytes": 13015
+    },
+    {
+      "path": "packages/helix/src/trp/verify_bundle.py.txt",
+      "sha256": "377c5dd3c06b045e6c88326976240419834bc85b752eb242020e1c7257e632d0",
+      "bytes": 26282
+    },
+    {
+      "path": "packages/helix/test/trp/remote-strict.test.ts",
+      "sha256": "244bc15dfaa63ad0fc1d17720416b4ce0e581b53d764692044486773662bcbc8",
+      "bytes": 10946
+    },
+    {
+      "path": "packages/helix/test/trp/test_remote_strict_checker.py",
+      "sha256": "570645273407499378aaa3811f1e8a693b5cd1bc03997a2f3fc2b57bf87f2f48",
+      "bytes": 10995
+    }
+  ],
+  "patchSha256": "f2d1698eb4e8661cbbf69345acd98d04a37ae7425940646f18b18991c3b91e5d",
+  "validation": {
+    "bunFocused": {
+      "command": "bun test test/trp/remote-strict.test.ts test/trp/remote.test.ts test/trp/remote-status-repair.test.ts test/trp/remote-approval.test.ts test/trp/resources.test.ts test/trp/enforcement.test.ts test/trp/workflow.test.ts test/trp/preflight.test.ts --timeout 30000",
+      "passed": 65,
+      "failed": 0,
+      "assertions": 261,
+      "note": "Before presentation-only Python entitlement refactor; final Python regression exercises actual observe with nonzero memory.current."
+    },
+    "bunNewFinal": {
+      "command": "bun test test/trp/remote-strict.test.ts --timeout 30000",
+      "passed": 9,
+      "failed": 0,
+      "assertions": 23
+    },
+    "pythonFinal": {
+      "command": "python3 packages/helix/test/trp/test_remote_strict_checker.py",
+      "passed": 12,
+      "failed": 0,
+      "includesActualObserveCurrentUsageRegression": true,
+      "includesColdReceiptContrasts": true
+    },
+    "typecheck": {
+      "command": "bun run typecheck",
+      "exitCode": 0
+    },
+    "liveKernelPositiveExecution": false
+  },
+  "scope": "Optional root-provisioned co-located client/Slurm profile; scientific sensitivity and independent annotations unchanged."
+}

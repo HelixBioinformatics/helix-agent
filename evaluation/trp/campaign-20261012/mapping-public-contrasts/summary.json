@@ -1,0 +1,135 @@
+{
+  "schema": "public-mapping-development-summary/1.0",
+  "selectedChains": 30,
+  "sourcesAndRuntimeCompleted": 30,
+  "labelPositions": 11751,
+  "labelMapped": 11751,
+  "labelGuardedByInspection": 0,
+  "labelUnsupported": 0,
+  "siftsParserMappedChains": 30,
+  "siftsParserRejectedChains": 0,
+  "preparedMappedChains": 28,
+  "preparedRejectedChains": 2,
+  "preparedMappedResidues": 11215,
+  "observedSiftsAccessionRows": 11749,
+  "unobservedSiftsAccessionRows": 265,
+  "sourceInsertionRows": 0,
+  "sourceAlternateRows": 0,
+  "oracleAgreement": true,
+  "reservedScientificEvaluation": false,
+  "humanReference": false,
+  "biologicalValidity": "not_established",
+  "modelCalls": 0,
+  "awsInstances": 0,
+  "scope": "Independent source-row expectations, shared Gemmi lexical parser; all selected chains retained. Guarded-by-inspection rows remain unmapped and do not imply an identity-mapper success. Numeric cross-reference equality is not repeat annotation or physical validity.",
+  "verifierSha256": "9cc0742d0fc1f10f047d5c244135db4f5670cdf0de080a17e879fb7745efc214",
+  "missingCaExpectedRejections": [
+    {
+      "case": "2bm4-A",
+      "author": "182",
+      "uniprot": "182",
+      "residue": "GLY",
+      "siftsObserved": true,
+      "atomsPresent": [
+        {
+          "residue": "GLY",
+          "atom": "N"
+        }
+      ],
+      "expectedPreparedError": "sifts-identity",
+      "sourceCifSha256": "09a3dedcb56630027797b9dacf5cb7f7f2daf8902792afe2d2e4b41a3fd7fc85",
+      "sourceXmlSha256": "f3f33621f7afb72c019b8562a68b81a250d04d4bbf16bb9152a16540b9f2b6f1"
+    },
+    {
+      "case": "1o8i-A",
+      "author": "353",
+      "uniprot": "375",
+      "residue": "LYS",
+      "siftsObserved": true,
+      "atomsPresent": [
+        {
+          "residue": "LYS",
+          "atom": "N"
+        }
+      ],
+      "expectedPreparedError": "sifts-identity",
+      "sourceCifSha256": "22975f5f96f13a283ac36af2d1d8ebd69a205a3c9317b97e8b093e47121ae4a2",
+      "sourceXmlSha256": "57e64321701bb8a24af7737a7dc55e6c0aa9e1606c718ab3c628833545629f75"
+    }
+  ],
+  "observedCaWithoutSelectedSifts": [
+    {
+      "case": "1k28-A",
+      "label": 576,
+      "author": "576",
+      "residue": "SER",
+      "reason": "no_selected_accession_observed_sifts_reference"
+    },
+    {
+      "case": "1k28-A",
+      "label": 583,
+      "author": "583",
+      "residue": "HIS",
+      "reason": "no_selected_accession_observed_sifts_reference"
+    },
+    {
+      "case": "1k28-A",
+      "label": 584,
+      "author": "584",
+      "residue": "HIS",
+      "reason": "no_selected_accession_observed_sifts_reference"
+    },
+    {
+      "case": "1k4z-A",
+      "label": 1,
+      "author": "1368",
+      "residue": "MET",
+      "reason": "no_selected_accession_observed_sifts_reference"
+    }
+  ],
+  "reproduction": {
+    "ok": true,
+    "results": [
+      {
+        "id": "1bhe-A",
+        "byteIdentical": true,
+        "primarySha256": "b360599a92d2dfc1d1b0c8e482c8b9b75afba575f9142d4da8bb2c4055adae89",
+        "reproducedSha256": "b360599a92d2dfc1d1b0c8e482c8b9b75afba575f9142d4da8bb2c4055adae89"
+      },
+      {
+        "id": "2bm4-A",
+        "byteIdentical": true,
+        "primarySha256": "c863d2ec0f3880c18b240292fef11af2a5be8a262e5faecc7b942882865cabc6",
+        "reproducedSha256": "c863d2ec0f3880c18b240292fef11af2a5be8a262e5faecc7b942882865cabc6"
+      },
+      {
+        "id": "1o8i-A",
+        "byteIdentical": true,
+        "primarySha256": "e24577a8bbbc0ee0d9d89bcb171b28e192173e1bda56c3960c6d16f86456a42f",
+        "reproducedSha256": "e24577a8bbbc0ee0d9d89bcb171b28e192173e1bda56c3960c6d16f86456a42f"
+      }
+    ],
+    "primaryOutcomesPreserved": true,
+    "newScientificCases": 0
+  },
+  "auditSha256": "b9c5b98fcac3464eb2bbe4d1e93ce112d272c93ce000bd6a856f0c7a3c61da6c",
+  "protocolSha256": "81bf8e5bf0a151c63df779b8036490e04ba18c2e4c1d5baf6b1defdbd425b6b1",
+  "oracleFreezeSha256": "86e81898e53fed7208323e4609d8aa7fb155718a675da3e00f4d5fdf99cd314d",
+  "sourceAcquisitionCaps": {
+    "requestSeconds": 30,
+    "sourceBytes": 20000000,
+    "decompressedXmlBytes": 20000000,
+    "requestAttemptsPerUrl": 1,
+    "scientificAttemptsPerChain": 1,
+    "scientificSecondsPerChain": 180
+  },
+  "officialSiftsLegacyFallbackChains": 30,
+  "retrospectiveDependencies": [
+    {
+      "path": "evaluation/trp/development/f3-reference-spec.json",
+      "sha256": "9e3660646b881ed268fa2ee196c7de7b1e3a26eb6cb489b0e0f084cab4cb5cf3",
+      "prospectivelyFrozen": false,
+      "reason": "Inherited typed specification fixture; numeric expectations were independently frozen without producer output."
+    }
+  ]
+}

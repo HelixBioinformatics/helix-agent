@@ -1,0 +1,414 @@
+[
+  {
+    "at": "2026-10-13T03:50:21.427Z",
+    "order": 0,
+    "source": "driver",
+    "outcome": "prepare-requested",
+    "detail": {
+      "id": "approval-rejected",
+      "budget": {
+        "cpus": 3,
+        "memoryBytes": 4294967296,
+        "workBytes": 268435456,
+        "wallSeconds": 1080,
+        "requireHardStorageLimit": false,
+        "origin": "Explicit engineering reference fixture; synthetic approval driver; not the thesis evaluation or provider budget"
+      }
+    }
+  },
+  {
+    "at": "2026-10-13T03:50:21.525Z",
+    "order": 1,
+    "source": "inventory",
+    "outcome": "requested",
+    "detail": {
+      "workspace": "/tmp/helix-test-36t0naaiktu"
+    }
+  },
+  {
+    "at": "2026-10-13T03:50:21.527Z",
+    "order": 2,
+    "source": "inventory",
+    "outcome": "observed",
+    "detail": {
+      "version": "trp-resources/1.2.0",
+      "observedAt": "2026-10-13T03:50:21.527Z",
+      "platform": "linux",
+      "architecture": "x64",
+      "host": "cachyos-x8664",
+      "workspace": "/tmp/helix-test-36t0naaiktu",
+      "filesystem": "16914836",
+      "cpus": 16,
+      "memoryBytes": 8976314368,
+      "freeBytes": 7612231680,
+      "sources": [
+        "os.availableParallelism",
+        "/proc/meminfo:MemAvailable",
+        "fs.statfs:bavail*bsize",
+        "/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/app.slice/ptyxis-spawn-5ef70805-ae6c-4b02-9384-90b452f3343c.scope:cpu.max,memory.max,memory.current",
+        "/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/app.slice:cpu.max,memory.max,memory.current",
+        "/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service:cpu.max,memory.max,memory.current",
+        "/sys/fs/cgroup/user.slice/user-1000.slice:cpu.max,memory.max,memory.current",
+        "/sys/fs/cgroup/user.slice:cpu.max,memory.max,memory.current",
+        "/sys/fs/cgroup:cpu.max,memory.max,memory.current"
+      ],
+      "limitations": [
+        "Host capacity clipped to inherited cgroup limits/headroom; not an exclusive allocation. Shared loads can change it.",
+        "Local Docker daemon/image and Nextflow version are separately checked before task launch. Remote Docker is rejected.",
+        "GPU not required; cluster access unconfirmed and unsupported by this route; aggregate disk quota unavailable."
+      ]
+    }
+  },
+  {
+    "at": "2026-10-13T03:50:21.528Z",
+    "order": 3,
+    "source": "protocol",
+    "outcome": "guard-requested",
+    "detail": {
+      "request": "Calcular la geometría de las unidades suministradas para 2xqh, cadena A.",
+      "detail": "{\"catalogHash\":\"e1c049cf4e4922d22d9f9f285582158b2f215170efa6520182007b990cf54815\",\"chain\":{\"origin\":{\"detail\":\"Published GeomeTRe 1.0 example for 2xqh A; development reference, excluded from held-out evaluation\",\"kind\":\"reference\",\"reference\":\"evaluation/trp/reference/geometre/units.json\"},\"value\":\"A\"},\"graph\":{\"edges\":[{\"contract\":{\"chain\":\"A\",\"confidence\":\"none\",\"format\":\"pdb\",\"insertionCodes\":\"preserved\",\"numbering\":\"pdb-author\",\"protein\":\"2xqh\",\"scale\":\"xyz:angstrom;B:angstrom^2\"},\"from\":\"structure\",\"input\":\"structure\",\"to\":\"select\"},{\"contract\":{\"chain\":\"A\",\"confidence\":\"none\",\"format\":\"pdb\",\"insertionCodes\":\"excluded\",\"numbering\":\"pdb-author\",\"protein\":\"2xqh\",\"scale\":\"xyz:angstrom;B:angstrom^2\"},\"from\":\"select\",\"input\":\"structure\",\"to\":\"geometry\"},{\"contract\":{\"chain\":\"A\",\"confidence\":\"none\",\"format\":\"json\",\"insertionCodes\":\"excluded\",\"numbering\":\"pdb-author\",\"protein\":\"2xqh\",\"scale\":\"author-residue-interval\"},\"from\":\"units\",\"input\":\"units\",\"to\":\"geometry\"}],\"nodes\":[{\"id\":\"structure\",\"operation\":\"input.structure\"},{\"id\":\"units\",\"operation\":\"input.units\"},{\"id\":\"select\",\"operation\":\"pdb.select\"},{\"id\":\"geometry\",\"operation\":\"geometre.geometry\"}]},\"insertions\":{\"origin\":{\"detail\":\"Published GeomeTRe 1.0 example for 2xqh A; development reference, excluded from held-out evaluation\",\"kind\":\"reference\",\"reference\":\"evaluation/trp/reference/geometre/units.json\"},\"value\":[{\"end\":372,\"start\":351}]},\"intent\":{\"origin\":{\"detail\":\"Published GeomeTRe 1.0 example for 2xqh A; development reference, excluded from held-out evaluation\",\"kind\":\"reference\",\"reference\":\"evaluation/trp/reference/geometre/units.json\"},\"value\":\"Calcular la geometría de las unidades suministradas para 2xqh, cadena A.\"},\"model\":{\"origin\":{\"detail\":\"Published GeomeTRe 1.0 example for 2xqh A; development reference, excluded from held-out evaluation\",\"kind\":\"reference\",\"reference\":\"evaluation/trp/reference/geometre/units.json\"},\"value\":1},\"structure\":{\"origin\":{\"detail\":\"Published GeomeTRe 1.0 example for 2xqh A; development reference, excluded from held-out evaluation\",\"kind\":\"reference\",\"reference\":\"evaluation/trp/reference/geometre/units.json\"},\"value\":{\"path\":\"input.pdb\",\"pdb\":\"2xqh\",\"sha256\":\"f674267d0ef4752a3d4da00497947bfc09f441a5c36d39593b72bc2ba390df0b\"}},\"units\":{\"origin\":{\"detail\":\"Published GeomeTRe 1.0 example for 2xqh A; development reference, excluded from held-out evaluation\",\"kind\":\"reference\",\"reference\":\"evaluation/trp/reference/geometre/units.json\"},\"value\":{\"contract\":{\"chain\":\"A\",\"confidence\":\"none\",\"format\":\"json\",\"insertionCodes\":\"excluded\",\"numbering\":\"pdb-author\",\"protein\":\"2xqh\",\"scale\":\"author-residue-interval\"},\"ranges\":[{\"end\":175,\"start\":161},{\"end\":189,\"start\":176},{\"end\":203,\"start\":190},{\"end\":217,\"start\":204},{\"end\":233,\"start\":218},{\"end\":249,\"start\":234},{\"end\":263,\"start\":250},{\"end\":276,\"start\":264},{\"end\":326,\"start\":305},{\"end\":350,\"start\":327},{\"end\":392,\"start\":373},{\"end\":416,\"start\":393}]}},\"version\":\"trp-spec/1.0.0\"} nextflow -C nextflow.config run main.nf -ansi-log false -with-trace trace.tsv"
+    }
+  },
+  {
+    "at": "2026-10-13T03:50:21.528Z",
+    "order": 4,
+    "source": "protocol",
+    "outcome": "guard-returned",
+    "detail": {
+      "result": {
+        "committed": false,
+        "enforced": false,
+        "violated": [],
+        "waived": [],
+        "unevaluated": [],
+        "cleared": [],
+        "refused": false
+      }
+    }
+  },
+  {
+    "at": "2026-10-13T03:50:21.586Z",
+    "order": 5,
+    "source": "driver",
+    "outcome": "prepare-returned",
+    "detail": {
+      "id": "37896de6-4b25-4fd8-8d23-a0aeddc843f0",
+      "digest": "96ab18e53e610f017231e2c4651c39fa881030a9000dfdd44d24741f73c6782c",
+      "truncated": false
+    }
+  },
+  {
+    "at": "2026-10-13T03:50:21.588Z",
+    "order": 6,
+    "source": "permission",
+    "outcome": "requested",
+    "detail": {
+      "permission": "trp_run",
+      "patterns": [
+        "96ab18e53e610f017231e2c4651c39fa881030a9000dfdd44d24741f73c6782c"
+      ],
+      "always": [],
+      "metadata": {
+        "digest": "96ab18e53e610f017231e2c4651c39fa881030a9000dfdd44d24741f73c6782c",
+        "command": [
+          "nextflow",
+          "-C",
+          "nextflow.config",
+          "run",
+          "main.nf",
+          "-ansi-log",
+          "false",
+          "-with-trace",
+          "trace.tsv"
+        ],
+        "specification": {
+          "version": "trp-spec/1.0.0",
+          "catalogHash": "e1c049cf4e4922d22d9f9f285582158b2f215170efa6520182007b990cf54815",
+          "intent": {
+            "value": "Calcular la geometría de las unidades suministradas para 2xqh, cadena A.",
+            "origin": {
+              "kind": "reference",
+              "reference": "evaluation/trp/reference/geometre/units.json",
+              "detail": "Published GeomeTRe 1.0 example for 2xqh A; development reference, excluded from held-out evaluation"
+            }
+          },
+          "structure": {
+            "value": {
+              "path": "input.pdb",
+              "sha256": "f674267d0ef4752a3d4da00497947bfc09f441a5c36d39593b72bc2ba390df0b",
+              "pdb": "2xqh"
+            },
+            "origin": {
+              "kind": "reference",
+              "reference": "evaluation/trp/reference/geometre/units.json",
+              "detail": "Published GeomeTRe 1.0 example for 2xqh A; development reference, excluded from held-out evaluation"
+            }
+          },
+          "chain": {
+            "value": "A",
+            "origin": {
+              "kind": "reference",
+              "reference": "evaluation/trp/reference/geometre/units.json",
+              "detail": "Published GeomeTRe 1.0 example for 2xqh A; development reference, excluded from held-out evaluation"
+            }
+          },
+          "model": {
+            "value": 1,
+            "origin": {
+              "kind": "reference",
+              "reference": "evaluation/trp/reference/geometre/units.json",
+              "detail": "Published GeomeTRe 1.0 example for 2xqh A; development reference, excluded from held-out evaluation"
+            }
+          },
+          "units": {
+            "value": {
+              "contract": {
+                "protein": "2xqh",
+                "chain": "A",
+                "format": "json",
+                "numbering": "pdb-author",
+                "insertionCodes": "excluded",
+                "confidence": "none",
+                "scale": "author-residue-interval"
+              },
+              "ranges": [
+                {
+                  "start": 161,
+                  "end": 175
+                },
+                {
+                  "start": 176,
+                  "end": 189
+                },
+                {
+                  "start": 190,
+                  "end": 203
+                },
+                {
+                  "start": 204,
+                  "end": 217
+                },
+                {
+                  "start": 218,
+                  "end": 233
+                },
+                {
+                  "start": 234,
+                  "end": 249
+                },
+                {
+                  "start": 250,
+                  "end": 263
+                },
+                {
+                  "start": 264,
+                  "end": 276
+                },
+                {
+                  "start": 305,
+                  "end": 326
+                },
+                {
+                  "start": 327,
+                  "end": 350
+                },
+                {
+                  "start": 373,
+                  "end": 392
+                },
+                {
+                  "start": 393,
+                  "end": 416
+                }
+              ]
+            },
+            "origin": {
+              "kind": "reference",
+              "reference": "evaluation/trp/reference/geometre/units.json",
+              "detail": "Published GeomeTRe 1.0 example for 2xqh A; development reference, excluded from held-out evaluation"
+            }
+          },
+          "insertions": {
+            "value": [
+              {
+                "start": 351,
+                "end": 372
+              }
+            ],
+            "origin": {
+              "kind": "reference",
+              "reference": "evaluation/trp/reference/geometre/units.json",
+              "detail": "Published GeomeTRe 1.0 example for 2xqh A; development reference, excluded from held-out evaluation"
+            }
+          },
+          "graph": {
+            "nodes": [
+              {
+                "id": "structure",
+                "operation": "input.structure"
+              },
+              {
+                "id": "units",
+                "operation": "input.units"
+              },
+              {
+                "id": "select",
+                "operation": "pdb.select"
+              },
+              {
+                "id": "geometry",
+                "operation": "geometre.geometry"
+              }
+            ],
+            "edges": [
+              {
+                "from": "structure",
+                "to": "select",
+                "input": "structure",
+                "contract": {
+                  "protein": "2xqh",
+                  "chain": "A",
+                  "format": "pdb",
+                  "numbering": "pdb-author",
+                  "insertionCodes": "preserved",
+                  "confidence": "none",
+                  "scale": "xyz:angstrom;B:angstrom^2"
+                }
+              },
+              {
+                "from": "select",
+                "to": "geometry",
+                "input": "structure",
+                "contract": {
+                  "protein": "2xqh",
+                  "chain": "A",
+                  "format": "pdb",
+                  "numbering": "pdb-author",
+                  "insertionCodes": "excluded",
+                  "confidence": "none",
+                  "scale": "xyz:angstrom;B:angstrom^2"
+                }
+              },
+              {
+                "from": "units",
+                "to": "geometry",
+                "input": "units",
+                "contract": {
+                  "protein": "2xqh",
+                  "chain": "A",
+                  "format": "json",
+                  "numbering": "pdb-author",
+                  "insertionCodes": "excluded",
+                  "confidence": "none",
+                  "scale": "author-residue-interval"
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  {
+    "at": "2026-10-13T03:50:21.588Z",
+    "order": 7,
+    "source": "permission",
+    "outcome": "allowed",
+    "detail": {
+      "actor": "authorized synthetic engineering callback"
+    }
+  },
+  {
+    "at": "2026-10-13T03:50:21.592Z",
+    "order": 8,
+    "source": "approval",
+    "outcome": "question-asked",
+    "detail": {
+      "id": "evt_13361fa97001JGZq7tvh15bYQW",
+      "type": "question.asked",
+      "location": {
+        "directory": "/tmp/helix-test-36t0naaiktu",
+        "project": {
+          "id": "global",
+          "directory": "/"
+        }
+      },
+      "data": {
+        "id": "que_13361fa96001yiRTSmtuQKzw94",
+        "sessionID": "ses_negative-approval-rejected",
+        "questions": [
+          {
+            "header": "Ejecutar análisis TRP",
+            "question": "Aprobación de la especificación 96ab18e53e610f017231e2c4651c39fa881030a9000dfdd44d24741f73c6782c.\nInfraestructura aprobada: equipo local.\nSe comprobará la configuración y se ejecutarán dos tareas simuladas de recorrido en seco, seguidas de dos tareas reales con Docker y Nextflow (máximo por tarea: 2 CPU, 2 GB, 3 minutos), sin reintentos. Se guardarán entradas, código, aprobación, validación y resultados en .helix/trp/. Esta ruta calcula geometría de unidades suministradas; no detecta repeticiones.\n\nPresupuesto propuesto (su aprobación autoriza estos límites):\n{\n  \"cpus\": 3,\n  \"memoryBytes\": 4294967296,\n  \"workBytes\": 268435456,\n  \"wallSeconds\": 1080,\n  \"requireHardStorageLimit\": false,\n  \"origin\": \"Explicit engineering reference fixture; synthetic approval driver; not the thesis evaluation or provider budget\"\n}\nReserva calculada y supuestos:\n{\n  \"version\": \"trp-resources/1.2.0\",\n  \"sourceBytes\": 359397,\n  \"selectionBytes\": 150911,\n  \"bundleBytes\": 1111763,\n  \"counts\": {\n    \"scientificTasks\": 2,\n    \"stubTasks\": 2,\n    \"remoteScientificCalls\": 0,\n    \"retries\": 0\n  },\n  \"cpus\": 3,\n  \"memoryBytes\": 4294967296,\n  \"workBytes\": 20971520,\n  \"wallSeconds\": 1080,\n  \"storage\": {\n    \"kind\": \"estimate\",\n    \"formula\": \"ceil((12*1048576 + 7*bundleBytes + 4*selectionBytes)/4096)*4096\",\n    \"hardLimit\": false\n  },\n  \"assumptions\": [\n    \"Two sequential tasks per traversal; one stub traversal then one real traversal; no retry or resume.\",\n    \"Task allocation: 2 CPUs/2 GiB. Controller allocation: 1 CPU/2 GiB; cgroup enforcement requires an independently verified operator sandbox. CPU bandwidth is not an exclusive core reservation.\",\n    \"Each traversal has an 8 minute watchdog; probes/configuration reserve another 120 seconds. This is a configured timeout, not a runtime prediction.\",\n    \"Storage estimates allocated workspace bytes including working copies, logs and portable evidence; an independently observed XFS project quota enforces an approved budget only inside an operator allocation.\",\n    \"The exact image and Nextflow distribution must already be cached. Image pulls/builds and shared Docker/Nextflow caches are outside workBytes.\",\n    \"Zero remote scientific calls applies to the offline workflow only; agent provider tokens, cost and conversation calls are not measured here.\"\n  ]\n}\nEl espacio de trabajo es una estimación sin cuota agregada. El presupuesto global de API no está medido por esta ruta.\nProtocolo comprobado:\n{\"check\":{\"cleared\":[],\"committed\":false,\"enforced\":false,\"refused\":false,\"unevaluated\":[],\"violated\":[],\"waived\":[]},\"ledger\":{\"amendments\":[],\"refusals\":[],\"unreadable\":[]},\"state\":null}\n\n\nEspecificación completa y fuentes declaradas:\n{\n  \"version\": \"trp-spec/1.0.0\",\n  \"catalogHash\": \"e1c049cf4e4922d22d9f9f285582158b2f215170efa6520182007b990cf54815\",\n  \"intent\": {\n    \"value\": \"Calcular la geometría de las unidades suministradas para 2xqh, cadena A.\",\n    \"origin\": {\n      \"kind\": \"reference\",\n      \"reference\": \"evaluation/trp/reference/geometre/units.json\",\n      \"detail\": \"Published GeomeTRe 1.0 example for 2xqh A; development reference, excluded from held-out evaluation\"\n    }\n  },\n  \"structure\": {\n    \"value\": {\n      \"path\": \"input.pdb\",\n      \"sha256\": \"f674267d0ef4752a3d4da00497947bfc09f441a5c36d39593b72bc2ba390df0b\",\n      \"pdb\": \"2xqh\"\n    },\n    \"origin\": {\n      \"kind\": \"reference\",\n      \"reference\": \"evaluation/trp/reference/geometre/units.json\",\n      \"detail\": \"Published GeomeTRe 1.0 example for 2xqh A; development reference, excluded from held-out evaluation\"\n    }\n  },\n  \"chain\": {\n    \"value\": \"A\",\n    \"origin\": {\n      \"kind\": \"reference\",\n      \"reference\": \"evaluation/trp/reference/geometre/units.json\",\n      \"detail\": \"Published GeomeTRe 1.0 example for 2xqh A; development reference, excluded from held-out evaluation\"\n    }\n  },\n  \"model\": {\n    \"value\": 1,\n    \"origin\": {\n      \"kind\": \"reference\",\n      \"reference\": \"evaluation/trp/reference/geometre/units.json\",\n      \"detail\": \"Published GeomeTRe 1.0 example for 2xqh A; development reference, excluded from held-out evaluation\"\n    }\n  },\n  \"units\": {\n    \"value\": {\n      \"contract\": {\n        \"protein\": \"2xqh\",\n        \"chain\": \"A\",\n        \"format\": \"json\",\n        \"numbering\": \"pdb-author\",\n        \"insertionCodes\": \"excluded\",\n        \"confidence\": \"none\",\n        \"scale\": \"author-residue-interval\"\n      },\n      \"ranges\": [\n        {\n          \"start\": 161,\n          \"end\": 175\n        },\n        {\n          \"start\": 176,\n          \"end\": 189\n        },\n        {\n          \"start\": 190,\n          \"end\": 203\n        },\n        {\n          \"start\": 204,\n          \"end\": 217\n        },\n        {\n          \"start\": 218,\n          \"end\": 233\n        },\n        {\n          \"start\": 234,\n          \"end\": 249\n        },\n        {\n          \"start\": 250,\n          \"end\": 263\n        },\n        {\n          \"start\": 264,\n          \"end\": 276\n        },\n        {\n          \"start\": 305,\n          \"end\": 326\n        },\n        {\n          \"start\": 327,\n          \"end\": 350\n        },\n        {\n          \"start\": 373,\n          \"end\": 392\n        },\n        {\n          \"start\": 393,\n          \"end\": 416\n        }\n      ]\n    },\n    \"origin\": {\n      \"kind\": \"reference\",\n      \"reference\": \"evaluation/trp/reference/geometre/units.json\",\n      \"detail\": \"Published GeomeTRe 1.0 example for 2xqh A; development reference, excluded from held-out evaluation\"\n    }\n  },\n  \"insertions\": {\n    \"value\": [\n      {\n        \"start\": 351,\n        \"end\": 372\n      }\n    ],\n    \"origin\": {\n      \"kind\": \"reference\",\n      \"reference\": \"evaluation/trp/reference/geometre/units.json\",\n      \"detail\": \"Published GeomeTRe 1.0 example for 2xqh A; development reference, excluded from held-out evaluation\"\n    }\n  },\n  \"graph\": {\n    \"nodes\": [\n      {\n        \"id\": \"structure\",\n        \"operation\": \"input.structure\"\n      },\n      {\n        \"id\": \"units\",\n        \"operation\": \"input.units\"\n      },\n      {\n        \"id\": \"select\",\n        \"operation\": \"pdb.select\"\n      },\n      {\n        \"id\": \"geometry\",\n        \"operation\": \"geometre.geometry\"\n      }\n    ],\n    \"edges\": [\n      {\n        \"from\": \"structure\",\n        \"to\": \"select\",\n        \"input\": \"structure\",\n        \"contract\": {\n          \"protein\": \"2xqh\",\n          \"chain\": \"A\",\n          \"format\": \"pdb\",\n          \"numbering\": \"pdb-author\",\n          \"insertionCodes\": \"preserved\",\n          \"confidence\": \"none\",\n          \"scale\": \"xyz:angstrom;B:angstrom^2\"\n        }\n      },\n      {\n        \"from\": \"select\",\n        \"to\": \"geometry\",\n        \"input\": \"structure\",\n        \"contract\": {\n          \"protein\": \"2xqh\",\n          \"chain\": \"A\",\n          \"format\": \"pdb\",\n          \"numbering\": \"pdb-author\",\n          \"insertionCodes\": \"excluded\",\n          \"confidence\": \"none\",\n          \"scale\": \"xyz:angstrom;B:angstrom^2\"\n        }\n      },\n      {\n        \"from\": \"units\",\n        \"to\": \"geometry\",\n        \"input\": \"units\",\n        \"contract\": {\n          \"protein\": \"2xqh\",\n          \"chain\": \"A\",\n          \"format\": \"json\",\n          \"numbering\": \"pdb-author\",\n          \"insertionCodes\": \"excluded\",\n          \"confidence\": \"none\",\n          \"scale\": \"author-residue-interval\"\n        }\n      }\n    ]\n  }\n}\n\nComprobaciones omitidas:\nOrigins are declared by the proposer; source authorship is not independently authenticated\nUnits are supplied; GeomeTRe does not detect or validate repeat membership\nStatic graph validation is not a structural assessment; preparation must attach the separate versioned structural report\nIndependent annotator and held-out evaluation remain pending\n\nLa aprobación se invalida si cambian la propuesta, las entradas, el catálogo o el código generado.",
+            "options": [
+              {
+                "label": "Aprobar y ejecutar",
+                "description": "Ejecutar esta especificación y conservar sus artefactos."
+              },
+              {
+                "label": "Rechazar",
+                "description": "Volver a la especificación sin ejecutar."
+              }
+            ],
+            "multiple": false,
+            "custom": false
+          }
+        ],
+        "tool": {
+          "messageID": "msg_negative-approval-rejected",
+          "callID": "negative-approval-rejected"
+        }
+      }
+    }
+  },
+  {
+    "at": "2026-10-13T03:50:21.594Z",
+    "order": 9,
+    "source": "driver",
+    "outcome": "question-reply-requested",
+    "detail": {
+      "requestID": "que_13361fa96001yiRTSmtuQKzw94",
+      "answers": [
+        [
+          "Rechazar"
+        ]
+      ]
+    }
+  },
+  {
+    "at": "2026-10-13T03:50:21.595Z",
+    "order": 10,
+    "source": "approval",
+    "outcome": "question-replied",
+    "detail": {
+      "id": "evt_13361fa9b001s2chlL6ZaGGllI",
+      "type": "question.replied",
+      "location": {
+        "directory": "/tmp/helix-test-36t0naaiktu",
+        "project": {
+          "id": "global",
+          "directory": "/"
+        }
+      },
+      "data": {
+        "sessionID": "ses_negative-approval-rejected",
+        "requestID": "que_13361fa96001yiRTSmtuQKzw94",
+        "answers": [
+          [
+            "Rechazar"
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "at": "2026-10-13T03:50:21.643Z",
+    "order": 11,
+    "source": "driver",
+    "outcome": "terminal-observed",
+    "detail": {
+      "failed": true,
+      "cause": "WorkflowError: The proposal was not approved\n    at <anonymous> (/home/webiwabou/Projects/bioinformatica-org/packages/helix/src/trp/workflow.ts:341:44)\n    at Tool.execute (/home/webiwabou/Projects/bioinformatica-org/packages/helix/src/tool/tool.ts:145:38)"
+    }
+  }
+]

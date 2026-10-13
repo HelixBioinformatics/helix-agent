@@ -1,0 +1,89 @@
+{
+  "schema": "helix-post-campaign-producer-amendment/1.0",
+  "recordedAt": "2026-10-13T16:42:16.208975+00:00",
+  "phase": "local-and-live-default-validation-passed",
+  "originalFreezeSha256": "c33fb8b69e6361fb90bac025ccbf62fb590122b93b5f78d8da754b3886d28f20",
+  "campaignSummaryPath": "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/summary.json",
+  "campaignSummarySha256": "a53095ee21ad8a1a4ba2efcfb7245e3e082cf5d1b1a33419685150f7026970e4",
+  "quiescencePath": "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/final-quiescence.json",
+  "quiescenceSha256": "3aac5f5c80421d416f61e489d9c0095d00d1059458cf96b33072a38198cab24a",
+  "all50CloudCasesObservedBeforeApplication": true,
+  "frozenScientificEvidenceRewritten": false,
+  "thresholdsChanged": false,
+  "repeatedCampaignCases": false,
+  "originalFortyDenominatorUnchanged": true,
+  "files": [
+    {
+      "path": "packages/helix/src/trp/workflow.ts",
+      "archivedPath": "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/source-snapshots/frozen-original40/packages/helix/src/trp/workflow.ts",
+      "sha256": "1a2e23517748532d62a44cb69b5502c5f97f6abfc068f48920ff0cd263715ccb",
+      "bytes": 32942,
+      "frozenSha256": "1a2e23517748532d62a44cb69b5502c5f97f6abfc068f48920ff0cd263715ccb",
+      "currentSha256": "986f4b13e1c2661ede6f42114ec23bc4a5e891872a401d1874c992e9ba3b5cc7"
+    },
+    {
+      "path": "packages/helix/src/trp/verify_bundle.py.txt",
+      "archivedPath": "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/source-snapshots/frozen-original40/packages/helix/src/trp/verify_bundle.py.txt",
+      "sha256": "86aec3f5034483c94fd814bf39df62e237f26ac91ea90d37dd0617872f80a3f5",
+      "bytes": 26780,
+      "frozenSha256": "86aec3f5034483c94fd814bf39df62e237f26ac91ea90d37dd0617872f80a3f5",
+      "currentSha256": "952e79d5cecae707954ed667d231838569323dffdd068ab43edd770284841eb9"
+    },
+    {
+      "path": "packages/helix/src/trp/remote_runner.py.txt",
+      "archivedPath": "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/source-snapshots/frozen-original40/packages/helix/src/trp/remote_runner.py.txt",
+      "sha256": "d1d86992a0922fe2511622e70c4e770914a669324b3b59f99a55808637f5fa2e",
+      "bytes": 26383,
+      "frozenSha256": "d1d86992a0922fe2511622e70c4e770914a669324b3b59f99a55808637f5fa2e",
+      "currentSha256": "f2aa0d714848da79726bf1126ed5611e999b941cd0ee653067a901a9873e1805"
+    }
+  ],
+  "purpose": [
+    "Use verified execution backend in run/completion/tool metadata",
+    "Require strict24methods/prose and10mandatory gates; explicitly anchored legacy-backend compatibility only",
+    "Persist owned native job IDs and raw terminal sources after queue disappearance; UNKNOWN remains explicit",
+    "Monitor Nextflow process groups; native failures stop the traversal, own cleanup remains attempted even when tracking reads fail"
+  ],
+  "historicalCompatibility": "Raw exports remain unchanged. The new verifier requires --allow-legacy-strict-backend and an external --sha256 for recognized historical strict success metadata; failed strict exports remain failed.",
+  "appliedAt": "2026-10-13T16:42:58.335416+00:00",
+  "patches": [
+    {
+      "path": "evaluation/trp/campaign-20261012/checks/backend-metadata-staged-20261013/workflow.patch",
+      "sha256": "e062a8c7171b42069a70fb49c112a43974ec6f2d84c043f15ced9b62572cf1bd"
+    },
+    {
+      "path": "evaluation/trp/campaign-20261012/checks/backend-metadata-staged-20261013/verify_bundle.patch",
+      "sha256": "997d8377172d9eeb62b42a766cb901b6865d0f0ba9892b2f0ffaf494cd34e40e"
+    },
+    {
+      "path": "evaluation/trp/campaign-20261012/checks/backend-metadata-staged-20261013/test-addition.patch",
+      "sha256": "b8bfce4edab49c26266868da8687a45ad19d88948241980380762788aad37032"
+    },
+    {
+      "path": "evaluation/trp/campaign-20261012/checks/native-job-tracking-staged-20261013/revision-2/production.patch",
+      "sha256": "31d0dc230ec985e6896ddd5640bec314bb7d42c8868a8208e8baa0511839f2f8"
+    }
+  ],
+  "testsAdded": [
+    {
+      "path": "packages/helix/test/trp/workflow-backend.test.ts",
+      "sha256": "46ead7759736ac5ca4b1aa1fad6c3b1729b9080f6d250e87bab2daad86b011a6"
+    },
+    {
+      "path": "packages/helix/test/trp/test_remote_native_tracking.py",
+      "sha256": "8e9980cf3cb25ad3f1c84180acd3289a2deb2e5748777e200f34f15ee9053301"
+    }
+  ],
+  "localValidationPath": "evaluation/trp/campaign-20261012/checks/post-campaign-production-20261013/summary.json",
+  "localValidationSha256": "fa5d578fb5e9983087a7042204f85fdc4761ef12e90a3b12ef407d2e460b9324",
+  "localValidationVerified": true,
+  "productionCommit": "9ada336",
+  "operationalHelperCommit": "0dcb38aa97cd41883a3181ebda720cb0aeab5167",
+  "closedAt": "2026-10-13T17:51:50.851378+00:00",
+  "cloudValidationPath": "evaluation/trp/campaign-20261012/checks/post-campaign-production-20261013/cloud/summary.json",
+  "cloudValidationSha256": "79d058fee282b559e7133ce43d602b3633484d6f5829a4d5e1bd4dae0df6530f",
+  "cloudValidationVerified": true,
+  "postCorrectionQuiescencePath": "evaluation/trp/campaign-20261012/checks/post-campaign-production-20261013/cloud/post-quiescence.json",
+  "postCorrectionQuiescenceSha256": "3511e2ef52679a46d77c508eb939c142f761b3b07b3783d46ce4e93c64403856",
+  "cloudValidationChecks": 89
+}

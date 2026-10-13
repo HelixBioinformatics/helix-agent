@@ -1,0 +1,28 @@
+
+Traceback (most recent call last):
+  File "/home/webiwabou/Projects/bioinformatica-org/script/tesis/structural_campaign.py", line 285, in <module>
+    main()
+  File "/home/webiwabou/Projects/bioinformatica-org/script/tesis/structural_campaign.py", line 279, in main
+    score_one(args.input, args.output)
+  File "/home/webiwabou/Projects/bioinformatica-org/script/tesis/structural_campaign.py", line 183, in score_one
+    result = run_program(program_class=Program, args=[str(input_path), "keep_hydrogens=False", "do_flips=False", "nuclear=False", "b_factor_cutoff=None", "fast=False", "verbose=False", "json=False"], logger=buffer)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/webiwabou/.local/state/helix/structural-20261012/venv/lib/python3.12/site-packages/iotbx/cli_parser.py", line 999, in run_program
+    task.run()
+  File "/home/webiwabou/.local/state/helix/structural-20261012/venv/lib/python3.12/site-packages/mmtbx/programs/clashscore2.py", line 111, in run
+    self.results = clashscore2(
+                   ^^^^^^^^^^^^
+  File "/home/webiwabou/.local/state/helix/structural-20261012/venv/lib/python3.12/site-packages/mmtbx/validation/clashscore2.py", line 94, in __init__
+    data_manager_model,_ = check_and_add_hydrogen(
+                           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/webiwabou/.local/state/helix/structural-20261012/venv/lib/python3.12/site-packages/mmtbx/validation/clashscore2.py", line 646, in check_and_add_hydrogen
+    reduce_add_h_obj.run()
+  File "/home/webiwabou/.local/state/helix/structural-20261012/venv/lib/python3.12/site-packages/mmtbx/hydrogens/reduce_hydrogen.py", line 303, in run
+    self.place_n_terminal_propeller(pdb_hierarchy = pdb_hierarchy)
+  File "/home/webiwabou/.local/state/helix/structural-20261012/venv/lib/python3.12/site-packages/mmtbx/hydrogens/reduce_hydrogen.py", line 438, in place_n_terminal_propeller
+    bonds=bonds_in_restraints(n, exclude_hydrogens=True)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/webiwabou/.local/state/helix/structural-20261012/venv/lib/python3.12/site-packages/mmtbx/hydrogens/reduce_hydrogen.py", line 121, in bonds_in_restraints
+    for b in cc_cif.get('_chem_comp_bond',[]):
+             ^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'get'

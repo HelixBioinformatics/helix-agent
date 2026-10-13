@@ -1,0 +1,67 @@
+{
+  "schema": "helix-r24-canonical-source-review/1.0",
+  "reviewedAtUtc": "2026-10-13T04:20:10.503374+00:00",
+  "verified": true,
+  "liveRunsRepeated": false,
+  "cloudOperations": false,
+  "original40": {
+    "planned": 40,
+    "feasible": 26,
+    "infeasible": 14,
+    "correct": 34,
+    "falseRejections": 6,
+    "falseAcceptances": 0,
+    "falseRejectionRate": 0.23076923076923078,
+    "accuracy": 0.85,
+    "dispatchedAttempts": 42,
+    "historicalUnknownAttemptsRetained": 2,
+    "unresolvedUniqueCases": 0,
+    "falseRejectionWilson95": [
+      0.11033849405783291,
+      0.42051554078943687
+    ],
+    "accuracyWilson95": [
+      0.709276756335103,
+      0.9293881228267964
+    ],
+    "unchangedFalseRejectionThreshold": 0.05,
+    "thresholdMet": false
+  },
+  "extensionSeparate": {
+    "planned": 6,
+    "feasible": 0,
+    "infeasible": 6,
+    "correct": 6,
+    "chosenAfterOriginalObserved": true,
+    "falseRejectionRate": null
+  },
+  "evidenceManifest": {
+    "path": "evaluation/trp/campaign-20261012/cloud/lab2/r24-evidence-manifest.json",
+    "sha256": "6ac7492e8161a9e39deedc7b6f4e7c90d5e02ca17f41fb5762f429146d8591f1",
+    "files": 7763,
+    "bytes": 415593508,
+    "allFileHashesMatch": true,
+    "anchorOutsideIncludedRuns": "evaluation/trp/campaign-20261012/cloud/lab2/r24-evidence-manifest.json.anchor.json"
+  },
+  "scientificR24FalseRejectionRate": null,
+  "aggregateActualClientPlusRemoteR22Enforced": false,
+  "scope": "Head-workspace development contrast with a materialized portable copy; actual client preparation/export outside the oracle. Same-tool CSV validation on one protein is not biological or reserved evaluation. Wilson intervals are descriptive under a binomial convention; repeated graph variants on one protein do not support protein-level generalization.",
+  "sources": [
+    {
+      "path": "evaluation/trp/campaign-20261012/cloud/lab2/r24-summary.json",
+      "sha256": "a36bee8d3bd32538550d16eda6d5e3392d3e8061b3148c62248815faee9a687b"
+    },
+    {
+      "path": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/r24-campaign/all-original-attempts.json",
+      "sha256": "392dba3e9b8aeeefccd167c1236ceb4aac84d2498cd5a242dde986eeeb28e645"
+    },
+    {
+      "path": "evaluation/trp/campaign-20261012/cloud/lab2/r24-extension/summary.json",
+      "sha256": "a82b42c8dfbc8a2590351fb586ce4ef5fc96a5eae7d68845f2a8323431b9e5bf"
+    },
+    {
+      "path": "evaluation/trp/campaign-20261012/trace/scope-gap-r24-closeout.json",
+      "sha256": "ecfc9803c0b2b4bb016eec6b3609889a9c09cdfbbfaa756a17c6ec34ce46dd8e"
+    }
+  ]
+}

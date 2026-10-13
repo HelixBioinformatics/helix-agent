@@ -1,0 +1,93 @@
+{
+  "schema": "helix-kernel-quota-copy-mechanism/1.0",
+  "freezeSha256": "0df80c061f9834534a3e0ab175c8ff539506c65fd5b425ddca063033e100509b",
+  "rows": [
+    {
+      "case": "low64",
+      "before": {
+        "globalFreeBytes": 61440,
+        "globalFreeInodes": 1046356,
+        "sourceDevice": 66305,
+        "sourceBytes": 359397,
+        "sourceBlocksBytes": 360448,
+        "destinationParentDevice": 1795,
+        "destinationExistedBefore": false,
+        "sourceRegular": true
+      },
+      "markers": {
+        "HELIX_COPY_CONTROL": {
+          "pid": 18597,
+          "atEpochSeconds": 1791869513.315,
+          "source": "/opt/helix-strict-runtime/campaign/smoke7/G-valid-001/source.pdb",
+          "destination": "/shared/helix-strict/hrs6667650bdfc142a5/client/input.pdb",
+          "inputBytes": 359397,
+          "sourceSha256": "f674267d0ef4752a3d4da00497947bfc09f441a5c36d39593b72bc2ba390df0b",
+          "operation": "node:fs/promises.copyFile",
+          "fullWorkflowOracle": false
+        },
+        "HELIX_COPY_CONTROL_THROW": {
+          "pid": 18597,
+          "atEpochSeconds": 1791869513.319,
+          "status": "failed",
+          "name": "Error",
+          "code": "ENOSPC",
+          "errno": -28,
+          "syscall": "copyfile",
+          "path": "/opt/helix-strict-runtime/campaign/smoke7/G-valid-001/source.pdb",
+          "dest": "/shared/helix-strict/hrs6667650bdfc142a5/client/input.pdb",
+          "message": "ENOSPC: no space left on device, copyfile '/opt/helix-strict-runtime/campaign/smoke7/G-valid-001/source.pdb' -> '/shared/helix-strict/hrs6667650bdfc142a5/client/input.pdb'",
+          "fullWorkflowOracle": false
+        }
+      },
+      "exit": 1,
+      "controllerAndTracerReaped": true,
+      "allocatedPeak": 4096,
+      "kernelFailureLines": [
+        "[pid 18601] 1791869513.318391 openat(AT_FDCWD</shared/helix-strict/hrs6667650bdfc142a5/client>, \"/shared/helix-strict/hrs6667650bdfc142a5/client/input.pdb\", O_WRONLY|O_CREAT, 0666) = -1 ENOSPC (No space left on device)"
+      ],
+      "allocationPolicySha256": "8eda2d8629d8e2b50b7ea907ac0781a71dd7bfcdcd8aa952d2b142c68da4d8c1"
+    },
+    {
+      "case": "generous",
+      "before": {
+        "globalFreeBytes": 134213632,
+        "globalFreeInodes": 1046348,
+        "sourceDevice": 66305,
+        "sourceBytes": 359397,
+        "sourceBlocksBytes": 360448,
+        "destinationParentDevice": 1795,
+        "destinationExistedBefore": false,
+        "sourceRegular": true
+      },
+      "markers": {
+        "HELIX_COPY_CONTROL": {
+          "pid": 19039,
+          "atEpochSeconds": 1791869525.929,
+          "source": "/opt/helix-strict-runtime/campaign/smoke7/G-valid-001/source.pdb",
+          "destination": "/shared/helix-strict/hrs0b533a1b116b42d5/client/input.pdb",
+          "inputBytes": 359397,
+          "sourceSha256": "f674267d0ef4752a3d4da00497947bfc09f441a5c36d39593b72bc2ba390df0b",
+          "operation": "node:fs/promises.copyFile",
+          "fullWorkflowOracle": false
+        },
+        "HELIX_COPY_CONTROL_RESULT": {
+          "pid": 19039,
+          "atEpochSeconds": 1791869525.935,
+          "status": "succeeded",
+          "bytes": 359397,
+          "sha256": "f674267d0ef4752a3d4da00497947bfc09f441a5c36d39593b72bc2ba390df0b",
+          "equalsSource": true,
+          "fullWorkflowOracle": false
+        }
+      },
+      "exit": 0,
+      "controllerAndTracerReaped": true,
+      "allocatedPeak": 364544,
+      "kernelFailureLines": [],
+      "allocationPolicySha256": "b2b96296bcedb47c529fbb11bfd378833ff43ee7951341239ba4a5ecc7f71e15"
+    }
+  ],
+  "fullWorkflowOracle": false,
+  "scope": "Fresh independently capped allocations; exact identical Bun copy primitive and same dense359397-byte source; all global health and enforced quota sources retained",
+  "mechanismQualified": false
+}

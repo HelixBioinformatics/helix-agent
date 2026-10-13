@@ -1,0 +1,12 @@
+{
+  "argv": [
+    "python",
+    "script/tesis/structural_runtime_contrast.py",
+    "verify"
+  ],
+  "exitCode": 1,
+  "stdout": "",
+  "stderr": "Traceback (most recent call last):\n  File \"/home/webiwabou/Projects/bioinformatica-org/script/tesis/structural_runtime_contrast.py\", line 195, in <module>\n    globals()[args.action]()\n    ~~~~~~~~~~~~~~~~~~~~~~^^\n  File \"/home/webiwabou/Projects/bioinformatica-org/script/tesis/structural_runtime_contrast.py\", line 164, in verify\n    freeze = verify_frozen()\n  File \"/home/webiwabou/Projects/bioinformatica-org/script/tesis/structural_runtime_contrast.py\", line 88, in verify_frozen\n    if freeze[\"sources\"] != sources():\n                            ~~~~~~~^^\n  File \"/home/webiwabou/Projects/bioinformatica-org/script/tesis/structural_runtime_contrast.py\", line 56, in sources\n    if sha(path) != expected:\n       ~~~^^^^^^\n  File \"/home/webiwabou/Projects/bioinformatica-org/script/tesis/structural_runtime_contrast.py\", line 29, in sha\n    return hashlib.sha256(path.read_bytes()).hexdigest()\n                          ~~~~~~~~~~~~~~~^^\n  File \"/usr/lib/python3.14/pathlib/__init__.py\", line 777, in read_bytes\n    with self.open(mode='rb', buffering=0) as f:\n         ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.14/pathlib/__init__.py\", line 771, in open\n    return io.open(self, mode, buffering, encoding, errors, newline)\n           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nFileNotFoundError: [Errno 2] No such file or directory: '/usr/lib/python3.12/site-packages/mmtbx/hydrogens/reduce_hydrogen.py'\n",
+  "observedAtUtc": "2026-10-13T02:45:06.266962+00:00",
+  "sourceSha256": "858e89d063439dfd5618112966a4cc4c1364e4fe71b5a131f895f2c067bceedc"
+}

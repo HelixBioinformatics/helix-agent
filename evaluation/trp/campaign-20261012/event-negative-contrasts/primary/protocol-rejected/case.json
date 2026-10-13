@@ -1,0 +1,31 @@
+{
+  "preparationSucceeded": false,
+  "terminalFailed": true,
+  "cause": "WorkflowError: Binding protocol violated or contains unevaluated constraints\n    at <anonymous> (/home/webiwabou/Projects/bioinformatica-org/packages/helix/src/trp/workflow.ts:161:19)\n    at Tool.execute (/home/webiwabou/Projects/bioinformatica-org/packages/helix/src/tool/tool.ts:145:38)",
+  "failureCode": "protocol-rejected",
+  "runDirectory": null,
+  "sourceFreezeSha256": "e35b57d0e9e81eaf0055281df856bf9226aefbd25529332e728e731b00b1e7bd",
+  "actionOracleBeforeProducerRead": true,
+  "expected": {
+    "id": "protocol-rejected",
+    "expectedEvents": [],
+    "expectedPermissionActions": 0,
+    "expectedApprovalActions": 0,
+    "expectedProtocolGuards": 1,
+    "expectedAdmissionDecision": true,
+    "expectedPreparationRecord": {
+      "protocolRefused": true,
+      "admissionAccepted": true,
+      "constraintId": "geometry-prohibited"
+    },
+    "causeCode": "protocol-rejected"
+  },
+  "actualHostInventory": true,
+  "syntheticCallbacks": true,
+  "modelCalls": 0,
+  "awsOperations": 0,
+  "forbiddenExternalLaunchAttempts": 0,
+  "scientificTasksLaunched": 0,
+  "humanLabels": 0,
+  "scientificMetrics": null
+}

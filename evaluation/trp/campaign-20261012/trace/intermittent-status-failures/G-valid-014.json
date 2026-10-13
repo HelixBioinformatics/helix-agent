@@ -1,0 +1,132 @@
+{
+  "schema": "helix-remote-campaign-audit/1.0",
+  "bundle": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab2/workflows/G-valid-014/failure/48b268214ec3-eaae97cc-9adf-43a7-9626-d54b2908463a/evidence",
+  "externally_recorded_manifest_sha256": "109491310a99e20856632abe709464351764f629cef17c0487da3dd4cd681161",
+  "expected_outcome": "cancelled",
+  "trusted_verifier_sha256": "5a60afbfd245f2b06ebcec5e409b971d7131a8faaa2f01b136f40de2283378a6",
+  "checks": [
+    {
+      "name": "portable_integrity_and_cold_counts",
+      "passed": true,
+      "result": {
+        "ok": true,
+        "files": 134,
+        "bytes": 4000894,
+        "manifestSha256": "109491310a99e20856632abe709464351764f629cef17c0487da3dd4cd681161",
+        "status": "failed",
+        "externallyAnchored": true,
+        "scope": "integrity, declared links and cold counts; not biological accuracy or authorship"
+      }
+    },
+    {
+      "name": "expected_outcome",
+      "passed": true,
+      "result": {
+        "outcome": "cancelled"
+      }
+    },
+    {
+      "name": "source_backed_methods_and_template",
+      "passed": true,
+      "result": {
+        "fields_checked": 20,
+        "required_fields": 18,
+        "markdown_reproduced_from_sources": true,
+        "unavailable_fields": []
+      }
+    },
+    {
+      "name": "event_chain_and_independent_gate_oracle",
+      "passed": true,
+      "result": {
+        "recorded_events": 11,
+        "source_counts": {
+          "admission": 3,
+          "protocol": 1,
+          "permission": 2,
+          "approval": 2,
+          "execution": 3
+        },
+        "independent_success_path_gate_events": 0,
+        "external_action_oracle_expected_events": null,
+        "limitation": "Mandatory path coverage only unless an independent action oracle is supplied; not full-session human coverage or protocol-violation sensitivity."
+      }
+    },
+    {
+      "name": "approval_configuration_and_transfer_bindings",
+      "passed": true,
+      "result": {
+        "run_id": "eaae97cc-9adf-43a7-9626-d54b2908463a",
+        "digest": "48b268214ec34a493c9e248bdc1c63d8a55cd35bd6aa964667bbeedc614a1d39",
+        "bound_files": 21,
+        "transferred_files": 121,
+        "target_fingerprint": "94a5cbb3ea611bf3435bbb5b82537b8838660e3d57a93243b20a061820ccf18a",
+        "terminal_status": "cancelled",
+        "approval_actor": "Question.Service answer; actor provenance must be disclosed by the campaign driver."
+      }
+    },
+    {
+      "name": "native_cancellation_confirmed",
+      "passed": true,
+      "result": {
+        "at": "2026-10-13T01:20:32.933996+00:00",
+        "confirmed": true,
+        "remaining": [],
+        "requested": []
+      }
+    }
+  ],
+  "scope": "Actual recorded remote engineering execution and source-backed methods; no independent human agreement or physical specificity.",
+  "partial_execution": {
+    "terminal": {
+      "digest": "48b268214ec34a493c9e248bdc1c63d8a55cd35bd6aa964667bbeedc614a1d39",
+      "error": "Command exit 1: nextflow: N E X T F L O W  ~  version 25.10.4\nLaunching `main.nf` [hungry_roentgen] DSL2 - revision: 0f14c41768\n[a0/b4d462] Submitted process > SELECT\n[ad/69adf9] Submitted process > GEOMETRY\nWARN: Killing running tasks (1)\n",
+      "finishedAt": "2026-10-13T01:20:32.934242+00:00",
+      "id": "eaae97cc-9adf-43a7-9626-d54b2908463a",
+      "status": "cancelled"
+    },
+    "native_tasks_observed_in_traces": [
+      {
+        "traversal": "scientific",
+        "process": "SELECT",
+        "native_id": "92",
+        "state": "COMPLETED",
+        "exit": "0"
+      },
+      {
+        "traversal": "scientific",
+        "process": "GEOMETRY",
+        "native_id": "93",
+        "state": "ABORTED",
+        "exit": "-"
+      },
+      {
+        "traversal": "stub",
+        "process": "SELECT",
+        "native_id": "90",
+        "state": "COMPLETED",
+        "exit": "0"
+      },
+      {
+        "traversal": "stub",
+        "process": "GEOMETRY",
+        "native_id": "91",
+        "state": "COMPLETED",
+        "exit": "0"
+      }
+    ],
+    "scientific_tasks_completed": 1,
+    "captured_task_errors": [],
+    "docker_mount_permission_denial_observed": false,
+    "native_cancellation": {
+      "at": "2026-10-13T01:20:32.933996+00:00",
+      "confirmed": true,
+      "remaining": [],
+      "requested": []
+    },
+    "no_owned_active_jobs_after_failure_confirmed": true,
+    "running_job_cancellation_demonstrated": false,
+    "limitation": "Trace native IDs do not establish actual node placement without matching native scheduler records. Empty cancellation requests show no owned active jobs, not cancellation of a running task."
+  },
+  "verified": true
+}

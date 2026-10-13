@@ -1,0 +1,68 @@
+{
+  "date": "2026-10-12",
+  "scope": "optional production steric observable, engineering verification separate from biological classification",
+  "productionIntegration": {
+    "enabledByOperator": true,
+    "verifiedCase": "8b",
+    "fullExternalCampaignExecutedThroughAgent": false
+  },
+  "validation": {
+    "realIntegrationTests": {
+      "passed": 9,
+      "failed": 0,
+      "assertions": 45,
+      "command": "HELIX_TRP_STERIC_TEST_PYTHON=<pinned environment python> bun test test/trp/steric.test.ts test/trp/structural.test.ts --timeout 120000 --only-failures"
+    },
+    "defaultTests": {
+      "passed": 8,
+      "skipped": 1,
+      "failed": 0,
+      "assertions": 33
+    },
+    "types": {
+      "command": "bun run typecheck",
+      "successfulTasks": 15,
+      "failedTasks": 0
+    },
+    "pythonCompile": true,
+    "ruffF401F821": true
+  },
+  "sources": [
+    {
+      "path": "script/tesis/structural_campaign.py",
+      "sha256": "9a4e76b301a26eccc18213e614eef2248810ee0e93b787f50b6a02254456e8b7"
+    },
+    {
+      "path": "script/tesis/setup_steric_validator.py",
+      "sha256": "dc9afcb3b695b7adf037c1a36ed55438f2696fbcb2e4221a2e323840064a40e5"
+    },
+    {
+      "path": "script/tesis/verify_structural_campaign.py",
+      "sha256": "481fbd5a518fe3e7fd709d0e82a7bc2c74ac71922295e8ab64e87a0910ea0185"
+    },
+    {
+      "path": "script/tesis/plot_structural_campaign.py",
+      "sha256": "33f6abd091cc1b954914dfb497056b36c4d74bdf06aed968b2f79fed6d70896e"
+    },
+    {
+      "path": "script/tesis/run_steric_production_reference.ts",
+      "sha256": "898524ff534f1536fabd0be1c67a39df3771cd7bfc85a36882bd292f8589fe64"
+    },
+    {
+      "path": "packages/helix/src/trp/structural.ts",
+      "sha256": "d4c7cd6b3b20c887b73733b31c182be05b9a71ca950b269de11bc8d3091e770b"
+    },
+    {
+      "path": "packages/helix/src/trp/steric_diagnostic.py.txt",
+      "sha256": "b84956c0b451be20843e46930bc89bf4c1dc2446e807969fb8a78d8cdb41a676"
+    },
+    {
+      "path": "packages/helix/src/trp/verify_inspection.py.txt",
+      "sha256": "f4cb72dda74523f3242b8fc645c64f26081cdc309446637e324947152d83a0d6"
+    },
+    {
+      "path": "packages/helix/test/trp/steric.test.ts",
+      "sha256": "93d8da17cb6da66ee786ad42e56bea700596e688c45e160a20c3f637e989d916"
+    }
+  ]
+}

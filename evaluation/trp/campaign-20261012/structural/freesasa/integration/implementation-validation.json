@@ -1,0 +1,94 @@
+{
+  "checkedUTC": "2026-10-13T02:15:02.181413+00:00",
+  "productionApplied": true,
+  "operatorVariable": "HELIX_TRP_SURFACE_PYTHON",
+  "scope": "optional deterministic surface-exposure diagnostic on selected polymer chain; broad C9 physical verdict remains not_evaluable",
+  "tests": [
+    {
+      "command": "HELIX_TRP_SURFACE_TEST_PYTHON=<pinned runtime> bun test test/trp/surface.test.ts test/trp/structural.test.ts test/trp/steric.test.ts",
+      "cwd": "packages/helix",
+      "passed": 12,
+      "skipped": 1,
+      "failed": 0,
+      "assertions": 69
+    },
+    {
+      "command": "bun test test/trp/surface.test.ts test/trp/structural.test.ts test/trp/steric.test.ts",
+      "cwd": "packages/helix",
+      "passed": 9,
+      "skipped": 4,
+      "failed": 0,
+      "assertions": 36
+    },
+    {
+      "command": "HELIX_TRP_STERIC_TEST_PYTHON=<pinned runtime> bun test test/trp/steric.test.ts",
+      "cwd": "packages/helix",
+      "passed": 2,
+      "failed": 0,
+      "assertions": 16
+    }
+  ],
+  "typecheck": {
+    "workspaceCommand": "bun run typecheck",
+    "successfulTasks": 15,
+    "totalTasks": 15,
+    "exitCode": 0,
+    "additionalHelixAfterTestAdditionExitCode": 0
+  },
+  "pythonCompile": {
+    "files": [
+      "surface_diagnostic.py.txt",
+      "verify_inspection.py.txt",
+      "verify_bundle.py.txt"
+    ],
+    "exitCode": 0
+  },
+  "realReference": {
+    "case": "22r",
+    "matchesFrozenExternalSidechainObservables": true,
+    "portablePrivateEvidenceVerified": true,
+    "modelCalls": 0
+  },
+  "negativeEngineeringControls": [
+    "missing runtime remains unknown",
+    "delete Asp28 OD1: incomplete sidechain retained, interpretable rSA null",
+    "8b no D/E/K/R: median null, never zero",
+    "surface wrapper tamper rejected by externally anchored portable evidence"
+  ],
+  "biologicalThreshold": null,
+  "physicalClassifierValidated": false,
+  "productionSources": [
+    {
+      "path": "packages/helix/src/trp/structural.ts",
+      "sha256": "54fc5cff7a5a2e7cd7d96bf13b9236a7122a28a2d41da35c8a301399872a8f5d"
+    },
+    {
+      "path": "packages/helix/src/trp/nextflow.ts",
+      "sha256": "3729bf84120a359ba5efb68349bca85d7d80be579638bbb4810c018554458309"
+    },
+    {
+      "path": "packages/helix/src/trp/surface_diagnostic.py.txt",
+      "sha256": "881566e1f18083801deafea9d6a0218e1df5698208217bced08aefc957250e64"
+    },
+    {
+      "path": "packages/helix/src/trp/steric_diagnostic.py.txt",
+      "sha256": "b84956c0b451be20843e46930bc89bf4c1dc2446e807969fb8a78d8cdb41a676"
+    },
+    {
+      "path": "packages/helix/src/trp/verify_inspection.py.txt",
+      "sha256": "9922cc49279f2539452875d398557db00cc53c02751db7c370d93b76c16e0d38"
+    },
+    {
+      "path": "packages/helix/src/trp/verify_bundle.py.txt",
+      "sha256": "69b88a192d44707c82358814d61ae83f2d46c579e93d8cf3afe6882b52382187"
+    },
+    {
+      "path": "packages/helix/test/trp/surface.test.ts",
+      "sha256": "26723a854355de101de9b8dbeed26a6f84dbe125800494f26b1080c66b5529a6"
+    },
+    {
+      "path": "script/tesis/run_surface_production_reference.ts",
+      "sha256": "de89ee81bbcb08a3d961fb40acc2b1d393ef1f78f77fe00b5a3f8e4bdd65890a"
+    }
+  ]
+}

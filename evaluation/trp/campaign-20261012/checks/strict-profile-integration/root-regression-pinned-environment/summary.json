@@ -1,0 +1,30 @@
+{
+  "observedAtUtc": "2026-10-13T04:32:00.897890+00:00",
+  "command": [
+    "bun",
+    "test",
+    "test/trp",
+    "test/bio",
+    "test/nfcore",
+    "test/tool/trp-detect.test.ts",
+    "test/tool/trp-detect-question.test.ts",
+    "test/tool/trp-predicted.test.ts",
+    "test/plugin/codex.test.ts",
+    "--timeout",
+    "30000"
+  ],
+  "cwd": "packages/helix",
+  "environment": {
+    "HELIX_TRP_PYTHON": "/home/webiwabou/.local/state/helix/freesasa-20261012/venv/bin/python",
+    "gemmiVersion": "0.7.5"
+  },
+  "exit_code": 0,
+  "elapsed_seconds": 24.769408776999626,
+  "log_sha256": "59dad94893eb3d8159d3c71cdc40fd530899c2beeccbfd32e91a7bd5457925da",
+  "scope": "Relevant default regression after strict Slurm integration, no live switches; prior wrong-environment failures retained without production/test changes",
+  "passed": 541,
+  "skipped_opt_in": 63,
+  "failed": 0,
+  "assertions": 1585,
+  "files": 56
+}

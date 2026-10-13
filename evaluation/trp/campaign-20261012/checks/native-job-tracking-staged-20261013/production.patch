@@ -1,0 +1,654 @@
+--- a/packages/helix/src/trp/remote_runner.py.txt
++++ b/packages/helix/src/trp/remote_runner.py.txt
+@@ -3,6 +3,7 @@
+ The exact script and target are bound to the immutable scientific approval.
+ """
+ import base64
++import fcntl
+ import hashlib
+ import json
+ import os
+@@ -244,43 +245,258 @@
+     return {'ok': True, 'directory': str(root), 'controller': state}
+ 
+ 
+-def process_run(root, argv, cwd, timeout):
++NATIVE_TRACKING_VERSION = 'trp-native-jobs/1.0.0'
++NATIVE_FAILURE_STATES = frozenset(('BOOT_FAIL', 'CANCELLED', 'DEADLINE', 'FAILED',
++                                  'NODE_FAIL', 'OUT_OF_MEMORY', 'PREEMPTED', 'TIMEOUT', 'REVOKED'))
++
++
++class NativeJobFailure(ValueError):
++    pass
++
++
++def native_fields(raw):
++    # Empty NodeList is valid for PENDING; do not consume the next key as its value.
++    return dict(re.findall(r'(\w+)=([^\s]*)', raw))
++
++
++def checked_native(req, job, raw):
++    value = native_fields(raw)
++    uid = re.fullmatch(r'[^()]+\((\d+)\)', value.get('UserId', ''))
++    if value.get('JobId') != job or value.get('Comment') != comment(req) or not uid or int(uid[1]) != os.getuid():
++        raise ValueError('Native job ownership differs: ' + job)
++    return value
++
++
++def native_failed(value):
++    native_state = value.get('JobState', '').split('+', 1)[0]
++    return native_state in NATIVE_FAILURE_STATES or native_state == 'COMPLETED' and value.get('ExitCode') not in (None, '0:0')
++
++
++def tracking_file(root, name, flags):
++    # Status/controller can run concurrently. The same owner may not redirect a
++    # tracking file through a symlink or special file; the lock covers all updates.
++    fd = os.open(root / name, flags | os.O_NOFOLLOW, 0o600)
++    value = os.fstat(fd)
++    if value.st_uid != os.getuid() or not stat.S_ISREG(value.st_mode):
++        os.close(fd)
++        raise ValueError('Native tracking path is not an owner-controlled ordinary file')
++    return os.fdopen(fd, 'r+' if flags & os.O_RDWR else 'r')
++
++
++def tracking_state(req, root):
++    file = root / 'remote-native-state.json'
++    if file.exists() or file.is_symlink():
++        with tracking_file(root, file.name, os.O_RDONLY) as stream:
++            state = json.load(stream)
++        if state.get('version') != NATIVE_TRACKING_VERSION or state.get('id') != req['id'] or state.get('digest') != req['digest'] or state.get('comment') != comment(req):
++            raise ValueError('Native tracking owner or approval differs')
++        return state
++    state = {'version': NATIVE_TRACKING_VERSION, 'id': req['id'], 'digest': req['digest'],
++             'comment': comment(req), 'jobs': {}, 'snapshotSignature': None}
++    # Upgrade a run whose older observer already saw a job. Only raw native
++    # ownership establishes membership; JSON summary fields are not an oracle.
++    journal = root / 'remote-native-jobs.jsonl'
++    if journal.exists() or journal.is_symlink():
++        with tracking_file(root, journal.name, os.O_RDONLY) as stream:
++            for line in stream:
++                snapshot = json.loads(line)
++                for job in snapshot['records']:
++                    if not re.fullmatch('[0-9]+', job.get('id', '')) or not job.get('source'):
++                        continue
++                    value = checked_native(req, job['id'], job['source'])
++                    record = native_record(req, root, job['id'], value, job['source'], 'legacy-journal')
++                    previous = state['jobs'].get(job['id'], {})
++                    state['jobs'][job['id']] = {'id': job['id'], 'ownership': 'confirmed',
++                        'firstSeenAt': previous.get('firstSeenAt', snapshot.get('at', now())),
++                        'traversals': list(dict.fromkeys([*previous.get('traversals', []), record['traversal']])),
++                        'lastConfirmed': record, 'current': record,
++                        **({'failure': previous.get('failure', record)} if native_failed(value) or previous.get('failure') else {})}
++    return state
++
++
++def native_record(req, root, job, value, raw, traversal):
++    work = Path(value.get('WorkDir', '/'))
++    if work.is_relative_to(root / 'dry-run'):
++        traversal = 'stub'
++    elif work.is_relative_to(root / 'work'):
++        traversal = 'science'
++    elif traversal not in ('stub', 'science'):
++        traversal = 'unknown'
++    return {'id': job, 'source': raw, 'state': value.get('JobState', 'UNKNOWN'),
++            'comment': value['Comment'], 'userId': value['UserId'], 'nodes': value.get('NodeList'),
++            'exitCode': value.get('ExitCode'), 'reason': value.get('Reason'),
++            'traversal': traversal, 'ownership': 'confirmed', 'observation': 'scontrol'}
++
++
++def snapshot_jobs(req, root, traversal=None):
++    with tracking_file(root, 'remote-native-state.lock', os.O_CREAT | os.O_RDWR) as lock:
++        fcntl.flock(lock, fcntl.LOCK_EX)
++        state = tracking_state(req, root)
++        original = canonical(state)
++        found = owned_jobs(req)
++        queue = {job['id']: job for job in found}
++        # Persist queue-owned IDs before a potentially unavailable scontrol
++        # query. Losing a transport request must not erase a job already seen.
++        for job in found:
++            entry = state['jobs'].setdefault(job['id'], {'id': job['id'], 'ownership': 'confirmed',
++                'firstSeenAt': now(), 'traversals': []})
++            entry['ownership'] = 'confirmed'
++            entry['lastQueue'] = job
++            entry.setdefault('current', {'id': job['id'], 'source': '', 'state': 'UNKNOWN',
++                'nodes': job['nodes'], 'ownership': 'confirmed', 'observation': 'squeue-owned-awaiting-scontrol',
++                'queueState': job['state'], 'traversal': traversal if traversal in ('stub', 'science') else 'unknown'})
++        if canonical(state) != original:
++            write(root, 'remote-native-state.json', state)
++        ids = set(state['jobs']) | set(queue)
++        for trace in [root / 'trace.tsv', root / 'dry-run/trace.tsv']:
++            if trace.is_file():
++                lines = [line.split('\t') for line in trace.read_text().strip().splitlines()]
++                if lines and 'native_id' in lines[0]:
++                    index = lines[0].index('native_id')
++                    ids.update(row[index] for row in lines[1:] if len(row) > index and re.fullmatch('[0-9]+', row[index]))
++        records = []
++        for job in sorted(ids, key=int):
++            entry = state['jobs'].setdefault(job, {'id': job, 'ownership': 'unconfirmed', 'firstSeenAt': now(), 'traversals': []})
++            if job in queue:
++                entry['ownership'] = 'confirmed'  # squeue was filtered by current UID and exact UUID.
++                entry['lastQueue'] = queue[job]
++            result = invoke(['scontrol', 'show', 'job', job, '--oneliner'], check=False)
++            raw = result.stdout.strip()
++            if raw:
++                value = checked_native(req, job, raw)
++            if result.returncode == 0 and raw:
++                record = native_record(req, root, job, value, raw, traversal)
++                entry['ownership'] = 'confirmed'
++                entry['lastConfirmed'] = record
++                if native_failed(value):
++                    entry.setdefault('failure', record)
++            else:
++                # MinJobAge/accounting can remove a record. Absence is not a
++                # completion or a failure, even when the previous state was RUNNING.
++                record = {'id': job, 'source': raw, 'state': 'UNKNOWN', 'nodes': None,
++                          'ownership': entry['ownership'], 'observation': 'scontrol-missing',
++                          'queryExitCode': result.returncode, 'queryStderr': result.stderr[-4096:],
++                          'previousState': entry.get('lastConfirmed', {}).get('state'),
++                          'traversal': traversal if traversal in ('stub', 'science') else 'unknown'}
++            if record['traversal'] not in entry['traversals']:
++                entry['traversals'].append(record['traversal'])
++            entry['current'] = record
++            records.append(record)
++        signature = sha(canonical(records).encode())
++        if records and signature != state['snapshotSignature']:
++            # Append actual transitions, with raw sources retained. Polling the
++            # same state does not fill a bounded workspace with duplicate records.
++            with tracking_file(root, 'remote-native-jobs.jsonl', os.O_CREAT | os.O_RDWR) as stream:
++                stream.seek(0, os.SEEK_END)
++                stream.write(canonical({'at': now(), 'records': records}) + '\n')
++            state['snapshotSignature'] = signature
++        if canonical(state) != original or not (root / 'remote-native-state.json').exists():
++            write(root, 'remote-native-state.json', state)
++        return found
++
++
++def native_status(req, root):
++    with tracking_file(root, 'remote-native-state.lock', os.O_CREAT | os.O_RDWR) as lock:
++        fcntl.flock(lock, fcntl.LOCK_SH)
++        state = tracking_state(req, root)
++    jobs = [entry['current'] for _, entry in sorted(state['jobs'].items(), key=lambda pair: int(pair[0]))]
++    failures = []
++    for entry in state['jobs'].values():
++        record = entry.get('failure') or entry.get('lastConfirmed')
++        if not record:
++            continue
++        value = checked_native(req, record['id'], record['source'])
++        if native_failed(value):
++            failures.append(record)
++    return {'nativeJobs': jobs, 'nativeFailures': failures,
++            'stateUnknown': [job['id'] for job in jobs if job['state'] == 'UNKNOWN']}
++
++
++
++def ensure_native_completion(req, root, traversal):
++    trace = root / ('dry-run/trace.tsv' if traversal == 'stub' else 'trace.tsv')
++    if not trace.is_file():
++        raise ValueError('Native completion unknown: trace is absent for ' + traversal)
++    lines = [line.split('\t') for line in trace.read_text().strip().splitlines()]
++    if not lines or 'native_id' not in lines[0]:
++        raise ValueError('Native completion unknown: trace has no native IDs')
++    column = lines[0].index('native_id')
++    ids = [row[column] for row in lines[1:] if len(row) > column]
++    if len(ids) != 2 or len(set(ids)) != 2 or any(not re.fullmatch('[0-9]+', job) for job in ids):
++        raise ValueError('Native completion unknown: expected two distinct tasks for ' + traversal)
++    with tracking_file(root, 'remote-native-state.lock', os.O_CREAT | os.O_RDWR) as lock:
++        fcntl.flock(lock, fcntl.LOCK_SH)
++        state = tracking_state(req, root)
++    for job in ids:
++        entry = state['jobs'].get(job, {})
++        record = entry.get('lastConfirmed')
++        if not record:
++            raise ValueError('Native completion unknown: ' + job)
++        value = checked_native(req, job, record['source'])
++        # A preserved exact terminal source remains evidence after Slurm purges
++        # it. No missing response or Nextflow trace can manufacture COMPLETED.
++        if value.get('JobState') != 'COMPLETED' or value.get('ExitCode') != '0:0' or entry.get('failure'):
++            raise ValueError('Native completion unverified: ' + job + ' state ' + value.get('JobState', 'UNKNOWN'))
++
++
++def stop_process(child):
++    # The Nextflow subprocess owns a new process group, separate from the
++    # controller/client. Its descendants cannot outlive an interrupted monitor.
++    if child.poll() is not None:
++        return
++    try:
++        os.killpg(child.pid, signal.SIGTERM)
++    except ProcessLookupError:
++        return
++    try:
++        child.wait(timeout=5)
++    except subprocess.TimeoutExpired:
++        try:
++            os.killpg(child.pid, signal.SIGKILL)
++        except ProcessLookupError:
++            pass
++        child.wait(timeout=5)
++
++
++def process_run(root, argv, cwd, timeout, req=None, traversal=None):
+     begin = time.monotonic()
+     started = now()
+     code = None
++    child = None
++    label = 'version' if '-version' in argv else 'config' if 'config' in argv else 'stdout'
++    outpath, errpath = cwd / ('remote-' + label + '.log'), cwd / ('remote-' + label + '.stderr')
+     try:
+-        result = invoke(argv, cwd=cwd, timeout=timeout, check=False)
+-        code = result.returncode
+-        (cwd / ('remote-' + ('version' if '-version' in argv else 'config' if 'config' in argv else 'stdout') + '.log')).write_text(result.stdout)
+-        (cwd / ('remote-' + ('version' if '-version' in argv else 'config' if 'config' in argv else 'stderr') + '.stderr')).write_text(result.stderr)
++        if req is None:
++            result = invoke(argv, cwd=cwd, timeout=timeout, check=False)
++            code = result.returncode
++            outpath.write_text(result.stdout)
++            errpath.write_text(result.stderr)
++        else:
++            with outpath.open('w') as out, errpath.open('w') as err:
++                child = subprocess.Popen(argv, cwd=cwd, stdin=subprocess.DEVNULL, stdout=out, stderr=err, start_new_session=True)
++                while True:
++                    snapshot_jobs(req, root, traversal)
++                    observation = native_status(req, root)
++                    if observation['nativeFailures']:
++                        write(root, 'remote-native-failure.json', {'at': now(), **observation})
++                        raise NativeJobFailure('Verified native Slurm failure: ' + canonical(observation['nativeFailures']))
++                    code = child.poll()
++                    if code is not None:
++                        break
++                    if time.monotonic() - begin > timeout:
++                        raise subprocess.TimeoutExpired(argv, timeout)
++                    time.sleep(1)
++            result = subprocess.CompletedProcess(argv, code, outpath.read_text(), errpath.read_text())
+         if code:
+             raise ValueError('Command exit ' + str(code) + ': ' + argv[0] + ': ' + (result.stderr[-4096:] or result.stdout[-4096:]))
+         return result.stdout
+     finally:
++        if child is not None:
++            stop_process(child)
++            code = child.poll()
+         with (root / 'remote-processes.jsonl').open('a') as stream:
+-            stream.write(canonical({'argv': argv, 'startedAt': started, 'durationMs': int((time.monotonic()-begin)*1000), 'exitCode': code}) + '\n')
+-
+-
+-def snapshot_jobs(req, root):
+-    found = owned_jobs(req)
+-    ids = {job['id'] for job in found}
+-    for trace in [root / 'trace.tsv', root / 'dry-run/trace.tsv']:
+-        if trace.is_file():
+-            lines = [line.split('\t') for line in trace.read_text().strip().splitlines()]
+-            if lines and 'native_id' in lines[0]:
+-                index = lines[0].index('native_id')
+-                ids.update(row[index] for row in lines[1:] if len(row) > index and re.fullmatch('[0-9]+', row[index]))
+-    records = []
+-    for job in sorted(ids, key=int):
+-        raw = invoke(['scontrol', 'show', 'job', job, '--oneliner'], check=False).stdout.strip()
+-        if raw:
+-            if fields(raw).get('Comment') != comment(req):
+-                raise ValueError('Native job ownership differs')
+-            records.append({'id': job, 'source': raw, 'state': fields(raw).get('JobState'), 'nodes': fields(raw).get('NodeList')})
+-    if records:
+-        with (root / 'remote-native-jobs.jsonl').open('a') as stream:
+-            stream.write(canonical({'at': now(), 'records': records}) + '\n')
+-    return found
++            stream.write(canonical({'argv': argv, 'startedAt': started, 'durationMs': int((time.monotonic()-begin)*1000), 'exitCode': code,
++                                    **({'traversal': traversal, 'monitoredNativeJobs': True} if req else {})}) + '\n')
+ 
+ 
+ def runtime_records(root):
+@@ -341,8 +557,9 @@
+         env = os.environ.copy()
+         env.update({'NXF_OFFLINE': 'true', 'NXF_DISABLE_CHECK_LATEST': 'true'})
+         os.environ.update(env)
+-        process_run(root, [*args, '-stub-run'], dry, min(480, req['budget']['wallSeconds']))
+-        snapshot_jobs(req, root)
++        process_run(root, [*args, '-stub-run'], dry, min(480, req['budget']['wallSeconds']), req, 'stub')
++        snapshot_jobs(req, root, 'stub')
++        ensure_native_completion(req, root, 'stub')
+         verify(req, root)
+         if req['target'].get('strict'):
+             write(root, 'remote-strict-before-science.json', strict_observation(req, 'controller'))
+@@ -357,8 +574,9 @@
+             time.sleep(0.5)
+         if req['target'].get('strict'):
+             write(root, 'remote-strict-before-science.json', strict_observation(req, 'controller'))
+-        process_run(root, args, root, min(480, req['budget']['wallSeconds']))
+-        snapshot_jobs(req, root)
++        process_run(root, args, root, min(480, req['budget']['wallSeconds']), req, 'science')
++        snapshot_jobs(req, root, 'science')
++        ensure_native_completion(req, root, 'science')
+         verify(req, root)
+         runtime_records(root)
+         if req['target'].get('numericalProfile') and any(row['numericalProfile'] != 'Haswell' or not any(blas.get('architecture') == 'Haswell' and blas.get('num_threads') == 1 for blas in row['blas']) for row in json.loads((root / 'remote-task-runtime.json').read_text())['records']):
+@@ -368,12 +586,23 @@
+         error = str(exc)
+         if isinstance(exc, InterruptedError) or (root / 'remote-cancel-request.json').exists():
+             status = 'cancelled'
++        if (root / 'remote-native-state.json').exists() and native_status(req, root)['nativeFailures']:
++            status = 'failed'
+         try:
+             write(root, 'remote-job-cancellation.json', cancel_jobs(req))
+         except Exception as cancellation:
+             write(root, 'remote-job-cancellation.json', {'confirmed': False, 'error': str(cancellation)})
+     finally:
+-        write(root, 'remote-terminal.json', {'status': status, 'error': error, 'finishedAt': now(), 'digest': req['digest'], 'id': req['id']})
++        final_native = {}
++        try:
++            if (root / 'remote-native-state.json').exists():
++                final_native = native_status(req, root)
++                if final_native['nativeFailures']:
++                    status = 'failed'
++        except Exception as tracking:
++            status = 'failed'
++            error = (error or '') + '; Native tracking validation failed: ' + str(tracking)
++        write(root, 'remote-terminal.json', {'status': status, 'error': error, 'finishedAt': now(), 'digest': req['digest'], 'id': req['id'], **final_native})
+ 
+ 
+ def status(req):
+@@ -385,7 +614,7 @@
+     inventory_file = root / 'remote-analysis-inventory.json'
+     return {'ok': True, **result, 'controllerAlive': controller_alive(identity), 'jobs': jobs, 'controller': identity,
+             'analysisInventory': json.loads(inventory_file.read_text()) if inventory_file.exists() else None,
+-            'analysisAdmitted': (root / 'remote-analysis-approval.json').exists()}
++            'analysisAdmitted': (root / 'remote-analysis-approval.json').exists(), **native_status(req, root)}
+ 
+ 
+ def admit_analysis(req):
+--- /dev/null
++++ b/packages/helix/test/trp/test_remote_native_tracking.py
+@@ -0,0 +1,296 @@
++"""Offline behavioral contracts. Scheduler outputs are fixtures, subprocesses are real.
++Only captured PENDING312 is primary; FAILED53 transition below is explicitly synthetic.
++"""
++import hashlib
++import importlib.machinery
++import importlib.util
++import json
++import os
++from pathlib import Path
++import subprocess
++import sys
++import tempfile
++import threading
++import time
++import unittest
++from unittest.mock import patch
++
++BASE = Path(__file__).resolve().parent
++DEFAULT_SOURCE = BASE / 'remote_runner.py.txt'
++if not DEFAULT_SOURCE.exists():
++    DEFAULT_SOURCE = BASE.parents[1] / 'src/trp/remote_runner.py.txt'
++SOURCE = Path(os.environ.get('HELIX_NATIVE_RUNNER_UNDER_TEST', DEFAULT_SOURCE))
++loader = importlib.machinery.SourceFileLoader('native_controller_staged', str(SOURCE))
++runner = importlib.util.module_from_spec(importlib.util.spec_from_loader(loader.name, loader))
++loader.exec_module(runner)
++# Public captured AGG-13 PENDING record; no original author coordinates or secrets.
++CAPTURED = {'id': '312', 'nodes': None, 'source': 'JobId=312 JobName=nf-GEOMETRY UserId=ubuntu(1000) GroupId=ubuntu(1000) MCS_label=N/A Priority=1 Nice=0 Account=(null) QOS=(null) JobState=PENDING Reason=InvalidAccount Dependency=(null) Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=00:03:00 TimeMin=N/A SubmitTime=2026-10-13T06:20:23 EligibleTime=2026-10-13T06:20:23 AccrueTime=2026-10-13T06:20:23 StartTime=Unknown EndTime=Unknown Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-10-13T06:20:24 Scheduler=Main Partition=helix AllocNode:Sid=helix-head:84149 ReqNodeList=helix-worker2 ExcNodeList=(null) NodeList= NumNodes=1 NumCPUs=2 NumTasks=1 CPUs/Task=2 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=2,mem=2G,node=1,billing=2 AllocTRES=(null) Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=2 MinMemoryNode=2G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null) Command=.command.run WorkDir=/shared/helix-strict/hrsb40f55c1826c4c12/remote/trp-8703dfca7b1a-a8a4d2eb-8601-4c0a-a1c9-ba96d1abcf87/dry-run/work/e0/5e1d06623358bd7909bef90d3c33f3 Comment=helix:a8a4d2eb-8601-4c0a-a1c9-ba96d1abcf87  StdErr=/shared/helix-strict/hrsb40f55c1826c4c12/remote/trp-8703dfca7b1a-a8a4d2eb-8601-4c0a-a1c9-ba96d1abcf87/dry-run/work/e0/5e1d06623358bd7909bef90d3c33f3/.command.log StdIn=/dev/null StdOut=/shared/helix-strict/hrsb40f55c1826c4c12/remote/trp-8703dfca7b1a-a8a4d2eb-8601-4c0a-a1c9-ba96d1abcf87/dry-run/work/e0/5e1d06623358bd7909bef90d3c33f3/.command.log Power= TresPerTask=cpu:2', 'state': 'PENDING'}
++# CI UIDs can differ. Only the owner UID token is adapted to the test process.
++CAPTURED['source'] = CAPTURED['source'].replace('ubuntu(1000)', f'synthetic({os.getuid()})')
++OWNER = 'a8a4d2eb-8601-4c0a-a1c9-ba96d1abcf87'
++REQ = {'id': OWNER, 'digest': 'a'*64, 'target': {'root': '/unused', 'version': runner.VERSION}}
++
++
++def native(job='312', state='PENDING', exit_code='0:0', owner=OWNER, reason='InvalidAccount', uid=None, root=None):
++    uid = os.getuid() if uid is None else uid
++    work = str(root / 'dry-run/work/e0/task') if root else '/synthetic/stub/work'
++    return (f'JobId={job} JobName=nf-GEOMETRY UserId=synthetic({uid}) GroupId=synthetic({uid}) '
++            f'JobState={state} ExitCode={exit_code} Reason={reason} WorkDir={work} '
++            f'Comment=helix:{owner} NodeList= NumCPUs=2')
++
++
++class Scheduler:
++    def __init__(self, root):
++        self.root, self.active, self.raw = root, True, native(root=root)
++        self.calls = []
++
++    def __call__(self, argv, **kwargs):
++        self.calls.append(argv)
++        if argv[0] == 'squeue':
++            text = f'312|helix:{OWNER}|PENDING|nf-GEOMETRY|\n' if self.active else ''
++            return subprocess.CompletedProcess(argv, 0, text, '')
++        if argv[:3] == ['scontrol', 'show', 'job']:
++            return subprocess.CompletedProcess(argv, 0 if self.raw else 1, self.raw, '' if self.raw else 'Invalid job id specified')
++        raise AssertionError('Unexpected scheduler command: ' + repr(argv))
++
++
++class TrackingContracts(unittest.TestCase):
++    def test_observed_job_survives_empty_queue_and_trace(self):
++        with tempfile.TemporaryDirectory() as directory:
++            root = Path(directory); scheduler = Scheduler(root)
++            with patch.object(runner, 'invoke', side_effect=scheduler):
++                runner.snapshot_jobs(REQ, root)
++                scheduler.active = False
++                scheduler.raw = native(state='FAILED', exit_code='53:0', reason='NonZeroExitCode', root=root)
++                runner.snapshot_jobs(REQ, root)
++            observations = [json.loads(line) for line in (root/'remote-native-jobs.jsonl').read_text().splitlines()]
++            latest = {row['id']: row for snapshot in observations for row in snapshot['records']}
++            self.assertEqual(latest['312']['state'], 'FAILED', 'Observed job must not disappear with squeue/traces')
++            self.assertIn('ExitCode=53:0', latest['312']['source'])
++            self.assertEqual([argv[3] for argv in scheduler.calls if argv[:3]==['scontrol','show','job']], ['312','312'])
++
++    def test_scontrol_transport_timeout_cannot_erase_seen_owned_queue_id(self):
++        with tempfile.TemporaryDirectory() as directory:
++            root=Path(directory); scheduler=Scheduler(root)
++            def invoke(argv,**kwargs):
++                if argv[0]=='scontrol': raise subprocess.TimeoutExpired(argv,20)
++                return scheduler(argv,**kwargs)
++            with patch.object(runner,'invoke',side_effect=invoke):
++                with self.assertRaises(subprocess.TimeoutExpired): runner.snapshot_jobs(REQ,root,'stub')
++            actual=runner.native_status(REQ,root)
++            self.assertEqual(actual['stateUnknown'],['312'])
++            self.assertEqual(actual['nativeFailures'],[])
++            self.assertEqual(actual['nativeJobs'][0]['queueState'],'PENDING')
++
++    def test_captured_pending_only_migrates_after_owner_validation(self):
++        with tempfile.TemporaryDirectory() as directory:
++            root=Path(directory); scheduler=Scheduler(root)
++            (root/'remote-native-jobs.jsonl').write_text(json.dumps({'at':'2026-10-13T06:20:48Z','records':[CAPTURED]})+'\n')
++            scheduler.active=False
++            scheduler.raw=native(state='FAILED',exit_code='53:0',root=root)
++            with patch.object(runner, 'invoke', side_effect=scheduler):
++                runner.snapshot_jobs(REQ,root,'stub')
++            actual=runner.native_status(REQ,root)
++            self.assertEqual(actual['nativeFailures'][0]['exitCode'],'53:0')
++            self.assertEqual(actual['nativeFailures'][0]['traversal'],'stub')
++            self.assertEqual(actual['stateUnknown'],[])
++
++    def test_missing_record_stays_unknown_and_keeps_earlier_source(self):
++        with tempfile.TemporaryDirectory() as directory:
++            root=Path(directory); scheduler=Scheduler(root)
++            with patch.object(runner,'invoke',side_effect=scheduler):
++                runner.snapshot_jobs(REQ,root,'stub')
++                scheduler.active=False; scheduler.raw=''
++                runner.snapshot_jobs(REQ,root,'stub')
++            actual=runner.native_status(REQ,root)
++            self.assertEqual(actual['stateUnknown'],['312'])
++            self.assertEqual(actual['nativeFailures'],[])
++            self.assertEqual(actual['nativeJobs'][0]['state'],'UNKNOWN')
++            self.assertEqual(actual['nativeJobs'][0]['previousState'],'PENDING')
++            state=json.loads((root/'remote-native-state.json').read_text())
++            self.assertIn('JobState=PENDING',state['jobs']['312']['lastConfirmed']['source'])
++            self.assertEqual(state['jobs']['312']['ownership'],'confirmed')
++
++    def test_prior_failed53_is_not_erased_by_later_missing_record(self):
++        with tempfile.TemporaryDirectory() as directory:
++            root=Path(directory); scheduler=Scheduler(root)
++            scheduler.raw=native(state='FAILED',exit_code='53:0',root=root)
++            with patch.object(runner,'invoke',side_effect=scheduler):
++                runner.snapshot_jobs(REQ,root,'stub')
++                scheduler.active=False; scheduler.raw=''
++                runner.snapshot_jobs(REQ,root,'stub')
++            actual=runner.native_status(REQ,root)
++            self.assertEqual(actual['stateUnknown'],['312'])
++            self.assertEqual(actual['nativeFailures'][0]['state'],'FAILED')
++            self.assertEqual(actual['nativeFailures'][0]['exitCode'],'53:0')
++
++    def test_foreign_comment_trace_candidate_rejected_before_adoption(self):
++        with tempfile.TemporaryDirectory() as directory:
++            root=Path(directory); scheduler=Scheduler(root)
++            scheduler.active=False; scheduler.raw=native(owner='b'*36,root=root)
++            (root/'trace.tsv').write_text('native_id\tstatus\n312\tSUBMITTED\n')
++            with patch.object(runner,'invoke',side_effect=scheduler):
++                with self.assertRaisesRegex(ValueError,'ownership differs'):
++                    runner.snapshot_jobs(REQ,root,'science')
++            self.assertFalse((root/'remote-native-state.json').exists())
++            self.assertFalse((root/'remote-native-jobs.jsonl').exists())
++
++    def test_same_comment_wrong_uid_or_jobid_is_rejected(self):
++        for raw in [native(uid=os.getuid()+1),native(job='313')]:
++            with self.subTest(raw=raw), tempfile.TemporaryDirectory() as directory:
++                root=Path(directory); scheduler=Scheduler(root); scheduler.raw=raw
++                with patch.object(runner,'invoke',side_effect=scheduler):
++                    with self.assertRaisesRegex(ValueError,'ownership differs'):
++                        runner.snapshot_jobs(REQ,root)
++
++    def test_unconfirmed_missing_trace_id_is_unknown_never_owned_completed(self):
++        with tempfile.TemporaryDirectory() as directory:
++            root=Path(directory); scheduler=Scheduler(root); scheduler.active=False; scheduler.raw=''
++            (root/'trace.tsv').write_text('native_id\tstatus\n312\tCOMPLETED\n')
++            with patch.object(runner,'invoke',side_effect=scheduler):
++                runner.snapshot_jobs(REQ,root,'science')
++            actual=runner.native_status(REQ,root)
++            self.assertEqual(actual['nativeJobs'][0]['state'],'UNKNOWN')
++            self.assertEqual(actual['nativeJobs'][0]['ownership'],'unconfirmed')
++            self.assertEqual(actual['nativeFailures'],[])
++
++    def test_pending_invalid_account_is_not_terminal_failure(self):
++        with tempfile.TemporaryDirectory() as directory:
++            root=Path(directory); scheduler=Scheduler(root)
++            with patch.object(runner,'invoke',side_effect=scheduler):
++                runner.snapshot_jobs(REQ,root,'stub')
++            actual=runner.native_status(REQ,root)
++            self.assertEqual(actual['nativeFailures'],[])
++            self.assertEqual(actual['nativeJobs'][0]['nodes'],'')
++            self.assertEqual(actual['nativeJobs'][0]['state'],'PENDING')
++            self.assertEqual(actual['nativeJobs'][0]['reason'],'InvalidAccount')
++
++    def test_completed_nonzero_exit_cannot_be_success(self):
++        with tempfile.TemporaryDirectory() as directory:
++            root=Path(directory); scheduler=Scheduler(root); scheduler.raw=native(state='COMPLETED',exit_code='0:9',root=root)
++            with patch.object(runner,'invoke',side_effect=scheduler): runner.snapshot_jobs(REQ,root)
++            self.assertEqual(runner.native_status(REQ,root)['nativeFailures'][0]['exitCode'],'0:9')
++
++    def test_unchanged_poll_does_not_duplicate_raw_evidence(self):
++        with tempfile.TemporaryDirectory() as directory:
++            root=Path(directory); scheduler=Scheduler(root)
++            with patch.object(runner,'invoke',side_effect=scheduler):
++                runner.snapshot_jobs(REQ,root,'stub'); runner.snapshot_jobs(REQ,root,'stub')
++            self.assertEqual(len((root/'remote-native-jobs.jsonl').read_text().splitlines()),1)
++
++    def test_approval_binding_and_symlink_tracker_are_rejected(self):
++        with tempfile.TemporaryDirectory() as directory:
++            root=Path(directory); scheduler=Scheduler(root)
++            with patch.object(runner,'invoke',side_effect=scheduler): runner.snapshot_jobs(REQ,root)
++            with patch.object(runner,'invoke',side_effect=scheduler):
++                with self.assertRaisesRegex(ValueError,'approval differs'):
++                    runner.snapshot_jobs({**REQ,'digest':'b'*64},root)
++            original=(root/'remote-native-state.json').read_bytes()
++            external=root/'external'; external.write_bytes(original)
++            (root/'remote-native-state.json').unlink(); (root/'remote-native-state.json').symlink_to(external)
++            with patch.object(runner,'invoke',side_effect=scheduler):
++                with self.assertRaises(OSError): runner.snapshot_jobs(REQ,root)
++            self.assertEqual(external.read_bytes(),original)
++
++    def test_cancellation_scancels_only_fresh_owned_queue_jobs(self):
++        calls=[]
++        def invoke(argv,**kwargs):
++            calls.append(argv)
++            if argv[0]=='squeue':
++                text=f'312|helix:{OWNER}|PENDING|own|\n313|helix:foreign|RUNNING|foreign|n\n' if len(calls)==1 else '313|helix:foreign|RUNNING|foreign|n\n'
++                return subprocess.CompletedProcess(argv,0,text,'')
++            return subprocess.CompletedProcess(argv,0,'','')
++        with patch.object(runner,'invoke',side_effect=invoke): actual=runner.cancel_jobs(REQ)
++        self.assertTrue(actual['confirmed'])
++        self.assertEqual([argv for argv in calls if argv[0]=='scancel'],[['scancel','312']])
++
++    def test_monitor_stops_real_owned_process_early_on_synthetic_failed53(self):
++        with tempfile.TemporaryDirectory() as directory:
++            root=Path(directory); scheduler=Scheduler(root); count=0
++            def invoke(argv,**kwargs):
++                nonlocal count
++                if argv[0]=='squeue':
++                    count+=1
++                    scheduler.active=count==1
++                    scheduler.raw=native(state='PENDING' if count==1 else 'FAILED',exit_code='0:0' if count==1 else '53:0',root=root)
++                return scheduler(argv,**kwargs)
++            code="import pathlib,time; print('ready',flush=True); time.sleep(10); pathlib.Path('escaped-monitor').write_text('wrong')"
++            began=time.monotonic()
++            with patch.object(runner,'invoke',side_effect=invoke):
++                with self.assertRaisesRegex(runner.NativeJobFailure,'Verified native Slurm failure'):
++                    runner.process_run(root,[sys.executable,'-c',code],root,20,REQ,'stub')
++            self.assertLess(time.monotonic()-began,4)
++            self.assertFalse((root/'escaped-monitor').exists())
++            self.assertIn('ready',(root/'remote-stdout.log').read_text())
++            observation=json.loads((root/'remote-native-failure.json').read_text())
++            self.assertEqual(observation['nativeFailures'][0]['exitCode'],'53:0')
++            process=json.loads((root/'remote-processes.jsonl').read_text())
++            self.assertEqual(process['exitCode'],-15)
++
++    def test_pending_monitor_allows_real_subprocess_to_finish(self):
++        with tempfile.TemporaryDirectory() as directory:
++            root=Path(directory); scheduler=Scheduler(root)
++            with patch.object(runner,'invoke',side_effect=scheduler):
++                result=runner.process_run(root,[sys.executable,'-c',"print('finished')"],root,5,REQ,'stub')
++            self.assertEqual(result,'finished\n')
++            self.assertFalse((root/'remote-native-failure.json').exists())
++
++    def test_trace_completed_and_missing_native_record_cannot_confirm_traversal(self):
++        with tempfile.TemporaryDirectory() as directory:
++            root=Path(directory); scheduler=Scheduler(root); scheduler.active=False; scheduler.raw=''
++            (root/'trace.tsv').write_text('native_id\tstatus\n312\tCOMPLETED\n313\tCOMPLETED\n')
++            with patch.object(runner,'invoke',side_effect=scheduler): runner.snapshot_jobs(REQ,root,'science')
++            with self.assertRaisesRegex(ValueError,'completion unknown'): runner.ensure_native_completion(REQ,root,'science')
++
++    def test_success_requires_two_distinct_owned_zero_exit_terminal_sources(self):
++        with tempfile.TemporaryDirectory() as directory:
++            root=Path(directory)
++            (root/'trace.tsv').write_text('native_id\tstatus\n312\tCOMPLETED\n313\tCOMPLETED\n')
++            def invoke(argv,**kwargs):
++                if argv[0]=='squeue': return subprocess.CompletedProcess(argv,0,'','')
++                return subprocess.CompletedProcess(argv,0,native(job=argv[3],state='COMPLETED',root=root),'')
++            with patch.object(runner,'invoke',side_effect=invoke): runner.snapshot_jobs(REQ,root,'science')
++            runner.ensure_native_completion(REQ,root,'science')
++            (root/'trace.tsv').write_text('native_id\tstatus\n312\tCOMPLETED\n312\tCOMPLETED\n')
++            with self.assertRaisesRegex(ValueError,'two distinct'): runner.ensure_native_completion(REQ,root,'science')
++
++    def test_controller_preserves_failed_signal53_after_owned_cleanup(self):
++        with tempfile.TemporaryDirectory() as directory:
++            root=Path(directory); scheduler=Scheduler(root)
++            scheduler.raw=native(state='FAILED',exit_code='0:53',root=root)
++            (root/'execution.json').write_text('{"container":"synthetic-image"}')
++            req={**REQ,'budget':{'wallSeconds':480}}
++            def invoke(argv,**kwargs):
++                if argv[0]=='docker':
++                    return subprocess.CompletedProcess(argv,0,'unix:///run/docker.sock' if argv[1]=='context' else 'synthetic-image','')
++                if argv==['scontrol','--version']: return subprocess.CompletedProcess(argv,0,'slurm-fixture','')
++                return scheduler(argv,**kwargs)
++            def process(root,argv,cwd,timeout,req=None,traversal=None):
++                if '-version' in argv: return 'nextflow version 25.10.4\n'
++                if 'config' in argv: return 'config\n'
++                runner.snapshot_jobs(req,root,'stub')
++                (root/'remote-cancel-request.json').write_text('{}')
++                raise InterruptedError('External monitor cancelled after native failure')
++            with patch.object(runner,'run_root',return_value=root), patch.object(runner,'verify',return_value={'files':{}}), \
++                 patch.object(runner,'observe',return_value={'synthetic':'inventory'}), patch.object(runner,'invoke',side_effect=invoke), \
++                 patch.object(runner,'process_run',side_effect=process), patch.object(runner.signal,'signal'), \
++                 patch.object(runner,'cancel_jobs',return_value={'confirmed':True,'requested':[{'id':'312'}]}) as cancel:
++                runner.controller(req)
++            terminal=json.loads((root/'remote-terminal.json').read_text())
++            self.assertEqual(terminal['status'],'failed')
++            self.assertEqual(terminal['nativeFailures'][0]['exitCode'],'0:53')
++            self.assertIn('External monitor',terminal['error'])
++            cancel.assert_called_once_with(req)
++            self.assertTrue(json.loads((root/'remote-job-cancellation.json').read_text())['confirmed'])
++
++    def test_probe_process_without_native_monitor_preserves_existing_interface(self):
++        with tempfile.TemporaryDirectory() as directory:
++            root=Path(directory)
++            result=runner.process_run(root,[sys.executable,'-c',"print('probe')"],root,5)
++            self.assertEqual(result,'probe\n')
++            process=json.loads((root/'remote-processes.jsonl').read_text())
++            self.assertEqual(process['exitCode'],0)
++            self.assertNotIn('monitoredNativeJobs',process)
++
++
++if __name__=='__main__': unittest.main(verbosity=2)

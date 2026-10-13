@@ -1,0 +1,67 @@
+{
+  "version": "academy-cloud-campaign/1.0.0",
+  "created_at": "2026-10-13T00:18:53.493328+00:00",
+  "status": "prospective_before_new_runs",
+  "base_protocol_sha256": "edd4e3f89c0a0c0f37b7acfba385d46a25780f3c06d68395bb975dbf0add5c72",
+  "scope": "Infrastructure and remote agent engineering; not held-out T-LANG or expert physical validation",
+  "labs": [
+    "183928",
+    "185395"
+  ],
+  "topology_each": {
+    "head": "t3.medium, 2 vCPU/4 GiB/50 GiB gp3",
+    "workers": [
+      "m5.large, 2 vCPU/8 GiB/20 GiB gp3",
+      "m5.large, 2 vCPU/8 GiB/20 GiB gp3"
+    ]
+  },
+  "adaptation": {
+    "original": "Planned cluster execution; suggested AWS ParallelCluster/Slurm and larger cloud credit envelope",
+    "replacement": "Directly provisioned Slurm/NFS cluster on permitted EC2 instance types in two separate Academy accounts",
+    "reason": "Academy IAM restrictions, per-instance size limits and US$50 budgets; existing Slurm verification proves direct provisioning viable",
+    "preserved": [
+      "real shared cluster and scheduler",
+      "approved workflow and exact image",
+      "per-node admission and runtime limits",
+      "native IDs/errors/cancellation/provenance",
+      "existing metric thresholds"
+    ],
+    "limitations": [
+      "No GPU or large-memory single node",
+      "No cross-account shared RAM or credit pool",
+      "No claim of universal architectural equivalence",
+      "No disk hard quota unless separately implemented and observed"
+    ]
+  },
+  "resource_policy": {
+    "portal_budget_usd_each": 50,
+    "minimum_reported_reserve_usd": 10,
+    "portal_update_lag_hours": [
+      8,
+      12
+    ],
+    "guest_stop_minutes_after_boot": 180,
+    "slurm_job_max_minutes": 20,
+    "maximum_initial_campaign_boot_hours_each": 3,
+    "stop_idle_compute": true,
+    "archive_before_stop": true,
+    "outside_accounts_paid_services": false
+  },
+  "planned_observations": [
+    "clean second-account bootstrap",
+    "exact image availability",
+    "remote Helix approval and immutable transfer",
+    "local/remote geometry comparison under recorded numerical profile",
+    "remote Docker CPU/RAM/swap pressure limits",
+    "valid/invalid capacity admission",
+    "cancellation of running owner jobs",
+    "copyable independent integrity verification"
+  ],
+  "conservative_planning_allowance_usd_each": 10,
+  "allowance_is_not_measured_spend": true,
+  "pending_dependencies": [
+    "independent expert references/paraphrases",
+    "human intervention judgments",
+    "physical negative control review"
+  ]
+}

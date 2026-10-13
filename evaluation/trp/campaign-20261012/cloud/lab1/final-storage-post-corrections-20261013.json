@@ -1,0 +1,52 @@
+{
+  "schema": "helix-academy-storage-observation/1.0",
+  "observedAt": "2026-10-13T17:52:50.723159+00:00",
+  "lab": "183928",
+  "source": "Fresh EC2 DescribeVolumes scoped to the owned three instance IDs",
+  "volumes": [
+    {
+      "volumeId": "vol-04f6bfc207cd947d9",
+      "gib": 50,
+      "type": "gp3",
+      "state": "in-use",
+      "attachments": [
+        {
+          "instanceId": "i-0f448183fd29011a8",
+          "state": "attached",
+          "device": "/dev/sda1"
+        }
+      ]
+    },
+    {
+      "volumeId": "vol-0dbb3b15eed449a59",
+      "gib": 20,
+      "type": "gp3",
+      "state": "in-use",
+      "attachments": [
+        {
+          "instanceId": "i-0509c635a9b526417",
+          "state": "attached",
+          "device": "/dev/sda1"
+        }
+      ]
+    },
+    {
+      "volumeId": "vol-05b69764fa28fb3d3",
+      "gib": 20,
+      "type": "gp3",
+      "state": "in-use",
+      "attachments": [
+        {
+          "instanceId": "i-0e58f08256b09b1a9",
+          "state": "attached",
+          "device": "/dev/sda1"
+        }
+      ]
+    }
+  ],
+  "retainedGiB": 90,
+  "computeStoppedRemovesStorageCost": false,
+  "finalBillingKnown": false,
+  "observationSourcePath": "evaluation/trp/campaign-20261012/cloud/record_final_storage.py",
+  "observationSourceSha256": "a09fc00bf0d1bf4c5434ba7030b3c57762ca19697eda78826231aba787c19f0a"
+}

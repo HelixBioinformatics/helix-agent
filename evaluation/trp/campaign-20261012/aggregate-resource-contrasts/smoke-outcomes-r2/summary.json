@@ -1,0 +1,275 @@
+{
+  "schema": "helix-aggregate-resource-independent-audit/1.0",
+  "freezeSha256": "e26973221b5ebb223e19f92100e7d7afe77b481e9a61a29b053b5f316ca2637b",
+  "rows": [
+    {
+      "case": "SMOKE-01-generous",
+      "physicalFeasibilityLabel": null,
+      "labelReason": "Not established from terminal production or causal kernel evidence",
+      "actualDecision": {
+        "version": "trp-resources/1.2.0",
+        "decidedAt": "2026-10-13T04:43:17.793Z",
+        "accepted": true,
+        "inventoryHash": "82875ef6c3361c67817957ca2bb6697d5f1be1373c45b296317d24dd86a0032d",
+        "budgetHash": "1e7e6b647717c1505f70d83c2ab596371ef89edd11865084c81884ce1d8c0067",
+        "demand": {
+          "version": "trp-resources/1.2.0",
+          "sourceBytes": 359397,
+          "selectionBytes": 150911,
+          "bundleBytes": 1158054,
+          "counts": {
+            "scientificTasks": 2,
+            "stubTasks": 2,
+            "remoteScientificCalls": 2,
+            "retries": 0
+          },
+          "cpus": 3,
+          "memoryBytes": 4294967296,
+          "workBytes": 21295104,
+          "wallSeconds": 1080,
+          "storage": {
+            "kind": "estimate",
+            "formula": "ceil((12*1048576 + 7*bundleBytes + 4*selectionBytes)/4096)*4096",
+            "hardLimit": false
+          },
+          "assumptions": [
+            "Verified co-located Slurm profile: the real Helix client and Python/Nextflow controller share a root-controlled 1 CPU/2 GiB/swap-zero cgroup. All declared client work/temp/state/cache/export and remote workspace paths inherit one kernel XFS project quota. Worker tasks remain separate 2 CPU/2 GiB Docker allocations; no memory pooling.",
+            "Two sequential tasks per traversal; one stub traversal then one real traversal; no retry or resume.",
+            "Task allocation: 2 CPUs/2 GiB. Controller allocation: 1 CPU/2 GiB; cgroup enforcement requires an independently verified operator sandbox. CPU bandwidth is not an exclusive core reservation.",
+            "Each traversal has an 8 minute watchdog; probes/configuration reserve another 120 seconds. This is a configured timeout, not a runtime prediction.",
+            "Storage estimates allocated workspace bytes including working copies, logs and portable evidence; an independently observed XFS project quota enforces an approved budget only inside an operator allocation.",
+            "The exact image and Nextflow distribution must already be cached. Image pulls/builds and shared Docker/Nextflow caches are outside workBytes.",
+            "Two remote scientific tasks are planned; SSH probes, controller commands and stub jobs are not scientific calls. Agent provider tokens, cost and conversation calls are not measured here."
+          ]
+        },
+        "rejections": []
+      },
+      "defaultPortableVerifier": null,
+      "executionOracleForcedOnly": null,
+      "allocatedBlockBytesObservedPeak": 5496832,
+      "allocatedBlockBytesFinal": 5496832,
+      "predictedWorkBytes": 21295104,
+      "observedUnderestimateBytes": 0,
+      "observedOverestimationFraction": null,
+      "kernelMemoryPeak": 163540992,
+      "actualExitCode": 1,
+      "terminationCause": null,
+      "elapsedSeconds": 4.664959990999705,
+      "persistentSqlite": [],
+      "checks": [
+        {
+          "name": "root-allocation-policy-binding",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "exact-kernel-budget",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "owner-quiescence",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-0",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-0",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-1",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-1",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-2",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-2",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-3",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-3",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-4",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-4",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-5",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-5",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-6",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-6",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-7",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-7",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-8",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-8",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-9",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-9",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-10",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-10",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-11",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-11",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-0",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-1",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-2",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-3",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-4",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-5",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-6",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-7",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-8",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-9",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "actual-unmodified-decision-source",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "actual-bound-decision-policy",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "actual-decision-budget-hash",
+          "ok": true,
+          "detail": null
+        }
+      ],
+      "checksPassed": 40,
+      "checksTotal": 40,
+      "supervisionSha256": "c988408bf2ab09565063a78b7c28442913ec9ac637cc5d2bc03bd01d25d23c3d",
+      "retainedArchiveSha256": "897fefda1e334c9bcbe0f58fc644f7e70ef18d84a47b6008a1667446a7d83c55",
+      "scientificR24Rate": null,
+      "scope": "Engineering, one development protein, actual aggregate client/head declared paths plus sequential worker tasks; infrastructure/runtime/Docker caches and experiment-only root telemetry excluded"
+    }
+  ],
+  "actualObservedCases": 1,
+  "actualFeasible": 0,
+  "actualInfeasible": 0,
+  "unknown": 1,
+  "scientificR24Rate": null,
+  "auditSourceSha256": "59319817ce79fa3a59c8f071a907e1cf6aa13cb9f9b9b0efe7b49c1313877c37"
+}

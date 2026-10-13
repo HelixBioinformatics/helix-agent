@@ -1,0 +1,1592 @@
+diff --git a/packages/helix/src/trp/evidence.ts b/packages/helix/src/trp/evidence.ts
+index 287cea1..d4f86a8 100644
+--- a/packages/helix/src/trp/evidence.ts
++++ b/packages/helix/src/trp/evidence.ts
+@@ -118,6 +118,21 @@ export async function methods(directory: string): Promise<void> {
+   const software = await read("software.json").catch(() => undefined)
+   const structural = await read("structural_report.json").catch(() => undefined)
+   const enforcement = await read("enforcement.json").catch(() => undefined)
++  const remoteStrict = await read("remote_strict_policy.json").catch(() => undefined)
++  if (remoteStrict) {
++    fields.push({
++      name: "co-located Slurm transport",
++      artifact: "execution.json",
++      pointer: ["transport"],
++      value: execution.transport,
++    })
++    fields.push({
++      name: "remote strict allocation",
++      artifact: "remote_strict_policy.json",
++      pointer: [],
++      value: remoteStrict,
++    })
++  }
+   if (enforcement)
+     fields.push({ name: "resource enforcement", artifact: "enforcement.json", pointer: [], value: enforcement })
+   if (structural)
+@@ -147,14 +162,18 @@ export async function methods(directory: string): Promise<void> {
+     )
+   const limitations = [
+     "Author-PDB numbering; supplied units, not repeat detection; experimental B-factor is not pLDDT.",
+-    execution.backend
+-      ? "The first-unit geometry zeros are placeholders. Remote Slurm execution is recorded for this run; external annotation and held-out scientific evaluation remain separate requirements."
+-      : "The first-unit geometry zeros are placeholders. External annotator and held-out evaluation remain separate requirements. This run uses local execution.",
+-    execution.backend
+-      ? "Slurm requests resources per job; container observations record effective CPU, memory and swap limits. Controller resources and aggregate storage use estimates and admission, without a hard controller limit or disk quota. Memory is not pooled between workers."
+-      : enforcement
+-        ? "Operator XFS quota and cgroup v2 bound controller and task resources. CPU quota is bandwidth, not exclusive cores. Full-run peaks are preserved by the external supervisor."
+-        : "Host resource admission uses estimates and reservations; aggregate disk quota and controller memory enforcement are unavailable.",
++    remoteStrict
++      ? "The real Helix client runs on the verified head. Local Python transport invokes the controller; Slurm executes worker jobs. This is not an SSH transport experiment."
++      : execution.backend
++        ? "The first-unit geometry zeros are placeholders. Remote Slurm execution is recorded for this run; external annotation and held-out scientific evaluation remain separate requirements."
++        : "The first-unit geometry zeros are placeholders. External annotator and held-out evaluation remain separate requirements. This run uses local execution.",
++    remoteStrict
++      ? "Root-owned policy and kernel receipts bind one XFS project quota covering declared client work/temp/state/cache/export and NFS remote work. Real Helix and Python/Nextflow share 1 CPU/2 GiB/swap-zero controller cgroup; sequential worker containers use 2 CPU/2 GiB. Root sampler records current usage separately from total-run entitlement. Preloaded read-only software/image caches and external root-supervisor records are infrastructure outside workBytes."
++      : execution.backend
++        ? "Slurm requests resources per job; container observations record effective CPU, memory and swap limits. Controller resources and aggregate storage use estimates and admission, without a hard controller limit or disk quota. Memory is not pooled between workers."
++        : enforcement
++          ? "Operator XFS quota and cgroup v2 bound controller and task resources. CPU quota is bandwidth, not exclusive cores. Full-run peaks are preserved by the external supervisor."
++          : "Host resource admission uses estimates and reservations; aggregate disk quota and controller memory enforcement are unavailable.",
+     "Offline verification checks bytes and declared links, not scientific truth or an authenticated human identity.",
+     "Agent provider/model/cost are not observed by this workflow; task software is identified by the pinned catalogue reference and image.",
+   ]
+diff --git a/packages/helix/src/trp/remote.ts b/packages/helix/src/trp/remote.ts
+index 259933c..eca5c7a 100644
+--- a/packages/helix/src/trp/remote.ts
++++ b/packages/helix/src/trp/remote.ts
+@@ -8,6 +8,7 @@ import { AppProcess } from "@helix/core/process"
+ import { TrpSpecification as S } from "./specification"
+ import type { TrpNextflow as N } from "./nextflow"
+ import { TrpResources as R } from "./resources"
++import { TrpRemoteEnforcement as H } from "./remote-enforcement"
+ import RUNNER from "./remote_runner.py.txt"
+ 
+ export const VERSION = "trp-slurm-ssh/1.0.0"
+@@ -16,8 +17,8 @@ export const Config = Schema.Struct({
+   host: Schema.String,
+   port: Schema.Number,
+   user: Schema.String,
+-  identityFile: Schema.String,
+-  knownHostsFile: Schema.String,
++  identityFile: Schema.optional(Schema.String),
++  knownHostsFile: Schema.optional(Schema.String),
+   hostKeyAlias: Schema.String,
+   root: Schema.String,
+   partition: Schema.String,
+@@ -25,12 +26,14 @@ export const Config = Schema.Struct({
+   geometryNode: Schema.optional(Schema.String),
+   numericalProfile: Schema.optional(Schema.Literal("haswell-single-thread")),
+   sessionExpiresAt: Schema.optional(Schema.String),
++  strictPolicy: Schema.optional(Schema.String),
+ })
+ export type Config = Schema.Schema.Type<typeof Config>
+ export interface Target {
+   config: Config
+   fingerprint: string
+   public: Record<string, unknown>
++  strict?: H.Allocation
+ }
+ 
+ /** The model cannot choose credentials, cluster capacity or a different target.
+@@ -77,20 +80,43 @@ export async function configured(): Promise<Target | undefined> {
+     throw new S.WorkflowError("remote-config", "Invalid port or shared root")
+   if (config.sessionExpiresAt !== undefined && !Number.isFinite(Date.parse(config.sessionExpiresAt)))
+     throw new S.WorkflowError("remote-config", "Invalid session expiry")
+-  const credentialsHash = await privateFile(config.identityFile, true)
+-  const knownHostsHash = await privateFile(config.knownHostsFile, false)
+-  const fingerprint = S.sha256(S.canonical({ configHash, credentialsHash, knownHostsHash }))
++  if (!config.strictPolicy && (!config.identityFile || !config.knownHostsFile))
++    throw new S.WorkflowError("remote-config", "SSH requires owner-controlled identity and known-host files")
++  const credentialsHash = config.identityFile ? await privateFile(config.identityFile, true) : null
++  const knownHostsHash = config.knownHostsFile ? await privateFile(config.knownHostsFile, false) : null
+   const { identityFile: _identity, knownHostsFile: _known, ...description } = config
++  const receipt = config.strictPolicy ? await H.observe(config.strictPolicy, description) : undefined
++  const fingerprint = S.sha256(
++    S.canonical({
++      configHash,
++      credentialsHash,
++      knownHostsHash,
++      ...(receipt ? { strictPolicySha256: receipt.policySha256, strictCheckerSha256: H.checkerSha256 } : {}),
++    }),
++  )
++  const strict = receipt ? H.allocation(config.strictPolicy!, receipt, fingerprint) : undefined
+   return {
+     config,
+     fingerprint,
+-    public: { ...description, fingerprint, hostKeyVerification: "strict", credentialBytes: "excluded" },
++    public: {
++      ...description,
++      fingerprint,
++      hostKeyVerification: strict ? "not_used_co_located_root_policy" : "strict",
++      credentialBytes: "excluded",
++      ...(strict ? { strict, transport: "co-located-python" } : {}),
++    },
++    ...(strict ? { strict } : {}),
+   }
+ }
+ 
+ const quote = (text: string) => "'" + text.replaceAll("'", "'\\''") + "'"
+ export function command(target: Target) {
++  // request() revalidates Linux/root receipts before selecting this transport.
++  // It exists only for the operator deployment with the real client on head.
++  if (target.strict) return ChildProcess.make("/usr/bin/python3", ["-c", RUNNER])
+   const c = target.config
++  if (!c.identityFile || !c.knownHostsFile)
++    throw new S.WorkflowError("remote-config", "SSH identity and trust files are required")
+   return ChildProcess.make("ssh", [
+     "-T",
+     "-o",
+@@ -154,6 +180,8 @@ export function request(
+   signal?: AbortSignal,
+ ) {
+   return Effect.gen(function* () {
++    if (target.strict)
++      yield* Effect.promise(() => H.observe(target.strict!.policyPath, target.public, target.strict!.policySha256))
+     const result = yield* runProcess(command(target), {
+       stdin: S.canonical({ action, target: target.public, ...payload }),
+       signal,
+@@ -200,6 +228,9 @@ export function inventory(value: any): R.Inventory {
+     sources: value.sources,
+     limitations: value.limitations,
+     remote: value.remote,
++    ...(value.remoteStrict
++      ? { remoteStrict: value.remoteStrict, remoteStrictObservation: value.remoteStrictObservation }
++      : {}),
+   }
+ }
+ 
+@@ -210,9 +241,14 @@ export function bind(bundle: N.Bundle, target: Target, id: string): void {
+   const geometry = bundle.spec.graph.nodes.find((n) => n.operation === "geometre.geometry")!.id.toUpperCase()
+   bundle.files["remote_target.json"] = S.canonical(target.public) + "\n"
+   bundle.files["remote_runner.py"] = RUNNER
++  if (target.strict) {
++    bundle.files["remote_strict_policy.json"] = S.canonical(target.strict) + "\n"
++    bundle.files["remote_strict.py"] = H.checkerSource
++  }
+   const execution = JSON.parse(bundle.files["execution.json"])
+-  execution.backend = VERSION
++  execution.backend = target.strict ? H.BACKEND : VERSION
+   execution.target = target.public
++  if (target.strict) execution.transport = "co-located-python"
+   execution.numericalProfile = c.numericalProfile ?? "native-single-thread"
+   bundle.files["execution.json"] = S.canonical(execution) + "\n"
+   bundle.files["nextflow.config"] = bundle.files["nextflow.config"]
+diff --git a/packages/helix/src/trp/remote_runner.py.txt b/packages/helix/src/trp/remote_runner.py.txt
+index d0f6eb7..63206c7 100644
+--- a/packages/helix/src/trp/remote_runner.py.txt
++++ b/packages/helix/src/trp/remote_runner.py.txt
+@@ -9,6 +9,7 @@ import os
+ from pathlib import Path
+ import platform
+ import re
++import runpy
+ import shutil
+ import signal
+ import socket
+@@ -19,6 +20,28 @@ import time
+ from datetime import datetime, timezone
+ 
+ VERSION = 'trp-slurm-ssh/1.0.0'
++STRICT_VERSION = 'trp-remote-strict/1.0.0'
++
++
++def strict_observation(req, role='client'):
++    fixed = req['target'].get('strict')
++    if fixed is None:
++        return None
++    if fixed.get('version') != STRICT_VERSION or req['target'].get('transport') != 'co-located-python':
++        raise ValueError('Unrecognized strict co-located transport')
++    checker = Path('/usr/local/libexec/helix-remote-strict-check.py')
++    for file, directory in [(checker.parent, True), (checker, False)]:
++        found = file.lstat()
++        if found.st_uid != 0 or found.st_mode & 0o022 or file.is_symlink() or file.resolve(strict=True) != file:
++            raise ValueError('Strict root checker path is untrusted')
++        if directory and not file.is_dir() or not directory and not file.is_file():
++            raise ValueError('Strict root checker is not an ordinary file')
++    if hashlib.sha256(checker.read_bytes()).hexdigest() != fixed['policy']['checker']['sha256']:
++        raise ValueError('Strict root checker changed')
++    receipt = runpy.run_path(str(checker))['observe'](fixed['policyPath'], req['target'], fixed['policySha256'], role)
++    if receipt['policy'] != fixed['policy'] or fixed['targetFingerprint'] != req['target']['fingerprint']:
++        raise ValueError('Strict allocation differs from approved target')
++    return receipt
+ 
+ 
+ def canonical(value):
+@@ -99,6 +122,7 @@ def fields(text):
+ 
+ 
+ def observe(req):
++    strict = strict_observation(req, 'controller' if req.get('strictController') else 'client')
+     root = target_root(req)
+     queue = req['target']['partition']
+     partition = fields(invoke(['scontrol', 'show', 'partition', queue, '--oneliner']).stdout)
+@@ -143,13 +167,23 @@ def observe(req):
+         seconds = min(seconds, guard_seconds) if seconds is not None else guard_seconds
+     return {'ok': True, 'observedAt': now(), 'platform': platform.system().lower(), 'architecture': 'x64' if platform.machine() == 'x86_64' else platform.machine(),
+             'host': socket.gethostname(), 'workspace': str(root), 'filesystem': str(os.stat(root).st_dev),
+-            'cpus': cpus + best['cpus'], 'memoryBytes': memory + best['memoryBytes'], 'freeBytes': capacity.f_bavail * capacity.f_frsize,
++            'cpus': strict['entitlement']['cpus'] if strict else cpus + best['cpus'],
++            'memoryBytes': strict['entitlement']['memoryBytes'] if strict else memory + best['memoryBytes'],
++            'freeBytes': strict['entitlement']['workBytes'] if strict else capacity.f_bavail * capacity.f_frsize,
++            **({'remoteStrict': req['target']['strict'], 'remoteStrictObservation': strict} if strict else {}),
+             'remote': {'version': VERSION, 'fingerprint': req['target']['fingerprint'], 'partition': queue,
+-                       'controllerCpus': cpus, 'controllerMemoryBytes': memory, 'nodes': nodes, 'requiredNodes': [req['target'][key] for key in ['selectNode', 'geometryNode'] if req['target'].get(key)], 'secondsRemaining': seconds},
+-            'sources': ['SSH host key verified by local client', '/proc/meminfo:MemAvailable', '/proc/self/cgroup and ancestor limits', 'os.statvfs shared root', 'scontrol partition/nodes', 'Academy expiry and per-boot guard when available'],
+-            'limitations': ['Capacity is observed, not an exclusive reservation. Controller and worker capacity are separate; one task must fit one worker.',
++                       # The strict total-run entitlement includes the real client.
++                       # Its current consumption stays in the separate receipt.
++                       'controllerCpus': strict['policy']['controller']['cpus'] if strict else cpus,
++                       'controllerMemoryBytes': strict['policy']['controller']['memoryBytes'] if strict else memory,
++                       'nodes': nodes, 'requiredNodes': [req['target'][key] for key in ['selectNode', 'geometryNode'] if req['target'].get(key)], 'secondsRemaining': seconds},
++            'sources': (['Root-owned co-located policy and fresh kernel XFS quota sample', 'FSGETXATTR project/inheritance; findmnt UUID/device; /proc boot/host/cgroup and controller limits', 'scontrol partition/nodes', 'current controller usage recorded separately from allocation entitlement'] if strict else ['SSH host key verified by local client', '/proc/meminfo:MemAvailable', '/proc/self/cgroup and ancestor limits', 'os.statvfs shared root', 'scontrol partition/nodes', 'Academy expiry and per-boot guard when available']),
++            'limitations': (['Real Helix client and Python/Nextflow controller share the fixed controller cgroup; sequential worker tasks have separate Docker limits.',
++                             'One XFS project covers declared client and NFS worker-visible work paths; preloaded read-only runtime/image caches and root supervisor records are outside workBytes.',
++                             'Local Python transport on the verified head is explicit; this strict profile is not an SSH transport test. Worker memory is never pooled.',
++                             'Allocated controller entitlement is not reduced by its own current usage. CPU quota is bandwidth, not exclusive cores.'] if strict else ['Capacity is observed, not an exclusive reservation. Controller and worker capacity are separate; one task must fit one worker.',
+                             'Slurm CPU/memory requests and Docker effective task limits are recorded separately. No aggregate disk quota or hard controller-memory limit is claimed.',
+-                            'Image caches and distributions are infrastructure outside workBytes. Cluster shared filesystem availability is tested by actual execution.']}
++                            'Image caches and distributions are infrastructure outside workBytes. Cluster shared filesystem availability is tested by actual execution.'])}
+ 
+ 
+ def verify(req, root):
+@@ -178,6 +212,7 @@ def controller_alive(state):
+ 
+ 
+ def start(req):
++    strict = strict_observation(req)
+     root = run_root(req, False)
+     if root.exists():
+         raise ValueError('Run already exists; automatic resubmission is forbidden')
+@@ -195,9 +230,14 @@ def start(req):
+     # Transported script must equal the script currently serving this request.
+     if (root / 'remote_runner.py').read_text() != SCRIPT_SELF:
+         raise ValueError('Runner bytes differ from approved runner')
++    if strict:
++        if json.loads((root / 'remote_strict_policy.json').read_text()) != req['target']['strict'] or sha((root / 'remote_strict.py').read_bytes()) != strict['policy']['checker']['sha256']:
++            raise ValueError('Strict policy/checker are not bound to the approval digest')
++        write(root, 'remote-strict-start.json', strict)
+     with (root / 'remote-controller.log').open('wb') as out, (root / 'remote-controller.stderr').open('wb') as err:
+         child = subprocess.Popen([sys.executable, str(root / 'remote_runner.py'), 'controller', base64.b64encode(canonical({k: v for k, v in req.items() if k != 'files'}).encode()).decode()],
+-                                 stdin=subprocess.DEVNULL, stdout=out, stderr=err, start_new_session=True)
++                                 stdin=subprocess.DEVNULL, stdout=out, stderr=err, start_new_session=True,
++                                 cwd=root if strict else None)
+     ticks = (Path('/proc') / str(child.pid) / 'stat').read_text().split()[21]
+     state = {'pid': child.pid, 'startTicks': ticks, 'id': req['id'], 'digest': req['digest'], 'status': 'starting', 'startedAt': now()}
+     write(root, 'remote-controller-identity.json', state)
+@@ -260,6 +300,8 @@ def runtime_records(root):
+ 
+ 
+ def controller(req):
++    if req['target'].get('strict'):
++        req['strictController'] = True
+     root = run_root(req)
+     signal.signal(signal.SIGTERM, lambda *_: (_ for _ in ()).throw(InterruptedError('Controller cancelled')))
+     status = 'failed'
+@@ -281,7 +323,8 @@ def controller(req):
+         if not re.search(r'version\s+25\.10\.4(?:\s|$)', version):
+             raise ValueError('Nextflow 25.10.4 is required')
+         write(root, 'software.json', {'imageId': exact_image, 'nextflowVersionOutput': version,
+-                                      'slurmVersionOutput': invoke(['scontrol', '--version']).stdout, 'backend': VERSION})
++                                      'slurmVersionOutput': invoke(['scontrol', '--version']).stdout,
++                                      'backend': 'trp-slurm-colocated-strict/1.0.0' if req['target'].get('strict') else VERSION})
+         process_run(root, ['nextflow', '-C', 'nextflow.config', 'config', '-flat'], root, 30)
+         manifest = verify(req, root)
+         dry = root / 'dry-run'
+@@ -293,9 +336,16 @@ def controller(req):
+         env = os.environ.copy()
+         env.update({'NXF_OFFLINE': 'true', 'NXF_DISABLE_CHECK_LATEST': 'true'})
+         os.environ.update(env)
++        if req['target'].get('strict'):
++            temporary = req['target']['strict']['policy']['paths']['temporaryRoot']
++            os.environ['NXF_TEMP'] = temporary
++            # Java does not infer java.io.tmpdir from the POSIX TMPDIR variable.
++            os.environ['NXF_OPTS'] = os.environ.get('NXF_OPTS', '') + ' -Djava.io.tmpdir=' + temporary
+         process_run(root, [*args, '-stub-run'], dry, min(480, req['budget']['wallSeconds']))
+         snapshot_jobs(req, root)
+         verify(req, root)
++        if req['target'].get('strict'):
++            write(root, 'remote-strict-before-science.json', strict_observation(req, 'controller'))
+         analysis_inventory = observe(req)
+         write(root, 'remote-analysis-inventory.json', analysis_inventory)
+         if analysis_inventory['remote']['controllerCpus'] < 1 or analysis_inventory['remote']['controllerMemoryBytes'] < 2147483648 or not any(n['eligible'] and n['cpus'] >= 2 and n['memoryBytes'] >= 2147483648 for n in analysis_inventory['remote']['nodes']):
+@@ -305,6 +355,8 @@ def controller(req):
+             if time.monotonic() > deadline:
+                 raise ValueError('Client did not grant fresh analysis resource admission')
+             time.sleep(0.5)
++        if req['target'].get('strict'):
++            write(root, 'remote-strict-before-science.json', strict_observation(req, 'controller'))
+         process_run(root, args, root, min(480, req['budget']['wallSeconds']))
+         snapshot_jobs(req, root)
+         verify(req, root)
+@@ -342,6 +394,8 @@ def admit_analysis(req):
+     decision = req['decision']
+     raw = json.loads((root / 'remote-analysis-inventory.json').read_text())
+     inventory = {key: raw[key] for key in ['observedAt', 'platform', 'architecture', 'host', 'workspace', 'filesystem', 'cpus', 'memoryBytes', 'freeBytes', 'sources', 'limitations', 'remote']}
++    if raw.get('remoteStrict'):
++        inventory.update(remoteStrict=raw['remoteStrict'], remoteStrictObservation=raw['remoteStrictObservation'])
+     inventory['version'] = 'trp-resources/1.2.0'
+     admission = json.loads((root / 'admission.json').read_text())
+     budget = json.loads((root / 'budget.json').read_text())
+diff --git a/packages/helix/src/trp/resources.ts b/packages/helix/src/trp/resources.ts
+index b37fc46..8e32842 100644
+--- a/packages/helix/src/trp/resources.ts
++++ b/packages/helix/src/trp/resources.ts
+@@ -7,6 +7,7 @@ import os from "node:os"
+ import path from "node:path"
+ import { TrpSpecification as S } from "./specification"
+ import { TrpEnforcement } from "./enforcement"
++import { TrpRemoteEnforcement as H } from "./remote-enforcement"
+ 
+ export const VERSION = "trp-resources/1.2.0"
+ export const MiB = 1024 ** 2
+@@ -33,6 +34,8 @@ export const Inventory = Schema.Struct({
+   sources: Schema.Array(Schema.String),
+   limitations: Schema.Array(Schema.String),
+   enforcement: Schema.optional(TrpEnforcement.AllocationSchema),
++  remoteStrict: Schema.optional(H.Allocation),
++  remoteStrictObservation: Schema.optional(Schema.Unknown),
+   remote: Schema.optional(
+     Schema.Struct({
+       version: Schema.Literal("trp-slurm-ssh/1.0.0"),
+@@ -112,11 +115,15 @@ export function count(files: Record<string, string>): Demand {
+       hardLimit: false,
+     },
+     assumptions: [
+-      ...(files["remote_target.json"]
++      ...(files["remote_strict_policy.json"]
+         ? [
+-            "SSH/Slurm backend: controller and worker capacity are checked separately. A 2 CPU/2 GiB task must fit one eligible worker; memory is never pooled across workers. Docker effective task cgroup limits are checked in scientific adapters; aggregate storage and controller enforcement remain unavailable.",
++            "Verified co-located Slurm profile: the real Helix client and Python/Nextflow controller share a root-controlled 1 CPU/2 GiB/swap-zero cgroup. All declared client work/temp/state/cache/export and remote workspace paths inherit one kernel XFS project quota. Worker tasks remain separate 2 CPU/2 GiB Docker allocations; no memory pooling.",
+           ]
+-        : []),
++        : files["remote_target.json"]
++          ? [
++              "SSH/Slurm backend: controller and worker capacity are checked separately. A 2 CPU/2 GiB task must fit one eligible worker; memory is never pooled across workers. Docker effective task cgroup limits are checked in scientific adapters; aggregate storage and controller enforcement remain unavailable.",
++            ]
++          : []),
+       "Two sequential tasks per traversal; one stub traversal then one real traversal; no retry or resume.",
+       "Task allocation: 2 CPUs/2 GiB. Controller allocation: 1 CPU/2 GiB; cgroup enforcement requires an independently verified operator sandbox. CPU bandwidth is not an exclusive core reservation.",
+       "Each traversal has an 8 minute watchdog; probes/configuration reserve another 120 seconds. This is a configured timeout, not a runtime prediction.",
+@@ -183,6 +190,30 @@ export function admit(demand: Demand, rawInventory: unknown, rawBudget: unknown,
+         reject("remote-session-insufficient", "secondsRemaining", demand.wallSeconds + 120, remote.secondsRemaining)
+       if (!/^[0-9a-f]{64}$/.test(remote.fingerprint))
+         reject("remote-identity-invalid", "fingerprint", "SHA-256 operator target", remote.fingerprint)
++      if (inventory.remoteStrict) {
++        const strict = inventory.remoteStrict
++        const entitled = strict.policy.entitlement
++        if (
++          !H.validateReceipt(inventory.remoteStrictObservation, strict, now.getTime() / 1000) ||
++          strict.targetFingerprint !== remote.fingerprint ||
++          !/^[0-9a-f]{64}$/.test(strict.policySha256) ||
++          strict.policy.checker.sha256 !== H.checkerSha256 ||
++          strict.policy.controller.cpus !== 1 ||
++          strict.policy.controller.memoryBytes !== 2048 * MiB ||
++          strict.policy.controller.swapBytes !== 0 ||
++          entitled.cpus !== 3 ||
++          entitled.memoryBytes !== 4096 * MiB ||
++          entitled.workBytes !== strict.policy.filesystem.hardBytes ||
++          remote.controllerCpus !== 1 ||
++          remote.controllerMemoryBytes !== 2048 * MiB ||
++          inventory.cpus !== entitled.cpus ||
++          inventory.memoryBytes !== entitled.memoryBytes ||
++          inventory.freeBytes !== entitled.workBytes
++        )
++          reject("remote-strict-receipt-invalid", "enforcement", "bound controller/global quota entitlement", null)
++      }
++    } else if (inventory.remoteStrict) {
++      reject("remote-strict-target-missing", "enforcement", "verified co-located Slurm target", null)
+     }
+   }
+   if (budget) {
+@@ -192,12 +223,18 @@ export function admit(demand: Demand, rawInventory: unknown, rawBudget: unknown,
+         reject("budget-insufficient", key, demand[key], Number.isFinite(budget[key]) ? budget[key] : null)
+     }
+     const enforced = inventory?.enforcement as TrpEnforcement.Allocation | undefined
+-    if (budget.requireHardStorageLimit && !enforced)
++    const remoteStrict = inventory?.remoteStrict
++    if (budget.requireHardStorageLimit && !enforced && !remoteStrict)
+       reject("storage-quota-unavailable", "workBytes", "enforced aggregate disk quota", "estimate only")
+     if (enforced) {
+       for (const key of ["cpus", "memoryBytes", "workBytes", "wallSeconds"] as const)
+         if (enforced[key] > budget[key]) reject("enforcement-exceeds-budget", key, enforced[key], budget[key])
+     }
++    if (remoteStrict) {
++      for (const key of ["cpus", "memoryBytes", "workBytes", "wallSeconds"] as const)
++        if (remoteStrict.policy.entitlement[key] > budget[key])
++          reject("enforcement-exceeds-budget", key, remoteStrict.policy.entitlement[key], budget[key])
++    }
+   }
+   return {
+     version: VERSION,
+diff --git a/packages/helix/src/trp/verify_bundle.py.txt b/packages/helix/src/trp/verify_bundle.py.txt
+index 3cf4a75..b94a57c 100644
+--- a/packages/helix/src/trp/verify_bundle.py.txt
++++ b/packages/helix/src/trp/verify_bundle.py.txt
+@@ -45,6 +45,49 @@ def safe_name(name):
+     return name
+ 
+ 
++def strict_receipt(receipt, allocated):
++    """Check preserved receipt semantics, never execute its root checker."""
++    p = allocated['policy']
++    if receipt['version'] != 'trp-remote-strict/1.0.0' or receipt['policy'] != p or receipt['policySha256'] != allocated['policySha256']:
++        raise ValueError('strict root policy receipt differs')
++    if digest(receipt['policyRaw'].encode()) != allocated['policySha256'] or parse(receipt['policyRaw']) != p:
++        raise ValueError('strict root policy source differs')
++    sample = parse(receipt['sampleRaw'])
++    if digest(receipt['sampleRaw'].encode()) != receipt['sampleSha256'] or sample['policySha256'] != allocated['policySha256'] or sample['bootId'] != p['bootId']:
++        raise ValueError('strict root sampler source differs')
++    if not -1 <= receipt['checkedAt'] - sample['observedAt'] <= 5:
++        raise ValueError('strict root sampler was stale when checked')
++    if receipt['host'] != p['hostname'] or receipt['transport'] != 'co-located-python' or receipt['membership'] != '0::/' + p['controller']['cgroup']:
++        raise ValueError('strict controller host/transport/membership differs')
++    limits = receipt['cgroup']
++    cpu = limits['cpu.max'].split()
++    if len(cpu) != 2 or cpu[0] == 'max' or int(cpu[0]) != int(cpu[1]) or limits['memory.max'] != '2147483648' or limits['memory.swap.max'] != '0':
++        raise ValueError('strict shared controller limits differ')
++    if receipt['currentUsageIsSubtractedFromEntitlement'] or receipt['entitlement'] != p['entitlement']:
++        raise ValueError('strict entitlement was reduced by current usage')
++    if receipt['role'] not in ('client', 'controller'):
++        raise ValueError('strict receipt role differs')
++    cwd = Path(receipt['cwd'])
++    if not cwd.is_relative_to(p['paths']['clientWorkspace' if receipt['role'] == 'client' else 'remoteRoot']):
++        raise ValueError('strict cwd was outside allocation')
++    if receipt['role'] == 'client' and receipt['parentMembership'] != receipt['membership']:
++        raise ValueError('real client parent was outside strict controller')
++    if {r['name'] for r in receipt['paths']} != set(p['paths']) or len(receipt['paths']) != len(p['paths']):
++        raise ValueError('strict path witness set differs')
++    for row in receipt['paths']:
++        if row['path'] != p['paths'][row['name']] or row['device'] != p['filesystem']['device'] or row['projectId'] != p['filesystem']['projectId'] or not row['inherit']:
++            raise ValueError('strict project/device/path witness differs')
++    mount = receipt['mount']
++    if mount['target'] != p['filesystem']['mountPoint'] or mount['uuid'] != p['filesystem']['uuid'] or mount['fstype'] != 'xfs' or not {'pquota', 'prjquota'} & set(mount['options'].split(',')):
++        raise ValueError('strict filesystem witness differs')
++    q = sample['quota']
++    rows = re.findall(r'^#?' + str(p['filesystem']['projectId']) + r'\s+(\d+)\s+(\d+)\s+(\d+)\s', q['reportSource'], re.M)
++    if len(rows) != 1 or int(rows[0][0]) * 1024 != q['usedBytes'] or int(rows[0][2]) * 1024 != q['hardBytes'] or q['hardBytes'] != p['filesystem']['hardBytes']:
++        raise ValueError('strict kernel quota source differs')
++    if 'Accounting: ON' not in q['stateSource'] or 'Enforcement: ON' not in q['stateSource'] or q['treeCheckExitCode'] != 0 or q['treeCheckStdout'].strip() or q['treeCheckStderr'].strip():
++        raise ValueError('strict kernel quota/inheritance was not enforced')
++
++
+ def walk(root):
+     result = set()
+     for item in root.rglob('*'):
+@@ -151,7 +194,8 @@ def verify(root, expected=None):
+             raise ValueError('approved bundle changed: ' + name)
+     admission, inventory, budget = record('admission.json'), record('inventory.json'), record('budget.json')
+     execution = record('execution.json')
+-    remote = execution.get('backend') == 'trp-slurm-ssh/1.0.0'
++    strict = execution.get('backend') == 'trp-slurm-colocated-strict/1.0.0'
++    remote = strict or execution.get('backend') == 'trp-slurm-ssh/1.0.0'
+     if remote:
+         if not {'remote_target.json', 'remote_runner.py'} <= set(bundle['files']):
+             raise ValueError('missing approved remote target/controller')
+@@ -161,6 +205,8 @@ def verify(root, expected=None):
+         if "process.executor = 'slurm'" not in config or '--memory=2g' not in config or '--memory-swap=2g' not in config:
+             raise ValueError('remote executor or effective task memory limits missing')
+     if 'enforcement' in inventory:
++        if strict:
++            raise ValueError('local sandbox cannot authorize strict Slurm allocation')
+         enforced = record('enforcement.json')
+         if enforced != inventory['enforcement'] or 'enforcement.json' not in bundle['files']:
+             raise ValueError('unbound resource enforcement')
+@@ -172,6 +218,23 @@ def verify(root, expected=None):
+                        '--memory-swap=2g', '--log-driver=none'):
+             if option not in config:
+                 raise ValueError('Docker task allocation missing: ' + option)
++    elif strict:
++        if not {'remote_strict_policy.json', 'remote_strict.py'} <= set(bundle['files']):
++            raise ValueError('strict policy/checker not approved')
++        allocated = record('remote_strict_policy.json')
++        if allocated != inventory.get('remoteStrict') or allocated != execution['target'].get('strict') or allocated['targetFingerprint'] != inventory['remote']['fingerprint'] or execution.get('transport') != 'co-located-python':
++            raise ValueError('strict target/allocation differs')
++        p = allocated['policy']
++        if p['version'] != 'trp-remote-strict/1.0.0' or p['controller'] != {'cgroup': 'helix-strict-' + p['id'] + '.service', 'cpus': 1, 'memoryBytes': 2147483648, 'swapBytes': 0}:
++            raise ValueError('strict controller policy differs')
++        if p['entitlement'] != {'cpus': 3, 'memoryBytes': 4294967296, 'workBytes': p['filesystem']['hardBytes'], 'wallSeconds': 1080}:
++            raise ValueError('strict total-run entitlement differs')
++        if digest((root/'run/remote_strict.py').read_bytes()) != p['checker']['sha256']:
++            raise ValueError('strict checker code differs')
++        for key in ('cpus', 'memoryBytes', 'workBytes', 'wallSeconds'):
++            if p['entitlement'][key] > budget[key]:
++                raise ValueError('strict allocation exceeds approved budget')
++        strict_receipt(inventory['remoteStrictObservation'], allocated)
+     elif budget['requireHardStorageLimit']:
+         raise ValueError('hard budget without enforcement')
+     if admission['inventoryHash'] != digest(canonical(inventory)) or admission['budgetHash'] != digest(canonical(budget)):
+@@ -222,6 +285,10 @@ def verify(root, expected=None):
+             r = record(name)
+             if r['inventory'].get('enforcement') != inventory.get('enforcement'):
+                 raise ValueError('allocation changed during execution')
++            if strict:
++                if r['inventory'].get('remoteStrict') != allocated:
++                    raise ValueError('strict allocation changed during execution')
++                strict_receipt(r['inventory']['remoteStrictObservation'], allocated)
+             if (not r['decision']['accepted'] or r['decision']['inventoryHash'] != digest(canonical(r['inventory']))
+                     or r['decision']['budgetHash'] != admission['budgetHash'] or r['decision']['demand'] != d):
+                 raise ValueError('resource recheck differs')
+@@ -235,6 +302,11 @@ def verify(root, expected=None):
+         if not remote and (len(processes) != 6 or any(p.get('exitCode') != 0 for p in processes)):
+             raise ValueError('successful controller command count differs')
+         if remote:
++            if strict:
++                for name in ['remote-strict-start.json', 'remote-strict-before-science.json']:
++                    if 'run/' + name not in listed:
++                        raise ValueError('successful strict run lacks ' + name)
++                    strict_receipt(record(name), allocated)
+             for name in ['remote-terminal.json', 'remote-approved.json', 'remote-transfer.json', 'remote-processes.jsonl', 'remote-native-jobs.jsonl', 'remote-task-runtime.json']:
+                 if 'run/' + name not in listed:
+                     raise ValueError('successful remote run lacks ' + name)
+diff --git a/packages/helix/src/trp/workflow.ts b/packages/helix/src/trp/workflow.ts
+index 48c51ec..6fcda8e 100644
+--- a/packages/helix/src/trp/workflow.ts
++++ b/packages/helix/src/trp/workflow.ts
+@@ -18,6 +18,7 @@ import { Protocol } from "../nfcore/protocol"
+ import { HandCount } from "../nfcore/handcount"
+ import { TrpInterventions } from "./interventions"
+ import { TrpEnforcement } from "./enforcement"
++import { TrpRemoteEnforcement } from "./remote-enforcement"
+ import { TrpRemote } from "./remote"
+ 
+ interface Draft {
+@@ -137,6 +138,7 @@ const layer = Layer.effect(
+         }
+         const allocation = inventory.enforcement
+         if (allocation) yield* Effect.promise(() => TrpEnforcement.claim(allocation))
++        if (inventory.remoteStrict) yield* Effect.promise(() => TrpRemoteEnforcement.claim(inventory.remoteStrict!))
+         const action = {
+           request: bundle.spec.intent.value,
+           detail: S.canonical(bundle.spec) + " " + N.command.join(" "),
+@@ -167,9 +169,11 @@ const layer = Layer.effect(
+             ? {
+                 ...check,
+                 status: "passed" as const,
+-                detail: inventory.enforcement
+-                  ? "Dated inventory, explicit budget, XFS quota and controller/task cgroups verified. See admission.json and enforcement.json."
+-                  : "Dated inventory and explicit budget checked; storage is an estimate, not a quota. See admission.json.",
++                detail: inventory.remoteStrict
++                  ? "Root policy and kernel receipts verify one XFS project for co-located client and Slurm work, plus shared client/controller cgroup. See inventory.json and remote_strict_policy.json."
++                  : inventory.enforcement
++                    ? "Dated inventory, explicit budget, XFS quota and controller/task cgroups verified. See admission.json and enforcement.json."
++                    : "Dated inventory and explicit budget checked; storage is an estimate, not a quota. See admission.json.",
+               }
+             : check,
+         )
+@@ -223,11 +227,13 @@ const layer = Layer.effect(
+           admission: structuredClone(admission),
+           inventory: structuredClone(inventory),
+           budget: structuredClone(budget),
+-          limits: target
+-            ? "SSH/Slurm on the reviewed operator target. Controller: reservation 1 CPU/2 GiB on head; each sequential Docker task: 2 CPU/2 GiB with effective cgroup observations. Worker memory is not pooled. Storage is estimated; no hard disk quota or exclusive CPU allocation. Two stub tasks then two scientific tasks, no automatic retries."
+-            : inventory.enforcement
+-              ? "Local Docker in an operator allocation: XFS project quota; controller 1 CPU/2 GiB; sequential tasks 2 CPU/2 GiB; aggregate 3 CPU/4 GiB. No automatic retries."
+-              : "Local Docker; two stub tasks followed by two real tasks, each at most 2 CPUs, 2 GB RAM and 3 minutes. Host inventory and reviewed budget required; storage is an estimate with no aggregate quota. No automatic retries.",
++          limits: inventory.remoteStrict
++            ? "Verified co-located Slurm: real Helix client and Python/Nextflow share 1 CPU/2 GiB/swap-zero controller cgroup; declared client/work/temp/state/cache/export and worker-visible remote work inherit one global XFS project quota. Sequential worker Docker tasks have 2 CPU/2 GiB limits. Python transport is local to the verified head; no SSH transport is claimed. No automatic retries."
++            : target
++              ? "SSH/Slurm on the reviewed operator target. Controller: reservation 1 CPU/2 GiB on head; each sequential Docker task: 2 CPU/2 GiB with effective cgroup observations. Worker memory is not pooled. Storage is estimated; no hard disk quota or exclusive CPU allocation. Two stub tasks then two scientific tasks, no automatic retries."
++              : inventory.enforcement
++                ? "Local Docker in an operator allocation: XFS project quota; controller 1 CPU/2 GiB; sequential tasks 2 CPU/2 GiB; aggregate 3 CPU/4 GiB. No automatic retries."
++                : "Local Docker; two stub tasks followed by two real tasks, each at most 2 CPUs, 2 GB RAM and 3 minutes. Host inventory and reviewed budget required; storage is an estimate with no aggregate quota. No automatic retries.",
+         }
+       }).pipe(Effect.orDie)
+ 
+@@ -310,7 +316,7 @@ const layer = Layer.effect(
+               questions: [
+                 {
+                   header: "Ejecutar análisis TRP",
+-                  question: `Aprobación de la especificación ${digest}.\nInfraestructura aprobada: ${draft.target ? S.canonical(draft.target.public) : "equipo local"}.\nSe comprobará la configuración y se ejecutarán dos tareas simuladas de recorrido en seco, seguidas de dos tareas reales con Docker y Nextflow (máximo por tarea: 2 CPU, 2 GB, 3 minutos), sin reintentos. Se guardarán entradas, código, aprobación, validación y resultados en .helix/trp/. Esta ruta calcula geometría de unidades suministradas; no detecta repeticiones.\n\nPresupuesto propuesto (su aprobación autoriza estos límites):\n${JSON.stringify(draft.budget, null, 2)}\nReserva calculada y supuestos:\n${JSON.stringify(draft.demand, null, 2)}\n${draft.bundle.files["enforcement.json"] ? "Cuota XFS y límites agregados de CPU/memoria verificados; controlador y tareas comparten la asignación." : "El espacio de trabajo es una estimación sin cuota agregada."} El presupuesto global de API no está medido por esta ruta.\nProtocolo comprobado:\n${draft.bundle.files["protocol.json"]}\n\nEspecificación completa y fuentes declaradas:\n${JSON.stringify(draft.bundle.spec, null, 2)}\n\nComprobaciones omitidas:\n${draft.bundle.report.checks
++                  question: `Aprobación de la especificación ${digest}.\nInfraestructura aprobada: ${draft.target ? S.canonical(draft.target.public) : "equipo local"}.\nSe comprobará la configuración y se ejecutarán dos tareas simuladas de recorrido en seco, seguidas de dos tareas reales con Docker y Nextflow (máximo por tarea: 2 CPU, 2 GB, 3 minutos), sin reintentos. Se guardarán entradas, código, aprobación, validación y resultados en .helix/trp/. Esta ruta calcula geometría de unidades suministradas; no detecta repeticiones.\n\nPresupuesto propuesto (su aprobación autoriza estos límites):\n${JSON.stringify(draft.budget, null, 2)}\nReserva calculada y supuestos:\n${JSON.stringify(draft.demand, null, 2)}\n${draft.bundle.files["remote_strict_policy.json"] ? "Perfil Slurm co-localizado verificado: cliente real y controlador/Nextflow comparten 1 CPU/2 GiB/swap cero; sus rutas de trabajo y las de los trabajadores heredan una única cuota XFS global. Transporte Python local en el head verificado; no es transporte SSH. Cada tarea del trabajador tiene límite independiente de 2 CPU/2 GiB." : draft.bundle.files["enforcement.json"] ? "Cuota XFS y límites agregados de CPU/memoria verificados; controlador y tareas comparten la asignación." : "El espacio de trabajo es una estimación sin cuota agregada."} El presupuesto global de API no está medido por esta ruta.\nProtocolo comprobado:\n${draft.bundle.files["protocol.json"]}\n\nEspecificación completa y fuentes declaradas:\n${JSON.stringify(draft.bundle.spec, null, 2)}\n\nComprobaciones omitidas:\n${draft.bundle.report.checks
+                     .filter((c) => c.status === "omitted")
+                     .map((c) => c.detail)
+                     .join(
+diff --git a/packages/helix/src/trp/remote-enforcement.ts b/packages/helix/src/trp/remote-enforcement.ts
+new file mode 100644
+index 0000000..72313c0
+--- /dev/null
++++ b/packages/helix/src/trp/remote-enforcement.ts
+@@ -0,0 +1,246 @@
++export * as TrpRemoteEnforcement from "./remote-enforcement"
++
++import fs from "node:fs/promises"
++import path from "node:path"
++import { Schema } from "effect"
++import { TrpSpecification as S } from "./specification"
++import CHECKER from "./remote_strict.py.txt"
++
++export const VERSION = "trp-remote-strict/1.0.0"
++export const BACKEND = "trp-slurm-colocated-strict/1.0.0"
++export const checkerPath = "/usr/local/libexec/helix-remote-strict-check.py"
++export const checkerSha256 = S.sha256(CHECKER)
++
++export const Policy = Schema.Struct({
++  version: Schema.Literal(VERSION),
++  id: Schema.String,
++  uid: Schema.Number,
++  hostname: Schema.String,
++  bootId: Schema.String,
++  target: Schema.Record(Schema.String, Schema.Union([Schema.String, Schema.Number])),
++  filesystem: Schema.Struct({
++    mountPoint: Schema.String,
++    uuid: Schema.String,
++    device: Schema.Number,
++    projectId: Schema.Number,
++    hardBytes: Schema.Number,
++  }),
++  paths: Schema.Struct({
++    allocationRoot: Schema.String,
++    clientWorkspace: Schema.String,
++    temporaryRoot: Schema.String,
++    exportRoot: Schema.String,
++    clientStateRoot: Schema.String,
++    clientCacheRoot: Schema.String,
++    remoteRoot: Schema.String,
++  }),
++  controller: Schema.Struct({
++    cgroup: Schema.String,
++    cpus: Schema.Number,
++    memoryBytes: Schema.Number,
++    swapBytes: Schema.Number,
++  }),
++  entitlement: Schema.Struct({
++    cpus: Schema.Number,
++    memoryBytes: Schema.Number,
++    workBytes: Schema.Number,
++    wallSeconds: Schema.Number,
++  }),
++  checker: Schema.Struct({ path: Schema.String, sha256: Schema.String }),
++  samplePath: Schema.String,
++})
++export type Policy = Schema.Schema.Type<typeof Policy>
++export const Allocation = Schema.Struct({
++  version: Schema.Literal(VERSION),
++  policyPath: Schema.String,
++  policySha256: Schema.String,
++  policy: Policy,
++  targetFingerprint: Schema.String,
++})
++export type Allocation = Schema.Schema.Type<typeof Allocation>
++export interface Receipt {
++  ok: true
++  policy: Policy
++  policySha256: string
++  sampleSha256: string
++  observedAt: number
++  transport: "co-located-python"
++  entitlement: Policy["entitlement"]
++  quota: { usedBytes: number; hardBytes: number }
++  [key: string]: unknown
++}
++
++/** A receipt is structured source evidence, never a yes/no enforcement flag.
++ * Live observe() additionally checks the root-owned files and actual kernel. */
++export function validateReceipt(raw: unknown, allocated: Allocation, now = Date.now() / 1000): boolean {
++  try {
++    const r = raw as any,
++      p = allocated.policy
++    if (
++      !r ||
++      r.version !== VERSION ||
++      r.policySha256 !== allocated.policySha256 ||
++      S.canonical(r.policy) !== S.canonical(p) ||
++      S.sha256(r.policyRaw) !== allocated.policySha256 ||
++      S.canonical(JSON.parse(r.policyRaw)) !== S.canonical(p) ||
++      S.sha256(r.sampleRaw) !== r.sampleSha256 ||
++      r.transport !== "co-located-python" ||
++      r.host !== p.hostname ||
++      r.membership !== "0::/" + p.controller.cgroup ||
++      r.currentUsageIsSubtractedFromEntitlement !== false ||
++      S.canonical(r.entitlement) !== S.canonical(p.entitlement)
++    )
++      return false
++    const sample = JSON.parse(r.sampleRaw)
++    if (
++      sample.version !== "trp-remote-strict-sample/1.0.0" ||
++      sample.policySha256 !== allocated.policySha256 ||
++      sample.bootId !== p.bootId ||
++      !Number.isFinite(r.checkedAt) ||
++      !Number.isFinite(sample.observedAt) ||
++      r.checkedAt - sample.observedAt < -1 ||
++      r.checkedAt - sample.observedAt > 5 ||
++      now - r.checkedAt < -1 ||
++      now - r.checkedAt > 5
++    )
++      return false
++    const cpu = r.cgroup["cpu.max"].trim().split(/\s+/).map(Number)
++    if (
++      cpu.length !== 2 ||
++      cpu[0] !== cpu[1] ||
++      cpu[0] <= 0 ||
++      r.cgroup["memory.max"] !== "2147483648" ||
++      r.cgroup["memory.swap.max"] !== "0"
++    )
++      return false
++    if (r.role !== "client" && r.role !== "controller") return false
++    const cwd = r.role === "client" ? p.paths.clientWorkspace : p.paths.remoteRoot
++    if (
++      (r.cwd !== cwd && !r.cwd.startsWith(cwd + path.sep)) ||
++      (r.role === "client" && r.parentMembership !== r.membership)
++    )
++      return false
++    if (
++      !Array.isArray(r.paths) ||
++      r.paths.length !== Object.keys(p.paths).length ||
++      new Set(r.paths.map((v: any) => v.name)).size !== r.paths.length
++    )
++      return false
++    for (const row of r.paths)
++      if (
++        row.path !== (p.paths as Record<string, string>)[row.name] ||
++        row.device !== p.filesystem.device ||
++        row.projectId !== p.filesystem.projectId ||
++        row.inherit !== true
++      )
++        return false
++    const q = sample.quota
++    const lines = q.reportSource.match(
++      new RegExp("^#?" + p.filesystem.projectId + "\\s+(\\d+)\\s+(\\d+)\\s+(\\d+)\\s", "m"),
++    )
++    if (
++      !lines ||
++      Number(lines[1]) * 1024 !== q.usedBytes ||
++      Number(lines[3]) * 1024 !== q.hardBytes ||
++      q.projectId !== p.filesystem.projectId ||
++      q.hardBytes !== p.filesystem.hardBytes ||
++      r.quota.hardBytes !== q.hardBytes ||
++      r.quota.usedBytes !== q.usedBytes ||
++      !q.stateSource.includes("Accounting: ON") ||
++      !q.stateSource.includes("Enforcement: ON") ||
++      q.treeCheckExitCode !== 0 ||
++      q.treeCheckStdout.trim() ||
++      q.treeCheckStderr.trim()
++    )
++      return false
++    return true
++  } catch {
++    return false
++  }
++}
++
++function fail(message: string): never {
++  throw new S.WorkflowError("remote-strict-unverified", message)
++}
++
++async function rootOwned(file: string, directory = false): Promise<void> {
++  const stat = await fs.lstat(file)
++  if (
++    stat.uid !== 0 ||
++    stat.mode & 0o022 ||
++    stat.isSymbolicLink() ||
++    (directory ? !stat.isDirectory() : !stat.isFile()) ||
++    (await fs.realpath(file)) !== file
++  )
++    fail("Strict operator policy/checker must be ordinary root-controlled files")
++}
++
++/** Both the root policy and Linux checks are required; no model-facing flag can
++ * create this allocation. The checker is read-only and pinned in this module. */
++export async function observe(
++  policyPath: string,
++  target: Record<string, unknown>,
++  expectedSha?: string,
++): Promise<Receipt> {
++  if (!/^\/run\/helix-remote-strict\/hrs[0-9a-f]{16}\.json$/.test(policyPath))
++    fail("Invalid immutable remote policy path")
++  await rootOwned("/run/helix-remote-strict", true)
++  await rootOwned(policyPath)
++  await rootOwned(path.dirname(checkerPath), true)
++  await rootOwned(checkerPath)
++  const raw = await fs.readFile(policyPath)
++  const policySha256 = S.sha256(raw)
++  if (expectedSha && expectedSha !== policySha256) fail("Remote allocation changed during review")
++  const policy = Schema.decodeUnknownSync(Policy)(JSON.parse(raw.toString()), { onExcessProperty: "error" })
++  if (
++    policy.checker.path !== checkerPath ||
++    policy.checker.sha256 !== checkerSha256 ||
++    S.sha256(await fs.readFile(checkerPath)) !== checkerSha256
++  )
++    fail("Installed root checker differs from approved code")
++  const child = Bun.spawn(["/usr/bin/python3", checkerPath], {
++    stdin: new Blob([S.canonical({ policyPath, target, policySha256, role: "client" })]),
++    stdout: "pipe",
++    stderr: "pipe",
++    env: process.env,
++  })
++  const timer = setTimeout(() => child.kill(), 15_000)
++  let receipt: Receipt
++  try {
++    const [code, out, err] = await Promise.all([
++      child.exited,
++      new Response(child.stdout).text(),
++      new Response(child.stderr).text(),
++    ])
++    if (code !== 0 || err.trim()) fail("Kernel/root policy verification failed: " + out.slice(-4096) + err.slice(-1024))
++    receipt = JSON.parse(out)
++  } finally {
++    clearTimeout(timer)
++  }
++  if (
++    !receipt.ok ||
++    receipt.policySha256 !== policySha256 ||
++    S.canonical(receipt.policy) !== S.canonical(policy) ||
++    receipt.transport !== "co-located-python" ||
++    receipt.quota.hardBytes !== policy.filesystem.hardBytes
++  )
++    fail("Kernel receipt differs from fixed operator policy")
++  if (!validateReceipt(receipt, allocation(policyPath, receipt, ""))) fail("Kernel receipt sources or limits differ")
++  return receipt
++}
++
++export function allocation(policyPath: string, receipt: Receipt, targetFingerprint: string): Allocation {
++  return { version: VERSION, policyPath, policySha256: receipt.policySha256, policy: receipt.policy, targetFingerprint }
++}
++
++export async function claim(allocated: Allocation): Promise<void> {
++  const file = await fs.open(
++    path.join(allocated.policy.paths.allocationRoot, ".helix-remote-strict-claim"),
++    "wx",
++    0o600,
++  )
++  await file.writeFile("One reviewed composition per co-located remote strict allocation\n")
++  await file.close()
++}
++
++export const checkerSource = CHECKER
+diff --git a/packages/helix/src/trp/remote_strict.py.txt b/packages/helix/src/trp/remote_strict.py.txt
+new file mode 100644
+index 0000000..c799667
+--- /dev/null
++++ b/packages/helix/src/trp/remote_strict.py.txt
+@@ -0,0 +1,221 @@
++#!/usr/bin/env python3
++"""Read-only kernel and root-policy validation for co-located Slurm clients.
++
++Never allocates resources, changes cgroups or sets quotas. A root supervisor
++must create the immutable policy and refresh the independently queried quota.
++"""
++import fcntl
++import hashlib
++import json
++import os
++from pathlib import Path
++import pwd
++import re
++import socket
++import stat
++import struct
++import subprocess
++import sys
++import time
++
++VERSION = 'trp-remote-strict/1.0.0'
++POLICY_ROOT = Path('/run/helix-remote-strict')
++CHECKER = Path('/usr/local/libexec/helix-remote-strict-check.py')
++FS_IOC_FSGETXATTR = 0x801c581f
++FS_XFLAG_PROJINHERIT = 0x00000200
++
++
++def sha(data):
++    return hashlib.sha256(data).hexdigest()
++
++
++def fail(detail):
++    raise ValueError('Strict remote allocation unverified: ' + detail)
++
++
++def root_owned(file, directory=False):
++    file = Path(file)
++    found = file.lstat()
++    if found.st_uid != 0 or found.st_mode & 0o022 or file.is_symlink():
++        fail('root ownership or permissions: ' + str(file))
++    if directory and not stat.S_ISDIR(found.st_mode) or not directory and not stat.S_ISREG(found.st_mode):
++        fail('ordinary root file/directory required: ' + str(file))
++    if file.resolve(strict=True) != file:
++        fail('root policy path contains a symlink')
++
++
++def root_json(pointer):
++    root_owned(POLICY_ROOT, True)
++    root_owned(pointer)
++    raw = Path(pointer).read_bytes()
++    return json.loads(raw), sha(raw), raw.decode('utf-8')
++
++
++def project_attributes(directory):
++    descriptor = os.open(directory, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW)
++    try:
++        result = bytearray(28)
++        fcntl.ioctl(descriptor, FS_IOC_FSGETXATTR, result, True)
++        flags, _, _, project, _ = struct.unpack('=5I', result[:20])
++        return {'projectId': project, 'inherit': bool(flags & FS_XFLAG_PROJINHERIT), 'flags': flags}
++    finally:
++        os.close(descriptor)
++
++
++def quota_values(source, project):
++    rows = re.findall(r'^#?' + str(project) + r'\s+(\d+)\s+(\d+)\s+(\d+)\s', source, re.M)
++    if len(rows) != 1:
++        fail('exact project quota absent or ambiguous in root kernel report')
++    used, soft, hard = map(int, rows[0])
++    return {'usedBytes': used * 1024, 'softBytes': soft * 1024, 'hardBytes': hard * 1024}
++
++
++def policy_contract(policy, target):
++    if set(policy) != {'version', 'id', 'uid', 'hostname', 'bootId', 'target', 'filesystem', 'paths', 'controller', 'entitlement', 'checker', 'samplePath'}:
++        fail('unsupported policy fields')
++    if policy['version'] != VERSION or not re.fullmatch(r'hrs[0-9a-f]{16}', policy['id']):
++        fail('unsupported policy version/identity')
++    if not isinstance(policy['uid'], int) or isinstance(policy['uid'], bool) or policy['uid'] <= 0:
++        fail('quota-exempt root cannot be the scientific client')
++    if set(policy['target']) - {'host', 'port', 'user', 'hostKeyAlias', 'root', 'partition', 'selectNode', 'geometryNode', 'numericalProfile'}:
++        fail('unsupported target policy fields')
++    for key, value in policy['target'].items():
++        if target.get(key) != value:
++            fail('target differs from root policy: ' + key)
++    if not {'host', 'port', 'user', 'hostKeyAlias', 'root', 'partition'} <= set(policy['target']):
++        fail('incomplete target binding')
++    fs = policy['filesystem']
++    if set(fs) != {'mountPoint', 'uuid', 'device', 'projectId', 'hardBytes'}:
++        fail('incomplete filesystem binding')
++    if not re.fullmatch(r'[0-9a-fA-F-]{36}', fs['uuid']) or not isinstance(fs['device'], int) or fs['device'] <= 0:
++        fail('unsupported filesystem identity')
++    if not isinstance(fs['projectId'], int) or fs['projectId'] <= 0 or not isinstance(fs['hardBytes'], int) or fs['hardBytes'] <= 0 or fs['hardBytes'] % 4096:
++        fail('unsupported project quota')
++    expected_paths = {'allocationRoot', 'clientWorkspace', 'temporaryRoot', 'exportRoot', 'clientStateRoot', 'clientCacheRoot', 'remoteRoot'}
++    if set(policy['paths']) != expected_paths or policy['paths']['remoteRoot'] != target['root']:
++        fail('incomplete co-located path binding')
++    for value in [fs['mountPoint'], *policy['paths'].values()]:
++        if not isinstance(value, str) or not re.fullmatch(r'/[a-zA-Z0-9_./-]+', value) or '..' in value or value == '/':
++            fail('unsafe or unsupported allocation path')
++    if policy['controller'] != {'cgroup': 'helix-strict-' + policy['id'] + '.service', 'cpus': 1, 'memoryBytes': 2147483648, 'swapBytes': 0}:
++        fail('unsupported controller allocation')
++    entitlement = policy['entitlement']
++    if entitlement != {'cpus': 3, 'memoryBytes': 4294967296, 'workBytes': fs['hardBytes'], 'wallSeconds': 1080}:
++        fail('unsupported run entitlement')
++    if policy['checker']['path'] != str(CHECKER) or not re.fullmatch(r'[0-9a-f]{64}', policy['checker']['sha256']):
++        fail('unrecognized root checker')
++    if policy['samplePath'] != str(POLICY_ROOT / (policy['id'] + '.sample.json')):
++        fail('unexpected sampler path')
++
++
++def observe(pointer, target, expected_policy_sha=None, role='client'):
++    if not re.fullmatch(r'/run/helix-remote-strict/hrs[0-9a-f]{16}\.json', pointer):
++        fail('invalid immutable policy path')
++    policy, policy_sha, policy_raw = root_json(pointer)
++    policy_contract(policy, target)
++    if expected_policy_sha is not None and policy_sha != expected_policy_sha:
++        fail('root policy changed after preparation')
++    if os.geteuid() != policy['uid'] or target['user'] != pwd.getpwuid(os.geteuid()).pw_name:
++        fail('client or controller user differs')
++    if Path(pointer).stem != policy['id']:
++        fail('policy identity differs from root filename')
++    if socket.gethostname() != policy['hostname'] or Path('/proc/sys/kernel/random/boot_id').read_text().strip() != policy['bootId']:
++        fail('co-located head/boot identity differs')
++    root_owned(CHECKER.parent, True)
++    root_owned(CHECKER)
++    if sha(CHECKER.read_bytes()) != policy['checker']['sha256']:
++        fail('root checker differs from fixed policy')
++    sample, sample_sha, sample_raw = root_json(policy['samplePath'])
++    if sample['version'] != 'trp-remote-strict-sample/1.0.0' or sample['policySha256'] != policy_sha or sample['bootId'] != policy['bootId']:
++        fail('quota sample binding differs')
++    age = time.time() - sample['observedAt']
++    if not -1 <= age <= 5:
++        fail('root quota sample is stale')
++    quota = sample['quota']
++    fs = policy['filesystem']
++    values = quota_values(quota['reportSource'], fs['projectId'])
++    if values['hardBytes'] != fs['hardBytes'] or quota['hardBytes'] != values['hardBytes'] or quota['usedBytes'] != values['usedBytes'] or quota['projectId'] != fs['projectId']:
++        fail('kernel quota differs from root allocation')
++    if 'Accounting: ON' not in quota['stateSource'] or 'Enforcement: ON' not in quota['stateSource']:
++        fail('kernel project quota enforcement is inactive')
++    if quota['treeCheckExitCode'] != 0 or quota['treeCheckStdout'].strip() or quota['treeCheckStderr'].strip():
++        fail('root recursive project inheritance check failed')
++    paths = policy['paths']
++    root = Path(paths['allocationRoot'])
++    mount = Path(fs['mountPoint'])
++    if not root.is_absolute() or root.resolve(strict=True) != root or root == mount or not root.is_relative_to(mount):
++        fail('allocation root is not an ordinary child of XFS mount')
++    observations = []
++    for name, value in paths.items():
++        file = Path(value)
++        if not file.is_absolute() or file.resolve(strict=True) != file or not file.is_dir() or not file.is_relative_to(root):
++            fail('path outside quota or containing symlinks: ' + name)
++        if file.stat().st_dev != fs['device'] or file.stat().st_uid != policy['uid']:
++            fail('path device/ownership differs: ' + name)
++        attributes = project_attributes(str(file))
++        if attributes['projectId'] != fs['projectId'] or not attributes['inherit']:
++            fail('directory project/inherit flag differs: ' + name)
++        observations.append({'name': name, 'path': value, 'device': file.stat().st_dev, **attributes})
++    command = ['findmnt', '--json', '--target', str(root), '--output', 'TARGET,SOURCE,FSTYPE,OPTIONS,UUID']
++    found = subprocess.run(command, capture_output=True, text=True, timeout=10, check=True)
++    mounts = json.loads(found.stdout)['filesystems']
++    if len(mounts) != 1:
++        fail('ambiguous mount identity')
++    observed_mount = mounts[0]
++    options = set(observed_mount['options'].split(','))
++    if observed_mount['target'] != str(mount) or observed_mount['fstype'] != 'xfs' or observed_mount['uuid'] != fs['uuid'] or not options & {'prjquota', 'pquota'} or options & {'pqnoenforce', 'noquota'}:
++        fail('XFS UUID/mount/enforcement options differ')
++    cwd = Path.cwd().resolve(strict=True)
++    expected_cwd = Path(paths['clientWorkspace' if role == 'client' else 'remoteRoot'])
++    if role not in ('client', 'controller') or not cwd.is_relative_to(expected_cwd):
++        fail('client/controller cwd outside assigned project path')
++    environment = {'TMPDIR': 'temporaryRoot', 'XDG_STATE_HOME': 'clientStateRoot', 'XDG_CACHE_HOME': 'clientCacheRoot'}
++    for variable, name in environment.items():
++        if os.environ.get(variable) != paths[name]:
++            fail('client temporary/state/cache path differs: ' + variable)
++    for variable, value in {'XDG_DATA_HOME': paths['clientStateRoot'] + '/data',
++                            'XDG_CONFIG_HOME': paths['clientStateRoot'] + '/config',
++                            'BUN_INSTALL_CACHE_DIR': paths['clientCacheRoot'] + '/bun'}.items():
++        if os.environ.get(variable) != value:
++            fail('client data/config/Bun cache path differs: ' + variable)
++    membership = Path('/proc/self/cgroup').read_text().strip()
++    group = Path('/sys/fs/cgroup') / policy['controller']['cgroup']
++    if membership != '0::/' + policy['controller']['cgroup']:
++        fail('client/controller outside the shared controller cgroup')
++    parent_membership = Path('/proc/' + str(os.getppid()) + '/cgroup').read_text().strip()
++    if role == 'client' and parent_membership != membership:
++        fail('real client parent is outside the shared controller cgroup')
++    root_owned(group, True)
++    limits = {name: (group / name).read_text().strip() for name in ('cpu.max', 'memory.max', 'memory.swap.max', 'memory.current', 'memory.peak')}
++    for name in ('cpu.max', 'memory.max', 'memory.swap.max'):
++        root_owned(group / name)
++    cpu = limits['cpu.max'].split()
++    if len(cpu) != 2 or cpu[0] == 'max' or int(cpu[0]) != int(cpu[1]) or limits['memory.max'] != '2147483648' or limits['memory.swap.max'] != '0':
++        fail('effective shared controller bounds differ')
++    ancestors = []
++    parent = group.parent
++    while parent != Path('/sys/fs/cgroup'):
++        cpu = (parent / 'cpu.max').read_text().split()
++        maximum = (parent / 'memory.max').read_text().strip()
++        if cpu[0] != 'max' and int(cpu[0]) < int(cpu[1]) or maximum != 'max' and int(maximum) < 2147483648:
++            fail('ancestor cannot supply the declared controller entitlement')
++        ancestors.append(str(parent))
++        parent = parent.parent
++    return {'version': VERSION, 'policy': policy, 'policySha256': policy_sha,
++            'sampleSha256': sample_sha, 'sampleRaw': sample_raw, 'policyRaw': policy_raw,
++            'observedAt': sample['observedAt'], 'checkedAt': time.time(), 'role': role,
++            'transport': 'co-located-python', 'host': socket.gethostname(), 'pid': os.getpid(),
++            'cwd': str(cwd), 'membership': membership, 'cgroup': limits, 'ancestors': ancestors,
++            'parentPid': os.getppid(), 'parentMembership': parent_membership,
++            'mount': observed_mount, 'paths': observations, 'quota': values,
++            'entitlement': policy['entitlement'], 'currentUsageIsSubtractedFromEntitlement': False}
++
++
++if __name__ == '__main__':
++    try:
++        request = json.load(sys.stdin)
++        result = observe(request['policyPath'], request['target'], request.get('policySha256'), request.get('role', 'client'))
++        print(json.dumps({'ok': True, **result}, sort_keys=True))
++    except Exception as error:
++        print(json.dumps({'ok': False, 'code': 'remote-strict-unverified', 'error': str(error)}))
++        sys.exit(1)
+diff --git a/packages/helix/test/trp/remote-strict.test.ts b/packages/helix/test/trp/remote-strict.test.ts
+new file mode 100644
+index 0000000..2a6c9a2
+--- /dev/null
++++ b/packages/helix/test/trp/remote-strict.test.ts
+@@ -0,0 +1,288 @@
++import { describe, expect, test } from "bun:test"
++import fs from "node:fs/promises"
++import os from "node:os"
++import path from "node:path"
++import { TrpRemoteEnforcement as H } from "../../src/trp/remote-enforcement"
++import { TrpRemote as Remote } from "../../src/trp/remote"
++import { TrpResources as R } from "../../src/trp/resources"
++import { TrpNextflow as N } from "../../src/trp/nextflow"
++import { TrpSpecification as S } from "../../src/trp/specification"
++import { inventory } from "./resource-fixture"
++const policySource = {
++  version: "trp-remote-strict/1.0.0",
++  id: "hrs0123456789abcdef",
++  uid: 1000,
++  hostname: "helix-head",
++  bootId: "REPLACE_WITH_PROC_BOOT_ID",
++  target: {
++    host: "127.0.0.1",
++    port: 22,
++    user: "ubuntu",
++    hostKeyAlias: "helix-lab2",
++    root: "/shared/helix-strict/allocation/remote",
++    partition: "helix",
++    selectNode: "helix-worker1",
++    geometryNode: "helix-worker2",
++    numericalProfile: "haswell-single-thread",
++  },
++  filesystem: {
++    mountPoint: "/shared/helix-strict",
++    uuid: "REPLACE_XFS_UUID",
++    device: 0,
++    projectId: 142,
++    hardBytes: 67108864,
++  },
++  paths: {
++    allocationRoot: "/shared/helix-strict/allocation",
++    clientWorkspace: "/shared/helix-strict/allocation/client",
++    temporaryRoot: "/shared/helix-strict/allocation/tmp",
++    exportRoot: "/shared/helix-strict/allocation/export",
++    clientStateRoot: "/shared/helix-strict/allocation/state",
++    clientCacheRoot: "/shared/helix-strict/allocation/cache",
++    remoteRoot: "/shared/helix-strict/allocation/remote",
++  },
++  controller: {
++    cgroup: "helix-strict-hrs0123456789abcdef.service",
++    cpus: 1,
++    memoryBytes: 2147483648,
++    swapBytes: 0,
++  },
++  entitlement: {
++    cpus: 3,
++    memoryBytes: 4294967296,
++    workBytes: 67108864,
++    wallSeconds: 1080,
++  },
++  checker: {
++    path: "/usr/local/libexec/helix-remote-strict-check.py",
++    sha256: "REPLACE_WITH_FINAL_CHECKER_SHA256",
++  },
++  samplePath: "/run/helix-remote-strict/hrs0123456789abcdef.sample.json",
++}
++import budget from "../../../../evaluation/trp/development/f4-budget.json"
++
++function allocation(): H.Allocation {
++  const policy = {
++    ...structuredClone(policySource),
++    checker: { ...policySource.checker, sha256: H.checkerSha256 },
++  } as H.Policy
++  return {
++    version: H.VERSION,
++    policyPath: "/run/helix-remote-strict/hrs0123456789abcdef.json",
++    policySha256: "a".repeat(64),
++    policy,
++    targetFingerprint: "f".repeat(64),
++  }
++}
++function observed() {
++  const initial = allocation()
++  const policyRaw = JSON.stringify(initial.policy)
++  const strict = { ...initial, policySha256: S.sha256(policyRaw) }
++  const checkedAt = Date.now() / 1000
++  const sampleRaw = JSON.stringify({
++    version: "trp-remote-strict-sample/1.0.0",
++    policySha256: strict.policySha256,
++    bootId: strict.policy.bootId,
++    observedAt: checkedAt,
++    quota: {
++      projectId: strict.policy.filesystem.projectId,
++      usedBytes: 4096,
++      hardBytes: strict.policy.filesystem.hardBytes,
++      reportSource: "#142 4 0 65536 0 [------]\n",
++      stateSource: "Accounting: ON\nEnforcement: ON\n",
++      treeCheckExitCode: 0,
++      treeCheckStdout: "",
++      treeCheckStderr: "",
++    },
++  })
++  const receipt = {
++    version: H.VERSION,
++    policy: strict.policy,
++    policySha256: strict.policySha256,
++    policyRaw,
++    sampleRaw,
++    sampleSha256: S.sha256(sampleRaw),
++    checkedAt,
++    role: "client",
++    host: strict.policy.hostname,
++    cwd: strict.policy.paths.clientWorkspace,
++    membership: "0::/" + strict.policy.controller.cgroup,
++    parentMembership: "0::/" + strict.policy.controller.cgroup,
++    transport: "co-located-python",
++    currentUsageIsSubtractedFromEntitlement: false,
++    entitlement: strict.policy.entitlement,
++    cgroup: {
++      "cpu.max": "100000 100000",
++      "memory.max": "2147483648",
++      "memory.swap.max": "0",
++      "memory.current": "52428800",
++    },
++    paths: Object.entries(strict.policy.paths).map(([name, path]) => ({
++      name,
++      path,
++      device: strict.policy.filesystem.device,
++      projectId: strict.policy.filesystem.projectId,
++      inherit: true,
++    })),
++    quota: { usedBytes: 4096, hardBytes: strict.policy.filesystem.hardBytes },
++  }
++  return {
++    ...inventory(),
++    cpus: 3,
++    memoryBytes: 4 * 1024 ** 3,
++    freeBytes: strict.policy.entitlement.workBytes,
++    remoteStrict: strict,
++    remoteStrictObservation: receipt,
++    remote: {
++      version: Remote.VERSION,
++      fingerprint: strict.targetFingerprint,
++      partition: "helix",
++      controllerCpus: 1,
++      controllerMemoryBytes: 2 * 1024 ** 3,
++      requiredNodes: ["worker1", "worker2"],
++      secondsRemaining: 3600,
++      nodes: ["worker1", "worker2"].map((name) => ({
++        name,
++        cpus: 2,
++        memoryBytes: 2 * 1024 ** 3,
++        eligible: true,
++        state: "IDLE",
++        source: "synthetic allocated worker contract",
++      })),
++    },
++  }
++}
++const files = { "source.pdb": "ATOM\n", "selection.pdb": "ATOM\n" }
++
++describe("optional co-located Slurm strict allocation", () => {
++  test("dedicated controller entitlement is not its remaining headroom", () => {
++    const value = observed()
++    const decision = R.admit(R.count(files), value, { ...budget, requireHardStorageLimit: true })
++    expect(decision.accepted).toBe(true)
++    // A true reservation has the full two-GiB entitlement, although the client
++    // already consumes memory inside it; remaining headroom is a different fact.
++    value.remote.controllerMemoryBytes -= 50 * R.MiB
++    expect(R.admit(R.count(files), value, budget).accepted).toBe(false)
++  })
++  test("one worker cannot borrow the second worker's memory", () => {
++    const value = observed()
++    value.remote.nodes[0].memoryBytes -= 1
++    expect(R.admit(R.count(files), value, budget).rejections.map((r) => r.code)).toContain(
++      "remote-placement-insufficient",
++    )
++  })
++  test("receipts with stale sources, changed project flags or incomplete source evidence are refused", () => {
++    for (const mode of ["stale", "project", "flag", "missing-source", "controller-limit", "subtracted-usage"]) {
++      const value = observed()
++      const r = value.remoteStrictObservation
++      if (mode === "stale") r.checkedAt -= 10
++      if (mode === "project") r.paths[0].projectId++
++      if (mode === "flag") r.paths[0].inherit = false
++      if (mode === "missing-source") r.sampleRaw = "{}"
++      if (mode === "controller-limit") r.cgroup["memory.max"] = "4294967296"
++      if (mode === "subtracted-usage") r.currentUsageIsSubtractedFromEntitlement = true
++      expect(R.admit(R.count(files), value, budget).rejections.map((r) => r.code)).toContain(
++        "remote-strict-receipt-invalid",
++      )
++    }
++  })
++  test("an unbound target or enlarged effective quota is rejected", () => {
++    const value = observed()
++    value.remoteStrict = { ...value.remoteStrict, targetFingerprint: "b".repeat(64) }
++    expect(R.admit(R.count(files), value, budget).rejections.map((r) => r.code)).toContain(
++      "remote-strict-receipt-invalid",
++    )
++    const allocated = observed()
++    const reduced = { ...budget, workBytes: R.count(files).workBytes, requireHardStorageLimit: true }
++    expect(R.admit(R.count(files), allocated, reduced).rejections.map((r) => r.code)).toContain(
++      "enforcement-exceeds-budget",
++    )
++  })
++  test("booleans, partial strict policy and a policy without a Slurm inventory never authorize a quota", () => {
++    for (const remoteStrict of [true, {}, { version: H.VERSION }])
++      expect(
++        R.admit(R.count(files), { ...inventory(), remoteStrict }, { ...budget, requireHardStorageLimit: true })
++          .accepted,
++      ).toBe(false)
++    expect(
++      R.admit(R.count(files), { ...inventory(), remoteStrict: allocation() }, budget).rejections.map((r) => r.code),
++    ).toContain("remote-strict-target-missing")
++  })
++  test("the local-only sandbox pointer cannot authorize a remote deployment", async () => {
++    const oldRemote = process.env.HELIX_TRP_REMOTE,
++      oldSandbox = process.env.HELIX_TRP_SANDBOX
++    try {
++      process.env.HELIX_TRP_REMOTE = "/tmp/unread-operator.json"
++      process.env.HELIX_TRP_SANDBOX = "/run/trp-sandbox/trp0123456789abcdef.json"
++      await expect(Remote.configured()).rejects.toThrow("local sandbox cannot authorize remote")
++    } finally {
++      if (oldRemote === undefined) delete process.env.HELIX_TRP_REMOTE
++      else process.env.HELIX_TRP_REMOTE = oldRemote
++      if (oldSandbox === undefined) delete process.env.HELIX_TRP_SANDBOX
++      else process.env.HELIX_TRP_SANDBOX = oldSandbox
++    }
++  })
++  test("an arbitrary user policy path fails before any process or filesystem allocation", async () => {
++    await expect(H.observe("/tmp/pretend-root-policy.json", {})).rejects.toThrow("Invalid immutable remote policy path")
++  })
++  test("one preparation claims an allocation exactly once", async () => {
++    const dir = await fs.mkdtemp(path.join(os.tmpdir(), "helix-remote-strict-claim-"))
++    const initial = allocation()
++    const value = { ...initial, policy: { ...initial.policy, paths: { ...initial.policy.paths, allocationRoot: dir } } }
++    try {
++      await H.claim(value)
++      await expect(H.claim(value)).rejects.toThrow()
++    } finally {
++      await fs.rm(dir, { recursive: true, force: true })
++    }
++  })
++  test("the strict policy and checker enter the digest with an explicit local transport backend", () => {
++    const strict = allocation()
++    const target: Remote.Target = {
++      config: {
++        version: Remote.VERSION,
++        ...policySource.target,
++        strictPolicy: strict.policyPath,
++        numericalProfile: "haswell-single-thread",
++      },
++      fingerprint: strict.targetFingerprint,
++      strict,
++      public: {
++        version: Remote.VERSION,
++        ...policySource.target,
++        strict,
++        fingerprint: strict.targetFingerprint,
++        transport: "co-located-python",
++      },
++    }
++    const bundle = {
++      spec: {
++        graph: {
++          nodes: [
++            { id: "select", operation: "pdb.select" },
++            { id: "geometry", operation: "geometre.geometry" },
++          ],
++        },
++      },
++      report: {},
++      files: {
++        ...files,
++        "execution.json": "{}",
++        "nextflow.config": "process.executor = 'local'\n--cpus 2 --tmpfs",
++        "trp_select.py": "pass",
++        "trp_geometry.py": "pass",
++      },
++      digest: "",
++      image: "",
++    } as any
++    Remote.bind(bundle, target, "11111111-1111-1111-1111-111111111111")
++    const execution = JSON.parse(bundle.files["execution.json"])
++    expect(execution.backend).toBe(H.BACKEND)
++    expect(execution.transport).toBe("co-located-python")
++    expect(bundle.files["remote_strict.py"]).toBe(H.checkerSource)
++    expect(JSON.parse(bundle.files["remote_strict_policy.json"])).toEqual(strict)
++    const digest = N.bundleDigest(bundle.files)
++    bundle.files["remote_strict_policy.json"] += " "
++    expect(N.bundleDigest(bundle.files)).not.toBe(digest)
++  })
++})
+diff --git a/packages/helix/test/trp/test_remote_strict_checker.py b/packages/helix/test/trp/test_remote_strict_checker.py
+new file mode 100644
+index 0000000..c5b16b4
+--- /dev/null
++++ b/packages/helix/test/trp/test_remote_strict_checker.py
+@@ -0,0 +1,209 @@
++"""Checker contracts are synthetic; live kernel admission needs root provisioning."""
++import copy
++import importlib.machinery
++import importlib.util
++import json
++import hashlib
++from pathlib import Path
++from pathlib import PurePosixPath
++import subprocess
++import tempfile
++from unittest.mock import patch
++import unittest
++
++ROOT = Path(__file__).resolve().parents[4]
++SOURCE = ROOT / 'packages/helix/src/trp/remote_strict.py.txt'
++loader = importlib.machinery.SourceFileLoader('strict_checker', str(SOURCE))
++spec = importlib.util.spec_from_loader(loader.name, loader)
++checker = importlib.util.module_from_spec(spec)
++loader.exec_module(checker)
++verifier_loader = importlib.machinery.SourceFileLoader('strict_cold_verifier', str(ROOT / 'packages/helix/src/trp/verify_bundle.py.txt'))
++verifier = importlib.util.module_from_spec(importlib.util.spec_from_loader(verifier_loader.name, verifier_loader))
++verifier_loader.exec_module(verifier)
++runner_loader = importlib.machinery.SourceFileLoader('strict_controller', str(ROOT / 'packages/helix/src/trp/remote_runner.py.txt'))
++runner = importlib.util.module_from_spec(importlib.util.spec_from_loader(runner_loader.name, runner_loader))
++runner_loader.exec_module(runner)
++POLICY = json.loads(r'''{
++  "version": "trp-remote-strict/1.0.0",
++  "id": "hrs0123456789abcdef",
++  "uid": 1000,
++  "hostname": "helix-head",
++  "bootId": "REPLACE_WITH_PROC_BOOT_ID",
++  "target": {
++    "host": "127.0.0.1",
++    "port": 22,
++    "user": "ubuntu",
++    "hostKeyAlias": "helix-lab2",
++    "root": "/shared/helix-strict/allocation/remote",
++    "partition": "helix",
++    "selectNode": "helix-worker1",
++    "geometryNode": "helix-worker2",
++    "numericalProfile": "haswell-single-thread"
++  },
++  "filesystem": {
++    "mountPoint": "/shared/helix-strict",
++    "uuid": "REPLACE_XFS_UUID",
++    "device": 0,
++    "projectId": 142,
++    "hardBytes": 67108864
++  },
++  "paths": {
++    "allocationRoot": "/shared/helix-strict/allocation",
++    "clientWorkspace": "/shared/helix-strict/allocation/client",
++    "temporaryRoot": "/shared/helix-strict/allocation/tmp",
++    "exportRoot": "/shared/helix-strict/allocation/export",
++    "clientStateRoot": "/shared/helix-strict/allocation/state",
++    "clientCacheRoot": "/shared/helix-strict/allocation/cache",
++    "remoteRoot": "/shared/helix-strict/allocation/remote"
++  },
++  "controller": {
++    "cgroup": "helix-strict-hrs0123456789abcdef.service",
++    "cpus": 1,
++    "memoryBytes": 2147483648,
++    "swapBytes": 0
++  },
++  "entitlement": {
++    "cpus": 3,
++    "memoryBytes": 4294967296,
++    "workBytes": 67108864,
++    "wallSeconds": 1080
++  },
++  "checker": {
++    "path": "/usr/local/libexec/helix-remote-strict-check.py",
++    "sha256": "REPLACE_WITH_FINAL_CHECKER_SHA256"
++  },
++  "samplePath": "/run/helix-remote-strict/hrs0123456789abcdef.sample.json"
++}''')
++POLICY['filesystem']['uuid'] = '01234567-0123-0123-0123-0123456789ab'
++POLICY['filesystem']['device'] = 123
++POLICY['checker']['sha256'] = 'a' * 64
++
++
++class Contracts(unittest.TestCase):
++    def test_complete_supported_contract(self):
++        checker.policy_contract(POLICY, POLICY['target'])
++
++    def test_missing_target_keys_cannot_hide_behind_optional_keys(self):
++        p = copy.deepcopy(POLICY)
++        del p['target']['port']
++        with self.assertRaisesRegex(ValueError, 'incomplete target'):
++            checker.policy_contract(p, p['target'])
++
++    def test_mismatched_destination(self):
++        target = {**POLICY['target'], 'host': 'other-head'}
++        with self.assertRaisesRegex(ValueError, 'target differs'):
++            checker.policy_contract(POLICY, target)
++
++    def test_root_client_cannot_claim_enforced_quota(self):
++        p = copy.deepcopy(POLICY); p['uid'] = 0
++        with self.assertRaisesRegex(ValueError, 'quota-exempt root'):
++            checker.policy_contract(p, p['target'])
++
++    def test_controller_caps_and_total_budget_cannot_be_raised(self):
++        for section, field in [('controller', 'memoryBytes'), ('controller', 'cpus'), ('entitlement', 'memoryBytes')]:
++            p = copy.deepcopy(POLICY); p[section][field] *= 2
++            with self.assertRaises(ValueError):
++                checker.policy_contract(p, p['target'])
++
++    def test_policy_can_never_redirect_temporary_paths_outside_declared_plain_paths(self):
++        p = copy.deepcopy(POLICY); p['paths']['temporaryRoot'] += ' -Djava.io.tmpdir=/tmp'
++        with self.assertRaisesRegex(ValueError, 'unsafe'):
++            checker.policy_contract(p, p['target'])
++
++    def test_quota_report_reads_kernel_blocks_as_kibibytes(self):
++        found = checker.quota_values('#142 12 0 65536 0 [------]\n', 142)
++        self.assertEqual(found, {'usedBytes': 12288, 'softBytes': 0, 'hardBytes': 67108864})
++
++    def test_missing_or_duplicate_kernel_project_is_rejected(self):
++        for text in ['#143 12 0 65536 0\n', '#142 12 0 65536 0\n#142 10 0 65536 0\n']:
++            with self.assertRaisesRegex(ValueError, 'absent or ambiguous'):
++                checker.quota_values(text, 142)
++
++    def test_arbitrary_user_path_rejected_before_root_or_kernel_operations(self):
++        with self.assertRaisesRegex(ValueError, 'invalid immutable policy path'):
++            checker.observe('/tmp/fake.json', {})
++
++    def receipt(self):
++        policy = copy.deepcopy(POLICY)
++        policy_raw = json.dumps(policy)
++        allocated = {'policy': policy, 'policySha256': hashlib.sha256(policy_raw.encode()).hexdigest()}
++        sample = {'version': 'trp-remote-strict-sample/1.0.0', 'policySha256': allocated['policySha256'],
++                  'observedAt': 1000, 'bootId': policy['bootId'], 'quota': {'projectId': 142, 'usedBytes': 12288,
++                  'hardBytes': 67108864, 'reportSource': '#142 12 0 65536 0 [------]\n',
++                  'stateSource': 'Accounting: ON\nEnforcement: ON\n', 'treeCheckExitCode': 0,
++                  'treeCheckStdout': '', 'treeCheckStderr': ''}}
++        raw = json.dumps(sample)
++        receipt = {'version': checker.VERSION, 'policy': policy, 'policySha256': allocated['policySha256'],
++                   'policyRaw': policy_raw, 'sampleRaw': raw, 'sampleSha256': hashlib.sha256(raw.encode()).hexdigest(),
++                   'checkedAt': 1001, 'host': policy['hostname'], 'transport': 'co-located-python',
++                   'membership': '0::/' + policy['controller']['cgroup'],
++                   'cgroup': {'cpu.max': '100000 100000', 'memory.max': '2147483648', 'memory.swap.max': '0'},
++                   'entitlement': policy['entitlement'], 'currentUsageIsSubtractedFromEntitlement': False,
++                   'role': 'client', 'cwd': policy['paths']['clientWorkspace'],
++                   'parentMembership': '0::/' + policy['controller']['cgroup'],
++                   'paths': [{'name': name, 'path': path, 'device': 123, 'projectId': 142, 'inherit': True}
++                             for name, path in policy['paths'].items()],
++                   'mount': {'target': policy['filesystem']['mountPoint'], 'uuid': policy['filesystem']['uuid'],
++                             'fstype': 'xfs', 'options': 'rw,prjquota'}}
++        return receipt, allocated
++
++    def test_cold_receipt_can_be_checked_without_linux_or_executing_checker(self):
++        receipt, allocated = self.receipt()
++        verifier.strict_receipt(receipt, allocated)
++
++    def test_cold_receipt_rejects_changed_or_stale_sources_and_kernel_identity(self):
++        for mode in ['policy-source', 'sampler-source', 'stale', 'membership', 'project', 'inherit', 'limits', 'parent']:
++            receipt, allocated = self.receipt()
++            if mode == 'policy-source': receipt['policyRaw'] += ' '
++            if mode == 'sampler-source': receipt['sampleRaw'] += ' '
++            if mode == 'stale': receipt['checkedAt'] += 10
++            if mode == 'membership': receipt['membership'] += '/other'
++            if mode == 'project': receipt['paths'][0]['projectId'] += 1
++            if mode == 'inherit': receipt['paths'][0]['inherit'] = False
++            if mode == 'limits': receipt['cgroup']['memory.max'] = '4294967296'
++            if mode == 'parent': receipt['parentMembership'] = '0::/other'
++            with self.assertRaises(ValueError, msg=mode):
++                verifier.strict_receipt(receipt, allocated)
++
++    def test_actual_observe_preserves_controller_entitlement_with_nonzero_current_usage(self):
++        data = {'/proc/meminfo': 'MemAvailable: 4194304 kB\n', '/proc/self/cgroup': '0::/fixture\n',
++                '/sys/fs/cgroup/fixture/cpu.max': '100000 100000',
++                '/sys/fs/cgroup/fixture/memory.max': '2147483648',
++                '/sys/fs/cgroup/fixture/memory.current': '52428800',
++                '/sys/fs/cgroup/cpu.max': 'max 100000', '/sys/fs/cgroup/memory.max': 'max'}
++
++        class KernelPath:
++            def __init__(self, value): self.value = PurePosixPath(value)
++            def __truediv__(self, value): return KernelPath(self.value / value)
++            def __eq__(self, other): return isinstance(other, KernelPath) and self.value == other.value
++            def __str__(self): return str(self.value)
++            @property
++            def parent(self): return KernelPath(self.value.parent)
++            def is_relative_to(self, value): return self.value.is_relative_to(value)
++            def exists(self): return str(self.value) in data
++            def is_file(self): return False
++            def read_text(self): return data[str(self.value)]
++
++        def invoke(argv, **kwargs):
++            if argv[1:3] == ['show', 'partition']: text = 'PartitionName=helix State=UP Nodes=worker1,worker2'
++            elif argv[1:3] == ['show', 'hostnames']: text = 'worker1\nworker2\n'
++            else: text = 'State=IDLE CPUTot=2 CPUAlloc=0 RealMemory=2048 AllocMem=0'
++            return subprocess.CompletedProcess(argv, 0, text, '')
++
++        receipt = {'policy': POLICY, 'entitlement': POLICY['entitlement'], 'cgroup': {'memory.current': '52428800'}}
++        req = {'target': {'partition': 'helix', 'fingerprint': 'a' * 64, 'strict': {'synthetic': 'kernel reader contract fixture'}}}
++        with tempfile.TemporaryDirectory() as root, patch.object(runner, 'Path', KernelPath), \
++             patch.object(runner, 'target_root', return_value=Path(root)), patch.object(runner, 'invoke', side_effect=invoke), \
++             patch.object(runner, 'strict_observation', return_value=receipt), patch.object(runner.os, 'sched_getaffinity', return_value={0, 1}):
++            actual = runner.observe(req)
++            self.assertEqual(actual['remote']['controllerCpus'], 1)
++            self.assertEqual(actual['remote']['controllerMemoryBytes'], 2147483648)
++            self.assertEqual(actual['remoteStrictObservation']['cgroup']['memory.current'], '52428800')
++            self.assertEqual(actual['memoryBytes'], 4294967296)
++            with patch.object(runner, 'strict_observation', return_value=None):
++                ordinary = runner.observe(req)
++                self.assertEqual(ordinary['remote']['controllerMemoryBytes'], 2147483648 - 52428800)
++
++
++if __name__ == '__main__':
++    unittest.main()

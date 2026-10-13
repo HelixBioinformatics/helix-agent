@@ -1,0 +1,87 @@
+bun test v1.3.14 (0d9b296a)
+
+test/trp/workflow.test.ts:
+(pass) TRP approval through the actual question service > auto-allowed permissions cannot replace a human answer [626.59ms]
+(pass) TRP approval through the actual question service > a changed parameter invalidates the outstanding approval [475.20ms]
+(pass) TRP approval through the actual question service > changed file bytes are rechecked after approval [389.96ms]
+(pass) TRP approval through the actual question service > a failed revision also invalidates an earlier proposal [286.11ms]
+(pass) TRP approval through the actual question service > session binding and exact digest reject forged requests [244.51ms]
+(pass) TRP approval through the actual question service > agent tool adapters use the same approval gate [1345.40ms]
+
+test/trp/preflight.test.ts:
+(pass) a image preflight failure blocks the real analysis and records failure [4981.64ms]
+(pass) a config preflight failure blocks the real analysis and records failure [288.87ms]
+(pass) a dry-run preflight failure blocks the real analysis and records failure [309.07ms]
+(pass) a missing-marker preflight failure blocks the real analysis and records failure [314.79ms]
+
+test/trp/resources.test.ts:
+(pass) resource admission, development contrasts > counts UTF-8 bytes and channels separately from four tasks [0.07ms]
+(pass) resource admission, development contrasts > exact threshold accepted and inventory hash is deterministic [0.33ms]
+(pass) resource admission, development contrasts > budget cpus below demand is rejected before execution [0.20ms]
+(pass) resource admission, development contrasts > budget memoryBytes below demand is rejected before execution [0.06ms]
+(pass) resource admission, development contrasts > budget workBytes below demand is rejected before execution [0.06ms]
+(pass) resource admission, development contrasts > budget wallSeconds below demand is rejected before execution [0.05ms]
+(pass) resource admission, development contrasts > observed cpus below demand is rejected [0.10ms]
+(pass) resource admission, development contrasts > observed memoryBytes below demand is rejected [0.05ms]
+(pass) resource admission, development contrasts > observed freeBytes below demand is rejected [0.05ms]
+(pass) resource admission, development contrasts > missing inventory never grants admission [0.57ms]
+(pass) resource admission, development contrasts > empty inventory never grants admission [0.20ms]
+(pass) resource admission, development contrasts > partial inventory never grants admission [0.05ms]
+(pass) resource admission, development contrasts > extra fields inventory never grants admission [0.08ms]
+(pass) resource admission, development contrasts > invalid budget undefined is rejected [0.11ms]
+(pass) resource admission, development contrasts > invalid budget {} is rejected [0.07ms]
+(pass) resource admission, development contrasts > invalid budget {"cpus":3,"memoryBytes":4294967296,"workBytes":268435456,"wallSeconds":1080,"requireHardStorageLimit":false,"origin":""} is rejected [0.05ms]
+(pass) resource admission, development contrasts > invalid budget {"cpus":-1,"memoryBytes":4294967296,"workBytes":268435456,"wallSeconds":1080,"requireHardStorageLimit":false,"origin":"Explicit engineering reference fixture; synthetic approval driver; not the thesis evaluation or provider budget"} is rejected [0.08ms]
+(pass) resource admission, development contrasts > invalid budget {"cpus":3,"memoryBytes":1.5,"workBytes":268435456,"wallSeconds":1080,"requireHardStorageLimit":false,"origin":"Explicit engineering reference fixture; synthetic approval driver; not the thesis evaluation or provider budget"} is rejected [0.04ms]
+(pass) resource admission, development contrasts > inventory timestamp invalid rejected [0.11ms]
+(pass) resource admission, development contrasts > inventory timestamp 2026-09-15T11:54:59.999Z rejected [0.07ms]
+(pass) resource admission, development contrasts > inventory timestamp 2026-09-15T12:00:00.001Z rejected [0.06ms]
+(pass) resource admission, development contrasts > a requested hard quota never becomes an estimate approval [0.10ms]
+
+test/trp/enforcement.test.ts:
+(pass) operator resource allocation > hard budget accepts observed enforcement and rejects a larger effective quota [0.79ms]
+(pass) operator resource allocation > an invented yes/no enforcement flag never grants admission [0.26ms]
+(pass) operator resource allocation > untrusted state path cannot assert kernel limits [0.83ms]
+(pass) operator resource allocation > allocation cannot be reused by another preparation [6.06ms]
+
+test/trp/remote.test.ts:
+(pass) TRP remote infrastructure admission > Slurm topology and exact runtime code enter the approval digest [0.52ms]
+(pass) TRP remote infrastructure admission > per-worker memory cannot be pooled to admit a task [0.78ms]
+(pass) TRP remote infrastructure admission > a depleted required worker is refused even if another worker could fit [0.29ms]
+(pass) TRP remote infrastructure admission > controller and session capacity are separate admission requirements [0.19ms]
+(pass) TRP remote infrastructure admission > operator config rejects permissive credentials and binds SSH trust [2.31ms]
+(pass) TRP remote transfer and lifecycle > fiber interruption runs owner-scoped native cancellation [10.14ms]
+(pass) TRP remote transfer and lifecycle > retrieval refuses escaped filenames, wrong bytes and changed approved inputs [0.64ms]
+(pass) TRP remote transfer and lifecycle > ssh-status-lost cancels owned jobs and retrieves evidence without resubmission [2.73ms]
+(pass) TRP remote transfer and lifecycle > native-failure cancels owned jobs and retrieves evidence without resubmission [1.45ms]
+(pass) TRP remote transfer and lifecycle > abort cancels owned jobs and retrieves evidence without resubmission [1.11ms]
+(pass) TRP remote transfer and lifecycle > analysis-rejected cancels owned jobs and retrieves evidence without resubmission [7.59ms]
+
+test/trp/remote-approval.test.ts:
+(pass) remote reject refuses execution through the production workflow gate [132.23ms]
+(pass) remote source-changed refuses execution through the production workflow gate [128.74ms]
+(pass) remote target-changed refuses execution through the production workflow gate [114.41ms]
+(pass) remote hard-quota refuses execution through the production workflow gate [101.55ms]
+
+test/trp/remote-status-repair.test.ts:
+(pass) one transient status reset recovers same controller with zero scientific resubmissions [1012.59ms]
+(pass) two transient status resets remain bounded and do not cancel a recovered controller [2020.10ms]
+(pass) persistent transport failure keeps JSON-safe unknown terminal and primary diagnostic [2019.87ms]
+(pass) host-key and authentication errors are never retried [12.25ms]
+(pass) an explicit abort bypasses status retries and cleans up owned jobs [12.35ms]
+
+test/trp/remote-strict.test.ts:
+(pass) optional co-located Slurm strict allocation > dedicated controller entitlement is not its remaining headroom [5.81ms]
+(pass) optional co-located Slurm strict allocation > one worker cannot borrow the second worker's memory [1.29ms]
+(pass) optional co-located Slurm strict allocation > receipts with stale sources, changed project flags or incomplete source evidence are refused [7.01ms]
+(pass) optional co-located Slurm strict allocation > an unbound target or enlarged effective quota is rejected [2.90ms]
+(pass) optional co-located Slurm strict allocation > booleans, partial strict policy and a policy without a Slurm inventory never authorize a quota [1.55ms]
+(pass) optional co-located Slurm strict allocation > the local-only sandbox pointer cannot authorize a remote deployment [0.53ms]
+(pass) optional co-located Slurm strict allocation > an arbitrary user policy path fails before any process or filesystem allocation [1.17ms]
+(pass) optional co-located Slurm strict allocation > one preparation claims an allocation exactly once [10.45ms]
+(pass) optional co-located Slurm strict allocation > the strict policy and checker enter the digest with an explicit local transport backend [1.69ms]
+
+ 65 pass
+ 0 fail
+ 261 expect() calls
+Ran 65 tests across 8 files. [19.00s]

@@ -1,0 +1,13 @@
+{
+  "steps": [
+    {
+      "at": "2026-10-13T07:01:57.951822+00:00",
+      "role": "head",
+      "command": "sudo python3 -c 'import pathlib,subprocess,json,os\nmount=pathlib.Path('\"'\"'/shared/helix-strict'\"'\"');image=pathlib.Path('\"'\"'/srv/helix-strict-store/disk.img'\"'\"')\nassert image.is_file()and image.stat().st_size==2147483648\npresent=subprocess.run(['\"'\"'findmnt'\"'\"','\"'\"'--mountpoint'\"'\"',str(mount),'\"'\"'--noheadings'\"'\"','\"'\"'-o'\"'\"','\"'\"'FSTYPE'\"'\"'],text=True,capture_output=True)\nif present.returncode!=0:subprocess.run(['\"'\"'mount'\"'\"','\"'\"'-o'\"'\"','\"'\"'loop,prjquota,allocsize=4k'\"'\"',str(image),str(mount)],check=True)\nview=json.loads(subprocess.check_output(['\"'\"'findmnt'\"'\"','\"'\"'--json'\"'\"','\"'\"'--mountpoint'\"'\"',str(mount),'\"'\"'-o'\"'\"','\"'\"'TARGET,SOURCE,FSTYPE,OPTIONS,UUID'\"'\"'],text=True))['\"'\"'filesystems'\"'\"'][0]\nassert view['\"'\"'fstype'\"'\"']=='\"'\"'xfs'\"'\"'and view['\"'\"'uuid'\"'\"']=='\"'\"'cd26a20b-f8e0-480a-9640-38e1b93e7fff'\"'\"'and'\"'\"'prjquota'\"'\"'in view['\"'\"'options'\"'\"'].split('\"'\"','\"'\"')\np=pathlib.Path('\"'\"'/etc/exports.d/helix-strict.exports'\"'\"');text='\"'\"'/shared/helix-strict 172.31.0.0/20(rw,sync,no_subtree_check,root_squash,fsid=43)\n'\"'\"'\nif p.exists():assert p.read_text().strip().startswith('\"'\"'/shared/helix-strict '\"'\"')\np.write_text(text);p.chmod(0o644);os.chown(p,0,0)\nsubprocess.run(['\"'\"'exportfs'\"'\"','\"'\"'-ra'\"'\"'],check=True)\nprint(json.dumps({'\"'\"'filesystem'\"'\"':view,'\"'\"'existingDataPreserved'\"'\"':True,'\"'\"'noFormat'\"'\"':True,'\"'\"'quotasNotReset'\"'\"':True,'\"'\"'export'\"'\"':text,'\"'\"'stableFsid'\"'\"':43}))'",
+      "exitCode": 1,
+      "stdout": "",
+      "stderr": "  File \"<string>\", line 8\n    p=pathlib.Path('/etc/exports.d/helix-strict.exports');text='/shared/helix-strict 172.31.0.0/20(rw,sync,no_subtree_check,root_squash,fsid=43)\n                                                               ^\nSyntaxError: unterminated string literal (detected at line 8)\n"
+    }
+  ],
+  "sourceSha256": "f2d3e8c1f1e52d70bd936fbea245032a5aaea731257433b21e2c3ef6111de04c"
+}

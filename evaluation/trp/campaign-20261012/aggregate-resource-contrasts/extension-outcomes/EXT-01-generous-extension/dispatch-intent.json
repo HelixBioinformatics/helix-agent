@@ -1,0 +1,17 @@
+{
+  "at": "2026-10-13T08:03:53.971840+00:00",
+  "guest": "/srv/helix-strict-results/extension-61000-EXT-01-generous-extension",
+  "allocationSha256": "400e7a712ed399728ddf2427c3bd10d04382b2d880b0283bc264e85eaf248c61",
+  "freezeSha256": "2947a9d34ab84687e16e848620b3221ad4add9642ee8710827b311c14fd691b3",
+  "command": "sudo env NXF_HOME=/home/ubuntu/.nextflow HELIX_MODELS_PATH=/opt/helix-strict-runtime/packages/core/test/plugin/fixtures/models-dev.json HELIX_TRP_PYTHON=/opt/helix-strict-runtime/python/bin/python nohup python3 /opt/helix-strict-runtime/script/tesis/provision_remote_strict_profile.py guest-supervise --allocation /srv/helix-strict-results/extension-61000-EXT-01-generous-extension-allocation.json --deadline 1791880200.0 --output /srv/helix-strict-results/extension-61000-EXT-01-generous-extension -- /usr/bin/strace -f -Z -yy -ttt -e trace=write,pwrite64,writev,pwritev,openat,ftruncate,copy_file_range -s 256 /usr/local/bin/helix-strict-bun /opt/helix-strict-runtime/evaluation/trp/campaign-20261012/aggregate-resource-contrasts/full_client.ts /opt/helix-strict-runtime/campaign/minimum-extension/EXT-01-generous-extension.json >/tmp/EXT-01-generous-extension-61000.supervisor.stdout 2>/tmp/EXT-01-generous-extension-61000.supervisor.stderr < /dev/null &",
+  "case": "EXT-01-generous-extension",
+  "budget": {
+    "cpus": 3,
+    "memoryBytes": 4294967296,
+    "workBytes": 134217728,
+    "wallSeconds": 1080,
+    "requireHardStorageLimit": true,
+    "origin": "Prospectively bounded aggregate Helix client/controller and Slurm development contrast"
+  },
+  "retryForbiddenOnUnknownTransport": true
+}

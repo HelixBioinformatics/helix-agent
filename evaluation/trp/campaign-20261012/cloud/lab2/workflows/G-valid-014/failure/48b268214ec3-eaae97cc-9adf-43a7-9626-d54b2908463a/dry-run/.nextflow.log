@@ -1,0 +1,76 @@
+Oct-13 01:18:55.354 [main] DEBUG nextflow.cli.Launcher - $> nextflow -C nextflow.config run main.nf -ansi-log false -with-trace trace.tsv -stub-run
+Oct-13 01:18:55.500 [main] INFO  nextflow.cli.CmdRun - N E X T F L O W  ~  version 25.10.4
+Oct-13 01:18:55.558 [main] DEBUG nextflow.plugin.PluginsFacade - Setting up plugin manager > mode=prod; embedded=false; plugins-dir=/home/ubuntu/.nextflow/plugins; core-plugins: nf-amazon@3.4.4,nf-azure@1.20.2,nf-cloudcache@0.5.0,nf-codecommit@0.5.0,nf-console@1.3.0,nf-google@1.23.5,nf-k8s@1.2.2,nf-tower@1.17.5,nf-wave@1.16.1
+Oct-13 01:18:55.615 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Enabled plugins: []
+Oct-13 01:18:55.617 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Disabled plugins: []
+Oct-13 01:18:55.623 [main] INFO  org.pf4j.DefaultPluginManager - PF4J version 3.12.0 in 'deployment' mode
+Oct-13 01:18:55.663 [main] INFO  org.pf4j.AbstractPluginManager - No plugins
+Oct-13 01:18:55.746 [main] DEBUG nextflow.config.ConfigBuilder - Parsing config file: /shared/helix/trp-48b268214ec3-eaae97cc-9adf-43a7-9626-d54b2908463a/dry-run/nextflow.config
+Oct-13 01:18:55.814 [main] DEBUG nextflow.config.ConfigBuilder - Applying config profile: `standard`
+Oct-13 01:18:56.944 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins default=[]
+Oct-13 01:18:56.945 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins resolved requirement=[]
+Oct-13 01:18:56.974 [main] DEBUG n.secret.LocalSecretsProvider - Secrets store: /home/ubuntu/.nextflow/secrets/store.json
+Oct-13 01:18:56.979 [main] DEBUG nextflow.secret.SecretsLoader - Discovered secrets providers: [nextflow.secret.LocalSecretsProvider@5cf3157b] - activable => nextflow.secret.LocalSecretsProvider@5cf3157b
+Oct-13 01:18:56.999 [main] DEBUG nextflow.cli.CmdRun - Applied DSL=2 from script declaration
+Oct-13 01:18:57.021 [main] INFO  nextflow.cli.CmdRun - Launching `main.nf` [curious_linnaeus] DSL2 - revision: 0f14c41768
+Oct-13 01:18:57.106 [main] DEBUG nextflow.Session - Session UUID: 577e635b-8954-4bed-90c2-5f49d19c4d27
+Oct-13 01:18:57.107 [main] DEBUG nextflow.Session - Run name: curious_linnaeus
+Oct-13 01:18:57.108 [main] DEBUG nextflow.Session - Executor pool size: 2
+Oct-13 01:18:57.123 [main] DEBUG nextflow.file.FilePorter - File porter settings maxRetries=3; maxTransfers=50; pollTimeout=null
+Oct-13 01:18:57.133 [main] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'FileTransfer' minSize=10; maxSize=10; workQueue=LinkedBlockingQueue[-1]; allowCoreThreadTimeout=false
+Oct-13 01:18:57.164 [main] DEBUG nextflow.cli.CmdRun - 
+  Version: 25.10.4 build 11177
+  Created: 10-02-2026 17:12 UTC 
+  System: Linux 7.0.0-1014-aws
+  Runtime: Groovy 4.0.28 on OpenJDK 64-Bit Server VM 21.0.12.1+1-1-24.04.4-Ubuntu
+  Encoding: UTF-8 (UTF-8)
+  Process: 41330@helix-head [172.31.0.220]
+  CPUs: 2 - Mem: 3.7 GB (723 MB) - Swap: 0 (0)
+Oct-13 01:18:57.217 [main] DEBUG nextflow.Session - Work-dir: /shared/helix/trp-48b268214ec3-eaae97cc-9adf-43a7-9626-d54b2908463a/dry-run/work [ext2/ext3]
+Oct-13 01:18:57.218 [main] DEBUG nextflow.Session - Script base path does not exist or is not a directory: /shared/helix/trp-48b268214ec3-eaae97cc-9adf-43a7-9626-d54b2908463a/dry-run/bin
+Oct-13 01:18:57.234 [main] DEBUG nextflow.executor.ExecutorFactory - Extension executors providers=[]
+Oct-13 01:18:57.251 [main] DEBUG nextflow.Session - Observer factory (v2): LinObserverFactory
+Oct-13 01:18:57.255 [main] DEBUG nextflow.Session - Observer factory (v2): DefaultObserverFactory
+Oct-13 01:18:57.378 [main] DEBUG nextflow.cache.CacheFactory - Using Nextflow cache factory: nextflow.cache.DefaultCacheFactory
+Oct-13 01:18:57.394 [main] DEBUG nextflow.util.CustomThreadPool - Creating default thread pool > poolSize: 3; maxThreads: 1000
+Oct-13 01:18:57.497 [main] DEBUG nextflow.Session - Session start
+Oct-13 01:18:57.521 [main] DEBUG nextflow.trace.TraceFileObserver - Workflow started -- trace file: trace.tsv
+Oct-13 01:18:58.115 [main] DEBUG nextflow.script.ScriptRunner - > Launching execution
+Oct-13 01:18:58.318 [main] DEBUG n.script.dsl.ProcessConfigBuilder - Config settings `withName:SELECT` matches process SELECT
+Oct-13 01:18:58.325 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: slurm
+Oct-13 01:18:58.325 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'slurm'
+Oct-13 01:18:58.348 [main] DEBUG nextflow.executor.Executor - [warm up] executor > slurm
+Oct-13 01:18:58.364 [main] DEBUG n.processor.TaskPollingMonitor - Creating task monitor for executor 'slurm' > capacity: 100; pollInterval: 5s; dumpInterval: 5m 
+Oct-13 01:18:58.374 [main] DEBUG n.processor.TaskPollingMonitor - >>> barrier register (monitor: slurm)
+Oct-13 01:18:58.394 [main] DEBUG n.executor.AbstractGridExecutor - Creating executor 'slurm' > queue-stat-interval: 1m
+Oct-13 01:18:58.470 [main] DEBUG nextflow.processor.TaskProcessor - Creating process 'SELECT': maxForks=1; fair=false; array=0
+Oct-13 01:18:58.585 [main] DEBUG n.script.dsl.ProcessConfigBuilder - Config settings `withName:GEOMETRY` matches process GEOMETRY
+Oct-13 01:18:58.587 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: slurm
+Oct-13 01:18:58.588 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'slurm'
+Oct-13 01:18:58.589 [main] DEBUG nextflow.processor.TaskProcessor - Creating process 'GEOMETRY': maxForks=1; fair=false; array=0
+Oct-13 01:18:58.596 [main] DEBUG nextflow.Session - Workflow process names [dsl2]: SELECT, GEOMETRY
+Oct-13 01:18:58.600 [main] DEBUG nextflow.Session - Igniting dataflow network (2)
+Oct-13 01:18:58.601 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > SELECT
+Oct-13 01:18:58.602 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > GEOMETRY
+Oct-13 01:18:58.605 [main] DEBUG nextflow.script.ScriptRunner - Parsed script files:
+  Script_c1aa1074afbfdfe7: /shared/helix/trp-48b268214ec3-eaae97cc-9adf-43a7-9626-d54b2908463a/dry-run/main.nf
+Oct-13 01:18:58.605 [main] DEBUG nextflow.script.ScriptRunner - > Awaiting termination 
+Oct-13 01:18:58.606 [main] DEBUG nextflow.Session - Session await
+Oct-13 01:18:59.112 [Task submitter] DEBUG nextflow.executor.GridTaskHandler - [SLURM] submitted process SELECT > jobId: 90; workDir: /shared/helix/trp-48b268214ec3-eaae97cc-9adf-43a7-9626-d54b2908463a/dry-run/work/c4/2f01f607d677b15efab6e3a41bd3fc
+Oct-13 01:18:59.113 [Task submitter] INFO  nextflow.Session - [c4/2f01f6] Submitted process > SELECT
+Oct-13 01:19:23.415 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[jobId: 90; id: 1; name: SELECT; status: COMPLETED; exit: 0; error: -; workDir: /shared/helix/trp-48b268214ec3-eaae97cc-9adf-43a7-9626-d54b2908463a/dry-run/work/c4/2f01f607d677b15efab6e3a41bd3fc started: 1791854363401; exited: 2026-10-13T01:19:19.795664248Z; ]
+Oct-13 01:19:23.418 [Task monitor] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'TaskFinalizer' minSize=10; maxSize=10; workQueue=LinkedBlockingQueue[-1]; allowCoreThreadTimeout=false
+Oct-13 01:19:23.549 [Task submitter] DEBUG nextflow.executor.GridTaskHandler - [SLURM] submitted process GEOMETRY > jobId: 91; workDir: /shared/helix/trp-48b268214ec3-eaae97cc-9adf-43a7-9626-d54b2908463a/dry-run/work/60/96a634b133211d2859cac4401955e1
+Oct-13 01:19:23.550 [Task submitter] INFO  nextflow.Session - [60/96a634] Submitted process > GEOMETRY
+Oct-13 01:19:53.407 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[jobId: 91; id: 2; name: GEOMETRY; status: COMPLETED; exit: 0; error: -; workDir: /shared/helix/trp-48b268214ec3-eaae97cc-9adf-43a7-9626-d54b2908463a/dry-run/work/60/96a634b133211d2859cac4401955e1 started: 1791854393400; exited: 2026-10-13T01:19:49.786302898Z; ]
+Oct-13 01:19:53.438 [TaskFinalizer-2] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'PublishDir' minSize=10; maxSize=10; workQueue=LinkedBlockingQueue[-1]; allowCoreThreadTimeout=false
+Oct-13 01:19:53.442 [main] DEBUG nextflow.Session - Session await > all processes finished
+Oct-13 01:19:58.402 [Task monitor] DEBUG n.processor.TaskPollingMonitor - <<< barrier arrives (monitor: slurm) - terminating tasks monitor poll loop
+Oct-13 01:19:58.402 [main] DEBUG nextflow.Session - Session await > all barriers passed
+Oct-13 01:19:58.407 [main] DEBUG nextflow.util.ThreadPoolManager - Thread pool 'TaskFinalizer' shutdown completed (hard=false)
+Oct-13 01:19:58.408 [main] DEBUG nextflow.util.ThreadPoolManager - Thread pool 'PublishDir' shutdown completed (hard=false)
+Oct-13 01:19:58.427 [main] DEBUG n.trace.WorkflowStatsObserver - Workflow completed > WorkflowStats[succeededCount=2; failedCount=0; ignoredCount=0; cachedCount=0; pendingCount=0; submittedCount=0; runningCount=0; retriesCount=0; abortedCount=0; succeedDuration=76ms; failedDuration=0ms; cachedDuration=0ms;loadCpus=0; loadMemory=0; peakRunning=1; peakCpus=2; peakMemory=2 GB; ]
+Oct-13 01:19:58.427 [main] DEBUG nextflow.trace.TraceFileObserver - Workflow completed -- saving trace file
+Oct-13 01:19:58.440 [main] DEBUG nextflow.cache.CacheDB - Closing CacheDB done
+Oct-13 01:19:58.460 [main] DEBUG nextflow.util.ThreadPoolManager - Thread pool 'FileTransfer' shutdown completed (hard=false)
+Oct-13 01:19:58.462 [main] DEBUG nextflow.script.ScriptRunner - > Execution complete -- Goodbye

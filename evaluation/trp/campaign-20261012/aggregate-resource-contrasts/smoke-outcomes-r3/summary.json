@@ -1,0 +1,2366 @@
+{
+  "schema": "helix-aggregate-resource-independent-audit/1.0",
+  "freezeSha256": "14b3bad19931da3e91976f8b9e4d775530ee0285d388138337ca78b32ec9386e",
+  "rows": [
+    {
+      "case": "SMOKE-01-generous",
+      "physicalFeasibilityLabel": null,
+      "labelReason": "Not established from terminal production or causal kernel evidence",
+      "actualDecision": {
+        "version": "trp-resources/1.2.0",
+        "decidedAt": "2026-10-13T04:47:24.340Z",
+        "accepted": true,
+        "inventoryHash": "63486cf8cfc05a80df936a7635157159bada0860fb5a935a40ae49b64bad4a22",
+        "budgetHash": "1e7e6b647717c1505f70d83c2ab596371ef89edd11865084c81884ce1d8c0067",
+        "demand": {
+          "version": "trp-resources/1.2.0",
+          "sourceBytes": 359397,
+          "selectionBytes": 150911,
+          "bundleBytes": 1158054,
+          "counts": {
+            "scientificTasks": 2,
+            "stubTasks": 2,
+            "remoteScientificCalls": 2,
+            "retries": 0
+          },
+          "cpus": 3,
+          "memoryBytes": 4294967296,
+          "workBytes": 21295104,
+          "wallSeconds": 1080,
+          "storage": {
+            "kind": "estimate",
+            "formula": "ceil((12*1048576 + 7*bundleBytes + 4*selectionBytes)/4096)*4096",
+            "hardLimit": false
+          },
+          "assumptions": [
+            "Verified co-located Slurm profile: the real Helix client and Python/Nextflow controller share a root-controlled 1 CPU/2 GiB/swap-zero cgroup. All declared client work/temp/state/cache/export and remote workspace paths inherit one kernel XFS project quota. Worker tasks remain separate 2 CPU/2 GiB Docker allocations; no memory pooling.",
+            "Two sequential tasks per traversal; one stub traversal then one real traversal; no retry or resume.",
+            "Task allocation: 2 CPUs/2 GiB. Controller allocation: 1 CPU/2 GiB; cgroup enforcement requires an independently verified operator sandbox. CPU bandwidth is not an exclusive core reservation.",
+            "Each traversal has an 8 minute watchdog; probes/configuration reserve another 120 seconds. This is a configured timeout, not a runtime prediction.",
+            "Storage estimates allocated workspace bytes including working copies, logs and portable evidence; an independently observed XFS project quota enforces an approved budget only inside an operator allocation.",
+            "The exact image and Nextflow distribution must already be cached. Image pulls/builds and shared Docker/Nextflow caches are outside workBytes.",
+            "Two remote scientific tasks are planned; SSH probes, controller commands and stub jobs are not scientific calls. Agent provider tokens, cost and conversation calls are not measured here."
+          ]
+        },
+        "rejections": []
+      },
+      "defaultPortableVerifier": null,
+      "executionOracleForcedOnly": null,
+      "allocatedBlockBytesObservedPeak": 18173952,
+      "allocatedBlockBytesFinal": 18149376,
+      "predictedWorkBytes": 21295104,
+      "observedUnderestimateBytes": 0,
+      "observedOverestimationFraction": null,
+      "kernelMemoryPeak": 600592384,
+      "actualExitCode": 1,
+      "terminationCause": null,
+      "elapsedSeconds": 76.51441179599988,
+      "persistentSqlite": [
+        {
+          "path": "state/data/helix/helix-local.db",
+          "bytes": 249856,
+          "sha256": "cb9e3b2599e1cfdc20456418740f0ad742e4d14f0691edb17686a9065f4ed3de"
+        }
+      ],
+      "checks": [
+        {
+          "name": "root-allocation-policy-binding",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "exact-kernel-budget",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "owner-quiescence",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-0",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-0",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-1",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-1",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-2",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-2",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-3",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-3",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-4",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-4",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-5",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-5",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-6",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-6",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-7",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-7",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-8",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-8",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-9",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-9",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-10",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-10",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-11",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-11",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-12",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-12",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-13",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-13",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-14",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-14",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-15",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-15",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-16",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-16",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-17",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-17",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-18",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-18",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-19",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-19",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-20",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-20",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-21",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-21",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-22",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-22",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-23",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-23",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-24",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-24",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-25",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-25",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-26",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-26",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-27",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-27",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-28",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-28",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-29",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-29",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-30",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-30",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-31",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-31",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-32",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-32",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-33",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-33",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-34",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-34",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-35",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-35",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-36",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-36",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-37",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-37",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-38",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-38",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-39",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-39",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-40",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-40",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-41",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-41",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-42",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-42",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-43",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-43",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-44",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-44",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-45",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-45",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-46",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-46",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-47",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-47",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-48",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-48",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-49",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-49",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-50",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-50",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-51",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-51",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-52",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-52",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-53",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-53",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-54",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-54",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-55",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-55",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-56",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-56",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-57",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-57",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-58",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-58",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-59",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-59",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-60",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-60",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-61",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-61",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-62",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-62",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-63",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-63",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-64",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-64",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-65",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-65",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-66",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-66",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-67",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-67",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-68",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-68",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-69",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-69",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-70",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-70",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-71",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-71",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-72",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-72",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-73",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-73",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-74",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-74",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-75",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-75",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-76",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-76",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-77",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-77",
+          "ok": false,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-78",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-78",
+          "ok": false,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-79",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-79",
+          "ok": false,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-80",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-80",
+          "ok": false,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-81",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-81",
+          "ok": false,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-82",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-82",
+          "ok": false,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-83",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-83",
+          "ok": false,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-84",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-84",
+          "ok": false,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-85",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-85",
+          "ok": false,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-86",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-86",
+          "ok": false,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-87",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-87",
+          "ok": false,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-88",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-88",
+          "ok": false,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-89",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-89",
+          "ok": false,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-90",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-90",
+          "ok": false,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-91",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-91",
+          "ok": false,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-92",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-92",
+          "ok": false,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-93",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-93",
+          "ok": false,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-94",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-94",
+          "ok": false,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-95",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-95",
+          "ok": false,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-96",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-96",
+          "ok": false,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-97",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-97",
+          "ok": false,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-98",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-98",
+          "ok": false,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-99",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-99",
+          "ok": false,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-100",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-100",
+          "ok": false,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-101",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-101",
+          "ok": false,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-102",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-102",
+          "ok": false,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-103",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-103",
+          "ok": false,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-104",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-104",
+          "ok": false,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-105",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-105",
+          "ok": false,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-106",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-106",
+          "ok": false,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-107",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-107",
+          "ok": false,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-108",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-108",
+          "ok": false,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-109",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-109",
+          "ok": false,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-110",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-110",
+          "ok": false,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-111",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-111",
+          "ok": false,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-112",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-112",
+          "ok": false,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-113",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-113",
+          "ok": false,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-114",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-114",
+          "ok": false,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-115",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-115",
+          "ok": false,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-116",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-116",
+          "ok": false,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-117",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-117",
+          "ok": false,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-118",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-118",
+          "ok": false,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-119",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-119",
+          "ok": false,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-120",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-120",
+          "ok": false,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-121",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-121",
+          "ok": false,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-122",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-122",
+          "ok": false,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-123",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-123",
+          "ok": false,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-124",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-124",
+          "ok": false,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-125",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-125",
+          "ok": false,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-126",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-126",
+          "ok": false,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-127",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-127",
+          "ok": false,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-128",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-128",
+          "ok": false,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-129",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-129",
+          "ok": false,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-130",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-130",
+          "ok": false,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-131",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-131",
+          "ok": false,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-132",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-132",
+          "ok": false,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-133",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-133",
+          "ok": false,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-134",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-134",
+          "ok": false,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-135",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-135",
+          "ok": false,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-136",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-136",
+          "ok": false,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-137",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-137",
+          "ok": false,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-138",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-138",
+          "ok": false,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-139",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-139",
+          "ok": false,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-140",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-140",
+          "ok": false,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-141",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-141",
+          "ok": false,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-142",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-142",
+          "ok": false,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-143",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-143",
+          "ok": false,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-144",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-144",
+          "ok": false,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-145",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-145",
+          "ok": false,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-146",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-146",
+          "ok": false,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-147",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-147",
+          "ok": false,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-148",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-148",
+          "ok": false,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-149",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-149",
+          "ok": false,
+          "detail": null
+        },
+        {
+          "name": "raw-recursive-source-150",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "kernel-project-quota-150",
+          "ok": false,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-0",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-1",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-2",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-3",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-4",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-5",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-6",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-7",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-8",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-9",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-10",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-11",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-12",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-13",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-14",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-15",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-16",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-17",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-18",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-19",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-20",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-21",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-22",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-23",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-24",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-25",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-26",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-27",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-28",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-29",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-30",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-31",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-32",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-33",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-34",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-35",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-36",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-37",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-38",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-39",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-40",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-41",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-42",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-43",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-44",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-45",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-46",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-47",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-48",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-49",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-50",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-51",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-52",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-53",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-54",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-55",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-56",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-57",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-58",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-59",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-60",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-61",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-62",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-63",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-64",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-65",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-66",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-67",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-68",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-69",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-70",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-71",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-72",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-73",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-74",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-75",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-76",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-77",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-78",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-79",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-80",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-81",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-82",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-83",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-84",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-85",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-86",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-87",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-88",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-89",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-90",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-91",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-92",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-93",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-94",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-95",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-96",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-97",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-98",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-99",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-100",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-101",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-102",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-103",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-104",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-105",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-106",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-107",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-108",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-109",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-110",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-111",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-112",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-113",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-114",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-115",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-116",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-117",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-118",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-119",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-120",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-121",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-122",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-123",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-124",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-125",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-126",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-127",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-128",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-129",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-130",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-131",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-132",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-133",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-134",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-135",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-136",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-137",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-138",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-139",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-140",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-141",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-142",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-143",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-144",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-145",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-146",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-147",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "shared-client-controller-cap-148",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "actual-unmodified-decision-source",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "actual-bound-decision-policy",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "actual-decision-budget-hash",
+          "ok": true,
+          "detail": null
+        }
+      ],
+      "checksPassed": 383,
+      "checksTotal": 457,
+      "supervisionSha256": "0899316cd4bc73d8ccc5a1c939631fea0ea1d846782ac840bb5ce1b25dcd0343",
+      "retainedArchiveSha256": "bf13431a33aeb84f7b4c247c54c22031e375c4ac608eaa12a48a68b7ddb42fc3",
+      "scientificR24Rate": null,
+      "scope": "Engineering, one development protein, actual aggregate client/head declared paths plus sequential worker tasks; infrastructure/runtime/Docker caches and experiment-only root telemetry excluded"
+    }
+  ],
+  "actualObservedCases": 1,
+  "actualFeasible": 0,
+  "actualInfeasible": 0,
+  "unknown": 1,
+  "scientificR24Rate": null,
+  "auditSourceSha256": "59319817ce79fa3a59c8f071a907e1cf6aa13cb9f9b9b0efe7b49c1313877c37"
+}

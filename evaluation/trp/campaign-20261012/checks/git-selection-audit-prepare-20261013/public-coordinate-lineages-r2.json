@@ -1,0 +1,57 @@
+{
+  "schema": "helix-coordinate-origin-qualified-aliases/1.0",
+  "notBiologicalLabels": true,
+  "coordinateValuesRecorded": false,
+  "entries": [
+    {
+      "kind": "synthetic-public-template-transform",
+      "id": "0SYN-engineering-fixture",
+      "source": {
+        "path": "evaluation/trp/campaign-20261012/cloud/lab1/cancellation/next-ctx-abort/fixture/source.pdb",
+        "sha256": "e74115f68944ad5307202991cf9cf70de9d2774d0a104663ed77519f902d01ab"
+      },
+      "evidence": [
+        {
+          "path": "evaluation/trp/campaign-20261012/cloud/lab1/cancellation/next-ctx-abort/fixture/freeze.json",
+          "sha256": "9debc0bc863fabecb8da4322eb564cd35fae53e87ddf7ec844e231abb7f708c9"
+        },
+        {
+          "path": "evaluation/trp/campaign-20261012/cloud/lab1/cancellation/running-job/fixture.json",
+          "sha256": "3bfdcfc4283b5d53eec68e9c9a5dede7b0143c9a4b316cda7bf5bb58d5ad3bd0"
+        },
+        {
+          "path": "evaluation/trp/campaign-20261012/cloud/lab1/cancellation/next-ctx-abort/fixture/protocol.json",
+          "sha256": "5d55aca8bee10b3e461aa3eac51947ae31090fc97105d53907f76929efa584b7"
+        },
+        {
+          "path": "packages/helix/test/trp/remote-cancellation.live.test.ts",
+          "sha256": "ed9c4b5dfe731c50224715894d51922ac0ab4e8bed51c481b8dc9cbbd082bfa2"
+        },
+        {
+          "path": "evaluation/trp/reference/coordinate-20260921/2xqh.pdb",
+          "sha256": "f674267d0ef4752a3d4da00497947bfc09f441a5c36d39593b72bc2ba390df0b"
+        }
+      ],
+      "scope": "Deterministic1000transformed copies of6CAs from publicly allowed2XQH; no Pratt input or biological label."
+    },
+    {
+      "kind": "public-RCSB-2XQH",
+      "id": "2XQH-mmCIF-public",
+      "source": {
+        "path": "evaluation/trp/reference/structural-f5/experimental/2xqh.cif",
+        "sha256": "7bbb3fb56d9998402f91c1356643ae7a6cde8687bde7e455e4b65bd931e5f74b"
+      },
+      "evidence": [
+        {
+          "path": "evaluation/trp/campaign-20261012/cloud/lab1/mapped-reference/mapping_source.cif",
+          "sha256": "7bbb3fb56d9998402f91c1356643ae7a6cde8687bde7e455e4b65bd931e5f74b"
+        },
+        {
+          "path": "evaluation/trp/campaign-20261012/trace/mapped-reference.json",
+          "sha256": "38ff44a16ad47bfa35cfa7d6c0c5098ba1ef8182e76aad691ec086a7d582e1bd"
+        }
+      ],
+      "scope": "Public2XQH mmCIF byte-equal to frozen mapped source; no Pratt origin."
+    }
+  ]
+}

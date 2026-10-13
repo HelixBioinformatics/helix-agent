@@ -1,0 +1,47 @@
+{
+  "schema": "helix-full-client-storage-calibration/1.0",
+  "recordedAtUtc": "2026-10-13T05:13:27.738899+00:00",
+  "calibrationCase": "smoke-outcomes-r4/SMOKE-01-generous",
+  "developmentOnly": true,
+  "reservedCasesUsed": false,
+  "oldModelObserved": {
+    "overheadBytes": 12582912,
+    "predictedBytes": 21295104,
+    "sampledObservedPeakBytes": 37380096,
+    "underestimateBytes": 16084992,
+    "signedMargin": -0.43030900723208415
+  },
+  "candidateProfile": {
+    "id": "trp-colocated-client-storage/1.0.0",
+    "overheadBytes": 33554432,
+    "copyCoefficients": {
+      "bundleBytes": 7,
+      "selectionBytes": 4
+    },
+    "variableBytes": 8710379,
+    "observedResidualBytes": 28669717,
+    "selectionRule": "Round the full-client development pilot residual above deterministic working-copy terms up to the next power of two before evaluation cases are frozen",
+    "recalculatedCandidateBytesOnCalibrationData": 42266624,
+    "calibrationMargin": 0.1307253999561692,
+    "newExecutionObserved": false
+  },
+  "thresholdsUnchanged": {
+    "medianOverestimationMax": 0.25,
+    "falseRejectionMax": 0.05,
+    "acceptedBudgetExceedanceMax": 0
+  },
+  "ordinaryRoutesOverheadUnchangedBytes": 12582912,
+  "counterSource": "packages/helix/src/trp/resources.ts",
+  "counterSourceSha256": "094766a68a26373bb3367bf844d83e32b0ccdcf0a9bb75374e92c45c8733007d",
+  "sources": [
+    {
+      "path": "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/smoke-outcomes-r4/SMOKE-01-generous/recovered/smoke-40030-SMOKE-01-generous/supervision.json",
+      "sha256": "ee0d0bf58fce5e2d676a61f7b74d34a82e3092b434125f5adc8e0a37ae4c27da"
+    },
+    {
+      "path": "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/smoke-outcomes-r4/SMOKE-01-generous/recovered/smoke-40030-SMOKE-01-generous/experiment-telemetry.stdout",
+      "sha256": "0576e1366de8b8bd53ed729392615342cb526caf7c5ed81684ad8d558fbf91b4"
+    }
+  ],
+  "scope": "An engineering reservation calibrated on one real full-client development pipeline, not a universal peak bound or a held-out result. Original underestimated run remains intact."
+}

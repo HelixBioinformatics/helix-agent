@@ -1,0 +1,26 @@
+1791869513.284368 openat(AT_FDCWD</shared/helix-strict/hrs6667650bdfc142a5/client>, "/shared/helix-strict/hrs6667650bdfc142a5/client/bunfig.toml", O_RDONLY) = -1 ENOENT (No such file or directory)
+1791869513.284557 openat(AT_FDCWD</shared/helix-strict/hrs6667650bdfc142a5/client>, "bunfig.toml", O_RDONLY) = -1 ENOENT (No such file or directory)
+1791869513.284688 openat(AT_FDCWD</shared/helix-strict/hrs6667650bdfc142a5/client>, "bunfig.toml", O_RDONLY) = -1 ENOENT (No such file or directory)
+/usr/bin/strace: Process 18598 attached
+[pid 18597] 1791869513.286361 openat(AT_FDCWD</shared/helix-strict/hrs6667650bdfc142a5/client>, "/sys/fs/cgroup/cpu.max", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+[pid 18597] 1791869513.288005 openat(AT_FDCWD</shared/helix-strict/hrs6667650bdfc142a5/client>, "/sys/kernel/debug/tracing/trace_marker", O_WRONLY) = -1 EACCES (Permission denied)
+[pid 18597] 1791869513.288675 openat(AT_FDCWD</shared/helix-strict/hrs6667650bdfc142a5/client>, "/sys/fs/cgroup/memory.max", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+[pid 18597] 1791869513.288715 openat(AT_FDCWD</shared/helix-strict/hrs6667650bdfc142a5/client>, "/sys/fs/cgroup/memory.high", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+/usr/bin/strace: Process 18599 attached
+/usr/bin/strace: Process 18600 attached
+/usr/bin/strace: Process 18601 attached
+[pid 18601] 1791869513.318391 openat(AT_FDCWD</shared/helix-strict/hrs6667650bdfc142a5/client>, "/shared/helix-strict/hrs6667650bdfc142a5/client/input.pdb", O_WRONLY|O_CREAT, 0666) = -1 ENOSPC (No space left on device)
+ENOSPC: no space left on device, copyfile '/opt/helix-strict-runtime/campaign/smoke7/G-valid-001/source.pdb' -> '/shared/helix-strict/hrs6667650bdfc142a5/client/input.pdb'
+    path: "/opt/helix-strict-runtime/campaign/smoke7/G-valid-001/source.pdb",
+    dest: "/shared/helix-strict/hrs6667650bdfc142a5/client/input.pdb",
+ syscall: "copyfile",
+   errno: -28,
+    code: "ENOSPC"
+
+
+Bun v1.3.14 (Linux x64)
+[pid 18601] 1791869513.319674 +++ exited with 1 +++
+[pid 18600] 1791869513.319685 +++ exited with 1 +++
+[pid 18598] 1791869513.319705 +++ exited with 1 +++
+[pid 18599] 1791869513.321335 +++ exited with 1 +++
+1791869513.321348 +++ exited with 1 +++

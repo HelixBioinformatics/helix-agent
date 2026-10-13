@@ -1,0 +1,468 @@
+{
+  "version": "structural-runtime-contrast/1.0.0",
+  "createdUTC": "2026-10-13T01:16:01.718188+00:00",
+  "kind": "prospective secondary computational-cap contrast after primary180s failures",
+  "reason": "Determine whether the external computational cap alone accounts for the three primary unevaluable results. No physical classifier, biological threshold, labels or coordinate preparation are changed.",
+  "primaryTimeoutSeconds": 180,
+  "secondaryTimeoutSeconds": 600,
+  "workers": 1,
+  "maximumAttemptsPerCase": 1,
+  "selectedCases": [
+    {
+      "id": "23ab",
+      "group": "pratt-original",
+      "label": "unlabelled",
+      "physicalFailureLabel": null,
+      "labelEvidence": null,
+      "coordinatePath": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/reference/pratt-author-20261001/originals/23ab_unrelaxed_rank_001_alphafold2_ptm_model_2_seed_000.pdb",
+      "coordinateSha256": "4377c245f3dd58f506109eacafe7dcb79a67f3045d7e446936f4a70058ce84f8",
+      "scoreInputPath": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/reference/pratt-author-20261001/originals/23ab_unrelaxed_rank_001_alphafold2_ptm_model_2_seed_000.pdb",
+      "scoreInputSha256": "4377c245f3dd58f506109eacafe7dcb79a67f3045d7e446936f4a70058ce84f8",
+      "residues": 230
+    },
+    {
+      "id": "1ea0-A",
+      "group": "experimental-reviewed-beta-solenoid",
+      "pdb": "1ea0",
+      "chain": "A",
+      "uniprot": [
+        "Q05755"
+      ],
+      "reviewed": true,
+      "label": "reference_repeat_structure",
+      "physicalFailureLabel": null,
+      "annotationUuid": "45bb4a74-b567-4546-b1e7-2bd577504ce8",
+      "annotationPath": "evaluation/trp/campaign-20261012/structural/annotations/1ea0-A.json",
+      "annotationSha256": "a8ebb18d7e51494748ba0c83ff00ecf3dbedbf9fd519251cf260611268b2e5d7",
+      "coordinateUrl": "https://files.rcsb.org/download/1EA0.cif",
+      "coordinatePath": "/home/webiwabou/.local/state/helix/structural-20261012/controls/1ea0.cif",
+      "coordinateSha256": "2dfb0b18fdaa4f4cfb6e2a15b55b6b1b8f1a7a261061baaafb04eb924d9485a8",
+      "scoreInputPath": "/home/webiwabou/.local/state/helix/structural-20261012/controls/1ea0-A.pdb",
+      "scoreInputSha256": "281a9445eaf0824aec2da2d6d30aa6e11cf297873d9721d6664ddbca962efea7",
+      "experimentalMethods": [
+        "'X-RAY DIFFRACTION'"
+      ],
+      "atoms": 11180,
+      "residues": 1452
+    },
+    {
+      "id": "1llw-A",
+      "group": "experimental-reviewed-beta-solenoid",
+      "pdb": "1llw",
+      "chain": "A",
+      "uniprot": [
+        "P55038"
+      ],
+      "reviewed": true,
+      "label": "reference_repeat_structure",
+      "physicalFailureLabel": null,
+      "annotationUuid": "5f758957-1b8d-4eda-9f87-6396083dcc1f",
+      "annotationPath": "evaluation/trp/campaign-20261012/structural/annotations/1llw-A.json",
+      "annotationSha256": "243920440c58451f937ef3f5a887a4d2985c9871e0b4a9608c7cc44589991f08",
+      "coordinateUrl": "https://files.rcsb.org/download/1LLW.cif",
+      "coordinatePath": "/home/webiwabou/.local/state/helix/structural-20261012/controls/1llw.cif",
+      "coordinateSha256": "623b83debb89e928c73aa8a7c36f0d3f3bec4fcef95c228c25ba9ddcdd08a6d6",
+      "scoreInputPath": "/home/webiwabou/.local/state/helix/structural-20261012/controls/1llw-A.pdb",
+      "scoreInputSha256": "798f2fc227fe70a0f4bbee1f14f9dfe4e4dd262afee29260ec5f7bf010540ade",
+      "experimentalMethods": [
+        "'X-RAY DIFFRACTION'"
+      ],
+      "atoms": 11311,
+      "residues": 1475
+    }
+  ],
+  "primaryRows": [
+    {
+      "id": "23ab",
+      "group": "pratt-original",
+      "label": "unlabelled",
+      "status": "not_evaluable",
+      "clashscore": "",
+      "num_clashes": "",
+      "elapsed_seconds": "",
+      "error": "external validator exceeded prospectively fixed 180 second case limit"
+    },
+    {
+      "id": "1ea0-A",
+      "group": "experimental-reviewed-beta-solenoid",
+      "label": "reference_repeat_structure",
+      "status": "not_evaluable",
+      "clashscore": "",
+      "num_clashes": "",
+      "elapsed_seconds": "",
+      "error": "external validator exceeded prospectively fixed 180 second case limit"
+    },
+    {
+      "id": "1llw-A",
+      "group": "experimental-reviewed-beta-solenoid",
+      "label": "reference_repeat_structure",
+      "status": "not_evaluable",
+      "clashscore": "",
+      "num_clashes": "",
+      "elapsed_seconds": "",
+      "error": "external validator exceeded prospectively fixed 180 second case limit"
+    }
+  ],
+  "primaryEvaluable": 105,
+  "primaryTotal": 108,
+  "sources": [
+    {
+      "kind": "primary",
+      "path": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/structural/freeze.json",
+      "sha256": "3e5d9e2a6385dbc099a2bc2f989262b0dbd28d62f43df2be77015aa5c7d742ca"
+    },
+    {
+      "kind": "primary",
+      "path": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/structural/manifest.json",
+      "sha256": "009f7836c94908a4da41fce972335c46e08de86a18df57628c3db676395bc5a0"
+    },
+    {
+      "kind": "primary",
+      "path": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/structural/protocol.json",
+      "sha256": "ae8d8aff9c2c3f71b3f5382b0ecbecc8a3d8462f670c4d3b313e5ac6379f395d"
+    },
+    {
+      "kind": "primary",
+      "path": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/structural/cases.json",
+      "sha256": "083afd9f4085c8e43789f2e7400bd24874e0661235b79439108cf841b425cfd7"
+    },
+    {
+      "kind": "primary",
+      "path": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/structural/summary.json",
+      "sha256": "a019bdf4e65abb960735df52907ec25e8105eebfffe313be35c9abc4933e622b"
+    },
+    {
+      "kind": "primary",
+      "path": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/structural/outcomes.csv",
+      "sha256": "42cf5beb2e794d188edd0e49f313b5d3432b5e33294928cdd9a44c98dc8a3d99"
+    },
+    {
+      "kind": "chemistry",
+      "path": "/home/webiwabou/.local/state/helix/structural-20261012/geostd/README.md",
+      "sha256": "91f36a6d93026ab5b658abbcdd23e86d4402c886de2c342049108969520da861"
+    },
+    {
+      "kind": "chemistry",
+      "path": "/home/webiwabou/.local/state/helix/structural-20261012/geostd/LICENSE.txt",
+      "sha256": "f3874ef7235ab3d84b3a3a175b606b33db472f28702d3d9597e955a99a07608a"
+    },
+    {
+      "kind": "chemistry",
+      "path": "/home/webiwabou/.local/state/helix/structural-20261012/geostd/COPYRIGHT.txt",
+      "sha256": "5da3012a174fb7e498ff9f4da3fb7cc886ba11a5be68b5b114a2de553192ec1d"
+    },
+    {
+      "kind": "chemistry",
+      "path": "/home/webiwabou/.local/state/helix/structural-20261012/geostd/list/mon_lib_list.cif",
+      "sha256": "00e63e4ec2d7231681679b9123158e2621a040930799a74f39483e79ef7fe91a"
+    },
+    {
+      "kind": "chemistry",
+      "path": "/home/webiwabou/.local/state/helix/structural-20261012/geostd/list/geostd_list.cif",
+      "sha256": "517e554cae815a83644306b5e52b2a7a81e5cca0fce8720dd78b56dd584e16fe"
+    },
+    {
+      "kind": "chemistry",
+      "path": "/home/webiwabou/.local/state/helix/structural-20261012/geostd/ener_lib.cif",
+      "sha256": "33c526d188364c7ae34bd3cb4d7b1d683548bf911a6e16a07f52e2120676e091"
+    },
+    {
+      "kind": "chemistry",
+      "path": "/home/webiwabou/.local/state/helix/structural-20261012/geostd/geostd_ener_lib.cif",
+      "sha256": "113e59b3bdd0b4602c46238bae05b3bf8877355081fe64b0e037dee8f328e37c"
+    },
+    {
+      "kind": "chemistry",
+      "path": "/home/webiwabou/.local/state/helix/structural-20261012/geostd/a/data_ALA.cif",
+      "sha256": "ab9df11569800dc344171d5abc52d0f0bc4c362f8e2f3ea40a8c616dc9ede825"
+    },
+    {
+      "kind": "chemistry",
+      "path": "/home/webiwabou/.local/state/helix/structural-20261012/geostd/a/data_ARG.cif",
+      "sha256": "ec3c29547bbf6dbb1cd180d5c136e65c98f1fc6b3fd0ea5afb888e0a20ae3061"
+    },
+    {
+      "kind": "chemistry",
+      "path": "/home/webiwabou/.local/state/helix/structural-20261012/geostd/a/data_ASN.cif",
+      "sha256": "04ba6499c4fa124ec2fbbded1d81a441d686fe5a41b2cffeac3a843f23f9b708"
+    },
+    {
+      "kind": "chemistry",
+      "path": "/home/webiwabou/.local/state/helix/structural-20261012/geostd/a/data_ASP.cif",
+      "sha256": "2657292d7d3442870c41446868500f1a3fce2b95f325d9bddfa9010105c4f523"
+    },
+    {
+      "kind": "chemistry",
+      "path": "/home/webiwabou/.local/state/helix/structural-20261012/geostd/c/data_CYS.cif",
+      "sha256": "4eb107ec4dd22ce923832d2401e144125f92e444d25a9eb279123ed656d8e007"
+    },
+    {
+      "kind": "chemistry",
+      "path": "/home/webiwabou/.local/state/helix/structural-20261012/geostd/g/data_GLN.cif",
+      "sha256": "285947cc0260fbef7e063a1f37d4b09dd806066ec8cabe9fde0c90629ddc9aed"
+    },
+    {
+      "kind": "chemistry",
+      "path": "/home/webiwabou/.local/state/helix/structural-20261012/geostd/g/data_GLU.cif",
+      "sha256": "298f2e8d9f921748c2acc8dee999ba03709c790da92265262d2e7195f9310438"
+    },
+    {
+      "kind": "chemistry",
+      "path": "/home/webiwabou/.local/state/helix/structural-20261012/geostd/g/data_GLY.cif",
+      "sha256": "6a694bc1883dcc0dd864931bcb3e2b360418c16144e6533010f1651e3257c114"
+    },
+    {
+      "kind": "chemistry",
+      "path": "/home/webiwabou/.local/state/helix/structural-20261012/geostd/h/data_HIS.cif",
+      "sha256": "f9b7403c87f68555e31c2aead341ced77842ea3392824f0045a199b7674c4901"
+    },
+    {
+      "kind": "chemistry",
+      "path": "/home/webiwabou/.local/state/helix/structural-20261012/geostd/i/data_ILE.cif",
+      "sha256": "c7ed87a543f3dbbae8b6db4592f495c861d9126cfb7b8a877465cec34097b0a3"
+    },
+    {
+      "kind": "chemistry",
+      "path": "/home/webiwabou/.local/state/helix/structural-20261012/geostd/l/data_LEU.cif",
+      "sha256": "90d64a7299ec81b565539e4cd2288f1880ea8fbb2a8baadc60c2918b8224afeb"
+    },
+    {
+      "kind": "chemistry",
+      "path": "/home/webiwabou/.local/state/helix/structural-20261012/geostd/l/data_LYS.cif",
+      "sha256": "01d732d607a878a6a7c7e59edde66821fb1ac5139e9ba5f1b3aec0476c978617"
+    },
+    {
+      "kind": "chemistry",
+      "path": "/home/webiwabou/.local/state/helix/structural-20261012/geostd/m/data_MET.cif",
+      "sha256": "c4d50874e947dd3bccb72a8725b180a3ca5d48613eac0a396737d127abdab4cf"
+    },
+    {
+      "kind": "chemistry",
+      "path": "/home/webiwabou/.local/state/helix/structural-20261012/geostd/p/data_PHE.cif",
+      "sha256": "95ab6340a2bbe5ab1d8ff10bf3c0ca24ff49e14bf9acca232942dc57ff8bb913"
+    },
+    {
+      "kind": "chemistry",
+      "path": "/home/webiwabou/.local/state/helix/structural-20261012/geostd/p/data_PRO.cif",
+      "sha256": "94eafcb83704828fad07a89e40c692644e8a3c2331744c130ed33003dadcb537"
+    },
+    {
+      "kind": "chemistry",
+      "path": "/home/webiwabou/.local/state/helix/structural-20261012/geostd/s/data_SER.cif",
+      "sha256": "bd2c436d124c8c111d90f4df3940c42f791a60e7ba1f1ee4a1517d967b2c0f76"
+    },
+    {
+      "kind": "chemistry",
+      "path": "/home/webiwabou/.local/state/helix/structural-20261012/geostd/t/data_THR.cif",
+      "sha256": "444c0a967214c2c57ae86b1d8e636c831f2542aa08bb03e9da47c27fed7b9efa"
+    },
+    {
+      "kind": "chemistry",
+      "path": "/home/webiwabou/.local/state/helix/structural-20261012/geostd/t/data_TRP.cif",
+      "sha256": "0a9638e50e18875c0d3b55878cce4daec0acb6c11bc8804c54da8977123c73f6"
+    },
+    {
+      "kind": "chemistry",
+      "path": "/home/webiwabou/.local/state/helix/structural-20261012/geostd/t/data_TYR.cif",
+      "sha256": "997a4efd886bbe2785fd5bb3a1ae31e640fe7397822d36815e7f8bf85c9bc0a4"
+    },
+    {
+      "kind": "chemistry",
+      "path": "/home/webiwabou/.local/state/helix/structural-20261012/geostd/v/data_VAL.cif",
+      "sha256": "2fd819b0e2355c03a85204c245730b7e46abbbbf0c4fe0a8e65e47ba77697d32"
+    },
+    {
+      "kind": "chemistry",
+      "path": "/home/webiwabou/.local/state/helix/structural-20261012/geostd/rna_dna/chain_link_rna2p.cif",
+      "sha256": "b880c201ac15ff3e5d31e69671de215507bd9d26df367f5c40186b15a5ca13b5"
+    },
+    {
+      "kind": "chemistry",
+      "path": "/home/webiwabou/.local/state/helix/structural-20261012/geostd/rna_dna/chain_link_rna3p.cif",
+      "sha256": "8544dbe0c2f5faa8340c7005737c62e4f39bbe8efc6f57f5219e22e83a197f69"
+    },
+    {
+      "kind": "chemistry",
+      "path": "/home/webiwabou/.local/state/helix/structural-20261012/geostd/rna_dna/mod_rna2p.cif",
+      "sha256": "6430554f0eba2ac3177ff87fa425a8e9d596a50b5794d974e53653d797f92cf6"
+    },
+    {
+      "kind": "chemistry",
+      "path": "/home/webiwabou/.local/state/helix/structural-20261012/geostd/rna_dna/mod_rna2p_pur.cif",
+      "sha256": "a4cfab10bee0043057fc4b5729449adb6d744a1d709f0d3916cb690d9761ba24"
+    },
+    {
+      "kind": "chemistry",
+      "path": "/home/webiwabou/.local/state/helix/structural-20261012/geostd/rna_dna/mod_rna2p_pyr.cif",
+      "sha256": "1a8a52bc40b38800be6f4be2d3a6c0abccd3872419721d27a2607a5528a295c4"
+    },
+    {
+      "kind": "chemistry",
+      "path": "/home/webiwabou/.local/state/helix/structural-20261012/geostd/rna_dna/mod_rna3p.cif",
+      "sha256": "9ee18478aa8b52ed81e558e38297674d6354acf9e7722f892cf9f6f1c061c02f"
+    },
+    {
+      "kind": "chemistry",
+      "path": "/home/webiwabou/.local/state/helix/structural-20261012/geostd/rna_dna/mod_rna3p_pur.cif",
+      "sha256": "22516033dbe8c4206530864c79c5a15e41d3827b247fd15a65aa338640f797a2"
+    },
+    {
+      "kind": "chemistry",
+      "path": "/home/webiwabou/.local/state/helix/structural-20261012/geostd/rna_dna/mod_rna3p_pyr.cif",
+      "sha256": "30fd079d1cecbd1b741315108227c3af239a8a22882347530479a2c6cec67394"
+    },
+    {
+      "kind": "chemistry",
+      "path": "/home/webiwabou/.local/state/helix/structural-20261012/chemical_components/a/data_ALA.cif",
+      "sha256": "6d32b34d4f7b3ddf0cd3dff3f98ddaf7649bc5303ff9a8bd95ba62283f47a1ca"
+    },
+    {
+      "kind": "chemistry",
+      "path": "/home/webiwabou/.local/state/helix/structural-20261012/chemical_components/a/data_ARG.cif",
+      "sha256": "191c437cfa501e0a87d275ca3d39974a1a9c8dc704df61bfc442a4c314e196ac"
+    },
+    {
+      "kind": "chemistry",
+      "path": "/home/webiwabou/.local/state/helix/structural-20261012/chemical_components/a/data_ASN.cif",
+      "sha256": "81491bbdb49f96e2945192c07510324d206298d3479029b76defba2ed6ab2dc7"
+    },
+    {
+      "kind": "chemistry",
+      "path": "/home/webiwabou/.local/state/helix/structural-20261012/chemical_components/a/data_ASP.cif",
+      "sha256": "82c4a2d0b5eda0a32c36f106f0bb00edbc5bc51172db414fdc494025b7b8c858"
+    },
+    {
+      "kind": "chemistry",
+      "path": "/home/webiwabou/.local/state/helix/structural-20261012/chemical_components/c/data_CYS.cif",
+      "sha256": "b28c79381f9f41fe57a9e97468fc8101d5fd1064272a22da1eed6d05d27a24cc"
+    },
+    {
+      "kind": "chemistry",
+      "path": "/home/webiwabou/.local/state/helix/structural-20261012/chemical_components/g/data_GLN.cif",
+      "sha256": "b542ea5c013fbe0c7acee8e3f42d5dc4e392bd16c0aa545edbf6cb3c335ca30f"
+    },
+    {
+      "kind": "chemistry",
+      "path": "/home/webiwabou/.local/state/helix/structural-20261012/chemical_components/g/data_GLU.cif",
+      "sha256": "99fa19054d31b07e7101b33ad9cc847cc6a209da60de279aed5e6a9236bb6da4"
+    },
+    {
+      "kind": "chemistry",
+      "path": "/home/webiwabou/.local/state/helix/structural-20261012/chemical_components/g/data_GLY.cif",
+      "sha256": "c49458946b0ebc057db6ad0a4e1557a1caaed4c80a203accd458efddccbf92ff"
+    },
+    {
+      "kind": "chemistry",
+      "path": "/home/webiwabou/.local/state/helix/structural-20261012/chemical_components/h/data_HIS.cif",
+      "sha256": "89355e09d9c622dd514738e559d7a75ab0a1659df9a179978e88e1a44704a46f"
+    },
+    {
+      "kind": "chemistry",
+      "path": "/home/webiwabou/.local/state/helix/structural-20261012/chemical_components/i/data_ILE.cif",
+      "sha256": "8166adcc6acb4661f4a167b0a4295879612dfad3f1a6b6f1b7bd0589c5bded93"
+    },
+    {
+      "kind": "chemistry",
+      "path": "/home/webiwabou/.local/state/helix/structural-20261012/chemical_components/l/data_LEU.cif",
+      "sha256": "fc56e022bc8baa25dc6e543b2c46664e365779aa1dda9831576fdf10b30ab84b"
+    },
+    {
+      "kind": "chemistry",
+      "path": "/home/webiwabou/.local/state/helix/structural-20261012/chemical_components/l/data_LYS.cif",
+      "sha256": "318a0f6fa8f98682b35e1793517d5b683b9045c1e6174bc564b7d43e07e4c07c"
+    },
+    {
+      "kind": "chemistry",
+      "path": "/home/webiwabou/.local/state/helix/structural-20261012/chemical_components/m/data_MET.cif",
+      "sha256": "a89adea8738d069b0a7bb0c3efc26b362dcc624ef9abd3b3f4bfaedd785f3afd"
+    },
+    {
+      "kind": "chemistry",
+      "path": "/home/webiwabou/.local/state/helix/structural-20261012/chemical_components/p/data_PHE.cif",
+      "sha256": "002c626d24aec78fd622459d4f4470c682c7c3f9f97d32414fec4313d780496e"
+    },
+    {
+      "kind": "chemistry",
+      "path": "/home/webiwabou/.local/state/helix/structural-20261012/chemical_components/p/data_PRO.cif",
+      "sha256": "08674e4d60bc40ad5702b8de6e5e4abb66c2bbb603832c021c31194f4b4e593c"
+    },
+    {
+      "kind": "chemistry",
+      "path": "/home/webiwabou/.local/state/helix/structural-20261012/chemical_components/s/data_SER.cif",
+      "sha256": "46db0296a07732854d2c3ca67ed0f74f4c82ddc5698d0e59f433039a5d7c88a0"
+    },
+    {
+      "kind": "chemistry",
+      "path": "/home/webiwabou/.local/state/helix/structural-20261012/chemical_components/t/data_THR.cif",
+      "sha256": "feb75dfac5bfcc7045de7a75a31575f3bf3e5b411716a06e92712924759dd554"
+    },
+    {
+      "kind": "chemistry",
+      "path": "/home/webiwabou/.local/state/helix/structural-20261012/chemical_components/t/data_TRP.cif",
+      "sha256": "4cea7e281ee404f3e72fc20d3ba98064373cdd9309a7f5c75479a04c4b6e36d6"
+    },
+    {
+      "kind": "chemistry",
+      "path": "/home/webiwabou/.local/state/helix/structural-20261012/chemical_components/t/data_TYR.cif",
+      "sha256": "fa0ef32f9d623e087a527b0a146c0494a5a656037c6448d956072dd2406fa554"
+    },
+    {
+      "kind": "chemistry",
+      "path": "/home/webiwabou/.local/state/helix/structural-20261012/chemical_components/v/data_VAL.cif",
+      "sha256": "9c3c807970c817b1e1a4b43164db91a5bf1e7bf438b3269c5649f6ce84d4c0ed"
+    },
+    {
+      "kind": "engine",
+      "path": "/home/webiwabou/.local/state/helix/structural-20261012/venv/lib/python3.12/site-packages/mmtbx/hydrogens/reduce_hydrogen.py",
+      "sha256": "0a48440771a9f01e49c8ceef95575b506ecdc9b8b9a0ed6573e661365d7912ef"
+    },
+    {
+      "kind": "engine",
+      "path": "/home/webiwabou/.local/state/helix/structural-20261012/venv/lib/python3.12/site-packages/mmtbx/monomer_library/server.py",
+      "sha256": "ee7c6d95d5d8ebf7fa055274935424914b53f18d92843045dd7a13ac0d029aaa"
+    },
+    {
+      "kind": "engine",
+      "path": "/home/webiwabou/.local/state/helix/structural-20261012/venv/lib/python3.12/site-packages/mmtbx/probe/Helpers.py",
+      "sha256": "aaac7691b48f4b6326878b5bd9ef0de1a28065223b59258cb35e44760b751b3a"
+    },
+    {
+      "kind": "engine",
+      "path": "/home/webiwabou/.local/state/helix/structural-20261012/venv/lib/python3.12/site-packages/mmtbx/programs/clashscore2.py",
+      "sha256": "4e56a780f093066175c06afdbf794a9f909b78dc77bf11f7b0db27f9c5b62707"
+    },
+    {
+      "kind": "engine",
+      "path": "/home/webiwabou/.local/state/helix/structural-20261012/venv/lib/python3.12/site-packages/mmtbx/validation/clashscore2.py",
+      "sha256": "cc2f548b9d3fb17dd9aac9fd8b4dea3dbf2b020c1d39b77747cf5b1887988ab0"
+    },
+    {
+      "kind": "engine",
+      "path": "/home/webiwabou/.local/state/helix/structural-20261012/venv/lib/python3.12/site-packages/mmtbx_probe_ext.so",
+      "sha256": "d1d40da30afe218ea1cd8610890ddd8c108a35028f930d2be437faf8ddeb736c"
+    },
+    {
+      "kind": "engine",
+      "path": "/home/webiwabou/.local/state/helix/structural-20261012/venv/lib/python3.12/site-packages/mmtbx_reduce_ext.so",
+      "sha256": "95d905f841c0abfcd91b71794ce78df360569b2797acbc5897bdfd3201a12970"
+    },
+    {
+      "kind": "driver",
+      "path": "/home/webiwabou/Projects/bioinformatica-org/script/tesis/structural_campaign.py",
+      "sha256": "9a4e76b301a26eccc18213e614eef2248810ee0e93b787f50b6a02254456e8b7"
+    },
+    {
+      "kind": "secondary-driver",
+      "path": "/home/webiwabou/Projects/bioinformatica-org/script/tesis/structural_runtime_contrast.py",
+      "sha256": "858e89d063439dfd5618112966a4cc4c1364e4fe71b5a131f895f2c067bceedc"
+    }
+  ],
+  "packages": {
+    "cctbx-base": "2025.11",
+    "gemmi": "0.7.5",
+    "numpy": "2.5.4",
+    "scipy": "1.18.1"
+  },
+  "python": "3.12.14 (main, Aug 23 2026, 16:15:12) [GCC 16.2.1 20260810]",
+  "interpretation": "Primary failures and denominators remain unchanged. Report secondary successes and expanded-profile availability separately."
+}

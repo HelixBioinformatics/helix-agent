@@ -1,0 +1,11 @@
+{
+  "version": "structural-runtime-amendment/1.2.0",
+  "date": "2026-10-12",
+  "previousAmendmentSha256": "24d1a9e5daedd5e78e746c1585e6c0d74016ffc5fd3a7e82fd4300a73abc4597",
+  "beforeSuccessfulPhysicalOutcome": true,
+  "problem": "CCTBX 2025.11 expects its default geostd terminal chemical modifications (e.g. NH1NOTPRO), absent from the supplied contemporary CCP4 library. Preflight failed before any score.",
+  "change": "Use pinned official geostd resources in the CCTBX repository search path and remove the alternate CLIBD_MON override. Thresholds, parameters, labels and input coordinates remain fixed.",
+  "geostdLibrarySha256": "f72fe3057ab8a88d2555a37482b6366e9b3fb715a9c4b250a0fc9d8dd24ee80e",
+  "searchPathLink": "/home/webiwabou/.local/state/helix/structural-20261012/venv/geostd",
+  "environment": "CLIBD_MON unset, default CCTBX resource search"
+}

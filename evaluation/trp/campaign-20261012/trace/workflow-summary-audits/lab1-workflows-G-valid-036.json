@@ -1,0 +1,143 @@
+{
+  "schema": "helix-remote-campaign-audit/1.0",
+  "bundle": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab1/workflows/G-valid-036/evidence",
+  "externally_recorded_manifest_sha256": "473879825321b8881f9291a49045ecbeb450e75d014f06896d9b544622e58140",
+  "expected_outcome": "succeeded",
+  "trusted_verifier_sha256": "69b88a192d44707c82358814d61ae83f2d46c579e93d8cf3afe6882b52382187",
+  "checks": [
+    {
+      "name": "portable_integrity_and_cold_counts",
+      "passed": true,
+      "result": {
+        "ok": true,
+        "files": 144,
+        "bytes": 4219719,
+        "manifestSha256": "473879825321b8881f9291a49045ecbeb450e75d014f06896d9b544622e58140",
+        "status": "succeeded",
+        "externallyAnchored": true,
+        "scope": "integrity, declared links and cold counts; not biological accuracy or authorship"
+      }
+    },
+    {
+      "name": "expected_outcome",
+      "passed": true,
+      "result": {
+        "outcome": "succeeded"
+      }
+    },
+    {
+      "name": "source_backed_methods_and_template",
+      "passed": true,
+      "result": {
+        "fields_checked": 20,
+        "required_fields": 18,
+        "markdown_reproduced_from_sources": true,
+        "unavailable_fields": []
+      }
+    },
+    {
+      "name": "event_chain_and_independent_gate_oracle",
+      "passed": true,
+      "result": {
+        "recorded_events": 10,
+        "source_counts": {
+          "admission": 3,
+          "protocol": 1,
+          "permission": 2,
+          "approval": 2,
+          "execution": 2
+        },
+        "independent_success_path_gate_events": 10,
+        "external_action_oracle_expected_events": 10,
+        "limitation": "Mandatory path coverage only unless an independent action oracle is supplied; not full-session human coverage or protocol-violation sensitivity."
+      }
+    },
+    {
+      "name": "approval_configuration_and_transfer_bindings",
+      "passed": true,
+      "result": {
+        "run_id": "6562162e-2e7b-43c0-9295-ff9528648e53",
+        "digest": "708f6060ef29ab1ab7e910eb996972f6f147f794263b3968dbd4a9f092ae7315",
+        "bound_files": 21,
+        "transferred_files": 132,
+        "target_fingerprint": "7eb9ec4e4d2301e3eacd0e7720545e42470a9d8eb731237bde00347a9da68ab6",
+        "terminal_status": "succeeded",
+        "approval_actor": "Question.Service answer; actor provenance must be disclosed by the campaign driver."
+      }
+    },
+    {
+      "name": "four_native_jobs_and_worker_placement",
+      "passed": true,
+      "result": {
+        "tasks": [
+          {
+            "traversal": "scientific",
+            "process": "SELECT",
+            "native_id": "67",
+            "node": "helix-worker1",
+            "state": "COMPLETED"
+          },
+          {
+            "traversal": "scientific",
+            "process": "GEOMETRY",
+            "native_id": "68",
+            "node": "helix-worker2",
+            "state": "COMPLETED"
+          },
+          {
+            "traversal": "stub",
+            "process": "SELECT",
+            "native_id": "65",
+            "node": "helix-worker1",
+            "state": "COMPLETED"
+          },
+          {
+            "traversal": "stub",
+            "process": "GEOMETRY",
+            "native_id": "66",
+            "node": "helix-worker2",
+            "state": "COMPLETED"
+          }
+        ],
+        "native_ids": [
+          "65",
+          "66",
+          "67",
+          "68"
+        ],
+        "nodes": [
+          "helix-worker1",
+          "helix-worker2"
+        ],
+        "unique_native_jobs": 4
+      }
+    },
+    {
+      "name": "effective_container_runtime_from_captured_output",
+      "passed": true,
+      "result": {
+        "observations": 2,
+        "cpus_per_task": 2,
+        "memory_bytes_per_task": 2147483648,
+        "swap_bytes_per_task": 0,
+        "cpu_quota_is_exclusive_cores": false,
+        "hard_controller_limit_verified": false,
+        "hard_aggregate_disk_quota_verified": false
+      }
+    },
+    {
+      "name": "input_specific_numerical_reference",
+      "passed": true,
+      "result": {
+        "rows": 10,
+        "units": 8,
+        "sha256": "7be5a87472e2149ed2ca035ac566ed7b3ea1437be43e0e92638333e44f2e414d",
+        "reference_comparison": "byte_identical",
+        "reference_run": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/trace/workflow-references/lab1-workflows-G-valid-036",
+        "reference_sha256": "7be5a87472e2149ed2ca035ac566ed7b3ea1437be43e0e92638333e44f2e414d"
+      }
+    }
+  ],
+  "scope": "Actual recorded remote engineering execution and source-backed methods; no independent human agreement or physical specificity.",
+  "verified": true
+}

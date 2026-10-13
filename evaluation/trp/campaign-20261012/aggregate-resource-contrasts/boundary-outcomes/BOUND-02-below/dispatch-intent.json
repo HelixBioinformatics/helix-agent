@@ -1,0 +1,17 @@
+{
+  "at": "2026-10-13T07:51:11.611562+00:00",
+  "guest": "/srv/helix-strict-results/boundary-60000-BOUND-02-below",
+  "allocationSha256": "1c0fc361b42e1ebb9e29550091bfd87d16f8520c509816fad8792befec7f6f17",
+  "freezeSha256": "6ef89e2db501a307ad1034ab41f9ad7c5dd01029848c2115a23d97c3ac0a518e",
+  "command": "sudo env NXF_HOME=/home/ubuntu/.nextflow HELIX_MODELS_PATH=/opt/helix-strict-runtime/packages/core/test/plugin/fixtures/models-dev.json HELIX_TRP_PYTHON=/opt/helix-strict-runtime/python/bin/python nohup python3 /opt/helix-strict-runtime/script/tesis/provision_remote_strict_profile.py guest-supervise --allocation /srv/helix-strict-results/boundary-60000-BOUND-02-below-allocation.json --deadline 1791880200.0 --output /srv/helix-strict-results/boundary-60000-BOUND-02-below -- /usr/bin/strace -f -Z -yy -ttt -e trace=write,pwrite64,writev,pwritev,openat,ftruncate,copy_file_range -s 256 /usr/local/bin/helix-strict-bun /opt/helix-strict-runtime/evaluation/trp/campaign-20261012/aggregate-resource-contrasts/full_client.ts /opt/helix-strict-runtime/campaign/boundary6/BOUND-02-below.json >/tmp/BOUND-02-below-60000.supervisor.stdout 2>/tmp/BOUND-02-below-60000.supervisor.stderr < /dev/null &",
+  "case": "BOUND-02-below",
+  "budget": {
+    "cpus": 3,
+    "memoryBytes": 4294967296,
+    "workBytes": 40894464,
+    "wallSeconds": 1080,
+    "requireHardStorageLimit": true,
+    "origin": "Prospectively bounded aggregate Helix client/controller and Slurm development contrast"
+  },
+  "retryForbiddenOnUnknownTransport": true
+}

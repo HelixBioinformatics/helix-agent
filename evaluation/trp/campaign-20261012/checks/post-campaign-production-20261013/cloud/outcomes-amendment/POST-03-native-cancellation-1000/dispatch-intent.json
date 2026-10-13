@@ -1,0 +1,17 @@
+{
+  "at": "2026-10-13T17:22:14.191223+00:00",
+  "guest": "/srv/helix-strict-results/post-integration-amendment-80100-POST-03-native-cancellation-1000",
+  "allocationSha256": "039133da5b5104ab953e0b2b85fd0ddd76c4850ae27f36e277e212e77ecf1f62",
+  "freezeSha256": "c472a51ef5a3e86eee26d8ef00269e9b12b2607c3a99e4519d60f220705e84ff",
+  "command": "sudo env NXF_HOME=/home/ubuntu/.nextflow HELIX_MODELS_PATH=/opt/helix-post-campaign-runtime-20261013-r1/packages/core/test/plugin/fixtures/models-dev.json HELIX_TRP_PYTHON=/opt/helix-post-campaign-runtime-20261013-r1/python/bin/python nohup python3 /opt/helix-post-campaign-runtime-20261013-r1/script/tesis/provision_remote_strict_profile.py guest-supervise --allocation /srv/helix-strict-results/post-integration-amendment-80100-POST-03-native-cancellation-1000-allocation.json --deadline 1791919200.0 --output /srv/helix-strict-results/post-integration-amendment-80100-POST-03-native-cancellation-1000 -- /usr/bin/strace -f -Z -yy -ttt -e trace=write,pwrite64,writev,pwritev,openat,ftruncate,copy_file_range -s 256 /usr/local/bin/helix-strict-bun /opt/helix-post-campaign-runtime-20261013-r1/evaluation/trp/campaign-20261012/checks/post-campaign-production-20261013/cloud/full_client_amended.ts /opt/helix-post-campaign-runtime-20261013-r1/campaign/post-integration-amendment/POST-03-native-cancellation-1000.json >/tmp/POST-03-native-cancellation-1000-80100.supervisor.stdout 2>/tmp/POST-03-native-cancellation-1000-80100.supervisor.stderr < /dev/null &",
+  "case": "POST-03-native-cancellation-1000",
+  "budget": {
+    "cpus": 3,
+    "memoryBytes": 4294967296,
+    "workBytes": 134217728,
+    "wallSeconds": 1080,
+    "requireHardStorageLimit": true,
+    "origin": "Prospective post-repair native cancellation integration; ordinary real admission and enforced strict project/cgroups"
+  },
+  "retryForbiddenOnUnknownTransport": true
+}

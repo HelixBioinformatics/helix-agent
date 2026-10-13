@@ -1,0 +1,302 @@
+{
+  "case": "AGG-06-small",
+  "physicalFeasibilityLabel": false,
+  "labelReason": "Actual terminal I/O failure linked by path and timestamp to kernel EDQUOT or independently qualified quota-reservation ENOSPC under matching enforced quota",
+  "actualDecision": {
+    "version": "trp-resources/1.2.0",
+    "decidedAt": "2026-10-13T05:58:36.403Z",
+    "accepted": false,
+    "inventoryHash": "b462f0389806a51f33f9d26d10299b058c7e3cee3837472a68133f425dee52ee",
+    "budgetHash": "f5f1a83494141957e98aa530ba0b3319b73704336429ea11a75ce98d21102192",
+    "demand": {
+      "version": "trp-resources/1.2.0",
+      "sourceBytes": 359397,
+      "selectionBytes": 150911,
+      "bundleBytes": 1158093,
+      "counts": {
+        "scientificTasks": 2,
+        "stubTasks": 2,
+        "remoteScientificCalls": 2,
+        "retries": 0
+      },
+      "cpus": 3,
+      "memoryBytes": 4294967296,
+      "workBytes": 42266624,
+      "wallSeconds": 1080,
+      "storage": {
+        "kind": "estimate",
+        "formula": "ceil((32*1048576 + 7*bundleBytes + 4*selectionBytes)/4096)*4096",
+        "hardLimit": false,
+        "profile": "trp-colocated-client-storage/1.0.0"
+      },
+      "assumptions": [
+        "Verified co-located Slurm profile: the real Helix client and Python/Nextflow controller share a root-controlled 1 CPU/2 GiB/swap-zero cgroup. All declared client work/temp/state/cache/export and remote workspace paths inherit one kernel XFS project quota. Worker tasks remain separate 2 CPU/2 GiB Docker allocations; no memory pooling.",
+        "Storage profile trp-colocated-client-storage/1.0.0 reserves32MiB overhead plus working-copy terms. This covers the real client/bootstrap/cache and portable export scope, calibrated on one development pilot before the aggregate campaign freeze; it is not a universal peak guarantee.",
+        "Two sequential tasks per traversal; one stub traversal then one real traversal; no retry or resume.",
+        "Task allocation: 2 CPUs/2 GiB. Controller allocation: 1 CPU/2 GiB; cgroup enforcement requires an independently verified operator sandbox. CPU bandwidth is not an exclusive core reservation.",
+        "Each traversal has an 8 minute watchdog; probes/configuration reserve another 120 seconds. This is a configured timeout, not a runtime prediction.",
+        "Storage estimates allocated workspace bytes including working copies, logs and portable evidence; an independently observed XFS project quota enforces an approved budget only inside an operator allocation.",
+        "The exact image and Nextflow distribution must already be cached. Image pulls/builds and shared Docker/Nextflow caches are outside workBytes.",
+        "Two remote scientific tasks are planned; SSH probes, controller commands and stub jobs are not scientific calls. Agent provider tokens, cost and conversation calls are not measured here."
+      ]
+    },
+    "rejections": [
+      {
+        "code": "capacity-insufficient",
+        "resource": "workBytes",
+        "demand": 42266624,
+        "available": 2097152
+      },
+      {
+        "code": "budget-insufficient",
+        "resource": "workBytes",
+        "demand": 42266624,
+        "available": 2097152
+      }
+    ]
+  },
+  "defaultPortableVerifier": null,
+  "executionOracleForcedOnly": true,
+  "allocatedBlockBytesObservedPeak": 1912832,
+  "allocatedBlockBytesFinal": 1912832,
+  "predictedWorkBytes": 42266624,
+  "observedUnderestimateBytes": 0,
+  "observedOverestimationFraction": null,
+  "kernelMemoryPeak": 104931328,
+  "causalKernelQuotaFailures": [
+    "[pid 49899] 1791871115.347443 openat(AT_FDCWD</shared/helix-strict/hrsa75a01164fa94155/client>, \"/shared/helix-strict/hrsa75a01164fa94155/cache/python/usr/lib/python3.12/re/_constants.cpython-312.pyc.133781858682608\", O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 49899] 1791871115.352839 openat(AT_FDCWD</shared/helix-strict/hrsa75a01164fa94155/client>, \"/shared/helix-strict/hrsa75a01164fa94155/cache/python/usr/lib/python3.12/re/_casefix.cpython-312.pyc.133781858682752\", O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 49899] 1791871115.355862 openat(AT_FDCWD</shared/helix-strict/hrsa75a01164fa94155/client>, \"/shared/helix-strict/hrsa75a01164fa94155/cache/python/usr/lib/python3.12/copyreg.cpython-312.pyc.133781858683040\", O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 49899] 1791871115.357966 openat(AT_FDCWD</shared/helix-strict/hrsa75a01164fa94155/client>, \"/shared/helix-strict/hrsa75a01164fa94155/cache/python/usr/lib/python3.12/json/scanner.cpython-312.pyc.133781858683472\", O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 49899] 1791871115.363266 openat(AT_FDCWD</shared/helix-strict/hrsa75a01164fa94155/client>, \"/shared/helix-strict/hrsa75a01164fa94155/cache/python/usr/lib/python3.12/json/encoder.cpython-312.pyc.133781858683760\", O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 49899] 1791871115.374713 openat(AT_FDCWD</shared/helix-strict/hrsa75a01164fa94155/client>, \"/shared/helix-strict/hrsa75a01164fa94155/cache/python/usr/lib/python3.12/pathlib.cpython-312.pyc.133781858684192\", O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 49899] 1791871115.377453 openat(AT_FDCWD</shared/helix-strict/hrsa75a01164fa94155/client>, \"/shared/helix-strict/hrsa75a01164fa94155/cache/python/usr/lib/python3.12/fnmatch.cpython-312.pyc.133781858688224\", O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 49899] 1791871115.406101 openat(AT_FDCWD</shared/helix-strict/hrsa75a01164fa94155/client>, \"/shared/helix-strict/hrsa75a01164fa94155/cache/python/usr/lib/python3.12/ipaddress.cpython-312.pyc.133781858691248\", O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 49899] 1791871115.418254 openat(AT_FDCWD</shared/helix-strict/hrsa75a01164fa94155/client>, \"/shared/helix-strict/hrsa75a01164fa94155/cache/python/usr/lib/python3.12/socket.cpython-312.pyc.133781858692256\", O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 49899] 1791871115.424236 openat(AT_FDCWD</shared/helix-strict/hrsa75a01164fa94155/client>, \"/shared/helix-strict/hrsa75a01164fa94155/cache/python/usr/lib/python3.12/selectors.cpython-312.pyc.133781858696432\", O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 49899] 1791871115.426042 openat(AT_FDCWD</shared/helix-strict/hrsa75a01164fa94155/client>, \"/shared/helix-strict/hrsa75a01164fa94155/cache/python/usr/lib/python3.12/collections/abc.cpython-312.pyc.133781851161104\", O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 49899] 1791871115.429672 openat(AT_FDCWD</shared/helix-strict/hrsa75a01164fa94155/client>, \"/shared/helix-strict/hrsa75a01164fa94155/cache/python/usr/lib/python3.12/struct.cpython-312.pyc.133781858696432\", O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 49899] 1791871115.452979 openat(AT_FDCWD</shared/helix-strict/hrsa75a01164fa94155/client>, \"/shared/helix-strict/hrsa75a01164fa94155/cache/python/usr/lib/python3.12/subprocess.cpython-312.pyc.133781851193392\", O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 49899] 1791871115.463974 openat(AT_FDCWD</shared/helix-strict/hrsa75a01164fa94155/client>, \"/shared/helix-strict/hrsa75a01164fa94155/cache/python/usr/lib/python3.12/locale.cpython-312.pyc.133781851194832\", O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 49899] 1791871115.466998 openat(AT_FDCWD</shared/helix-strict/hrsa75a01164fa94155/client>, \"/shared/helix-strict/hrsa75a01164fa94155/cache/python/usr/lib/python3.12/signal.cpython-312.pyc.133781851195984\", O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 49899] 1791871115.473461 openat(AT_FDCWD</shared/helix-strict/hrsa75a01164fa94155/client>, \"/shared/helix-strict/hrsa75a01164fa94155/cache/python/usr/lib/python3.12/contextlib.cpython-312.pyc.133781851196272\", O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 49916] 1791871115.695500 openat(AT_FDCWD</shared/helix-strict/hrsa75a01164fa94155/client>, \"/shared/helix-strict/hrsa75a01164fa94155/cache/python/usr/lib/python3.12/re/_constants.cpython-312.pyc.139046340097008\", O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 49916] 1791871115.697495 openat(AT_FDCWD</shared/helix-strict/hrsa75a01164fa94155/client>, \"/shared/helix-strict/hrsa75a01164fa94155/cache/python/usr/lib/python3.12/re/_casefix.cpython-312.pyc.139046340097440\", O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 49916] 1791871115.701073 openat(AT_FDCWD</shared/helix-strict/hrsa75a01164fa94155/client>, \"/shared/helix-strict/hrsa75a01164fa94155/cache/python/usr/lib/python3.12/copyreg.cpython-312.pyc.139046340097728\", O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 49916] 1791871115.703101 openat(AT_FDCWD</shared/helix-strict/hrsa75a01164fa94155/client>, \"/shared/helix-strict/hrsa75a01164fa94155/cache/python/usr/lib/python3.12/json/scanner.cpython-312.pyc.139046340098160\", O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 49916] 1791871115.711477 openat(AT_FDCWD</shared/helix-strict/hrsa75a01164fa94155/client>, \"/shared/helix-strict/hrsa75a01164fa94155/cache/python/usr/lib/python3.12/json/encoder.cpython-312.pyc.139046340098736\", O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 49916] 1791871115.725005 openat(AT_FDCWD</shared/helix-strict/hrsa75a01164fa94155/client>, \"/shared/helix-strict/hrsa75a01164fa94155/cache/python/usr/lib/python3.12/pathlib.cpython-312.pyc.139046340099312\", O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 49916] 1791871115.727662 openat(AT_FDCWD</shared/helix-strict/hrsa75a01164fa94155/client>, \"/shared/helix-strict/hrsa75a01164fa94155/cache/python/usr/lib/python3.12/fnmatch.cpython-312.pyc.139046335041088\", O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 49916] 1791871115.754903 openat(AT_FDCWD</shared/helix-strict/hrsa75a01164fa94155/client>, \"/shared/helix-strict/hrsa75a01164fa94155/cache/python/usr/lib/python3.12/ipaddress.cpython-312.pyc.139046335044112\", O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 49916] 1791871115.767165 openat(AT_FDCWD</shared/helix-strict/hrsa75a01164fa94155/client>, \"/shared/helix-strict/hrsa75a01164fa94155/cache/python/usr/lib/python3.12/socket.cpython-312.pyc.139046335045120\", O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 49916] 1791871115.772884 openat(AT_FDCWD</shared/helix-strict/hrsa75a01164fa94155/client>, \"/shared/helix-strict/hrsa75a01164fa94155/cache/python/usr/lib/python3.12/selectors.cpython-312.pyc.139046335049296\", O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 49916] 1791871115.774586 openat(AT_FDCWD</shared/helix-strict/hrsa75a01164fa94155/client>, \"/shared/helix-strict/hrsa75a01164fa94155/cache/python/usr/lib/python3.12/collections/abc.cpython-312.pyc.139046334786064\", O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 49916] 1791871115.778152 openat(AT_FDCWD</shared/helix-strict/hrsa75a01164fa94155/client>, \"/shared/helix-strict/hrsa75a01164fa94155/cache/python/usr/lib/python3.12/struct.cpython-312.pyc.139046335050016\", O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 49916] 1791871115.794888 openat(AT_FDCWD</shared/helix-strict/hrsa75a01164fa94155/client>, \"/shared/helix-strict/hrsa75a01164fa94155/cache/python/usr/lib/python3.12/subprocess.cpython-312.pyc.139046335049296\", O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 49916] 1791871115.805479 openat(AT_FDCWD</shared/helix-strict/hrsa75a01164fa94155/client>, \"/shared/helix-strict/hrsa75a01164fa94155/cache/python/usr/lib/python3.12/locale.cpython-312.pyc.139046335051456\", O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 49916] 1791871115.808327 openat(AT_FDCWD</shared/helix-strict/hrsa75a01164fa94155/client>, \"/shared/helix-strict/hrsa75a01164fa94155/cache/python/usr/lib/python3.12/signal.cpython-312.pyc.139046335052608\", O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 49916] 1791871115.814732 openat(AT_FDCWD</shared/helix-strict/hrsa75a01164fa94155/client>, \"/shared/helix-strict/hrsa75a01164fa94155/cache/python/usr/lib/python3.12/contextlib.cpython-312.pyc.139046335052896\", O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 49918] 1791871115.972175 openat(AT_FDCWD</shared/helix-strict/hrsa75a01164fa94155/client>, \"/shared/helix-strict/hrsa75a01164fa94155/cache/python/usr/lib/python3.12/base64.cpython-312.pyc.127637401202112\", O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 49918] 1791871115.980711 openat(AT_FDCWD</shared/helix-strict/hrsa75a01164fa94155/client>, \"/shared/helix-strict/hrsa75a01164fa94155/cache/python/usr/lib/python3.12/re/_constants.cpython-312.pyc.127637401205136\", O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 49918] 1791871115.982549 openat(AT_FDCWD</shared/helix-strict/hrsa75a01164fa94155/client>, \"/shared/helix-strict/hrsa75a01164fa94155/cache/python/usr/lib/python3.12/re/_casefix.cpython-312.pyc.127637401205280\", O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 49918] 1791871115.985732 openat(AT_FDCWD</shared/helix-strict/hrsa75a01164fa94155/client>, \"/shared/helix-strict/hrsa75a01164fa94155/cache/python/usr/lib/python3.12/copyreg.cpython-312.pyc.127637401205568\", O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 49918] 1791871115.987369 openat(AT_FDCWD</shared/helix-strict/hrsa75a01164fa94155/client>, \"/shared/helix-strict/hrsa75a01164fa94155/cache/python/usr/lib/python3.12/struct.cpython-312.pyc.127637401206000\", O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 49918] 1791871115.999885 openat(AT_FDCWD</shared/helix-strict/hrsa75a01164fa94155/client>, \"/shared/helix-strict/hrsa75a01164fa94155/cache/python/usr/lib/python3.12/json/scanner.cpython-312.pyc.127637395718192\", O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 49918] 1791871116.006765 openat(AT_FDCWD</shared/helix-strict/hrsa75a01164fa94155/client>, \"/shared/helix-strict/hrsa75a01164fa94155/cache/python/usr/lib/python3.12/json/encoder.cpython-312.pyc.127637395718912\", O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 49918] 1791871116.020255 openat(AT_FDCWD</shared/helix-strict/hrsa75a01164fa94155/client>, \"/shared/helix-strict/hrsa75a01164fa94155/cache/python/usr/lib/python3.12/pathlib.cpython-312.pyc.127637395719344\", O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 49918] 1791871116.023037 openat(AT_FDCWD</shared/helix-strict/hrsa75a01164fa94155/client>, \"/shared/helix-strict/hrsa75a01164fa94155/cache/python/usr/lib/python3.12/fnmatch.cpython-312.pyc.127637395723664\", O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 49918] 1791871116.054000 openat(AT_FDCWD</shared/helix-strict/hrsa75a01164fa94155/client>, \"/shared/helix-strict/hrsa75a01164fa94155/cache/python/usr/lib/python3.12/ipaddress.cpython-312.pyc.127637395726688\", O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 49918] 1791871116.067660 openat(AT_FDCWD</shared/helix-strict/hrsa75a01164fa94155/client>, \"/shared/helix-strict/hrsa75a01164fa94155/cache/python/usr/lib/python3.12/platform.cpython-312.pyc.127637395727696\", O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 49918] 1791871116.081709 openat(AT_FDCWD</shared/helix-strict/hrsa75a01164fa94155/client>, \"/shared/helix-strict/hrsa75a01164fa94155/cache/python/usr/lib/python3.12/shutil.cpython-312.pyc.127637395727696\", O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 49918] 1791871116.085109 openat(AT_FDCWD</shared/helix-strict/hrsa75a01164fa94155/client>, \"/shared/helix-strict/hrsa75a01164fa94155/cache/python/usr/lib/python3.12/bz2.cpython-312.pyc.127637395731584\", O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 49918] 1791871116.087508 openat(AT_FDCWD</shared/helix-strict/hrsa75a01164fa94155/client>, \"/shared/helix-strict/hrsa75a01164fa94155/cache/python/usr/lib/python3.12/_compression.cpython-312.pyc.127637395733888\", O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 49918] 1791871116.092594 openat(AT_FDCWD</shared/helix-strict/hrsa75a01164fa94155/client>, \"/shared/helix-strict/hrsa75a01164fa94155/cache/python/usr/lib/python3.12/lzma.cpython-312.pyc.127637395734032\", O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 49918] 1791871116.096968 openat(AT_FDCWD</shared/helix-strict/hrsa75a01164fa94155/client>, \"/shared/helix-strict/hrsa75a01164fa94155/cache/python/usr/lib/python3.12/signal.cpython-312.pyc.127637395734320\", O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 49918] 1791871116.104840 openat(AT_FDCWD</shared/helix-strict/hrsa75a01164fa94155/client>, \"/shared/helix-strict/hrsa75a01164fa94155/cache/python/usr/lib/python3.12/socket.cpython-312.pyc.127637388460224\", O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 49918] 1791871116.110644 openat(AT_FDCWD</shared/helix-strict/hrsa75a01164fa94155/client>, \"/shared/helix-strict/hrsa75a01164fa94155/cache/python/usr/lib/python3.12/selectors.cpython-312.pyc.127637388461520\", O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 49918] 1791871116.112264 openat(AT_FDCWD</shared/helix-strict/hrsa75a01164fa94155/client>, \"/shared/helix-strict/hrsa75a01164fa94155/cache/python/usr/lib/python3.12/collections/abc.cpython-312.pyc.127637389036240\", O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 49918] 1791871116.130972 openat(AT_FDCWD</shared/helix-strict/hrsa75a01164fa94155/client>, \"/shared/helix-strict/hrsa75a01164fa94155/cache/python/usr/lib/python3.12/subprocess.cpython-312.pyc.127637388462384\", O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 49918] 1791871116.141661 openat(AT_FDCWD</shared/helix-strict/hrsa75a01164fa94155/client>, \"/shared/helix-strict/hrsa75a01164fa94155/cache/python/usr/lib/python3.12/locale.cpython-312.pyc.127637388463680\", O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 49918] 1791871116.148233 openat(AT_FDCWD</shared/helix-strict/hrsa75a01164fa94155/client>, \"/shared/helix-strict/hrsa75a01164fa94155/cache/python/usr/lib/python3.12/contextlib.cpython-312.pyc.127637388464832\", O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 49918] 1791871116.150904 openat(AT_FDCWD</shared/helix-strict/hrsa75a01164fa94155/client>, \"/shared/helix-strict/hrsa75a01164fa94155/cache/python/usr/lib/python3.12/datetime.cpython-312.pyc.127637388463536\", O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 49918] 1791871116.157103 openat(AT_FDCWD</shared/helix-strict/hrsa75a01164fa94155/client>, \"/shared/helix-strict/hrsa75a01164fa94155/cache/python/usr/lib/python3.12/pkgutil.cpython-312.pyc.127637388464832\", O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 49918] 1791871116.163753 openat(AT_FDCWD</shared/helix-strict/hrsa75a01164fa94155/client>, \"/shared/helix-strict/hrsa75a01164fa94155/cache/python/usr/lib/python3.12/weakref.cpython-312.pyc.127637388467424\", O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 49918] 1791871116.190296 openat(AT_FDCWD</shared/helix-strict/hrsa75a01164fa94155/client>, \"/shared/helix-strict/hrsa75a01164fa94155/cache/python/usr/lib/python3.12/typing.cpython-312.pyc.127637388469584\", O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 49840] 1791871116.413599 openat(AT_FDCWD</shared/helix-strict/hrsa75a01164fa94155/client>, \"/shared/helix-strict/hrsa75a01164fa94155/client/input.pdb\", O_WRONLY|O_CREAT, 0666) = -1 ENOSPC (No space left on device)"
+  ],
+  "causallyLinkedTerminalIoFailures": [
+    {
+      "failure": {
+        "pid": 49838,
+        "failedAtEpochSeconds": 1791871116.414,
+        "name": "Error",
+        "code": "ENOSPC",
+        "errno": -28,
+        "syscall": "copyfile",
+        "path": "/opt/helix-strict-runtime/campaign/original40/G-valid-006/source.pdb",
+        "dest": "/shared/helix-strict/hrsa75a01164fa94155/client/input.pdb",
+        "message": "ENOSPC: no space left on device, copyfile '/opt/helix-strict-runtime/campaign/original40/G-valid-006/source.pdb' -> '/shared/helix-strict/hrsa75a01164fa94155/client/input.pdb'",
+        "cause": "Error: ENOSPC: no space left on device, copyfile '/opt/helix-strict-runtime/campaign/original40/G-valid-006/source.pdb' -> '/shared/helix-strict/hrsa75a01164fa94155/client/input.pdb'",
+        "stack": "Error: ENOSPC: no space left on device, copyfile '/opt/helix-strict-runtime/campaign/original40/G-valid-006/source.pdb' -> '/shared/helix-strict/hrsa75a01164fa94155/client/input.pdb'\n    at async main (/opt/helix-strict-runtime/evaluation/trp/campaign-20261012/aggregate-resource-contrasts/full_client.ts:68:10)"
+      },
+      "kernelSyscall": "[pid 49840] 1791871116.413599 openat(AT_FDCWD</shared/helix-strict/hrsa75a01164fa94155/client>, \"/shared/helix-strict/hrsa75a01164fa94155/client/input.pdb\", O_WRONLY|O_CREAT, 0666) = -1 ENOSPC (No space left on device)"
+    }
+  ],
+  "actualExitCode": 1,
+  "terminationCause": null,
+  "elapsedSeconds": 2.6306731619997663,
+  "persistentSqlite": [],
+  "checks": [
+    {
+      "name": "root-allocation-policy-binding",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "exact-kernel-budget",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "owner-quiescence",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "real-controller-and-tracer-reaped",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-0",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-0",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-1",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-1",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-2",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-2",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-3",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-3",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-4",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-4",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-5",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-5",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-6",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-6",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-7",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-7",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-0",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-1",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-2",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-3",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-4",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-5",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "actual-unmodified-decision-source",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "actual-bound-decision-policy",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "actual-decision-budget-hash",
+      "ok": true,
+      "detail": null
+    }
+  ],
+  "checksPassed": 29,
+  "checksTotal": 29,
+  "supervisionSha256": "9a8fe7875aba8855a29bedeb0bf058acac13248e3e56c6c01f5aba3882ef6467",
+  "retainedArchiveSha256": "f75952df6c2a92ec7fd5d883453e45d5aa4b80501918f3485f5a7626307a47ee",
+  "scientificR24Rate": null,
+  "scope": "Engineering, one development protein, actual aggregate client/head declared paths plus sequential worker tasks; infrastructure/runtime/Docker caches and experiment-only root telemetry excluded"
+}

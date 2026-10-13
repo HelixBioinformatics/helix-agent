@@ -1,0 +1,30 @@
+{
+  "case": {
+    "id": "helix-worker1-cpu-1.5",
+    "node": "helix-worker1",
+    "mode": "cpu",
+    "cpus": 1.5,
+    "memory_mib": 256,
+    "expected": "feasible"
+  },
+  "command": "srun --partition=helix --nodelist=helix-worker1 --cpus-per-task=2 --mem=3000M --time=00:02:00 --kill-on-bad-exit=1 docker run --rm --network none --read-only --cap-drop ALL --security-opt no-new-privileges --pids-limit 128 --cpus 1.5 --memory 256m --memory-swap 256m --entrypoint python sha256:1dd91e70acb153a0bd9a51346fc001dd5025f851c9598697cdd37f07d9490b0a -c 'import json,multiprocessing,time,pathlib\np=pathlib.Path('\"'\"'/sys/fs/cgroup'\"'\"')\ndef values(): return {k:int(v) for k,v in (l.split() for l in (p/'\"'\"'cpu.stat'\"'\"').read_text().splitlines())}\ndef spin():\n end=time.monotonic()+4\n while time.monotonic()<end: sum(range(1000))\na=values();t=time.monotonic();xs=[multiprocessing.Process(target=spin) for _ in range(4)]\nfor x in xs:x.start()\nfor x in xs:x.join()\nb=values();elapsed=time.monotonic()-t\nprint(json.dumps({'\"'\"'cpu_max'\"'\"':(p/'\"'\"'cpu.max'\"'\"').read_text().strip(),'\"'\"'memory_max'\"'\"':(p/'\"'\"'memory.max'\"'\"').read_text().strip(),'\"'\"'swap_max'\"'\"':(p/'\"'\"'memory.swap.max'\"'\"').read_text().strip(),'\"'\"'mean_cpus'\"'\"':(b['\"'\"'usage_usec'\"'\"']-a['\"'\"'usage_usec'\"'\"'])/1e6/elapsed,'\"'\"'elapsed_seconds'\"'\"':elapsed,'\"'\"'throttled_delta'\"'\"':b['\"'\"'nr_throttled'\"'\"']-a['\"'\"'nr_throttled'\"'\"'],'\"'\"'child_exit_codes'\"'\"':[x.exitcode for x in xs]}))\n'",
+  "observed_at": "2026-10-13T00:34:40.641574+00:00",
+  "exit_code": 0,
+  "stdout": "{\"cpu_max\": \"150000 100000\", \"memory_max\": \"268435456\", \"swap_max\": \"0\", \"mean_cpus\": 1.5143769794076094, \"elapsed_seconds\": 4.018424793000008, \"throttled_delta\": 39, \"child_exit_codes\": [0, 0, 0, 0]}\n",
+  "stderr": "",
+  "observed": {
+    "cpu_max": "150000 100000",
+    "memory_max": "268435456",
+    "swap_max": "0",
+    "mean_cpus": 1.5143769794076094,
+    "elapsed_seconds": 4.018424793000008,
+    "throttled_delta": 39,
+    "child_exit_codes": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "passed": true
+}

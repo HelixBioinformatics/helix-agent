@@ -1,0 +1,78 @@
+{
+  "case": "SMOKE-01-generous",
+  "status": "succeeded",
+  "executionOracleForcedOnly": false,
+  "realDecision": {
+    "version": "trp-resources/1.2.0",
+    "decidedAt": "2026-10-13T05:01:00.278Z",
+    "accepted": true,
+    "inventoryHash": "4a432c3c46b3f028ebe81f7f2a89c9e02e864f6d4fa34633e68d22e775cc494b",
+    "budgetHash": "1e7e6b647717c1505f70d83c2ab596371ef89edd11865084c81884ce1d8c0067",
+    "demand": {
+      "version": "trp-resources/1.2.0",
+      "sourceBytes": 359397,
+      "selectionBytes": 150911,
+      "bundleBytes": 1158105,
+      "counts": {
+        "scientificTasks": 2,
+        "stubTasks": 2,
+        "remoteScientificCalls": 2,
+        "retries": 0
+      },
+      "cpus": 3,
+      "memoryBytes": 4294967296,
+      "workBytes": 21295104,
+      "wallSeconds": 1080,
+      "storage": {
+        "kind": "estimate",
+        "formula": "ceil((12*1048576 + 7*bundleBytes + 4*selectionBytes)/4096)*4096",
+        "hardLimit": false
+      },
+      "assumptions": [
+        "Verified co-located Slurm profile: the real Helix client and Python/Nextflow controller share a root-controlled 1 CPU/2 GiB/swap-zero cgroup. All declared client work/temp/state/cache/export and remote workspace paths inherit one kernel XFS project quota. Worker tasks remain separate 2 CPU/2 GiB Docker allocations; no memory pooling.",
+        "Two sequential tasks per traversal; one stub traversal then one real traversal; no retry or resume.",
+        "Task allocation: 2 CPUs/2 GiB. Controller allocation: 1 CPU/2 GiB; cgroup enforcement requires an independently verified operator sandbox. CPU bandwidth is not an exclusive core reservation.",
+        "Each traversal has an 8 minute watchdog; probes/configuration reserve another 120 seconds. This is a configured timeout, not a runtime prediction.",
+        "Storage estimates allocated workspace bytes including working copies, logs and portable evidence; an independently observed XFS project quota enforces an approved budget only inside an operator allocation.",
+        "The exact image and Nextflow distribution must already be cached. Image pulls/builds and shared Docker/Nextflow caches are outside workBytes.",
+        "Two remote scientific tasks are planned; SSH probes, controller commands and stub jobs are not scientific calls. Agent provider tokens, cost and conversation calls are not measured here."
+      ]
+    },
+    "rejections": []
+  },
+  "gateRecords": [],
+  "terminal": {
+    "prepared": {
+      "id": "ffe23bc1-32e9-497e-bb5a-5e604fb407c1",
+      "digest": "b0754aba9107ef3a3d52eb5e23d1a1c335a2db10fd32df3e87afe9bec1425198",
+      "truncated": false
+    },
+    "executed": {
+      "directory": "/shared/helix-strict/hrs2d99027b4e734149/client/.helix/trp/b0754aba9107-ffe23bc1-32e9-497e-bb5a-5e604fb407c1",
+      "digest": "b0754aba9107ef3a3d52eb5e23d1a1c335a2db10fd32df3e87afe9bec1425198",
+      "manifestSha256": "e6ebff9ccc9e2a3cb9442bad5bbbc627e8145fadd6d6baab5f532a119919bf08",
+      "truncated": false
+    }
+  },
+  "actualCsvSha256": "52b169a50ad1b2847e8a9e294ff93452e6e54d2c9d85d32f14d2aee4935b9c3f",
+  "goldCsvSha256": "52b169a50ad1b2847e8a9e294ff93452e6e54d2c9d85d32f14d2aee4935b9c3f",
+  "numericalEqual": true,
+  "portableExportDirectory": "/shared/helix-strict/hrs2d99027b4e734149/export/portable-evidence",
+  "portableVerification": {
+    "ok": true,
+    "files": 150,
+    "bytes": 6012573,
+    "manifestSha256": "e6ebff9ccc9e2a3cb9442bad5bbbc627e8145fadd6d6baab5f532a119919bf08",
+    "status": "succeeded",
+    "externallyAnchored": false,
+    "scope": "integrity, declared links and cold counts; not biological accuracy or authorship"
+  },
+  "portableVerifierExitCode": 0,
+  "portableVerifierStderr": "",
+  "ordinaryExportRequired": true,
+  "independentCounterfactualAuditRequired": false,
+  "syntheticApproval": true,
+  "humanEvaluation": false,
+  "persistentSqliteExpected": true,
+  "fullSourceSha256": "99af6b1caa097f4c789c9fcc36350343d2364b0e6e2528235ed596e088d9c2a5"
+}

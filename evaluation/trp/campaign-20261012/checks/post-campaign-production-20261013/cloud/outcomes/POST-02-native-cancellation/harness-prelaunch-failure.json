@@ -1,0 +1,22 @@
+{
+  "at": "2026-10-13T17:15:35.264752+00:00",
+  "sourceObservation": {
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\n  File \"/opt/helix-post-campaign-runtime-20261013-r1/script/tesis/provision_remote_strict_profile.py\", line 280, in <module>\n    if __name__==\"__main__\":main()\n                            ^^^^^^\n  File \"/opt/helix-post-campaign-runtime-20261013-r1/script/tesis/provision_remote_strict_profile.py\", line 276, in main\n    else:result=supervise(a.allocation,[v for v in a.client_argv if v!=\"--\"],a.deadline,a.output)\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/helix-post-campaign-runtime-20261013-r1/script/tesis/provision_remote_strict_profile.py\", line 182, in supervise\n    output.mkdir(mode=0o700,parents=True,exist_ok=False)\n  File \"/usr/lib/python3.12/pathlib.py\", line 1313, in mkdir\n    os.mkdir(self, mode)\nFileExistsError: [Errno 17] File exists: '/srv/helix-strict-results/post-integration-80000-POST-02-native-cancellation'\n",
+    "queue": "",
+    "ownProcesses": [],
+    "cgroup": {
+      "cgroup.procs": "",
+      "cgroup.events": "populated 0\nfrozen 0"
+    },
+    "sourceInputCopied": false,
+    "outputEntries": []
+  },
+  "actualStage": "guest_supervise prelaunch output.mkdir FileExistsError",
+  "nativeJobsSubmitted": 0,
+  "clientStarted": false,
+  "sourceMutation": false,
+  "resubmitted": false,
+  "case": "POST-02-native-cancellation",
+  "actor": "harness setup, not producer or resource oracle"
+}

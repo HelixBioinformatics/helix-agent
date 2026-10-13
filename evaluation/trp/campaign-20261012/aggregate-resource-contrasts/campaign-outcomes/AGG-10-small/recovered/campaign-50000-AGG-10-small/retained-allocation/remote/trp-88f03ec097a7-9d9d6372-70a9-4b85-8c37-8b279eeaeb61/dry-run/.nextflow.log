@@ -1,0 +1,107 @@
+Oct-13 06:12:50.198 [main] DEBUG nextflow.cli.Launcher - $> nextflow -C nextflow.config run main.nf -ansi-log false -with-trace trace.tsv -stub-run
+Oct-13 06:12:50.815 [main] INFO  nextflow.cli.CmdRun - N E X T F L O W  ~  version 25.10.4
+Oct-13 06:12:50.926 [main] DEBUG nextflow.plugin.PluginsFacade - Setting up plugin manager > mode=prod; embedded=false; plugins-dir=/home/ubuntu/.nextflow/plugins; core-plugins: nf-amazon@3.4.4,nf-azure@1.20.2,nf-cloudcache@0.5.0,nf-codecommit@0.5.0,nf-console@1.3.0,nf-google@1.23.5,nf-k8s@1.2.2,nf-tower@1.17.5,nf-wave@1.16.1
+Oct-13 06:12:51.043 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Enabled plugins: []
+Oct-13 06:12:51.047 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Disabled plugins: []
+Oct-13 06:12:51.126 [main] INFO  org.pf4j.DefaultPluginManager - PF4J version 3.12.0 in 'deployment' mode
+Oct-13 06:12:51.211 [main] INFO  org.pf4j.AbstractPluginManager - No plugins
+Oct-13 06:12:51.805 [main] DEBUG nextflow.config.ConfigBuilder - Parsing config file: /shared/helix-strict/hrsb6ba2e3058584489/remote/trp-88f03ec097a7-9d9d6372-70a9-4b85-8c37-8b279eeaeb61/dry-run/nextflow.config
+Oct-13 06:12:52.003 [main] DEBUG nextflow.config.ConfigBuilder - Applying config profile: `standard`
+Oct-13 06:12:54.616 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins default=[]
+Oct-13 06:12:54.620 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins resolved requirement=[]
+Oct-13 06:12:54.906 [main] DEBUG n.secret.LocalSecretsProvider - Secrets store: /home/ubuntu/.nextflow/secrets/store.json
+Oct-13 06:12:54.916 [main] DEBUG nextflow.secret.SecretsLoader - Discovered secrets providers: [nextflow.secret.LocalSecretsProvider@5cf3157b] - activable => nextflow.secret.LocalSecretsProvider@5cf3157b
+Oct-13 06:12:54.942 [main] DEBUG nextflow.cli.CmdRun - Applied DSL=2 from script declaration
+Oct-13 06:12:55.109 [main] INFO  nextflow.cli.CmdRun - Launching `main.nf` [suspicious_davinci] DSL2 - revision: 0f14c41768
+Oct-13 06:12:55.331 [main] DEBUG nextflow.Session - Session UUID: 9af7aa16-7be8-44df-b9a2-fbb2b4e2c8cc
+Oct-13 06:12:55.332 [main] DEBUG nextflow.Session - Run name: suspicious_davinci
+Oct-13 06:12:55.336 [main] DEBUG nextflow.Session - Executor pool size: 2
+Oct-13 06:12:55.418 [main] DEBUG nextflow.file.FilePorter - File porter settings maxRetries=3; maxTransfers=50; pollTimeout=null
+Oct-13 06:12:55.434 [main] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'FileTransfer' minSize=10; maxSize=10; workQueue=LinkedBlockingQueue[-1]; allowCoreThreadTimeout=false
+Oct-13 06:12:55.527 [main] DEBUG nextflow.cli.CmdRun - 
+  Version: 25.10.4 build 11177
+  Created: 10-02-2026 17:12 UTC 
+  System: Linux 7.0.0-1014-aws
+  Runtime: Groovy 4.0.28 on OpenJDK 64-Bit Server VM 21.0.12.1+1-1-24.04.4-Ubuntu
+  Encoding: UTF-8 (UTF-8)
+  Process: 72232@helix-head [172.31.0.220]
+  CPUs: 1 - Mem: 2 GB (1.5 GB) - Swap: 0 (0)
+Oct-13 06:12:55.638 [main] DEBUG nextflow.Session - Work-dir: /shared/helix-strict/hrsb6ba2e3058584489/remote/trp-88f03ec097a7-9d9d6372-70a9-4b85-8c37-8b279eeaeb61/dry-run/work [xfs]
+Oct-13 06:12:55.639 [main] DEBUG nextflow.Session - Script base path does not exist or is not a directory: /shared/helix-strict/hrsb6ba2e3058584489/remote/trp-88f03ec097a7-9d9d6372-70a9-4b85-8c37-8b279eeaeb61/dry-run/bin
+Oct-13 06:12:55.723 [main] DEBUG nextflow.executor.ExecutorFactory - Extension executors providers=[]
+Oct-13 06:12:55.743 [main] DEBUG nextflow.Session - Observer factory (v2): LinObserverFactory
+Oct-13 06:12:55.791 [main] DEBUG nextflow.Session - Observer factory (v2): DefaultObserverFactory
+Oct-13 06:12:56.027 [main] DEBUG nextflow.cache.CacheFactory - Using Nextflow cache factory: nextflow.cache.DefaultCacheFactory
+Oct-13 06:12:56.200 [main] DEBUG nextflow.util.CustomThreadPool - Creating default thread pool > poolSize: 2; maxThreads: 1000
+Oct-13 06:12:56.430 [main] DEBUG nextflow.Session - Session start
+Oct-13 06:12:56.437 [main] DEBUG nextflow.trace.TraceFileObserver - Workflow started -- trace file: trace.tsv
+Oct-13 06:12:58.409 [main] DEBUG nextflow.script.ScriptRunner - > Launching execution
+Oct-13 06:12:58.912 [main] DEBUG n.script.dsl.ProcessConfigBuilder - Config settings `withName:SELECT` matches process SELECT
+Oct-13 06:12:58.919 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: slurm
+Oct-13 06:12:58.920 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'slurm'
+Oct-13 06:12:59.004 [main] DEBUG nextflow.executor.Executor - [warm up] executor > slurm
+Oct-13 06:12:59.023 [main] DEBUG n.processor.TaskPollingMonitor - Creating task monitor for executor 'slurm' > capacity: 100; pollInterval: 5s; dumpInterval: 5m 
+Oct-13 06:12:59.027 [main] DEBUG n.processor.TaskPollingMonitor - >>> barrier register (monitor: slurm)
+Oct-13 06:12:59.034 [main] DEBUG n.executor.AbstractGridExecutor - Creating executor 'slurm' > queue-stat-interval: 1m
+Oct-13 06:12:59.137 [main] DEBUG nextflow.processor.TaskProcessor - Creating process 'SELECT': maxForks=1; fair=false; array=0
+Oct-13 06:12:59.504 [main] DEBUG n.script.dsl.ProcessConfigBuilder - Config settings `withName:GEOMETRY` matches process GEOMETRY
+Oct-13 06:12:59.507 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: slurm
+Oct-13 06:12:59.508 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'slurm'
+Oct-13 06:12:59.509 [main] DEBUG nextflow.processor.TaskProcessor - Creating process 'GEOMETRY': maxForks=1; fair=false; array=0
+Oct-13 06:12:59.517 [main] DEBUG nextflow.Session - Workflow process names [dsl2]: SELECT, GEOMETRY
+Oct-13 06:12:59.524 [main] DEBUG nextflow.Session - Igniting dataflow network (2)
+Oct-13 06:12:59.525 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > SELECT
+Oct-13 06:12:59.528 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > GEOMETRY
+Oct-13 06:12:59.531 [main] DEBUG nextflow.script.ScriptRunner - Parsed script files:
+  Script_c1aa1074afbfdfe7: /shared/helix-strict/hrsb6ba2e3058584489/remote/trp-88f03ec097a7-9d9d6372-70a9-4b85-8c37-8b279eeaeb61/dry-run/main.nf
+Oct-13 06:12:59.532 [main] DEBUG nextflow.script.ScriptRunner - > Awaiting termination 
+Oct-13 06:12:59.532 [main] DEBUG nextflow.Session - Session await
+Oct-13 06:13:00.916 [Task submitter] DEBUG nextflow.executor.GridTaskHandler - [SLURM] submitted process SELECT > jobId: 302; workDir: /shared/helix-strict/hrsb6ba2e3058584489/remote/trp-88f03ec097a7-9d9d6372-70a9-4b85-8c37-8b279eeaeb61/dry-run/work/40/256bbcb6cd19538322c19c9dc06fa0
+Oct-13 06:13:00.919 [Task submitter] INFO  nextflow.Session - [40/256bbc] Submitted process > SELECT
+Oct-13 06:13:14.225 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[jobId: 302; id: 1; name: SELECT; status: COMPLETED; exit: 1; error: -; workDir: /shared/helix-strict/hrsb6ba2e3058584489/remote/trp-88f03ec097a7-9d9d6372-70a9-4b85-8c37-8b279eeaeb61/dry-run/work/40/256bbcb6cd19538322c19c9dc06fa0 started: 1791871994046; exited: 2026-10-13T06:13:13.123922608Z; ]
+Oct-13 06:13:14.237 [Task monitor] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'TaskFinalizer' minSize=10; maxSize=10; workQueue=LinkedBlockingQueue[-1]; allowCoreThreadTimeout=false
+Oct-13 06:13:14.506 [TaskFinalizer-1] DEBUG nextflow.processor.TaskProcessor - Handling unexpected condition for
+  task: name=SELECT; work-dir=/shared/helix-strict/hrsb6ba2e3058584489/remote/trp-88f03ec097a7-9d9d6372-70a9-4b85-8c37-8b279eeaeb61/dry-run/work/40/256bbcb6cd19538322c19c9dc06fa0
+  error [nextflow.exception.ProcessFailedException]: Process `SELECT` terminated with an error exit status (1)
+Oct-13 06:13:14.606 [TaskFinalizer-1] DEBUG nextflow.processor.TaskRun - Unable to dump output of process 'null' -- Cause: java.nio.file.NoSuchFileException: /shared/helix-strict/hrsb6ba2e3058584489/remote/trp-88f03ec097a7-9d9d6372-70a9-4b85-8c37-8b279eeaeb61/dry-run/work/40/256bbcb6cd19538322c19c9dc06fa0/.command.out
+Oct-13 06:13:14.610 [TaskFinalizer-1] DEBUG nextflow.processor.TaskRun - Unable to dump error of process 'null' -- Cause: java.nio.file.NoSuchFileException: /shared/helix-strict/hrsb6ba2e3058584489/remote/trp-88f03ec097a7-9d9d6372-70a9-4b85-8c37-8b279eeaeb61/dry-run/work/40/256bbcb6cd19538322c19c9dc06fa0/.command.err
+Oct-13 06:13:14.814 [TaskFinalizer-1] ERROR nextflow.processor.TaskProcessor - Error executing process > 'SELECT'
+
+Caused by:
+  Process `SELECT` terminated with an error exit status (1)
+
+
+Command executed:
+
+  cp selection.pdb 2xqh.pdb
+
+Command exit status:
+  1
+
+Command output:
+  (empty)
+
+Command wrapper:
+  cp: failed to clone 'source.pdb' from '/shared/helix-strict/hrsb6ba2e3058584489/remote/trp-88f03ec097a7-9d9d6372-70a9-4b85-8c37-8b279eeaeb61/dry-run/source.pdb': No space left on device
+
+Work dir:
+  /shared/helix-strict/hrsb6ba2e3058584489/remote/trp-88f03ec097a7-9d9d6372-70a9-4b85-8c37-8b279eeaeb61/dry-run/work/40/256bbcb6cd19538322c19c9dc06fa0
+
+Container:
+  sha256:1dd91e70acb153a0bd9a51346fc001dd5025f851c9598697cdd37f07d9490b0a
+
+Tip: you can try to figure out what's wrong by changing to the process work dir and showing the script file named `.command.sh`
+Oct-13 06:13:14.901 [main] DEBUG nextflow.Session - Session await > all processes finished
+Oct-13 06:13:14.905 [TaskFinalizer-1] DEBUG nextflow.Session - Session aborted -- Cause: Process `SELECT` terminated with an error exit status (1)
+Oct-13 06:13:15.099 [TaskFinalizer-1] DEBUG nextflow.processor.TaskRun - Unable to dump error of process 'null' -- Cause: java.nio.file.NoSuchFileException: /shared/helix-strict/hrsb6ba2e3058584489/remote/trp-88f03ec097a7-9d9d6372-70a9-4b85-8c37-8b279eeaeb61/dry-run/work/40/256bbcb6cd19538322c19c9dc06fa0/.command.err
+Oct-13 06:13:15.192 [TaskFinalizer-1] DEBUG nextflow.processor.TaskRun - Unable to dump output of process 'null' -- Cause: java.nio.file.NoSuchFileException: /shared/helix-strict/hrsb6ba2e3058584489/remote/trp-88f03ec097a7-9d9d6372-70a9-4b85-8c37-8b279eeaeb61/dry-run/work/40/256bbcb6cd19538322c19c9dc06fa0/.command.out
+Oct-13 06:13:15.230 [TaskFinalizer-1] DEBUG n.trace.WorkflowStatsObserver - Workflow completed > WorkflowStats[succeededCount=0; failedCount=1; ignoredCount=0; cachedCount=0; pendingCount=0; submittedCount=0; runningCount=0; retriesCount=0; abortedCount=0; succeedDuration=0ms; failedDuration=334ms; cachedDuration=0ms;loadCpus=0; loadMemory=0; peakRunning=1; peakCpus=2; peakMemory=2 GB; ]
+Oct-13 06:13:15.234 [TaskFinalizer-1] DEBUG nextflow.trace.TraceFileObserver - Workflow completed -- saving trace file
+Oct-13 06:13:15.346 [TaskFinalizer-1] DEBUG nextflow.processor.TaskRun - Unable to dump error of process 'null' -- Cause: java.nio.file.NoSuchFileException: /shared/helix-strict/hrsb6ba2e3058584489/remote/trp-88f03ec097a7-9d9d6372-70a9-4b85-8c37-8b279eeaeb61/dry-run/work/40/256bbcb6cd19538322c19c9dc06fa0/.command.err
+Oct-13 06:13:15.390 [TaskFinalizer-1] DEBUG nextflow.processor.TaskRun - Unable to dump output of process 'null' -- Cause: java.nio.file.NoSuchFileException: /shared/helix-strict/hrsb6ba2e3058584489/remote/trp-88f03ec097a7-9d9d6372-70a9-4b85-8c37-8b279eeaeb61/dry-run/work/40/256bbcb6cd19538322c19c9dc06fa0/.command.out
+Oct-13 06:13:15.398 [Task monitor] DEBUG n.processor.TaskPollingMonitor - <<< barrier arrives (monitor: slurm) - terminating tasks monitor poll loop
+Oct-13 06:13:15.399 [main] DEBUG nextflow.Session - Session await > all barriers passed
+Oct-13 06:13:15.404 [main] DEBUG n.trace.WorkflowStatsObserver - Workflow completed > WorkflowStats[succeededCount=0; failedCount=1; ignoredCount=0; cachedCount=0; pendingCount=0; submittedCount=0; runningCount=0; retriesCount=0; abortedCount=0; succeedDuration=0ms; failedDuration=334ms; cachedDuration=0ms;loadCpus=0; loadMemory=0; peakRunning=1; peakCpus=2; peakMemory=2 GB; ]
+Oct-13 06:13:15.404 [main] DEBUG nextflow.trace.TraceFileObserver - Workflow completed -- saving trace file
+Oct-13 06:13:15.416 [main] DEBUG nextflow.cache.CacheDB - Closing CacheDB done
+Oct-13 06:13:15.498 [main] DEBUG nextflow.script.ScriptRunner - > Execution complete -- Goodbye

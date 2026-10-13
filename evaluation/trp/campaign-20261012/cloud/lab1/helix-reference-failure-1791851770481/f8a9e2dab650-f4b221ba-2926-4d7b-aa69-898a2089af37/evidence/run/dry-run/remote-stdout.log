@@ -1,0 +1,33 @@
+N E X T F L O W  ~  version 25.10.4
+Launching `main.nf` [ecstatic_pike] DSL2 - revision: 0f14c41768
+[b3/2259d5] Submitted process > SELECT
+ERROR ~ Error executing process > 'SELECT'
+
+Caused by:
+  Process `SELECT` terminated with an error exit status (126)
+
+
+Command executed:
+
+  cp selection.pdb 2xqh.pdb
+
+Command exit status:
+  126
+
+Command output:
+  (empty)
+
+Command error:
+  docker: Error response from daemon: error while creating mount source path '/shared/helix/trp-f8a9e2dab650-f4b221ba-2926-4d7b-aa69-898a2089af37/dry-run': mkdir /shared/helix/trp-f8a9e2dab650-f4b221ba-2926-4d7b-aa69-898a2089af37/dry-run: permission denied
+  
+  Run 'docker run --help' for more information
+
+Work dir:
+  /shared/helix/trp-f8a9e2dab650-f4b221ba-2926-4d7b-aa69-898a2089af37/dry-run/work/b3/2259d51f460a495f5ef938ce0866c6
+
+Container:
+  sha256:1dd91e70acb153a0bd9a51346fc001dd5025f851c9598697cdd37f07d9490b0a
+
+Tip: you can try to figure out what's wrong by changing to the process work dir and showing the script file named `.command.sh`
+
+ -- Check '.nextflow.log' file for details

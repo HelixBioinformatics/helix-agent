@@ -1,0 +1,18 @@
+test_observed_job_survives_empty_queue_and_trace (__main__.TrackingContracts.test_observed_job_survives_empty_queue_and_trace) ... FAIL
+
+======================================================================
+FAIL: test_observed_job_survives_empty_queue_and_trace (__main__.TrackingContracts.test_observed_job_survives_empty_queue_and_trace)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/helix-native-job-tracking-stage-20261013/test_native_job_tracking.py", line 62, in test_observed_job_survives_empty_queue_and_trace
+    self.assertEqual(latest['312']['state'], 'FAILED', 'Observed job must not disappear with squeue/traces')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'PENDING' != 'FAILED'
+- PENDING
++ FAILED
+ : Observed job must not disappear with squeue/traces
+
+----------------------------------------------------------------------
+Ran 1 test in 0.001s
+
+FAILED (failures=1)

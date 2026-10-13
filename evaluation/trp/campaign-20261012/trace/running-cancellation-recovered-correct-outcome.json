@@ -1,0 +1,142 @@
+{
+  "schema": "helix-remote-campaign-audit/1.0",
+  "bundle": "/home/webiwabou/Projects/bioinformatica-org/evaluation/trp/campaign-20261012/cloud/lab1/cancellation/running-job/evidence",
+  "externally_recorded_manifest_sha256": "82ba85307d7efdae574be1506c7e7a7ef380714b8c5cb5b5ec68b4643741961c",
+  "expected_outcome": "cancelled",
+  "trusted_verifier_sha256": "5a60afbfd245f2b06ebcec5e409b971d7131a8faaa2f01b136f40de2283378a6",
+  "checks": [
+    {
+      "name": "portable_integrity_and_cold_counts",
+      "passed": true,
+      "result": {
+        "ok": true,
+        "files": 145,
+        "bytes": 9728271,
+        "manifestSha256": "82ba85307d7efdae574be1506c7e7a7ef380714b8c5cb5b5ec68b4643741961c",
+        "status": "failed",
+        "externallyAnchored": true,
+        "scope": "integrity, declared links and cold counts; not biological accuracy or authorship"
+      }
+    },
+    {
+      "name": "expected_outcome",
+      "passed": true,
+      "result": {
+        "outcome": "cancelled"
+      }
+    },
+    {
+      "name": "source_backed_methods_and_template",
+      "passed": true,
+      "result": {
+        "fields_checked": 20,
+        "required_fields": 18,
+        "markdown_reproduced_from_sources": true,
+        "unavailable_fields": []
+      }
+    },
+    {
+      "name": "event_chain_and_independent_gate_oracle",
+      "passed": false,
+      "error": "Failed path omitted failure event"
+    },
+    {
+      "name": "approval_configuration_and_transfer_bindings",
+      "passed": true,
+      "result": {
+        "run_id": "d1c4095d-957b-4446-9e59-3770ae91d67a",
+        "digest": "c901c452e9424ad7844f58ce822bfe93aeacdee753755820eabc30a642021c39",
+        "bound_files": 21,
+        "transferred_files": 132,
+        "target_fingerprint": "7eb9ec4e4d2301e3eacd0e7720545e42470a9d8eb731237bde00347a9da68ab6",
+        "terminal_status": "cancelled",
+        "approval_actor": "Question.Service answer; actor provenance must be disclosed by the campaign driver."
+      }
+    },
+    {
+      "name": "native_cancellation_confirmed",
+      "passed": true,
+      "result": {
+        "at": "2026-10-13T00:56:21.694905+00:00",
+        "confirmed": true,
+        "remaining": [],
+        "requested": [
+          {
+            "comment": "helix:d1c4095d-957b-4446-9e59-3770ae91d67a",
+            "id": "24",
+            "name": "nf-GEOMETRY",
+            "nodes": "helix-worker2",
+            "state": "COMPLETING"
+          }
+        ]
+      }
+    }
+  ],
+  "scope": "Actual recorded remote engineering execution and source-backed methods; no independent human agreement or physical specificity.",
+  "partial_execution": {
+    "terminal": {
+      "digest": "c901c452e9424ad7844f58ce822bfe93aeacdee753755820eabc30a642021c39",
+      "error": "Command exit 1: nextflow: N E X T F L O W  ~  version 25.10.4\nLaunching `main.nf` [scruffy_volhard] DSL2 - revision: bc07e2a09f\n[2f/e15090] Submitted process > SELECT\n[8d/e9ba71] Submitted process > GEOMETRY\nWARN: Killing running tasks (1)\n",
+      "finishedAt": "2026-10-13T00:56:21.695172+00:00",
+      "id": "d1c4095d-957b-4446-9e59-3770ae91d67a",
+      "status": "cancelled"
+    },
+    "native_tasks_observed_in_traces": [
+      {
+        "traversal": "scientific",
+        "process": "SELECT",
+        "native_id": "23",
+        "state": "COMPLETED",
+        "exit": "0"
+      },
+      {
+        "traversal": "scientific",
+        "process": "GEOMETRY",
+        "native_id": "24",
+        "state": "ABORTED",
+        "exit": "-"
+      },
+      {
+        "traversal": "stub",
+        "process": "SELECT",
+        "native_id": "21",
+        "state": "COMPLETED",
+        "exit": "0"
+      },
+      {
+        "traversal": "stub",
+        "process": "GEOMETRY",
+        "native_id": "22",
+        "state": "COMPLETED",
+        "exit": "0"
+      }
+    ],
+    "scientific_tasks_completed": 1,
+    "captured_task_errors": [
+      {
+        "artifact": "work/8d/e9ba713d8cb797f2b12c0e616e6119/.command.err",
+        "sha256": "795fb22d8b218e9dd49a8623ea20d3073dccac5bdb7edafd76d96a0b5fd5afa8",
+        "excerpt": "2026-10-13 00:55:20,924 - INFO - Processing file: 0syn.pdb, chain: A\n"
+      }
+    ],
+    "docker_mount_permission_denial_observed": false,
+    "native_cancellation": {
+      "at": "2026-10-13T00:56:21.694905+00:00",
+      "confirmed": true,
+      "remaining": [],
+      "requested": [
+        {
+          "comment": "helix:d1c4095d-957b-4446-9e59-3770ae91d67a",
+          "id": "24",
+          "name": "nf-GEOMETRY",
+          "nodes": "helix-worker2",
+          "state": "COMPLETING"
+        }
+      ]
+    },
+    "no_owned_active_jobs_after_failure_confirmed": true,
+    "running_job_cancellation_demonstrated": false,
+    "limitation": "Trace native IDs do not establish actual node placement without matching native scheduler records. Empty cancellation requests show no owned active jobs, not cancellation of a running task."
+  },
+  "verified": false
+}

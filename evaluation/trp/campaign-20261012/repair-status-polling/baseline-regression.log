@@ -1,0 +1,52 @@
+bun test v1.3.14 (0d9b296a)
+
+status-repair.test.ts:
+37 |   } finally { await fs.rm(dir, { recursive: true, force: true }) }
+38 | }
+39 | 
+40 | test("one transient status reset recovers same controller with zero scientific resubmissions", async () => {
+41 |   const value = await scenario(1, "kex_exchange_identification: read: Connection reset by peer\r\n")
+42 |   expect(Exit.isSuccess(value.result)).toBe(true)
+                                            ^
+error: expect(received).toBe(expected)
+
+Expected: true
+Received: false
+
+      at <anonymous> (/tmp/helix-status-polling-repair-20261013/status-repair.test.ts:42:40)
+(fail) one transient status reset recovers same controller with zero scientific resubmissions [15.92ms]
+44 |   expect(value.logs.find((r) => r.outcome === "remote-monitor-error").detail.diagnostic.stderr).toContain("Connection reset")
+45 | })
+46 | 
+47 | test("two transient status resets remain bounded and do not cancel a recovered controller", async () => {
+48 |   const value = await scenario(2, "Connection closed by 192.0.2.1 port 22")
+49 |   expect(Exit.isSuccess(value.result)).toBe(true)
+                                            ^
+error: expect(received).toBe(expected)
+
+Expected: true
+Received: false
+
+      at <anonymous> (/tmp/helix-status-polling-repair-20261013/status-repair.test.ts:49:40)
+(fail) two transient status resets remain bounded and do not cancel a recovered controller [3.54ms]
+53 | })
+54 | 
+55 | test("persistent transport failure keeps JSON-safe unknown terminal and primary diagnostic", async () => {
+56 |   const value = await scenario(10, "Connection reset by peer")
+57 |   expect(Exit.isFailure(value.result)).toBe(true)
+58 |   expect(String((value.result as any).cause)).toContain("SSH action status")
+                                                   ^
+error: expect(received).toContain(expected)
+
+Expected to contain: "SSH action status"
+Received: "Cause([Die(WorkflowError: A specification must contain finite JSON values)])"
+
+      at <anonymous> (/tmp/helix-status-polling-repair-20261013/status-repair.test.ts:58:47)
+(fail) persistent transport failure keeps JSON-safe unknown terminal and primary diagnostic [1.12ms]
+(pass) host-key and authentication errors are never retried [3.86ms]
+(pass) an explicit abort bypasses status retries and cleans up owned jobs [0.97ms]
+
+ 2 pass
+ 3 fail
+ 19 expect() calls
+Ran 5 tests across 1 file. [266.00ms]

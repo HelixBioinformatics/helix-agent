@@ -1,0 +1,82 @@
+{
+  "cgroupCreation": "Direct root-controlled cgroup v2 leaf, not a systemd unit",
+  "clientInputOrPreparationBeforeQuota": false,
+  "configPath": "/shared/helix-strict/hrs48d4de1b67834816/client/remote.json",
+  "configSha256": "6184c7fc88e2cc4960a304d4c9342b857c0be3fc88d04f1e95a3e07327314689",
+  "createdAtUtc": "2026-10-13T05:22:45.681219+00:00",
+  "credentialsCopied": false,
+  "helperSha256": "ebfe7a7be60c59303cb89bdd107341bc7ee761fa31d0aa7e71436153d2d32695",
+  "operatorMetadataChargedAndVerifiedBeforeClient": {
+    "bootId": "9ae02d7d-e52c-4b62-bc23-0b99afba8722",
+    "observedAt": 1791868965.680916,
+    "policySha256": "cd591fc0615b6b59465274a02df2e242b6f383a4f5a6347c78483b091d30f021",
+    "quota": {
+      "hardBytes": 134217728,
+      "projectId": 40040,
+      "reportSource": "Project quota on /shared/helix-strict (/dev/loop3)\n                               Blocks                     \nProject ID       Used       Soft       Hard    Warn/Grace     \n---------- -------------------------------------------------- \n#0                   0          0          0     00 [--------]\n#40000            2388          0     131072     00 [--------]\n#40010            5368          0     131072     00 [--------]\n#40020           17724          0     131072     00 [--------]\n#40030           35272          0     131072     00 [--------]\n#40031               0          0         64     00 [--------]\n#40040               4          0     131072     00 [--------]\n\n",
+      "stateSource": "Project quota state on /shared/helix-strict (/dev/loop3)\n  Accounting: ON\n  Enforcement: ON\n  Inode: #131 (3 blocks, 2 extents)\nBlocks grace time: [7 days]\nBlocks max warnings: 0\nInodes grace time: [7 days]\nInodes max warnings: 0\nRealtime Blocks grace time: [7 days]\n",
+      "treeCheckExitCode": 0,
+      "treeCheckRawStdout": "Checking project 40040 (path /shared/helix-strict/hrs48d4de1b67834816)...\nProcessed 1 (/etc/projects and cmdline) paths for project 40040 with recursion depth infinite (-1).\n",
+      "treeCheckStderr": "",
+      "treeCheckStdout": "",
+      "treeCheckStdoutIsDiagnostics": true,
+      "usedBytes": 4096
+    },
+    "version": "trp-remote-strict-sample/1.0.0"
+  },
+  "operatorMetadataCreatedBeforeQuota": true,
+  "policy": {
+    "bootId": "9ae02d7d-e52c-4b62-bc23-0b99afba8722",
+    "checker": {
+      "path": "/usr/local/libexec/helix-remote-strict-check.py",
+      "sha256": "f7587626581f414ca8515b87997495f1f65785e07231e1a2151a33da395b9b50"
+    },
+    "controller": {
+      "cgroup": "helix-strict-hrs48d4de1b67834816.service",
+      "cpus": 1,
+      "memoryBytes": 2147483648,
+      "swapBytes": 0
+    },
+    "entitlement": {
+      "cpus": 3,
+      "memoryBytes": 4294967296,
+      "wallSeconds": 1080,
+      "workBytes": 134217728
+    },
+    "filesystem": {
+      "device": 1795,
+      "hardBytes": 134217728,
+      "mountPoint": "/shared/helix-strict",
+      "projectId": 40040,
+      "uuid": "cd26a20b-f8e0-480a-9640-38e1b93e7fff"
+    },
+    "hostname": "helix-head",
+    "id": "hrs48d4de1b67834816",
+    "paths": {
+      "allocationRoot": "/shared/helix-strict/hrs48d4de1b67834816",
+      "clientCacheRoot": "/shared/helix-strict/hrs48d4de1b67834816/cache",
+      "clientStateRoot": "/shared/helix-strict/hrs48d4de1b67834816/state",
+      "clientWorkspace": "/shared/helix-strict/hrs48d4de1b67834816/client",
+      "exportRoot": "/shared/helix-strict/hrs48d4de1b67834816/export",
+      "remoteRoot": "/shared/helix-strict/hrs48d4de1b67834816/remote",
+      "temporaryRoot": "/shared/helix-strict/hrs48d4de1b67834816/tmp"
+    },
+    "samplePath": "/run/helix-remote-strict/hrs48d4de1b67834816.sample.json",
+    "target": {
+      "geometryNode": "helix-worker2",
+      "host": "127.0.0.1",
+      "hostKeyAlias": "helix-colocated",
+      "numericalProfile": "haswell-single-thread",
+      "partition": "helix",
+      "port": 22,
+      "root": "/shared/helix-strict/hrs48d4de1b67834816/remote",
+      "selectNode": "helix-worker1",
+      "user": "ubuntu"
+    },
+    "uid": 1000,
+    "version": "trp-remote-strict/1.0.0"
+  },
+  "policyPath": "/run/helix-remote-strict/hrs48d4de1b67834816.json",
+  "policySha256": "cd591fc0615b6b59465274a02df2e242b6f383a4f5a6347c78483b091d30f021",
+  "schema": "helix-strict-operator-allocation/1.0"
+}

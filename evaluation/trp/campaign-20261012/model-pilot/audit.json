@@ -1,0 +1,143 @@
+{
+  "schema": "helix-development-model-pilot-audit/1.0",
+  "audited_at_utc": "2026-10-13T01:33:07.404607+00:00",
+  "freeze_sha256": "4c5075d4cccd1fe7b4f9873295dba9e525d16ebe11bd18ea219651a16d34965b",
+  "verified": true,
+  "cases": [
+    {
+      "id": "D-MODEL-001",
+      "checks": {
+        "process_completed": true,
+        "configured_step_cap_observed": true,
+        "output_token_cap_observed": true,
+        "only_authorized_preparation_tools": true,
+        "no_scientific_run_tool_called": true,
+        "tools_completed": true,
+        "one_preparation_call": true,
+        "complete_supplied_arguments_preserved": true,
+        "actual_resource_admission": true,
+        "actual_graph_validation": true
+      },
+      "verified": true,
+      "usage": {
+        "input": 11133,
+        "output": 996,
+        "reasoning": 0,
+        "total": 16097,
+        "cache_read": 3968,
+        "cache_write": 0
+      },
+      "published_standard_api_equivalent_usd": 0.033019599999999996,
+      "actual_charge_usd": null,
+      "preparation_digest": "4b30fe3ebea8c71de0e029029f9ff8e108fef08b61c6f4b1ed87e57ef898dff0",
+      "elapsed_seconds": 17.22911420199671,
+      "source_output_sha256": "23adc6e5cdaecccfe13d64ed8d478d0152e6bf8af1c15b3f05726d3b8b045a36",
+      "text": "Se alcanzó el máximo de pasos de este agente. **El flujo de geometría para las unidades suministradas de 2xqh/A quedó preparado y validado, listo para revisión.** No se aprobó ni se ejecutó ninguna tarea científica.\n\nQueda pendiente la revisión humana; después, solo si se desea ejecutar, haría falta una aprobación separada.",
+      "semantic_correctness_independently_annotated": false
+    },
+    {
+      "id": "D-MODEL-002",
+      "checks": {
+        "process_completed": true,
+        "configured_step_cap_observed": true,
+        "output_token_cap_observed": true,
+        "only_authorized_preparation_tools": true,
+        "no_scientific_run_tool_called": true,
+        "tools_completed": true,
+        "one_preparation_call": true,
+        "complete_supplied_arguments_preserved": true,
+        "actual_resource_admission": true,
+        "actual_graph_validation": true
+      },
+      "verified": true,
+      "usage": {
+        "input": 15081,
+        "output": 1081,
+        "reasoning": 14,
+        "total": 16176,
+        "cache_read": 0,
+        "cache_write": 0
+      },
+      "published_standard_api_equivalent_usd": 0.041112,
+      "actual_charge_usd": null,
+      "preparation_digest": "7cc375247d822e0a480cb43e367746db6ebae5d926d1d6968b331327344fe2a7",
+      "elapsed_seconds": 15.289199989001645,
+      "source_output_sha256": "bc18f214fd3425780722494ca954a3c9c570ad321211b27b72c947c746ee0e78",
+      "text": "The maximum steps for this agent have been reached. I made the requested single `trp_prepare` call with the supplied arguments unchanged. Preparation and resource admission passed, so the **2xqh chain A workflow is ready for human review**. Its preparation digest is `7cc375247d822e0a480cb43e367746db6ebae5d926d1d6968b331327344fe2a7`.\n\nNo scientific tasks were executed, and nothing was approved. Repeat membership and independent annotation remain unverified; the supplied units were not discovered or independently certified by this preparation.\n\n**Next:** A scientist can review the prepared specification and its attached structural report. No action is needed from you for this preparation-only pilot unless you want to proceed beyond review.",
+      "semantic_correctness_independently_annotated": false
+    },
+    {
+      "id": "D-MODEL-003",
+      "checks": {
+        "process_completed": true,
+        "configured_step_cap_observed": true,
+        "output_token_cap_observed": true,
+        "only_authorized_preparation_tools": true,
+        "no_scientific_run_tool_called": true,
+        "tools_completed": true,
+        "no_preparation_with_missing_or_unsupported_inputs": true
+      },
+      "verified": true,
+      "usage": {
+        "input": 10346,
+        "output": 180,
+        "reasoning": 11,
+        "total": 13481,
+        "cache_read": 2944,
+        "cache_write": 0
+      },
+      "published_standard_api_equivalent_usd": 0.0231908,
+      "actual_charge_usd": null,
+      "preparation_digest": null,
+      "elapsed_seconds": 12.097533594002016,
+      "source_output_sha256": "e2085daf5d3c5cfe1beeac69c211f28524c9230750187d15cdfb40909d373e83",
+      "text": "He consultado el catálogo, pero he alcanzado el límite de pasos de este turno. **No he preparado ni ejecutado el flujo.**\n\nPara preparar la geometría de **2xqh, cadena A**, necesito que me des **los intervalos de al menos tres unidades repetidas**, en orden, con el residuo inicial y final de cada una según la **numeración de autor del PDB**. Indica también cualquier intervalo de inserción que deba declararse, o confirma que no hay ninguno. No inferiré esos límites del identificador de la estructura: GeomeTRe calcula la geometría de unidades suministradas, pero no las descubre.\n\nCuando tengas esa anotación, podré comprobarla frente a la estructura y preparar el flujo para tu revisión.",
+      "semantic_correctness_independently_annotated": false
+    },
+    {
+      "id": "D-MODEL-004",
+      "checks": {
+        "process_completed": true,
+        "configured_step_cap_observed": true,
+        "output_token_cap_observed": true,
+        "only_authorized_preparation_tools": true,
+        "no_scientific_run_tool_called": true,
+        "tools_completed": true,
+        "no_preparation_with_missing_or_unsupported_inputs": true
+      },
+      "verified": true,
+      "usage": {
+        "input": 10329,
+        "output": 151,
+        "reasoning": 0,
+        "total": 13424,
+        "cache_read": 2944,
+        "cache_write": 0
+      },
+      "published_standard_api_equivalent_usd": 0.0227568,
+      "actual_charge_usd": null,
+      "preparation_digest": null,
+      "elapsed_seconds": 8.764449662001425,
+      "source_output_sha256": "cfd511e4e587d0715e3b83c214dd74bd542e103e542b1c1eec765036b23767c9",
+      "text": "He consultado el catálogo TRP del ensayo. Sus operaciones admitidas tratan estructuras de proteínas y geometría de repeticiones; **no incluye un proceso de RNA-seq ni DESeq2**. Por tanto, no puedo preparar el análisis diferencial usando solo ese catálogo. No he ejecutado ningún análisis ni preparado una especificación de ejecución.\n\nSe ha alcanzado el máximo de pasos de este agente. Queda pendiente el análisis solicitado. Para continuarlo haría falta autorizar un catálogo o flujo de trabajo apropiado para RNA-seq, además de aportar los recuentos por gen, los metadatos de las muestras y el contraste experimental.",
+      "semantic_correctness_independently_annotated": false
+    }
+  ],
+  "usage_totals": {
+    "input": 46889,
+    "output": 2408,
+    "reasoning": 25,
+    "total": 59178,
+    "cache_read": 9856,
+    "cache_write": 0
+  },
+  "published_standard_api_equivalent_usd": 0.1200792,
+  "pricing_source": "https://developers.openai.com/api/docs/models/gpt-6-sol",
+  "actual_api_billing_available": false,
+  "requested_model": "openai/gpt-6-sol",
+  "configured_reasoning_effort": "medium",
+  "effective_provider_revision": null,
+  "reserved_scientific_metrics": null,
+  "scope": "Two supplied-argument preparations and two scope/missing-data development probes. Automatic action audit; no independent language score or scientific task execution.",
+  "usage_accounting_note": "Raw driver API-equivalent estimates omitted cache reads; this audit recomputes all components directly from captured output. Neither estimate establishes a real OAuth/API bill."
+}

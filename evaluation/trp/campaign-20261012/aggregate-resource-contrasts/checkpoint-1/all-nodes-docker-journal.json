@@ -1,0 +1,27 @@
+{
+  "observations": [
+    {
+      "role": "head",
+      "at": "2026-10-13T06:39:14.061678+00:00",
+      "exitCode": 0,
+      "stdout": "active\n-- No entries --\nTARGET               SOURCE     FSTYPE OPTIONS\n/shared/helix-strict /dev/loop3 xfs    rw,relatime,inode64,allocsize=4k,logbufs=8,logbsize=32k,prjquota\n",
+      "stderr": ""
+    },
+    {
+      "role": "worker",
+      "at": "2026-10-13T06:39:13.938616+00:00",
+      "exitCode": 0,
+      "stdout": "active\nOct 13 06:15:15 helix-worker1 slurmd[1134]: slurmd: task/affinity: task_p_slurmd_batch_request: task_p_slurmd_batch_request: 305\nOct 13 06:15:15 helix-worker1 slurmd[1134]: slurmd: task/affinity: batch_bind: job 305 CPU input mask for node: 0x3\nOct 13 06:15:15 helix-worker1 slurmd[1134]: slurmd: task/affinity: batch_bind: job 305 CPU final HW mask for node: 0x3\nOct 13 06:15:15 helix-worker1 slurmd[1134]: slurmd: Launching batch job 305 for UID 1000\nOct 13 06:17:16 helix-worker1 slurmd[1134]: slurmd: task/affinity: task_p_slurmd_batch_request: task_p_slurmd_batch_request: 307\nOct 13 06:17:16 helix-worker1 slurmd[1134]: slurmd: task/affinity: batch_bind: job 307 CPU input mask for node: 0x3\nOct 13 06:17:16 helix-worker1 slurmd[1134]: slurmd: task/affinity: batch_bind: job 307 CPU final HW mask for node: 0x3\nOct 13 06:17:16 helix-worker1 slurmd[1134]: slurmd: Launching batch job 307 for UID 1000\nOct 13 06:18:16 helix-worker1 slurmd[1134]: slurmd: task/affinity: task_p_slurmd_batch_request: task_p_slurmd_batch_request: 309\nOct 13 06:18:16 helix-worker1 slurmd[1134]: slurmd: task/affinity: batch_bind: job 309 CPU input mask for node: 0x3\nOct 13 06:18:16 helix-worker1 slurmd[1134]: slurmd: task/affinity: batch_bind: job 309 CPU final HW mask for node: 0x3\nOct 13 06:18:16 helix-worker1 slurmd[1134]: slurmd: Launching batch job 309 for UID 1000\nOct 13 06:20:21 helix-worker1 slurmd[1134]: slurmd: task/affinity: task_p_slurmd_batch_request: task_p_slurmd_batch_request: 311\nOct 13 06:20:21 helix-worker1 slurmd[1134]: slurmd: task/affinity: batch_bind: job 311 CPU input mask for node: 0x3\nOct 13 06:20:21 helix-worker1 slurmd[1134]: slurmd: task/affinity: batch_bind: job 311 CPU final HW mask for node: 0x3\nOct 13 06:20:21 helix-worker1 slurmd[1134]: slurmd: Launching batch job 311 for UID 1000\nOct 13 06:29:29 helix-worker1 slurmd[1134]: slurmd: task/affinity: task_p_slurmd_batch_request: task_p_slurmd_batch_request: 313\nOct 13 06:29:29 helix-worker1 slurmd[1134]: slurmd: task/affinity: batch_bind: job 313 CPU input mask for node: 0x3\nOct 13 06:29:29 helix-worker1 slurmd[1134]: slurmd: task/affinity: batch_bind: job 313 CPU final HW mask for node: 0x3\nOct 13 06:29:29 helix-worker1 slurmd[1134]: slurmd: Launching batch job 313 for UID 1000\nTARGET               SOURCE                            FSTYPE OPTIONS\n/shared/helix-strict 172.31.0.220:/shared/helix-strict nfs4   rw,relatime,vers=4.2,rsize=524288,wsize=524288,namlen=255,hard,fatal_neterrors=none,proto=tcp,timeo=600,retrans=2,sec=sys,clientaddr=172.31.0.221,local_lock=none,addr=172.31.0.220\n",
+      "stderr": ""
+    },
+    {
+      "role": "worker",
+      "at": "2026-10-13T06:39:13.894755+00:00",
+      "exitCode": 0,
+      "stdout": "active\nOct 13 06:15:45 helix-worker2 slurmd[1128]: slurmd: task/affinity: task_p_slurmd_batch_request: task_p_slurmd_batch_request: 306\nOct 13 06:15:45 helix-worker2 slurmd[1128]: slurmd: task/affinity: batch_bind: job 306 CPU input mask for node: 0x3\nOct 13 06:15:45 helix-worker2 slurmd[1128]: slurmd: task/affinity: batch_bind: job 306 CPU final HW mask for node: 0x3\nOct 13 06:15:45 helix-worker2 slurmd[1128]: slurmd: Launching batch job 306 for UID 1000\nOct 13 06:17:46 helix-worker2 slurmd[1128]: slurmd: task/affinity: task_p_slurmd_batch_request: task_p_slurmd_batch_request: 308\nOct 13 06:17:46 helix-worker2 slurmd[1128]: slurmd: task/affinity: batch_bind: job 308 CPU input mask for node: 0x3\nOct 13 06:17:46 helix-worker2 slurmd[1128]: slurmd: task/affinity: batch_bind: job 308 CPU final HW mask for node: 0x3\nOct 13 06:17:46 helix-worker2 slurmd[1128]: slurmd: Launching batch job 308 for UID 1000\nOct 13 06:18:46 helix-worker2 slurmd[1128]: slurmd: task/affinity: task_p_slurmd_batch_request: task_p_slurmd_batch_request: 310\nOct 13 06:18:46 helix-worker2 slurmd[1128]: slurmd: task/affinity: batch_bind: job 310 CPU input mask for node: 0x3\nOct 13 06:18:46 helix-worker2 slurmd[1128]: slurmd: task/affinity: batch_bind: job 310 CPU final HW mask for node: 0x3\nOct 13 06:18:46 helix-worker2 slurmd[1128]: slurmd: Launching batch job 310 for UID 1000\nOct 13 06:20:51 helix-worker2 slurmd[1128]: slurmd: task/affinity: task_p_slurmd_batch_request: task_p_slurmd_batch_request: 312\nOct 13 06:20:51 helix-worker2 slurmd[1128]: slurmd: task/affinity: batch_bind: job 312 CPU input mask for node: 0x3\nOct 13 06:20:51 helix-worker2 slurmd[1128]: slurmd: task/affinity: batch_bind: job 312 CPU final HW mask for node: 0x3\nOct 13 06:20:51 helix-worker2 slurmd[1128]: slurmd: Launching batch job 312 for UID 1000\nTARGET               SOURCE                            FSTYPE OPTIONS\n/shared/helix-strict 172.31.0.220:/shared/helix-strict nfs4   rw,relatime,vers=4.2,rsize=524288,wsize=524288,namlen=255,hard,fatal_neterrors=none,proto=tcp,timeo=600,retrans=2,sec=sys,clientaddr=172.31.0.222,local_lock=none,addr=172.31.0.220\n",
+      "stderr": ""
+    }
+  ],
+  "readOnly": true,
+  "noResubmission": true
+}

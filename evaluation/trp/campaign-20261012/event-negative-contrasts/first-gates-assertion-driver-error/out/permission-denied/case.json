@@ -1,0 +1,46 @@
+{
+  "preparationSucceeded": true,
+  "terminalFailed": true,
+  "cause": "Error: Independent synthetic permission refusal\n    at <anonymous> (/home/webiwabou/Projects/bioinformatica-org/packages/helix/test/trp/event-negative.campaign.test.ts:111:38)\n    at Tool.execute (/home/webiwabou/Projects/bioinformatica-org/packages/helix/src/tool/tool.ts:145:38)",
+  "runDirectory": "producer/trp/deaf1fcec713-8c6d5a05-2b07-46d5-ad74-ab001b1b96a2",
+  "sourceFreezeSha256": "c22729cde6bf5fe329c2e40fff84d35a5a6ce2f2aaeb6cc845402566f4d9205e",
+  "actionOracleBeforeProducerRead": true,
+  "expected": {
+    "id": "permission-denied",
+    "causeContains": "Independent synthetic permission refusal",
+    "expectedEvents": [
+      {
+        "source": "admission",
+        "outcome": "accepted-for-review"
+      },
+      {
+        "source": "protocol",
+        "outcome": "not-committed"
+      },
+      {
+        "source": "permission",
+        "outcome": "requested"
+      },
+      {
+        "source": "permission",
+        "outcome": "denied-or-error"
+      },
+      {
+        "source": "execution",
+        "outcome": "failed-or-rejected"
+      }
+    ],
+    "expectedPermissionActions": 2,
+    "expectedApprovalActions": 0,
+    "expectedProtocolGuards": 1,
+    "expectedAdmissionDecision": true
+  },
+  "actualHostInventory": true,
+  "syntheticCallbacks": true,
+  "modelCalls": 0,
+  "awsOperations": 0,
+  "forbiddenExternalLaunchAttempts": 0,
+  "scientificTasksLaunched": 0,
+  "humanLabels": 0,
+  "scientificMetrics": null
+}

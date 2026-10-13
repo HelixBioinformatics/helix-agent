@@ -1,0 +1,467 @@
+{
+  "version": "structural-sasa-descriptive/1.0.0",
+  "createdUTC": "2026-10-13T01:48:32.512626+00:00",
+  "kind": "prospective secondary descriptive surface-exposure profile",
+  "question": "Measure side-chain solvent accessibility of ASP/GLU/LYS/ARG and polar/apolar atomic surface in the unchanged existing corpus, prioritizing the five published figure-linked cases.",
+  "parameters": {
+    "algorithm": "LeeRichards",
+    "probe-radius": 1.4,
+    "n-slices": 20,
+    "n-points": 100,
+    "n-threads": 1
+  },
+  "classifier": "protor",
+  "parserOptions": {
+    "hetatm": false,
+    "hydrogen": false,
+    "join-models": false,
+    "skip-unknown": false,
+    "halt-at-unknown": true
+  },
+  "workers": 1,
+  "perCaseTimeoutSeconds": 180,
+  "maximumAttemptsPerCase": 1,
+  "scope": "Complete selected single polymer chain from the existing steric inputs, first and only model; excludes hydrogen, water, ligands and other chains. Does not isolate the RepeatsDB repeat interval.",
+  "chargedSidechainExpectedHeavyAtoms": {
+    "ASP": [
+      "CB",
+      "CG",
+      "OD1",
+      "OD2"
+    ],
+    "GLU": [
+      "CB",
+      "CG",
+      "CD",
+      "OE1",
+      "OE2"
+    ],
+    "LYS": [
+      "CB",
+      "CG",
+      "CD",
+      "CE",
+      "NZ"
+    ],
+    "ARG": [
+      "CB",
+      "CG",
+      "CD",
+      "NE",
+      "CZ",
+      "NH1",
+      "NH2"
+    ]
+  },
+  "standardResidueExpectedHeavyAtoms": {
+    "ALA": [
+      "N",
+      "CA",
+      "C",
+      "O",
+      "CB"
+    ],
+    "ARG": [
+      "N",
+      "CA",
+      "C",
+      "O",
+      "CB",
+      "CG",
+      "CD",
+      "NE",
+      "CZ",
+      "NH1",
+      "NH2"
+    ],
+    "ASN": [
+      "N",
+      "CA",
+      "C",
+      "O",
+      "CB",
+      "CG",
+      "OD1",
+      "ND2"
+    ],
+    "ASP": [
+      "N",
+      "CA",
+      "C",
+      "O",
+      "CB",
+      "CG",
+      "OD1",
+      "OD2"
+    ],
+    "CYS": [
+      "N",
+      "CA",
+      "C",
+      "O",
+      "CB",
+      "SG"
+    ],
+    "GLN": [
+      "N",
+      "CA",
+      "C",
+      "O",
+      "CB",
+      "CG",
+      "CD",
+      "OE1",
+      "NE2"
+    ],
+    "GLU": [
+      "N",
+      "CA",
+      "C",
+      "O",
+      "CB",
+      "CG",
+      "CD",
+      "OE1",
+      "OE2"
+    ],
+    "GLY": [
+      "N",
+      "CA",
+      "C",
+      "O"
+    ],
+    "HIS": [
+      "N",
+      "CA",
+      "C",
+      "O",
+      "CB",
+      "CG",
+      "ND1",
+      "CD2",
+      "CE1",
+      "NE2"
+    ],
+    "ILE": [
+      "N",
+      "CA",
+      "C",
+      "O",
+      "CB",
+      "CG1",
+      "CG2",
+      "CD1"
+    ],
+    "LEU": [
+      "N",
+      "CA",
+      "C",
+      "O",
+      "CB",
+      "CG",
+      "CD1",
+      "CD2"
+    ],
+    "LYS": [
+      "N",
+      "CA",
+      "C",
+      "O",
+      "CB",
+      "CG",
+      "CD",
+      "CE",
+      "NZ"
+    ],
+    "MET": [
+      "N",
+      "CA",
+      "C",
+      "O",
+      "CB",
+      "CG",
+      "SD",
+      "CE"
+    ],
+    "PHE": [
+      "N",
+      "CA",
+      "C",
+      "O",
+      "CB",
+      "CG",
+      "CD1",
+      "CD2",
+      "CE1",
+      "CE2",
+      "CZ"
+    ],
+    "PRO": [
+      "N",
+      "CA",
+      "C",
+      "O",
+      "CB",
+      "CG",
+      "CD"
+    ],
+    "SER": [
+      "N",
+      "CA",
+      "C",
+      "O",
+      "CB",
+      "OG"
+    ],
+    "THR": [
+      "N",
+      "CA",
+      "C",
+      "O",
+      "CB",
+      "OG1",
+      "CG2"
+    ],
+    "TRP": [
+      "N",
+      "CA",
+      "C",
+      "O",
+      "CB",
+      "CG",
+      "CD1",
+      "CD2",
+      "NE1",
+      "CE2",
+      "CE3",
+      "CZ2",
+      "CZ3",
+      "CH2"
+    ],
+    "TYR": [
+      "N",
+      "CA",
+      "C",
+      "O",
+      "CB",
+      "CG",
+      "CD1",
+      "CD2",
+      "CE1",
+      "CE2",
+      "CZ",
+      "OH"
+    ],
+    "VAL": [
+      "N",
+      "CA",
+      "C",
+      "O",
+      "CB",
+      "CG1",
+      "CG2"
+    ]
+  },
+  "missingAtoms": "Keep all raw observed-atom areas. A D/E/K/R side chain with any expected side-chain atom absent is incomplete: set interpretable relative side-chain area to null, retain atom names/missing names. Missing atoms in neighboring residues may affect all areas and are recorded at structure level. No imputation.",
+  "relativeAreaConvention": "Area divided by the embedded ProtOr extended Ala-X-Ala reference for the same residue and area component. A ratio may exceed 1 and is not clipped. FreeSASA counts CA and OXT as main-chain atoms.",
+  "referenceAreasAngstromSquared": {
+    "ALA": {
+      "total": 108.76,
+      "mainChain": 43.96,
+      "sideChain": 64.8,
+      "polar": 37.75,
+      "apolar": 71.01
+    },
+    "ARG": {
+      "total": 238.17,
+      "mainChain": 42.0,
+      "sideChain": 196.17,
+      "polar": 165.0,
+      "apolar": 73.17
+    },
+    "ASN": {
+      "total": 145.01,
+      "mainChain": 41.53,
+      "sideChain": 103.48,
+      "polar": 103.46,
+      "apolar": 41.55
+    },
+    "ASP": {
+      "total": 142.76,
+      "mainChain": 42.29,
+      "sideChain": 100.47,
+      "polar": 100.27,
+      "apolar": 42.49
+    },
+    "CYS": {
+      "total": 132.2,
+      "mainChain": 42.55,
+      "sideChain": 89.66,
+      "polar": 92.74,
+      "apolar": 39.47
+    },
+    "GLN": {
+      "total": 178.83,
+      "mainChain": 42.0,
+      "sideChain": 136.83,
+      "polar": 131.85,
+      "apolar": 46.98
+    },
+    "GLU": {
+      "total": 174.18,
+      "mainChain": 42.0,
+      "sideChain": 132.18,
+      "polar": 122.48,
+      "apolar": 51.7
+    },
+    "GLY": {
+      "total": 81.09,
+      "mainChain": 81.09,
+      "sideChain": 0.0,
+      "polar": 44.65,
+      "apolar": 36.44
+    },
+    "HIS": {
+      "total": 182.97,
+      "mainChain": 39.09,
+      "sideChain": 143.87,
+      "polar": 85.94,
+      "apolar": 97.03
+    },
+    "ILE": {
+      "total": 175.73,
+      "mainChain": 41.49,
+      "sideChain": 134.23,
+      "polar": 36.85,
+      "apolar": 138.87
+    },
+    "LEU": {
+      "total": 179.56,
+      "mainChain": 39.78,
+      "sideChain": 139.78,
+      "polar": 37.16,
+      "apolar": 142.39
+    },
+    "LYS": {
+      "total": 204.98,
+      "mainChain": 42.0,
+      "sideChain": 162.98,
+      "polar": 93.88,
+      "apolar": 111.1
+    },
+    "MET": {
+      "total": 193.1,
+      "mainChain": 42.0,
+      "sideChain": 151.1,
+      "polar": 75.48,
+      "apolar": 117.62
+    },
+    "PHE": {
+      "total": 199.88,
+      "mainChain": 38.43,
+      "sideChain": 161.45,
+      "polar": 34.94,
+      "apolar": 164.94
+    },
+    "PRO": {
+      "total": 137.21,
+      "mainChain": 27.51,
+      "sideChain": 109.7,
+      "polar": 16.09,
+      "apolar": 121.12
+    },
+    "SER": {
+      "total": 118.34,
+      "mainChain": 43.41,
+      "sideChain": 74.93,
+      "polar": 71.38,
+      "apolar": 46.96
+    },
+    "THR": {
+      "total": 140.6,
+      "mainChain": 41.96,
+      "sideChain": 98.64,
+      "polar": 66.15,
+      "apolar": 74.45
+    },
+    "TRP": {
+      "total": 249.19,
+      "mainChain": 42.59,
+      "sideChain": 206.6,
+      "polar": 61.64,
+      "apolar": 187.55
+    },
+    "TYR": {
+      "total": 214.19,
+      "mainChain": 38.43,
+      "sideChain": 175.76,
+      "polar": 81.12,
+      "apolar": 133.07
+    },
+    "VAL": {
+      "total": 151.97,
+      "mainChain": 41.5,
+      "sideChain": 110.46,
+      "polar": 36.87,
+      "apolar": 115.09
+    }
+  },
+  "observables": [
+    "atom SASA with ProtOr polarity",
+    "all residue absolute area components",
+    "embedded-reference relative area components",
+    "D/E/K/R side-chain completeness and continuous side-chain rSA",
+    "case medians/min/max of complete D/E/K/R side-chain rSA",
+    "whole-chain polar/apolar surface fractions"
+  ],
+  "notInferred": [
+    "actual residue protonation",
+    "charge compensation or salt-bridge strength",
+    "counterion involvement",
+    "energetic stability",
+    "physical fold correctness",
+    "sensitivity or specificity"
+  ],
+  "thresholds": null,
+  "biologicalClassifier": null,
+  "confidenceScoresUsed": false,
+  "comparison": "Descriptive observations only. Whole-chain SASA depends on composition, length, missing coordinates and omitted assembly partners; AF2 unrelaxed models and experimental refined coordinates are distinct preparations. No tuned cutoff, p-value, group-trained classifier or new ground truth.",
+  "verification": "Frozen input/library hashes, PDB/FreeSASA atom identity and coordinates, finite nonnegative areas, additive components, residue and atom sums, exact embedded-reference normalization, missing-side-chain exclusion from interpretable summaries, deterministic reproduction of 22r, and no changes to existing primary or secondary steric manifests.",
+  "sources": [
+    {
+      "title": "FreeSASA: An open source C library for solvent accessible surface area calculations",
+      "author": "Simon Mitternacht",
+      "year": 2016,
+      "journal": "F1000Research",
+      "volume": "5",
+      "article": "189",
+      "doi": "10.12688/f1000research.7931.1",
+      "url": "https://f1000research.com/articles/5-189/v1"
+    },
+    {
+      "title": "FreeSASA CLI and relative-area reference convention",
+      "url": "https://freesasa.github.io/doxygen/CLI.html"
+    },
+    {
+      "title": "FreeSASA Python API",
+      "url": "https://freesasa.github.io/python/classes.html"
+    },
+    {
+      "title": "Python package source artifact 2.2.1",
+      "url": "https://pypi.org/project/freesasa/2.2.1/"
+    }
+  ],
+  "runtimeIdentity": {
+    "pythonDistribution": "2.2.1",
+    "sourceConfigPackageVersion": "2.0.2",
+    "note": "The Python distribution version and bundled config.h package-version text differ. Do not claim C version 2.2.1. The installed module and source archive are pinned by SHA-256.",
+    "python": "3.12.14 (main, Aug 23 2026, 16:15:12) [GCC 16.2.1 20260810]",
+    "defaultParametersObserved": {
+      "algorithm": "LeeRichards",
+      "probe-radius": 1.4,
+      "n-points": 100,
+      "n-slices": 20,
+      "n-threads": 1
+    }
+  }
+}

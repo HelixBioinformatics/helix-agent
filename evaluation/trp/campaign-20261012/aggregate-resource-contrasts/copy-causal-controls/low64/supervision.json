@@ -1,0 +1,160 @@
+{
+  "actualExitCode": 1,
+  "clientArgv": [
+    "/usr/bin/strace",
+    "-f",
+    "-Z",
+    "-yy",
+    "-ttt",
+    "-e",
+    "trace=write,pwrite64,writev,pwritev,openat,ftruncate,copy_file_range",
+    "-s",
+    "256",
+    "/usr/local/bin/helix-strict-bun",
+    "/opt/helix-quota-copy-control.js",
+    "/opt/helix-strict-runtime/campaign/smoke7/G-valid-001/source.pdb",
+    "/shared/helix-strict/hrs6667650bdfc142a5/client/input.pdb"
+  ],
+  "controllerAndTracerReaped": true,
+  "elapsedSeconds": 0.5549920839994229,
+  "finalCgroup": {
+    "cgroup.events": "populated 0\nfrozen 0",
+    "cgroup.procs": "",
+    "cpu.max": "100000 100000",
+    "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\nsock_throttled 0",
+    "memory.max": "2147483648",
+    "memory.peak": "9678848",
+    "memory.swap.max": "0"
+  },
+  "finalQuota": {
+    "bootId": "9ae02d7d-e52c-4b62-bc23-0b99afba8722",
+    "observedAt": 1791869513.8214357,
+    "policySha256": "8eda2d8629d8e2b50b7ea907ac0781a71dd7bfcdcd8aa952d2b142c68da4d8c1",
+    "quota": {
+      "hardBytes": 65536,
+      "projectId": 41000,
+      "reportSource": "Project quota on /shared/helix-strict (/dev/loop3)\n                               Blocks                     \nProject ID       Used       Soft       Hard    Warn/Grace     \n---------- -------------------------------------------------- \n#0                   0          0          0     00 [--------]\n#40000            2388          0     131072     00 [--------]\n#40010            5368          0     131072     00 [--------]\n#40020           17724          0     131072     00 [--------]\n#40030           35272          0     131072     00 [--------]\n#40031               0          0         64     00 [--------]\n#40040           34676          0     131072     00 [--------]\n#40041               4          0         64     00 [--------]\n#41000               4          0         64     00 [--------]\n\n",
+      "stateSource": "Project quota state on /shared/helix-strict (/dev/loop3)\n  Accounting: ON\n  Enforcement: ON\n  Inode: #131 (4 blocks, 3 extents)\nBlocks grace time: [7 days]\nBlocks max warnings: 0\nInodes grace time: [7 days]\nInodes max warnings: 0\nRealtime Blocks grace time: [7 days]\n",
+      "treeCheckExitCode": 0,
+      "treeCheckRawStdout": "Checking project 41000 (path /shared/helix-strict/hrs6667650bdfc142a5)...\nProcessed 1 (/etc/projects and cmdline) paths for project 41000 with recursion depth infinite (-1).\n",
+      "treeCheckStderr": "",
+      "treeCheckStdout": "",
+      "treeCheckStdoutIsDiagnostics": true,
+      "usedBytes": 4096
+    },
+    "version": "trp-remote-strict-sample/1.0.0"
+  },
+  "helperSha256": "ebfe7a7be60c59303cb89bdd107341bc7ee761fa31d0aa7e71436153d2d32695",
+  "initialQuota": {
+    "bootId": "9ae02d7d-e52c-4b62-bc23-0b99afba8722",
+    "observedAt": 1791869513.2664363,
+    "policySha256": "8eda2d8629d8e2b50b7ea907ac0781a71dd7bfcdcd8aa952d2b142c68da4d8c1",
+    "quota": {
+      "hardBytes": 65536,
+      "projectId": 41000,
+      "reportSource": "Project quota on /shared/helix-strict (/dev/loop3)\n                               Blocks                     \nProject ID       Used       Soft       Hard    Warn/Grace     \n---------- -------------------------------------------------- \n#0                   0          0          0     00 [--------]\n#40000            2388          0     131072     00 [--------]\n#40010            5368          0     131072     00 [--------]\n#40020           17724          0     131072     00 [--------]\n#40030           35272          0     131072     00 [--------]\n#40031               0          0         64     00 [--------]\n#40040           34676          0     131072     00 [--------]\n#40041               4          0         64     00 [--------]\n#41000               4          0         64     00 [--------]\n\n",
+      "stateSource": "Project quota state on /shared/helix-strict (/dev/loop3)\n  Accounting: ON\n  Enforcement: ON\n  Inode: #131 (4 blocks, 3 extents)\nBlocks grace time: [7 days]\nBlocks max warnings: 0\nInodes grace time: [7 days]\nInodes max warnings: 0\nRealtime Blocks grace time: [7 days]\n",
+      "treeCheckExitCode": 0,
+      "treeCheckRawStdout": "Checking project 41000 (path /shared/helix-strict/hrs6667650bdfc142a5)...\nProcessed 1 (/etc/projects and cmdline) paths for project 41000 with recursion depth infinite (-1).\n",
+      "treeCheckStderr": "",
+      "treeCheckStdout": "",
+      "treeCheckStdoutIsDiagnostics": true,
+      "usedBytes": 4096
+    },
+    "version": "trp-remote-strict-sample/1.0.0"
+  },
+  "nativeCleanup": {
+    "remaining": [],
+    "requested": []
+  },
+  "ownedComments": [],
+  "policySha256": "8eda2d8629d8e2b50b7ea907ac0781a71dd7bfcdcd8aa952d2b142c68da4d8c1",
+  "privateCredentialsCopied": false,
+  "publicChildEnvironment": {
+    "BUN_INSTALL_CACHE_DIR": "/shared/helix-strict/hrs6667650bdfc142a5/cache/bun",
+    "BUN_RUNTIME_TRANSPILER_CACHE_PATH": "/shared/helix-strict/hrs6667650bdfc142a5/cache/transpiler",
+    "HELIX_DISABLE_MODELS_FETCH": "true",
+    "HELIX_TEST_HOME": "/shared/helix-strict/hrs6667650bdfc142a5/state/home",
+    "HELIX_TEST_MANAGED_CONFIG_DIR": "/shared/helix-strict/hrs6667650bdfc142a5/state/managed",
+    "HELIX_TRP_PYTHON": "/opt/helix-strict-runtime/python/bin/python",
+    "HELIX_TRP_REMOTE": "/shared/helix-strict/hrs6667650bdfc142a5/client/remote.json",
+    "LANG": "C.UTF-8",
+    "NXF_DISABLE_CHECK_LATEST": "true",
+    "NXF_OFFLINE": "true",
+    "NXF_OPTS": "-Djava.io.tmpdir=/shared/helix-strict/hrs6667650bdfc142a5/tmp",
+    "NXF_TEMP": "/shared/helix-strict/hrs6667650bdfc142a5/tmp",
+    "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin",
+    "PYTHONPYCACHEPREFIX": "/shared/helix-strict/hrs6667650bdfc142a5/cache/python",
+    "TMPDIR": "/shared/helix-strict/hrs6667650bdfc142a5/tmp",
+    "USER": "ubuntu",
+    "XDG_CACHE_HOME": "/shared/helix-strict/hrs6667650bdfc142a5/cache",
+    "XDG_CONFIG_HOME": "/shared/helix-strict/hrs6667650bdfc142a5/state/config",
+    "XDG_DATA_HOME": "/shared/helix-strict/hrs6667650bdfc142a5/state/data",
+    "XDG_STATE_HOME": "/shared/helix-strict/hrs6667650bdfc142a5/state"
+  },
+  "samples": [
+    {
+      "cgroup": {
+        "cgroup.events": "populated 1\nfrozen 0",
+        "cpu.max": "100000 100000",
+        "memory.current": "1552384",
+        "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\nsock_throttled 0",
+        "memory.max": "2147483648",
+        "memory.peak": "1556480",
+        "memory.swap.max": "0"
+      },
+      "elapsedSeconds": 0.01668530499955523,
+      "quota": {
+        "bootId": "9ae02d7d-e52c-4b62-bc23-0b99afba8722",
+        "observedAt": 1791869513.282445,
+        "policySha256": "8eda2d8629d8e2b50b7ea907ac0781a71dd7bfcdcd8aa952d2b142c68da4d8c1",
+        "quota": {
+          "hardBytes": 65536,
+          "projectId": 41000,
+          "reportSource": "Project quota on /shared/helix-strict (/dev/loop3)\n                               Blocks                     \nProject ID       Used       Soft       Hard    Warn/Grace     \n---------- -------------------------------------------------- \n#0                   0          0          0     00 [--------]\n#40000            2388          0     131072     00 [--------]\n#40010            5368          0     131072     00 [--------]\n#40020           17724          0     131072     00 [--------]\n#40030           35272          0     131072     00 [--------]\n#40031               0          0         64     00 [--------]\n#40040           34676          0     131072     00 [--------]\n#40041               4          0         64     00 [--------]\n#41000               4          0         64     00 [--------]\n\n",
+          "stateSource": "Project quota state on /shared/helix-strict (/dev/loop3)\n  Accounting: ON\n  Enforcement: ON\n  Inode: #131 (4 blocks, 3 extents)\nBlocks grace time: [7 days]\nBlocks max warnings: 0\nInodes grace time: [7 days]\nInodes max warnings: 0\nRealtime Blocks grace time: [7 days]\n",
+          "treeCheckExitCode": 0,
+          "treeCheckRawStdout": "Checking project 41000 (path /shared/helix-strict/hrs6667650bdfc142a5)...\nProcessed 1 (/etc/projects and cmdline) paths for project 41000 with recursion depth infinite (-1).\n",
+          "treeCheckStderr": "",
+          "treeCheckStdout": "",
+          "treeCheckStdoutIsDiagnostics": true,
+          "usedBytes": 4096
+        },
+        "version": "trp-remote-strict-sample/1.0.0"
+      }
+    },
+    {
+      "cgroup": {
+        "cgroup.events": "populated 0\nfrozen 0",
+        "cpu.max": "100000 100000",
+        "memory.current": "380928",
+        "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\nsock_throttled 0",
+        "memory.max": "2147483648",
+        "memory.peak": "9678848",
+        "memory.swap.max": "0"
+      },
+      "elapsedSeconds": 0.5239196949996767,
+      "quota": {
+        "bootId": "9ae02d7d-e52c-4b62-bc23-0b99afba8722",
+        "observedAt": 1791869513.7902296,
+        "policySha256": "8eda2d8629d8e2b50b7ea907ac0781a71dd7bfcdcd8aa952d2b142c68da4d8c1",
+        "quota": {
+          "hardBytes": 65536,
+          "projectId": 41000,
+          "reportSource": "Project quota on /shared/helix-strict (/dev/loop3)\n                               Blocks                     \nProject ID       Used       Soft       Hard    Warn/Grace     \n---------- -------------------------------------------------- \n#0                   0          0          0     00 [--------]\n#40000            2388          0     131072     00 [--------]\n#40010            5368          0     131072     00 [--------]\n#40020           17724          0     131072     00 [--------]\n#40030           35272          0     131072     00 [--------]\n#40031               0          0         64     00 [--------]\n#40040           34676          0     131072     00 [--------]\n#40041               4          0         64     00 [--------]\n#41000               4          0         64     00 [--------]\n\n",
+          "stateSource": "Project quota state on /shared/helix-strict (/dev/loop3)\n  Accounting: ON\n  Enforcement: ON\n  Inode: #131 (4 blocks, 3 extents)\nBlocks grace time: [7 days]\nBlocks max warnings: 0\nInodes grace time: [7 days]\nInodes max warnings: 0\nRealtime Blocks grace time: [7 days]\n",
+          "treeCheckExitCode": 0,
+          "treeCheckRawStdout": "Checking project 41000 (path /shared/helix-strict/hrs6667650bdfc142a5)...\nProcessed 1 (/etc/projects and cmdline) paths for project 41000 with recursion depth infinite (-1).\n",
+          "treeCheckStderr": "",
+          "treeCheckStdout": "",
+          "treeCheckStdoutIsDiagnostics": true,
+          "usedBytes": 4096
+        },
+        "version": "trp-remote-strict-sample/1.0.0"
+      }
+    }
+  ],
+  "schema": "helix-full-client-root-supervision/1.0",
+  "scope": "Actual client preparation/state/cache/tmp/export and head run in one XFS project; actual client and head controller share a1CPU/2GiB cgroup; workers2CPU/2GiB each sequentially.",
+  "terminationCause": null
+}

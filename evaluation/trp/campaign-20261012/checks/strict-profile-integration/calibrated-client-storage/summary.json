@@ -1,0 +1,29 @@
+{
+  "observedAtUtc": "2026-10-13T05:15:15.185625+00:00",
+  "command": [
+    "bun",
+    "test",
+    "test/trp/remote-strict.test.ts",
+    "test/trp/remote.test.ts",
+    "test/trp/remote-status-repair.test.ts",
+    "test/trp/remote-approval.test.ts",
+    "test/trp/resources.test.ts",
+    "test/trp/enforcement.test.ts",
+    "test/trp/workflow.test.ts",
+    "test/trp/preflight.test.ts",
+    "--timeout",
+    "30000"
+  ],
+  "exitCode": 0,
+  "elapsedSeconds": 11.740470108001318,
+  "sourceSha256": {
+    "packages/helix/src/trp/resources.ts": "094766a68a26373bb3367bf844d83e32b0ccdcf0a9bb75374e92c45c8733007d",
+    "packages/helix/src/trp/evidence.ts": "ad6f2f15f84ff659cb3e760dd909412d475af39e0d906e876dae67a9400f558b",
+    "packages/helix/src/trp/verify_bundle.py.txt": "86aec3f5034483c94fd814bf39df62e237f26ac91ea90d37dd0617872f80a3f5"
+  },
+  "logSha256": "ed6421b5ec7b479e2b2d3369743669c3acc18215c1f20a50595629ab38ca42ba",
+  "reason": "Explicit32MiB full-client storage profile calibrated on development residual before final campaign; ordinary12MiB and historical data preserved",
+  "passed": 65,
+  "failed": 0,
+  "assertions": 263
+}

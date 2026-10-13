@@ -1,0 +1,294 @@
+{
+  "case": "AGG-03-small",
+  "physicalFeasibilityLabel": false,
+  "labelReason": "Actual terminal I/O failure linked by path and timestamp to kernel EDQUOT or independently qualified quota-reservation ENOSPC under matching enforced quota",
+  "actualDecision": {
+    "version": "trp-resources/1.2.0",
+    "decidedAt": "2026-10-13T05:49:43.239Z",
+    "accepted": false,
+    "inventoryHash": "a7a558a9705525adbc2c44b1d63862cdb0717a2301d2f6e64b74bf088f14b68d",
+    "budgetHash": "7b6c8c21824166cf53fd07d08ba185322ea82a17c52d35ccf9a067def40e7b64",
+    "demand": {
+      "version": "trp-resources/1.2.0",
+      "sourceBytes": 359397,
+      "selectionBytes": 150911,
+      "bundleBytes": 1158087,
+      "counts": {
+        "scientificTasks": 2,
+        "stubTasks": 2,
+        "remoteScientificCalls": 2,
+        "retries": 0
+      },
+      "cpus": 3,
+      "memoryBytes": 4294967296,
+      "workBytes": 42266624,
+      "wallSeconds": 1080,
+      "storage": {
+        "kind": "estimate",
+        "formula": "ceil((32*1048576 + 7*bundleBytes + 4*selectionBytes)/4096)*4096",
+        "hardLimit": false,
+        "profile": "trp-colocated-client-storage/1.0.0"
+      },
+      "assumptions": [
+        "Verified co-located Slurm profile: the real Helix client and Python/Nextflow controller share a root-controlled 1 CPU/2 GiB/swap-zero cgroup. All declared client work/temp/state/cache/export and remote workspace paths inherit one kernel XFS project quota. Worker tasks remain separate 2 CPU/2 GiB Docker allocations; no memory pooling.",
+        "Storage profile trp-colocated-client-storage/1.0.0 reserves32MiB overhead plus working-copy terms. This covers the real client/bootstrap/cache and portable export scope, calibrated on one development pilot before the aggregate campaign freeze; it is not a universal peak guarantee.",
+        "Two sequential tasks per traversal; one stub traversal then one real traversal; no retry or resume.",
+        "Task allocation: 2 CPUs/2 GiB. Controller allocation: 1 CPU/2 GiB; cgroup enforcement requires an independently verified operator sandbox. CPU bandwidth is not an exclusive core reservation.",
+        "Each traversal has an 8 minute watchdog; probes/configuration reserve another 120 seconds. This is a configured timeout, not a runtime prediction.",
+        "Storage estimates allocated workspace bytes including working copies, logs and portable evidence; an independently observed XFS project quota enforces an approved budget only inside an operator allocation.",
+        "The exact image and Nextflow distribution must already be cached. Image pulls/builds and shared Docker/Nextflow caches are outside workBytes.",
+        "Two remote scientific tasks are planned; SSH probes, controller commands and stub jobs are not scientific calls. Agent provider tokens, cost and conversation calls are not measured here."
+      ]
+    },
+    "rejections": [
+      {
+        "code": "capacity-insufficient",
+        "resource": "workBytes",
+        "demand": 42266624,
+        "available": 262144
+      },
+      {
+        "code": "budget-insufficient",
+        "resource": "workBytes",
+        "demand": 42266624,
+        "available": 262144
+      }
+    ]
+  },
+  "defaultPortableVerifier": null,
+  "executionOracleForcedOnly": true,
+  "allocatedBlockBytesObservedPeak": 208896,
+  "allocatedBlockBytesFinal": 208896,
+  "predictedWorkBytes": 42266624,
+  "observedUnderestimateBytes": 0,
+  "observedOverestimationFraction": null,
+  "kernelMemoryPeak": 107233280,
+  "causalKernelQuotaFailures": [
+    "[pid 34512] 1791870580.246983 openat(12</shared/helix-strict/hrs6a8a847694fd4c85/cache/transpiler>, \".dafe65ec8fd7febf-00000003..pile\", O_WRONLY|O_CREAT|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 34513] 1791870580.249506 openat(13</shared/helix-strict/hrs6a8a847694fd4c85/cache/transpiler>, \".3fffe7cfdfbeef7f-00000004..pile\", O_WRONLY|O_CREAT|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 34513] 1791870580.304326 openat(14</shared/helix-strict/hrs6a8a847694fd4c85/cache/transpiler>, \".39ff92ccae87efaf-00000005..pile\", O_WRONLY|O_CREAT|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 34513] 1791870580.325720 openat(12</shared/helix-strict/hrs6a8a847694fd4c85/cache/transpiler>, \".d8ff37cd9fe96259-00000006..pile\", O_WRONLY|O_CREAT|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 34512] 1791870580.341502 openat(13</shared/helix-strict/hrs6a8a847694fd4c85/cache/transpiler>, \".5fde1ffcb5bffd15-00000007..pile\", O_WRONLY|O_CREAT|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 34512] 1791870580.387532 openat(12</shared/helix-strict/hrs6a8a847694fd4c85/cache/transpiler>, \".1ddeabeeb778937f-00000008..pile\", O_WRONLY|O_CREAT|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 34513] 1791870580.395151 openat(13</shared/helix-strict/hrs6a8a847694fd4c85/cache/transpiler>, \".fcffaedeffedfc23-00000009..pile\", O_WRONLY|O_CREAT|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 34512] 1791870580.407697 openat(11</shared/helix-strict/hrs6a8a847694fd4c85/cache/transpiler>, \".b9ff8ded97fff4bf-0000000A..pile\", O_WRONLY|O_CREAT|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 34512] 1791870580.413367 openat(13</shared/helix-strict/hrs6a8a847694fd4c85/cache/transpiler>, \".fafee6eeb596ddeb-0000000B..pile\", O_WRONLY|O_CREAT|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 34512] 1791870580.419216 openat(12</shared/helix-strict/hrs6a8a847694fd4c85/cache/transpiler>, \".5bdfe8fdbdfd9f7f-0000000C..pile\", O_WRONLY|O_CREAT|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 34512] 1791870580.429108 openat(13</shared/helix-strict/hrs6a8a847694fd4c85/cache/transpiler>, \".dadfa4efd5f7d215-0000000D..pile\", O_WRONLY|O_CREAT|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 34512] 1791870580.486827 openat(13</shared/helix-strict/hrs6a8a847694fd4c85/cache/transpiler>, \".f8fea8fdfdf3e7ff-0000000E..pile\", O_WRONLY|O_CREAT|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 34513] 1791870580.491421 openat(11</shared/helix-strict/hrs6a8a847694fd4c85/cache/transpiler>, \".1affc8cfbdf6b932-0000000F..pile\", O_WRONLY|O_CREAT|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 34512] 1791870580.491762 openat(14</shared/helix-strict/hrs6a8a847694fd4c85/cache/transpiler>, \".9ede2ffcffbf1ddf-00000010..pile\", O_WRONLY|O_CREAT|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 34513] 1791870580.513074 openat(13</shared/helix-strict/hrs6a8a847694fd4c85/cache/transpiler>, \".9ade34cddefbffe8-00000011..pile\", O_WRONLY|O_CREAT|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 34512] 1791870580.716545 openat(12</shared/helix-strict/hrs6a8a847694fd4c85/cache/transpiler>, \".1dfe18cde7b7f66f-00000012..pile\", O_WRONLY|O_CREAT|O_CLOEXEC, 0644) = -1 ENOSPC (No space left on device)",
+    "[pid 34512] 1791870583.250687 openat(AT_FDCWD</shared/helix-strict/hrs6a8a847694fd4c85/client>, \"/shared/helix-strict/hrs6a8a847694fd4c85/client/input.pdb\", O_WRONLY|O_CREAT, 0666) = -1 ENOSPC (No space left on device)"
+  ],
+  "causallyLinkedTerminalIoFailures": [
+    {
+      "failure": {
+        "pid": 34508,
+        "failedAtEpochSeconds": 1791870583.251,
+        "name": "Error",
+        "code": "ENOSPC",
+        "errno": -28,
+        "syscall": "copyfile",
+        "path": "/opt/helix-strict-runtime/campaign/original40/G-valid-003/source.pdb",
+        "dest": "/shared/helix-strict/hrs6a8a847694fd4c85/client/input.pdb",
+        "message": "ENOSPC: no space left on device, copyfile '/opt/helix-strict-runtime/campaign/original40/G-valid-003/source.pdb' -> '/shared/helix-strict/hrs6a8a847694fd4c85/client/input.pdb'",
+        "cause": "Error: ENOSPC: no space left on device, copyfile '/opt/helix-strict-runtime/campaign/original40/G-valid-003/source.pdb' -> '/shared/helix-strict/hrs6a8a847694fd4c85/client/input.pdb'",
+        "stack": "Error: ENOSPC: no space left on device, copyfile '/opt/helix-strict-runtime/campaign/original40/G-valid-003/source.pdb' -> '/shared/helix-strict/hrs6a8a847694fd4c85/client/input.pdb'\n    at async main (/opt/helix-strict-runtime/evaluation/trp/campaign-20261012/aggregate-resource-contrasts/full_client.ts:68:10)"
+      },
+      "kernelSyscall": "[pid 34512] 1791870583.250687 openat(AT_FDCWD</shared/helix-strict/hrs6a8a847694fd4c85/client>, \"/shared/helix-strict/hrs6a8a847694fd4c85/client/input.pdb\", O_WRONLY|O_CREAT, 0666) = -1 ENOSPC (No space left on device)"
+    }
+  ],
+  "actualExitCode": 1,
+  "terminationCause": null,
+  "elapsedSeconds": 3.6240281929995035,
+  "persistentSqlite": [],
+  "checks": [
+    {
+      "name": "root-allocation-policy-binding",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "exact-kernel-budget",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "owner-quiescence",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "real-controller-and-tracer-reaped",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-0",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-0",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-1",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-1",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-2",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-2",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-3",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-3",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-4",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-4",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-5",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-5",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-6",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-6",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-7",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-7",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-8",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-8",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "raw-recursive-source-9",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "kernel-project-quota-9",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-0",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-1",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-2",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-3",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-4",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-5",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-6",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "shared-client-controller-cap-7",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "actual-unmodified-decision-source",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "actual-bound-decision-policy",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "actual-decision-budget-hash",
+      "ok": true,
+      "detail": null
+    }
+  ],
+  "checksPassed": 35,
+  "checksTotal": 35,
+  "supervisionSha256": "b8917c56ec48a74cd87552cf4b7e0931be1a4a8be09f02b52941a2c96aaa8953",
+  "retainedArchiveSha256": "941863aeda54dc7e3165d04947d8c2a661cbfb2ce5a5ce5048560f0450db1408",
+  "causalTimestampQuantizationToleranceSeconds": 0.001,
+  "scientificR24Rate": null,
+  "scope": "Engineering, one development protein, actual aggregate client/head declared paths plus sequential worker tasks; infrastructure/runtime/Docker caches and experiment-only root telemetry excluded",
+  "frozenAuditSha256": "334117b086af3beced36272f92fa725b9b2c5e59c9f25ac3126128184082a57c",
+  "reviewSourceSha256": "0acc1922dd3c9ed4816f79bbaeb49bb6c380e54caec65e7bb406bd8b2c1e1089",
+  "amendmentSha256": "6b0e7d66cac51d9f6b8dcde4f833b41a3a70676a005c3f7852d82f58e3ab02f0"
+}

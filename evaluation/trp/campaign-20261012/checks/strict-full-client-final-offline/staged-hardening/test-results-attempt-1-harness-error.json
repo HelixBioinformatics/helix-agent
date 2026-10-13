@@ -1,0 +1,293 @@
+{
+  "schema": "strict-verifier-staging-tests/1.0",
+  "at": "2026-10-13T06:30:51.406637+00:00",
+  "originalSha256": "86aec3f5034483c94fd814bf39df62e237f26ac91ea90d37dd0617872f80a3f5",
+  "candidateSha256": "a3544563cba384829248a8c8dfc9cbcd9b745661eb69f3bdad490c63df4b53f1",
+  "patchSha256": "c253921a51c6f5cdfba8469a3aabaa08edebeccccf43de9adde5675634496878",
+  "tests": 7,
+  "successful": false,
+  "errors": [
+    [
+      "test_final_restoration (__main__.Hardening.test_final_restoration)",
+      "Traceback (most recent call last):\n  File \"/tmp/helix-strict-verifier-hardening-20261013/test_hardening.py\", line 92, in test_final_restoration\n    self.assertTrue(self.patched(self.copy,sha(self.manifest))['ok'])\n                    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nTypeError: verify() takes from 1 to 2 positional arguments but 3 were given\n"
+    ],
+    [
+      "test_gate_sources_and_actual_approval (__main__.Hardening.test_gate_sources_and_actual_approval)",
+      "Traceback (most recent call last):\n  File \"/tmp/helix-strict-verifier-hardening-20261013/test_hardening.py\", line 84, in test_gate_sources_and_actual_approval\n    self.rejects('approval-rejection-success-claim','approval.json',lambda p:self.cj(p,lambda d:d.__setitem__('answer','Rechazar')),old=True)\n    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/helix-strict-verifier-hardening-20261013/test_hardening.py\", line 49, in rejects\n    result=self.resealed(artifact,mutate,False);self.assertTrue(result['ok'])\n  File \"/tmp/helix-strict-verifier-hardening-20261013/test_hardening.py\", line 45, in resealed\n    return (self.patched if stage else self.original)(self.copy,anchor)\n           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^\nTypeError: verify() takes from 1 to 2 positional arguments but 3 were given\n"
+    ],
+    [
+      "test_original_anchored_fixtures_compatible (__main__.Hardening.test_original_anchored_fixtures_compatible) (name='strict150')",
+      "Traceback (most recent call last):\n  File \"/tmp/helix-strict-verifier-hardening-20261013/test_hardening.py\", line 63, in test_original_anchored_fixtures_compatible\n    out=self.patched(target,anchor);self.assertTrue(out['ok']);reports.append({'case':'baseline:'+name,'externallyAnchored':out['externallyAnchored'],'files':out['files'],'detected':True})\nTypeError: verify() takes from 1 to 2 positional arguments but 3 were given\n"
+    ],
+    [
+      "test_original_anchored_fixtures_compatible (__main__.Hardening.test_original_anchored_fixtures_compatible) (name='ordinary144')",
+      "Traceback (most recent call last):\n  File \"/tmp/helix-strict-verifier-hardening-20261013/test_hardening.py\", line 63, in test_original_anchored_fixtures_compatible\n    out=self.patched(target,anchor);self.assertTrue(out['ok']);reports.append({'case':'baseline:'+name,'externallyAnchored':out['externallyAnchored'],'files':out['files'],'detected':True})\nTypeError: verify() takes from 1 to 2 positional arguments but 3 were given\n"
+    ],
+    [
+      "test_original_anchored_fixtures_compatible (__main__.Hardening.test_original_anchored_fixtures_compatible) (name='mapped156')",
+      "Traceback (most recent call last):\n  File \"/tmp/helix-strict-verifier-hardening-20261013/test_hardening.py\", line 63, in test_original_anchored_fixtures_compatible\n    out=self.patched(target,anchor);self.assertTrue(out['ok']);reports.append({'case':'baseline:'+name,'externallyAnchored':out['externallyAnchored'],'files':out['files'],'detected':True})\nTypeError: verify() takes from 1 to 2 positional arguments but 3 were given\n"
+    ],
+    [
+      "test_original_anchored_fixtures_compatible (__main__.Hardening.test_original_anchored_fixtures_compatible) (name='cancelled143')",
+      "Traceback (most recent call last):\n  File \"/tmp/helix-strict-verifier-hardening-20261013/test_hardening.py\", line 63, in test_original_anchored_fixtures_compatible\n    out=self.patched(target,anchor);self.assertTrue(out['ok']);reports.append({'case':'baseline:'+name,'externallyAnchored':out['externallyAnchored'],'files':out['files'],'detected':True})\nTypeError: verify() takes from 1 to 2 positional arguments but 3 were given\n"
+    ],
+    [
+      "test_original_anchored_fixtures_compatible (__main__.Hardening.test_original_anchored_fixtures_compatible) (name='permission-denied25')",
+      "Traceback (most recent call last):\n  File \"/tmp/helix-strict-verifier-hardening-20261013/test_hardening.py\", line 63, in test_original_anchored_fixtures_compatible\n    out=self.patched(target,anchor);self.assertTrue(out['ok']);reports.append({'case':'baseline:'+name,'externallyAnchored':out['externallyAnchored'],'files':out['files'],'detected':True})\nTypeError: verify() takes from 1 to 2 positional arguments but 3 were given\n"
+    ],
+    [
+      "test_original_anchored_fixtures_compatible (__main__.Hardening.test_original_anchored_fixtures_compatible) (name='approval-rejected25')",
+      "Traceback (most recent call last):\n  File \"/tmp/helix-strict-verifier-hardening-20261013/test_hardening.py\", line 63, in test_original_anchored_fixtures_compatible\n    out=self.patched(target,anchor);self.assertTrue(out['ok']);reports.append({'case':'baseline:'+name,'externallyAnchored':out['externallyAnchored'],'files':out['files'],'detected':True})\nTypeError: verify() takes from 1 to 2 positional arguments but 3 were given\n"
+    ],
+    [
+      "test_three_real_semantic_gaps (__main__.Hardening.test_three_real_semantic_gaps)",
+      "Traceback (most recent call last):\n  File \"/tmp/helix-strict-verifier-hardening-20261013/test_hardening.py\", line 65, in test_three_real_semantic_gaps\n    self.rejects('strict-field-removed','methods.json',lambda p:self.cj(p,lambda d:d['fields'].pop(16)),old=True)\n    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/helix-strict-verifier-hardening-20261013/test_hardening.py\", line 49, in rejects\n    result=self.resealed(artifact,mutate,False);self.assertTrue(result['ok'])\n  File \"/tmp/helix-strict-verifier-hardening-20261013/test_hardening.py\", line 45, in resealed\n    return (self.patched if stage else self.original)(self.copy,anchor)\n           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^\nTypeError: verify() takes from 1 to 2 positional arguments but 3 were given\n"
+    ]
+  ],
+  "failures": [],
+  "cases": [
+    {
+      "case": "missing-gate:0",
+      "detected": true,
+      "originalAccepted": null,
+      "error": "verify() takes from 1 to 2 positional arguments but 3 were given"
+    },
+    {
+      "case": "missing-gate:1",
+      "detected": true,
+      "originalAccepted": null,
+      "error": "verify() takes from 1 to 2 positional arguments but 3 were given"
+    },
+    {
+      "case": "missing-gate:2",
+      "detected": true,
+      "originalAccepted": null,
+      "error": "verify() takes from 1 to 2 positional arguments but 3 were given"
+    },
+    {
+      "case": "missing-gate:3",
+      "detected": true,
+      "originalAccepted": null,
+      "error": "verify() takes from 1 to 2 positional arguments but 3 were given"
+    },
+    {
+      "case": "missing-gate:4",
+      "detected": true,
+      "originalAccepted": null,
+      "error": "verify() takes from 1 to 2 positional arguments but 3 were given"
+    },
+    {
+      "case": "missing-gate:5",
+      "detected": true,
+      "originalAccepted": null,
+      "error": "verify() takes from 1 to 2 positional arguments but 3 were given"
+    },
+    {
+      "case": "missing-gate:6",
+      "detected": true,
+      "originalAccepted": null,
+      "error": "verify() takes from 1 to 2 positional arguments but 3 were given"
+    },
+    {
+      "case": "missing-gate:7",
+      "detected": true,
+      "originalAccepted": null,
+      "error": "verify() takes from 1 to 2 positional arguments but 3 were given"
+    },
+    {
+      "case": "missing-gate:8",
+      "detected": true,
+      "originalAccepted": null,
+      "error": "verify() takes from 1 to 2 positional arguments but 3 were given"
+    },
+    {
+      "case": "missing-gate:9",
+      "detected": true,
+      "originalAccepted": null,
+      "error": "verify() takes from 1 to 2 positional arguments but 3 were given"
+    },
+    {
+      "case": "duplicate-request-gate",
+      "detected": true,
+      "originalAccepted": null,
+      "error": "verify() takes from 1 to 2 positional arguments but 3 were given"
+    },
+    {
+      "case": "reordered-request-and-answer",
+      "detected": true,
+      "originalAccepted": null,
+      "error": "verify() takes from 1 to 2 positional arguments but 3 were given"
+    },
+    {
+      "case": "missing-method-field:0",
+      "detected": true,
+      "originalAccepted": null,
+      "error": "verify() takes from 1 to 2 positional arguments but 3 were given"
+    },
+    {
+      "case": "missing-method-field:1",
+      "detected": true,
+      "originalAccepted": null,
+      "error": "verify() takes from 1 to 2 positional arguments but 3 were given"
+    },
+    {
+      "case": "missing-method-field:2",
+      "detected": true,
+      "originalAccepted": null,
+      "error": "verify() takes from 1 to 2 positional arguments but 3 were given"
+    },
+    {
+      "case": "missing-method-field:3",
+      "detected": true,
+      "originalAccepted": null,
+      "error": "verify() takes from 1 to 2 positional arguments but 3 were given"
+    },
+    {
+      "case": "missing-method-field:4",
+      "detected": true,
+      "originalAccepted": null,
+      "error": "verify() takes from 1 to 2 positional arguments but 3 were given"
+    },
+    {
+      "case": "missing-method-field:5",
+      "detected": true,
+      "originalAccepted": null,
+      "error": "verify() takes from 1 to 2 positional arguments but 3 were given"
+    },
+    {
+      "case": "missing-method-field:6",
+      "detected": true,
+      "originalAccepted": null,
+      "error": "verify() takes from 1 to 2 positional arguments but 3 were given"
+    },
+    {
+      "case": "missing-method-field:7",
+      "detected": true,
+      "originalAccepted": null,
+      "error": "verify() takes from 1 to 2 positional arguments but 3 were given"
+    },
+    {
+      "case": "missing-method-field:8",
+      "detected": true,
+      "originalAccepted": null,
+      "error": "verify() takes from 1 to 2 positional arguments but 3 were given"
+    },
+    {
+      "case": "missing-method-field:9",
+      "detected": true,
+      "originalAccepted": null,
+      "error": "verify() takes from 1 to 2 positional arguments but 3 were given"
+    },
+    {
+      "case": "missing-method-field:10",
+      "detected": true,
+      "originalAccepted": null,
+      "error": "verify() takes from 1 to 2 positional arguments but 3 were given"
+    },
+    {
+      "case": "missing-method-field:11",
+      "detected": true,
+      "originalAccepted": null,
+      "error": "verify() takes from 1 to 2 positional arguments but 3 were given"
+    },
+    {
+      "case": "missing-method-field:12",
+      "detected": true,
+      "originalAccepted": null,
+      "error": "verify() takes from 1 to 2 positional arguments but 3 were given"
+    },
+    {
+      "case": "missing-method-field:13",
+      "detected": true,
+      "originalAccepted": null,
+      "error": "verify() takes from 1 to 2 positional arguments but 3 were given"
+    },
+    {
+      "case": "missing-method-field:14",
+      "detected": true,
+      "originalAccepted": null,
+      "error": "verify() takes from 1 to 2 positional arguments but 3 were given"
+    },
+    {
+      "case": "missing-method-field:15",
+      "detected": true,
+      "originalAccepted": null,
+      "error": "verify() takes from 1 to 2 positional arguments but 3 were given"
+    },
+    {
+      "case": "missing-method-field:16",
+      "detected": true,
+      "originalAccepted": null,
+      "error": "verify() takes from 1 to 2 positional arguments but 3 were given"
+    },
+    {
+      "case": "missing-method-field:17",
+      "detected": true,
+      "originalAccepted": null,
+      "error": "verify() takes from 1 to 2 positional arguments but 3 were given"
+    },
+    {
+      "case": "missing-method-field:18",
+      "detected": true,
+      "originalAccepted": null,
+      "error": "verify() takes from 1 to 2 positional arguments but 3 were given"
+    },
+    {
+      "case": "missing-method-field:19",
+      "detected": true,
+      "originalAccepted": null,
+      "error": "verify() takes from 1 to 2 positional arguments but 3 were given"
+    },
+    {
+      "case": "missing-method-field:20",
+      "detected": true,
+      "originalAccepted": null,
+      "error": "verify() takes from 1 to 2 positional arguments but 3 were given"
+    },
+    {
+      "case": "missing-method-field:21",
+      "detected": true,
+      "originalAccepted": null,
+      "error": "verify() takes from 1 to 2 positional arguments but 3 were given"
+    },
+    {
+      "case": "missing-method-field:22",
+      "detected": true,
+      "originalAccepted": null,
+      "error": "verify() takes from 1 to 2 positional arguments but 3 were given"
+    },
+    {
+      "case": "missing-method-field:23",
+      "detected": true,
+      "originalAccepted": null,
+      "error": "verify() takes from 1 to 2 positional arguments but 3 were given"
+    },
+    {
+      "case": "duplicate-name",
+      "detected": true,
+      "originalAccepted": null,
+      "error": "verify() takes from 1 to 2 positional arguments but 3 were given"
+    },
+    {
+      "case": "strict-allocation-same-value-different-source",
+      "detected": true,
+      "originalAccepted": null,
+      "error": "verify() takes from 1 to 2 positional arguments but 3 were given"
+    },
+    {
+      "case": "unavailable-version-faked",
+      "detected": true,
+      "originalAccepted": null,
+      "error": "verify() takes from 1 to 2 positional arguments but 3 were given"
+    },
+    {
+      "case": "quota-exclusion-limitation-missing",
+      "detected": true,
+      "originalAccepted": null,
+      "error": "verify() takes from 1 to 2 positional arguments but 3 were given"
+    }
+  ],
+  "cloudCalls": 0,
+  "scientificJobs": 0,
+  "scope": "Copies only; same externally anchored engineering bundles; staged verifier never executes bundled payloads."
+}

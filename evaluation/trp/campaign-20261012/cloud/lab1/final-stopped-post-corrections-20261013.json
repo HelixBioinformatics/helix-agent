@@ -1,0 +1,42 @@
+{
+  "schema": "helix-academy-lifecycle-observation/1.0",
+  "observed_at_utc": "2026-10-13T17:06:16.659074+00:00",
+  "source": "Fresh EC2 DescribeInstances response, with verified deployment ownership tags",
+  "lab": "183928",
+  "region": "us-east-1",
+  "deployment": "helix-academy-20261012",
+  "nodes": [
+    {
+      "name": "helix-head",
+      "role": "head",
+      "type": "t3.medium",
+      "root_volume_gib": 50,
+      "id": "i-0f448183fd29011a8",
+      "private_ip": "172.31.80.220",
+      "state": "stopped",
+      "public_ip": null
+    },
+    {
+      "name": "helix-worker1",
+      "role": "worker",
+      "type": "m5.large",
+      "root_volume_gib": 20,
+      "id": "i-0509c635a9b526417",
+      "private_ip": "172.31.80.221",
+      "state": "stopped",
+      "public_ip": null
+    },
+    {
+      "name": "helix-worker2",
+      "role": "worker",
+      "type": "m5.large",
+      "root_volume_gib": 20,
+      "id": "i-0e58f08256b09b1a9",
+      "private_ip": "172.31.80.222",
+      "state": "stopped",
+      "public_ip": null
+    }
+  ],
+  "all_stopped": true,
+  "stopped_compute_does_not_remove_storage": true
+}

@@ -1,0 +1,132 @@
+{
+  "schema": "aws-academy-observation/1.0",
+  "observed_at_utc": "2026-10-13T03:24:35.592593+00:00",
+  "lab": "185395",
+  "observe_only": true,
+  "renew_requested": false,
+  "lifecycle_actions": [],
+  "cli_credentials_opened": false,
+  "private_files_written": false,
+  "metadata": {
+    "Remaining session time": "00:53:45",
+    "Session started at": "2026-10-12T15:13:04-0700",
+    "Session to end": "2026-10-12T21:18:18-0700",
+    "AWSAccountId": "ending 0651",
+    "Region": "us-east-1",
+    "reported_used_usd": 0.8,
+    "reported_budget_usd": 50.0,
+    "remaining_computed_usd": 49.2,
+    "lab_status": "ready_or_running",
+    "usage_delay": {
+      "displayed_amount": null,
+      "displayed_unit": null,
+      "independently_verified": false,
+      "interpretation": "Portal-reported cumulative use; update latency and final billed use are not independently verified."
+    }
+  },
+  "observation_quality": "complete",
+  "missing_metadata_fields": [],
+  "panel_health": {
+    "detailbtn2": {
+      "present": true,
+      "visible": true
+    },
+    "panel3": {
+      "present": false,
+      "visible": false
+    },
+    "panel3-hide": {
+      "present": true,
+      "visible": true
+    },
+    "clikeyboxbtn": {
+      "present": true,
+      "visible": true
+    },
+    "vmstatus": {
+      "present": true,
+      "visible": true
+    },
+    "labspinbox": {
+      "present": true,
+      "visible": true
+    }
+  },
+  "validation": {
+    "exec_session": 6264,
+    "exec_exit_code": 0,
+    "initial_partial_exec_session": 29290,
+    "initial_partial_exit_code": 0,
+    "private_credentials_and_session_hash_size_mtime_unchanged": true,
+    "private_fingerprints_not_published": true,
+    "deadline_observed_utc": "2026-10-13T04:18:18+00:00",
+    "deadline_matches_existing_session": true,
+    "account_suffix_matches_existing_session": true,
+    "full_account_id_not_published": true,
+    "reported_use_equal_to_existing_session_report": true,
+    "existing_session_report_observed_at": "2026-10-13T00:18:23.131156+00:00",
+    "helpers_sha256": "9a17c9bb4fa5cd625790a56d6c9825f28ff2a30efc2fef85a613f9a460395235",
+    "tests_sha256": "7fcf8fbf8e3c90886b946362615cdb913c0d5e7a325ac4fde9fce8c5d595791b",
+    "tests_pass": 8,
+    "tests_fail": 0,
+    "tests_log_sha256": "513e2495f23964bc103e18770258cc0b8ccdf164344ccbb898aefef1886c683b",
+    "git_base_revision": "498736e3523fe5013e3c5bcef6a25b8b5f787da1",
+    "no_commits_by_agent": true
+  },
+  "diagnosis": {
+    "original_failure": "Metadata read incorrectly waited for CLI credential button visibility.",
+    "additional_format_issue": "Portal deadline is labelled Session to end at; parser now accepts that prefix and asynchronous metadata hydration.",
+    "initial_partial_observation": {
+      "schema": "aws-academy-observation/1.0",
+      "observed_at_utc": "2026-10-13T03:15:52.922922+00:00",
+      "lab": "185395",
+      "observe_only": true,
+      "renew_requested": false,
+      "lifecycle_actions": [],
+      "cli_credentials_opened": false,
+      "private_files_written": false,
+      "metadata": {
+        "Remaining session time": "01:02:27",
+        "Session started at": "2026-10-12T15:13:04-0700",
+        "AWSAccountId": "ending 0651",
+        "Region": "us-east-1",
+        "lab_status": "ready_or_running",
+        "usage_delay": {
+          "displayed_amount": null,
+          "displayed_unit": null,
+          "independently_verified": false,
+          "interpretation": "Portal-reported cumulative use; update latency and final billed use are not independently verified."
+        }
+      },
+      "panel_health": {
+        "detailbtn2": {
+          "present": true,
+          "visible": true
+        },
+        "panel3": {
+          "present": false,
+          "visible": false
+        },
+        "panel3-hide": {
+          "present": true,
+          "visible": true
+        },
+        "clikeyboxbtn": {
+          "present": true,
+          "visible": true
+        },
+        "vmstatus": {
+          "present": true,
+          "visible": true
+        },
+        "labspinbox": {
+          "present": true,
+          "visible": true
+        }
+      }
+    },
+    "source": "rendered authenticated Academy portal; fields are whitelisted and account masked",
+    "usage_delay_scope": "No latency amount displayed in this observation. Reported USD0.80 equals the older portal report and is not proof of zero additional unbilled compute. Do not treat USD49.20 arithmetic remainder as verified real-time or final billing.",
+    "changed_deadline_or_account_suffix_observed": false
+  }
+}

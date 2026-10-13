@@ -1,0 +1,735 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/production/classification": {
+      "get": {
+        "operationId": "ClassificationSearchController_findAll",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/ClassificationDto"
+                      },
+                      {
+                        "type": "object",
+                        "properties": {
+                          "statistics": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "source": {
+                                  "type": "string"
+                                },
+                                "author": {
+                                  "type": "string"
+                                },
+                                "structures": {
+                                  "type": "number"
+                                },
+                                "chains": {
+                                  "type": "number"
+                                },
+                                "regions": {
+                                  "type": "number"
+                                },
+                                "units": {
+                                  "type": "number"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "production"
+        ]
+      }
+    },
+    "/production/annotations": {
+      "get": {
+        "operationId": "AnnotationSearchController_findMany",
+        "parameters": [
+          {
+            "name": "created.by",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "updated.by",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "created.before",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "created.after",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "updated.before",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "updated.after",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "skip",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "chain.source",
+            "required": false,
+            "in": "query",
+            "description": "Source of the chain",
+            "example": "PDB",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "chain.structure",
+            "required": false,
+            "in": "query",
+            "description": "Structure of the chain",
+            "example": "1a0a",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "chain.id",
+            "required": false,
+            "in": "query",
+            "description": "ID of the chain",
+            "example": "1",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "region.classes",
+            "required": false,
+            "in": "query",
+            "description": "Class identifier of the region",
+            "example": [
+              "4.2.1",
+              "4.2.2"
+            ],
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "production"
+        ]
+      }
+    },
+    "/production/annotations/{uuid}": {
+      "get": {
+        "operationId": "AnnotationSearchController_findOne",
+        "parameters": [
+          {
+            "name": "format",
+            "required": false,
+            "in": "query",
+            "description": "Format of the annotation content",
+            "schema": {
+              "enum": [
+                "fasta",
+                "cif",
+                "png",
+                "gif"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "uuid",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "content": {
+                          "$ref": "#/components/schemas/AnnotationDto"
+                        }
+                      }
+                    },
+                    {
+                      "$ref": "#/components/schemas/NodeDto"
+                    }
+                  ]
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "tags": [
+          "production"
+        ]
+      }
+    },
+    "/production/annotations/source/{source}/structure/{structure}/chain/{chain}": {
+      "get": {
+        "operationId": "AnnotationSearchController_findOneByChain",
+        "parameters": [
+          {
+            "name": "source",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "structure",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "chain",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "format",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "production"
+        ]
+      }
+    },
+    "/staging/classification": {
+      "get": {
+        "operationId": "ClassificationSearchController_findAll",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "$ref": "#/components/schemas/ClassificationDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "staging"
+        ]
+      }
+    },
+    "/staging/authors/{orcid}": {
+      "get": {
+        "operationId": "AuthorSearchController_findOne",
+        "parameters": [
+          {
+            "name": "orcid",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "staging"
+        ]
+      }
+    },
+    "/staging/authors": {
+      "get": {
+        "operationId": "AuthorSearchController_findMany",
+        "parameters": [
+          {
+            "name": "text",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "exclude",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "staging"
+        ]
+      }
+    },
+    "/staging/annotations/{uuid}": {
+      "get": {
+        "operationId": "AnnotationSearchController_findOne",
+        "parameters": [
+          {
+            "name": "uuid",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "staging"
+        ]
+      },
+      "delete": {
+        "operationId": "AnnotationEditController_delete",
+        "parameters": [
+          {
+            "name": "uuid",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "staging"
+        ]
+      }
+    },
+    "/staging/annotations": {
+      "get": {
+        "operationId": "AnnotationSearchController_findMany",
+        "parameters": [
+          {
+            "name": "created.by",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "updated.by",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "created.before",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "created.after",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "updated.before",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "updated.after",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "skip",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "chain.source",
+            "required": false,
+            "in": "query",
+            "description": "Source of the chain",
+            "example": "PDB",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "chain.structure",
+            "required": false,
+            "in": "query",
+            "description": "Structure of the chain",
+            "example": "1a0a",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "chain.id",
+            "required": false,
+            "in": "query",
+            "description": "ID of the chain",
+            "example": "1",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "region.classes",
+            "required": false,
+            "in": "query",
+            "description": "Class identifier of the region",
+            "example": [
+              "4.2.1",
+              "4.2.2"
+            ],
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "staging"
+        ]
+      },
+      "post": {
+        "operationId": "AnnotationEditController_create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NodeDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "staging"
+        ]
+      },
+      "patch": {
+        "operationId": "AnnotationEditController_update",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NodeDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "staging"
+        ]
+      }
+    },
+    "/auth/orcid": {
+      "get": {
+        "operationId": "AuthController_orcidAuth",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "authentication"
+        ]
+      }
+    },
+    "/auth/orcid/callback": {
+      "get": {
+        "operationId": "AuthController_orcidAuthCallback",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "authentication"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "RepeatsDB & Bio-curation Tool Endpoints",
+    "description": "Complete description of APIs used by RepeastDB and the Bio-curation Tool",
+    "version": "2.0",
+    "contact": {}
+  },
+  "tags": [
+    {
+      "name": "production",
+      "description": "Production endpoints, used by the RepeatsDB main interface"
+    },
+    {
+      "name": "staging",
+      "description": "Staging endpoints, used by the RepeatsDB Bio-curation Tool"
+    },
+    {
+      "name": "authentication",
+      "description": "Authorization and authentication endpoints, for the RepeatsDB Bio-curation Tool"
+    }
+  ],
+  "servers": [],
+  "components": {
+    "schemas": {
+      "ClassificationDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier",
+            "example": "1"
+          },
+          "name": {
+            "type": "string",
+            "description": "Full name",
+            "example": "Alpha/Beta Barrel"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description",
+            "example": "Alpha/Beta Barrel"
+          },
+          "wikipedia": {
+            "type": "string",
+            "description": "Link to Wikipedia page",
+            "example": "https://en.wikipedia.org/wiki/Alpha/Beta_Barrel"
+          },
+          "representative": {
+            "type": "string",
+            "description": "Structure, chain identifier of RCSB/PDB representative structure",
+            "example": "1a0aA"
+          },
+          "version": {
+            "type": "string",
+            "description": "Version of the classification, usually set in root element",
+            "example": "1.0.0"
+          },
+          "release": {
+            "type": "string",
+            "description": "Release of the classification, usually set in root element as ISO date",
+            "example": "2022-01-01T00:00:00Z"
+          }
+        },
+        "required": [
+          "id",
+          "name"
+        ]
+      },
+      "NodeDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "AnnotationDto": {
+        "type": "object",
+        "properties": {
+          "loci": {
+            "description": "List of loci",
+            "example": [
+              {
+                "type": "region",
+                "start": "0",
+                "end": "100",
+                "class": "alpha"
+              },
+              {
+                "type": "unit",
+                "start": "0",
+                "end": "10",
+                "parent": 0
+              }
+            ],
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "chain": {
+            "type": "object",
+            "description": "Chain",
+            "example": {
+              "id": "1",
+              "structure": "1a0a",
+              "source": "PDB",
+              "hash": ""
+            }
+          },
+          "comment": {
+            "type": "string"
+          },
+          "features": {
+            "type": "object",
+            "description": "Features of the annotation",
+            "example": {
+              "feature": "value"
+            }
+          }
+        },
+        "required": [
+          "loci",
+          "chain"
+        ]
+      }
+    }
+  }
+}

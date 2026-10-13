@@ -1,0 +1,507 @@
+{
+  "schema": "helix-rendered-figures-scientific-peer-review/1.0",
+  "at": "2026-10-13T17:03:45.226206+00:00",
+  "reviewerAgent": "/root/remote_executor",
+  "scope": "Read-only targeted review by a separate writing-review agent of three figures and 21 result rows. Prior reviewer authorship of the adapter and strict offline proof is disclosed; no blinded scientific or human annotation is claimed.",
+  "inputDocx": "/tmp/helix-word-figures-review-20261013/Tesis-AWS-20261012-candidate.docx",
+  "inputDocxSha256": "b9f93e15ede4d03e51555d8d4f2854e944acb792ccd61a98931a8f0a13d01948",
+  "inputPdf": "/tmp/helix-word-figures-review-20261013/Tesis-AWS-20261012-candidate.pdf",
+  "inputPdfSha256": "234e664c4962a8f41200adc4bb9dc6e54357c3b0f336638a6b1cc58e3aa23b57",
+  "pdfPages": 152,
+  "finalFreezeSha256": "c33fb8b69e6361fb90bac025ccbf62fb590122b93b5f78d8da754b3886d28f20",
+  "summarySha256": "a53095ee21ad8a1a4ba2efcfb7245e3e082cf5d1b1a33419685150f7026970e4",
+  "checkedSources": [
+    {
+      "path": "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/summary.json",
+      "sha256": "a53095ee21ad8a1a4ba2efcfb7245e3e082cf5d1b1a33419685150f7026970e4"
+    },
+    {
+      "path": "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/campaign-inputs/freeze.json",
+      "sha256": "c33fb8b69e6361fb90bac025ccbf62fb590122b93b5f78d8da754b3886d28f20"
+    },
+    {
+      "path": "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/source-snapshots/frozen-original40/manifest.json",
+      "sha256": "cc4ddef2b3a8b52664d049f89a63478b55157f782b9c98c133637a0bdabdd9ad"
+    },
+    {
+      "path": "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/final-package-verification.json",
+      "sha256": "99bf437f36f6c5d7c7cfd1ca1541b7fda143adec4b7486fef82caa6958bd1ed7"
+    },
+    {
+      "path": "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/figures/figure-manifest.json",
+      "sha256": "27f9a0fdefcde94568118df07a247f5eefa3bb5b6333b0d1a622972a2e4352a8"
+    },
+    {
+      "path": "evaluation/trp/campaign-20261012/structural/summary.json",
+      "sha256": "a019bdf4e65abb960735df52907ec25e8105eebfffe313be35c9abc4933e622b"
+    },
+    {
+      "path": "evaluation/trp/campaign-20261012/structural/outcomes.csv",
+      "sha256": "42cf5beb2e794d188edd0e49f313b5d3432b5e33294928cdd9a44c98dc8a3d99"
+    },
+    {
+      "path": "evaluation/trp/campaign-20261012/structural/figure-source.json",
+      "sha256": "75de3ccd83f521de1ac0ea180def2828f6ab89f354abcb0d64d2cfdead347972"
+    },
+    {
+      "path": "evaluation/trp/campaign-20261012/structural/freesasa/summary.json",
+      "sha256": "2b05c768cac199c8177e4f974846b1f6fe0eef84c98097a12cef0384951e3397"
+    },
+    {
+      "path": "evaluation/trp/campaign-20261012/structural/freesasa/outcomes.csv",
+      "sha256": "91c41282f5a2374628c0011002011465624f6ce9532a452ed0e97f5e88d17c93"
+    },
+    {
+      "path": "evaluation/trp/campaign-20261012/structural/freesasa/figure-source.json",
+      "sha256": "71323092dced8f2f57cf9373e494695186bc4b1e3f68382fac13fded824ffb0c"
+    },
+    {
+      "path": "evaluation/trp/campaign-20261012/cloud/workflow-summary.json",
+      "sha256": "ae68aac93c5d9b7809804bf0f40c44e462e0e19005df0e9e73661913dc7310ae"
+    },
+    {
+      "path": "evaluation/trp/campaign-20261012/mapping-public-contrasts/summary.json",
+      "sha256": "7388b1eb7f776d7a092a6c4f7f3641b586db428fb63eb471b79a93909846591c"
+    },
+    {
+      "path": "evaluation/trp/campaign-20261012/checks/strict-full-client-final-offline/attempt-2/fault-injection.json",
+      "sha256": "2089ef24c730c6625013b7cfd65e3069748c8ba881cd6c826d3da3b713f1f87e"
+    },
+    {
+      "path": "evaluation/trp/campaign-20261012/trace/event-negative-independent-agent-review.json",
+      "sha256": "ca0b8d07f60b66cd5dba64a0b30c3d9cf6dd6d857725f183480e9d4a3f700a38"
+    },
+    {
+      "path": "evaluation/trp/campaign-20261012/document/figures-intermediate-audit.json",
+      "sha256": "4fc866340bf8a0f943b2e4da49083ad9bda5869e47aa96209352331de995db29"
+    }
+  ],
+  "scriptChecks": [
+    {
+      "name": "aggregate summary matches requested hash",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "original 40 preserved with 18/18/4 labels",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "original rates use 36 labelled cases",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "boundary false rejection retained separately",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "posthoc supplement 4 does not replace original",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "scientific resource metric remains null",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "freeze source matches archived source manifest",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "32 archived sources retain exact freeze bytes",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "four original images remain byte identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Ilustración 4 embedded image matches source",
+      "passed": true,
+      "details": {
+        "pdfPage": 99,
+        "printedPage": 89,
+        "source": "aggregate-resource-contrasts/figures/aggregate-storage.png"
+      }
+    },
+    {
+      "name": "Ilustración 5 embedded image matches source",
+      "passed": true,
+      "details": {
+        "pdfPage": 102,
+        "printedPage": 92,
+        "source": "structural/steric-distribution.png"
+      }
+    },
+    {
+      "name": "Ilustración 6 embedded image matches source",
+      "passed": true,
+      "details": {
+        "pdfPage": 104,
+        "printedPage": 94,
+        "source": "structural/freesasa/surface-exposure.png"
+      }
+    },
+    {
+      "name": "storage figure derives from current summary",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "primary steric denominator pratt-original",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "primary steric denominator experimental-reviewed-beta-solenoid",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "steric plotted groups retain 105/108",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "SASA evaluation and applicability pratt-original",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "SASA evaluation and applicability experimental-reviewed-beta-solenoid",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "SASA residue counts match prose",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "22r 40 complete sidechains and median match",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "SASA plot applicability and repeat positions match",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "21 current IDs occur once in current order",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "52 attempts retain 48 first successes and 2 first failures",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "mapping counts and absent insertion domain match",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "460 integrity and 19 combined semantic detections qualified",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "negative review has 13 matched eligible records",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "candidate hashes match author render audit",
+      "passed": true,
+      "details": null
+    }
+  ],
+  "scriptChecksPassed": 27,
+  "scriptChecksTotal": 27,
+  "allScriptChecksPassed": true,
+  "visualReview": [
+    {
+      "figure": "Ilustración 4",
+      "pdfPage": 99,
+      "printedPage": 89,
+      "imageAndCaptionSamePage": true,
+      "clippedOrUnreadable": false,
+      "judgment": "Viewed the complete page at 1400 pixels. Axes, captions and denominators are readable; no missing panel.",
+      "raster": "/tmp/helix-word-figures-peer-review-20261013/affected-099.png",
+      "rasterSha256": "e6aa3f0479976966679b0bb26836f7599e674ba4c9b917a2a4cda099a1cc5f53"
+    },
+    {
+      "figure": "Ilustración 5",
+      "pdfPage": 102,
+      "printedPage": 92,
+      "imageAndCaptionSamePage": true,
+      "clippedOrUnreadable": false,
+      "judgment": "Viewed the complete page at 1400 pixels. Axes, captions and denominators are readable; no missing panel.",
+      "raster": "/tmp/helix-word-figures-peer-review-20261013/affected-102.png",
+      "rasterSha256": "37b95e4120f4868ec12b0a8c672cf5148e6597b5e776efce9d25df1a01f2a2dc"
+    },
+    {
+      "figure": "Ilustración 6",
+      "pdfPage": 104,
+      "printedPage": 94,
+      "imageAndCaptionSamePage": true,
+      "clippedOrUnreadable": false,
+      "judgment": "Viewed the complete page at 1400 pixels. Axes, captions and denominators are readable; no missing panel.",
+      "raster": "/tmp/helix-word-figures-peer-review-20261013/affected-104.png",
+      "rasterSha256": "ccf644277667f70821aee26a9f8ae7dad6dfcb6bae0c93a0f3cbb0c2cb6703ca"
+    }
+  ],
+  "tableVisualReview": {
+    "pdfPages": [
+      104,
+      105,
+      106
+    ],
+    "printedPages": [
+      94,
+      95,
+      96
+    ],
+    "rowsSplitAcrossPages": false,
+    "headersRepeated": true,
+    "all21RowsLegible": true,
+    "observed": "All three pages viewed. The table is dense, but its rows remain intact and its headers repeat."
+  },
+  "stericRecalculatedFromPrimaryCSV": [
+    {
+      "group": "pratt-original",
+      "planned": 78,
+      "evaluable": 77,
+      "min": 0.0,
+      "max": 241.27906976744185,
+      "median": 54.510058403634005,
+      "withClash": 73
+    },
+    {
+      "group": "experimental-reviewed-beta-solenoid",
+      "planned": 30,
+      "evaluable": 28,
+      "min": 0.9718172983479106,
+      "max": 29.446269357109337,
+      "median": 10.091332514772677,
+      "withClash": 28
+    }
+  ],
+  "sasaRecalculatedFromPrimaryCSV": [
+    {
+      "group": "pratt-original",
+      "planned": 78,
+      "evaluable": 78,
+      "applicableChargedSidechainMedian": 49
+    },
+    {
+      "group": "experimental-reviewed-beta-solenoid",
+      "planned": 30,
+      "evaluable": 30,
+      "applicableChargedSidechainMedian": 30
+    }
+  ],
+  "resultRows": [
+    {
+      "id": "R1.1",
+      "evidenceText": "Catálogo 1.2.0: tres operaciones admitidas de seis recursos auditados.",
+      "scopeText": "Implementación parcial del dominio; ReUPred y contrato de loci RepeatsDB pendientes.",
+      "review": "Consistent with reported development/preparation scope; no final scientific metric asserted.",
+      "qualification": null
+    },
+    {
+      "id": "R1.2",
+      "evidenceText": "Especificación tipada, origen de parámetros y aprobación vinculada. Piloto real: dos preparaciones suministradas y dos consultas de alcance.",
+      "scopeText": "Software verificado en desarrollo; cuatro acciones auditadas sin puntuación semántica independiente ni desempeño reservado.",
+      "review": "Consistent with reported development/preparation scope; no final scientific metric asserted.",
+      "qualification": null
+    },
+    {
+      "id": "R1.3",
+      "evidenceText": "Setenta solicitudes preparadas; referencias y cien paráfrasis humanas sin recibir.",
+      "scopeText": "Preparación; admisibilidad y estabilidad externas sin calcular.",
+      "review": "Consistent with reported development/preparation scope; no final scientific metric asserted.",
+      "qualification": null
+    },
+    {
+      "id": "R1.4",
+      "evidenceText": "Protocolo 1.0.1 con veintiún indicadores; planes técnicos y enmiendas operativas fechados.",
+      "scopeText": "Diseño implementado; congelación final de campañas científicas pendiente.",
+      "review": "Consistent with reported development/preparation scope; no final scientific metric asserted.",
+      "qualification": null
+    },
+    {
+      "id": "R1.5",
+      "evidenceText": "Referencia local y Helix sobre dos trabajadores Slurm; CSV coincidente. Primera tentativa: 48/50 verificadas, 2 fallos. 50/50 casos únicos verificados tras 2 tentativas adicionales.",
+      "scopeText": "Motor verificado en desarrollo; meta de 95% sobre cincuenta especificaciones externas pendiente.",
+      "review": "Consistent with reported development/preparation scope; no final scientific metric asserted.",
+      "qualification": null
+    },
+    {
+      "id": "R1.6",
+      "evidenceText": "Slurm: 206 residuos y doce unidades, CSV idéntico. Fuentes públicas: 11751/11751 label/autor; SIFTS 30/30; preparación 28/30 con 11215 residuos y dos rechazos correctos.",
+      "scopeText": "Correspondencias contrastadas con fuentes separadas en desarrollo; cero inserciones observadas. Referencia humana y evaluación reservada pendientes.",
+      "review": "Consistent with reported development/preparation scope; no final scientific metric asserted.",
+      "qualification": null
+    },
+    {
+      "id": "R1.7",
+      "evidenceText": "Cincuenta grafos válidos y treinta inválidos; validación y recorrido simulado previos a ejecutar en Slurm.",
+      "scopeText": "Controles implementados y contrastados técnicamente; generalización de la reserva pendiente.",
+      "review": "Consistent with reported development/preparation scope; no final scientific metric asserted.",
+      "qualification": null
+    },
+    {
+      "id": "R1.8",
+      "evidenceText": "Informes conservan comprobaciones realizadas, omitidas y no evaluables, con motivos.",
+      "scopeText": "Implementado en las ejecuciones observadas; cobertura de campaña completa pendiente.",
+      "review": "Consistent with reported development/preparation scope; no final scientific metric asserted.",
+      "qualification": null
+    },
+    {
+      "id": "R1.9",
+      "evidenceText": "Cero de treinta inválidas admitidas; diez modos con tres variantes, además de la regresión histórica.",
+      "scopeText": "Corpus técnico medido; no se presenta como desempeño sobre proteínas independientes.",
+      "review": "Consistent with reported development/preparation scope; no final scientific metric asserted.",
+      "qualification": null
+    },
+    {
+      "id": "R2.1",
+      "evidenceText": "Inventarios fechados de controlador y nodos; memoria y CPU por trabajo, sin sumar RAM entre trabajadores.",
+      "scopeText": "Implementado local y remoto; recurso compartido y alcance de reservas explícitos.",
+      "review": "Consistent with reported development/preparation scope; no final scientific metric asserted.",
+      "qualification": null
+    },
+    {
+      "id": "R2.2",
+      "evidenceText": "Perfil conjunto: 40/40 IDs observados; 18 positivos con verificación portable y 18 conteos reproducidos. Sobreestimación positiva mediana 13,90%; 0 excesos de presupuesto y 0 de estimación admitida. Subestimación inicial conservada.",
+      "scopeText": "Límites XFS/cgroup de rutas declaradas contrastados en desarrollo; software compartido y telemetría externa excluidos. Evaluación científica reservada pendiente.",
+      "review": "Consistent with reported development/preparation scope; no final scientific metric asserted.",
+      "qualification": null
+    },
+    {
+      "id": "R2.3",
+      "evidenceText": "Política root, inventarios por nodo, ventana, aprobación y reobservación de admisión verificadas. Decisiones reales retenidas antes del oráculo exclusivo de workBytes.",
+      "scopeText": "Rechazos técnicos contrastados en el perfil declarado; el oráculo forzado no cuenta como admisión real. Cobertura reservada pendiente.",
+      "review": "Consistent with reported development/preparation scope; no final scientific metric asserted.",
+      "qualification": null
+    },
+    {
+      "id": "R2.4",
+      "evidenceText": "Matriz original conjunta: 40/40 observados, 18 factibles, 18 inviables y 4 desconocidos; acierto 36/36, falso rechazo 0/18. Frontera separada: 6/6, falso rechazo 3/6.",
+      "scopeText": "Resultados de ingeniería de una proteína, tras calibración previa; conservar el resultado histórico del espacio remoto 6/26 y los denominadores separados. Indicador científico sin calcular.",
+      "review": "Consistent with reported development/preparation scope; no final scientific metric asserted.",
+      "qualification": "The accuracy denominator is36 labelled cases;4 remain unknown. The supplement4 is separate and posthoc, and the boundary retains its failed target."
+    },
+    {
+      "id": "R3.1",
+      "evidenceText": "Paquete estricto de 150 artefactos: 460/460 fallos de integridad y 19/19 contradicciones semánticas detectadas en copia; restauración y original intactos. Referencia SIFTS: 320/320 y copia fuera del repositorio.",
+      "scopeText": "Integridad y enlaces verificados con anclas externas; no autentica autores ni establece verdad biológica.",
+      "review": "Consistent with reported development/preparation scope; no final scientific metric asserted.",
+      "qualification": "Clarify combined verifier/observer detection and the separate post-campaign source amendment."
+    },
+    {
+      "id": "R3.2",
+      "evidenceText": "Diez eventos de la referencia y 13/13 registros de cuatro sesiones de rechazo, con acciones externas, causas y orden contrastados. Cancelación nativa y empaquetado automático auditados.",
+      "scopeText": "Cobertura técnica verificada en esos caminos; actores sintéticos. Cobertura de sesiones humanas pendiente.",
+      "review": "Consistent with reported development/preparation scope; no final scientific metric asserted.",
+      "qualification": null
+    },
+    {
+      "id": "R3.3",
+      "evidenceText": "Clasificador y conteo implementados; no hay corpus de cien turnos con primeras etiquetas independientes.",
+      "scopeText": "Kappa y corrección emparejada sin calcular; respuestas del conductor no son turnos humanos.",
+      "review": "Consistent with reported development/preparation scope; no final scientific metric asserted.",
+      "qualification": null
+    },
+    {
+      "id": "R3.4",
+      "evidenceText": "Perfil estricto: 24/24 campos de métodos iguales a sus fuentes y texto derivado exacto. Referencias anteriores de veinte campos conservadas.",
+      "scopeText": "Derivación mecánica contrastada en los alcances descritos; revisión científica reservada pendiente.",
+      "review": "Consistent with reported development/preparation scope; no final scientific metric asserted.",
+      "qualification": null
+    },
+    {
+      "id": "R3.5",
+      "evidenceText": "Nueve controles documentados; diagnósticos opcionales estérico y FreeSASA en C9, con versiones y hashes.",
+      "scopeText": "Catálogo implementado; no comprende un clasificador validado de todos los fallos físicos.",
+      "review": "Consistent with reported development/preparation scope; no final scientific metric asserted.",
+      "qualification": null
+    },
+    {
+      "id": "R3.6",
+      "evidenceText": "Valores y estados: 77/78; 28/30 diagnósticos estéricos evaluables; 78/78; 30/30 áreas de superficie evaluables.",
+      "scopeText": "Batería mecánica y observables implementados; veredicto físico general no evaluable.",
+      "review": "Consistent with reported development/preparation scope; no final scientific metric asserted.",
+      "qualification": null
+    },
+    {
+      "id": "R3.7",
+      "evidenceText": "Reportes por instancia con fuente, versión, marco, confianza y diagnóstico disponible.",
+      "scopeText": "Artefactos implementados y verificables; validez biológica no establecida.",
+      "review": "Consistent with reported development/preparation scope; no final scientific metric asserted.",
+      "qualification": null
+    },
+    {
+      "id": "R3.8",
+      "evidenceText": "Setenta y ocho originales Pratt y cinco ejemplos problemáticos; treinta referencias revisadas del dominio.",
+      "scopeText": "Sensibilidad física y especificidad sin calcular; faltan regla validada y etiquetas físicas pertinentes.",
+      "review": "Consistent with reported development/preparation scope; no final scientific metric asserted.",
+      "qualification": null
+    }
+  ],
+  "issues": [
+    {
+      "title": "Identify the components behind semantic detection",
+      "severity": "moderate",
+      "source_kind": "script",
+      "comment_type": "methodological_transparency",
+      "pdfPages": [
+        99,
+        105
+      ],
+      "printedPages": [
+        89,
+        95
+      ],
+      "quote": "19/19 contradicciones semánticas detectadas en copia",
+      "quote_verified": true,
+      "explanation": "The frozen verifier rejected 16 of 19 resealed contradictions; the separate source observer detected the remaining 3. The combined audit is 19/19, but a reader reproducing only the standalone frozen verifier does not get that coverage. This qualifies the scope and does not dispute the combined total. The later verifier amendment must not be attributed retroactively to the frozen campaign.",
+      "recommendation": "Identify verificador congelado y observador independiente in the table/prose. The final amendment paragraph should retain 16/19 + 3/19, then describe the new verifier tests and explicit externally anchored legacy option. Preserve raw exports and source hashes.",
+      "gate_blocker": false,
+      "confidence": 1.0
+    }
+  ],
+  "claimJudgment": {
+    "storage": "Sampled XFS blocks, original decisions, incomplete or unknown cases and exclusions are qualified. The rejected 39 MiB cases that completed under a counterfactual remain separate from real admission. The 50% boundary false rejection and failure of the 5% target are explicit.",
+    "steric": "The primary 180-second denominators retain 105/108. Five published problem cases remain distinct from 73 unlabelled originals and 30 experimental references. No classifier cutoff or physical sensitivity/specificity is inferred.",
+    "sasa": "Area evaluation of 108/108 remains distinct from applicability of charged-sidechain medians in 79/108. Missing or absent sidechains are not zeros. Four positions across ten repeats are not a time series. Isolated-chain scope and preparation differences are explicit.",
+    "scientificMetricClosure": "No scientific completion of R1.3, R1.5, R3.3 or R3.8 is asserted in the figures or result table."
+  },
+  "preservationQualification": {
+    "originalImagesIndependentlyByteChecked": true,
+    "chapters1to3AndBibliography": "The author machine audit reports 349 original blocks and 99 original bibliography entries preserved within 101 entries. This peer review reads that report and directly checks original image bytes. It does not repeat the author preservation script or validate external bibliography metadata."
+  },
+  "plannedFinalUpdatesNotCountedAsDefects": [
+    "The parent will update final conclusions with the scope of the original 40 cases, six boundary cases and four supplemental cases.",
+    "Parent will add production amendment/local validation and separately observed cloud smoke; this intermediate render cannot claim that smoke."
+  ],
+  "mutations": {
+    "producer": false,
+    "word": false,
+    "generator": false,
+    "canonicals": false,
+    "aws": false,
+    "frozenEvidence": false
+  },
+  "recommendedDisposition": "Suitable for the next render with the local methodological qualification. This targeted review is not final thesis approval, installation or publication."
+}

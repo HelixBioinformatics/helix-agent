@@ -1,0 +1,195 @@
+--- a/packages/helix/src/trp/verify_bundle.py.txt
++++ b/packages/helix/src/trp/verify_bundle.py.txt
+@@ -88,6 +88,115 @@
+         raise ValueError('strict kernel quota/inheritance was not enforced')
+ 
+ 
++
++def strict_methods(m, record, root):
++    """Check mandatory declared fields and deterministic prose for strict1.0 only.
++    Ordinary legacy templates are preserved rather than retroactively assumed.
++    """
++    methods = record('methods.json')
++    catalogue = record('catalogue.json')
++    indices = [i for i, entry in enumerate(catalogue['entries']) if entry['id'] == 'geometre.geometry']
++    if len(indices) != 1:
++        raise ValueError('strict GeomeTRe catalogue entry absent/duplicated')
++    index = indices[0]
++    expected = {
++        'protein': ('specification.json', ['structure', 'value', 'pdb']),
++        'chain': ('specification.json', ['chain', 'value']),
++        'model': ('specification.json', ['model', 'value']),
++        'units': ('specification.json', ['units', 'value', 'ranges']),
++        'insertions': ('specification.json', ['insertions', 'value']),
++        'coordinate contract': ('specification.json', ['units', 'value', 'contract']),
++        'GeomeTRe revision': ('catalogue.json', ['entries', index, 'source', 'revision']),
++        'parameter contract': ('catalogue.json', ['entries', index, 'parameters']),
++        'input hash': ('specification.json', ['structure', 'value', 'sha256']),
++        'engine': ('execution.json', ['engine']),
++        'image': ('execution.json', ['container']),
++        'command': ('execution.json', ['run']),
++        'counts': ('admission.json', ['demand', 'counts']),
++        'storage estimate': ('admission.json', ['demand', 'workBytes']),
++        'status': ('run.json', ['status']),
++        'co-located Slurm transport': ('execution.json', ['transport']),
++        'remote strict allocation': ('remote_strict_policy.json', []),
++        'worker input staging': ('execution.json', ['inputStaging']),
++        'client storage estimate': ('admission.json', ['demand', 'storage']),
++        'structural controls': ('structural_report.json', ['summary']),
++        'execution backend': ('execution.json', ['backend']),
++        'remote infrastructure': ('execution.json', ['target']),
++        'numerical profile': ('execution.json', ['numericalProfile']),
++    }
++    software = record('software.json') if (root/'run/software.json').is_file() else None
++    if software:
++        expected['Nextflow version output'] = ('software.json', ['nextflowVersionOutput'])
++    fields = methods['fields']
++    names = [field['name'] for field in fields]
++    if methods['version'] != 'trp-methods/1.0.0' or len(set(names)) != len(names) or set(names) != set(expected):
++        raise ValueError('strict methods required fields absent/duplicated/unsupported')
++    for field in fields:
++        if (field['artifact'], field['pointer']) != expected[field['name']]:
++            raise ValueError('strict methods source pointer differs: ' + field['name'])
++    limitations = [
++        'Author-PDB numbering; supplied units, not repeat detection; experimental B-factor is not pLDDT.',
++        'The real Helix client runs on the verified head. Local Python transport invokes the controller; Slurm executes worker jobs. This is not an SSH transport experiment.',
++        'Root-owned policy and kernel receipts bind one XFS project quota covering declared client work/temp/state/cache/export and NFS remote work. Real Helix and Python/Nextflow share 1 CPU/2 GiB/swap-zero controller cgroup; sequential worker containers use 2 CPU/2 GiB. Root sampler records current usage separately from total-run entitlement. Preloaded read-only software/image caches and external root-supervisor records are infrastructure outside workBytes.',
++        'Offline verification checks bytes and declared links, not scientific truth or an authenticated human identity.',
++        'Agent provider/model/cost are not observed by this workflow; task software is identified by the pinned catalogue reference and image.',
++    ]
++    unavailable = [] if software else ['Nextflow version probe did not complete successfully; see run.json and process records']
++    if methods['limitations'] != limitations or methods.get('unavailable') != unavailable:
++        raise ValueError('strict methods limitations/software availability differs')
++    spec, execution = record('specification.json'), record('execution.json')
++    admission, run = record('admission.json'), record('run.json')
++    compact = lambda v: json.dumps(v, ensure_ascii=False, separators=(',', ':'), allow_nan=False)
++    paragraph = [
++        '# Métodos de la ejecución registrada', '',
++        f"Se procesó {spec['structure']['value']['pdb']}, cadena autora {spec['chain']['value']}, modelo {spec['model']['value']}, con {len(spec['units']['value']['ranges'])} unidades suministradas. La entrada se identifica mediante SHA-256 {spec['structure']['value']['sha256']}.", '',
++        f"El adaptador {execution['engine']} generó la orden {compact(execution['run'])} y fijó la imagen {execution['container']}. La revisión de GeomeTRe es {catalogue['entries'][index]['source']['revision']}; su contrato de parámetros es {compact(catalogue['entries'][index]['parameters'])}. Se planificaron dos tareas simuladas y dos reales, sin reintentos; tareas científicas en infraestructura remota: {admission['demand']['counts']['remoteScientificCalls']}. Estado registrado: {run['status']}.", '',
++        f"Salida observada de la consulta de versión de Nextflow: {compact(software['nextflowVersionOutput'])}." if software else 'No se dispone de una consulta de versión de Nextflow completada correctamente.', '',
++        f"La reserva estimada de almacenamiento fue {admission['demand']['workBytes']} bytes. Los campos y sus fuentes se encuentran en methods.json; el inventario, el presupuesto, las decisiones y los eventos se conservan en archivos separados.", '',
++        *['- ' + line for line in limitations], '',
++    ]
++    if (root/'run/methods.md').read_text() != '\n'.join(paragraph):
++        raise ValueError('strict methods prose differs from source-backed template')
++
++
++def strict_success_gates(events, record, bundle):
++    """Require the declared workflow gates and their retained source records.
++    This is mandatory-path consistency, not an independent callback/human oracle.
++    """
++    protocol = record('protocol.json')
++    expected = [('admission', 'accepted-for-review'),
++                ('protocol', 'checked' if protocol['check']['committed'] else 'not-committed'),
++                ('permission', 'requested'), ('permission', 'returned-allowed'),
++                ('approval', 'requested'), ('approval', 'answered'),
++                ('admission', 'recheck-accepted'), ('execution', 'remote-started'),
++                ('admission', 'analysis-accepted'), ('execution', 'completed')]
++    sources = [(event['source'], event['outcome']) for event in events]
++    positions = []
++    for pair in expected:
++        if sources.count(pair) != 1:
++            raise ValueError('strict successful gate missing/duplicated: ' + repr(pair))
++        positions.append(sources.index(pair))
++    if positions != sorted(positions):
++        raise ValueError('strict successful gate order differs')
++    selected = [events[i] for i in positions]
++    for event in selected:
++        detail = event['detail']
++        if 'digest' in detail and detail['digest'] != bundle['digest']:
++            raise ValueError('strict event proposal digest differs')
++    approval = record('approval.json')
++    if approval['digest'] != bundle['digest'] or approval.get('channel') != 'Question.Service' or approval.get('answer') != 'Aprobar y ejecutar':
++        raise ValueError('strict approval channel/answer/digest differs')
++    if (selected[0]['detail'] != record('admission.json') or selected[1]['detail'] != protocol
++        or selected[5]['detail'].get('answers') != [['Aprobar y ejecutar']]
++        or selected[6]['detail'] != record('recheck.json')['decision']
++        or selected[8]['detail'] != record('analysis-admission.json')['decision']
++        or selected[7]['detail'].get('controller') != record('remote-controller-identity.json')):
++        raise ValueError('strict gate retained source differs')
++    run = record('run.json')
++    if selected[9]['detail'].get('geometry') != run['geometry'] or selected[9]['detail'].get('measuredTasks') != run['measuredTasks']:
++        raise ValueError('strict completion gate source differs')
++
++
+ def walk(root):
+     result = set()
+     for item in root.rglob('*'):
+@@ -100,7 +209,11 @@
+     return result
+ 
+ 
+-def verify(root, expected=None):
++def verify(root, expected=None, allow_legacy_strict_backend=False):
++    if type(allow_legacy_strict_backend) is not bool:
++        raise ValueError('legacy backend option must be boolean')
++    if allow_legacy_strict_backend and expected is None:
++        raise ValueError('legacy strict backend compatibility requires an external manifest anchor')
+     root = Path(root).resolve(strict=True)
+     names = walk(root)
+     raw = (root / 'manifest.json').read_bytes()
+@@ -194,6 +307,8 @@
+             raise ValueError('approved bundle changed: ' + name)
+     admission, inventory, budget = record('admission.json'), record('inventory.json'), record('budget.json')
+     execution = record('execution.json')
++    if execution.get('backend') not in (None, 'trp-slurm-ssh/1.0.0', 'trp-slurm-colocated-strict/1.0.0'):
++        raise ValueError('unsupported execution backend')
+     strict = execution.get('backend') == 'trp-slurm-colocated-strict/1.0.0'
+     remote = strict or execution.get('backend') == 'trp-slurm-ssh/1.0.0'
+     if remote:
+@@ -280,6 +395,22 @@
+     run = record('run.json')
+     if run['digest'] != bundle['digest']:
+         raise ValueError('run identity differs')
++    legacy_backend_metadata = False
++    if remote and run['status'] == 'succeeded':
++        completions = [event for event in events if event['source'] == 'execution' and event['outcome'] == 'completed']
++        if len(completions) != 1:
++            raise ValueError('remote completion backend is missing/duplicated')
++        declared = execution['backend']
++        recorded_run = run.get('backend')
++        recorded_event = completions[0]['detail'].get('backend')
++        if recorded_run != declared or recorded_event != declared:
++            # Historical strict runs retained the generic SSH family label in
++            # these two metadata records. An explicit operator option and the
++            # external immutable anchor are necessary; never rewrite old bytes.
++            if (not allow_legacy_strict_backend or expected is None or not strict
++                or recorded_run != 'trp-slurm-ssh/1.0.0' or recorded_event != 'trp-slurm-ssh/1.0.0'):
++                raise ValueError('remote run/completion backend differs from verified execution')
++            legacy_backend_metadata = True
+     if run['status'] == 'succeeded':
+         for name in ['approval.json', 'recheck.json', 'analysis-admission.json', 'software.json', 'processes.jsonl', 'trace.tsv', 'dry-run/trace.tsv', 'results/geometry.csv']:
+             if 'run/' + name not in listed:
+@@ -362,6 +493,10 @@
+             status, exit_code = headers.index('status'), headers.index('exit')
+             if any(row.split('\t')[status] != 'COMPLETED' or row.split('\t')[exit_code] != '0' for row in rows[1:]):
+                 raise ValueError('trace task failed')
++    if strict:
++        strict_methods(m, record, root)
++        if run['status'] == 'succeeded':
++            strict_success_gates(events, record, bundle)
+     methods = record('methods.json')
+     required_methods = {'protein', 'chain', 'model', 'units', 'insertions', 'coordinate contract',
+                         'GeomeTRe revision', 'parameter contract', 'input hash', 'engine', 'image', 'command',
+@@ -380,6 +515,7 @@
+             raise ValueError('unsupported methods field: ' + item['name'])
+     return {'ok': True, 'files': len(listed), 'bytes': total, 'manifestSha256': manifest_hash,
+             'status': run['status'], 'externallyAnchored': expected is not None,
++            'legacyBackendMetadata': legacy_backend_metadata,
+             'scope': 'integrity, declared links and cold counts; not biological accuracy or authorship'}
+ 
+ 
+@@ -387,9 +523,11 @@
+     parser = argparse.ArgumentParser(description=__doc__)
+     parser.add_argument('bundle')
+     parser.add_argument('--sha256')
++    parser.add_argument('--allow-legacy-strict-backend', action='store_true',
++                        help='With an external anchor only: preserve historical strict exports whose run/completion metadata used the generic SSH family label; reports legacyBackendMetadata=true')
+     args = parser.parse_args()
+     try:
+-        result = verify(args.bundle, args.sha256)
++        result = verify(args.bundle, args.sha256, args.allow_legacy_strict_backend)
+     except (OSError, ValueError, KeyError, TypeError, RecursionError) as error:
+         result = {'ok': False, 'error': str(error)}
+     print(json.dumps(result, ensure_ascii=False, indent=2))

@@ -1,0 +1,33 @@
+{
+  "schema": "helix-post-campaign-production-local-check/1.0",
+  "observedAtUtc": "2026-10-13T16:44:32.349968+00:00",
+  "command": [
+    "bun",
+    "run",
+    "typecheck"
+  ],
+  "cwd": "packages/helix",
+  "environment": {
+    "HELIX_TRP_PYTHON": "/home/webiwabou/.local/state/helix/freesasa-20261012/venv/bin/python",
+    "gemmiVersion": "0.7.5",
+    "liveSwitchesCleared": true,
+    "removedVariableNames": [],
+    "TRP_BACKEND_TEST_OUTPUT": null
+  },
+  "exitCode": 0,
+  "elapsedSeconds": 9.697994666988961,
+  "logSha256": "ae47736bb2a9401aa9743893f2f64b9a605e65a99d78cd991a8021e0f7722d87",
+  "statistics": {
+    "passed": null,
+    "skipped_opt_in": null,
+    "failed": null,
+    "assertions": null
+  },
+  "sourceHashes": {
+    "packages/helix/src/trp/workflow.ts": "986f4b13e1c2661ede6f42114ec23bc4a5e891872a401d1874c992e9ba3b5cc7",
+    "packages/helix/src/trp/verify_bundle.py.txt": "952e79d5cecae707954ed667d231838569323dffdd068ab43edd770284841eb9",
+    "packages/helix/src/trp/remote_runner.py.txt": "f2aa0d714848da79726bf1126ed5611e999b941cd0ee653067a901a9873e1805",
+    "packages/helix/test/trp/workflow-backend.test.ts": "46ead7759736ac5ca4b1aa1fad6c3b1729b9080f6d250e87bab2daad86b011a6"
+  },
+  "scope": "Local production regression/type checks only; mocked unit boundaries and optional skips retain their declared scope. No new science/model/cloud observations."
+}

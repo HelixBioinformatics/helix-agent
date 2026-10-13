@@ -1,0 +1,688 @@
+{
+  "kind": "independent_raw_pressure_evidence_audit",
+  "scientific_workflow_evaluation": false,
+  "plan_sha256": "6886c30ab8f02030f9860e78bc38cc101b5e3560f1a3766124e89558efeb06fa",
+  "inventory_sha256": "bc4479d4a2fcbe81e62575d63d389c8fd8a5d79a39886cac0bcf7211b412f88b",
+  "prospective_cases": 40,
+  "rechecked": 40,
+  "permitted_container_contrasts": 20,
+  "infeasible_per_node_requests": 20,
+  "capacities": {
+    "helix-worker1": {
+      "cpus": 2,
+      "memory_mib": 7400
+    },
+    "helix-worker2": {
+      "cpus": 2,
+      "memory_mib": 7400
+    }
+  },
+  "rows": [
+    {
+      "id": "helix-worker1-cpu-0.25",
+      "mode": "cpu",
+      "node": "helix-worker1",
+      "independently_rechecked": true,
+      "evidence_sha256": "a0e372cb34619fc6bf184986e7f0ecea1bc8592e8ba1f799cc2e5d794d97092d",
+      "details": {
+        "cpu_max": "25000 100000",
+        "memory_max": "268435456",
+        "swap_max": "0",
+        "mean_cpus": 0.25159870405873225,
+        "elapsed_seconds": 4.092986106000012,
+        "throttled_delta": 41,
+        "child_exit_codes": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "id": "helix-worker1-cpu-0.5",
+      "mode": "cpu",
+      "node": "helix-worker1",
+      "independently_rechecked": true,
+      "evidence_sha256": "6ad151e9111ce635002dfd6f4a615b5c729f6d41fa586f549573fe43643a00b1",
+      "details": {
+        "cpu_max": "50000 100000",
+        "memory_max": "268435456",
+        "swap_max": "0",
+        "mean_cpus": 0.4995682943987687,
+        "elapsed_seconds": 4.053700010000057,
+        "throttled_delta": 41,
+        "child_exit_codes": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "id": "helix-worker1-cpu-1",
+      "mode": "cpu",
+      "node": "helix-worker1",
+      "independently_rechecked": true,
+      "evidence_sha256": "33dbbea0a3bf0dd26adec87438258025aafa86deb32dcc043b31b62e6b358400",
+      "details": {
+        "cpu_max": "100000 100000",
+        "memory_max": "268435456",
+        "swap_max": "0",
+        "mean_cpus": 1.0053096337202982,
+        "elapsed_seconds": 4.024581944000033,
+        "throttled_delta": 40,
+        "child_exit_codes": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "id": "helix-worker1-cpu-1.5",
+      "mode": "cpu",
+      "node": "helix-worker1",
+      "independently_rechecked": true,
+      "evidence_sha256": "6e248716a390ef1d0b43da16c13f7ddf4a2a129a13bf7597801701ef41bdb812",
+      "details": {
+        "cpu_max": "150000 100000",
+        "memory_max": "268435456",
+        "swap_max": "0",
+        "mean_cpus": 1.5143769794076094,
+        "elapsed_seconds": 4.018424793000008,
+        "throttled_delta": 39,
+        "child_exit_codes": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "id": "helix-worker1-cpu-2",
+      "mode": "cpu",
+      "node": "helix-worker1",
+      "independently_rechecked": true,
+      "evidence_sha256": "948729d63c88c6a66b4ad87a7816a7cbbf7914b24e5cc4af4b26c60bc37e97a1",
+      "details": {
+        "cpu_max": "200000 100000",
+        "memory_max": "268435456",
+        "swap_max": "0",
+        "mean_cpus": 1.9945094342744738,
+        "elapsed_seconds": 4.0164833829999225,
+        "throttled_delta": 9,
+        "child_exit_codes": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "id": "helix-worker1-memory-128",
+      "mode": "memory",
+      "node": "helix-worker1",
+      "independently_rechecked": true,
+      "evidence_sha256": "6853f8c2198fab2351adf0d65c1249bb967cbddd9d170515ea1b398d8a645158",
+      "details": {
+        "cpu_max": "100000 100000",
+        "memory_max": "134217728",
+        "swap_max": "0",
+        "oom_kill_delta": 1,
+        "child_exit_code": -9,
+        "peak_bytes": 134217728
+      }
+    },
+    {
+      "id": "helix-worker1-memory-256",
+      "mode": "memory",
+      "node": "helix-worker1",
+      "independently_rechecked": true,
+      "evidence_sha256": "7049398b3f889854376c74234c3b0016d5cbdbbdae0e2aa82312dafce40dcaa9",
+      "details": {
+        "cpu_max": "100000 100000",
+        "memory_max": "268435456",
+        "swap_max": "0",
+        "oom_kill_delta": 1,
+        "child_exit_code": -9,
+        "peak_bytes": 268435456
+      }
+    },
+    {
+      "id": "helix-worker1-memory-512",
+      "mode": "memory",
+      "node": "helix-worker1",
+      "independently_rechecked": true,
+      "evidence_sha256": "5d33091e1245de26d4c8c1871ac414143adb4331999d9944b453864179dd2a8b",
+      "details": {
+        "cpu_max": "100000 100000",
+        "memory_max": "536870912",
+        "swap_max": "0",
+        "oom_kill_delta": 1,
+        "child_exit_code": -9,
+        "peak_bytes": 536870912
+      }
+    },
+    {
+      "id": "helix-worker1-memory-1024",
+      "mode": "memory",
+      "node": "helix-worker1",
+      "independently_rechecked": true,
+      "evidence_sha256": "d3cf72899317a7f9ce947b86dd3fcffc6af7cc738f8d31e2cebddf07a0829af0",
+      "details": {
+        "cpu_max": "100000 100000",
+        "memory_max": "1073741824",
+        "swap_max": "0",
+        "oom_kill_delta": 1,
+        "child_exit_code": -9,
+        "peak_bytes": 1073741824
+      }
+    },
+    {
+      "id": "helix-worker1-memory-2048",
+      "mode": "memory",
+      "node": "helix-worker1",
+      "independently_rechecked": true,
+      "evidence_sha256": "bbc8fd552c003f2cef7df220e00aa42ea9de36d880ff27fe9a1c6a3bffecb5ea",
+      "details": {
+        "cpu_max": "100000 100000",
+        "memory_max": "2147483648",
+        "swap_max": "0",
+        "oom_kill_delta": 1,
+        "child_exit_code": -9,
+        "peak_bytes": 2147483648
+      }
+    },
+    {
+      "id": "helix-worker1-unavailable-cpu-3",
+      "mode": "scheduler",
+      "node": "helix-worker1",
+      "independently_rechecked": true,
+      "evidence_sha256": "602b9220e1ac3714f56c9a8e44b3d5adcaf7fc012a41a5aa6a2317e4debe4ad0",
+      "details": {
+        "capacity": {
+          "cpus": 2,
+          "memory_mib": 7400
+        },
+        "request_exceeds_capacity": true,
+        "scheduler_exit_code": 1
+      }
+    },
+    {
+      "id": "helix-worker1-unavailable-cpu-4",
+      "mode": "scheduler",
+      "node": "helix-worker1",
+      "independently_rechecked": true,
+      "evidence_sha256": "b0d6f8c76b803cade370b2543129d31ac493fcaa7cb5288d1a771d73a5c32563",
+      "details": {
+        "capacity": {
+          "cpus": 2,
+          "memory_mib": 7400
+        },
+        "request_exceeds_capacity": true,
+        "scheduler_exit_code": 1
+      }
+    },
+    {
+      "id": "helix-worker1-unavailable-cpu-5",
+      "mode": "scheduler",
+      "node": "helix-worker1",
+      "independently_rechecked": true,
+      "evidence_sha256": "7fc82fc046d0cc54b567cdc871f36585419c432a2b8193f4b873dbecbdf58e6f",
+      "details": {
+        "capacity": {
+          "cpus": 2,
+          "memory_mib": 7400
+        },
+        "request_exceeds_capacity": true,
+        "scheduler_exit_code": 1
+      }
+    },
+    {
+      "id": "helix-worker1-unavailable-cpu-6",
+      "mode": "scheduler",
+      "node": "helix-worker1",
+      "independently_rechecked": true,
+      "evidence_sha256": "52e64fbf4cb633c340df1fc5d9e05fe9fb7de0c1d391822d7e2346478aea2275",
+      "details": {
+        "capacity": {
+          "cpus": 2,
+          "memory_mib": 7400
+        },
+        "request_exceeds_capacity": true,
+        "scheduler_exit_code": 1
+      }
+    },
+    {
+      "id": "helix-worker1-unavailable-cpu-7",
+      "mode": "scheduler",
+      "node": "helix-worker1",
+      "independently_rechecked": true,
+      "evidence_sha256": "4003ca366477e40144d5a47f33c93237606a5417119cf48bc879ff83c1398e82",
+      "details": {
+        "capacity": {
+          "cpus": 2,
+          "memory_mib": 7400
+        },
+        "request_exceeds_capacity": true,
+        "scheduler_exit_code": 1
+      }
+    },
+    {
+      "id": "helix-worker1-unavailable-memory-7500",
+      "mode": "scheduler",
+      "node": "helix-worker1",
+      "independently_rechecked": true,
+      "evidence_sha256": "ba606fc581da0cf1c50d3ba1ae23f00c4a761cdc7c31cd8d40bfe7c7144722d1",
+      "details": {
+        "capacity": {
+          "cpus": 2,
+          "memory_mib": 7400
+        },
+        "request_exceeds_capacity": true,
+        "scheduler_exit_code": 1
+      }
+    },
+    {
+      "id": "helix-worker1-unavailable-memory-8192",
+      "mode": "scheduler",
+      "node": "helix-worker1",
+      "independently_rechecked": true,
+      "evidence_sha256": "7c5262c3b4c5f9ced709cebca03dce71687ca8cfdab04e5d83880b7e583cb0ae",
+      "details": {
+        "capacity": {
+          "cpus": 2,
+          "memory_mib": 7400
+        },
+        "request_exceeds_capacity": true,
+        "scheduler_exit_code": 1
+      }
+    },
+    {
+      "id": "helix-worker1-unavailable-memory-9216",
+      "mode": "scheduler",
+      "node": "helix-worker1",
+      "independently_rechecked": true,
+      "evidence_sha256": "cc6d90d4eab2b8cbc13327269f1bbbf8608fa406584399d6e2750f47910edb37",
+      "details": {
+        "capacity": {
+          "cpus": 2,
+          "memory_mib": 7400
+        },
+        "request_exceeds_capacity": true,
+        "scheduler_exit_code": 1
+      }
+    },
+    {
+      "id": "helix-worker1-unavailable-memory-10240",
+      "mode": "scheduler",
+      "node": "helix-worker1",
+      "independently_rechecked": true,
+      "evidence_sha256": "30d42b605a757edd4cc55a60eec03038c8b9fb779311793758610679b92104c5",
+      "details": {
+        "capacity": {
+          "cpus": 2,
+          "memory_mib": 7400
+        },
+        "request_exceeds_capacity": true,
+        "scheduler_exit_code": 1
+      }
+    },
+    {
+      "id": "helix-worker1-unavailable-memory-11264",
+      "mode": "scheduler",
+      "node": "helix-worker1",
+      "independently_rechecked": true,
+      "evidence_sha256": "dc005817ecad6d00e092002c75eb7c0052341dda764af229d8e762bbd179557e",
+      "details": {
+        "capacity": {
+          "cpus": 2,
+          "memory_mib": 7400
+        },
+        "request_exceeds_capacity": true,
+        "scheduler_exit_code": 1
+      }
+    },
+    {
+      "id": "helix-worker2-cpu-0.25",
+      "mode": "cpu",
+      "node": "helix-worker2",
+      "independently_rechecked": true,
+      "evidence_sha256": "5f4a444f39e0d62813f43106afdf42231841e31e7eb49d56942d5728ac8eb47f",
+      "details": {
+        "cpu_max": "25000 100000",
+        "memory_max": "268435456",
+        "swap_max": "0",
+        "mean_cpus": 0.24660147069352284,
+        "elapsed_seconds": 4.178231366999967,
+        "throttled_delta": 42,
+        "child_exit_codes": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "id": "helix-worker2-cpu-0.5",
+      "mode": "cpu",
+      "node": "helix-worker2",
+      "independently_rechecked": true,
+      "evidence_sha256": "7c68ee547b981007ff547b19b16324208d497e081821c84bfa98ee7effff643a",
+      "details": {
+        "cpu_max": "50000 100000",
+        "memory_max": "268435456",
+        "swap_max": "0",
+        "mean_cpus": 0.49861098665187426,
+        "elapsed_seconds": 4.068143410999937,
+        "throttled_delta": 41,
+        "child_exit_codes": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "id": "helix-worker2-cpu-1",
+      "mode": "cpu",
+      "node": "helix-worker2",
+      "independently_rechecked": true,
+      "evidence_sha256": "d38259f4b8a558b5d9414e621bc8fc5aaa968f23663654e92a493820330ff637",
+      "details": {
+        "cpu_max": "100000 100000",
+        "memory_max": "268435456",
+        "swap_max": "0",
+        "mean_cpus": 1.0126211893135255,
+        "elapsed_seconds": 4.01782032899996,
+        "throttled_delta": 40,
+        "child_exit_codes": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "id": "helix-worker2-cpu-1.5",
+      "mode": "cpu",
+      "node": "helix-worker2",
+      "independently_rechecked": true,
+      "evidence_sha256": "896c82ae754fbfb5cf3b9d1e4973816274a453da3fcbc5ff94107581ea214dfa",
+      "details": {
+        "cpu_max": "150000 100000",
+        "memory_max": "268435456",
+        "swap_max": "0",
+        "mean_cpus": 1.504762284678662,
+        "elapsed_seconds": 4.033063602000084,
+        "throttled_delta": 40,
+        "child_exit_codes": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "id": "helix-worker2-cpu-2",
+      "mode": "cpu",
+      "node": "helix-worker2",
+      "independently_rechecked": true,
+      "evidence_sha256": "87971ae5362bebb823825330205ddcbdbec35cd4632290959e1527cf4e11e55d",
+      "details": {
+        "cpu_max": "200000 100000",
+        "memory_max": "268435456",
+        "swap_max": "0",
+        "mean_cpus": 1.9902981886658453,
+        "elapsed_seconds": 4.01460497000005,
+        "throttled_delta": 2,
+        "child_exit_codes": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "id": "helix-worker2-memory-128",
+      "mode": "memory",
+      "node": "helix-worker2",
+      "independently_rechecked": true,
+      "evidence_sha256": "70fd62fb92381a282ad32fe092c2095f07e2ba1c5ace48ebacb3e12fb7ffbff3",
+      "details": {
+        "cpu_max": "100000 100000",
+        "memory_max": "134217728",
+        "swap_max": "0",
+        "oom_kill_delta": 1,
+        "child_exit_code": -9,
+        "peak_bytes": 134217728
+      }
+    },
+    {
+      "id": "helix-worker2-memory-256",
+      "mode": "memory",
+      "node": "helix-worker2",
+      "independently_rechecked": true,
+      "evidence_sha256": "09d483a34397239f8706ee00e259e8d1b4d529651613ce4de1415705b87bdd82",
+      "details": {
+        "cpu_max": "100000 100000",
+        "memory_max": "268435456",
+        "swap_max": "0",
+        "oom_kill_delta": 1,
+        "child_exit_code": -9,
+        "peak_bytes": 268435456
+      }
+    },
+    {
+      "id": "helix-worker2-memory-512",
+      "mode": "memory",
+      "node": "helix-worker2",
+      "independently_rechecked": true,
+      "evidence_sha256": "0aedad5347804c2b9368e974b6925dffafbb0ff832c65f2d7bc590a4625db30b",
+      "details": {
+        "cpu_max": "100000 100000",
+        "memory_max": "536870912",
+        "swap_max": "0",
+        "oom_kill_delta": 1,
+        "child_exit_code": -9,
+        "peak_bytes": 536870912
+      }
+    },
+    {
+      "id": "helix-worker2-memory-1024",
+      "mode": "memory",
+      "node": "helix-worker2",
+      "independently_rechecked": true,
+      "evidence_sha256": "9e73336dafcbf3264939cebf6274fde049cc1f829cf9752551c47a6f559d7966",
+      "details": {
+        "cpu_max": "100000 100000",
+        "memory_max": "1073741824",
+        "swap_max": "0",
+        "oom_kill_delta": 1,
+        "child_exit_code": -9,
+        "peak_bytes": 1073741824
+      }
+    },
+    {
+      "id": "helix-worker2-memory-2048",
+      "mode": "memory",
+      "node": "helix-worker2",
+      "independently_rechecked": true,
+      "evidence_sha256": "6b5107e2b6ba50a05e0edac7273d645c8a8bec613b54e3df294784cf74fd1e9d",
+      "details": {
+        "cpu_max": "100000 100000",
+        "memory_max": "2147483648",
+        "swap_max": "0",
+        "oom_kill_delta": 1,
+        "child_exit_code": -9,
+        "peak_bytes": 2147483648
+      }
+    },
+    {
+      "id": "helix-worker2-unavailable-cpu-3",
+      "mode": "scheduler",
+      "node": "helix-worker2",
+      "independently_rechecked": true,
+      "evidence_sha256": "b6022c673587b9b6b8b084e5a76d15e0195b5777eea5d6105e4bdf0d07d6ce49",
+      "details": {
+        "capacity": {
+          "cpus": 2,
+          "memory_mib": 7400
+        },
+        "request_exceeds_capacity": true,
+        "scheduler_exit_code": 1
+      }
+    },
+    {
+      "id": "helix-worker2-unavailable-cpu-4",
+      "mode": "scheduler",
+      "node": "helix-worker2",
+      "independently_rechecked": true,
+      "evidence_sha256": "4e61d643b601738139495e1a4ed7e3ac01b0825e9638a02b6db758b69f967914",
+      "details": {
+        "capacity": {
+          "cpus": 2,
+          "memory_mib": 7400
+        },
+        "request_exceeds_capacity": true,
+        "scheduler_exit_code": 1
+      }
+    },
+    {
+      "id": "helix-worker2-unavailable-cpu-5",
+      "mode": "scheduler",
+      "node": "helix-worker2",
+      "independently_rechecked": true,
+      "evidence_sha256": "8d6256390c1074694c59fea2e00e60685c790e20d73171aadee643f957582653",
+      "details": {
+        "capacity": {
+          "cpus": 2,
+          "memory_mib": 7400
+        },
+        "request_exceeds_capacity": true,
+        "scheduler_exit_code": 1
+      }
+    },
+    {
+      "id": "helix-worker2-unavailable-cpu-6",
+      "mode": "scheduler",
+      "node": "helix-worker2",
+      "independently_rechecked": true,
+      "evidence_sha256": "a3a0e70c898120234c4d9c2f4c2e46080ddf1f8ccb10c7c98beddbc2fd0678ba",
+      "details": {
+        "capacity": {
+          "cpus": 2,
+          "memory_mib": 7400
+        },
+        "request_exceeds_capacity": true,
+        "scheduler_exit_code": 1
+      }
+    },
+    {
+      "id": "helix-worker2-unavailable-cpu-7",
+      "mode": "scheduler",
+      "node": "helix-worker2",
+      "independently_rechecked": true,
+      "evidence_sha256": "c6c2c1bdaa82071c29b13130fc801f923a924fdd00d02dfdf53d913a196aae1f",
+      "details": {
+        "capacity": {
+          "cpus": 2,
+          "memory_mib": 7400
+        },
+        "request_exceeds_capacity": true,
+        "scheduler_exit_code": 1
+      }
+    },
+    {
+      "id": "helix-worker2-unavailable-memory-7500",
+      "mode": "scheduler",
+      "node": "helix-worker2",
+      "independently_rechecked": true,
+      "evidence_sha256": "892008a64cb72ba5d9b993a16abe47b5b9c3ab32abbfd1ce8e50ad9b40eade14",
+      "details": {
+        "capacity": {
+          "cpus": 2,
+          "memory_mib": 7400
+        },
+        "request_exceeds_capacity": true,
+        "scheduler_exit_code": 1
+      }
+    },
+    {
+      "id": "helix-worker2-unavailable-memory-8192",
+      "mode": "scheduler",
+      "node": "helix-worker2",
+      "independently_rechecked": true,
+      "evidence_sha256": "e0f0295c63f6ce97b798e1b97a21c9a84c729832a8597f1dd9082e526fb9bf78",
+      "details": {
+        "capacity": {
+          "cpus": 2,
+          "memory_mib": 7400
+        },
+        "request_exceeds_capacity": true,
+        "scheduler_exit_code": 1
+      }
+    },
+    {
+      "id": "helix-worker2-unavailable-memory-9216",
+      "mode": "scheduler",
+      "node": "helix-worker2",
+      "independently_rechecked": true,
+      "evidence_sha256": "3bef1bb7bafaa8c25101c5e9764614e1aba2dcabbf3e60b57a5aedf9a5c3e5ba",
+      "details": {
+        "capacity": {
+          "cpus": 2,
+          "memory_mib": 7400
+        },
+        "request_exceeds_capacity": true,
+        "scheduler_exit_code": 1
+      }
+    },
+    {
+      "id": "helix-worker2-unavailable-memory-10240",
+      "mode": "scheduler",
+      "node": "helix-worker2",
+      "independently_rechecked": true,
+      "evidence_sha256": "07f472d5a0715ee70ff8737cc8c5ec278f5271397e622f511ced6b88894ff8eb",
+      "details": {
+        "capacity": {
+          "cpus": 2,
+          "memory_mib": 7400
+        },
+        "request_exceeds_capacity": true,
+        "scheduler_exit_code": 1
+      }
+    },
+    {
+      "id": "helix-worker2-unavailable-memory-11264",
+      "mode": "scheduler",
+      "node": "helix-worker2",
+      "independently_rechecked": true,
+      "evidence_sha256": "173d9e4267dfaddd2f7ed47f64f6f893110813769885ba087f98b015f262c269",
+      "details": {
+        "capacity": {
+          "cpus": 2,
+          "memory_mib": 7400
+        },
+        "request_exceeds_capacity": true,
+        "scheduler_exit_code": 1
+      }
+    }
+  ],
+  "limitations": [
+    "Memory OOM containment succeeds because the bound child is killed; this is not scientific task success.",
+    "No Helix admission predictions are present in these hardware contrasts, so workflow rejection accuracy and false-rejection rate are not derived.",
+    "CPU quota is bandwidth rather than exclusive cores; startup timing allowance follows the engineering probe criteria."
+  ],
+  "verified": true
+}

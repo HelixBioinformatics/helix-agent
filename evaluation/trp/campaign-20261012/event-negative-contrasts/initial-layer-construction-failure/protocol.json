@@ -1,0 +1,152 @@
+{
+  "schema": "helix-negative-action-oracle-protocol/1.0",
+  "frozenAtUtc": "2026-10-13T03:49:26.942483+00:00",
+  "scope": "Real local production Helix prepare/run and Question.Service; prospective engineering action oracle from isolated callbacks; real host inventory; no model, human labels or cloud. Preparation refusal records are counted separately from run events, with their actual timestamps and causes. No full-human-session or kappa claim.",
+  "cases": [
+    {
+      "id": "permission-denied",
+      "causeContains": "Independent synthetic permission refusal",
+      "expectedEvents": [
+        {
+          "source": "admission",
+          "outcome": "accepted-for-review"
+        },
+        {
+          "source": "protocol",
+          "outcome": "not-committed"
+        },
+        {
+          "source": "permission",
+          "outcome": "requested"
+        },
+        {
+          "source": "permission",
+          "outcome": "denied-or-error"
+        },
+        {
+          "source": "execution",
+          "outcome": "failed-or-rejected"
+        }
+      ],
+      "expectedPermissionActions": 2,
+      "expectedApprovalActions": 0,
+      "expectedProtocolGuards": 1,
+      "expectedAdmissionDecision": true
+    },
+    {
+      "id": "approval-rejected",
+      "causeContains": "approval-denied",
+      "expectedEvents": [
+        {
+          "source": "admission",
+          "outcome": "accepted-for-review"
+        },
+        {
+          "source": "protocol",
+          "outcome": "not-committed"
+        },
+        {
+          "source": "permission",
+          "outcome": "requested"
+        },
+        {
+          "source": "permission",
+          "outcome": "returned-allowed"
+        },
+        {
+          "source": "approval",
+          "outcome": "requested"
+        },
+        {
+          "source": "approval",
+          "outcome": "answered"
+        },
+        {
+          "source": "execution",
+          "outcome": "failed-or-rejected"
+        }
+      ],
+      "expectedPermissionActions": 2,
+      "expectedApprovalActions": 2,
+      "expectedProtocolGuards": 1,
+      "expectedAdmissionDecision": true
+    },
+    {
+      "id": "protocol-rejected",
+      "causeContains": "protocol-rejected",
+      "expectedEvents": [],
+      "expectedPermissionActions": 0,
+      "expectedApprovalActions": 0,
+      "expectedProtocolGuards": 1,
+      "expectedAdmissionDecision": true,
+      "expectedPreparationRecord": {
+        "protocolRefused": true,
+        "admissionAccepted": true,
+        "constraintId": "geometry-prohibited"
+      }
+    },
+    {
+      "id": "admission-rejected",
+      "causeContains": "resource-rejected",
+      "expectedEvents": [],
+      "expectedPermissionActions": 0,
+      "expectedApprovalActions": 0,
+      "expectedProtocolGuards": 0,
+      "expectedAdmissionDecision": false,
+      "expectedPreparationRecord": {
+        "admissionAccepted": false,
+        "resource": "cpus",
+        "code": "budget-insufficient",
+        "demand": 3,
+        "available": 1
+      }
+    }
+  ],
+  "sources": [
+    {
+      "path": "packages/helix/test/trp/event-negative.campaign.test.ts",
+      "sha256": "d360085b99632fc2c0c1a0d5249ce0a58b38d7b00c849e9a2b452ca03d6aa159"
+    },
+    {
+      "path": "packages/helix/src/trp/workflow.ts",
+      "sha256": "a0d24c572ed0a4dc52ecfa600ca83693ecf76a2d6bd538e0817d88176ce5872b"
+    },
+    {
+      "path": "packages/helix/src/trp/resources.ts",
+      "sha256": "c920fbb81914f2d8f15051ef45ef7c898bcae0c72ab4ee4e5e38a1ea5c55b5b2"
+    },
+    {
+      "path": "packages/helix/src/trp/nextflow.ts",
+      "sha256": "3729bf84120a359ba5efb68349bca85d7d80be579638bbb4810c018554458309"
+    },
+    {
+      "path": "packages/helix/src/trp/remote.ts",
+      "sha256": "21826043bd1806383ae712af8bfb8fd92f529e1d589e03d8d886b57cac896caf"
+    },
+    {
+      "path": "packages/helix/src/trp/evidence.ts",
+      "sha256": "6159acfa99371f2228f23405bb71c1ff36a183a62641803c969a229b7326fb73"
+    },
+    {
+      "path": "packages/helix/src/nfcore/protocol.ts",
+      "sha256": "3aa06be1866680d70974b0a03bab6bdf06b99f1d54913d268169bd4c9c53c9a2"
+    },
+    {
+      "path": "packages/helix/src/question/index.ts",
+      "sha256": "0842bb01a4126c604cae693471b0eab4a5bfb8ac9590507eb6299d0e0c718aff"
+    },
+    {
+      "path": "evaluation/trp/development/f3-reference-spec.json",
+      "sha256": "9e3660646b881ed268fa2ee196c7de7b1e3a26eb6cb489b0e0f084cab4cb5cf3"
+    },
+    {
+      "path": "evaluation/trp/development/f4-budget.json",
+      "sha256": "63a642761fc0128198bdbeeebe367338e70bc9f604a68ba4fff02e7665bafcd9"
+    }
+  ],
+  "productionMutated": false,
+  "heldOutScientific": false,
+  "humanLabels": 0,
+  "modelCalls": 0,
+  "awsOperations": 0
+}

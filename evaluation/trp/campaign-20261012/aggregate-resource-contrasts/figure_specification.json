@@ -1,0 +1,18 @@
+{
+  "schema": "helix-resource-figure-specification/1.0",
+  "input": "summary.json",
+  "purpose": "Show the observed same-scope resource contrasts without treating unfinished work as full-workflow consumption or combining prospectively separate cohorts.",
+  "panels": [
+    {"group": "original", "planned": 40, "x": "budgetWorkBytes in MiB, logarithmic base two", "y": "allocatedBlockBytesObservedPeak in MiB, linear", "color": "actual unmodified Helix admission", "marker": "independently observed complete workflow or causal terminal resource failure"},
+    {"group": "boundary", "planned": 6, "x": "same", "y": "same", "color": "same", "marker": "same"}
+  ],
+  "rules": [
+    "No jitter, guessed outcomes, interpolated missing cases or confidence intervals.",
+    "Show the actual sampled peak for terminal failures; explicitly state that this is incomplete work and not the required total storage.",
+    "Display unknown and not-observed denominators in each panel.",
+    "Plot quota equality and observed production estimates as separately labeled lines.",
+    "State that software/shared container infrastructure and experiment-only root telemetry are outside the assigned work-storage scope.",
+    "Preserve original forty and separately frozen six boundary contrasts, with one development protein and no biological metric substitution.",
+    "Export PNG at 300 DPI plus vector PDF and SVG; use colorblind-friendly blue/orange with distinct shape encoding and readable Spanish labels."
+  ]
+}

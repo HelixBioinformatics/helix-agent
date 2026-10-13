@@ -1,0 +1,31 @@
+N E X T F L O W  ~  version 25.10.4
+Launching `main.nf` [suspicious_davinci] DSL2 - revision: 0f14c41768
+[40/256bbc] Submitted process > SELECT
+ERROR ~ Error executing process > 'SELECT'
+
+Caused by:
+  Process `SELECT` terminated with an error exit status (1)
+
+
+Command executed:
+
+  cp selection.pdb 2xqh.pdb
+
+Command exit status:
+  1
+
+Command output:
+  (empty)
+
+Command wrapper:
+  cp: failed to clone 'source.pdb' from '/shared/helix-strict/hrsb6ba2e3058584489/remote/trp-88f03ec097a7-9d9d6372-70a9-4b85-8c37-8b279eeaeb61/dry-run/source.pdb': No space left on device
+
+Work dir:
+  /shared/helix-strict/hrsb6ba2e3058584489/remote/trp-88f03ec097a7-9d9d6372-70a9-4b85-8c37-8b279eeaeb61/dry-run/work/40/256bbcb6cd19538322c19c9dc06fa0
+
+Container:
+  sha256:1dd91e70acb153a0bd9a51346fc001dd5025f851c9598697cdd37f07d9490b0a
+
+Tip: you can try to figure out what's wrong by changing to the process work dir and showing the script file named `.command.sh`
+
+ -- Check '.nextflow.log' file for details

@@ -1,0 +1,30 @@
+bun test v1.3.14 (0d9b296a)
+
+test/nfcore/handcount.test.ts:
+hand-count agreement: 43/43 = 100.0%
+CHANGED  corpus/a.ndjson
+         recorded bb157861a164e35cdde9d726b0af9ce2765a8f530c35d9e45732b94ee65e9557
+         on disk  feb939020e9d63a4e5671c2fee3621703f45dcd172d5ab9380cec70a163dea5d
+
+FAILED — 1 file(s) do not match what this dossier records.
+MISSING  corpus/a.ndjson
+
+FAILED — 1 file(s) do not match what this dossier records.
+CHANGED  corpus/a.ndjson
+         recorded bb157861a164e35cdde9d726b0af9ce2765a8f530c35d9e45732b94ee65e9557
+         on disk  665e6c72bd9bcbb99fc9304c76702de80e33dc59b54589ee8217b27c20a4cee0
+CHANGED  index.json
+         recorded 650bb99a6b90c75f9ab47cd963ec1e2857dd091974eeb831b266bdec9b981641
+         on disk  93def49f115eeae79689e238862708515d371e01d268ef0ebee19675e1589f2c
+
+FAILED — 2 file(s) do not match what this dossier records.
+REFUSED  the project this dossier was assembled from did not verify
+         1 check(s) failed at assembly time:
+           corpus/a.manifest.json: sha256 mismatch
+
+
+ 532 pass
+ 59 skip
+ 0 fail
+ 1562 expect() calls
+Ran 591 tests across 54 files. [18.42s]

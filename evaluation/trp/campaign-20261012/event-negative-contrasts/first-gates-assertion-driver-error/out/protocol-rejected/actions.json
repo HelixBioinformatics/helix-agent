@@ -1,0 +1,122 @@
+[
+  {
+    "at": "2026-10-13T03:50:21.712Z",
+    "order": 0,
+    "source": "driver",
+    "outcome": "prepare-requested",
+    "detail": {
+      "id": "protocol-rejected",
+      "budget": {
+        "cpus": 3,
+        "memoryBytes": 4294967296,
+        "workBytes": 268435456,
+        "wallSeconds": 1080,
+        "requireHardStorageLimit": false,
+        "origin": "Explicit engineering reference fixture; synthetic approval driver; not the thesis evaluation or provider budget"
+      }
+    }
+  },
+  {
+    "at": "2026-10-13T03:50:21.809Z",
+    "order": 1,
+    "source": "inventory",
+    "outcome": "requested",
+    "detail": {
+      "workspace": "/tmp/helix-test-o1kgb6ncwjn"
+    }
+  },
+  {
+    "at": "2026-10-13T03:50:21.812Z",
+    "order": 2,
+    "source": "inventory",
+    "outcome": "observed",
+    "detail": {
+      "version": "trp-resources/1.2.0",
+      "observedAt": "2026-10-13T03:50:21.812Z",
+      "platform": "linux",
+      "architecture": "x64",
+      "host": "cachyos-x8664",
+      "workspace": "/tmp/helix-test-o1kgb6ncwjn",
+      "filesystem": "16914836",
+      "cpus": 16,
+      "memoryBytes": 8949264384,
+      "freeBytes": 7612223488,
+      "sources": [
+        "os.availableParallelism",
+        "/proc/meminfo:MemAvailable",
+        "fs.statfs:bavail*bsize",
+        "/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/app.slice/ptyxis-spawn-5ef70805-ae6c-4b02-9384-90b452f3343c.scope:cpu.max,memory.max,memory.current",
+        "/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/app.slice:cpu.max,memory.max,memory.current",
+        "/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service:cpu.max,memory.max,memory.current",
+        "/sys/fs/cgroup/user.slice/user-1000.slice:cpu.max,memory.max,memory.current",
+        "/sys/fs/cgroup/user.slice:cpu.max,memory.max,memory.current",
+        "/sys/fs/cgroup:cpu.max,memory.max,memory.current"
+      ],
+      "limitations": [
+        "Host capacity clipped to inherited cgroup limits/headroom; not an exclusive allocation. Shared loads can change it.",
+        "Local Docker daemon/image and Nextflow version are separately checked before task launch. Remote Docker is rejected.",
+        "GPU not required; cluster access unconfirmed and unsupported by this route; aggregate disk quota unavailable."
+      ]
+    }
+  },
+  {
+    "at": "2026-10-13T03:50:21.812Z",
+    "order": 3,
+    "source": "protocol",
+    "outcome": "guard-requested",
+    "detail": {
+      "request": "Calcular la geometría de las unidades suministradas para 2xqh, cadena A.",
+      "detail": "{\"catalogHash\":\"e1c049cf4e4922d22d9f9f285582158b2f215170efa6520182007b990cf54815\",\"chain\":{\"origin\":{\"detail\":\"Published GeomeTRe 1.0 example for 2xqh A; development reference, excluded from held-out evaluation\",\"kind\":\"reference\",\"reference\":\"evaluation/trp/reference/geometre/units.json\"},\"value\":\"A\"},\"graph\":{\"edges\":[{\"contract\":{\"chain\":\"A\",\"confidence\":\"none\",\"format\":\"pdb\",\"insertionCodes\":\"preserved\",\"numbering\":\"pdb-author\",\"protein\":\"2xqh\",\"scale\":\"xyz:angstrom;B:angstrom^2\"},\"from\":\"structure\",\"input\":\"structure\",\"to\":\"select\"},{\"contract\":{\"chain\":\"A\",\"confidence\":\"none\",\"format\":\"pdb\",\"insertionCodes\":\"excluded\",\"numbering\":\"pdb-author\",\"protein\":\"2xqh\",\"scale\":\"xyz:angstrom;B:angstrom^2\"},\"from\":\"select\",\"input\":\"structure\",\"to\":\"geometry\"},{\"contract\":{\"chain\":\"A\",\"confidence\":\"none\",\"format\":\"json\",\"insertionCodes\":\"excluded\",\"numbering\":\"pdb-author\",\"protein\":\"2xqh\",\"scale\":\"author-residue-interval\"},\"from\":\"units\",\"input\":\"units\",\"to\":\"geometry\"}],\"nodes\":[{\"id\":\"structure\",\"operation\":\"input.structure\"},{\"id\":\"units\",\"operation\":\"input.units\"},{\"id\":\"select\",\"operation\":\"pdb.select\"},{\"id\":\"geometry\",\"operation\":\"geometre.geometry\"}]},\"insertions\":{\"origin\":{\"detail\":\"Published GeomeTRe 1.0 example for 2xqh A; development reference, excluded from held-out evaluation\",\"kind\":\"reference\",\"reference\":\"evaluation/trp/reference/geometre/units.json\"},\"value\":[{\"end\":372,\"start\":351}]},\"intent\":{\"origin\":{\"detail\":\"Published GeomeTRe 1.0 example for 2xqh A; development reference, excluded from held-out evaluation\",\"kind\":\"reference\",\"reference\":\"evaluation/trp/reference/geometre/units.json\"},\"value\":\"Calcular la geometría de las unidades suministradas para 2xqh, cadena A.\"},\"model\":{\"origin\":{\"detail\":\"Published GeomeTRe 1.0 example for 2xqh A; development reference, excluded from held-out evaluation\",\"kind\":\"reference\",\"reference\":\"evaluation/trp/reference/geometre/units.json\"},\"value\":1},\"structure\":{\"origin\":{\"detail\":\"Published GeomeTRe 1.0 example for 2xqh A; development reference, excluded from held-out evaluation\",\"kind\":\"reference\",\"reference\":\"evaluation/trp/reference/geometre/units.json\"},\"value\":{\"path\":\"input.pdb\",\"pdb\":\"2xqh\",\"sha256\":\"f674267d0ef4752a3d4da00497947bfc09f441a5c36d39593b72bc2ba390df0b\"}},\"units\":{\"origin\":{\"detail\":\"Published GeomeTRe 1.0 example for 2xqh A; development reference, excluded from held-out evaluation\",\"kind\":\"reference\",\"reference\":\"evaluation/trp/reference/geometre/units.json\"},\"value\":{\"contract\":{\"chain\":\"A\",\"confidence\":\"none\",\"format\":\"json\",\"insertionCodes\":\"excluded\",\"numbering\":\"pdb-author\",\"protein\":\"2xqh\",\"scale\":\"author-residue-interval\"},\"ranges\":[{\"end\":175,\"start\":161},{\"end\":189,\"start\":176},{\"end\":203,\"start\":190},{\"end\":217,\"start\":204},{\"end\":233,\"start\":218},{\"end\":249,\"start\":234},{\"end\":263,\"start\":250},{\"end\":276,\"start\":264},{\"end\":326,\"start\":305},{\"end\":350,\"start\":327},{\"end\":392,\"start\":373},{\"end\":416,\"start\":393}]}},\"version\":\"trp-spec/1.0.0\"} nextflow -C nextflow.config run main.nf -ansi-log false -with-trace trace.tsv"
+    }
+  },
+  {
+    "at": "2026-10-13T03:50:21.815Z",
+    "order": 4,
+    "source": "protocol",
+    "outcome": "guard-returned",
+    "detail": {
+      "result": {
+        "committed": true,
+        "enforced": true,
+        "violated": [
+          {
+            "constraint": {
+              "id": "geometry-prohibited",
+              "text": "This campaign prohibits the supplied GeomeTRe request.",
+              "triggers": [
+                "geometre"
+              ]
+            },
+            "why": "the request mentions \"geometre\""
+          }
+        ],
+        "waived": [],
+        "unevaluated": [],
+        "cleared": [],
+        "refused": true
+      },
+      "refusal": {
+        "at": "2026-10-13T03:50:21.814Z",
+        "request": "Calcular la geometría de las unidades suministradas para 2xqh, cadena A.",
+        "constraintIds": [
+          "geometry-prohibited"
+        ],
+        "constraintTexts": [
+          "This campaign prohibits the supplied GeomeTRe request."
+        ],
+        "outcome": "refused"
+      },
+      "message": "<protocol_refusal>\nREFUSED by the protocol committed for this campaign on 2026-10-13T03:50:21.710Z by synthetic engineering fixture.\n\nRequested:\nCalcular la geometría de las unidades suministradas para 2xqh, cadena A.\n\nRefused by:\n- [geometry-prohibited] This campaign prohibits the supplied GeomeTRe request.\n    implicated because the request mentions \"geometre\"\n\nThere is exactly one way forward, and it is on the record:\n  helix protocol amend geometry-prohibited --action waive --scope \"<the request, verbatim>\" --reason \"<why this once>\" --sign \"<name>\"\n\nDo not work around the constraint, do not restate the request in different words, and do not treat the scientist saying \"go ahead\" in conversation as an amendment. The scientist committed to this while they were cold; you are talking to them while they are warm.\nThis attempt has been appended to .helix/protocol/refusals.jsonl with a timestamp.\n</protocol_refusal>"
+    }
+  },
+  {
+    "at": "2026-10-13T03:50:21.817Z",
+    "order": 5,
+    "source": "driver",
+    "outcome": "terminal-observed",
+    "detail": {
+      "failed": true,
+      "cause": "WorkflowError: Binding protocol violated or contains unevaluated constraints\n    at <anonymous> (/home/webiwabou/Projects/bioinformatica-org/packages/helix/src/trp/workflow.ts:161:19)\n    at Tool.execute (/home/webiwabou/Projects/bioinformatica-org/packages/helix/src/tool/tool.ts:145:38)"
+    }
+  }
+]

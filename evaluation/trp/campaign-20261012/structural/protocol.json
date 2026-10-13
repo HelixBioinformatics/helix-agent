@@ -1,0 +1,52 @@
+{
+  "version": "structural-physical-development/1.0.0",
+  "date": "2026-10-12",
+  "kind": "prospectively specified exploratory extension; not reserved T-STRUCT validation",
+  "problem": "The original inspection has confidence/PAE checks but no physical observable. Existing mechanical alarms mark all 78 Pratt models and cannot establish discrimination.",
+  "adaptation": "Compute an established all-atom steric clash observable with CCTBX Reduce2/Probe2, and acquire an independent reference cohort of experimentally solved, reviewed beta-solenoids from RepeatsDB. Retain physical validity labels as unknown wherever no specific published label exists.",
+  "adaptationReason": "Original author coordinates now exist. CPU-only coordinate validation can be performed without additional AWS credits or regeneration of predictions, while independent physical-failure labels and a validated decision rule remain limited.",
+  "engine": {
+    "package": "cctbx-base",
+    "version": "2025.11",
+    "entryPoint": "mmtbx.programs.clashscore2.Program",
+    "keepHydrogens": false,
+    "doFlips": false,
+    "nuclear": false,
+    "bFactorCutoff": null,
+    "fast": false,
+    "meaning": "Unfavorable nonbonded atomic overlaps of at least 0.4 angstrom, after standard hydrogen preparation; report clash count and clashes per 1000 atoms.",
+    "moleculeWideThreshold": null,
+    "thresholdPolicy": "No retrospectively chosen structure-level cutoff, classifier, sensitivity, specificity or pass/fail declaration is introduced by this diagnostic. Atomic overlap criterion is part of the established external method."
+  },
+  "pratt": {
+    "cohort": "all 78 original rank-1 author-shared models, unchanged",
+    "explicitPublishedProblems": ["8b", "12ab", "19r", "21r", "22r"],
+    "otherModels": "unlabelled",
+    "labelPolicy": "Only the five existing sequence/caption-linked published problems remain positive examples. Other models are not assigned success/failure labels.",
+    "developmentExposure": "Existing mechanical outcomes and paper descriptions have already been examined. New physical outcomes belong to development, even though method parameters are fixed before this run."
+  },
+  "referenceSelection": {
+    "endpoint": "https://repeatsdb.org/api/production/annotations",
+    "query": {"limit": 100, "skip": 0, "chain.source": "PDB", "region.classes": "3.1"},
+    "source": "RCSB/PDB",
+    "reviewed": true,
+    "foldClass": "3.1 beta-solenoid",
+    "target": 30,
+    "selectionOrder": "API order frozen by the raw response; first eligible representative per UniProt identity, one chain per PDB entry",
+    "exclusions": ["2xqh and P69905 development references", "multiple coordinate models", "non-experimental method", "missing selected author chain", "ambiguous or partially occupied alternate atoms", "duplicate mapped UniProt identity", "coordinate download or parsing failure"],
+    "exclusionPolicy": "All candidates and reasons are retained. Steric clash outcomes are never consulted during selection and never trigger replacement.",
+    "coordinateScope": "Complete selected author chain as deposited, with no inferred conversion of RepeatsDB loci, automated repairs, relaxation or atom trimming. Additional crystal chains, ligands and waters are not scored in this bounded intrachain comparison.",
+    "label": "independent experimental reviewed-repeat reference; not certified physically flawless",
+    "labelPolicy": "RepeatsDB reviewed=true supports repeat annotation. It does not certify absence of every atom-level modeling error, so these rows are not silently counted as confirmed no-clash negatives."
+  },
+  "outputs": ["frozen source hashes", "candidate eligibility ledger", "30 reviewed experimental reference entries if available", "per-case external validation report", "continuous per-case clash outcomes", "explicit unevaluable errors and coverage", "separate feasible/pending assessment"],
+  "verification": "Check input hashes and method/version, require one model and finite coordinates, retain errors, independently verify count/score correspondence and reproducibility on one fixed case. No raw author coordinates or hydrogenated derivatives are committed.",
+  "remainingForR3.8": ["A validated rule and a reference standard for the specific physical failure being tested", "Independent evaluation data not used to design or calibrate that rule", "Coverage of charged buried stacks, exposed hydrophobic stacks and environmental compatibility beyond steric overlaps"],
+  "sources": [
+    {"url": "https://github.com/cctbx/cctbx_project/blob/master/mmtbx/programs/clashscore2.py", "purpose": "Official method implementation and parameters"},
+    {"url": "https://github.com/cctbx/cctbx_project/blob/master/mmtbx/validation/clashscore2.py", "purpose": "Official steric clash calculation"},
+    {"url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5734394/", "doi": "10.1002/pro.3330", "purpose": "MolProbity method, hydrogen preparation and limits"},
+    {"url": "https://repeatsdb.org/api/", "purpose": "Official production annotation API"},
+    {"url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11701623/", "doi": "10.1093/nar/gkae965", "purpose": "Independent database review/annotation scope"}
+  ]
+}

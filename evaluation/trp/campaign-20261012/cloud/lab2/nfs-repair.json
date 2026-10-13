@@ -1,0 +1,13 @@
+{
+  "kind": "bootstrap_mount_race_repair",
+  "observed_at": "2026-10-13T00:28:28.251006+00:00",
+  "reason": "Workers attempted NFS before head export became available; slurmd could start without actual mount because fstab uses nofail. No scientific jobs had run.",
+  "nodes": [
+    {
+      "node": "helix-worker1",
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "sed: -e expression #1, char 60: unknown command: `A'\n"
+    }
+  ]
+}

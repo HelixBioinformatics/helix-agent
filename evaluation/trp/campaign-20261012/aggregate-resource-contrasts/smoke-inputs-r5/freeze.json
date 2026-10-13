@@ -1,0 +1,442 @@
+{
+  "schema": "helix-aggregate-client-resource-contrasts/1.0",
+  "mode": "smoke",
+  "guestInputNamespace": "smoke5",
+  "frozenAt": "2026-10-13T04:45:43.995Z",
+  "cases": [
+    {
+      "id": "SMOKE-01-generous",
+      "graphId": "G-valid-001",
+      "cohort": "generous",
+      "specification": {
+        "version": "trp-spec/1.0.0",
+        "catalogHash": "e1c049cf4e4922d22d9f9f285582158b2f215170efa6520182007b990cf54815",
+        "intent": {
+          "value": "Calcular la geometría de las unidades suministradas para 2xqh, cadena A.",
+          "origin": {
+            "kind": "reference",
+            "reference": "evaluation/trp/reference/geometre/units.json",
+            "detail": "Published GeomeTRe 1.0 example for 2xqh A; development reference, excluded from held-out evaluation"
+          }
+        },
+        "structure": {
+          "value": {
+            "path": "evaluation/trp/reference/geometre/2xqh.pdb",
+            "sha256": "f674267d0ef4752a3d4da00497947bfc09f441a5c36d39593b72bc2ba390df0b",
+            "pdb": "2xqh"
+          },
+          "origin": {
+            "kind": "reference",
+            "reference": "evaluation/trp/reference/geometre/units.json",
+            "detail": "Published GeomeTRe 1.0 example for 2xqh A; development reference, excluded from held-out evaluation"
+          }
+        },
+        "chain": {
+          "value": "A",
+          "origin": {
+            "kind": "reference",
+            "reference": "evaluation/trp/reference/geometre/units.json",
+            "detail": "Published GeomeTRe 1.0 example for 2xqh A; development reference, excluded from held-out evaluation"
+          }
+        },
+        "model": {
+          "value": 1,
+          "origin": {
+            "kind": "reference",
+            "reference": "evaluation/trp/reference/geometre/units.json",
+            "detail": "Published GeomeTRe 1.0 example for 2xqh A; development reference, excluded from held-out evaluation"
+          }
+        },
+        "units": {
+          "value": {
+            "contract": {
+              "protein": "2xqh",
+              "chain": "A",
+              "format": "json",
+              "numbering": "pdb-author",
+              "insertionCodes": "excluded",
+              "confidence": "none",
+              "scale": "author-residue-interval"
+            },
+            "ranges": [
+              {
+                "start": 190,
+                "end": 203
+              },
+              {
+                "start": 218,
+                "end": 233
+              },
+              {
+                "start": 264,
+                "end": 276
+              }
+            ]
+          },
+          "origin": {
+            "kind": "derived",
+            "reference": "evaluation/trp/reference/geometre/units.json",
+            "detail": "Fixed subset of published development units, not an independent biological annotation."
+          }
+        },
+        "insertions": {
+          "value": [
+            {
+              "start": 351,
+              "end": 372
+            }
+          ],
+          "origin": {
+            "kind": "reference",
+            "reference": "evaluation/trp/reference/geometre/units.json",
+            "detail": "Published GeomeTRe 1.0 example for 2xqh A; development reference, excluded from held-out evaluation"
+          }
+        },
+        "graph": {
+          "nodes": [
+            {
+              "id": "structure",
+              "operation": "input.structure"
+            },
+            {
+              "id": "units",
+              "operation": "input.units"
+            },
+            {
+              "id": "select",
+              "operation": "pdb.select"
+            },
+            {
+              "id": "geometry",
+              "operation": "geometre.geometry"
+            }
+          ],
+          "edges": [
+            {
+              "from": "structure",
+              "to": "select",
+              "input": "structure",
+              "contract": {
+                "protein": "2xqh",
+                "chain": "A",
+                "numbering": "pdb-author",
+                "confidence": "none",
+                "format": "pdb",
+                "insertionCodes": "preserved",
+                "scale": "xyz:angstrom;B:angstrom^2"
+              }
+            },
+            {
+              "from": "select",
+              "to": "geometry",
+              "input": "structure",
+              "contract": {
+                "protein": "2xqh",
+                "chain": "A",
+                "numbering": "pdb-author",
+                "confidence": "none",
+                "format": "pdb",
+                "insertionCodes": "excluded",
+                "scale": "xyz:angstrom;B:angstrom^2"
+              }
+            },
+            {
+              "from": "units",
+              "to": "geometry",
+              "input": "units",
+              "contract": {
+                "protein": "2xqh",
+                "chain": "A",
+                "numbering": "pdb-author",
+                "confidence": "none",
+                "format": "json",
+                "insertionCodes": "excluded",
+                "scale": "author-residue-interval"
+              }
+            }
+          ]
+        }
+      },
+      "budget": {
+        "cpus": 3,
+        "memoryBytes": 4294967296,
+        "workBytes": 134217728,
+        "wallSeconds": 1080,
+        "requireHardStorageLimit": true,
+        "origin": "Prospectively bounded aggregate Helix client/controller and Slurm development contrast"
+      },
+      "prospectiveDecisionUuid": "15820189-d237-4e97-b99c-e1d27213a1aa",
+      "allowWorkOnlyOracle": true,
+      "unboundBundlePath": "/opt/helix-strict-runtime/campaign/smoke5/G-valid-001/unbound-bundle.json",
+      "unboundFileHashes": {
+        "catalogue.json": "97684486814a24bc435353bda9477d852032538e4662468b13fa16c1192fc8df",
+        "catalogue_evidence.json": "d4563219e99d42068a057b1c1e8a718db1cba3e9391260aba2f954436d880249",
+        "execution.json": "75bd42e61bf921a191d6c618549f8df093c86426b9072dea643e26decb3e82d6",
+        "specification.json": "caf9c62666c785dd35f2a82ac7e8124373b29321e6344c8a935d22cc9524f1dd",
+        "validation.json": "e02f8e009e658df42d9ff70baec4d5091c73964c47349e451900a186c641d5dd",
+        "structural_report.json": "f36eb295e22345d3e9fc221f5882ab04c297fc2cd31cdeeb9859f67d989369ef",
+        "structural_catalogue.json": "2536d668520fcd19f2d8fea5377e47dbcb839d6307ed216eaaeaa5cf294c2cb5",
+        "inspect_structure.py": "10e3f2224213fbb6718023348e243605fd71afcd6b1b3bfdf1feb14f8822993b",
+        "source.pdb": "f674267d0ef4752a3d4da00497947bfc09f441a5c36d39593b72bc2ba390df0b",
+        "selection.pdb": "e126fdcfaec095bf8a874bf0f5c35af98162fb5258ee42c91b1258b157b5fceb",
+        "settings.json": "35957b3775409597bbfc2403a34d5af879a4f0495bd2f026b330954dddbfb70c",
+        "trp_select.py": "31659d173eb50bd0ffbf7200e26ff51d3febec5f287a459489452934c3b0247e",
+        "trp_geometry.py": "60d6606d3ce57d1d71b02d85d4fa369abfc65a9da97dbc8fce398dfd78b4bbcf",
+        "main.nf": "93f4e5ae23ec27a7fc5b671bb396b854c5381eb4441e15dff2997809de2e8be5",
+        "nextflow.config": "79dad9b9a201f498964a84223d8eeb305a40e2f13c4ab87a44b34751edb2f05b"
+      },
+      "sourceInputPath": "/opt/helix-strict-runtime/campaign/smoke5/G-valid-001/source.pdb",
+      "sourceInputSha256": "f674267d0ef4752a3d4da00497947bfc09f441a5c36d39593b72bc2ba390df0b",
+      "goldCsvPath": "/opt/helix-strict-runtime/campaign/smoke5/G-valid-001/geometry.csv",
+      "goldCsvSha256": "52b169a50ad1b2847e8a9e294ff93452e6e54d2c9d85d32f14d2aee4935b9c3f",
+      "evidenceRoot": "/opt/helix-strict-runtime",
+      "physicalFeasibilityLabel": null,
+      "helixDecision": null,
+      "decisionScope": "Same strict-target-bound bundle; re-count actual policy/checker/runner before independent full client; actual preparation is repeated inside quota",
+      "oracleScope": "Real persistent SQLite/bootstrap and preparation, local Python controller, native Slurm tasks, portable export all in one XFS project; preinstalled immutable dependencies and image caches plus experiment-only root telemetry excluded"
+    },
+    {
+      "id": "SMOKE-01-small",
+      "graphId": "G-valid-001",
+      "cohort": "small",
+      "specification": {
+        "version": "trp-spec/1.0.0",
+        "catalogHash": "e1c049cf4e4922d22d9f9f285582158b2f215170efa6520182007b990cf54815",
+        "intent": {
+          "value": "Calcular la geometría de las unidades suministradas para 2xqh, cadena A.",
+          "origin": {
+            "kind": "reference",
+            "reference": "evaluation/trp/reference/geometre/units.json",
+            "detail": "Published GeomeTRe 1.0 example for 2xqh A; development reference, excluded from held-out evaluation"
+          }
+        },
+        "structure": {
+          "value": {
+            "path": "evaluation/trp/reference/geometre/2xqh.pdb",
+            "sha256": "f674267d0ef4752a3d4da00497947bfc09f441a5c36d39593b72bc2ba390df0b",
+            "pdb": "2xqh"
+          },
+          "origin": {
+            "kind": "reference",
+            "reference": "evaluation/trp/reference/geometre/units.json",
+            "detail": "Published GeomeTRe 1.0 example for 2xqh A; development reference, excluded from held-out evaluation"
+          }
+        },
+        "chain": {
+          "value": "A",
+          "origin": {
+            "kind": "reference",
+            "reference": "evaluation/trp/reference/geometre/units.json",
+            "detail": "Published GeomeTRe 1.0 example for 2xqh A; development reference, excluded from held-out evaluation"
+          }
+        },
+        "model": {
+          "value": 1,
+          "origin": {
+            "kind": "reference",
+            "reference": "evaluation/trp/reference/geometre/units.json",
+            "detail": "Published GeomeTRe 1.0 example for 2xqh A; development reference, excluded from held-out evaluation"
+          }
+        },
+        "units": {
+          "value": {
+            "contract": {
+              "protein": "2xqh",
+              "chain": "A",
+              "format": "json",
+              "numbering": "pdb-author",
+              "insertionCodes": "excluded",
+              "confidence": "none",
+              "scale": "author-residue-interval"
+            },
+            "ranges": [
+              {
+                "start": 190,
+                "end": 203
+              },
+              {
+                "start": 218,
+                "end": 233
+              },
+              {
+                "start": 264,
+                "end": 276
+              }
+            ]
+          },
+          "origin": {
+            "kind": "derived",
+            "reference": "evaluation/trp/reference/geometre/units.json",
+            "detail": "Fixed subset of published development units, not an independent biological annotation."
+          }
+        },
+        "insertions": {
+          "value": [
+            {
+              "start": 351,
+              "end": 372
+            }
+          ],
+          "origin": {
+            "kind": "reference",
+            "reference": "evaluation/trp/reference/geometre/units.json",
+            "detail": "Published GeomeTRe 1.0 example for 2xqh A; development reference, excluded from held-out evaluation"
+          }
+        },
+        "graph": {
+          "nodes": [
+            {
+              "id": "structure",
+              "operation": "input.structure"
+            },
+            {
+              "id": "units",
+              "operation": "input.units"
+            },
+            {
+              "id": "select",
+              "operation": "pdb.select"
+            },
+            {
+              "id": "geometry",
+              "operation": "geometre.geometry"
+            }
+          ],
+          "edges": [
+            {
+              "from": "structure",
+              "to": "select",
+              "input": "structure",
+              "contract": {
+                "protein": "2xqh",
+                "chain": "A",
+                "numbering": "pdb-author",
+                "confidence": "none",
+                "format": "pdb",
+                "insertionCodes": "preserved",
+                "scale": "xyz:angstrom;B:angstrom^2"
+              }
+            },
+            {
+              "from": "select",
+              "to": "geometry",
+              "input": "structure",
+              "contract": {
+                "protein": "2xqh",
+                "chain": "A",
+                "numbering": "pdb-author",
+                "confidence": "none",
+                "format": "pdb",
+                "insertionCodes": "excluded",
+                "scale": "xyz:angstrom;B:angstrom^2"
+              }
+            },
+            {
+              "from": "units",
+              "to": "geometry",
+              "input": "units",
+              "contract": {
+                "protein": "2xqh",
+                "chain": "A",
+                "numbering": "pdb-author",
+                "confidence": "none",
+                "format": "json",
+                "insertionCodes": "excluded",
+                "scale": "author-residue-interval"
+              }
+            }
+          ]
+        }
+      },
+      "budget": {
+        "cpus": 3,
+        "memoryBytes": 4294967296,
+        "workBytes": 65536,
+        "wallSeconds": 1080,
+        "requireHardStorageLimit": true,
+        "origin": "Prospectively bounded aggregate Helix client/controller and Slurm development contrast"
+      },
+      "prospectiveDecisionUuid": "3eb7396c-fa6c-4138-8a12-b9951782f852",
+      "allowWorkOnlyOracle": true,
+      "unboundBundlePath": "/opt/helix-strict-runtime/campaign/smoke5/G-valid-001/unbound-bundle.json",
+      "unboundFileHashes": {
+        "catalogue.json": "97684486814a24bc435353bda9477d852032538e4662468b13fa16c1192fc8df",
+        "catalogue_evidence.json": "d4563219e99d42068a057b1c1e8a718db1cba3e9391260aba2f954436d880249",
+        "execution.json": "75bd42e61bf921a191d6c618549f8df093c86426b9072dea643e26decb3e82d6",
+        "specification.json": "caf9c62666c785dd35f2a82ac7e8124373b29321e6344c8a935d22cc9524f1dd",
+        "validation.json": "e02f8e009e658df42d9ff70baec4d5091c73964c47349e451900a186c641d5dd",
+        "structural_report.json": "f36eb295e22345d3e9fc221f5882ab04c297fc2cd31cdeeb9859f67d989369ef",
+        "structural_catalogue.json": "2536d668520fcd19f2d8fea5377e47dbcb839d6307ed216eaaeaa5cf294c2cb5",
+        "inspect_structure.py": "10e3f2224213fbb6718023348e243605fd71afcd6b1b3bfdf1feb14f8822993b",
+        "source.pdb": "f674267d0ef4752a3d4da00497947bfc09f441a5c36d39593b72bc2ba390df0b",
+        "selection.pdb": "e126fdcfaec095bf8a874bf0f5c35af98162fb5258ee42c91b1258b157b5fceb",
+        "settings.json": "35957b3775409597bbfc2403a34d5af879a4f0495bd2f026b330954dddbfb70c",
+        "trp_select.py": "31659d173eb50bd0ffbf7200e26ff51d3febec5f287a459489452934c3b0247e",
+        "trp_geometry.py": "60d6606d3ce57d1d71b02d85d4fa369abfc65a9da97dbc8fce398dfd78b4bbcf",
+        "main.nf": "93f4e5ae23ec27a7fc5b671bb396b854c5381eb4441e15dff2997809de2e8be5",
+        "nextflow.config": "79dad9b9a201f498964a84223d8eeb305a40e2f13c4ab87a44b34751edb2f05b"
+      },
+      "sourceInputPath": "/opt/helix-strict-runtime/campaign/smoke5/G-valid-001/source.pdb",
+      "sourceInputSha256": "f674267d0ef4752a3d4da00497947bfc09f441a5c36d39593b72bc2ba390df0b",
+      "goldCsvPath": "/opt/helix-strict-runtime/campaign/smoke5/G-valid-001/geometry.csv",
+      "goldCsvSha256": "52b169a50ad1b2847e8a9e294ff93452e6e54d2c9d85d32f14d2aee4935b9c3f",
+      "evidenceRoot": "/opt/helix-strict-runtime",
+      "physicalFeasibilityLabel": null,
+      "helixDecision": null,
+      "decisionScope": "Same strict-target-bound bundle; re-count actual policy/checker/runner before independent full client; actual preparation is repeated inside quota",
+      "oracleScope": "Real persistent SQLite/bootstrap and preparation, local Python controller, native Slurm tasks, portable export all in one XFS project; preinstalled immutable dependencies and image caches plus experiment-only root telemetry excluded"
+    }
+  ],
+  "sourceHashes": {
+    "packages/helix/src/trp/catalog.ts": "e30d5e78c7c0e601f73b767868e5a6c70b25f48b84876c6fe5dac420b51c593c",
+    "packages/helix/src/trp/catalog.json": "10aeb85d21e0f124173c615e61924c665b6d69fd0c799ae70d05b810003842c0",
+    "packages/helix/src/trp/specification.ts": "7203ac6634be723b8d88ca9efefa0df7b6141486c60a2b6bd62fb7a42f0155ff",
+    "packages/helix/src/trp/graph.ts": "31d66a12fc902e1a7219e45751ade36a13f720c73c45cf6059567f8c2db7ff18",
+    "packages/helix/src/trp/nextflow.ts": "3729bf84120a359ba5efb68349bca85d7d80be579638bbb4810c018554458309",
+    "packages/helix/src/trp/interventions.ts": "99b20265751966910521db0eda32ddf38c3a5133928e2d6546ab6c0d2a122542",
+    "packages/helix/src/trp/inspect_structure.py.txt": "10e3f2224213fbb6718023348e243605fd71afcd6b1b3bfdf1feb14f8822993b",
+    "packages/helix/src/trp/structural.ts": "54fc5cff7a5a2e7cd7d96bf13b9236a7122a28a2d41da35c8a301399872a8f5d",
+    "packages/helix/src/trp/verify_inspection.py.txt": "9922cc49279f2539452875d398557db00cc53c02751db7c370d93b76c16e0d38",
+    "packages/helix/src/trp/enforcement.ts": "9b624ff112a57948e074efbae2a6818e97b7e21cee289379956190b84684e383",
+    "packages/helix/src/trp/coordinates.ts": "ffaca8f54d37f69bb5bf8f0618ab729a4d7e398b519a03b4595cf02beb088db5",
+    "packages/helix/src/trp/sifts_residues.py.txt": "6bdf0e763daf4e8100cb9c65eb0428e0e08c10fb07ab66c0e2b9de8c862e0a0b",
+    "packages/helix/src/trp/strpsearch_guard.py.txt": "5d7b075e50998577299d15ca11be64454d83ec9bd79c7f7b23c6ef97ed6d013a",
+    "packages/helix/src/trp/predicted_geometry.py.txt": "f4b7d728c54e3a0a3e2eba91914c3ec26b25ec6d5740ddf0adce7ef50e671d0e",
+    "packages/helix/src/trp/verify_predicted.py.txt": "ffc3a233d08bfa948df019a07fa6289c0093912582fac3cfe10477bc031175a0",
+    "packages/helix/src/trp/steric_diagnostic.py.txt": "b84956c0b451be20843e46930bc89bf4c1dc2446e807969fb8a78d8cdb41a676",
+    "packages/helix/src/trp/surface_diagnostic.py.txt": "881566e1f18083801deafea9d6a0218e1df5698208217bced08aefc957250e64",
+    "packages/helix/src/trp/evidence.ts": "3b642b58a3ed34b634c8047300bcf4984b9c1294d615e1fd7253d0de94fb74a1",
+    "packages/helix/src/trp/remote.ts": "5326e798708970cec38734227b77043035254800795d395682c4404cf9e3de46",
+    "packages/helix/src/trp/remote_runner.py.txt": "d1d86992a0922fe2511622e70c4e770914a669324b3b59f99a55808637f5fa2e",
+    "packages/helix/src/trp/resources.ts": "e626c338bb0975de603e44194f3097b56d09665e90b7446a4d6dccb28908ddf3",
+    "packages/helix/src/trp/verify_bundle.py.txt": "377c5dd3c06b045e6c88326976240419834bc85b752eb242020e1c7257e632d0",
+    "packages/helix/src/trp/workflow.ts": "1a2e23517748532d62a44cb69b5502c5f97f6abfc068f48920ff0cd263715ccb",
+    "packages/helix/src/trp/remote-enforcement.ts": "c34e9f86faf5d0e1d41679239d73212139f7c76be9b24a57ca62db1372e1eb92",
+    "packages/helix/src/trp/remote_strict.py.txt": "f7587626581f414ca8515b87997495f1f65785e07231e1a2151a33da395b9b50",
+    "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/full_client.ts": "99af6b1caa097f4c789c9fcc36350343d2364b0e6e2528235ed596e088d9c2a5",
+    "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/prepare_cases.ts": "1ee3318ae379432d8d1fb85f444980cdac465f4d198e08827279cac77b88007b",
+    "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/drive_campaign.py": "7f802122694ff1354dc7ea5c54ad9d83f436b1a0b4ef6eeb9b036dc1c18af911",
+    "evaluation/trp/campaign-20261012/aggregate-resource-contrasts/audit_cases.py": "59319817ce79fa3a59c8f071a907e1cf6aa13cb9f9b9b0efe7b49c1313877c37",
+    "script/tesis/provision_remote_strict_profile.py": "fd05854f3f8cbecce53997a91780bdf0f9bb44e851d95ab57d6fa19c241da49b"
+  },
+  "graphCorpusSha256": "3d20eda715833d882a7ff8e0e5b10180c3fecec4f20012eb74f266062bfc9e7d",
+  "uniqueProteins": 1,
+  "physicalLabelsObservedBeforeFreeze": false,
+  "prospectiveCohorts": {
+    "generous": 1,
+    "small": 1
+  },
+  "actualFeasibleMinimum": 20,
+  "actualInfeasibleMinimum": 20,
+  "retainedThresholds": {
+    "falseRejectionMax": 0.05,
+    "acceptedBudgetExceedanceMax": 0,
+    "countDifferenceMax": 0,
+    "medianStorageOverestimationMax": 0.25
+  },
+  "failedSyscallObserver": "strace -f -Z -yy; observer executable and client share approved controller cgroup; syscall diagnostic stream is experiment-only root telemetry outside storage project",
+  "labelRule": "true only native four completed jobs, exact own-input gold, real portable export, actual persistent SQLite and verified quota/cgroup scope; false only causal EDQUOT/OOM; otherwise unknown",
+  "originalHeadOnlyCampaignUnmodified": true,
+  "reservedBiologicalMetrics": null,
+  "globalCheckpointUtc": "2026-10-13T06:49:00Z"
+}

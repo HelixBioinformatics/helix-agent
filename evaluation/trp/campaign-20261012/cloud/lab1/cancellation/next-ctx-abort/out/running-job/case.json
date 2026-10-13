@@ -1,0 +1,27 @@
+{
+  "kind": "actual native cancellation engineering contrast",
+  "id": "6b2252f8-ac94-4611-85c4-0a710cec219f",
+  "digest": "5246c76d479605f75e3a3c2f89fa9d2c27ccb6f0017d89846db4ff0dc88be07b",
+  "status": "failed",
+  "nativeId": "128",
+  "before": "RUNNING",
+  "after": "JobId=128 JobName=nf-GEOMETRY UserId=ubuntu(1000) GroupId=ubuntu(1000) MCS_label=N/A Priority=1 Nice=0 Account=(null) QOS=(null) JobState=CANCELLED Reason=None Dependency=(null) Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=143:0 RunTime=00:00:03 TimeLimit=00:03:00 TimeMin=N/A SubmitTime=2026-10-13T02:15:05 EligibleTime=2026-10-13T02:15:05 AccrueTime=2026-10-13T02:15:05 StartTime=2026-10-13T02:15:34 EndTime=2026-10-13T02:15:37 Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-10-13T02:15:34 Scheduler=Backfill Partition=helix AllocNode:Sid=helix-head:80889 ReqNodeList=helix-worker2 ExcNodeList=(null) NodeList=helix-worker2 BatchHost=helix-worker2 NumNodes=1 NumCPUs=2 NumTasks=1 CPUs/Task=2 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=2,mem=2G,node=1,billing=2 AllocTRES=cpu=2,mem=2G,node=1,billing=2 Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=2 MinMemoryNode=2G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null) Command=.command.run WorkDir=/shared/helix/trp-5246c76d4796-6b2252f8-ac94-4611-85c4-0a710cec219f/work/5e/d8946c603e47e433fc8501e6273068 Comment=helix:6b2252f8-ac94-4611-85c4-0a710cec219f  StdErr=/shared/helix/trp-5246c76d4796-6b2252f8-ac94-4611-85c4-0a710cec219f/work/5e/d8946c603e47e433fc8501e6273068/.command.log StdIn=/dev/null StdOut=/shared/helix/trp-5246c76d4796-6b2252f8-ac94-4611-85c4-0a710cec219f/work/5e/d8946c603e47e433fc8501e6273068/.command.log Power= TresPerTask=cpu:2 \n",
+  "cancellation": {
+    "at": "2026-10-13T02:15:49.092646+00:00",
+    "confirmed": true,
+    "controllerStopped": true,
+    "ok": true,
+    "remaining": [],
+    "requested": [
+      {
+        "comment": "helix:6b2252f8-ac94-4611-85c4-0a710cec219f",
+        "id": "128",
+        "name": "nf-GEOMETRY",
+        "nodes": "helix-worker2",
+        "state": "RUNNING"
+      }
+    ]
+  },
+  "syntheticApproval": true,
+  "humanEvaluation": false
+}

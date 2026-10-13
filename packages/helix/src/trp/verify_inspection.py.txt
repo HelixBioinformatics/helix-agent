@@ -44,6 +44,16 @@ def verify(directory, expected=None):
         if diagnostic['status']=='measured':
             if diagnostic.get('sourceSha256')!=r['provenance']['structureSha256'] or diagnostic.get('scope',{}).get('authorChain')!=o['chain'] or diagnostic.get('scope',{}).get('modelOrdinal')!=o['model']: raise ValueError('steric selection differs')
             if diagnostic.get('foldVerdict')!='not_established' or diagnostic.get('structureLevelThreshold') is not None: raise ValueError('unsupported fold verdict')
+    if isinstance(physical.get('value'),dict) and 'surfaceDiagnostic' in physical['value']:
+        value=physical['value']; diagnostic=value['surfaceDiagnostic']
+        if 'surface_diagnostic.py' not in listed or value.get('surfaceWrapperSha256')!=digest((root/'surface_diagnostic.py').read_bytes()): raise ValueError('surface wrapper differs')
+        if physical['status']!='not_evaluable' or diagnostic.get('version')!='helix-surface-diagnostic/1.0.0' or diagnostic.get('status') not in ('measured','not_evaluable'): raise ValueError('unsupported surface classification')
+        if diagnostic['status']=='measured':
+            if diagnostic.get('sourceSha256')!=r['provenance']['structureSha256'] or diagnostic.get('scope',{}).get('authorChain')!=o['chain'] or diagnostic.get('scope',{}).get('modelOrdinal')!=o['model']: raise ValueError('surface selection differs')
+            if diagnostic.get('foldVerdict')!='not_established' or diagnostic.get('burialThreshold') is not None or diagnostic.get('confidenceScoresUsed') is not False: raise ValueError('unsupported surface fold verdict')
+            metric=diagnostic['measurement']; residues=diagnostic['chargedResidueObservations']
+            if metric['chargedResidues']!=len(residues) or metric['completeChargedSidechains']+metric['incompleteChargedSidechains']!=len(residues): raise ValueError('surface denominator differs')
+            if any(row['completeSidechain']!=(not bool(row['missingSidechainAtoms'])) or (not row['completeSidechain'] and row['interpretableRelativeSidechainArea'] is not None) for row in residues): raise ValueError('surface incomplete sidechain differs')
     failed=[c['id'] for c in r['checks'] if c['status']=='fail']
     unknown=[c['id'] for c in r['checks'] if c['status']=='not_evaluable']
     blocking=failed+[c for c in unknown if c in ('confidence-scale','filter-direction','interunit-pae')]

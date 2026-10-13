@@ -176,8 +176,12 @@ env.OMP_NUM_THREADS = '1'
 env.MKL_NUM_THREADS = '1'
 `,
   }
-  if (structural.checks.some((check) => check.id === "fold-plausibility" && check.value !== null))
-    files["steric_diagnostic.py"] = TrpStructural.STERIC_SCRIPT
+  const physical = structural.checks.find((check) => check.id === "fold-plausibility")?.value as Record<
+    string,
+    unknown
+  > | null
+  if (physical?.stericDiagnostic) files["steric_diagnostic.py"] = TrpStructural.STERIC_SCRIPT
+  if (physical?.surfaceDiagnostic) files["surface_diagnostic.py"] = TrpStructural.SURFACE_SCRIPT
   if (enforced) files["enforcement.json"] = S.canonical(enforced.config) + "\n"
   const digest = bundleDigest(files)
   return { spec, report: publicReport, files, digest, image }
@@ -198,7 +202,10 @@ export async function materialize(bundle: Bundle, directory: string): Promise<vo
   await fs.mkdir(directory, { recursive: false, mode: 0o700 })
   for (const [name, text] of Object.entries(bundle.files)) {
     if (!/^[a-z][a-z0-9_.]*$/.test(name)) throw new S.WorkflowError("bundle-path", name)
-    await fs.writeFile(path.join(directory, name), text, { flag: "wx", mode: 0o600 })
+    await fs.writeFile(path.join(directory, name), text, {
+      flag: "wx",
+      mode: 0o600,
+    })
   }
 }
 

@@ -2,7 +2,7 @@ export * as TrpRemote from "./remote"
 
 import fs from "node:fs/promises"
 import path from "node:path"
-import { Effect, Schema } from "effect"
+import { Cause, Effect, Schema } from "effect"
 import { ChildProcess } from "effect/unstable/process"
 import { AppProcess } from "@helix/core/process"
 import { TrpSpecification as S } from "./specification"
@@ -116,6 +116,36 @@ export function command(target: Target) {
   ])
 }
 
+export class TransportError extends S.WorkflowError {
+  readonly retryable: boolean
+  constructor(
+    readonly exitCode: number,
+    readonly stderr: string,
+    action: string,
+  ) {
+    super("remote-transport", `SSH action ${action}, exit ${exitCode}: ${stderr}`)
+    const denied =
+      /permission denied|host key verification failed|remote host identification has changed|bad configuration|bad permissions|invalid format/i.test(
+        stderr,
+      )
+    this.retryable =
+      exitCode === 255 &&
+      !denied &&
+      /connection reset|connection closed|broken pipe|connection timed out|operation timed out|connection refused|temporary failure in name resolution|network is unreachable|no route to host|remote host closed/i.test(
+        stderr,
+      )
+  }
+}
+
+export function transportDiagnostic(cause: Cause.Cause<unknown>) {
+  for (const reason of cause.reasons) {
+    const value = Cause.isDieReason(reason) ? reason.defect : Cause.isFailReason(reason) ? reason.error : undefined
+    if (value instanceof TransportError)
+      return { exitCode: value.exitCode, stderr: value.stderr, retryable: value.retryable }
+  }
+  return null
+}
+
 export function request(
   target: Target,
   action: string,
@@ -139,6 +169,8 @@ export function request(
     }
     if (response?.ok === false)
       return yield* Effect.die(new S.WorkflowError(response.code || "remote-failed", response.error || action))
+    if (result.exitCode === 255 && !result.stderrTruncated)
+      return yield* Effect.die(new TransportError(result.exitCode, result.stderr.toString().slice(-8192), action))
     if (result.exitCode !== 0 || result.stdoutTruncated || result.stderrTruncated || !response?.ok)
       return yield* Effect.die(
         new S.WorkflowError(
@@ -237,9 +269,26 @@ export function execute(
       while (!failure) {
         if (signal.aborted) throw AppProcess.abortError(signal)
         if (Date.now() > deadline) throw new S.WorkflowError("remote-timeout", "Reviewed wall time exceeded")
-        const response = yield* request(target, "status", { id, digest: bundle.digest }, runProcess, signal).pipe(
+        let response = yield* request(target, "status", { id, digest: bundle.digest }, runProcess, signal).pipe(
           Effect.exit,
         )
+        for (let attempt = 1; response._tag === "Failure"; attempt++) {
+          const diagnostic = transportDiagnostic(response.cause)
+          const detail = {
+            action: "status",
+            attempt,
+            error: String(response.cause),
+            diagnostic,
+            retryScheduled: !signal.aborted && Boolean(diagnostic?.retryable) && attempt < 3,
+          }
+          yield* Effect.promise(() => log("remote-monitor-error", detail))
+          if (!detail.retryScheduled) break
+          // Re-observe the same controller. Never start/resubmit scientific work.
+          yield* Effect.sleep("1 second").pipe(Effect.raceFirst(AppProcess.waitForAbort(signal)))
+          response = yield* request(target, "status", { id, digest: bundle.digest }, runProcess, signal).pipe(
+            Effect.exit,
+          )
+        }
         if (response._tag === "Failure") throw new S.WorkflowError("remote-monitor-failed", String(response.cause))
         const state = response.value
         yield* Effect.promise(() =>
@@ -300,7 +349,7 @@ export function execute(
         )
       })
       yield* Effect.promise(() =>
-        log("remote-failed-or-cancelled", { terminal, error: String(failure ?? "Remote failure") }),
+        log("remote-failed-or-cancelled", { terminal: terminal ?? null, error: String(failure ?? "Remote failure") }),
       )
       cleaned = true
     }

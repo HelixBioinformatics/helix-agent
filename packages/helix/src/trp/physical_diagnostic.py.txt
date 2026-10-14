@@ -1,0 +1,462 @@
+"""CPU physical warnings for repeated buried charge and distributed packing conflict.
+
+No coordinate payloads are returned. No-alert does not establish global fold validity.
+The first rule is prospectively frozen development, not a validated thermodynamic model.
+"""
+import hashlib
+import importlib.metadata
+import json
+import math
+from pathlib import Path
+import sys
+
+VERSION = 'helix-physical-diagnostic/1.1.0'
+RULES = {
+    'polarMoietyRelativeArea1p4Maximum': 0.08,
+    'polarMoietyRelativeArea2p0Maximum': 0.02,
+    'referenceMoietyAreaAngstromSquared': {'ASP': {'1.4': 62.78548950554914, '2.0': 81.18884102730263}, 'GLU': {'1.4': 85.08654065955557, '2.0': 112.15455739315725}, 'LYS': {'1.4': 57.058412958809996, '2.0': 76.58403011937939}, 'ARG': {'1.4': 128.11010497547963, '2.0': 162.63697468464403}},
+    'referenceAreaEvidenceSha256': '0ee1d4daa7d2899b2031228848e2faa73cee01ac6e1c7aca90c1ab42cad8d2bb',
+    'sameSignContactMaximumAngstrom': 6,
+    'sequenceSeparationMinimum': 5,
+    'buriedColumnGroupsMinimum': 3,
+    'uncompensatedGroupsMinimum': 2,
+    'principalAxisVarianceMinimum': 0.8,
+    'oppositeChargeContactMaximumAngstrom': 4,
+    'positiveIonContactMaximumAngstrom': 3,
+    'negativeIonContactMaximumAngstrom': 3.5,
+    'unknownChemistryContactMaximumAngstrom': 4,
+    'waterContactMaximumAngstrom': 3.5,
+    'packingOverlapMinimumAngstrom': 1,
+    'packingDisjointResiduePairsMinimum': 3,
+    'possibleDisulfideMinimumAngstrom': 1.8,
+    'possibleDisulfideMaximumAngstrom': 2.35,
+    'hydrophobicExposedRelativeAreaMinimum': 0.25,
+    'hydrophobicContactMaximumAngstrom': 7,
+}
+SIDE = {'ALA': 'CB', 'ARG': 'CB CG CD NE CZ NH1 NH2', 'ASN': 'CB CG OD1 ND2',
+        'ASP': 'CB CG OD1 OD2', 'CYS': 'CB SG', 'GLN': 'CB CG CD OE1 NE2',
+        'GLU': 'CB CG CD OE1 OE2', 'GLY': '', 'HIS': 'CB CG ND1 CD2 CE1 NE2',
+        'ILE': 'CB CG1 CG2 CD1', 'LEU': 'CB CG CD1 CD2', 'LYS': 'CB CG CD CE NZ',
+        'MET': 'CB CG SD CE', 'PHE': 'CB CG CD1 CD2 CE1 CE2 CZ', 'PRO': 'CB CG CD',
+        'SER': 'CB OG', 'THR': 'CB OG1 CG2', 'TRP': 'CB CG CD1 CD2 NE1 CE2 CE3 CZ2 CZ3 CH2',
+        'TYR': 'CB CG CD1 CD2 CE1 CE2 CZ OH', 'VAL': 'CB CG1 CG2'}
+REFERENCE_SIDE = {'ALA': 64.8, 'ARG': 196.17, 'ASN': 103.48, 'ASP': 100.47,
+                  'CYS': 89.66, 'GLN': 136.83, 'GLU': 132.18, 'GLY': 0,
+                  'HIS': 143.87, 'ILE': 134.23, 'LEU': 139.78, 'LYS': 162.98,
+                  'MET': 151.1, 'PHE': 161.45, 'PRO': 109.7, 'SER': 74.93,
+                  'THR': 98.64, 'TRP': 206.6, 'TYR': 175.76, 'VAL': 110.46}
+GROUP = {'ASP': ('OD1', 'OD2'), 'GLU': ('OE1', 'OE2'), 'LYS': ('NZ',), 'ARG': ('NE', 'NH1', 'NH2')}
+SIGN = {'ASP': -1, 'GLU': -1, 'LYS': 1, 'ARG': 1}
+HYDRO = {'ALA', 'VAL', 'ILE', 'LEU', 'MET', 'PHE', 'TRP', 'TYR', 'CYS'}
+ION_CAPACITY = {'Ca': 2, 'Mg': 2, 'Zn': 2, 'Na': 1, 'K': 1}
+VARIABLE_VALENCE = {'Mn', 'Fe', 'Co', 'Ni', 'Cu'}
+ANION = {'Cl', 'Br', 'I'}
+BONDI = {'C': 1.70, 'N': 1.55, 'O': 1.52, 'S': 1.80}
+PARAMETERS = {'algorithm': 'LeeRichards', 'probe-radius': 1.4, 'n-slices': 20, 'n-points': 100, 'n-threads': 1}
+
+
+def digest(data):
+    return hashlib.sha256(data).hexdigest()
+
+
+def distance(a, b):
+    return math.sqrt(sum((x - y) ** 2 for x, y in zip(a, b)))
+
+
+def nearest(a, b):
+    return min(distance(x, y) for x in a for y in b)
+
+
+def centroid(points):
+    return tuple(sum(p[i] for p in points) / len(points) for i in range(3))
+
+
+def axis_fraction(points):
+    """Largest eigenvalue / trace of the unnormalized3x3 covariance matrix."""
+    centre = centroid(points)
+    shifted = [tuple(p[i] - centre[i] for i in range(3)) for p in points]
+    matrix = [[sum(p[i] * p[j] for p in shifted) for j in range(3)] for i in range(3)]
+    trace = sum(matrix[i][i] for i in range(3))
+    if trace <= 1e-12:
+        return 0.0
+    # All three axis starts avoid an accidental vector orthogonal to the major axis.
+    eigenvalues = []
+    for start in range(3):
+        vector = [float(i == start) for i in range(3)]
+        for _ in range(64):
+            transformed = [sum(matrix[i][j] * vector[j] for j in range(3)) for i in range(3)]
+            length = math.sqrt(sum(x * x for x in transformed))
+            if length <= 1e-15:
+                break
+            vector = [x / length for x in transformed]
+        eigenvalues.append(sum(vector[i] * matrix[i][j] * vector[j] for i in range(3) for j in range(3)))
+    return max(eigenvalues) / trace
+
+
+def components(nodes, connected):
+    remaining = set(range(len(nodes)))
+    out = []
+    while remaining:
+        first = min(remaining)
+        remaining.remove(first)
+        pending, found = [first], [first]
+        while pending:
+            current = pending.pop()
+            for item in sorted(remaining):
+                if connected(nodes[current], nodes[item]):
+                    remaining.remove(item)
+                    pending.append(item)
+                    found.append(item)
+        out.append([nodes[i] for i in sorted(found)])
+    return out
+
+
+def assign_compensators(groups, resources):
+    """Maximum capacity-limited matching; a counterpart cannot veto an entire column."""
+    slots = [(resource, i) for resource in resources for i in range(resource['capacity'])]
+    candidates = []
+    for group in groups:
+        row = []
+        for i, (resource, _) in enumerate(slots):
+            if group['sign'] == resource['sign'] or group['key'] == resource['key']:
+                continue
+            dist = nearest(group['points'], resource['points'])
+            if dist <= resource['cutoff']:
+                row.append((dist, resource['key'], i))
+        candidates.append([i for _, _, i in sorted(row)])
+    owner = {}
+
+    def augment(group_index, seen):
+        for slot in candidates[group_index]:
+            if slot in seen:
+                continue
+            seen.add(slot)
+            if slot not in owner or augment(owner[slot], seen):
+                owner[slot] = group_index
+                return True
+        return False
+
+    for i in range(len(groups)):
+        augment(i, set())
+    result = {}
+    for slot, group_index in owner.items():
+        resource = slots[slot][0]
+        result[groups[group_index]['key']] = {
+            'counterpart': resource['key'], 'kind': resource['kind'],
+            'capacity': resource['capacity'], 'distanceAngstrom': nearest(groups[group_index]['points'], resource['points']),
+        }
+    return result
+
+
+def charge_columns(groups, resources):
+    buried = [g for g in groups if g['complete']
+              and g['relativePolarMoietyArea1p4'] <= RULES['polarMoietyRelativeArea1p4Maximum']
+              and g['relativePolarMoietyArea2p0'] <= RULES['polarMoietyRelativeArea2p0Maximum']]
+    assigned = assign_compensators(buried, resources)
+    column_rows = []
+    for sign in (-1, 1):
+        nodes = [g for g in buried if g['sign'] == sign]
+        clusters = components(nodes, lambda a, b: abs(a['index'] - b['index']) >= RULES['sequenceSeparationMinimum']
+                              and nearest(a['points'], b['points']) <= RULES['sameSignContactMaximumAngstrom'])
+        for group in clusters:
+            if len(group) < RULES['buriedColumnGroupsMinimum']:
+                continue
+            fraction = axis_fraction([centroid(g['points']) for g in group])
+            if fraction < RULES['principalAxisVarianceMinimum']:
+                continue
+            uncompensated = [g for g in group if g['key'] not in assigned]
+            certain = [g for g in uncompensated if not g['uncertainty']]
+            column_rows.append({'nominalSign': sign, 'residues': [g['key'] for g in group],
+                                'groups': len(group), 'principalAxisVarianceFraction': fraction,
+                                'possibleCompensation': [{'residue': g['key'], **assigned[g['key']]} for g in group if g['key'] in assigned],
+                                'uncompensatedResidues': [g['key'] for g in uncompensated],
+                                'uncertainResidues': [g['key'] for g in uncompensated if g['uncertainty']],
+                                'alert': len(certain) >= RULES['uncompensatedGroupsMinimum']})
+    return buried, column_rows
+
+
+class Grid:
+    def __init__(self, atoms, width=4.0):
+        self.width, self.bins = width, {}
+        for atom in atoms:
+            self.bins.setdefault(self.cell(atom['point']), []).append(atom)
+
+    def cell(self, point):
+        return tuple(math.floor(v / self.width) for v in point)
+
+    def around(self, point, radius):
+        cell = self.cell(point)
+        extent = math.ceil(radius / self.width)
+        for x in range(cell[0] - extent, cell[0] + extent + 1):
+            for y in range(cell[1] - extent, cell[1] + extent + 1):
+                for z in range(cell[2] - extent, cell[2] + extent + 1):
+                    yield from self.bins.get((x, y, z), ())
+
+
+def packing_conflicts(atoms, declared_bonds=()):
+    grid, pairs = Grid(atoms), {}
+    bonded = {tuple(sorted(pair)) for pair in declared_bonds}
+    for atom in atoms:
+        for other in grid.around(atom['point'], 3.6):
+            if other['ordinal'] <= atom['ordinal'] or abs(other['index'] - atom['index']) < RULES['sequenceSeparationMinimum']:
+                continue
+            dist = distance(atom['point'], other['point'])
+            if tuple(sorted((atom['key'], other['key']))) in bonded:
+                continue
+            if atom['residueName'] == other['residueName'] == 'CYS' and atom['name'] == other['name'] == 'SG' and RULES['possibleDisulfideMinimumAngstrom'] <= dist <= RULES['possibleDisulfideMaximumAngstrom']:
+                continue
+            overlap = BONDI[atom['element']] + BONDI[other['element']] - dist
+            if overlap < RULES['packingOverlapMinimumAngstrom']:
+                continue
+            key = tuple(sorted((atom['residueKey'], other['residueKey'])))
+            row = {'residues': list(key), 'atoms': [atom['key'], other['key']], 'distanceAngstrom': dist, 'overlapAngstrom': overlap}
+            if key not in pairs or overlap > pairs[key]['overlapAngstrom']:
+                pairs[key] = row
+    # Conservative deterministic disjoint witnesses: never count one bad residue repeatedly.
+    disjoint, seen = [], set()
+    for row in sorted(pairs.values(), key=lambda r: (-r['overlapAngstrom'], r['atoms'])):
+        if not seen.intersection(row['residues']):
+            seen.update(row['residues'])
+            disjoint.append(row)
+    return {'nonlocalResiduePairs': len(pairs), 'disjointResiduePairs': len(disjoint),
+            'witnesses': disjoint[:100], 'witnessesTruncated': len(disjoint) > 100,
+            'maximumOverlapAngstrom': max((r['overlapAngstrom'] for r in pairs.values()), default=0),
+            'alert': len(disjoint) >= RULES['packingDisjointResiduePairsMinimum']}
+
+
+def measure(request):
+    import freesasa
+    import gemmi
+    versions = {name: importlib.metadata.version(name) for name in ('freesasa', 'gemmi')}
+    if versions != {'freesasa': '2.2.1', 'gemmi': '0.7.5'}:
+        raise ValueError('unsupported-engine-version')
+    source, options = request['structure'], request['options']
+    if len(source.encode('utf8')) > 20_000_000:
+        raise ValueError('structure-size')
+    structure = (gemmi.make_structure_from_block(gemmi.cif.read_string(source).sole_block())
+                 if options['format'] == 'mmcif' else gemmi.read_pdb_string(source))
+    ordinal = options['model']
+    if isinstance(ordinal, bool) or not isinstance(ordinal, int) or not 1 <= ordinal <= len(structure):
+        raise ValueError('model-selection')
+    model = structure[ordinal - 1]
+    # Gemmi may expose a polymer, its ligands and its waters as separate Chain
+    # objects sharing one author ID. Only polymer parts define chain ambiguity;
+    # every other part remains in the full-model context below.
+    selected_indices = [i for i, c in enumerate(model) if c.name == options['chain']
+                        and any(r.entity_type == gemmi.EntityType.Polymer or r.het_flag == 'A' for r in c)]
+    if len(selected_indices) != 1:
+        raise ValueError('ambiguous-author-chain')
+    classifier = freesasa.Classifier.getStandardClassifier('protor')
+    residues, atoms, context, waters, missing, radius_fallbacks = [], [], [], [], [], []
+    selected_index = -1
+    seen = set()
+    for chain_index, chain in enumerate(model):
+        for residue_index, residue in enumerate(chain):
+            polymer = residue.entity_type == gemmi.EntityType.Polymer or residue.het_flag == 'A'
+            is_selected = chain_index == selected_indices[0]
+            target = is_selected and polymer
+            if target:
+                selected_index += 1
+                if residue.name not in SIDE:
+                    raise ValueError('unsupported-selected-residue')
+            key = f'{chain.name}:{str(residue.seqid)}:{residue.name}'
+            item = {'key': key, 'chain': chain.name, 'name': residue.name, 'index': selected_index if target else None, 'atoms': [], 'target': target}
+            for atom in residue:
+                if atom.is_hydrogen():
+                    continue
+                point = (atom.pos.x, atom.pos.y, atom.pos.z)
+                if not all(math.isfinite(v) for v in point):
+                    raise ValueError('nonfinite-coordinates')
+                ambiguous = atom.altloc not in ('\x00', ' ') or abs(atom.occ - 1) > 0.001
+                if target and ambiguous:
+                    raise ValueError('ambiguous-selected-atoms')
+                identity = (chain_index, residue_index, atom.name, atom.altloc)
+                if identity in seen:
+                    raise ValueError('duplicate-atom-identity')
+                seen.add(identity)
+                element = atom.element.name
+                if target and element not in BONDI:
+                    raise ValueError('unsupported-selected-element')
+                radius = classifier.radius(residue.name, atom.name) if residue.name in SIDE else -1
+                if radius <= 0:
+                    radius = atom.element.vdw_r
+                    radius_fallbacks.append({'residue': key, 'atom': atom.name, 'element': element, 'radiusAngstrom': radius})
+                if not math.isfinite(radius) or radius <= 0:
+                    raise ValueError('unsupported-context-element')
+                record = {'key': key + ':' + atom.name, 'residueKey': key, 'residueName': residue.name,
+                          'name': atom.name, 'element': element, 'point': point, 'radius': radius,
+                          'index': item['index'], 'ordinal': len(atoms), 'ambiguous': ambiguous,
+                          'polymer': polymer, 'water': residue.is_water(), 'target': target,
+                          'formalCharge': atom.charge}
+                item['atoms'].append(record)
+                if residue.is_water():
+                    waters.append(record)
+                else:
+                    atoms.append(record)
+                if not target:
+                    context.append(record)
+            if target:
+                names = {a['name'] for a in item['atoms']}
+                absent = sorted(set(('N CA C O ' + SIDE[residue.name]).split()) - names)
+                if absent:
+                    missing.append({'residue': key, 'missingExpectedHeavyAtoms': absent})
+            residues.append(item)
+    targets = [r for r in residues if r['target']]
+    if not targets or not atoms:
+        raise ValueError('empty-selected-polymer')
+    target_atoms = [a for a in atoms if a['target']]
+    if len(atoms) > 60_000 or len(target_atoms) > 30_000:
+        raise ValueError('atom-limit')
+    coords = [v for atom in atoms for v in atom['point']]
+    result = freesasa.calcCoord(coords, [a['radius'] for a in atoms], freesasa.Parameters(PARAMETERS))
+    parameters2p0 = {**PARAMETERS, 'probe-radius': 2.0}
+    result2p0 = freesasa.calcCoord(coords, [a['radius'] for a in atoms], freesasa.Parameters(parameters2p0))
+    for i, atom in enumerate(atoms):
+        atom['area'] = result.atomArea(i)
+        atom['area2p0'] = result2p0.atomArea(i)
+        if any(not math.isfinite(v) or v < 0 for v in (atom['area'], atom['area2p0'])):
+            raise ValueError('nonfinite-surface-area')
+    if not math.isclose(sum(a['area2p0'] for a in atoms), result2p0.totalArea(), rel_tol=1e-10, abs_tol=1e-7):
+        raise ValueError('surface-area-identity')
+    if not math.isclose(sum(a['area'] for a in atoms), result.totalArea(), rel_tol=1e-10, abs_tol=1e-7):
+        raise ValueError('surface-area-identity')
+    declared_bonds = []
+    for connection in structure.connections:
+        if connection.type not in (gemmi.ConnectionType.Covale, gemmi.ConnectionType.Disulf):
+            continue
+        declared_bonds.append(tuple(f'{address.chain_name}:{str(address.res_id.seqid)}:{address.res_id.name}:{address.atom_name}'
+                                    for address in (connection.partner1, connection.partner2)))
+    terminal_atoms = set()
+    for chain_name in {c.name for c in model}:
+        chain_polymers = [r for r in residues if r['chain'] == chain_name and any(a['polymer'] for a in r['atoms'])]
+        if chain_polymers:
+            terminal_atoms.update(a['key'] for a in chain_polymers[0]['atoms'] if a['name'] == 'N')
+            terminal_atoms.update(a['key'] for a in chain_polymers[-1]['atoms'] if a['name'] in ('C', 'O', 'OXT'))
+    grid = Grid(atoms + waters)
+    groups, all_groups, hydro = [], [], []
+    for residue in residues:
+        name = residue['name']
+        by_name = {a['name']: a for a in residue['atoms']}
+        if residue['target']:
+            side = [a for a in residue['atoms'] if a['name'] in SIDE[name].split()]
+            side_area = sum(a['area'] for a in side)
+            relative = side_area / REFERENCE_SIDE[name] if REFERENCE_SIDE[name] else None
+            if name in HYDRO:
+                complete = set(SIDE[name].split()) <= set(by_name)
+                hydro.append({'residue': residue['key'], 'completeSidechain': complete,
+                              'sidechainAreaAngstromSquared': side_area,
+                              'relativeSidechainArea': relative if complete else None,
+                              'exposed': complete and relative >= RULES['hydrophobicExposedRelativeAreaMinimum']})
+        if name not in GROUP:
+            continue
+        complete_group = set(GROUP[name]) <= set(by_name)
+        if not complete_group:
+            if residue['target']:
+                groups.append({'key': residue['key'], 'sign': SIGN[name], 'index': residue['index'],
+                               'complete': False, 'uncertainty': ['missing-charged-group-atoms']})
+            continue
+        points = [by_name[n]['point'] for n in GROUP[name]]
+        all_groups.append({'key': residue['key'], 'points': points, 'sign': SIGN[name], 'capacity': 1,
+                           'cutoff': RULES['oppositeChargeContactMaximumAngstrom'], 'kind': 'nominal-opposite-protein-charge'})
+        if not residue['target']:
+            continue
+        complete_side = set(SIDE[name].split()) <= set(by_name)
+        uncertainty, neighbors = [], []
+        for candidate in grid.around(centroid(points), 8):
+            if candidate['residueKey'] == residue['key'] and candidate['key'] not in terminal_atoms:
+                continue
+            dist = min(distance(p, candidate['point']) for p in points)
+            typed_variable = candidate['element'] in VARIABLE_VALENCE and candidate['formalCharge'] > 0
+            is_ion = candidate['element'] in ION_CAPACITY or candidate['element'] in ANION or typed_variable
+            unknown = not candidate['polymer'] and not candidate['water'] and not is_ion
+            if dist <= 3.5 and candidate['element'] in ('N', 'O', 'S'):
+                neighbors.append({'atom': candidate['key'], 'distanceAngstrom': dist, 'water': candidate['water']})
+            terminal = candidate['key'] in terminal_atoms
+            if (candidate['ambiguous'] and dist <= 4) or (candidate['water'] and dist <= RULES['waterContactMaximumAngstrom']) or ((unknown or candidate['residueName'] == 'HIS' or terminal) and dist <= RULES['unknownChemistryContactMaximumAngstrom']):
+                uncertainty.append(candidate['key'])
+        side_area = sum(by_name[n]['area'] for n in SIDE[name].split() if n in by_name)
+        groups.append({'key': residue['key'], 'sign': SIGN[name], 'index': residue['index'],
+                       'complete': complete_side, 'points': points,
+                       'relativeSidechainArea': side_area / REFERENCE_SIDE[name] if complete_side else None,
+                       'chargedGroupArea': sum(by_name[n]['area'] for n in GROUP[name]),
+                       'chargedGroupArea2p0': sum(by_name[n]['area2p0'] for n in GROUP[name]),
+                       'relativePolarMoietyArea1p4': sum(by_name[n]['area'] for n in GROUP[name]) / RULES['referenceMoietyAreaAngstromSquared'][name]['1.4'],
+                       'relativePolarMoietyArea2p0': sum(by_name[n]['area2p0'] for n in GROUP[name]) / RULES['referenceMoietyAreaAngstromSquared'][name]['2.0'],
+                       'uncertainty': sorted(set(uncertainty)), 'polarNeighbors': sorted(neighbors, key=lambda n: (n['distanceAngstrom'], n['atom']))[:20]})
+    resources = list(all_groups)
+    for atom in atoms:
+        element = atom['element']
+        variable_capacity = atom['formalCharge'] if element in VARIABLE_VALENCE and atom['formalCharge'] > 0 else None
+        if atom['polymer'] or (element not in ION_CAPACITY and element not in ANION and variable_capacity is None):
+            continue
+        positive = element in ION_CAPACITY or variable_capacity is not None
+        resources.append({'key': atom['key'], 'points': [atom['point']], 'capacity': variable_capacity or ION_CAPACITY.get(element, 1),
+                          'sign': 1 if positive else -1,
+                          'cutoff': RULES['positiveIonContactMaximumAngstrom'] if positive else RULES['negativeIonContactMaximumAngstrom'],
+                          'kind': 'observed-positive-ion' if positive else 'observed-negative-ion'})
+    buried, columns = charge_columns(groups, resources)
+    packing = packing_conflicts(target_atoms, declared_bonds)
+    charge_alert = any(c['alert'] for c in columns)
+    alert = charge_alert or packing['alert']
+    unresolved = [g['key'] for g in groups if not g['complete']]
+    uncertain_columns = [c for c in columns if not c['alert'] and len(c['uncompensatedResidues']) >= RULES['uncompensatedGroupsMinimum'] and c['uncertainResidues']]
+    evaluable = alert or (not unresolved and not uncertain_columns)
+    decision = 'alert' if alert else 'no_targeted_failure_detected' if evaluable else 'inconclusive'
+    public_groups = [{k: v for k, v in g.items() if k != 'points'} for g in groups]
+    binaries = list(Path(gemmi.__file__).parent.glob('gemmi_ext*.so'))
+    if len(binaries) != 1:
+        raise ValueError('engine-identity')
+    modules = {'freesasa': digest(Path(freesasa.__file__).read_bytes()), 'gemmi': digest(Path(gemmi.__file__).read_bytes()), 'gemmi_ext': digest(binaries[0].read_bytes())}
+    return {'version': VERSION, 'implementationRevision': 'polar-moiety-dual-probe-dev/1.1.0',
+            'status': 'evaluated' if evaluable else 'not_evaluable',
+            'sourceSha256': digest(source.encode('utf8')), 'decision': decision,
+            'scope': {'authorChain': options['chain'], 'modelOrdinal': ordinal, 'selectedResidues': len(targets),
+                      'selectedHeavyAtoms': len(target_atoms), 'modelHeavyAtoms': len(atoms), 'contextHeavyAtoms': len(atoms) - len(target_atoms),
+                      'waterAtomsRetainedAsContext': len(waters), 'modelChains': [c.name for c in model],
+                      'selection': 'complete selected polymer chain, all observed model nonwater atoms for SASA; all chains/hetero/ions/water retained for context'},
+            'rules': RULES, 'rulesSha256': digest(json.dumps(RULES, sort_keys=True, separators=(',', ':')).encode()),
+            'engine': {'versions': versions, 'modulesSha256': modules, 'surfaceParameters': PARAMETERS, 'surfaceParameters2p0': parameters2p0,
+                       'surfaceRadiusFallbacks': radius_fallbacks, 'packingRadiiAngstrom': BONDI},
+            'measurement': {'chargedGroups': len(groups), 'completeChargedSidechains': sum(g['complete'] for g in groups),
+                            'buriedChargedGroups': len(buried), 'qualifiedColumns': len(columns), 'chargeAlert': charge_alert,
+                            'packingAlert': packing['alert'], 'hydrophobicResidues': len(hydro),
+                            'exposedHydrophobicResidues': sum(r['exposed'] for r in hydro),
+                            'hydrophobicSidechainAreaAngstromSquared': sum(r['sidechainAreaAngstromSquared'] for r in hydro)},
+            'chargedResidueObservations': public_groups, 'chargeColumns': columns, 'packingConflicts': packing,
+            'declaredCovalentBonds': [list(pair) for pair in declared_bonds],
+            'hydrophobicSupport': hydro, 'missingExpectedAtoms': missing, 'unresolvedChargedSidechains': unresolved,
+            'mechanismsDetected': (['buried-uncompensated-same-sign-column'] if charge_alert else []) + (['distributed-severe-packing-conflict'] if packing['alert'] else []),
+            'globalFoldValidity': 'not_established', 'confidenceScoresUsed': False,
+            'limitations': ['New development hypothesis: polar-moiety relative SASA8%at1.4ÅAND2%at2Å, descriptiveSNaserange not a validated failure cutoff.',
+                            'StaticAla-X-Alareference differs from primaryMDmodel-compound normalization; extension toArg is unvalidated.',
+                            'Development warning rule, not a validated free-energy or complete fold-validity test.',
+                            'Charges and ion valences are explicit nominal assumptions; buried pKa shifts can change protonation.',
+                            'Possible compensation is assigned per group with finite capacity; favorable coordination or salt-bridge energy is not established.',
+                            'Surface hydrophobic exposure alone does not establish misfolding, aggregation or instability.',
+                            'Only provided model context is observed; omitted assembly partners, ions, waters and alternate conformations can change interpretation.',
+                            'Pratt development cases and prior controls have already been inspected; no held-out validation is implied.',
+                            'No-alert means neither tested pattern was detected, not that all physical failures were excluded.']}
+
+
+def main():
+    raw = sys.stdin.buffer.read(40_000_001)
+    if len(raw) > 40_000_000:
+        raise ValueError('request-size')
+    request = json.loads(raw)
+    try:
+        result = measure(request)
+    except (ImportError, FileNotFoundError):
+        result = {'version': VERSION, 'status': 'not_evaluable', 'decision': 'inconclusive', 'failureCode': 'missing-validator-dependencies'}
+    except ValueError as error:
+        known = {'unsupported-engine-version', 'structure-size', 'model-selection', 'ambiguous-author-chain',
+                 'unsupported-selected-residue', 'nonfinite-coordinates', 'ambiguous-selected-atoms',
+                 'duplicate-atom-identity', 'unsupported-selected-element', 'unsupported-context-element',
+                 'empty-selected-polymer', 'atom-limit', 'nonfinite-surface-area', 'surface-area-identity', 'engine-identity'}
+        result = {'version': VERSION, 'status': 'not_evaluable', 'decision': 'inconclusive', 'failureCode': str(error) if str(error) in known else 'validator-failed'}
+    except Exception:
+        result = {'version': VERSION, 'status': 'not_evaluable', 'decision': 'inconclusive', 'failureCode': 'validator-failed'}
+    print(json.dumps(result, sort_keys=True, allow_nan=False))
+
+
+if __name__ == '__main__':
+    main()

@@ -7,6 +7,7 @@ import argparse
 import base64
 import hashlib
 import json
+import math
 from pathlib import Path
 import re
 import sys
@@ -35,6 +36,81 @@ def parse(data):
 
 def canonical(data):
     return json.dumps(data, sort_keys=True, ensure_ascii=False, separators=(',', ':')).encode()
+
+
+def colocated_storage_plan(sizes):
+    """Independent exact replay of strict profile2 roles, blocks and phases."""
+    block = 4096
+    allocated = lambda n: ((n + block - 1) // block) * block
+    size = lambda name: allocated(sizes.get(name, 0))
+    extras = {'source.pdb': 9, 'selection.pdb': 24, 'settings.json': 16,
+              'trp_select.py': 8, 'trp_geometry.py': 8}
+    roles = [{'file': name, 'bytes': sizes[name], 'allocatedBytesPerCopy': size(name),
+              'copies': 8 + extras.get(name, 0)} for name in sorted(sizes)]
+    bundle = sum(r['allocatedBytesPerCopy'] for r in roles)
+    task = 2 * (size('source.pdb') + 3 * size('selection.pdb') + 2 * size('settings.json') +
+                size('trp_select.py') + size('trp_geometry.py'))
+    late = 64 * 1024
+    tree = 2 * bundle + task + 2 * late
+    process_records = 8 + 3 * ((1080 + 1) // 2)
+    allowances = {'coldClientCacheBytes': 14*1048576, 'persistentSqliteBytes': 1048576,
+                  'temporaryBytes': 1048576, 'directoriesAndOperatorMetadataBytes': 1048576,
+                  'controllerAndFailureRecordsBytes': 1048576,
+                  'lateControlPerTraversalBytes': late, 'maximumProcessRecords': process_records,
+                  'normalizedProcessRecordBytes': 512,
+                  'processLogPerViewBytes': allocated(process_records * 512)}
+    cold = sum(allowances[k] for k in ('coldClientCacheBytes', 'persistentSqliteBytes',
+               'temporaryBytes', 'directoriesAndOperatorMetadataBytes', 'controllerAndFailureRecordsBytes'))
+    source, log = size('source.pdb'), allowances['processLogPerViewBytes']
+    phases = [
+        {'name': 'cold-bootstrap-and-input', 'estimatedBytes': cold + source},
+        {'name': 'prepared-client', 'estimatedBytes': cold + source + bundle + late},
+        {'name': 'remote-traversals', 'estimatedBytes': cold + source + bundle + late + tree + log},
+        {'name': 'retrieved-client', 'estimatedBytes': cold + source + 2*tree + log},
+        {'name': 'packed-evidence', 'estimatedBytes': cold + source + 3*tree + 2*log},
+        {'name': 'portable-export', 'estimatedBytes': cold + source + 4*tree + 3*log},
+    ]
+    return {'blockBytes': block, 'roles': roles, 'allowances': allowances, 'phases': phases}
+
+
+def storage_estimate(d, sizes, strict):
+    """Reproduce resource admission using source byte counts, never plan inputs."""
+    if any(type(n) is not int or n < 0 for n in sizes.values()):
+        raise ValueError('invalid counted source size')
+    counted = sum(sizes.values())
+    if d['version'] == 'trp-resources/1.0.0':
+        estimated = 64*1048576 + 4*d['bundleBytes'] + 4*d['selectionBytes']
+    elif d['version'] in {'trp-resources/1.1.0', 'trp-resources/1.2.0'}:
+        copies, headroom = (5, 14) if d['version'] == 'trp-resources/1.1.0' else (7, 12)
+        profile = d['storage'].get('profile')
+        if profile == 'trp-colocated-client-storage/2.0.0':
+            if not strict or d['version'] != 'trp-resources/1.2.0':
+                raise ValueError('misplaced role/block client storage profile')
+            if any(type(d[k]) is not int for k in ('sourceBytes', 'selectionBytes', 'bundleBytes', 'workBytes')):
+                raise ValueError('invalid role/block resource number')
+            if d['sourceBytes'] != sizes['source.pdb'] or d['selectionBytes'] != sizes['selection.pdb']:
+                raise ValueError('role/block input sizes differ')
+            plan = colocated_storage_plan(sizes)
+            expected_storage = {
+                'kind': 'estimate',
+                'formula': 'max(storage.plan.phases[].estimatedBytes); role copies rounded individually to4096bytes',
+                'hardLimit': False, 'profile': profile, 'plan': plan,
+            }
+            if canonical(d['storage']) != canonical(expected_storage):
+                raise ValueError('role/block client storage plan differs from source bytes and fixed profile')
+            estimated = max(p['estimatedBytes'] for p in plan['phases'])
+        else:
+            if profile is not None:
+                if not strict or d['version'] != 'trp-resources/1.2.0' or profile != 'trp-colocated-client-storage/1.0.0':
+                    raise ValueError('unknown or misplaced client storage profile')
+                headroom = 32
+            numerator = headroom*1048576 + copies*d['bundleBytes'] + 4*d['selectionBytes']
+            estimated = ((numerator + 4095) // 4096) * 4096
+    else:
+        raise ValueError('unknown resource estimator')
+    if counted != d['bundleBytes'] or d['workBytes'] != estimated:
+        raise ValueError('cold storage calculation differs')
+    return estimated
 
 
 def safe_name(name):
@@ -209,6 +285,43 @@ def walk(root):
     return result
 
 
+def verify_polar_moiety(diagnostic):
+    """Recheck reported arithmetic/AND membership, never recalculate geometric SASA."""
+    if diagnostic.get('version') != 'helix-physical-diagnostic/1.1.0':
+        return
+    rules = diagnostic['rules']
+    if (rules.get('polarMoietyRelativeArea1p4Maximum') != 0.08 or rules.get('polarMoietyRelativeArea2p0Maximum') != 0.02
+            or rules.get('referenceAreaEvidenceSha256') != '0ee1d4daa7d2899b2031228848e2faa73cee01ac6e1c7aca90c1ab42cad8d2bb'):
+        raise ValueError('physical polar-moiety profile differs')
+    if (diagnostic['engine']['surfaceParameters'].get('probe-radius') != 1.4
+            or diagnostic['engine']['surfaceParameters2p0'].get('probe-radius') != 2.0):
+        raise ValueError('physical polar-moiety probes differ')
+    observations = diagnostic['chargedResidueObservations']
+    if (len({g['key'] for g in observations}) != len(observations)
+            or diagnostic['measurement']['chargedGroups'] != len(observations)
+            or diagnostic['measurement']['completeChargedSidechains'] != sum(g['complete'] for g in observations)):
+        raise ValueError('physical polar-moiety observation denominator differs')
+    buried = set()
+    for group in observations:
+        if not group['complete']:
+            continue
+        residue = group['key'].rsplit(':', 1)[-1]
+        reference = rules['referenceMoietyAreaAngstromSquared'][residue]
+        for probe, area_key, ratio_key in (('1.4', 'chargedGroupArea', 'relativePolarMoietyArea1p4'),
+                                          ('2.0', 'chargedGroupArea2p0', 'relativePolarMoietyArea2p0')):
+            values = (reference[probe], group[area_key], group[ratio_key])
+            if any(type(v) not in (int, float) or not math.isfinite(v) or v < 0 for v in values) or reference[probe] <= 0:
+                raise ValueError('physical polar-moiety nonfinite or invalid measurement')
+            if not math.isclose(group[ratio_key], group[area_key] / reference[probe], rel_tol=1e-9, abs_tol=1e-10):
+                raise ValueError('physical polar-moiety ratio differs')
+        if group['relativePolarMoietyArea1p4'] <= 0.08 and group['relativePolarMoietyArea2p0'] <= 0.02:
+            buried.add(group['key'])
+    if diagnostic['measurement']['buriedChargedGroups'] != len(buried):
+        raise ValueError('physical polar-moiety buried denominator differs')
+    if any(c['groups'] != len(c['residues']) or not set(c['residues']) <= buried for c in diagnostic['chargeColumns']):
+        raise ValueError('physical polar-moiety column membership differs')
+
+
 def verify(root, expected=None, allow_legacy_strict_backend=False):
     if type(allow_legacy_strict_backend) is not bool:
         raise ValueError('legacy backend option must be boolean')
@@ -273,22 +386,48 @@ def verify(root, expected=None, allow_legacy_strict_backend=False):
         expected_ids = {c['id'] for c in record('structural_catalogue.json')['controls']}
         controls = structural['checks']
         fold = next((c for c in controls if c['id'] == 'fold-plausibility'), None)
+        has_physical = fold and isinstance(fold.get('value'), dict) and 'physicalDiagnostic' in fold['value']
         if fold and isinstance(fold.get('value'), dict) and 'stericDiagnostic' in fold['value']:
             if 'steric_diagnostic.py' not in bundle['files'] or fold['value'].get('wrapperSha256') != digest((root/'run/steric_diagnostic.py').read_bytes()):
                 raise ValueError('optional steric diagnostic source differs')
-            if fold['status'] != 'not_evaluable':
+            if fold['status'] != 'not_evaluable' and not has_physical:
                 raise ValueError('steric diagnostic cannot establish broad fold plausibility')
         if fold and isinstance(fold.get('value'), dict) and 'surfaceDiagnostic' in fold['value']:
             value = fold['value']; diagnostic = value['surfaceDiagnostic']
             if 'surface_diagnostic.py' not in bundle['files'] or value.get('surfaceWrapperSha256') != digest((root/'run/surface_diagnostic.py').read_bytes()):
                 raise ValueError('optional surface diagnostic source differs')
-            if fold['status'] != 'not_evaluable' or diagnostic.get('version') != 'helix-surface-diagnostic/1.0.0' or diagnostic.get('status') not in ('measured', 'not_evaluable'):
+            if (fold['status'] != 'not_evaluable' and not has_physical) or diagnostic.get('version') != 'helix-surface-diagnostic/1.0.0' or diagnostic.get('status') not in ('measured', 'not_evaluable'):
                 raise ValueError('surface diagnostic cannot establish broad fold plausibility')
             if diagnostic['status'] == 'measured':
                 if diagnostic.get('sourceSha256') != structural['provenance']['structureSha256'] or diagnostic.get('scope', {}).get('authorChain') != spec['chain']['value'] or diagnostic.get('scope', {}).get('modelOrdinal') != spec['model']['value']:
                     raise ValueError('surface diagnostic selection differs')
                 if diagnostic.get('foldVerdict') != 'not_established' or diagnostic.get('burialThreshold') is not None or diagnostic.get('confidenceScoresUsed') is not False:
                     raise ValueError('unsupported surface fold verdict')
+        if has_physical:
+            value = fold['value']; diagnostic = value['physicalDiagnostic']
+            if 'physical_diagnostic.py' not in bundle['files'] or value.get('physicalWrapperSha256') != digest((root/'run/physical_diagnostic.py').read_bytes()):
+                raise ValueError('optional physical diagnostic source differs')
+            decision = diagnostic.get('decision')
+            if diagnostic.get('version') not in ('helix-physical-diagnostic/1.0.0', 'helix-physical-diagnostic/1.1.0') or diagnostic.get('status') not in ('evaluated', 'not_evaluable') or decision not in ('alert', 'no_targeted_failure_detected', 'inconclusive'):
+                raise ValueError('physical diagnostic version/status differs')
+            if fold['status'] != {'alert': 'fail', 'no_targeted_failure_detected': 'pass', 'inconclusive': 'not_evaluable'}[decision]:
+                raise ValueError('physical control decision differs')
+            if diagnostic['status'] == 'evaluated' or diagnostic.get('sourceSha256'):
+                if diagnostic.get('sourceSha256') != structural['provenance']['structureSha256'] or diagnostic.get('scope', {}).get('authorChain') != spec['chain']['value'] or diagnostic.get('scope', {}).get('modelOrdinal') != spec['model']['value']:
+                    raise ValueError('physical diagnostic selection differs')
+                if diagnostic.get('globalFoldValidity') != 'not_established' or diagnostic.get('confidenceScoresUsed') is not False:
+                    raise ValueError('unsupported complete physical fold claim')
+                rules_sha = digest(canonical(diagnostic['rules']))
+                if diagnostic.get('rulesSha256') != rules_sha or fold.get('threshold', {}).get('rulesSha256') != rules_sha:
+                    raise ValueError('physical rule binding differs')
+                verify_polar_moiety(diagnostic)
+                metric = diagnostic['measurement']; columns = diagnostic['chargeColumns']; packing = diagnostic['packingConflicts']
+                if metric['qualifiedColumns'] != len(columns) or metric['chargeAlert'] != any(c['alert'] for c in columns) or metric['packingAlert'] != packing['alert']:
+                    raise ValueError('physical mechanism evidence differs')
+                if (decision == 'alert') != (metric['chargeAlert'] or metric['packingAlert']) or (diagnostic['status'] == 'evaluated') != (decision != 'inconclusive'):
+                    raise ValueError('physical diagnostic result differs')
+            elif decision != 'inconclusive':
+                raise ValueError('physical diagnostic provenance missing')
         if len(controls) != len(expected_ids) or {c['id'] for c in controls} != expected_ids:
             raise ValueError('structural inventory differs')
         if structural['version'] not in ('trp-structural/1.0.0', 'trp-structural/1.1.0') or structural['provenance']['structureSha256'] != digest((root / 'run/source.pdb').read_bytes()):
@@ -363,22 +502,26 @@ def verify(root, expected=None, allow_legacy_strict_backend=False):
         raise ValueError('input byte count differs')
     base = {k: v for k, v in bundle['files'].items() if k not in {'inventory.json', 'budget.json', 'admission.json', 'protocol.json', 'validation.json'}}
     # validation.json is augmented after admission; its original size is recorded in countInputs.
-    counted = sum((root / 'run' / k).stat().st_size for k in base) + m['countInputs']['validationBytes']
-    if d['version'] == 'trp-resources/1.0.0':
-        estimated = 64*1048576 + 4*d['bundleBytes'] + 4*d['selectionBytes']
-    elif d['version'] in {'trp-resources/1.1.0', 'trp-resources/1.2.0'}:
-        copies, headroom = (5, 14) if d['version'] == 'trp-resources/1.1.0' else (7, 12)
-        profile = d['storage'].get('profile')
-        if profile is not None:
-            if not strict or d['version'] != 'trp-resources/1.2.0' or profile != 'trp-colocated-client-storage/1.0.0':
-                raise ValueError('unknown or misplaced client storage profile')
-            headroom = 32
-        numerator = headroom*1048576 + copies*d['bundleBytes'] + 4*d['selectionBytes']
-        estimated = ((numerator + 4095) // 4096) * 4096
-    else:
-        raise ValueError('unknown resource estimator')
-    if counted != d['bundleBytes'] or d['workBytes'] != estimated:
-        raise ValueError('cold storage calculation differs')
+    sizes = {k: (root / 'run' / k).stat().st_size for k in base}
+    validation_bytes = m['countInputs']['validationBytes']
+    if type(validation_bytes) is not int or validation_bytes < 0:
+        raise ValueError('invalid original validation byte count')
+    sizes['validation.json'] = validation_bytes
+    storage_estimate(d, sizes, strict)
+    if d['storage'].get('profile') == 'trp-colocated-client-storage/2.0.0':
+        process_path = root / 'run/processes.jsonl'
+        if not process_path.exists() and run['status'] == 'succeeded':
+            raise ValueError('role/block profile process receipts missing')
+        receipts = [parse(line) for line in process_path.read_bytes().splitlines()] if process_path.exists() else []
+        limits = d['storage']['plan']['allowances']
+        if len(receipts) > limits['maximumProcessRecords']:
+            raise ValueError('role/block process receipt count exceeds declared reservation')
+        marker = '<approved-runner-sha256:' + digest((root / 'run/remote_runner.py').read_bytes()) + '>'
+        for receipt in receipts:
+            if receipt['argv'] != ['/usr/bin/python3', '-c', marker]:
+                raise ValueError('role/block process receipt is not linked to the exact approved runner')
+            if receipt.get('exitCode') == 0 and len(canonical(receipt)) > limits['normalizedProcessRecordBytes']:
+                raise ValueError('role/block successful process receipt exceeds declared reservation')
     if record('specification.json')['structure']['value']['sha256'] != digest((root / 'run/source.pdb').read_bytes()):
         raise ValueError('source identity differs')
     for artifact in record('catalogue_evidence.json'):

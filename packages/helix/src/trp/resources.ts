@@ -11,6 +11,75 @@ import { TrpRemoteEnforcement as H } from "./remote-enforcement"
 
 export const VERSION = "trp-resources/1.2.0"
 export const MiB = 1024 ** 2
+export const COLOCATED_STORAGE_PROFILE = "trp-colocated-client-storage/2.0.0"
+export const STORAGE_BLOCK_BYTES = 4096
+
+export interface StoragePlan {
+  blockBytes: number
+  roles: { file: string; bytes: number; allocatedBytesPerCopy: number; copies: number }[]
+  allowances: Record<string, number>
+  phases: { name: string; estimatedBytes: number }[]
+}
+
+/** Explicit reservation for the fixed two-traversal, copy-staged strict route.
+ * Count paths by their producer role, never by coincident content hashes. This
+ * includes the input in the client workspace and all retained task inputs,
+ * outputs, retrieval, evidence packing and the requested second portable copy.
+ * Runtime allowances are engineering estimates; the independent kernel quota
+ * remains the cap. This profile needs revalidation when its runtime changes. */
+export function colocatedStorage(files: Record<string, string>): StoragePlan {
+  const blocks = (n: number) => Math.ceil(n / STORAGE_BLOCK_BYTES) * STORAGE_BLOCK_BYTES
+  const size = (name: string) => blocks(Buffer.byteLength(files[name] ?? ""))
+  const extras: Record<string, number> = {
+    "source.pdb": 9, // one initial client copy, two SELECT stage-ins in four retained views
+    "selection.pdb": 24, // two traversals: SELECT stage-in/output and GEOMETRY stage-in, four views
+    "settings.json": 16, // two tasks per traversal, four retained views
+    "trp_select.py": 8,
+    "trp_geometry.py": 8,
+  }
+  const roles = Object.keys(files).sort().map((file) => ({
+    file,
+    bytes: Buffer.byteLength(files[file]),
+    allocatedBytesPerCopy: size(file),
+    copies: 8 + (extras[file] ?? 0),
+  }))
+  const bundle = roles.reduce((n, r) => n + r.allocatedBytesPerCopy, 0)
+  const taskStaging = 2 * (size("source.pdb") + 3 * size("selection.pdb") +
+    2 * size("settings.json") + size("trp_select.py") + size("trp_geometry.py"))
+  // Each remote/client tree contains a real and a stub traversal. Late
+  // admission/protocol/inventory files are written after the initial count.
+  const lateControlPerTraversalBytes = 64 * 1024
+  const tree = 2 * bundle + taskStaging + 2 * lateControlPerTraversalBytes
+  // A status loop sleeps2s; at most three transport observations per loop.
+  // Reserve a bounded successful receipt size after source-linked argv
+  // normalization, plus independent controller/failure metadata below.
+  const maximumProcessRecords = 8 + 3 * Math.ceil(1080 / 2)
+  const allowances = {
+    coldClientCacheBytes: 14 * MiB,
+    persistentSqliteBytes: MiB,
+    temporaryBytes: MiB,
+    directoriesAndOperatorMetadataBytes: MiB,
+    controllerAndFailureRecordsBytes: MiB,
+    lateControlPerTraversalBytes,
+    maximumProcessRecords,
+    normalizedProcessRecordBytes: 512,
+    processLogPerViewBytes: blocks(maximumProcessRecords * 512),
+  }
+  const cold = allowances.coldClientCacheBytes + allowances.persistentSqliteBytes +
+    allowances.temporaryBytes + allowances.directoriesAndOperatorMetadataBytes +
+    allowances.controllerAndFailureRecordsBytes
+  const stagedInput = size("source.pdb")
+  const processLog = allowances.processLogPerViewBytes
+  const phases = [
+    { name: "cold-bootstrap-and-input", estimatedBytes: cold + stagedInput },
+    { name: "prepared-client", estimatedBytes: cold + stagedInput + bundle + lateControlPerTraversalBytes },
+    { name: "remote-traversals", estimatedBytes: cold + stagedInput + bundle + lateControlPerTraversalBytes + tree + processLog },
+    { name: "retrieved-client", estimatedBytes: cold + stagedInput + 2 * tree + processLog },
+    { name: "packed-evidence", estimatedBytes: cold + stagedInput + 3 * tree + 2 * processLog },
+    { name: "portable-export", estimatedBytes: cold + stagedInput + 4 * tree + 3 * processLog },
+  ]
+  return { blockBytes: STORAGE_BLOCK_BYTES, roles, allowances, phases }
+}
 export const Budget = Schema.Struct({
   cpus: Schema.Number,
   memoryBytes: Schema.Number,
@@ -69,7 +138,7 @@ export interface Demand {
   memoryBytes: number
   workBytes: number
   wallSeconds: number
-  storage: { kind: "estimate"; formula: string; hardLimit: false; profile?: string }
+  storage: { kind: "estimate"; formula: string; hardLimit: false; profile?: string; plan?: StoragePlan }
   assumptions: string[]
 }
 export interface Rejection {
@@ -95,7 +164,7 @@ export function count(files: Record<string, string>): Demand {
   const selectionBytes = Buffer.byteLength(files["selection.pdb"])
   const bundleBytes = Object.values(files).reduce((n, s) => n + Buffer.byteLength(s), 0)
   const colocated = Boolean(files["remote_strict_policy.json"])
-  const overheadMiB = colocated ? 32 : 12
+  const storagePlan = colocated ? colocatedStorage(files) : undefined
   return {
     version: VERSION,
     sourceBytes,
@@ -109,19 +178,23 @@ export function count(files: Record<string, string>): Demand {
     },
     cpus: 3,
     memoryBytes: 4096 * MiB,
-    workBytes: Math.ceil((overheadMiB * MiB + 7 * bundleBytes + 4 * selectionBytes) / 4096) * 4096,
+    workBytes: storagePlan
+      ? Math.max(...storagePlan.phases.map((p) => p.estimatedBytes))
+      : Math.ceil((12 * MiB + 7 * bundleBytes + 4 * selectionBytes) / 4096) * 4096,
     wallSeconds: 1080,
     storage: {
       kind: "estimate",
-      formula: `ceil((${overheadMiB}*1048576 + 7*bundleBytes + 4*selectionBytes)/4096)*4096`,
+      formula: storagePlan
+        ? "max(storage.plan.phases[].estimatedBytes); role copies rounded individually to4096bytes"
+        : "ceil((12*1048576 + 7*bundleBytes + 4*selectionBytes)/4096)*4096",
       hardLimit: false,
-      ...(colocated ? { profile: "trp-colocated-client-storage/1.0.0" } : {}),
+      ...(storagePlan ? { profile: COLOCATED_STORAGE_PROFILE, plan: storagePlan } : {}),
     },
     assumptions: [
       ...(files["remote_strict_policy.json"]
         ? [
             "Verified co-located Slurm profile: the real Helix client and Python/Nextflow controller share a root-controlled 1 CPU/2 GiB/swap-zero cgroup. All declared client work/temp/state/cache/export and remote workspace paths inherit one kernel XFS project quota. Worker tasks remain separate 2 CPU/2 GiB Docker allocations; no memory pooling.",
-            "Storage profile trp-colocated-client-storage/1.0.0 reserves32MiB overhead plus working-copy terms. This covers the real client/bootstrap/cache and portable export scope, calibrated on one development pilot before the aggregate campaign freeze; it is not a universal peak guarantee.",
+            "Storage profile trp-colocated-client-storage/2.0.0 accounts for per-file roles,4KiB blocks and the maximum cumulative bootstrap/execution/retrieval/evidence/export phase. It reserves cold client cache, persistent SQLite, temporary files, metadata and source-linked process receipts. Allowances are development engineering estimates, not a universal peak guarantee; all seven declared paths remain charged to one kernel quota.",
           ]
         : files["remote_target.json"]
           ? [

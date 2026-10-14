@@ -182,6 +182,7 @@ env.MKL_NUM_THREADS = '1'
   > | null
   if (physical?.stericDiagnostic) files["steric_diagnostic.py"] = TrpStructural.STERIC_SCRIPT
   if (physical?.surfaceDiagnostic) files["surface_diagnostic.py"] = TrpStructural.SURFACE_SCRIPT
+  if (physical?.physicalDiagnostic) files["physical_diagnostic.py"] = TrpStructural.PHYSICAL_SCRIPT
   if (enforced) files["enforcement.json"] = S.canonical(enforced.config) + "\n"
   const digest = bundleDigest(files)
   return { spec, report: publicReport, files, digest, image }

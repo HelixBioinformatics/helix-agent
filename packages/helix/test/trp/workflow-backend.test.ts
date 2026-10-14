@@ -25,6 +25,7 @@ import source from "../../../../evaluation/trp/development/f3-reference-spec.jso
 import budget from "../../../../evaluation/trp/development/f4-budget.json"
 const root = path.resolve(import.meta.dir, "../../../..")
 let target: Remote.Target, receipt: any, workspace = "", actions: string[] = [], submitted: any
+let actualCommands: { action: string; argv: string[] }[] = []
 const configured = spyOn(Remote, "configured").mockImplementation(async () => target)
 const rootObserver = spyOn(H, "observe").mockImplementation(async () => receipt)
 afterAll(() => {configured.mockRestore();rootObserver.mockRestore()})
@@ -36,6 +37,7 @@ function observed() {
 }
 const processLayer=Layer.mock(AppProcess.Service,{run:(_command, options)=>Effect.gen(function*(){
  const req=JSON.parse(String(options?.stdin));actions.push(req.action)
+ if (_command._tag === "StandardCommand") actualCommands.push({action:req.action,argv:[_command.command,..._command.args]})
  if(req.action==="observe")return response(observed())
  if(req.action==="start"){submitted=req;return response({ok:true,directory:"/simulated/run",controller:{id:req.id,digest:req.digest}})}
  if(req.action==="status")return response({ok:true,status:"succeeded",controllerAlive:false,id:req.id,digest:req.digest,analysisInventory:observed(),analysisAdmitted:false})
@@ -56,7 +58,7 @@ const pending=Effect.fn(function*(){
  for(;;){const q=(yield* question.list()).find(q=>q.sessionID===ctx.sessionID);if(q)return q;yield* Queue.take(asked).pipe(Effect.timeout("5 seconds"))}
 })
 for(const strict of [false,true]) it.instance(`actual workflow/tool writes ${strict?"co-located strict":"SSH"} backend from verified execution`,()=>Effect.gen(function*(){
- workspace=yield* InstanceState.directory;actions=[]
+ workspace=yield* InstanceState.directory;actions=[];actualCommands=[]
  const policy:any={version:H.VERSION,id:"hrs0123456789abcdef",uid:1000,hostname:"simulated-head",bootId:"simulated-boot",target:{host:"127.0.0.1",port:22,user:"ubuntu",hostKeyAlias:"simulated",root:path.join(workspace,"remote"),partition:"helix",numericalProfile:"haswell-single-thread"},filesystem:{mountPoint:workspace,uuid:"simulated-xfs",device:1,projectId:142,hardBytes:budget.workBytes},paths:{allocationRoot:path.join(workspace,"allocation"),clientWorkspace:workspace,remoteRoot:path.join(workspace,"remote"),temporaryRoot:path.join(workspace,"tmp"),exportRoot:path.join(workspace,"export"),clientStateRoot:path.join(workspace,"state"),clientCacheRoot:path.join(workspace,"cache")},controller:{cgroup:"helix-strict-hrs0123456789abcdef.service",cpus:1,memoryBytes:2*(1024 ** 3),swapBytes:0},entitlement:{cpus:3,memoryBytes:4*(1024 ** 3),workBytes:budget.workBytes,wallSeconds:budget.wallSeconds},checker:{path:H.checkerPath,sha256:H.checkerSha256},samplePath:"/run/helix-remote-strict/hrs0123456789abcdef.sample.json"}
  const policyRaw=S.canonical(policy),checkedAt=Date.now()/1000,quota={projectId:142,usedBytes:4096,hardBytes:budget.workBytes,reportSource:`#142 4 0 ${budget.workBytes/1024} 0 [------]\n`,stateSource:"Accounting: ON\nEnforcement: ON\n",treeCheckExitCode:0,treeCheckStdout:"",treeCheckStderr:""}
  const allocation:any={version:H.VERSION,policyPath:"/run/helix-remote-strict/hrs0123456789abcdef.json",policySha256:S.sha256(policyRaw),policy,targetFingerprint:"f".repeat(64)}
@@ -78,6 +80,21 @@ for(const strict of [false,true]) it.instance(`actual workflow/tool writes ${str
  expect(events.find(e=>e.outcome==="completed").detail.backend).toBe(expected)
  expect(payload.evidence.manifestSha256).toMatch(/^[0-9a-f]{64}$/)
  expect(actions).toEqual(["observe","observe","start","status","admit-analysis","export"])
+ const receipts=yield* Effect.promise(async()=>(await fs.readFile(path.join(payload.directory,"processes.jsonl"),"utf8")).trim().split("\n").map(l=>JSON.parse(l)))
+ // Preparation observes before run receipts exist; the run recheck is logged.
+ const invocations=actualCommands.slice(1)
+ expect(receipts).toHaveLength(invocations.length)
+ const runner=submitted.files["remote_runner.py"],marker=`<approved-runner-sha256:${S.sha256(runner)}>`
+ for (const [index,record] of receipts.entries()) {
+  expect(record.startedAt).toBeString();expect(record.durationMs).toBeNumber();expect(record.exitCode).toBe(0)
+  if(strict){
+   // The real workflow changes only its receipt; the process boundary still
+   // receives every complete byte of the approved Python source.
+   expect(invocations[index].argv).toEqual(["/usr/bin/python3","-c",runner])
+   expect(record.argv).toEqual(["/usr/bin/python3","-c",marker])
+   expect(Buffer.byteLength(JSON.stringify(record))).toBeLessThanOrEqual(512)
+  }else expect(record.argv.at(-1)).toBe(`python3 -c ${marker}`)
+ }
  const out={kind:"functional workflow metadata regression with simulated OS/process boundary",strict,actualBackend:execution.backend,resultBackend:payload.backend,runBackend:run.backend,completionBackend:events.find(e=>e.outcome==="completed").detail.backend,actions,sourcePreparedDigest:preview.digest,evidencePacked:true,humanApproval:false,scientificExecution:false,rootEnforcementObserved:false}
  if (process.env.TRP_BACKEND_TEST_OUTPUT) yield* Effect.promise(()=>fs.writeFile(path.join(process.env.TRP_BACKEND_TEST_OUTPUT!, `functional-${strict?"strict":"ssh"}.json`),JSON.stringify(out,null,2)+"\n"))
 }),30000)

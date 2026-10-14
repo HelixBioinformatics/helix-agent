@@ -21,6 +21,16 @@ import { TrpEnforcement } from "./enforcement"
 import { TrpRemoteEnforcement } from "./remote-enforcement"
 import { TrpRemote } from "./remote"
 
+/** Content-address the exact approved script in process receipts. Execution
+ * still receives the complete script; unrelated Python commands stay literal. */
+export function processReceiptArgv(argv: readonly string[], approvedRunner: string | undefined, strict: boolean) {
+  const recorded = [...argv]
+  if (strict && approvedRunner !== undefined && recorded.length === 3 &&
+      recorded[0] === "/usr/bin/python3" && recorded[1] === "-c" && recorded[2] === approvedRunner)
+    recorded[2] = `<approved-runner-sha256:${S.sha256(approvedRunner)}>`
+  return recorded
+}
+
 interface Draft {
   id: string
   bundle: N.Bundle
@@ -259,8 +269,11 @@ const layer = Layer.effect(
           Effect.gen(function* () {
             const startedAt = new Date().toISOString(),
               start = Date.now()
-            const argv =
-              command._tag === "StandardCommand" ? [command.command, ...command.args] : ["unsupported-pipeline"]
+            const argv = processReceiptArgv(
+              command._tag === "StandardCommand" ? [command.command, ...command.args] : ["unsupported-pipeline"],
+              draft.bundle.files["remote_runner.py"],
+              Boolean(draft.target?.strict),
+            )
             if (argv[0] === "ssh")
               argv[argv.length - 1] =
                 `python3 -c <approved-runner-sha256:${S.sha256(draft.bundle.files["remote_runner.py"])}>`

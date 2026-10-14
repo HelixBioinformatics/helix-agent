@@ -11,10 +11,11 @@ import SCRIPT from "./inspect_structure.py.txt"
 import VERIFIER from "./verify_inspection.py.txt"
 import STERIC_SCRIPT from "./steric_diagnostic.py.txt"
 import SURFACE_SCRIPT from "./surface_diagnostic.py.txt"
+import PHYSICAL_SCRIPT from "./physical_diagnostic.py.txt"
 import catalog from "./structural_catalog.json"
 
 export { SCRIPT, catalog }
-export { STERIC_SCRIPT, SURFACE_SCRIPT }
+export { STERIC_SCRIPT, SURFACE_SCRIPT, PHYSICAL_SCRIPT }
 export const VERSION = "trp-structural/1.1.0"
 const Range = Schema.Struct({ start: Schema.Number, end: Schema.Number })
 export const Options = Schema.Struct({
@@ -83,6 +84,13 @@ export const Report = Schema.Struct({
   limitations: Schema.Array(Schema.String),
 })
 export type Report = typeof Report.Type
+type InspectionRequest = {
+  structure: string
+  options: Options
+  pae?: unknown
+  api?: unknown
+  colabfold?: { metadata: unknown; scores: string; pae: string }
+}
 
 /** Trusted, bundled offline parser, isolated from cwd imports. Input is data on
  * stdin, never command text. Python path is an operator setting, not an LLM arg. */
@@ -175,13 +183,7 @@ export async function runParser(
 }
 
 export async function inspect(
-  request: {
-    structure: string
-    options: Options
-    pae?: unknown
-    api?: unknown
-    colabfold?: { metadata: unknown; scores: string; pae: string }
-  },
+  request: InspectionRequest,
   signal?: AbortSignal,
   python = process.env.HELIX_TRP_PYTHON ?? "python3",
 ): Promise<Report> {
@@ -256,7 +258,7 @@ export async function inspect(
     }
   }
   const surfacePython = process.env.HELIX_TRP_SURFACE_PYTHON
-  if (!surfacePython) return extended
+  if (!surfacePython) return physicalReport(extended, request, signal)
   signal?.throwIfAborted()
   let surfaceDiagnostic: unknown
   try {
@@ -322,23 +324,166 @@ export async function inspect(
       failureCode: "validator-failed-or-interrupted",
     }
   }
-  return {
-    ...extended,
-    checks: extended.checks.map((check) =>
-      check.id === "fold-plausibility"
-        ? {
-            ...check,
-            value: {
-              ...(check.value as Record<string, unknown> | null),
-              surfaceDiagnostic,
-              surfaceWrapperSha256: S.sha256(SURFACE_SCRIPT),
-            },
-            reason:
-              check.reason +
-              " An optional solvent-exposure diagnostic records continuous areas and incomplete sidechains; it does not establish overall fold plausibility.",
+  return physicalReport(
+    {
+      ...extended,
+      checks: extended.checks.map((check) =>
+        check.id === "fold-plausibility"
+          ? {
+              ...check,
+              value: {
+                ...(check.value as Record<string, unknown> | null),
+                surfaceDiagnostic,
+                surfaceWrapperSha256: S.sha256(SURFACE_SCRIPT),
+              },
+              reason:
+                check.reason +
+                " An optional solvent-exposure diagnostic records continuous areas and incomplete sidechains; it does not establish overall fold plausibility.",
+            }
+          : check,
+      ),
+    },
+    request,
+    signal,
+  )
+}
+
+/** Operator-configured physical warning; no LLM-selected cutoffs or runtime. */
+async function physicalReport(report: Report, request: InspectionRequest, signal?: AbortSignal): Promise<Report> {
+  const python = process.env.HELIX_TRP_PHYSICAL_PYTHON
+  if (!python) return report
+  signal?.throwIfAborted()
+  let diagnostic: any
+  try {
+    diagnostic = await runParser(request, signal, python, PHYSICAL_SCRIPT, 180_000)
+    Schema.decodeUnknownSync(
+      Schema.Struct({
+        version: Schema.Literals(["helix-physical-diagnostic/1.0.0", "helix-physical-diagnostic/1.1.0"]),
+        status: Schema.Literals(["evaluated", "not_evaluable"]),
+        decision: Schema.Literals(["alert", "no_targeted_failure_detected", "inconclusive"]),
+      }),
+    )(diagnostic)
+    if (diagnostic.status === "evaluated" || diagnostic.sourceSha256) {
+      const m = diagnostic.measurement
+      if (
+        diagnostic.sourceSha256 !== report.provenance.structureSha256 ||
+        diagnostic.scope?.authorChain !== request.options.chain ||
+        diagnostic.scope?.modelOrdinal !== request.options.model ||
+        diagnostic.globalFoldValidity !== "not_established" ||
+        diagnostic.confidenceScoresUsed !== false ||
+        !/^[a-f0-9]{64}$/.test(diagnostic.rulesSha256 ?? "") ||
+        !Array.isArray(diagnostic.chargeColumns) ||
+        !Array.isArray(diagnostic.mechanismsDetected) ||
+        !Number.isInteger(m?.chargedGroups) ||
+        m.chargedGroups < 0 ||
+        !Number.isInteger(m?.qualifiedColumns) ||
+        m.qualifiedColumns !== diagnostic.chargeColumns.length ||
+        typeof m?.chargeAlert !== "boolean" ||
+        typeof m?.packingAlert !== "boolean" ||
+        m.chargeAlert !== diagnostic.chargeColumns.some((c: any) => c.alert === true) ||
+        m.packingAlert !== diagnostic.packingConflicts?.alert ||
+        (diagnostic.decision === "alert") !== (m.chargeAlert || m.packingAlert) ||
+        (diagnostic.status === "evaluated") !== (diagnostic.decision !== "inconclusive")
+      )
+        throw new S.WorkflowError("physical-contract", "Unexpected physical warning identity or decision")
+      if (diagnostic.version === "helix-physical-diagnostic/1.1.0") {
+        const rules = diagnostic.rules
+        const observations = diagnostic.chargedResidueObservations
+        if (
+          rules?.polarMoietyRelativeArea1p4Maximum !== 0.08 ||
+          rules?.polarMoietyRelativeArea2p0Maximum !== 0.02 ||
+          rules?.referenceAreaEvidenceSha256 !== "0ee1d4daa7d2899b2031228848e2faa73cee01ac6e1c7aca90c1ab42cad8d2bb" ||
+          diagnostic.engine?.surfaceParameters?.["probe-radius"] !== 1.4 ||
+          diagnostic.engine?.surfaceParameters2p0?.["probe-radius"] !== 2 ||
+          !Array.isArray(observations) ||
+          observations.length !== m.chargedGroups
+        )
+          throw new S.WorkflowError("physical-contract", "Unexpected polar-moiety profile or denominator")
+        const buried = new Set<string>()
+        for (const group of observations) {
+          if (!group.complete) continue
+          const reference = rules.referenceMoietyAreaAngstromSquared?.[group.key.split(":").at(-1)]
+          for (const [probe, area, ratio] of [
+            ["1.4", "chargedGroupArea", "relativePolarMoietyArea1p4"],
+            ["2.0", "chargedGroupArea2p0", "relativePolarMoietyArea2p0"],
+          ]) {
+            if (
+              !Number.isFinite(reference?.[probe]) ||
+              reference[probe] <= 0 ||
+              !Number.isFinite(group[area]) ||
+              group[area] < 0 ||
+              !Number.isFinite(group[ratio]) ||
+              group[ratio] < 0 ||
+              Math.abs(group[ratio] - group[area] / reference[probe]) > 1e-9
+            )
+              throw new S.WorkflowError("physical-contract", "Unexpected polar-moiety arithmetic")
           }
-        : check,
-    ),
+          if (group.relativePolarMoietyArea1p4 <= 0.08 && group.relativePolarMoietyArea2p0 <= 0.02)
+            buried.add(group.key)
+        }
+        if (
+          buried.size !== m.buriedChargedGroups ||
+          diagnostic.chargeColumns.some(
+            (column: any) =>
+              column.groups !== column.residues.length || column.residues.some((key: string) => !buried.has(key)),
+          )
+        )
+          throw new S.WorkflowError("physical-contract", "Unexpected polar-moiety membership")
+      }
+    } else if (diagnostic.status !== "not_evaluable" || diagnostic.decision !== "inconclusive") {
+      throw new S.WorkflowError("physical-contract", "Physical decision lacks measurement provenance")
+    }
+  } catch {
+    signal?.throwIfAborted()
+    diagnostic = {
+      version: "helix-physical-diagnostic/1.1.0",
+      status: "not_evaluable",
+      decision: "inconclusive",
+      failureCode: "validator-failed-or-interrupted",
+    }
+  }
+  const status =
+    diagnostic.decision === "alert"
+      ? "fail"
+      : diagnostic.decision === "no_targeted_failure_detected"
+        ? "pass"
+        : "not_evaluable"
+  const checks = report.checks.map((check) =>
+    check.id === "fold-plausibility"
+      ? {
+          ...check,
+          status,
+          value: {
+            ...(check.value as Record<string, unknown> | null),
+            physicalDiagnostic: diagnostic,
+            physicalWrapperSha256: S.sha256(PHYSICAL_SCRIPT),
+          },
+          threshold: { rule: diagnostic.version, rulesSha256: diagnostic.rulesSha256 ?? null },
+          reason:
+            status === "fail"
+              ? "A physical warning was detected under the declared nominal charge and packing assumptions; see the mechanism and residue evidence. This is not experimental proof of global fold impossibility."
+              : status === "pass"
+                ? "No buried-charge-column or distributed severe packing warning met this development rule. This pass is limited to those mechanisms; global fold validity and stability remain not established."
+                : "The configured physical warning could not be adjudicated; retain the missing-input or chemistry uncertainty and do not infer global fold validity.",
+        }
+      : check,
+  )
+  const failed = checks.filter((c) => c.status === "fail").map((c) => c.id)
+  const notEvaluable = checks.filter((c) => c.status === "not_evaluable").map((c) => c.id)
+  const blocking = failed.concat(
+    notEvaluable.filter((id) => ["confidence-scale", "filter-direction", "interunit-pae"].includes(id)),
+  )
+  return {
+    ...report,
+    checks: checks as Report["checks"],
+    summary: {
+      ...report.summary,
+      failed,
+      notEvaluable,
+      blocking,
+      mechanicalAdmission: blocking.length === 0,
+      biologicalValidity: "not_established",
+    },
   }
 }
 
@@ -434,6 +579,7 @@ export async function inspectFiles(args: Parameters, workspace: string, signal?:
   > | null
   if (physical?.stericDiagnostic) files["steric_diagnostic.py"] = STERIC_SCRIPT
   if (physical?.surfaceDiagnostic) files["surface_diagnostic.py"] = SURFACE_SCRIPT
+  if (physical?.physicalDiagnostic) files["physical_diagnostic.py"] = PHYSICAL_SCRIPT
   files["verify.py"] = VERIFIER
   const directory = path.join(await E.parent(root), "inspection-" + randomUUID())
   await fs.mkdir(directory, { mode: 0o700 })

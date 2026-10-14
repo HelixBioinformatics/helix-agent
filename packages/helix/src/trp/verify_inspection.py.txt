@@ -2,7 +2,45 @@
 import argparse
 import hashlib
 import json
+import math
 from pathlib import Path
+
+def verify_polar_moiety(diagnostic):
+    """Recheck reported arithmetic/AND membership, never recalculate geometric SASA."""
+    if diagnostic.get('version') != 'helix-physical-diagnostic/1.1.0':
+        return
+    rules = diagnostic['rules']
+    if (rules.get('polarMoietyRelativeArea1p4Maximum') != 0.08 or rules.get('polarMoietyRelativeArea2p0Maximum') != 0.02
+            or rules.get('referenceAreaEvidenceSha256') != '0ee1d4daa7d2899b2031228848e2faa73cee01ac6e1c7aca90c1ab42cad8d2bb'):
+        raise ValueError('physical polar-moiety profile differs')
+    if (diagnostic['engine']['surfaceParameters'].get('probe-radius') != 1.4
+            or diagnostic['engine']['surfaceParameters2p0'].get('probe-radius') != 2.0):
+        raise ValueError('physical polar-moiety probes differ')
+    observations = diagnostic['chargedResidueObservations']
+    if (len({g['key'] for g in observations}) != len(observations)
+            or diagnostic['measurement']['chargedGroups'] != len(observations)
+            or diagnostic['measurement']['completeChargedSidechains'] != sum(g['complete'] for g in observations)):
+        raise ValueError('physical polar-moiety observation denominator differs')
+    buried = set()
+    for group in observations:
+        if not group['complete']:
+            continue
+        residue = group['key'].rsplit(':', 1)[-1]
+        reference = rules['referenceMoietyAreaAngstromSquared'][residue]
+        for probe, area_key, ratio_key in (('1.4', 'chargedGroupArea', 'relativePolarMoietyArea1p4'),
+                                          ('2.0', 'chargedGroupArea2p0', 'relativePolarMoietyArea2p0')):
+            values = (reference[probe], group[area_key], group[ratio_key])
+            if any(type(v) not in (int, float) or not math.isfinite(v) or v < 0 for v in values) or reference[probe] <= 0:
+                raise ValueError('physical polar-moiety nonfinite or invalid measurement')
+            if not math.isclose(group[ratio_key], group[area_key] / reference[probe], rel_tol=1e-9, abs_tol=1e-10):
+                raise ValueError('physical polar-moiety ratio differs')
+        if group['relativePolarMoietyArea1p4'] <= 0.08 and group['relativePolarMoietyArea2p0'] <= 0.02:
+            buried.add(group['key'])
+    if diagnostic['measurement']['buriedChargedGroups'] != len(buried):
+        raise ValueError('physical polar-moiety buried denominator differs')
+    if any(c['groups'] != len(c['residues']) or not set(c['residues']) <= buried for c in diagnostic['chargeColumns']):
+        raise ValueError('physical polar-moiety column membership differs')
+
 
 def verify(directory, expected=None):
     root=Path(directory)
@@ -37,28 +75,45 @@ def verify(directory, expected=None):
     if len(r['checks'])!=len(ids) or {c['id'] for c in r['checks']}!=ids: raise ValueError('control inventory differs')
     if any(c['status'] not in ('pass','fail','not_evaluable','not_applicable') or not c['reason'] for c in r['checks']): raise ValueError('invalid control verdict')
     physical=next(c for c in r['checks'] if c['id']=='fold-plausibility')
+    has_physical=isinstance(physical.get('value'),dict) and 'physicalDiagnostic' in physical['value']
     if isinstance(physical.get('value'),dict) and 'stericDiagnostic' in physical['value']:
         value=physical['value']; diagnostic=value['stericDiagnostic']
         if 'steric_diagnostic.py' not in listed or value.get('wrapperSha256')!=digest((root/'steric_diagnostic.py').read_bytes()): raise ValueError('steric wrapper differs')
-        if physical['status']!='not_evaluable' or diagnostic.get('version')!='helix-steric-diagnostic/1.0.0' or diagnostic.get('status') not in ('measured','not_evaluable'): raise ValueError('unsupported physical classification')
+        if (physical['status']!='not_evaluable' and not has_physical) or diagnostic.get('version')!='helix-steric-diagnostic/1.0.0' or diagnostic.get('status') not in ('measured','not_evaluable'): raise ValueError('unsupported physical classification')
         if diagnostic['status']=='measured':
             if diagnostic.get('sourceSha256')!=r['provenance']['structureSha256'] or diagnostic.get('scope',{}).get('authorChain')!=o['chain'] or diagnostic.get('scope',{}).get('modelOrdinal')!=o['model']: raise ValueError('steric selection differs')
             if diagnostic.get('foldVerdict')!='not_established' or diagnostic.get('structureLevelThreshold') is not None: raise ValueError('unsupported fold verdict')
     if isinstance(physical.get('value'),dict) and 'surfaceDiagnostic' in physical['value']:
         value=physical['value']; diagnostic=value['surfaceDiagnostic']
         if 'surface_diagnostic.py' not in listed or value.get('surfaceWrapperSha256')!=digest((root/'surface_diagnostic.py').read_bytes()): raise ValueError('surface wrapper differs')
-        if physical['status']!='not_evaluable' or diagnostic.get('version')!='helix-surface-diagnostic/1.0.0' or diagnostic.get('status') not in ('measured','not_evaluable'): raise ValueError('unsupported surface classification')
+        if (physical['status']!='not_evaluable' and not has_physical) or diagnostic.get('version')!='helix-surface-diagnostic/1.0.0' or diagnostic.get('status') not in ('measured','not_evaluable'): raise ValueError('unsupported surface classification')
         if diagnostic['status']=='measured':
             if diagnostic.get('sourceSha256')!=r['provenance']['structureSha256'] or diagnostic.get('scope',{}).get('authorChain')!=o['chain'] or diagnostic.get('scope',{}).get('modelOrdinal')!=o['model']: raise ValueError('surface selection differs')
             if diagnostic.get('foldVerdict')!='not_established' or diagnostic.get('burialThreshold') is not None or diagnostic.get('confidenceScoresUsed') is not False: raise ValueError('unsupported surface fold verdict')
             metric=diagnostic['measurement']; residues=diagnostic['chargedResidueObservations']
             if metric['chargedResidues']!=len(residues) or metric['completeChargedSidechains']+metric['incompleteChargedSidechains']!=len(residues): raise ValueError('surface denominator differs')
             if any(row['completeSidechain']!=(not bool(row['missingSidechainAtoms'])) or (not row['completeSidechain'] and row['interpretableRelativeSidechainArea'] is not None) for row in residues): raise ValueError('surface incomplete sidechain differs')
+    if has_physical:
+        value=physical['value']; diagnostic=value['physicalDiagnostic']
+        if 'physical_diagnostic.py' not in listed or value.get('physicalWrapperSha256')!=digest((root/'physical_diagnostic.py').read_bytes()): raise ValueError('physical wrapper differs')
+        if diagnostic.get('version') not in ('helix-physical-diagnostic/1.0.0','helix-physical-diagnostic/1.1.0') or diagnostic.get('status') not in ('evaluated','not_evaluable'): raise ValueError('physical diagnostic version/status differs')
+        decision=diagnostic.get('decision')
+        if decision not in ('alert','no_targeted_failure_detected','inconclusive') or physical['status']!={'alert':'fail','no_targeted_failure_detected':'pass','inconclusive':'not_evaluable'}[decision]: raise ValueError('physical decision differs')
+        if diagnostic['status']=='evaluated' or diagnostic.get('sourceSha256'):
+            if diagnostic.get('sourceSha256')!=r['provenance']['structureSha256'] or diagnostic.get('scope',{}).get('authorChain')!=o['chain'] or diagnostic.get('scope',{}).get('modelOrdinal')!=o['model']: raise ValueError('physical selection differs')
+            if diagnostic.get('globalFoldValidity')!='not_established' or diagnostic.get('confidenceScoresUsed') is not False: raise ValueError('unsupported complete fold claim')
+            rules=digest(json.dumps(diagnostic['rules'],sort_keys=True,separators=(',',':')).encode())
+            if diagnostic.get('rulesSha256')!=rules or physical.get('threshold',{}).get('rulesSha256')!=rules: raise ValueError('physical rule binding differs')
+            verify_polar_moiety(diagnostic)
+            metric=diagnostic['measurement']; columns=diagnostic['chargeColumns']; packing=diagnostic['packingConflicts']
+            if metric['qualifiedColumns']!=len(columns) or metric['chargeAlert']!=any(c['alert'] for c in columns) or metric['packingAlert']!=packing['alert']: raise ValueError('physical mechanism evidence differs')
+            if (decision=='alert')!=(metric['chargeAlert'] or metric['packingAlert']) or (diagnostic['status']=='evaluated')!=(decision!='inconclusive'): raise ValueError('physical result differs')
+        elif decision!='inconclusive': raise ValueError('physical provenance missing')
     failed=[c['id'] for c in r['checks'] if c['status']=='fail']
     unknown=[c['id'] for c in r['checks'] if c['status']=='not_evaluable']
     blocking=failed+[c for c in unknown if c in ('confidence-scale','filter-direction','interunit-pae')]
     if r['summary']!={'failed':failed,'notEvaluable':unknown,'blocking':blocking,'mechanicalAdmission':not blocking,'biologicalValidity':'not_established'}: raise ValueError('summary differs')
-    return {'ok':True,'files':len(listed),'manifestSha256':anchor,'externallyAnchored':bool(expected),'scope':'integrity and declared links; no scientific re-execution or authorship certification'}
+    return {'ok':True,'files':len(listed),'manifestSha256':anchor,'externallyAnchored':bool(expected),'scope':'integrity, declared links and internal decision consistency; no FreeSASA/physical scientific re-execution or authorship certification'}
 
 if __name__=='__main__':
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('directory');p.add_argument('--sha256');a=p.parse_args()

@@ -1,5 +1,5 @@
 {
-  "version": "trp-structural-catalog/1.1.0",
+  "version": "trp-structural-catalog/1.2.0",
   "scope": "Mechanical screening, not certification of a fold or a repeat annotation",
   "controls": [
     {
@@ -54,7 +54,7 @@
       "id": "fold-plausibility",
       "failure": "Confident but implausible repeat fold (Pratt et al.)",
       "source": "https://doi.org/10.1016/j.csbj.2025.01.016",
-      "criterion": "Not evaluable by pLDDT/PAE screening; requires independent physical/experimental evidence and separate evaluation on recoverable published cases"
+      "criterion": "pLDDT/PAE alone do not evaluate physical validity. The optional operator-configured development profile1.1 measures exposure of polar ionizable groups with two probes (8% at1.4Å and2% at2Å); these are engineering hypotheses, not validated fold-failure thresholds. It can warn of buried nominal-charge columns or distributed severe packing conflicts. A pass means neither targeted warning was detected; global fold validity and stability remain not established. Independent physical/experimental evidence and separate evaluation remain required."
     }
   ]
 }

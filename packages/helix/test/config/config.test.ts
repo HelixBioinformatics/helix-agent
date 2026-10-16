@@ -308,24 +308,22 @@ it.instance("falls back to generic username when system user info is unavailable
   }),
 )
 
-// No config schema is published yet. Seed the config without a broken reference.
-// Once published, set CONFIG_SCHEMA_URL and assert the stamped value here.
-it.effect("seeds the global jsonc config without a dead schema reference", () =>
+const CONFIG_SCHEMA_URL = "https://helixbioinformatics.github.io/helix-agent/config.json"
+
+it.effect("seeds the global jsonc config with the published schema", () =>
   withGlobalConfig({}, ({ dir }) =>
     Effect.gen(function* () {
       yield* Config.use.get().pipe(provideInstanceEffect(dir))
 
       const content = yield* FSUtil.use.readFileString(path.join(dir, "helix.jsonc"))
-      expect(content).not.toContain("helix-agent")
-      expect(JSON.parse(content)).toEqual({})
+      expect(JSON.parse(content)).toEqual({ $schema: CONFIG_SCHEMA_URL })
     }).pipe(Effect.provide(testInstanceStoreLayer), Effect.provide(LayerNode.compile(CrossSpawnSpawner.node))),
   ),
 )
 
-// The complement of the above, and the one that would catch a regression the
-// seeding test cannot see: a config the user already wrote must never be
-// rewritten to carry an unresolvable schema URL.
-it.instance("never stamps an unresolvable schema onto a user's own config", () =>
+// The complement of the above: a config the user already wrote gets the schema
+// inserted on load, keeping their own keys.
+it.instance("stamps the published schema onto a user's own config", () =>
   Effect.gen(function* () {
     const test = yield* TestInstance
     const file = path.join(test.directory, "helix.json")
@@ -334,7 +332,7 @@ it.instance("never stamps an unresolvable schema onto a user's own config", () =
     yield* Config.use.get()
 
     const content = yield* FSUtil.use.readFileString(file)
-    expect(content).not.toContain("helix-agent")
+    expect(JSON.parse(content)).toEqual({ $schema: CONFIG_SCHEMA_URL, username: "someone" })
   }),
 )
 

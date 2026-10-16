@@ -8,8 +8,8 @@ import { Global } from "@helix/core/global"
 import { Filesystem } from "@/util/filesystem"
 import * as ConfigPaths from "@/config/paths"
 
-// Skip schema stamping until a config schema is published at a stable URL.
-const TUI_SCHEMA_URL: string | undefined = undefined
+// The TUI config schema (not theme.json), published to GitHub Pages by .github/workflows/pages.yml.
+const TUI_SCHEMA_URL: string | undefined = "https://helixbioinformatics.github.io/helix-agent/tui.json"
 
 const decodeTheme = Schema.decodeUnknownOption(Schema.String)
 const decodeRecord = Schema.decodeUnknownOption(Schema.Record(Schema.String, Schema.Unknown))

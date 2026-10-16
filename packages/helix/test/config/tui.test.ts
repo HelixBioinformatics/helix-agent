@@ -206,6 +206,7 @@ it.instance("migrates tui-specific keys from helix.json when tui.json does not e
       expect(config.scroll_speed).toBe(5)
       expect(config.keybinds.get("app.exit")?.[0]?.key).toBe("ctrl+q")
       expect(JSON.parse(yield* fs.readFileString(path.join(test.directory, "tui.json")))).toMatchObject({
+        $schema: "https://helixbioinformatics.github.io/helix-agent/tui.json",
         theme: "migrated-theme",
         scroll_speed: 5,
       })

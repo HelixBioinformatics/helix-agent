@@ -6,17 +6,20 @@
     <title>Helix Agent | Bioinformática en tu terminal</title>
     <meta
       name="description"
-      content="De tu pregunta al análisis. Helix Agent te ayuda a planificar, ejecutar y documentar tu trabajo en bioinformática. Descárgalo para Linux, macOS o Windows."
+      content="Describe tus datos y Helix Agent elige el pipeline de nf-core, te muestra el comando exacto antes de ejecutarlo y deja evidencia que se verifica sin el agente. Para Linux, macOS y Windows."
     />
     <meta property="og:title" content="Helix Agent | Bioinformática en tu terminal" />
     <meta
       property="og:description"
-      content="Un compañero de investigación para tu terminal. Descarga Helix Agent para Linux, macOS y Windows."
+      content="Un agente de terminal para bioinformática: de tu pregunta a un pipeline de nf-core, con evidencia que se verifica sin el agente."
     />
     <meta property="og:type" content="website" />
-    <meta name="theme-color" content="#244d3e" />
+    <meta name="theme-color" content="#0a0c10" />
     <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="./styles.css" />
+    <script>
+      document.documentElement.classList.add("js")
+    </script>
   </head>
   <body>
     <input class="switch" type="radio" name="lang" id="lang-es" aria-label="Español" checked />
@@ -28,560 +31,1163 @@
       <a class="skip" href="#download"
         ><span data-lang="es" lang="es">Ir a la descarga</span><span data-lang="en" lang="en">Skip to download</span></a
       >
-      <header>
-        <a href="#" class="brand" aria-label="Helix Agent"
-          ><svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.5"
-            stroke-linecap="round"
-            aria-hidden="true"
+      <header class="site-header">
+        <div class="container header-row">
+          <a href="#top" class="brand" aria-label="Helix Agent"
+            ><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
+              <path class="brand-strands" d="M6 3c0 9 12 9 12 18M18 3c0 9-12 9-12 18" />
+              <path class="brand-rungs" d="M7 6h10M10 10h4M10 14h4M8 18h8" /></svg
+            ><span>helix<span class="period">.</span></span><span class="brand-tag">AGENT</span></a
           >
-            <path d="M6 3c0 9 12 9 12 18M18 3c0 9-12 9-12 18M7 6h10M8 18h8M10 10h4M10 14h4" /></svg
-          ><span>helix<span class="period">.</span></span
-          ><span class="brand-tag">AGENT</span></a
-        >
-        <nav aria-label="Language"><label for="lang-es">ES</label><label for="lang-en">EN</label></nav>
-        <a class="repo-link" href="https://github.com/HelixBioLab/helix-agent">GitHub ↗</a>
-      </header>
-      <main>
-        <section class="hero">
-          <div class="hero-copy">
-            <h1 data-lang="es" lang="es">Tu próxima pregunta.<br /><em>Un nuevo hallazgo.</em></h1>
-            <h1 data-lang="en" lang="en">Your next question.<br /><em>A new discovery.</em></h1>
-            <p data-lang="es" lang="es" class="lead">
-              La investigación empieza con una pregunta. Helix Agent te ayuda a convertirla en un análisis: organiza los
-              pasos, trabaja con tus herramientas y deja un registro que puedes revisar y compartir.
-            </p>
-            <p data-lang="en" lang="en" class="lead">
-              Research starts with a question. Helix Agent helps you turn it into an analysis: plan the steps, work with
-              your tools, and keep a record you can review and share.
-            </p>
-            <div class="hero-actions">
-              <a class="primary" href="#download"
-                ><span data-lang="es" lang="es">Instalar Helix Agent <span aria-hidden="true">↘</span></span
-                ><span data-lang="en" lang="en">Install Helix Agent <span aria-hidden="true">↘</span></span></a
-              ><span data-lang="es" lang="es" class="quiet">Código abierto · En tu terminal</span
-              ><span data-lang="en" lang="en" class="quiet">Open source · In your terminal</span>
-            </div>
-          </div>
-          <div class="hero-video">
-            <video
-              controls
-              playsinline
-              preload="metadata"
-              width="1750"
-              height="1080"
-              poster="./media/helix-agent-demo.jpg"
-              aria-label="Helix Agent demo"
+          <nav class="site-nav" aria-label="Secciones">
+            <a href="#proceso"
+              ><span data-lang="es" lang="es">Cómo funciona</span><span data-lang="en" lang="en">How it works</span></a
             >
-              <source src="./media/helix-agent-demo.mp4" type="video/mp4" />
-              <a href="./media/helix-agent-demo.mp4"
-                ><span data-lang="es" lang="es">Ver el video de Helix Agent</span
-                ><span data-lang="en" lang="en">Watch the Helix Agent video</span></a
-              >
-            </video>
+            <a href="#evidencia"
+              ><span data-lang="es" lang="es">Evidencia</span><span data-lang="en" lang="en">Evidence</span></a
+            >
+            <a href="#download"
+              ><span data-lang="es" lang="es">Instalación</span><span data-lang="en" lang="en">Install</span></a
+            >
+            <a href="#contacto"
+              ><span data-lang="es" lang="es">Contacto</span><span data-lang="en" lang="en">Contact</span></a
+            >
+          </nav>
+          <div class="header-tools">
+            <nav class="lang" aria-label="Language">
+              <label for="lang-es">ES</label><span aria-hidden="true">/</span><label for="lang-en">EN</label>
+            </nav>
+            <a class="repo-link" href="https://github.com/HelixBioinformatics/helix-agent">GitHub <span aria-hidden="true">↗</span></a>
           </div>
-        </section>
-        <section class="features" aria-label="Helix Agent">
-          <article>
-            <span class="index">01</span>
-            <h2 data-lang="es" lang="es">Dale contexto</h2>
-            <h2 data-lang="en" lang="en">Start with context</h2>
-            <p data-lang="es" lang="es">
-              Cuéntale qué datos tienes y qué quieres investigar, con tus propias palabras.
+        </div>
+        <div class="progress" aria-hidden="true"></div>
+      </header>
+
+      <main>
+        <section class="hero" id="top">
+          <canvas class="glyph-field hero-glyphs" aria-hidden="true"></canvas>
+          <div class="hero-figure" aria-hidden="true">
+            <canvas class="helix-canvas" id="helix-canvas"></canvas>
+            <svg class="helix-fallback" viewBox="0 0 24 72" fill="none" stroke-linecap="round">
+              <defs>
+                <linearGradient id="chrome" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0" stop-color="#3a3f4a" />
+                  <stop offset="0.35" stop-color="#f4f6fb" />
+                  <stop offset="0.6" stop-color="#8c93a6" />
+                  <stop offset="1" stop-color="#d9ddea" />
+                </linearGradient>
+              </defs>
+              <path
+                stroke="url(#chrome)"
+                stroke-width="1.6"
+                d="M6 0c0 9 12 9 12 18s-12 9-12 18 12 9 12 18-12 9-12 18M18 0c0 9-12 9-12 18s12 9 12 18-12 9-12 18 12 9 12 18"
+              />
+              <path
+                stroke="#b9e27f"
+                stroke-opacity="0.55"
+                stroke-width="0.6"
+                d="M7 3h10M10 7h4M10 11h4M7 15h10M7 21h10M10 25h4M10 29h4M7 33h10M7 39h10M10 43h4M10 47h4M7 51h10M7 57h10M10 61h4M10 65h4M7 69h10"
+              />
+            </svg>
+            <p class="fig-caption mono">
+              <span data-lang="es" lang="es">FIG. 01 — DOBLE HÉLICE</span
+              ><span data-lang="en" lang="en">FIG. 01 — DOUBLE HELIX</span>
+              <span class="fig-angle" id="helix-angle">θ 000°</span>
             </p>
-            <p data-lang="en" lang="en">Describe your data and what you want to investigate, in your own words.</p>
-          </article>
-          <article>
-            <span class="index">02</span>
-            <h2 data-lang="es" lang="es">Construye el análisis</h2>
-            <h2 data-lang="en" lang="en">Build your analysis</h2>
-            <p data-lang="es" lang="es">
-              Revisa la propuesta y las herramientas necesarias antes de poner el análisis en marcha.
-            </p>
-            <p data-lang="en" lang="en">Review the plan and the tools it needs before starting your analysis.</p>
-          </article>
-          <article>
-            <span class="index">03</span>
-            <h2 data-lang="es" lang="es">Conserva la evidencia</h2>
-            <h2 data-lang="en" lang="en">Keep the evidence</h2>
-            <p data-lang="es" lang="es">
-              Consulta los comandos, resultados y registros para comprobar cómo se hizo el trabajo.
-            </p>
-            <p data-lang="en" lang="en">Inspect commands, results and records to understand how the work was done.</p>
-          </article>
-        </section>
-        <section class="download" id="download">
-          <div class="section-heading">
-            <div>
-              <h2 data-lang="es" lang="es">Tu terminal, con Helix.</h2>
-              <h2 data-lang="en" lang="en">Your terminal, with Helix.</h2>
+            <p class="bp-tip mono" id="bp-tip"></p>
+          </div>
+          <div class="container hero-inner">
+            <div class="hero-copy">
+              <p class="eyebrow hero-eyebrow">
+                <span class="live-dot" aria-hidden="true"></span
+                ><span data-lang="es" lang="es" data-scramble="load">AGENTE DE TERMINAL PARA BIOINFORMÁTICA</span
+                ><span data-lang="en" lang="en" data-scramble="load">A TERMINAL AGENT FOR BIOINFORMATICS</span>
+              </p>
+              <h1 data-lang="es" lang="es" class="hero-title">
+                <span class="line"><span>Tu pregunta.</span></span>
+                <span class="line"><span>Una respuesta que puedes defender.</span></span>
+              </h1>
+              <h1 data-lang="en" lang="en" class="hero-title">
+                <span class="line"><span>Your question.</span></span>
+                <span class="line"><span>An answer you can defend.</span></span>
+              </h1>
+              <p data-lang="es" lang="es" class="lead hero-rise">
+                Describe tus datos en lenguaje natural. Helix elige el pipeline de <span class="nb">nf-core</span>, prepara la samplesheet
+                y te muestra el comando exacto: nada se ejecuta sin tu aprobación.
+              </p>
+              <p data-lang="en" lang="en" class="lead hero-rise">
+                Describe your data in plain language. Helix selects the <span class="nb">nf-core</span> pipeline, prepares the samplesheet
+                and shows you the exact command. Nothing runs without your approval.
+              </p>
+              <div class="hero-actions hero-rise">
+                <a class="btn btn-primary" href="#download"
+                  ><span data-lang="es" lang="es">Instalar Helix Agent</span
+                  ><span data-lang="en" lang="en">Install Helix Agent</span><span class="btn-arrow" aria-hidden="true"
+                    >↘</span
+                  ></a
+                >
+                <a class="btn btn-ghost" href="#demo" data-play
+                  ><svg class="play-icon" viewBox="0 0 16 16" aria-hidden="true">
+                    <circle cx="8" cy="8" r="7.25" fill="none" stroke="currentColor" />
+                    <path d="M6.5 5.2v5.6L11 8z" fill="currentColor" /></svg
+                  ><span data-lang="es" lang="es">Ver demo</span><span data-lang="en" lang="en">Watch demo</span></a
+                >
+              </div>
+              <p class="hero-meta mono hero-rise">
+                <span data-lang="es" lang="es">Código abierto · Linux, macOS y Windows</span
+                ><span data-lang="en" lang="en">Open source · Linux, macOS and Windows</span>
+              </p>
             </div>
-            <p data-lang="es" lang="es" class="quiet">Elige tu sistema y sigue los pasos.</p>
-            <p data-lang="en" lang="en" class="quiet">Choose your system and follow the steps.</p>
           </div>
-          <p class="recommendation quiet" id="os-recommendation" hidden></p>
-          <div class="systems" role="group" aria-label="Operating system">
-            <label for="os-linux">Linux</label><label for="os-mac">macOS</label><label for="os-win">Windows</label>
+          <div class="container hero-foot mono">
+            <span data-lang="es" lang="es">UN PROYECTO DE HELIX BIOINFORMATICS</span
+            ><span data-lang="en" lang="en">A HELIX BIOINFORMATICS PROJECT</span>
+            <a href="#demo"
+              ><span data-lang="es" lang="es">EXPLORA EL PROCESO</span
+              ><span data-lang="en" lang="en">EXPLORE THE PROCESS</span> <span class="bounce" aria-hidden="true">↓</span></a
+            >
           </div>
-          <div class="install-grid">
-            <div class="install-main">
-              <section class="step">
-                <span class="num">1</span>
-                <div>
-                  <h3 data-lang="es" lang="es">Prepara la descarga</h3>
-                  <h3 data-lang="en" lang="en">Prepare your download</h3>
-                  <div data-os="linux">
-                    <p data-lang="es" lang="es">
-                      Abre la terminal desde el menú de aplicaciones. Puedes usar wget o curl instalado con el gestor de
-                      paquetes de tu distribución.
+        </section>
+
+        <section class="demo band-dark" id="demo">
+          <div class="container">
+            <div class="section-head">
+              <div>
+                <p class="eyebrow" data-reveal>
+                  <span class="num">01</span><span class="sep">/</span
+                  ><span data-lang="es" lang="es" data-scramble="view">DE LA PREGUNTA AL PIPELINE</span
+                  ><span data-lang="en" lang="en" data-scramble="view">FROM QUESTION TO PIPELINE</span>
+                </p>
+                <h2 class="display" data-reveal>
+                  <span data-lang="es" lang="es">Tú hablas de biología.<br />Helix gestiona el workflow.</span
+                  ><span data-lang="en" lang="en">You speak biology.<br />Helix manages the workflow.</span>
+                </h2>
+              </div>
+              <p class="section-aside" data-reveal>
+                <span data-lang="es" lang="es"
+                  >Sin escribir un comando de pipeline a mano.<br />Sin ceder ninguna decisión científica.</span
+                ><span data-lang="en" lang="en"
+                  >No pipeline commands typed by hand.<br />No scientific decision handed over.</span
+                >
+              </p>
+            </div>
+
+            <div class="term" id="term" data-reveal>
+              <div class="term-bar">
+                <span class="term-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                <span class="term-title mono"
+                  ><span data-lang="es" lang="es">helix — ~/analisis-rnaseq</span
+                  ><span data-lang="en" lang="en">helix — ~/rnaseq-analysis</span></span
+                >
+                <span class="term-shell mono">zsh</span>
+              </div>
+              <div class="term-body">
+                <div class="term-session">
+                  <div class="term-main mono">
+                    <p class="term-brand">helix<span class="period">.</span>AGENT</p>
+                    <p class="term-prompt">
+                      <span class="caret" aria-hidden="true">❯</span>
+                      <span data-lang="es" lang="es" data-type
+                        >Tengo 12 FASTQ pareados de RNA-seq de hígado de ratón en ./datos: seis controles y seis
+                        tratados. Quiero cuantificar la expresión génica.</span
+                      ><span data-lang="en" lang="en" data-type
+                        >I have 12 paired-end RNA-seq FASTQ files from mouse liver in ./data: six controls and six
+                        treated. I want to quantify gene expression.</span
+                      >
                     </p>
-                    <p data-lang="en" lang="en">
-                      Open Terminal from your applications menu. Use wget or curl installed through your distribution’s
-                      package manager.
+                    <p class="term-reply" data-step>
+                      <span data-lang="es" lang="es"
+                        >Corresponde a <span class="nb">nf-core/rnaseq</span>. Fijé una release, revisé tu máquina y preparé la samplesheet a partir de
+                        ./datos.</span
+                      ><span data-lang="en" lang="en"
+                        >This maps to <span class="nb">nf-core/rnaseq</span>. I pinned a release, checked your machine and prepared the samplesheet
+                        from ./data.</span
+                      >
                     </p>
-                    <div class="distro-list">
-                      <details>
-                        <summary>
-                          <span data-lang="es" lang="es">Ubuntu / Debian / Linux Mint</span
-                          ><span data-lang="en" lang="en">Ubuntu / Debian / Linux Mint</span>
-                        </summary>
-                        <div class="detail-body">
-                          <div
-                            class="cmd"
-                            data-copy="sudo apt update &amp;&amp; sudo apt install -y wget ca-certificates tar gzip"
-                          >
-                            <pre><code>sudo apt update &amp;&amp; sudo apt install -y wget ca-certificates tar gzip</code></pre>
-                          </div>
-                        </div>
-                      </details>
-                      <details>
-                        <summary>
-                          <span data-lang="es" lang="es">Fedora</span><span data-lang="en" lang="en">Fedora</span>
-                        </summary>
-                        <div class="detail-body">
-                          <div class="cmd" data-copy="sudo dnf install wget ca-certificates tar gzip">
-                            <pre><code>sudo dnf install wget ca-certificates tar gzip</code></pre>
-                          </div>
-                        </div>
-                      </details>
-                      <details>
-                        <summary>
-                          <span data-lang="es" lang="es">Arch / EndeavourOS</span
-                          ><span data-lang="en" lang="en">Arch / EndeavourOS</span>
-                        </summary>
-                        <div class="detail-body">
-                          <div class="cmd" data-copy="sudo pacman -Syu wget ca-certificates tar gzip">
-                            <pre><code>sudo pacman -Syu wget ca-certificates tar gzip</code></pre>
-                          </div>
-                        </div>
-                      </details>
-                      <details>
-                        <summary>
-                          <span data-lang="es" lang="es">openSUSE</span><span data-lang="en" lang="en">openSUSE</span>
-                        </summary>
-                        <div class="detail-body">
-                          <div class="cmd" data-copy="sudo zypper install wget ca-certificates tar gzip">
-                            <pre><code>sudo zypper install wget ca-certificates tar gzip</code></pre>
-                          </div>
-                        </div>
-                      </details>
-                      <details>
-                        <summary>
-                          <span data-lang="es" lang="es">Alpine</span><span data-lang="en" lang="en">Alpine</span>
-                        </summary>
-                        <div class="detail-body">
-                          <div class="cmd" data-copy="sudo apk add bash wget ca-certificates tar gzip">
-                            <pre><code>sudo apk add bash wget ca-certificates tar gzip</code></pre>
-                          </div>
-                        </div>
-                      </details>
+                    <div class="term-plan" data-step>
+                      <p class="term-label">
+                        <span data-lang="es" lang="es">ANTES DE EJECUTAR</span
+                        ><span data-lang="en" lang="en">BEFORE ANYTHING RUNS</span>
+                      </p>
+                      <ol>
+                        <li data-step>
+                          <span class="plan-num">01</span
+                          ><span data-lang="es" lang="es">Samplesheet: 12 muestras, 2 condiciones</span
+                          ><span data-lang="en" lang="en">Samplesheet: 12 samples, 2 conditions</span>
+                        </li>
+                        <li data-step>
+                          <span class="plan-num">02</span
+                          ><span data-lang="es" lang="es">Primero el perfil test, luego tus datos</span
+                          ><span data-lang="en" lang="en">Test profile first, then your data</span>
+                        </li>
+                        <li data-step>
+                          <span class="plan-num">03</span
+                          ><span data-lang="es" lang="es">El comando exacto, listo para revisar</span
+                          ><span data-lang="en" lang="en">The exact command, ready for review</span>
+                        </li>
+                      </ol>
                     </div>
-                    <p data-lang="es" lang="es" class="note">
-                      Si ya tienes wget, puedes pasar al siguiente paso. Estos comandos pueden pedir tu contraseña para
-                      instalar los paquetes del sistema.
-                    </p>
-                    <p data-lang="en" lang="en" class="note">
-                      Already have wget? Continue to the next step. These commands may ask for your password to install
-                      system packages.
+                    <p class="term-next" data-step>
+                      <span aria-hidden="true">→ </span
+                      ><span data-lang="es" lang="es">¿Ejecuto el perfil test?</span
+                      ><span data-lang="en" lang="en">Run the test profile?</span
+                      ><span class="cursor" aria-hidden="true"></span>
                     </p>
                   </div>
-                  <div data-os="mac">
-                    <p data-lang="es" lang="es">
-                      Abre Spotlight con <kbd>⌘</kbd> + <kbd>Espacio</kbd>, busca <strong>Terminal</strong> y presiona
-                      Enter. Usaremos el curl incluido en macOS.
+                  <aside class="term-side">
+                    <p class="term-label mono">
+                      <span data-lang="es" lang="es">CONTEXTO DE SESIÓN</span
+                      ><span data-lang="en" lang="en">SESSION CONTEXT</span>
                     </p>
-                    <p data-lang="en" lang="en">
-                      Open Spotlight with <kbd>⌘</kbd> + <kbd>Space</kbd>, search for <strong>Terminal</strong>, and
-                      press Enter. We’ll use the curl included with macOS.
-                    </p>
-                  </div>
-                  <div data-os="win">
-                    <p data-lang="es" lang="es">
-                      Busca <strong>PowerShell</strong> en el menú Inicio. El agente se ejecuta dentro de Linux mediante
-                      WSL y podrás abrirlo desde PowerShell.
-                    </p>
-                    <p data-lang="en" lang="en">
-                      Find <strong>PowerShell</strong> in the Start menu. The agent runs inside Linux through WSL and
-                      can be launched from PowerShell.
-                    </p>
-                  </div>
-                </div>
-              </section>
-              <section class="step">
-                <span class="num">2</span>
-                <div>
-                  <h3 data-lang="es" lang="es">Instala el agente</h3>
-                  <h3 data-lang="en" lang="en">Install the agent</h3>
-                  <div data-os="linux">
-                    <p data-lang="es" lang="es">
-                      Con wget, descarga el instalador y ejecútalo solo si la descarga termina correctamente.
-                    </p>
-                    <p data-lang="en" lang="en">
-                      With wget, download the installer and run it only after a successful download.
-                    </p>
-                    <div
-                      class="cmd"
-                      data-copy="wget -O helix-install.sh https://helixbiolab.github.io/helix-agent/install &amp;&amp; bash helix-install.sh"
-                    >
-                      <pre><code>wget -O helix-install.sh https://helixbiolab.github.io/helix-agent/install &amp;&amp; bash helix-install.sh</code></pre>
-                    </div>
-                    <details>
-                      <summary>
-                        <span data-lang="es" lang="es">¿Prefieres curl?</span
-                        ><span data-lang="en" lang="en">Prefer curl?</span>
-                      </summary>
-                      <div class="detail-body">
-                        <p data-lang="es" lang="es">
-                          Usa la versión del sistema. En Ubuntu o Debian puedes instalarla con
-                          <code>sudo apt install curl</code>. La ruta completa evita usar por accidente la versión de
-                          Snap.
-                        </p>
-                        <p data-lang="en" lang="en">
-                          Use the system version. On Ubuntu or Debian, install it with
-                          <code>sudo apt install curl</code>. The full path avoids accidentally selecting the Snap
-                          version.
-                        </p>
-                        <div
-                          class="cmd"
-                          data-copy="/usr/bin/curl -fL -o helix-install.sh https://helixbiolab.github.io/helix-agent/install &amp;&amp; bash helix-install.sh"
-                        >
-                          <pre><code>/usr/bin/curl -fL -o helix-install.sh https://helixbiolab.github.io/helix-agent/install &amp;&amp; bash helix-install.sh</code></pre>
-                        </div>
+                    <dl>
+                      <div data-step>
+                        <dt><span data-lang="es" lang="es">Proyecto</span><span data-lang="en" lang="en">Project</span></dt>
+                        <dd>
+                          <span data-lang="es" lang="es">~/analisis-rnaseq</span
+                          ><span data-lang="en" lang="en">~/rnaseq-analysis</span>
+                        </dd>
                       </div>
-                    </details>
-                  </div>
-                  <div data-os="mac">
-                    <div
-                      class="cmd"
-                      data-copy="/usr/bin/curl -fL -o helix-install.sh https://helixbiolab.github.io/helix-agent/install &amp;&amp; bash helix-install.sh"
-                    >
-                      <pre><code>/usr/bin/curl -fL -o helix-install.sh https://helixbiolab.github.io/helix-agent/install &amp;&amp; bash helix-install.sh</code></pre>
-                    </div>
-                  </div>
-                  <div data-os="win">
-                    <div class="cmd" data-copy="irm https://helixbiolab.github.io/helix-agent/install.ps1 | iex">
-                      <pre><code>irm https://helixbiolab.github.io/helix-agent/install.ps1 | iex</code></pre>
-                    </div>
-                    <p data-lang="es" lang="es" class="note">
-                      Si falta WSL, el instalador te guía para habilitarlo. Ese paso requiere permisos de administrador
-                      y puede pedir un reinicio. Luego, vuelve a ejecutar el comando.
-                    </p>
-                    <p data-lang="en" lang="en" class="note">
-                      If WSL is missing, the installer guides you through enabling it. This requires administrator
-                      rights and may need a restart. Then run the command again.
-                    </p>
-                  </div>
-                  <p data-lang="es" lang="es" class="note">
-                    El agente se instala en tu carpeta personal. En Linux y macOS, este paso no requiere sudo. Puedes
-                    revisar el <a href="./install">script de Linux y macOS</a> o el
-                    <a href="./install.ps1">de Windows</a> antes de ejecutarlo.
-                  </p>
-                  <p data-lang="en" lang="en" class="note">
-                    The agent installs in your home folder. On Linux and macOS, this step does not need sudo. You can
-                    read the <a href="./install">Linux and macOS script</a> or the
-                    <a href="./install.ps1">Windows script</a> before running it.
-                  </p>
+                      <div data-step>
+                        <dt>Pipeline</dt>
+                        <dd><span class="nb">nf-core/rnaseq</span></dd>
+                      </div>
+                      <div data-step>
+                        <dt><span data-lang="es" lang="es">Estado</span><span data-lang="en" lang="en">Status</span></dt>
+                        <dd class="status">
+                          <span class="status-dot" aria-hidden="true"></span
+                          ><span data-lang="es" lang="es">Esperando tu aprobación</span
+                          ><span data-lang="en" lang="en">Waiting for your approval</span>
+                        </dd>
+                      </div>
+                    </dl>
+                  </aside>
                 </div>
-              </section>
-              <section class="step">
-                <span class="num">3</span>
-                <div>
-                  <h3 data-lang="es" lang="es">Abre tu primera sesión</h3>
-                  <h3 data-lang="en" lang="en">Start your first session</h3>
-                  <p data-lang="es" lang="es">
-                    Abre una terminal nueva y conecta tu proveedor de modelos. Después, entra a la carpeta de tu
-                    proyecto y ejecuta el agente.
-                  </p>
-                  <p data-lang="en" lang="en">
-                    Open a new terminal and connect your model provider. Then open your project folder and launch the
-                    agent.
-                  </p>
-                  <div class="cmd" data-copy="helix providers login">
-                    <pre><code>helix providers login</code></pre>
-                  </div>
-                  <p data-lang="es" lang="es">Desde la carpeta de tu proyecto:</p>
-                  <p data-lang="en" lang="en">From your project folder:</p>
-                  <div class="cmd" data-copy="helix">
-                    <pre><code>helix</code></pre>
-                  </div>
-                  <p data-lang="es" lang="es" class="note">
-                    Por compatibilidad con las instalaciones existentes, el comando sigue siendo
-                    <code>helix</code>.
-                  </p>
-                  <p data-lang="en" lang="en" class="note">
-                    For compatibility with existing installations, the command remains <code>helix</code>.
-                  </p>
-                </div>
-              </section>
-            </div>
-            <aside>
-              <div class="aside-card">
-                <span class="aside-icon"
-                  ><svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    aria-hidden="true"
+                <div class="term-video">
+                  <video
+                    id="demo-video"
+                    controls
+                    playsinline
+                    preload="none"
+                    width="1750"
+                    height="1080"
+                    poster="./media/helix-agent-demo.jpg"
+                    aria-label="Helix Agent demo"
                   >
-                    <path d="M6 3c0 9 12 9 12 18M18 3c0 9-12 9-12 18M7 6h10M8 18h8M10 10h4M10 14h4" /></svg
-                ></span>
-                <h3 data-lang="es" lang="es">¿curl te falla en Ubuntu?</h3>
-                <h3 data-lang="en" lang="en">Trouble with curl on Ubuntu?</h3>
-                <p data-lang="es" lang="es">
-                  Si lo instalaste mediante Snap, sus restricciones de acceso a archivos pueden interferir con la
-                  instalación. Usa wget desde APT o el curl del sistema. El instalador admite ambos y evita los
-                  ejecutables de Snap.
+                    <source src="./media/helix-agent-demo.mp4" type="video/mp4" />
+                  </video>
+                </div>
+              </div>
+              <div class="term-foot">
+                <button class="term-play" type="button" data-play>
+                  <svg viewBox="0 0 16 16" aria-hidden="true">
+                    <circle cx="8" cy="8" r="7.25" fill="none" stroke="currentColor" />
+                    <path d="M6.5 5.2v5.6L11 8z" fill="currentColor" />
+                  </svg>
+                  <span data-lang="es" lang="es">Ver la grabación</span
+                  ><span data-lang="en" lang="en">Watch the recording</span>
+                </button>
+                <span class="term-track" aria-hidden="true"><span class="term-progress"></span></span>
+                <button class="term-expand" type="button" data-fullscreen>
+                  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true">
+                    <path d="M2 6V2h4M14 6V2h-4M2 10v4h4M14 10v4h-4" />
+                  </svg>
+                  <span class="sr-only" data-lang="es" lang="es">Ver el video a pantalla completa</span
+                  ><span class="sr-only" data-lang="en" lang="en">Watch the video full screen</span>
+                </button>
+              </div>
+            </div>
+            <div class="demo-foot">
+              <p class="mono">
+                <span data-lang="es" lang="es">SESIÓN ILUSTRATIVA, NO UNA GRABACIÓN</span
+                ><span data-lang="en" lang="en">ILLUSTRATIVE SESSION, NOT A RECORDING</span>
+              </p>
+              <a class="text-link" href="./media/helix-agent-demo.mp4"
+                ><span data-lang="es" lang="es">Abrir el video ↗</span
+                ><span data-lang="en" lang="en">Open the video ↗</span></a
+              >
+            </div>
+          </div>
+        </section>
+
+        <section class="process band-light" id="proceso">
+          <div class="container">
+            <div class="process-head">
+              <p class="eyebrow" data-reveal>
+                <span class="num">02</span><span class="sep">/</span
+                ><span data-lang="es" lang="es" data-scramble="view">CÓMO FUNCIONA</span
+                ><span data-lang="en" lang="en" data-scramble="view">HOW IT WORKS</span>
+              </p>
+              <h2 class="display" data-reveal>
+                <span data-lang="es" lang="es">Tú defines la pregunta y das la aprobación.<br />Helix ejecuta el pipeline.</span
+                ><span data-lang="en" lang="en">You define the question and give the approval.<br />Helix runs the pipeline.</span>
+              </h2>
+            </div>
+            <ol class="cards">
+              <li class="card" data-reveal style="--i: 0">
+                <div class="card-top">
+                  <span class="mono">01</span>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+                    <path d="M3.5 4.5h11v8h-7l-4 3z" />
+                    <path d="M14.5 8.5h6v8l-3-2h-6v-2" />
+                  </svg>
+                </div>
+                <h3><span data-lang="es" lang="es">Describe tus datos</span><span data-lang="en" lang="en">Describe your data</span></h3>
+                <p>
+                  <span data-lang="es" lang="es"
+                    >En prosa: cuántas muestras, qué condiciones, dónde están los archivos. Helix arma la samplesheet con eso.</span
+                  ><span data-lang="en" lang="en"
+                    >In plain prose: how many samples, which conditions, where the files live. Helix builds the samplesheet from that.</span
+                  >
                 </p>
-                <p data-lang="en" lang="en">
-                  Snap’s file access restrictions can interfere with installation. Use wget from APT or the system curl.
-                  The installer supports both and skips Snap executables.
+                <p class="card-tag mono">
+                  <span data-lang="es" lang="es">PROSA → SAMPLESHEET</span><span data-lang="en" lang="en">PROSE → SAMPLESHEET</span>
                 </p>
-                <a href="https://snapcraft.io/docs/explanation/security/security-policies/"
+              </li>
+              <li class="card" data-reveal style="--i: 1">
+                <div class="card-top">
+                  <span class="mono">02</span>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+                    <rect x="3.5" y="3.5" width="7" height="6" rx="1.5" />
+                    <rect x="13.5" y="14.5" width="7" height="6" rx="1.5" />
+                    <path d="M7 9.5v4a3 3 0 0 0 3 3h3.5" />
+                  </svg>
+                </div>
+                <h3><span data-lang="es" lang="es">Aprueba cada ejecución</span><span data-lang="en" lang="en">Approve every run</span></h3>
+                <p>
+                  <span data-lang="es" lang="es"
+                    >Antes de tocar tus datos, Helix fija la release, revisa tu máquina y ejecuta el perfil test. Cada ejecución espera tu aprobación.</span
+                  ><span data-lang="en" lang="en"
+                    >Before touching your data, Helix pins the release, checks your machine and runs the test profile. Every run waits for your approval.</span
+                  >
+                </p>
+                <p class="card-tag mono">
+                  <span data-lang="es" lang="es">COMANDO → APROBACIÓN</span><span data-lang="en" lang="en">COMMAND → SIGN-OFF</span>
+                </p>
+              </li>
+              <li class="card" data-reveal style="--i: 2">
+                <div class="card-top">
+                  <span class="mono">03</span>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+                    <path d="M4 9V4.5h4.5M20 9V4.5h-4.5M4 15v4.5h4.5M20 15v4.5h-4.5" />
+                    <path d="M8.5 12h7" />
+                  </svg>
+                </div>
+                <h3><span data-lang="es" lang="es">Comprueba, no confíes</span><span data-lang="en" lang="en">Check, don’t trust</span></h3>
+                <p>
+                  <span data-lang="es" lang="es"
+                    >Cada campaña deja artefactos que un tercero verifica sin el agente, sin modelo y sin red.</span
+                  ><span data-lang="en" lang="en"
+                    >Every campaign leaves artifacts a third party can verify without the agent, a model or a network.</span
+                  >
+                </p>
+                <p class="card-tag mono">
+                  <span data-lang="es" lang="es">CAMPAÑA → DOSSIER</span><span data-lang="en" lang="en">CAMPAIGN → DOSSIER</span>
+                </p>
+              </li>
+            </ol>
+          </div>
+        </section>
+
+        <section class="evidence band-dark" id="evidencia">
+          <div class="container">
+            <div class="section-head">
+              <div>
+                <p class="eyebrow" data-reveal>
+                  <span class="num">03</span><span class="sep">/</span
+                  ><span data-lang="es" lang="es" data-scramble="view">LA EVIDENCIA</span
+                  ><span data-lang="en" lang="en" data-scramble="view">THE EVIDENCE</span>
+                </p>
+                <h2 class="display" data-reveal>
+                  <span data-lang="es" lang="es">Defendible ante quien<br />no estuvo en la sala.</span
+                  ><span data-lang="en" lang="en">Built for someone<br />who wasn’t in the room.</span>
+                </h2>
+              </div>
+              <p class="section-aside" data-reveal>
+                <span data-lang="es" lang="es"
+                  >Quien dirige tu tesis, quien revisa tu artículo, tú dentro de dieciocho meses. El relato del agente no
+                  les basta; estos cuatro artefactos, sí.</span
+                ><span data-lang="en" lang="en"
+                  >Your advisor, a reviewer, you in eighteen months. The agent’s own story won’t convince them. These
+                  four artifacts can.</span
+                >
+              </p>
+            </div>
+            <div class="evidence-grid">
+              <div class="ledger spot" id="ledger" data-reveal>
+                <div class="ledger-top">
+                  <p class="term-label mono">DOSSIER</p>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+                    <path d="M3 18V6.5A1.5 1.5 0 0 1 4.5 5h4l2 2h7A1.5 1.5 0 0 1 19 8.5V10" />
+                    <path d="M3 18l2.5-8H21l-2.5 8z" />
+                  </svg>
+                </div>
+                <p class="ledger-title">
+                  <span data-lang="es" lang="es">Una campaña.<br />Cuatro artefactos.</span
+                  ><span data-lang="en" lang="en">One campaign.<br />Four artifacts.</span>
+                </p>
+                <ul class="ledger-rows mono">
+                  <li data-artifact="manifest">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3.5h7l4 4v13H7z M14 3.5v4h4" /></svg><span><span data-lang="es" lang="es">Manifiesto en frío</span><span data-lang="en" lang="en">Cold manifest</span></span
+                    ><code>corpus/</code><span class="ok">OK</span>
+                  </li>
+                  <li data-artifact="protocol">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3.5h7l4 4v13H7z M14 3.5v4h4" /></svg><span><span data-lang="es" lang="es">Protocolo</span><span data-lang="en" lang="en">Protocol</span></span
+                    ><code>.helix/protocol/</code><span class="ok">OK</span>
+                  </li>
+                  <li data-artifact="interventions">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3.5h7l4 4v13H7z M14 3.5v4h4" /></svg><span><span data-lang="es" lang="es">Intervenciones</span><span data-lang="en" lang="en">Interventions</span></span
+                    ><code>handcount.json</code><span class="ok">OK</span>
+                  </li>
+                  <li data-artifact="methods">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3.5h7l4 4v13H7z M14 3.5v4h4" /></svg><span><span data-lang="es" lang="es">Métodos</span><span data-lang="en" lang="en">Methods</span></span
+                    ><code>.helix/manifests/</code><span class="ok">OK</span>
+                  </li>
+                </ul>
+                <p class="ledger-verify mono">
+                  <span class="prompt" aria-hidden="true">$</span> cd dossier &amp;&amp; sh verify.sh
+                  <span class="verify-state" aria-hidden="true"></span>
+                </p>
+              </div>
+              <div>
+                <dl class="artifacts">
+                <div data-reveal data-artifact="manifest" style="--i: 0">
+                  <dt><span data-lang="es" lang="es">Manifiesto en frío</span><span data-lang="en" lang="en">Cold manifest</span></dt>
+                  <dd>
+                    <span data-lang="es" lang="es"
+                      >Cada descarga queda con su fuente, su consulta, la versión que publica el origen y su SHA-256. <code>helix verify</code> lo recalcula sin modelo ni red.</span
+                    ><span data-lang="en" lang="en"
+                      >Every download is stored with its source, query, upstream version stamp and SHA-256. <code>helix verify</code> rechecks it with no model and no network.</span
+                    >
+                  </dd>
+                </div>
+                <div data-reveal data-artifact="protocol" style="--i: 1">
+                  <dt><span data-lang="es" lang="es">Protocolo</span><span data-lang="en" lang="en">Protocol</span></dt>
+                  <dd>
+                    <span data-lang="es" lang="es"
+                      >Comprometes tus restricciones antes de empezar. Lo que las viola se rechaza y queda anotado; saltárselas exige una enmienda firmada.</span
+                    ><span data-lang="en" lang="en"
+                      >You commit to your constraints up front. Anything that breaks them is refused and logged; getting past them takes a signed amendment.</span
+                    >
+                  </dd>
+                </div>
+                <div data-reveal data-artifact="interventions" style="--i: 2">
+                  <dt><span data-lang="es" lang="es">Intervenciones</span><span data-lang="en" lang="en">Interventions</span></dt>
+                  <dd>
+                    <span data-lang="es" lang="es"
+                      >Dónde corregiste, aprobaste o rechazaste. Lo clasifican reglas fijas, no un modelo.</span
+                    ><span data-lang="en" lang="en"
+                      >Where you corrected, approved or refused. Fixed rules classify it, not a model.</span
+                    >
+                  </dd>
+                </div>
+                <div data-reveal data-artifact="methods" style="--i: 3">
+                  <dt><span data-lang="es" lang="es">Métodos</span><span data-lang="en" lang="en">Methods</span></dt>
+                  <dd>
+                    <span data-lang="es" lang="es"
+                      >Versiones, parámetros y trazas de <span class="nb">nf-core</span>, más el registro de tus aprobaciones.</span
+                    ><span data-lang="en" lang="en"
+                      ><span class="nb">nf-core</span> versions, parameters and traces, plus the record of your approvals.</span
+                    >
+                  </dd>
+                </div>
+                </dl>
+                <div class="limits" data-reveal>
+                  <p class="term-label mono">
+                    <span data-lang="es" lang="es">LO QUE NO DEMUESTRA</span
+                    ><span data-lang="en" lang="en">WHAT IT DOESN’T PROVE</span>
+                  </p>
+                  <p>
+                    <span data-lang="es" lang="es"
+                      >Un dossier muestra que el trabajo registrado no se reportó mal. No muestra que el resultado sea
+                      correcto.</span
+                    ><span data-lang="en" lang="en"
+                      >A dossier shows the recorded work wasn’t misreported. It doesn’t show the result is right.</span
+                    >
+                  </p>
+                  <a
+                    class="text-link"
+                    href="https://github.com/HelixBioinformatics/helix-agent#lo-que-los-artefactos-no-demuestran"
+                    ><span data-lang="es" lang="es">Todos los límites, por escrito ↗</span
+                    ><span data-lang="en" lang="en">Every limit, in writing ↗</span></a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="install band-deep" id="download">
+          <div class="container install-grid">
+            <div class="install-intro">
+              <p class="eyebrow" data-reveal>
+                <span class="num">04</span><span class="sep">/</span
+                ><span data-lang="es" lang="es" data-scramble="view">EMPIEZA EN TU ENTORNO</span
+                ><span data-lang="en" lang="en" data-scramble="view">START IN YOUR ENVIRONMENT</span>
+              </p>
+              <h2 class="display" data-reveal>
+                <span data-lang="es" lang="es">Tu terminal,<br />con Helix.</span
+                ><span data-lang="en" lang="en">Your terminal,<br />with Helix.</span>
+              </h2>
+              <p class="intro-copy" data-reveal>
+                <span data-lang="es" lang="es"
+                  >Instala el agente, conecta tu proveedor y abre tu primera sesión desde la carpeta de tu proyecto.</span
+                ><span data-lang="en" lang="en"
+                  >Install the agent, connect your provider and start your first session from your project folder.</span
+                >
+              </p>
+              <div class="intro-note" data-reveal>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+                  <path d="M3 7.5A1.5 1.5 0 0 1 4.5 6h4l2 2h9A1.5 1.5 0 0 1 21 9.5v8a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5z" />
+                  <path d="M12 11v5M9.8 13.8 12 16l2.2-2.2" />
+                </svg>
+                <p class="mono">
+                  <span data-lang="es" lang="es">Se instala en tu carpeta personal.<br />Sin sudo en Linux y macOS.</span
+                  ><span data-lang="en" lang="en">Installs in your home folder.<br />No sudo on Linux or macOS.</span>
+                </p>
+                <p class="small">
+                  <span data-lang="es" lang="es"
+                    >Puedes revisar el <a href="./install">script de Linux y macOS</a> o el
+                    <a href="./install.ps1">de Windows</a> antes de ejecutarlo.</span
+                  ><span data-lang="en" lang="en"
+                    >You can read the <a href="./install">Linux and macOS script</a> or the
+                    <a href="./install.ps1">Windows script</a> before running it.</span
+                  >
+                </p>
+              </div>
+              <div class="snap-card spot" data-reveal>
+                <h3>
+                  <span data-lang="es" lang="es">¿Problemas con curl en Ubuntu?</span
+                  ><span data-lang="en" lang="en">Trouble with curl on Ubuntu?</span>
+                </h3>
+                <p>
+                  <span data-lang="es" lang="es"
+                    >Si lo instalaste mediante Snap, sus restricciones de acceso a archivos pueden interferir con la
+                    instalación. Usa wget desde APT o el curl del sistema. El instalador admite ambos y evita los
+                    ejecutables de Snap.</span
+                  ><span data-lang="en" lang="en"
+                    >Snap’s file access restrictions can interfere with installation. Use wget from APT or the system
+                    curl. The installer supports both and skips Snap executables.</span
+                  >
+                </p>
+                <a class="text-link" href="https://snapcraft.io/docs/explanation/security/security-policies/"
                   ><span data-lang="es" lang="es">Cómo funciona el aislamiento de Snap ↗</span
                   ><span data-lang="en" lang="en">About Snap confinement ↗</span></a
                 >
               </div>
-              <div class="aside-card manual">
-                <h3 data-lang="es" lang="es">¿Prefieres el navegador?</h3>
-                <h3 data-lang="en" lang="en">Prefer your browser?</h3>
-                <p data-lang="es" lang="es">
-                  Descarga el archivo de tu sistema desde GitHub. Linux usa <code>.tar.gz</code> y macOS
-                  <code>.zip</code>. En Windows, usa el instalador de WSL que aparece en esta página.
-                </p>
-                <p data-lang="en" lang="en">
-                  Download the archive for your system from GitHub. Linux uses <code>.tar.gz</code> and macOS uses
-                  <code>.zip</code>. On Windows, use this page’s WSL installer.
-                </p>
-                <a class="secondary" href="https://github.com/HelixBioLab/helix-agent/releases/latest"
-                  ><span data-lang="es" lang="es">Ver descargas ↗</span
-                  ><span data-lang="en" lang="en">Browse downloads ↗</span></a
-                >
-                <details>
-                  <summary>
-                    <span data-lang="es" lang="es">Elegir e instalar el archivo</span
-                    ><span data-lang="en" lang="en">Choose and install an archive</span>
-                  </summary>
-                  <div class="detail-body">
-                    <p data-lang="es" lang="es">
-                      Elige <code>arm64</code> para ARM o Apple Silicon y <code>x64</code> para Intel/AMD. En x64, la
-                      variante <code>baseline</code> sirve para equipos sin AVX2; en Alpine, elige <code>musl</code>.
-                    </p>
-                    <p data-lang="en" lang="en">
-                      Choose <code>arm64</code> for ARM or Apple Silicon, or <code>x64</code> for Intel/AMD. On x64,
-                      choose <code>baseline</code> for CPUs without AVX2; on Alpine, choose <code>musl</code>.
-                    </p>
-                    <p data-lang="es" lang="es">
-                      Extrae el archivo y abre una terminal en la carpeta del ejecutable. En Linux o macOS:
-                    </p>
-                    <p data-lang="en" lang="en">
-                      Extract the archive and open a terminal in the executable’s folder. On Linux or macOS:
-                    </p>
-                    <div
-                      class="cmd"
-                      data-copy='mkdir -p "$HOME/.helix/bin"
-cp helix "$HOME/.helix/bin/"
-chmod +x "$HOME/.helix/bin/helix"'
+            </div>
+
+            <div class="install-steps">
+              <div class="handheld-note" role="note">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+                  <rect x="3" y="4.5" width="18" height="12" rx="1.5" />
+                  <path d="M9 20h6M12 16.5V20M7 9l2.5 2L7 13M11.5 13H15" />
+                </svg>
+                <div>
+                  <h3>
+                    <span data-lang="es" lang="es">Instálalo desde tu computadora</span
+                    ><span data-lang="en" lang="en">Install it from your computer</span>
+                  </h3>
+                  <p>
+                    <span data-lang="es" lang="es"
+                      >Helix Agent funciona en la terminal de Linux, macOS o Windows. Abre esta página en tu computadora
+                      para seguir los pasos.</span
+                    ><span data-lang="en" lang="en"
+                      >Helix Agent runs in the terminal on Linux, macOS or Windows. Open this page on your computer to
+                      follow the steps.</span
                     >
-                      <pre><code>mkdir -p &quot;$HOME/.helix/bin&quot;
-cp helix &quot;$HOME/.helix/bin/&quot;
-chmod +x &quot;$HOME/.helix/bin/helix&quot;</code></pre>
+                  </p>
+                  <div class="handheld-actions">
+                    <button class="btn btn-primary" type="button" data-share-link>
+                      <span data-lang="es" lang="es">Enviarme el enlace</span
+                      ><span data-lang="en" lang="en">Send me the link</span>
+                    </button>
+                    <button class="text-link" type="button" data-show-steps>
+                      <span data-lang="es" lang="es">Ver los pasos igualmente</span
+                      ><span data-lang="en" lang="en">Show the steps anyway</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <p class="recommendation mono" id="os-recommendation" hidden></p>
+              <div class="systems" role="group" aria-label="Operating system">
+                <label for="os-linux">Linux</label><label for="os-mac">macOS</label><label for="os-win">Windows</label>
+              </div>
+
+              <section class="step" data-reveal>
+                <h3>
+                  <span class="step-num mono" aria-hidden="true">01</span
+                  ><span data-lang="es" lang="es">Prepara el entorno</span
+                  ><span data-lang="en" lang="en">Prepare your environment</span>
+                </h3>
+                <div data-os="linux">
+                  <p data-lang="es" lang="es">
+                    Abre la terminal desde el menú de aplicaciones. En Ubuntu, Debian o Linux Mint, instala wget y los
+                    certificados con APT:
+                  </p>
+                  <p data-lang="en" lang="en">
+                    Open Terminal from your applications menu. On Ubuntu, Debian or Linux Mint, install wget and the
+                    certificates with APT:
+                  </p>
+                  <div class="cmd" data-copy="sudo apt update &amp;&amp; sudo apt install -y wget ca-certificates tar gzip">
+                    <pre><code>sudo apt update &amp;&amp; sudo apt install -y wget ca-certificates tar gzip</code></pre>
+                  </div>
+                  <div class="distros">
+                    <p class="distros-title">
+                      <span data-lang="es" lang="es">Otras distribuciones Linux</span
+                      ><span data-lang="en" lang="en">Other Linux distributions</span>
+                    </p>
+                    <div class="distro">
+                      <span class="mono">Fedora</span>
+                      <div class="cmd cmd-row" data-copy="sudo dnf install wget ca-certificates tar gzip">
+                        <pre><code>sudo dnf install wget ca-certificates tar gzip</code></pre>
+                      </div>
                     </div>
-                    <p data-lang="es" lang="es">Puedes iniciarlo por su ruta completa, sin configurar el PATH:</p>
-                    <p data-lang="en" lang="en">Launch it by its full path without configuring PATH:</p>
-                    <div class="cmd" data-copy="~/.helix/bin/helix">
-                      <pre><code>~/.helix/bin/helix</code></pre>
+                    <div class="distro">
+                      <span class="mono">Arch</span>
+                      <div class="cmd cmd-row" data-copy="sudo pacman -Syu wget ca-certificates tar gzip">
+                        <pre><code>sudo pacman -Syu wget ca-certificates tar gzip</code></pre>
+                      </div>
+                    </div>
+                    <div class="distro">
+                      <span class="mono">openSUSE</span>
+                      <div class="cmd cmd-row" data-copy="sudo zypper install wget ca-certificates tar gzip">
+                        <pre><code>sudo zypper install wget ca-certificates tar gzip</code></pre>
+                      </div>
+                    </div>
+                    <div class="distro">
+                      <span class="mono">Alpine</span>
+                      <div class="cmd cmd-row" data-copy="sudo apk add bash wget ca-certificates tar gzip">
+                        <pre><code>sudo apk add bash wget ca-certificates tar gzip</code></pre>
+                      </div>
                     </div>
                   </div>
-                </details>
-              </div>
-            </aside>
+                  <p data-lang="es" lang="es" class="note">
+                    Si ya tienes wget, puedes pasar al siguiente paso. Estos comandos pueden pedir tu contraseña para
+                    instalar los paquetes del sistema.
+                  </p>
+                  <p data-lang="en" lang="en" class="note">
+                    Already have wget? Continue to the next step. These commands may ask for your password to install
+                    system packages.
+                  </p>
+                </div>
+                <div data-os="mac">
+                  <p data-lang="es" lang="es">
+                    Abre Spotlight con <kbd>⌘</kbd> + <kbd>Espacio</kbd>, busca <strong>Terminal</strong> y presiona
+                    Enter. Usaremos el curl incluido en macOS.
+                  </p>
+                  <p data-lang="en" lang="en">
+                    Open Spotlight with <kbd>⌘</kbd> + <kbd>Space</kbd>, search for <strong>Terminal</strong>, and press
+                    Enter. We’ll use the curl included with macOS.
+                  </p>
+                </div>
+                <div data-os="win">
+                  <p data-lang="es" lang="es">
+                    Busca <strong>PowerShell</strong> en el menú Inicio. El agente se ejecuta dentro de Linux mediante WSL
+                    y podrás abrirlo desde PowerShell.
+                  </p>
+                  <p data-lang="en" lang="en">
+                    Find <strong>PowerShell</strong> in the Start menu. The agent runs inside Linux through WSL and can be
+                    launched from PowerShell.
+                  </p>
+                </div>
+              </section>
+
+              <section class="step" data-reveal>
+                <h3>
+                  <span class="step-num mono" aria-hidden="true">02</span
+                  ><span data-lang="es" lang="es">Instala Helix Agent</span
+                  ><span data-lang="en" lang="en">Install Helix Agent</span>
+                </h3>
+                <div data-os="linux">
+                  <p data-lang="es" lang="es">
+                    Descarga el instalador con wget y ejecútalo solo si la descarga termina correctamente.
+                  </p>
+                  <p data-lang="en" lang="en">
+                    Download the installer with wget and run it only after a successful download.
+                  </p>
+                  <div
+                    class="cmd"
+                    data-copy="wget -O helix-install.sh https://helixbioinformatics.github.io/helix-agent/install &amp;&amp; bash helix-install.sh"
+                  >
+                    <pre><code>wget -O helix-install.sh https://helixbioinformatics.github.io/helix-agent/install &amp;&amp; bash helix-install.sh</code></pre>
+                  </div>
+                  <p data-lang="es" lang="es" class="note">
+                    ¿Prefieres curl? Usa la versión del sistema; en Ubuntu o Debian, instálala con
+                    <code>sudo apt install curl</code>. La ruta completa evita usar por accidente la versión de Snap.
+                  </p>
+                  <p data-lang="en" lang="en" class="note">
+                    Prefer curl? Use the system version; on Ubuntu or Debian, install it with
+                    <code>sudo apt install curl</code>. The full path avoids accidentally selecting the Snap version.
+                  </p>
+                  <div
+                    class="cmd"
+                    data-copy="/usr/bin/curl -fL -o helix-install.sh https://helixbioinformatics.github.io/helix-agent/install &amp;&amp; bash helix-install.sh"
+                  >
+                    <pre><code>/usr/bin/curl -fL -o helix-install.sh https://helixbioinformatics.github.io/helix-agent/install &amp;&amp; bash helix-install.sh</code></pre>
+                  </div>
+                </div>
+                <div data-os="mac">
+                  <div
+                    class="cmd"
+                    data-copy="/usr/bin/curl -fL -o helix-install.sh https://helixbioinformatics.github.io/helix-agent/install &amp;&amp; bash helix-install.sh"
+                  >
+                    <pre><code>/usr/bin/curl -fL -o helix-install.sh https://helixbioinformatics.github.io/helix-agent/install &amp;&amp; bash helix-install.sh</code></pre>
+                  </div>
+                </div>
+                <div data-os="win">
+                  <div class="cmd" data-copy="irm https://helixbioinformatics.github.io/helix-agent/install.ps1 | iex">
+                    <pre><code>irm https://helixbioinformatics.github.io/helix-agent/install.ps1 | iex</code></pre>
+                  </div>
+                  <p data-lang="es" lang="es" class="note">
+                    Si falta WSL, el instalador te guía para habilitarlo. Ese paso requiere permisos de administrador y
+                    puede pedir un reinicio. Luego, vuelve a ejecutar el comando.
+                  </p>
+                  <p data-lang="en" lang="en" class="note">
+                    If WSL is missing, the installer guides you through enabling it. This requires administrator rights
+                    and may need a restart. Then run the command again.
+                  </p>
+                </div>
+              </section>
+
+              <section class="step" data-reveal>
+                <h3>
+                  <span class="step-num mono" aria-hidden="true">03</span
+                  ><span data-lang="es" lang="es">Abre tu primera sesión</span
+                  ><span data-lang="en" lang="en">Start your first session</span>
+                </h3>
+                <p data-lang="es" lang="es">
+                  Abre una terminal nueva y conecta tu proveedor de modelos. Después, entra a la carpeta de tu proyecto y
+                  ejecuta el agente.
+                </p>
+                <p data-lang="en" lang="en">
+                  Open a new terminal and connect your model provider. Then open your project folder and launch the
+                  agent.
+                </p>
+                <div class="cmd" data-copy="helix providers login">
+                  <pre><code>helix providers login</code></pre>
+                </div>
+                <p data-lang="es" lang="es">Desde la carpeta de tu proyecto:</p>
+                <p data-lang="en" lang="en">From your project folder:</p>
+                <div class="cmd" data-copy="helix">
+                  <pre><code>helix</code></pre>
+                </div>
+              </section>
+            </div>
           </div>
         </section>
-        <section class="faq">
-          <h2 data-lang="es" lang="es">Antes de empezar</h2>
-          <h2 data-lang="en" lang="en">Before you begin</h2>
-          <details>
-            <summary>
-              <span data-lang="es" lang="es">¿Necesito un modelo o una suscripción?</span
-              ><span data-lang="en" lang="en">Do I need a model or a subscription?</span>
-            </summary>
-            <div class="detail-body">
-              <p data-lang="es" lang="es">
-                Helix Agent no incluye un modelo propio. Conecta un proveedor con tus credenciales; la disponibilidad y
-                el costo dependen del proveedor y del modelo que elijas.
+
+        <section class="paths band-dark">
+          <div class="container">
+            <div class="paths-head">
+              <p class="eyebrow" data-reveal>
+                <span data-lang="es" lang="es" data-scramble="view">¿PREFIERES NO EJECUTAR UN SCRIPT?</span
+                ><span data-lang="en" lang="en" data-scramble="view">RATHER NOT RUN A SCRIPT?</span>
               </p>
-              <p data-lang="en" lang="en">
-                Helix Agent does not include a model. Connect a provider with your credentials; availability and cost
-                depend on your provider and chosen model.
-              </p>
+              <a class="text-link" href="https://github.com/HelixBioinformatics/helix-agent/issues"
+                ><span data-lang="es" lang="es">¿Necesitas ayuda? Reporta un problema ↗</span
+                ><span data-lang="en" lang="en">Need help? Report an issue ↗</span></a
+              >
             </div>
-          </details>
-          <details>
-            <summary>
-              <span data-lang="es" lang="es">¿Qué herramientas necesito para analizar mis datos?</span
-              ><span data-lang="en" lang="en">Which tools do I need to analyze my data?</span>
-            </summary>
-            <div class="detail-body">
-              <p data-lang="es" lang="es">
-                Depende del análisis. Los flujos de Nextflow requieren Java y pueden usar Docker, Apptainer o Conda.
-                Este comando revisa tu equipo y sugiere cómo instalar lo que falte, sin hacer cambios:
-              </p>
-              <p data-lang="en" lang="en">
-                It depends on your analysis. Nextflow workflows require Java and may use Docker, Apptainer or Conda.
-                This command checks your machine and suggests how to install missing tools without making changes:
-              </p>
-              <div class="cmd" data-copy="helix debug env">
-                <pre><code>helix debug env</code></pre>
+            <div class="manual spot" data-reveal>
+              <div class="manual-copy">
+                <div class="manual-title">
+                  <h3>
+                    <span data-lang="es" lang="es">Descarga e instalación manual</span
+                    ><span data-lang="en" lang="en">Manual download and install</span>
+                  </h3>
+                </div>
+                <p>
+                  <span data-lang="es" lang="es"
+                    >Descarga el archivo de tu sistema desde GitHub. Linux usa <code>.tar.gz</code> y macOS
+                    <code>.zip</code>. En Windows, usa el instalador de WSL que aparece en esta página.</span
+                  ><span data-lang="en" lang="en"
+                    >Download the archive for your system from GitHub. Linux uses <code>.tar.gz</code> and macOS uses
+                    <code>.zip</code>. On Windows, use this page’s WSL installer.</span
+                  >
+                </p>
+                <ul class="arch mono">
+                  <li>
+                    <b>arm64</b
+                    ><span data-lang="es" lang="es">ARM o Apple Silicon</span
+                    ><span data-lang="en" lang="en">ARM or Apple Silicon</span>
+                  </li>
+                  <li><b>x64</b><span>Intel / AMD</span></li>
+                  <li>
+                    <b>baseline</b
+                    ><span data-lang="es" lang="es">x64 sin AVX2</span><span data-lang="en" lang="en">x64 without AVX2</span>
+                  </li>
+                  <li><b>musl</b><span>Alpine</span></li>
+                </ul>
+                <a class="btn btn-ghost" href="https://github.com/HelixBioinformatics/helix-agent/releases/latest"
+                  ><span data-lang="es" lang="es">Ver descargas</span><span data-lang="en" lang="en">Browse downloads</span
+                  ><span class="btn-arrow" aria-hidden="true">↗</span></a
+                >
+              </div>
+              <div class="manual-cmds">
+                <p>
+                  <span data-lang="es" lang="es"
+                    >Extrae el archivo y abre una terminal en la carpeta del ejecutable. En Linux o macOS:</span
+                  ><span data-lang="en" lang="en"
+                    >Extract the archive and open a terminal in the executable’s folder. On Linux or macOS:</span
+                  >
+                </p>
+                <div
+                  class="cmd"
+                  data-copy='mkdir -p "$HOME/.helix/bin"
+cp helix "$HOME/.helix/bin/"
+chmod +x "$HOME/.helix/bin/helix"'
+                >
+                  <pre><code>mkdir -p &quot;$HOME/.helix/bin&quot;
+cp helix &quot;$HOME/.helix/bin/&quot;
+chmod +x &quot;$HOME/.helix/bin/helix&quot;</code></pre>
+                </div>
+                <p>
+                  <span data-lang="es" lang="es">Puedes iniciarlo por su ruta completa, sin configurar el PATH:</span
+                  ><span data-lang="en" lang="en">Launch it by its full path without configuring PATH:</span>
+                </p>
+                <div class="cmd" data-copy="~/.helix/bin/helix">
+                  <pre><code>~/.helix/bin/helix</code></pre>
+                </div>
               </div>
             </div>
-          </details>
-          <details>
-            <summary>
-              <span data-lang="es" lang="es">¿Cómo verifico una descarga manual?</span
-              ><span data-lang="en" lang="en">How do I verify a manual download?</span>
-            </summary>
-            <div class="detail-body">
-              <p data-lang="es" lang="es">
-                Descarga también <code>SHA256SUMS</code> de la misma versión y guárdalo junto al archivo. Ejecuta el
-                comando desde esa carpeta. Si no descargaste todos los archivos, aparecerán avisos por los que faltan;
-                comprueba que el tuyo indique <code>OK</code>.
+          </div>
+        </section>
+
+        <section class="faq band-dark" id="faq">
+          <div class="container faq-grid">
+            <div class="faq-intro">
+              <p class="eyebrow" data-reveal>
+                <span class="num">05</span><span class="sep">/</span
+                ><span data-lang="es" lang="es" data-scramble="view">ANTES DE EMPEZAR</span
+                ><span data-lang="en" lang="en" data-scramble="view">BEFORE YOU BEGIN</span>
               </p>
-              <p data-lang="en" lang="en">
-                Download <code>SHA256SUMS</code> from the same release and save it beside the archive. Run the command
-                from that folder. Missing archives may produce warnings; check that your downloaded file reports
-                <code>OK</code>.
+              <h2 class="display" data-reveal>
+                <span data-lang="es" lang="es">Buenas<br />preguntas.</span
+                ><span data-lang="en" lang="en">Good<br />questions.</span>
+              </h2>
+              <p class="intro-copy" data-reveal>
+                <span data-lang="es" lang="es">Lo esencial antes de abrir la terminal.</span
+                ><span data-lang="en" lang="en">The essentials before you open the terminal.</span>
               </p>
-              <p data-lang="es" lang="es">En Linux:</p>
-              <p data-lang="en" lang="en">On Linux:</p>
-              <div class="cmd" data-copy="sha256sum --check --ignore-missing SHA256SUMS">
-                <pre><code>sha256sum --check --ignore-missing SHA256SUMS</code></pre>
+              <a class="text-link" href="https://github.com/HelixBioinformatics/helix-agent" data-reveal
+                ><span data-lang="es" lang="es">Consultar el repositorio ↗</span
+                ><span data-lang="en" lang="en">Browse the repository ↗</span></a
+              >
+            </div>
+            <div class="faq-list">
+              <details open data-reveal>
+                <summary>
+                  <span data-lang="es" lang="es">¿Necesito un modelo o una suscripción?</span
+                  ><span data-lang="en" lang="en">Do I need a model or a subscription?</span>
+                </summary>
+                <div class="detail-body">
+                  <p data-lang="es" lang="es">
+                    Helix Agent no incluye un modelo propio. Conecta un proveedor con tus credenciales; la disponibilidad
+                    y el costo dependen del proveedor y del modelo que elijas.
+                  </p>
+                  <p data-lang="en" lang="en">
+                    Helix Agent does not include a model. Connect a provider with your credentials; availability and
+                    cost depend on your provider and chosen model.
+                  </p>
+                </div>
+              </details>
+              <details data-reveal>
+                <summary>
+                  <span data-lang="es" lang="es">¿Qué herramientas necesito para analizar mis datos?</span
+                  ><span data-lang="en" lang="en">Which tools do I need to analyze my data?</span>
+                </summary>
+                <div class="detail-body">
+                  <p data-lang="es" lang="es">
+                    Depende del análisis. Los flujos de Nextflow requieren Java y pueden usar Docker, Apptainer o Conda.
+                    Este comando revisa tu equipo y sugiere cómo instalar lo que falte, sin hacer cambios:
+                  </p>
+                  <p data-lang="en" lang="en">
+                    It depends on your analysis. Nextflow workflows require Java and may use Docker, Apptainer or Conda.
+                    This command checks your machine and suggests how to install missing tools without making changes:
+                  </p>
+                  <div class="cmd" data-copy="helix debug env">
+                    <pre><code>helix debug env</code></pre>
+                  </div>
+                </div>
+              </details>
+              <details data-reveal>
+                <summary>
+                  <span data-lang="es" lang="es">¿Cómo verifico una descarga manual?</span
+                  ><span data-lang="en" lang="en">How do I verify a manual download?</span>
+                </summary>
+                <div class="detail-body">
+                  <p data-lang="es" lang="es">
+                    Descarga también <code>SHA256SUMS</code> de la misma versión y guárdalo junto al archivo. Ejecuta el
+                    comando desde esa carpeta. Si no descargaste todos los archivos, aparecerán avisos por los que
+                    faltan; comprueba que el tuyo indique <code>OK</code>.
+                  </p>
+                  <p data-lang="en" lang="en">
+                    Download <code>SHA256SUMS</code> from the same release and save it beside the archive. Run the
+                    command from that folder. Missing archives may produce warnings; check that your downloaded file
+                    reports <code>OK</code>.
+                  </p>
+                  <p data-lang="es" lang="es">En Linux:</p>
+                  <p data-lang="en" lang="en">On Linux:</p>
+                  <div class="cmd" data-copy="sha256sum --check --ignore-missing SHA256SUMS">
+                    <pre><code>sha256sum --check --ignore-missing SHA256SUMS</code></pre>
+                  </div>
+                  <p data-lang="es" lang="es">En macOS:</p>
+                  <p data-lang="en" lang="en">On macOS:</p>
+                  <div class="cmd" data-copy="shasum -a 256 --check SHA256SUMS">
+                    <pre><code>shasum -a 256 --check SHA256SUMS</code></pre>
+                  </div>
+                </div>
+              </details>
+              <details data-reveal>
+                <summary>
+                  <span data-lang="es" lang="es">¿Cómo actualizo sin desinstalar?</span
+                  ><span data-lang="en" lang="en">How do I update without uninstalling?</span>
+                </summary>
+                <div class="detail-body">
+                  <p data-lang="es" lang="es">
+                    Vuelve a ejecutar el instalador de esta página. Reemplaza el ejecutable y conserva la configuración,
+                    credenciales y sesiones. Después abre una sesión nueva y ejecuta <code>helix --version</code>. No
+                    necesitas desinstalar. Si SSH no encuentra el comando, usa
+                    <code>~/.helix/bin/helix --version</code>.
+                  </p>
+                  <p data-lang="en" lang="en">
+                    Run this page's installer again. It replaces the executable and retains settings, credentials and
+                    sessions. Then start a new session and run <code>helix --version</code>. You do not need to
+                    uninstall. If SSH cannot find the command, use <code>~/.helix/bin/helix --version</code>.
+                  </p>
+                  <p data-lang="es" lang="es">
+                    La próxima versión incorpora <code>helix upgrade</code> y <code>helix upgrade --check</code>. El
+                    binario 0.3.0 todavía requiere el instalador.
+                  </p>
+                  <p data-lang="en" lang="en">
+                    The next version adds <code>helix upgrade</code> and <code>helix upgrade --check</code>. The 0.3.0
+                    binary still requires the installer.
+                  </p>
+                </div>
+              </details>
+              <details data-reveal>
+                <summary>
+                  <span data-lang="es" lang="es">¿Puedo instalar una versión específica o compilar el código?</span
+                  ><span data-lang="en" lang="en">Can I install a specific version or build from source?</span>
+                </summary>
+                <div class="detail-body">
+                  <p data-lang="es" lang="es">
+                    Sí. Después de descargar el instalador, ejecútalo con
+                    <code>bash helix-install.sh --version X.Y.Z</code>, reemplazando <code>X.Y.Z</code> por una versión
+                    publicada. Para compilarlo, sigue la
+                    <a href="https://github.com/HelixBioinformatics/helix-agent#instalación">guía del repositorio</a>.
+                  </p>
+                  <p data-lang="en" lang="en">
+                    Yes. After downloading the installer, run <code>bash helix-install.sh --version X.Y.Z</code>,
+                    replacing <code>X.Y.Z</code> with a published version. To build from source, follow the
+                    <a href="https://github.com/HelixBioinformatics/helix-agent#instalación">repository guide</a>.
+                  </p>
+                </div>
+              </details>
+            </div>
+          </div>
+        </section>
+
+        <section class="about band-light" id="contacto">
+          <div class="about-figure" aria-hidden="true">
+            <canvas class="protein-canvas" id="protein-canvas"></canvas>
+          </div>
+          <div class="container about-grid">
+            <div class="about-copy">
+              <p class="eyebrow" data-reveal>
+                <span class="num">06</span><span class="sep">/</span
+                ><span data-lang="es" lang="es" data-scramble="view">DETRÁS DE HELIX</span
+                ><span data-lang="en" lang="en" data-scramble="view">BEHIND HELIX</span>
+              </p>
+              <h2 class="display" data-reveal>
+                <span data-lang="es" lang="es">Empieza con una pregunta.<br />Sigue con Helix.</span
+                ><span data-lang="en" lang="en">Start with a question.<br />Keep going with Helix.</span>
+              </h2>
+              <p class="about-lead" data-reveal>
+                <span data-lang="es" lang="es"
+                  >Helix es software de investigación abierto y en desarrollo. Avanza por hitos y declara sus límites en
+                  lugar de ocultarlos.</span
+                ><span data-lang="en" lang="en"
+                  >Helix is open research software under active development. It advances in milestones and states its
+                  limits instead of hiding them.</span
+                >
+              </p>
+              <div class="hero-actions" data-reveal>
+                <a class="btn btn-primary btn-on-light" href="#download"
+                  ><span data-lang="es" lang="es">Instalar Helix Agent</span
+                  ><span data-lang="en" lang="en">Install Helix Agent</span><span class="btn-arrow" aria-hidden="true"
+                    >↗</span
+                  ></a
+                >
+                <a class="text-link" href="https://github.com/HelixBioinformatics/helix-agent"
+                  ><span data-lang="es" lang="es">Explora el código ↗</span
+                  ><span data-lang="en" lang="en">Explore the code ↗</span></a
+                >
               </div>
-              <p data-lang="es" lang="es">En macOS:</p>
-              <p data-lang="en" lang="en">On macOS:</p>
-              <div class="cmd" data-copy="shasum -a 256 --check SHA256SUMS">
-                <pre><code>shasum -a 256 --check SHA256SUMS</code></pre>
+            </div>
+
+            <article class="founder spot-light" data-reveal aria-labelledby="founder-name">
+              <div class="founder-head">
+                <span class="monogram" aria-hidden="true">MA<i></i></span>
+                <div>
+                  <p class="founder-kicker mono">FOUNDER &amp; CEO · HELIX</p>
+                  <h3 id="founder-name">Marlow Ariza</h3>
+                  <p class="founder-title">
+                    <span data-lang="es" lang="es">Ingeniero informático</span
+                    ><span data-lang="en" lang="en">Computer engineer</span>
+                  </p>
+                </div>
               </div>
-            </div>
-          </details>
-          <details>
-            <summary>
-              <span data-lang="es" lang="es">¿Cómo actualizo sin desinstalar?</span>
-              <span data-lang="en" lang="en">How do I update without uninstalling?</span>
-            </summary>
-            <div class="detail-body">
-              <p data-lang="es" lang="es">
-                Vuelve a ejecutar el instalador de esta página. Reemplaza el ejecutable y conserva
-                la configuración, credenciales y sesiones. Después abre una sesión nueva y ejecuta
-                <code>helix --version</code>. No necesitas desinstalar.
-                Si SSH no encuentra el comando, usa <code>~/.helix/bin/helix --version</code>.
+              <p class="founder-note">
+                <span data-lang="es" lang="es"
+                  >¿Preguntas, aportes, colaboraciones, peticiones o un piloto en tu laboratorio? Escríbeme.</span
+                ><span data-lang="en" lang="en"
+                  >Questions, contributions, collaborations, requests or a pilot in your lab? Write to me.</span
+                >
               </p>
-              <p data-lang="en" lang="en">
-                Run this page's installer again. It replaces the executable and retains settings,
-                credentials and sessions. Then start a new session and run <code>helix --version</code>.
-                You do not need to uninstall. If SSH cannot find the command, use
-                <code>~/.helix/bin/helix --version</code>.
+              <div class="contact">
+                <a class="contact-mail" href="mailto:m.ariza@pucp.edu.pe?subject=Helix%20Agent"
+                  ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+                    <rect x="3" y="5.5" width="18" height="13" rx="2" />
+                    <path d="m3.5 7 8.5 6 8.5-6" /></svg
+                  >m.ariza@pucp.edu.pe</a
+                >
+                <button class="copy-inline" type="button" data-copy-value="m.ariza@pucp.edu.pe">
+                  <span data-lang="es" lang="es">Copiar</span><span data-lang="en" lang="en">Copy</span>
+                </button>
+              </div>
+              <ul class="founder-links mono">
+                <li><a href="https://github.com/HelixBioinformatics">GitHub · Helix Bioinformatics ↗</a></li>
+              </ul>
+            </article>
+          </div>
+
+          <div class="container about-more">
+            <article class="card" data-reveal style="--i: 0">
+              <div class="card-top">
+                <span class="mono"><span data-lang="es" lang="es">CITA</span><span data-lang="en" lang="en">CITE</span></span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+                  <path d="M5 4.5h10l4 4v11H5z" />
+                  <path d="M15 4.5v4h4M8.5 12.5h7M8.5 16h5" />
+                </svg>
+              </div>
+              <h3>
+                <span data-lang="es" lang="es">Cita Helix Agent</span><span data-lang="en" lang="en">Cite Helix Agent</span>
+              </h3>
+              <p>
+                <span data-lang="es" lang="es">Pronto podrás citarlo en tus publicaciones.</span
+                ><span data-lang="en" lang="en">Soon you’ll be able to cite it in your papers.</span>
               </p>
-              <p data-lang="es" lang="es">
-                La próxima versión incorpora <code>helix upgrade</code> y
-                <code>helix upgrade --check</code>. El binario 0.3.0 todavía requiere el instalador.
+              <span class="soon mono"
+                ><span data-lang="es" lang="es">PRÓXIMAMENTE</span><span data-lang="en" lang="en">COMING SOON</span></span
+              >
+            </article>
+            <article class="card" data-reveal style="--i: 1">
+              <div class="card-top">
+                <span class="mono"
+                  ><span data-lang="es" lang="es">CONTRIBUYE</span><span data-lang="en" lang="en">CONTRIBUTE</span></span
+                >
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+                  <circle cx="6.5" cy="5.5" r="2" />
+                  <circle cx="6.5" cy="18.5" r="2" />
+                  <circle cx="17.5" cy="9" r="2" />
+                  <path d="M6.5 7.5v9M17.5 11a5 5 0 0 1-5 5H8" />
+                </svg>
+              </div>
+              <h3>
+                <span data-lang="es" lang="es">Propón un cambio</span
+                ><span data-lang="en" lang="en">Propose a change</span>
+              </h3>
+              <p>
+                <span data-lang="es" lang="es"
+                  >La guía explica cómo levantar el entorno, verificar un cambio y proponer un pull request.</span
+                ><span data-lang="en" lang="en"
+                  >The guide explains how to set up the environment, verify a change and open a pull request.</span
+                >
               </p>
-              <p data-lang="en" lang="en">
-                The next version adds <code>helix upgrade</code> and <code>helix upgrade --check</code>.
-                The 0.3.0 binary still requires the installer.
+              <a class="text-link" href="https://github.com/HelixBioinformatics/helix-agent/blob/main/CONTRIBUTING.md"
+                ><span data-lang="es" lang="es">Leer la guía ↗</span><span data-lang="en" lang="en">Read the guide ↗</span></a
+              >
+            </article>
+            <article class="card" data-reveal style="--i: 2">
+              <div class="card-top">
+                <span class="mono"
+                  ><span data-lang="es" lang="es">SEGURIDAD</span><span data-lang="en" lang="en">SECURITY</span></span
+                >
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+                  <path d="M12 3.5 19 6v5.5c0 4.2-2.9 7.6-7 9-4.1-1.4-7-4.8-7-9V6z" />
+                  <path d="m9 12 2.2 2.2L15.5 10" />
+                </svg>
+              </div>
+              <h3>
+                <span data-lang="es" lang="es">Reporta una vulnerabilidad</span
+                ><span data-lang="en" lang="en">Report a vulnerability</span>
+              </h3>
+              <p>
+                <span data-lang="es" lang="es"
+                  >Usa el formulario privado de GitHub, no un issue público. Incluye la versión, tu sistema y los pasos
+                  para reproducirla.</span
+                ><span data-lang="en" lang="en"
+                  >Use GitHub’s private form, not a public issue. Include the version, your system and the steps to
+                  reproduce it.</span
+                >
               </p>
-            </div>
-          </details>
-          <details>
-            <summary>
-              <span data-lang="es" lang="es">¿Puedo instalar una versión específica o compilar el código?</span
-              ><span data-lang="en" lang="en">Can I install a specific version or build from source?</span>
-            </summary>
-            <div class="detail-body">
-              <p data-lang="es" lang="es">
-                Sí. Después de descargar el instalador, ejecútalo con
-                <code>bash helix-install.sh --version X.Y.Z</code>, reemplazando <code>X.Y.Z</code> por una versión
-                publicada. Para compilarlo, sigue la
-                <a href="https://github.com/HelixBioLab/helix-agent#instalación">guía del repositorio</a>.
-              </p>
-              <p data-lang="en" lang="en">
-                Yes. After downloading the installer, run <code>bash helix-install.sh --version X.Y.Z</code>, replacing
-                <code>X.Y.Z</code> with a published version. To build from source, follow the
-                <a href="https://github.com/HelixBioLab/helix-agent#instalación">repository guide</a>.
-              </p>
-            </div>
-          </details>
-          <details>
-            <summary>
-              <span data-lang="es" lang="es">¿Qué queda registrado del análisis?</span
-              ><span data-lang="en" lang="en">What does the analysis record?</span>
-            </summary>
-            <div class="detail-body">
-              <p data-lang="es" lang="es">
-                El agente puede generar un dossier, un registro del protocolo, un recuento del trabajo y manifiestos de
-                archivos. Sirven para revisar lo realizado y sus límites. Encontrarás los detalles en
-                <a href="https://github.com/HelixBioLab/helix-agent#los-cuatro-artefactos"
-                  >la documentación de los cuatro artefactos</a
-                >.
-              </p>
-              <p data-lang="en" lang="en">
-                The agent can produce a dossier, a protocol ledger, a work tally and file manifests to help review the
-                work and its limits. Read about
-                <a href="https://github.com/HelixBioLab/helix-agent#los-cuatro-artefactos">the four artifacts</a>.
-              </p>
-            </div>
-          </details>
+              <a class="text-link" href="https://github.com/HelixBioinformatics/helix-agent/security/advisories/new"
+                ><span data-lang="es" lang="es">Reportar en privado ↗</span
+                ><span data-lang="en" lang="en">Report privately ↗</span></a
+              >
+            </article>
+          </div>
+          <p class="container figure-credit mono">
+            <span data-lang="es" lang="es">Estructura 3D adaptada de</span
+            ><span data-lang="en" lang="en">3D structure adapted from</span>
+            <a href="https://alphafold.ebi.ac.uk/entry/P42212">AlphaFold DB · AF-P42212-F1</a> ·
+            <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>
+          </p>
         </section>
       </main>
-      <footer>
-        <a class="brand footer-brand" href="#"
-          ><svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.5"
-            stroke-linecap="round"
-            aria-hidden="true"
-          >
-            <path d="M6 3c0 9 12 9 12 18M18 3c0 9-12 9-12 18M7 6h10M8 18h8M10 10h4M10 14h4" /></svg
-          ><span>helix<span class="period">.</span></span
-          ><span class="brand-tag">AGENT</span></a
-        >
-        <p data-lang="es" lang="es">Preguntas que avanzan. Ciencia que puedes revisar.</p>
-        <p data-lang="en" lang="en">Move your questions forward. Keep your science reviewable.</p>
-        <div>
-          <a href="https://github.com/HelixBioLab/helix-agent">GitHub</a
-          ><a href="https://github.com/HelixBioLab/helix-agent/issues"
-            ><span data-lang="es" lang="es">Reportar un problema</span
-            ><span data-lang="en" lang="en">Report an issue</span></a
-          ><a href="https://github.com/HelixBioLab/helix-agent/blob/main/LICENSE">MIT</a>
+
+      <footer class="site-footer">
+        <canvas class="glyph-field footer-glyphs" aria-hidden="true"></canvas>
+        <div class="container">
+          <div class="footer-top">
+            <div>
+              <a class="brand footer-brand" href="#top" aria-label="Helix Agent"
+                ><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
+                  <path class="brand-strands" d="M6 3c0 9 12 9 12 18M18 3c0 9-12 9-12 18" />
+                  <path class="brand-rungs" d="M7 6h10M10 10h4M10 14h4M8 18h8" /></svg
+                ><span>helix<span class="period">.</span></span><span class="brand-tag">AGENT</span></a
+              >
+              <p>
+                <span data-lang="es" lang="es">Preguntas que avanzan. Ciencia que puedes revisar.</span
+                ><span data-lang="en" lang="en">Questions that move. Science you can check.</span>
+              </p>
+            </div>
+            <nav class="footer-links" aria-label="Helix Agent">
+              <a href="https://github.com/HelixBioinformatics/helix-agent">GitHub ↗</a>
+              <a href="https://github.com/HelixBioinformatics/helix-agent/issues"
+                ><span data-lang="es" lang="es">Reportar un problema ↗</span
+                ><span data-lang="en" lang="en">Report an issue ↗</span></a
+              >
+              <a href="https://github.com/HelixBioinformatics/helix-agent/blob/main/LICENSE">MIT ↗</a>
+            </nav>
+          </div>
+          <div class="footer-bottom mono">
+            <span
+              ><span data-lang="es" lang="es">HELIX BIOINFORMATICS · CÓDIGO ABIERTO</span
+              ><span data-lang="en" lang="en">HELIX BIOINFORMATICS · OPEN SOURCE</span></span
+            >
+            <a href="#top"
+              ><span data-lang="es" lang="es">VOLVER ARRIBA</span><span data-lang="en" lang="en">BACK TO TOP</span>
+              <span aria-hidden="true">↑</span></a
+            >
+          </div>
         </div>
       </footer>
     </div>
+    <script src="./glyphs.js"></script>
+    <script src="./gfp-data.js"></script>
+    <script src="./helix-gl.js"></script>
     <script src="./site.js"></script>
   </body>
 </html>

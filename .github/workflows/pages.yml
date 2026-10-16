@@ -6,7 +6,7 @@
 # evita. Este workflow publica `www/` en GitHub Pages y copia ese mismo `install`
 # junto al `index.html`, de modo que
 #
-#     curl -fsSL https://helixbiolab.github.io/helix-agent/install | bash
+#     curl -fsSL https://helixbioinformatics.github.io/helix-agent/install | bash
 #
 # sirva el script del repositorio y no una copia que se pueda quedar atrás. Por eso
 # el workflow se dispara también cuando cambia `install`, y no sólo `www/`.
@@ -71,8 +71,8 @@ jobs:
           test -s _site/install.ps1
           head -1 _site/install | grep -q '^#!/usr/bin/env bash'
           bash -n _site/install
-          grep -q 'helixbiolab.github.io/helix-agent/install' _site/index.html
-          grep -q 'helixbiolab.github.io/helix-agent/install.ps1' _site/index.html
+          grep -q 'helixbioinformatics.github.io/helix-agent/install' _site/index.html
+          grep -q 'helixbioinformatics.github.io/helix-agent/install.ps1' _site/index.html
           pwsh -NoProfile -File script/check-powershell-syntax.ps1 _site/install.ps1
 
       - name: Test native curl and wget installation

@@ -1,8 +1,10 @@
-import { expect, test } from "bun:test"
+import { expect, expectTypeOf, test } from "bun:test"
 import { mkdir, writeFile } from "node:fs/promises"
 import path from "node:path"
 import type { TerminalColors } from "@opentui/core"
-import { DEFAULT_THEMES, addTheme, allThemes, hasTheme, resolveTheme, terminalMode } from "../src/theme"
+import { Schema } from "effect"
+import { DEFAULT_THEMES, addTheme, allThemes, hasTheme, resolveTheme, terminalMode, type ThemeJson } from "../src/theme"
+import { ThemeSchema } from "../src/theme/schema"
 import { discoverThemes } from "../src/context/theme"
 import { tmpdir } from "./fixture/fixture"
 
@@ -78,4 +80,23 @@ test("custom theme precedence follows directory order", async () => {
   await writeFile(path.join(project, "themes", "custom.json"), JSON.stringify({ source: "project" }))
 
   await expect(discoverThemes([global, project])).resolves.toEqual({ custom: { source: "project" } })
+})
+
+// theme.json is generated from ThemeSchema, so a color missing there is one
+// editors would flag as unknown in every theme.
+test("theme schema lists the same colors as ThemeJson", () => {
+  expectTypeOf<keyof ThemeSchema.Info["theme"]>().toEqualTypeOf<keyof ThemeJson["theme"]>()
+})
+
+test("every bundled theme matches the theme schema", () => {
+  const decode = Schema.decodeUnknownExit(ThemeSchema.Info)
+  for (const [name, theme] of Object.entries(DEFAULT_THEMES)) {
+    expect([name, decode(theme)._tag]).toEqual([name, "Success"])
+  }
+})
+
+test("theme schema rejects a malformed hex color", () => {
+  const theme = structuredClone(DEFAULT_THEMES.helix)
+  theme.theme.primary = "#12345"
+  expect(Schema.decodeUnknownExit(ThemeSchema.Info)(theme)._tag).toBe("Failure")
 })

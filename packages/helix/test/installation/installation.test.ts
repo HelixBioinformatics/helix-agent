@@ -101,10 +101,10 @@ testEffect(
     releaseRequests.push(request.url)
     return Response.json({ tag_name: "v0.3.1" })
   }),
-).effect("explicit latest uses HelixBioLab GitHub release only", () =>
+).effect("explicit latest uses the Helix Bioinformatics GitHub release only", () =>
   Effect.gen(function* () {
     expect(yield* Installation.use.latest("curl")).toBe("0.3.1")
-    expect(releaseRequests).toEqual(["https://api.github.com/repos/HelixBioLab/helix-agent/releases/latest"])
+    expect(releaseRequests).toEqual(["https://api.github.com/repos/HelixBioinformatics/helix-agent/releases/latest"])
   }),
 )
 
@@ -124,7 +124,7 @@ testEffect(
 ).effect("pins installer to release tag, selects version explicitly and verifies installed binary", () =>
   Effect.gen(function* () {
     yield* Installation.use.upgrade("curl", "v0.3.1")
-    expect(installerRequests).toEqual(["https://raw.githubusercontent.com/HelixBioLab/helix-agent/v0.3.1/install"])
+    expect(installerRequests).toEqual(["https://raw.githubusercontent.com/HelixBioinformatics/helix-agent/v0.3.1/install"])
     expect(launches[0]).toEqual({ cmd: "bash", args: ["-s", "--", "--version", "0.3.1", "--no-modify-path"] })
     expect(launches[1].cmd).toEndWith("/.helix/bin/helix")
   }),

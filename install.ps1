@@ -2,7 +2,7 @@
 #
 # Instalador de Helix Agent para Windows.
 #
-#   irm https://helixbiolab.github.io/helix-agent/install.ps1 | iex
+#   irm https://helixbioinformatics.github.io/helix-agent/install.ps1 | iex
 #
 # Nextflow no corre nativamente en Windows: necesita un entorno POSIX. En vez de
 # un agente nativo que hable con Linux a traves de un puente -con la traduccion
@@ -50,7 +50,7 @@ $ErrorActionPreference = "Stop"
 # El script de instalacion de Linux, servido por la misma pagina que este
 # fichero. Se descarga dentro de WSL, no aqui: lo que se instala es un binario
 # de Linux.
-$InstallUrl = "https://helixbiolab.github.io/helix-agent/install"
+$InstallUrl = "https://helixbioinformatics.github.io/helix-agent/install"
 $ShimDir = Join-Path $env:LOCALAPPDATA "helix\bin"
 $ShimPath = Join-Path $ShimDir "helix.cmd"
 

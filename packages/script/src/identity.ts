@@ -11,13 +11,13 @@
 // practice.
 
 /** The GitHub repository, as `owner/name`. CI supplies its own. */
-const REPOSITORY = process.env["GITHUB_REPOSITORY"] ?? "HelixBioLab/helix-agent"
+const REPOSITORY = process.env["GITHUB_REPOSITORY"] ?? "HelixBioinformatics/helix-agent"
 
 /** Shared name for the executable and distribution artifacts. */
 const DISTRIBUTION_NAME: string | undefined = "helix"
 
 /** GitHub Pages hosts the website and the installers copied from this repository. */
-const HOMEPAGE: string | undefined = "https://helixbiolab.github.io/helix-agent"
+const HOMEPAGE: string | undefined = "https://helixbioinformatics.github.io/helix-agent"
 
 /** The name as written for a human: in the TUI, the docs, and any citation. */
 export const BRAND = "Helix Agent"

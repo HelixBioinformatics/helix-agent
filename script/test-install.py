@@ -93,8 +93,8 @@ cp "$TEST_ARCHIVE" "$output"
         logs, _ = self.run_install(['wget'])
         self.assertIn('api.github.com', logs)
         self.assertIn('/wget ', logs)
-        self.assertIn('api.github.com/repos/HelixBioLab/helix-agent/releases/latest', logs)
-        self.assertIn('github.com/HelixBioLab/helix-agent/releases/latest/download/helix-', logs)
+        self.assertIn('api.github.com/repos/HelixBioinformatics/helix-agent/releases/latest', logs)
+        self.assertIn('github.com/HelixBioinformatics/helix-agent/releases/latest/download/helix-', logs)
 
     def test_curl_without_wget(self):
         self.run_install(['curl'])

@@ -36,8 +36,8 @@ import { ConfigVariable } from "./variable"
 import { Npm } from "@helix/core/npm"
 import { withTransientReadRetry } from "@/util/effect-http-client"
 
-// Skip schema stamping until a config schema is published at a stable URL.
-const CONFIG_SCHEMA_URL: string | undefined = undefined
+// Published to GitHub Pages by .github/workflows/pages.yml from script/schema.ts.
+const CONFIG_SCHEMA_URL: string | undefined = "https://helixbioinformatics.github.io/helix-agent/config.json"
 
 // Custom merge function that concatenates array fields instead of replacing them
 // Keep remeda's deep conditional merge type out of hot config-loading paths; TS profiling showed it dominates here.

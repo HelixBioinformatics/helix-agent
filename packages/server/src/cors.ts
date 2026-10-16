@@ -1,6 +1,6 @@
 import { Context } from "effect"
 
-const helixOrigin = "https://helixbiolab.github.io"
+const helixOrigin = "https://helixbioinformatics.github.io"
 
 export type CorsOptions = { readonly cors?: ReadonlyArray<string> }
 

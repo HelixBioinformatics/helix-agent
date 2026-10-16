@@ -1209,7 +1209,7 @@ export type Config = {
     diff_style?: "auto" | "stacked"
   }
   /**
-   * Command configuration, see https://helixbiolab.github.io/helix-agent/docs/commands
+   * Command configuration, see https://helixbioinformatics.github.io/helix-agent/docs/commands
    */
   command?: {
     [key: string]: {
@@ -1266,7 +1266,7 @@ export type Config = {
     [key: string]: AgentConfig | undefined
   }
   /**
-   * Agent configuration, see https://helixbiolab.github.io/helix-agent/docs/agent
+   * Agent configuration, see https://helixbioinformatics.github.io/helix-agent/docs/agent
    */
   agent?: {
     plan?: AgentConfig

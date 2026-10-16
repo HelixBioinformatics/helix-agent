@@ -110,7 +110,7 @@ const layer = configLayer()
 const it = testEffect(layer)
 const configIt = (options?: Parameters<typeof configLayer>[0]) => testEffect(configLayer(options))
 
-const schemaConfig = (config: object) => ({ $schema: "https://helixbiolab.github.io/helix-agent/config.json", ...config })
+const schemaConfig = (config: object) => ({ $schema: "https://helixbioinformatics.github.io/helix-agent/config.json", ...config })
 
 const provideCurrentInstance = <A, E, R>(effect: Effect.Effect<A, E, R>, ctx: InstanceContext) =>
   effect.pipe(Effect.provideService(InstanceRef, ctx))
@@ -268,7 +268,7 @@ async function check(map: (dir: string) => string) {
   await clear()
   try {
     await writeConfig(globalTmp.path, {
-      $schema: "https://helixbiolab.github.io/helix-agent/config.json",
+      $schema: "https://helixbioinformatics.github.io/helix-agent/config.json",
       snapshot: false,
     })
     await withTestInstance({
@@ -379,7 +379,7 @@ it.instance("updates config and preserves empty shell sentinel", () =>
     const test = yield* TestInstance
     yield* writeConfigEffect(
       test.directory,
-      { $schema: "https://helixbiolab.github.io/helix-agent/config.json", shell: "bash" },
+      { $schema: "https://helixbioinformatics.github.io/helix-agent/config.json", shell: "bash" },
       "config.json",
     )
 
@@ -455,7 +455,7 @@ it.instance("ignores legacy tui keys in helix config", () =>
   Effect.gen(function* () {
     const test = yield* TestInstance
     yield* writeConfigEffect(test.directory, {
-      $schema: "https://helixbiolab.github.io/helix-agent/config.json",
+      $schema: "https://helixbioinformatics.github.io/helix-agent/config.json",
       model: "test/model",
       theme: "legacy",
       tui: { scroll_speed: 4 },
@@ -475,7 +475,7 @@ it.instance("loads JSONC config file", () =>
       path.join(test.directory, "helix.jsonc"),
       `{
         // This is a comment
-        "$schema": "https://helixbiolab.github.io/helix-agent/config.json",
+        "$schema": "https://helixbioinformatics.github.io/helix-agent/config.json",
         "model": "test/model",
         "username": "testuser"
       }`,
@@ -492,14 +492,14 @@ it.instance("jsonc overrides json in the same directory", () =>
     yield* writeConfigEffect(
       test.directory,
       {
-        $schema: "https://helixbiolab.github.io/helix-agent/config.json",
+        $schema: "https://helixbioinformatics.github.io/helix-agent/config.json",
         model: "base",
         username: "base",
       },
       "helix.jsonc",
     )
     yield* writeConfigEffect(test.directory, {
-      $schema: "https://helixbiolab.github.io/helix-agent/config.json",
+      $schema: "https://helixbioinformatics.github.io/helix-agent/config.json",
       model: "override",
     })
     const config = yield* Config.use.get()
@@ -515,7 +515,7 @@ it.instance("handles environment variable substitution", () =>
     Effect.gen(function* () {
       const test = yield* TestInstance
       yield* writeConfigEffect(test.directory, {
-        $schema: "https://helixbiolab.github.io/helix-agent/config.json",
+        $schema: "https://helixbioinformatics.github.io/helix-agent/config.json",
         username: "{env:TEST_VAR}",
       })
       const config = yield* Config.use.get()
@@ -554,7 +554,7 @@ it.instance("handles file inclusion substitution", () =>
     const test = yield* TestInstance
     yield* FSUtil.use.writeWithDirs(path.join(test.directory, "included.txt"), "test-user")
     yield* writeConfigEffect(test.directory, {
-      $schema: "https://helixbiolab.github.io/helix-agent/config.json",
+      $schema: "https://helixbioinformatics.github.io/helix-agent/config.json",
       username: "{file:included.txt}",
     })
     const config = yield* Config.use.get()
@@ -567,7 +567,7 @@ it.instance("handles file inclusion with replacement tokens", () =>
     const test = yield* TestInstance
     yield* FSUtil.use.writeWithDirs(path.join(test.directory, "included.md"), "const out = await Bun.$`echo hi`")
     yield* writeConfigEffect(test.directory, {
-      $schema: "https://helixbiolab.github.io/helix-agent/config.json",
+      $schema: "https://helixbioinformatics.github.io/helix-agent/config.json",
       username: "{file:included.md}",
     })
     const config = yield* Config.use.get()
@@ -622,7 +622,7 @@ it.instance("validates config schema and throws on invalid fields", () =>
   Effect.gen(function* () {
     const test = yield* TestInstance
     yield* writeConfigEffect(test.directory, {
-      $schema: "https://helixbiolab.github.io/helix-agent/config.json",
+      $schema: "https://helixbioinformatics.github.io/helix-agent/config.json",
       invalid_field: "should cause error",
     })
     const exit = yield* Config.use.get().pipe(Effect.exit)
@@ -643,7 +643,7 @@ it.instance("handles agent configuration", () =>
   Effect.gen(function* () {
     const test = yield* TestInstance
     yield* writeConfigEffect(test.directory, {
-      $schema: "https://helixbiolab.github.io/helix-agent/config.json",
+      $schema: "https://helixbioinformatics.github.io/helix-agent/config.json",
       agent: {
         test_agent: {
           model: "test/model",
@@ -667,7 +667,7 @@ it.instance("treats agent variant as model-scoped setting (not provider option)"
   Effect.gen(function* () {
     const test = yield* TestInstance
     yield* writeConfigEffect(test.directory, {
-      $schema: "https://helixbiolab.github.io/helix-agent/config.json",
+      $schema: "https://helixbioinformatics.github.io/helix-agent/config.json",
       agent: {
         test_agent: {
           model: "openai/gpt-5.2",
@@ -691,7 +691,7 @@ it.instance("handles command configuration", () =>
   Effect.gen(function* () {
     const test = yield* TestInstance
     yield* writeConfigEffect(test.directory, {
-      $schema: "https://helixbiolab.github.io/helix-agent/config.json",
+      $schema: "https://helixbioinformatics.github.io/helix-agent/config.json",
       command: {
         test_command: {
           template: "test template",
@@ -713,7 +713,7 @@ it.instance("migrates autoshare to share field", () =>
   Effect.gen(function* () {
     const test = yield* TestInstance
     yield* writeConfigEffect(test.directory, {
-      $schema: "https://helixbiolab.github.io/helix-agent/config.json",
+      $schema: "https://helixbioinformatics.github.io/helix-agent/config.json",
       autoshare: true,
     })
     const config = yield* Config.use.get()
@@ -726,7 +726,7 @@ it.instance("migrates mode field to agent field", () =>
   Effect.gen(function* () {
     const test = yield* TestInstance
     yield* writeConfigEffect(test.directory, {
-      $schema: "https://helixbiolab.github.io/helix-agent/config.json",
+      $schema: "https://helixbioinformatics.github.io/helix-agent/config.json",
       mode: {
         test_mode: {
           model: "test/model",
@@ -749,7 +749,7 @@ it.instance("accepts the deprecated reference field", () =>
   Effect.gen(function* () {
     const test = yield* TestInstance
     yield* writeConfigEffect(test.directory, {
-      $schema: "https://helixbiolab.github.io/helix-agent/config.json",
+      $schema: "https://helixbioinformatics.github.io/helix-agent/config.json",
       reference: {
         local: { path: "../library" },
         sdk: { repository: "github.com/example/sdk", branch: "main" },
@@ -1159,7 +1159,7 @@ it.instance("migrates legacy tools config to permissions - allow", () =>
   Effect.gen(function* () {
     const test = yield* TestInstance
     yield* writeConfigEffect(test.directory, {
-      $schema: "https://helixbiolab.github.io/helix-agent/config.json",
+      $schema: "https://helixbioinformatics.github.io/helix-agent/config.json",
       agent: { test: { tools: { bash: true, read: true } } },
     })
 
@@ -1175,7 +1175,7 @@ it.instance("migrates legacy tools config to permissions - deny", () =>
   Effect.gen(function* () {
     const test = yield* TestInstance
     yield* writeConfigEffect(test.directory, {
-      $schema: "https://helixbiolab.github.io/helix-agent/config.json",
+      $schema: "https://helixbioinformatics.github.io/helix-agent/config.json",
       agent: { test: { tools: { bash: false, webfetch: false } } },
     })
 
@@ -1191,7 +1191,7 @@ it.instance("migrates legacy write tool to edit permission", () =>
   Effect.gen(function* () {
     const test = yield* TestInstance
     yield* writeConfigEffect(test.directory, {
-      $schema: "https://helixbiolab.github.io/helix-agent/config.json",
+      $schema: "https://helixbioinformatics.github.io/helix-agent/config.json",
       agent: { test: { tools: { write: true } } },
     })
 
@@ -1207,7 +1207,7 @@ it.instance(
   "managed settings override user settings",
   Effect.gen(function* () {
     yield* writeManagedSettingsEffect({
-      $schema: "https://helixbiolab.github.io/helix-agent/config.json",
+      $schema: "https://helixbioinformatics.github.io/helix-agent/config.json",
       model: "managed/model",
       share: "disabled",
     })
@@ -1224,7 +1224,7 @@ it.instance(
   "managed settings override project settings",
   Effect.gen(function* () {
     yield* writeManagedSettingsEffect({
-      $schema: "https://helixbiolab.github.io/helix-agent/config.json",
+      $schema: "https://helixbioinformatics.github.io/helix-agent/config.json",
       autoupdate: false,
       disabled_providers: ["openai"],
     })
@@ -1259,7 +1259,7 @@ it.instance("migrates legacy edit tool to edit permission", () =>
   Effect.gen(function* () {
     const test = yield* TestInstance
     yield* writeConfigEffect(test.directory, {
-      $schema: "https://helixbiolab.github.io/helix-agent/config.json",
+      $schema: "https://helixbioinformatics.github.io/helix-agent/config.json",
       agent: { test: { tools: { edit: false } } },
     })
 
@@ -1272,7 +1272,7 @@ it.instance("migrates legacy patch tool to edit permission", () =>
   Effect.gen(function* () {
     const test = yield* TestInstance
     yield* writeConfigEffect(test.directory, {
-      $schema: "https://helixbiolab.github.io/helix-agent/config.json",
+      $schema: "https://helixbioinformatics.github.io/helix-agent/config.json",
       agent: { test: { tools: { patch: true } } },
     })
 
@@ -1285,7 +1285,7 @@ it.instance("migrates mixed legacy tools config", () =>
   Effect.gen(function* () {
     const test = yield* TestInstance
     yield* writeConfigEffect(test.directory, {
-      $schema: "https://helixbiolab.github.io/helix-agent/config.json",
+      $schema: "https://helixbioinformatics.github.io/helix-agent/config.json",
       agent: { test: { tools: { bash: true, write: true, read: false, webfetch: true } } },
     })
 
@@ -1303,7 +1303,7 @@ it.instance("merges legacy tools with existing permission config", () =>
   Effect.gen(function* () {
     const test = yield* TestInstance
     yield* writeConfigEffect(test.directory, {
-      $schema: "https://helixbiolab.github.io/helix-agent/config.json",
+      $schema: "https://helixbioinformatics.github.io/helix-agent/config.json",
       agent: { test: { permission: { glob: "allow" }, tools: { bash: true } } },
     })
 
@@ -1321,7 +1321,7 @@ it.instance("permission config preserves user key order", () =>
   Effect.gen(function* () {
     const test = yield* TestInstance
     yield* writeConfigEffect(test.directory, {
-      $schema: "https://helixbiolab.github.io/helix-agent/config.json",
+      $schema: "https://helixbioinformatics.github.io/helix-agent/config.json",
       permission: {
         "*": "deny",
         edit: "ask",
@@ -1382,7 +1382,7 @@ it.instance("project config can override MCP server enabled status", () =>
     const test = yield* TestInstance
     // Simulates a base config (like from remote .well-known) with disabled MCP.
     yield* writeConfigEffect(test.directory, {
-      $schema: "https://helixbiolab.github.io/helix-agent/config.json",
+      $schema: "https://helixbioinformatics.github.io/helix-agent/config.json",
       mcp: {
         jira: {
           type: "remote",
@@ -1400,7 +1400,7 @@ it.instance("project config can override MCP server enabled status", () =>
     yield* writeConfigEffect(
       test.directory,
       {
-        $schema: "https://helixbiolab.github.io/helix-agent/config.json",
+        $schema: "https://helixbioinformatics.github.io/helix-agent/config.json",
         mcp: {
           jira: {
             type: "remote",
@@ -1430,7 +1430,7 @@ it.instance("MCP config deep merges preserving base config properties", () =>
   Effect.gen(function* () {
     const test = yield* TestInstance
     yield* writeConfigEffect(test.directory, {
-      $schema: "https://helixbiolab.github.io/helix-agent/config.json",
+      $schema: "https://helixbioinformatics.github.io/helix-agent/config.json",
       mcp: {
         myserver: {
           type: "remote",
@@ -1445,7 +1445,7 @@ it.instance("MCP config deep merges preserving base config properties", () =>
     yield* writeConfigEffect(
       test.directory,
       {
-        $schema: "https://helixbiolab.github.io/helix-agent/config.json",
+        $schema: "https://helixbioinformatics.github.io/helix-agent/config.json",
         mcp: {
           myserver: {
             type: "remote",
@@ -1473,7 +1473,7 @@ it.instance("local .helix config can override MCP from project config", () =>
   Effect.gen(function* () {
     const test = yield* TestInstance
     yield* writeConfigEffect(test.directory, {
-      $schema: "https://helixbiolab.github.io/helix-agent/config.json",
+      $schema: "https://helixbioinformatics.github.io/helix-agent/config.json",
       mcp: {
         docs: {
           type: "remote",
@@ -1486,7 +1486,7 @@ it.instance("local .helix config can override MCP from project config", () =>
     yield* writeConfigEffect(
       path.join(test.directory, ".helix"),
       {
-        $schema: "https://helixbiolab.github.io/helix-agent/config.json",
+        $schema: "https://helixbioinformatics.github.io/helix-agent/config.json",
         mcp: {
           docs: {
             type: "remote",
@@ -1933,7 +1933,7 @@ describe("HELIX_CONFIG_CONTENT token substitution", () => {
       withProcessEnv(
         "HELIX_CONFIG_CONTENT",
         JSON.stringify({
-          $schema: "https://helixbiolab.github.io/helix-agent/config.json",
+          $schema: "https://helixbioinformatics.github.io/helix-agent/config.json",
           username: "{env:TEST_CONFIG_VAR}",
         }),
         Effect.gen(function* () {
@@ -1951,7 +1951,7 @@ describe("HELIX_CONFIG_CONTENT token substitution", () => {
       yield* withProcessEnv(
         "HELIX_CONFIG_CONTENT",
         JSON.stringify({
-          $schema: "https://helixbiolab.github.io/helix-agent/config.json",
+          $schema: "https://helixbioinformatics.github.io/helix-agent/config.json",
           username: "{file:./api_key.txt}",
         }),
         Effect.gen(function* () {
@@ -1999,7 +1999,7 @@ test("parseManagedPlist parses server settings", async () => {
     ConfigParse.jsonc(
       await ConfigManaged.parseManagedPlist(
         JSON.stringify({
-          $schema: "https://helixbiolab.github.io/helix-agent/config.json",
+          $schema: "https://helixbioinformatics.github.io/helix-agent/config.json",
           server: { hostname: "127.0.0.1", mdns: false },
           autoupdate: true,
         }),
@@ -2019,7 +2019,7 @@ test("parseManagedPlist parses permission rules", async () => {
     ConfigParse.jsonc(
       await ConfigManaged.parseManagedPlist(
         JSON.stringify({
-          $schema: "https://helixbiolab.github.io/helix-agent/config.json",
+          $schema: "https://helixbioinformatics.github.io/helix-agent/config.json",
           permission: {
             "*": "ask",
             bash: { "*": "ask", "rm -rf *": "deny", "curl *": "deny" },
@@ -2049,7 +2049,7 @@ test("parseManagedPlist parses enabled_providers", async () => {
     ConfigParse.jsonc(
       await ConfigManaged.parseManagedPlist(
         JSON.stringify({
-          $schema: "https://helixbiolab.github.io/helix-agent/config.json",
+          $schema: "https://helixbioinformatics.github.io/helix-agent/config.json",
           enabled_providers: ["anthropic", "google"],
         }),
       ),
@@ -2064,10 +2064,10 @@ test("parseManagedPlist handles empty config", async () => {
   const config = ConfigParse.schema(
     ConfigV1.Info,
     ConfigParse.jsonc(
-      await ConfigManaged.parseManagedPlist(JSON.stringify({ $schema: "https://helixbiolab.github.io/helix-agent/config.json" })),
+      await ConfigManaged.parseManagedPlist(JSON.stringify({ $schema: "https://helixbioinformatics.github.io/helix-agent/config.json" })),
       "test:mobileconfig",
     ),
     "test:mobileconfig",
   )
-  expect(config.$schema).toBe("https://helixbiolab.github.io/helix-agent/config.json")
+  expect(config.$schema).toBe("https://helixbioinformatics.github.io/helix-agent/config.json")
 })

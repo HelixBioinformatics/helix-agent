@@ -41,7 +41,7 @@ describe("ZenmuxPlugin", () => {
       })
       yield* addPlugin()
       const result = required(yield* catalog.provider.get(ProviderV2.ID.make("zenmux")))
-      expect(result.request.headers).toEqual({ "HTTP-Referer": "https://helixbiolab.github.io/helix-agent/", "X-Title": "helix" })
+      expect(result.request.headers).toEqual({ "HTTP-Referer": "https://helixbioinformatics.github.io/helix-agent/", "X-Title": "helix" })
       expect(Object.keys(result.request.headers).sort()).toEqual(["HTTP-Referer", "X-Title"])
     }),
   )
@@ -63,7 +63,7 @@ describe("ZenmuxPlugin", () => {
 
       expect(required(yield* catalog.provider.get(ProviderV2.ID.make("zenmux"))).request.headers).toEqual({
         Existing: "value",
-        "HTTP-Referer": "https://helixbiolab.github.io/helix-agent/",
+        "HTTP-Referer": "https://helixbioinformatics.github.io/helix-agent/",
         "X-Title": "helix",
       })
     }),

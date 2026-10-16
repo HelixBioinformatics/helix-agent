@@ -46,7 +46,7 @@ describe("LLMGatewayPlugin", () => {
       yield* addPlugin()
       expect((yield* catalog.provider.get(ProviderV2.ID.make("llmgateway")))?.request.headers).toEqual({
         Existing: "value",
-        "HTTP-Referer": "https://helixbiolab.github.io/helix-agent/",
+        "HTTP-Referer": "https://helixbioinformatics.github.io/helix-agent/",
         "X-Title": "helix",
         "X-Source": "helix",
       })

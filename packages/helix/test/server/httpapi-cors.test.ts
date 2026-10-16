@@ -71,14 +71,14 @@ describe("HttpApi CORS", () => {
       const response = yield* Effect.promise(() =>
         handler(
           new Request(new URL("/global/config", "http://localhost"), {
-            headers: { origin: "https://helixbiolab.github.io" },
+            headers: { origin: "https://helixbioinformatics.github.io" },
           }),
           HttpApiApp.context,
         ),
       )
 
       expect(response.status).toBe(401)
-      expect(response.headers.get("access-control-allow-origin")).toBe("https://helixbiolab.github.io")
+      expect(response.headers.get("access-control-allow-origin")).toBe("https://helixbioinformatics.github.io")
     }),
   )
 

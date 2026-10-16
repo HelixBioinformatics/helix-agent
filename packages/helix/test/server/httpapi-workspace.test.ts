@@ -399,7 +399,7 @@ describe("workspace HttpApi", () => {
             "content-type": "application/json",
             "x-helix-workspace": "internal",
           },
-          body: JSON.stringify({ $schema: "https://helixbiolab.github.io/helix-agent/config.json" }),
+          body: JSON.stringify({ $schema: "https://helixbioinformatics.github.io/helix-agent/config.json" }),
         })
 
         const responseBody = yield* response.text
@@ -416,7 +416,7 @@ describe("workspace HttpApi", () => {
               "content-type": "application/json",
               "x-target-auth": "secret",
             }),
-            body: JSON.stringify({ $schema: "https://helixbiolab.github.io/helix-agent/config.json" }),
+            body: JSON.stringify({ $schema: "https://helixbioinformatics.github.io/helix-agent/config.json" }),
           },
         ])
         expect(forwarded[0]?.headers).not.toHaveProperty("x-helix-directory")

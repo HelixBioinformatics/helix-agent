@@ -38,13 +38,13 @@ import { McpBrowser } from "./browser"
 const DEFAULT_TIMEOUT = 30_000
 const CLIENT_OPTIONS = {
   capabilities: {
-    // https://github.com/HelixBioLab/helix-agent/issues/11948
+    // https://github.com/anomalyco/opencode/issues/11948
     // sampling: {},
-    // https://github.com/HelixBioLab/helix-agent/issues/23066
+    // https://github.com/anomalyco/opencode/issues/23066
     // elicitation: {},
-    // https://github.com/HelixBioLab/helix-agent/issues/2308
+    // https://github.com/anomalyco/opencode/issues/2308
     roots: {},
-    // https://github.com/HelixBioLab/helix-agent/issues/28567
+    // https://github.com/anomalyco/opencode/issues/28567
     // tasks: {},
   },
 } satisfies ClientOptions

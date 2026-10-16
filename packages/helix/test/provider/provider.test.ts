@@ -1237,7 +1237,7 @@ it.instance(
   Effect.gen(function* () {
     const providers = yield* list
     expect(providers[ProviderV2.ID.make("nvidia")].options.headers).toEqual({
-      "HTTP-Referer": "https://helixbiolab.github.io/helix-agent/",
+      "HTTP-Referer": "https://helixbioinformatics.github.io/helix-agent/",
       "X-Title": "helix",
       "X-BILLING-INVOKE-ORIGIN": "Helix",
     })
@@ -1250,7 +1250,7 @@ it.instance(
   Effect.gen(function* () {
     const providers = yield* list
     expect(providers[ProviderV2.ID.make("nvidia")].options.headers).toEqual({
-      "HTTP-Referer": "https://helixbiolab.github.io/helix-agent/",
+      "HTTP-Referer": "https://helixbioinformatics.github.io/helix-agent/",
       "X-Title": "helix",
       "X-BILLING-INVOKE-ORIGIN": "Helix",
     })

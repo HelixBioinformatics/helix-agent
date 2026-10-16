@@ -52,7 +52,7 @@ const bootstrapFixture = Effect.gen(function* () {
     Bun.write(
       path.join(dir, "helix.json"),
       JSON.stringify({
-        $schema: "https://helixbiolab.github.io/helix-agent/config.json",
+        $schema: "https://helixbioinformatics.github.io/helix-agent/config.json",
         plugin: [pathToFileURL(pluginFile).href],
       }),
     ),

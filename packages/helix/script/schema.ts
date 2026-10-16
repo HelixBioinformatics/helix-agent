@@ -1,8 +1,14 @@
 #!/usr/bin/env bun
 
-import { Config } from "@/config/config"
+// Writes the JSON Schemas that the Pages site publishes into the given directory:
+// config.json for helix.json, tui.json for tui.json and theme.json for TUI themes.
+//
+//     bun run script/schema.ts <dir>
+
+import path from "path"
 import { ConfigV1 } from "@helix/core/v1/config/config"
 import { TuiConfig } from "@helix/tui/config"
+import { ThemeSchema } from "@helix/tui/theme/schema"
 import { Schema } from "effect"
 
 type JsonSchema = Record<string, unknown>
@@ -65,13 +71,16 @@ function isRecord(value: unknown): value is JsonSchema {
   return typeof value === "object" && value !== null && !Array.isArray(value)
 }
 
-const configFile = process.argv[2]
-const tuiFile = process.argv[3]
+const dir = process.argv[2]
+if (!dir) throw new Error("usage: bun run script/schema.ts <dir>")
 
-console.log(configFile)
-await Bun.write(configFile, JSON.stringify(generateEffect(ConfigV1.Info), null, 2))
-
-if (tuiFile) {
-  console.log(tuiFile)
-  await Bun.write(tuiFile, JSON.stringify(generateEffect(TuiConfig.Info), null, 2))
+const schemas = {
+  "config.json": ConfigV1.Info,
+  "tui.json": TuiConfig.Info,
+  "theme.json": ThemeSchema.Info,
+}
+for (const [name, schema] of Object.entries(schemas)) {
+  const file = path.resolve(dir, name)
+  console.log(file)
+  await Bun.write(file, JSON.stringify(generateEffect(schema), null, 2) + "\n")
 }

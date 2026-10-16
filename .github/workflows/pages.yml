@@ -11,6 +11,15 @@
 # sirva el script del repositorio y no una copia que se pueda quedar atrás. Por eso
 # el workflow se dispara también cuando cambia `install`, y no sólo `www/`.
 #
+# También publica los JSON Schema a los que apuntan los `$schema` de las
+# configuraciones y de los temas: config.json, tui.json, theme.json y
+# desktop-theme.json. Los tres primeros se generan aquí desde el código con
+# packages/helix/script/schema.ts, así que no hay una copia en el repositorio que
+# se pueda quedar atrás; desktop-theme.json se copia tal cual de packages/ui. El
+# workflow se dispara con los archivos que definen esos esquemas, pero el de la
+# configuración importa tipos de otros sitios del monorepo: si un cambio fuera de
+# esas rutas altera el esquema, hay que lanzar el workflow a mano.
+#
 # Requiere que Pages esté activado en el repositorio con el origen «GitHub Actions»
 # (Settings → Pages → Build and deployment → Source: GitHub Actions). No se puede
 # activar desde aquí: `actions/configure-pages` sólo lo hace con un token distinto
@@ -28,6 +37,12 @@ on:
       - "install.ps1"
       - ".github/workflows/pages.yml"
       - "script/test-install.py"
+      - "packages/helix/script/schema.ts"
+      - "packages/core/src/config/**"
+      - "packages/core/src/v1/config/**"
+      - "packages/tui/src/config/**"
+      - "packages/tui/src/theme/schema.ts"
+      - "packages/ui/src/theme/desktop-theme.schema.json"
   workflow_dispatch:
 
 permissions:
@@ -51,6 +66,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
 
+      # Sólo hace falta para generar los esquemas.
+      - name: Setup Bun
+        uses: ./.github/actions/setup-bun
+
       - name: Assemble the site
         run: |
           mkdir -p _site
@@ -58,6 +77,8 @@ jobs:
           rm -f _site/README.md # nota para quien lee el repositorio, no parte del sitio
           cp install _site/install
           cp install.ps1 _site/install.ps1
+          bun run --cwd packages/helix script/schema.ts "$GITHUB_WORKSPACE/_site"
+          cp packages/ui/src/theme/desktop-theme.schema.json _site/desktop-theme.json
 
       # El sitio no lleva build, así que lo único que puede fallar en silencio es
       # que un instalador no llegue, o llegue roto. El de Windows además no se
@@ -74,6 +95,15 @@ jobs:
           grep -q 'helixbioinformatics.github.io/helix-agent/install' _site/index.html
           grep -q 'helixbioinformatics.github.io/helix-agent/install.ps1' _site/index.html
           pwsh -NoProfile -File script/check-powershell-syntax.ps1 _site/install.ps1
+
+      # Un esquema que no llega, o que llega roto, no hace fallar nada al cargar
+      # una configuración: el editor deja de validar sin avisar. Por eso se
+      # comprueba que cada uno esté publicado y sea un JSON Schema.
+      - name: Check the schemas are published and parse
+        run: |
+          for name in config.json tui.json theme.json desktop-theme.json; do
+            python3 -c 'import json, sys; schema = json.load(open(sys.argv[1])); assert isinstance(schema, dict) and "$schema" in schema, sys.argv[1] + " is not a JSON Schema"' "_site/$name"
+          done
 
       - name: Test native curl and wget installation
         run: python3 script/test-install.py

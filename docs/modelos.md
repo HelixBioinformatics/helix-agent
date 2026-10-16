@@ -1,6 +1,6 @@
 # Modelos y proveedores
 
-Bioinformática.org no trae modelo propio ni pasarela propia. El catálogo de proveedores y
+Helix Agent no trae modelo propio ni pasarela propia. El catálogo de proveedores y
 modelos se descarga de [models.dev](https://models.dev) y las credenciales se configuran en
 local: la clave nunca sale de tu máquina hacia este proyecto.
 

@@ -1,13 +1,13 @@
 # Cómo citar este software.
 #
-# Rellena `authors` y, cuando exista un release archivado en Zenodo, `doi` y
-# `date-released`. Valida con:  cffconvert --validate
+# Cuando exista un release archivado en Zenodo, añade `doi`. Valida con:
+#   cffconvert --validate
 
 cff-version: 1.2.0
 message: "Si usas este software, cítalo como se indica abajo."
 type: software
 
-title: "Bioinformática.org"
+title: "Helix Agent"
 abstract: >-
   Agente de terminal para bioinformática: ejecuta pipelines nf-core/Nextflow a
   partir de una pregunta formulada en lenguaje natural, y emite sobre cada
@@ -17,13 +17,15 @@ abstract: >-
   conteo de intervenciones humanas, y documentación de métodos con versiones
   fijadas.
 
-# TODO: sustituir por el nombre real y el ORCID antes del primer release.
-# Un valor de relleno en un fichero de citación es peor que un fichero ausente.
+# Pendiente: el ORCID del autor.
 authors:
-  - name: "Bioinformática.org"
+  - family-names: "Ariza"
+    given-names: "Marlow"
 
-repository-code: "https://github.com/HelixBioLab/helix-agent"
-url: "https://helixbiolab.github.io/helix-agent"
+version: "0.3.0"
+date-released: "2026-09-23"
+repository-code: "https://github.com/HelixBioinformatics/helix-agent"
+url: "https://helixbioinformatics.github.io/helix-agent"
 license: MIT
 
 keywords:
@@ -36,5 +38,3 @@ keywords:
 
 # Añadir cuando exista el depósito en Zenodo:
 # doi: 10.5281/zenodo.XXXXXXX
-# version: 0.1.0
-# date-released: YYYY-MM-DD

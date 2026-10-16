@@ -37,7 +37,7 @@ diagnósticos continuos tampoco sustituyen las referencias humanas reservadas.
 
 ## Comprobación independiente de instantáneas
 
-`verify_snapshot.py` requiere Python 3.9 o posterior y únicamente su biblioteca estándar. Se puede copiar junto a un corpus a otra máquina. No importa código de Bioinformática.org, no ejecuta el modelo, no escribe archivos y no usa la red.
+`verify_snapshot.py` requiere Python 3.9 o posterior y únicamente su biblioteca estándar. Se puede copiar junto a un corpus a otra máquina. No importa código de Helix Agent, no ejecuta el modelo, no escribe archivos y no usa la red.
 
 ```bash
 python3 script/tesis/verify_snapshot.py /ruta/corpus/repeatsdb.manifest.json

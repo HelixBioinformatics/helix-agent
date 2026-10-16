@@ -30,7 +30,7 @@ cada uno lleva su propio commit. -->
 > anchura del glifo deje de importar. Eso entra en el hito 2 con el resto de la
 > rejilla.
 
-Propuesta de diseño para la TUI de Bioinformática.org. Base: la dirección *Asiento*, con injertos de *Bancada*, *Escalera* y *El Anillo* donde los jueces los señalaron, y con las fallas fatales de las cuatro respondidas explícitamente.
+Propuesta de diseño para la TUI de Helix Agent. Base: la dirección *Asiento*, con injertos de *Bancada*, *Escalera* y *El Anillo* donde los jueces los señalaron, y con las fallas fatales de las cuatro respondidas explícitamente.
 
 ---
 
@@ -243,7 +243,7 @@ Cinco maquetas a 80 columnas exactas, con la misma rejilla, los mismos glifos y 
 
 ```
         ●
-  ●    ○ ○    ●   Bioinformática.org
+  ●    ○ ○    ●   Helix Agent
       ○   ○       co-científico de bioinformática
   ●    ○ ○    ●
         ●

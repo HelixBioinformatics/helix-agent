@@ -1,9 +1,9 @@
-# Cómo contribuir a Bioinformática.org
+# Cómo contribuir a Helix Agent
 
 Gracias por el interés. Este documento explica cómo levantar el entorno, cómo verificar un cambio
 antes de proponerlo y qué esperamos de un pull request.
 
-Bioinformática.org es un fork de [opencode](https://github.com/anomalyco/opencode) (MIT). Buena
+Helix Agent es un fork de [opencode](https://github.com/anomalyco/opencode) (MIT). Buena
 parte del árbol viene de ahí. Lo propio de este proyecto vive sobre todo en
 `packages/helix/src/nfcore/` (nf-core/Nextflow, manifiestos, protocolo, dosier) y en
 `packages/helix/src/bio/` (clientes de bases de datos biológicas).

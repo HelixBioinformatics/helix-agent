@@ -51,7 +51,7 @@ Para compilar desde el código fuente hace falta además **[Bun](https://bun.sh)
 ## Instalación
 
 ```bash
-wget -O helix-install.sh https://helixbiolab.github.io/helix-agent/install && bash helix-install.sh
+wget -O helix-install.sh https://helixbioinformatics.github.io/helix-agent/install && bash helix-install.sh
 ```
 
 El instalador funciona con wget o curl nativos y evita las versiones de Snap.
@@ -59,18 +59,18 @@ En Ubuntu/Debian puedes instalar wget con `sudo apt update && sudo apt install -
 En macOS, usa el curl del sistema:
 
 ```bash
-/usr/bin/curl -fL -o helix-install.sh https://helixbiolab.github.io/helix-agent/install && bash helix-install.sh
+/usr/bin/curl -fL -o helix-install.sh https://helixbioinformatics.github.io/helix-agent/install && bash helix-install.sh
 ```
 
-La [página de descarga](https://helixbiolab.github.io/helix-agent/) incluye instrucciones
+La [página de descarga](https://helixbioinformatics.github.io/helix-agent/) incluye instrucciones
 para Fedora, Arch, openSUSE y Alpine, además de descarga manual desde el navegador.
 
 
 Descarga el binario que corresponde a la plataforma desde
-[GitHub Releases](https://github.com/HelixBioLab/helix-agent/releases), lo deja en
+[GitHub Releases](https://github.com/HelixBioinformatics/helix-agent/releases), lo deja en
 `~/.helix/bin` y añade esa carpeta al `PATH`. No pide root ni toca nada fuera del
 directorio personal. Los mismos pasos, explicados para quien no vive en la terminal, están
-en <https://helixbiolab.github.io/helix-agent/> — la página vive en [`www/`](./www) y
+en <https://helixbioinformatics.github.io/helix-agent/> — la página vive en [`www/`](./www) y
 sirve el propio `install` de este repositorio, no una copia.
 
 El instalador acepta `--version <v>` para fijar una versión, `--binary <ruta>` para
@@ -102,7 +102,7 @@ En SSH o un shell cuyo `PATH` todavía no se actualizó, usa
 En Windows, desde PowerShell:
 
 ```powershell
-irm https://helixbiolab.github.io/helix-agent/install.ps1 | iex
+irm https://helixbioinformatics.github.io/helix-agent/install.ps1 | iex
 ```
 
 Nextflow necesita un entorno POSIX, así que ese script instala el agente **dentro de WSL**:
@@ -117,7 +117,7 @@ sistema de ficheros lento de WSL sin decir por qué.
 Compilar desde el código:
 
 ```bash
-git clone https://github.com/HelixBioLab/helix-agent.git
+git clone https://github.com/HelixBioinformatics/helix-agent.git
 cd helix-agent
 bun install
 
@@ -392,8 +392,8 @@ con `@general` en un mensaje.
 
 ## Estado del proyecto
 
-Esto es **software de investigación en desarrollo**, versión 0.1.0, sin releases
-publicadas y sin API estable. Se construye por hitos y las capacidades se añaden de una en
+Esto es **software de investigación en desarrollo**, versión 0.3.0, con releases
+publicadas en GitHub y sin API estable. Se construye por hitos y las capacidades se añaden de una en
 una. Merece la pena leer lo siguiente antes de apoyar nada importante en él.
 
 ### Lo que los artefactos no demuestran

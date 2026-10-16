@@ -59,7 +59,7 @@ function model(input: {
     providerID: "helix",
     api: {
       id: "helix",
-      url: "https://helixbiolab.github.io/helix-agent",
+      url: "https://helixbioinformatics.github.io/helix-agent",
       npm: "@ai-sdk/openai-compatible",
     },
     name: input.name,

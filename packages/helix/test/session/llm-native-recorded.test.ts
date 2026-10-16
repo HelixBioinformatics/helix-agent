@@ -291,7 +291,7 @@ const writeConfig = (directory: string, scenario: RecordedScenario, model: Model
   Effect.promise(() =>
     Bun.write(
       path.join(directory, "helix.json"),
-      JSON.stringify({ $schema: "https://helixbiolab.github.io/helix-agent/config.json", ...scenario.config(model) }),
+      JSON.stringify({ $schema: "https://helixbioinformatics.github.io/helix-agent/config.json", ...scenario.config(model) }),
     ),
   )
 

@@ -39,7 +39,7 @@ describe("NvidiaPlugin", () => {
       yield* addPlugin()
       expect((yield* catalog.provider.get(ProviderV2.ID.make("nvidia")))?.request.headers).toEqual({
         Existing: "value",
-        "HTTP-Referer": "https://helixbiolab.github.io/helix-agent/",
+        "HTTP-Referer": "https://helixbioinformatics.github.io/helix-agent/",
         "X-Title": "helix",
         "X-BILLING-INVOKE-ORIGIN": "Helix",
       })
@@ -62,7 +62,7 @@ describe("NvidiaPlugin", () => {
       yield* addPlugin()
 
       expect((yield* catalog.provider.get(ProviderV2.ID.make("nvidia")))?.request.headers).toEqual({
-        "HTTP-Referer": "https://helixbiolab.github.io/helix-agent/",
+        "HTTP-Referer": "https://helixbioinformatics.github.io/helix-agent/",
         "X-Title": "helix",
         "X-BILLING-INVOKE-ORIGIN": "Helix",
       })
@@ -88,7 +88,7 @@ describe("NvidiaPlugin", () => {
       yield* addPlugin()
 
       expect((yield* catalog.provider.get(ProviderV2.ID.make("nvidia")))?.request.headers).toEqual({
-        "HTTP-Referer": "https://helixbiolab.github.io/helix-agent/",
+        "HTTP-Referer": "https://helixbioinformatics.github.io/helix-agent/",
         "X-Title": "helix",
         "X-BILLING-INVOKE-ORIGIN": "CustomOrigin",
       })

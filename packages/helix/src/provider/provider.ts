@@ -456,7 +456,7 @@ function custom(dep: CustomDep): Record<string, CustomLoader> {
         autoload: false,
         options: {
           headers: {
-            "HTTP-Referer": "https://helixbiolab.github.io/helix-agent/",
+            "HTTP-Referer": "https://helixbioinformatics.github.io/helix-agent/",
             "X-Title": "helix",
             "X-Source": "helix",
           },
@@ -467,7 +467,7 @@ function custom(dep: CustomDep): Record<string, CustomLoader> {
         autoload: false,
         options: {
           headers: {
-            "HTTP-Referer": "https://helixbiolab.github.io/helix-agent/",
+            "HTTP-Referer": "https://helixbioinformatics.github.io/helix-agent/",
             "X-Title": "helix",
           },
         },
@@ -477,7 +477,7 @@ function custom(dep: CustomDep): Record<string, CustomLoader> {
         autoload: provider.source === "config",
         options: {
           headers: {
-            "HTTP-Referer": "https://helixbiolab.github.io/helix-agent/",
+            "HTTP-Referer": "https://helixbioinformatics.github.io/helix-agent/",
             "X-Title": "helix",
             "X-BILLING-INVOKE-ORIGIN": "Helix",
           },
@@ -488,7 +488,7 @@ function custom(dep: CustomDep): Record<string, CustomLoader> {
         autoload: false,
         options: {
           headers: {
-            "http-referer": "https://helixbiolab.github.io/helix-agent/",
+            "http-referer": "https://helixbioinformatics.github.io/helix-agent/",
             "x-title": "helix",
           },
         },
@@ -594,7 +594,7 @@ function custom(dep: CustomDep): Record<string, CustomLoader> {
         autoload: false,
         options: {
           headers: {
-            "HTTP-Referer": "https://helixbiolab.github.io/helix-agent/",
+            "HTTP-Referer": "https://helixbioinformatics.github.io/helix-agent/",
             "X-Title": "helix",
           },
         },
@@ -852,7 +852,7 @@ function custom(dep: CustomDep): Record<string, CustomLoader> {
         autoload: false,
         options: {
           headers: {
-            "HTTP-Referer": "https://helixbiolab.github.io/helix-agent/",
+            "HTTP-Referer": "https://helixbioinformatics.github.io/helix-agent/",
             "X-Title": "helix",
           },
         },

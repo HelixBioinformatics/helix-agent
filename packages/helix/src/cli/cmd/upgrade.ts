@@ -25,7 +25,7 @@ export const UpgradeCommand = effectCmd({
     const method = yield* installation.method()
     if (method !== "curl" && !args.check)
       return yield* fail(
-        "This executable is not the official ~/.helix/bin/helix installation. Re-run the installer from https://helixbiolab.github.io/helix-agent/ without uninstalling; your settings and sessions are retained.",
+        "This executable is not the official ~/.helix/bin/helix installation. Re-run the installer from https://helixbioinformatics.github.io/helix-agent/ without uninstalling; your settings and sessions are retained.",
       )
     const target = args.target
       ? yield* Effect.try({

@@ -240,7 +240,7 @@ describe("SessionStatus.Info", () => {
         title: "Free limit reached",
         message: "Upgrade your plan with your provider.",
         label: "subscribe",
-        link: "https://helixbiolab.github.io/helix-agent/go",
+        link: "https://helixbioinformatics.github.io/helix-agent/go",
       },
       next: 500,
     }

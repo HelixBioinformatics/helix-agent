@@ -41,7 +41,7 @@ function withProject<A, E, R>(source: string, self: Effect.Effect<A, E, R>) {
             path.join(test.directory, "helix.json"),
             JSON.stringify(
               {
-                $schema: "https://helixbiolab.github.io/helix-agent/config.json",
+                $schema: "https://helixbioinformatics.github.io/helix-agent/config.json",
                 plugin: [pathToFileURL(file).href],
               },
               null,

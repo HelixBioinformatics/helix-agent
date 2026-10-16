@@ -59,8 +59,8 @@ export function plan(report: Environment.Report): Plan {
       requiresSudo: !available,
       command: available ? undefined : "wsl --install",
       rationale: available
-        ? "Nextflow needs a POSIX environment, so the work happens inside the WSL distribution and not here. Install Helix inside it with the Windows installer at https://helixbiolab.github.io/helix-agent/install.ps1, which also leaves a launcher on the Windows PATH that carries the current directory across."
-        : "Nextflow needs a POSIX environment, and Windows already ships one: WSL. `wsl --install` needs administrator rights and usually a restart. The Windows installer at https://helixbiolab.github.io/helix-agent/install.ps1 walks through it and asks before elevating anything.",
+        ? "Nextflow needs a POSIX environment, so the work happens inside the WSL distribution and not here. Install Helix inside it with the Windows installer at https://helixbioinformatics.github.io/helix-agent/install.ps1, which also leaves a launcher on the Windows PATH that carries the current directory across."
+        : "Nextflow needs a POSIX environment, and Windows already ships one: WSL. `wsl --install` needs administrator rights and usually a restart. The Windows installer at https://helixbioinformatics.github.io/helix-agent/install.ps1 walks through it and asks before elevating anything.",
     })
     return { ready: false, steps }
   }

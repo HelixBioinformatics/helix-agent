@@ -824,7 +824,7 @@ function App(props: { onSnapshot?: () => Promise<string[]>; pluginHost: TuiPlugi
         name: "docs.open",
         title: "Open docs",
         run: () => {
-          open("https://helixbiolab.github.io/helix-agent/docs").catch(() => {})
+          open("https://helixbioinformatics.github.io/helix-agent/docs").catch(() => {})
           dialog.clear()
         },
         category: "System",

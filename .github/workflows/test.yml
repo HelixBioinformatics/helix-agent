@@ -48,6 +48,25 @@ jobs:
       - name: Setup Bun
         uses: ./.github/actions/setup-bun
 
+      - name: Prepare ripgrep on Windows
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          $package = 'ripgrep-15.1.0-x86_64-pc-windows-msvc'
+          $archive = Join-Path $env:RUNNER_TEMP "$package.zip"
+          $destination = Join-Path $env:RUNNER_TEMP 'helix-ripgrep'
+          Invoke-WebRequest "https://github.com/BurntSushi/ripgrep/releases/download/15.1.0/$package.zip" -OutFile $archive
+          Expand-Archive -LiteralPath $archive -DestinationPath $destination -Force
+          $directory = Join-Path $destination $package
+          & (Join-Path $directory 'rg.exe') --version
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          $directory | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+
+      - name: Verify ripgrep on Windows
+        if: runner.os == 'Windows'
+        run: |
+          bun -e 'const rg = Bun.which("rg.exe"); if (!rg) throw new Error("ripgrep missing from test PATH"); console.log(rg); const result = Bun.spawnSync([rg, "--version"]); console.log(result.stdout.toString()); process.exit(result.exitCode)'
+
       - name: Prepare structural test dependencies
         run: |
           if [ "$RUNNER_OS" = "Windows" ]; then
@@ -86,6 +105,6 @@ jobs:
 
       - name: Run unit tests
         timeout-minutes: 20
-        run: GITHUB_ACTIONS=false bun turbo test --continue=dependencies-successful
+        run: GITHUB_ACTIONS=false bun turbo test --continue=dependencies-successful --log-order=stream
         env:
           HELIX_EXPERIMENTAL_DISABLE_FILEWATCHER: ${{ runner.os == 'Windows' && 'true' || 'false' }}

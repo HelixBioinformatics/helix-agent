@@ -1,10 +1,11 @@
-import { TextareaRenderable, TextAttributes } from "@opentui/core"
+import { TextareaRenderable } from "@opentui/core"
 import { useTheme } from "../context/theme"
-import { useDialog, type DialogContext } from "./dialog"
+import { DialogHeader, useDialog, type DialogContext } from "./dialog"
 import { Show, createEffect, createSignal, onMount, type JSX } from "solid-js"
 import { Spinner } from "../component/spinner"
 import { useTuiConfig } from "../config"
 import { useBindings, useCommandShortcut } from "../keymap"
+import { identityBorder } from "./identity"
 
 export type DialogPromptProps = {
   title: string
@@ -74,29 +75,31 @@ export function DialogPrompt(props: DialogPromptProps) {
 
   return (
     <box paddingLeft={2} paddingRight={2} gap={1}>
-      <box flexDirection="row" justifyContent="space-between">
-        <text attributes={TextAttributes.BOLD} fg={theme.text}>
-          {props.title}
-        </text>
-        <text fg={theme.textMuted} onMouseUp={() => dialog.clear()}>
-          esc
-        </text>
-      </box>
+      <DialogHeader title={props.title} />
       <box gap={1}>
         {props.description?.()}
-        <textarea
-          height={3}
-          ref={(val: TextareaRenderable) => {
-            textarea = val
-            setTextareaTarget(val)
-          }}
-          initialValue={props.value}
-          placeholder={props.placeholder ?? "Enter text"}
-          placeholderColor={theme.textMuted}
-          textColor={props.busy ? theme.textMuted : theme.text}
-          focusedTextColor={props.busy ? theme.textMuted : theme.text}
-          cursorColor={props.busy ? theme.backgroundElement : theme.text}
-        />
+        <box
+          border={["left"]}
+          borderColor={props.busy ? theme.border : theme.primary}
+          customBorderChars={identityBorder()}
+          paddingLeft={1}
+        >
+          <textarea
+            height={3}
+            backgroundColor={theme.backgroundElement}
+            focusedBackgroundColor={theme.backgroundElement}
+            ref={(val: TextareaRenderable) => {
+              textarea = val
+              setTextareaTarget(val)
+            }}
+            initialValue={props.value}
+            placeholder={props.placeholder ?? "Enter text"}
+            placeholderColor={theme.textMuted}
+            textColor={props.busy ? theme.textMuted : theme.text}
+            focusedTextColor={props.busy ? theme.textMuted : theme.text}
+            cursorColor={props.busy ? theme.backgroundElement : theme.text}
+          />
+        </box>
         <Show when={props.busy}>
           <Spinner color={theme.textMuted}>{props.busyText ?? "Working..."}</Spinner>
         </Show>

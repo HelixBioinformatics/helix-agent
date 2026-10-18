@@ -16,6 +16,6 @@ export const SplitBorder = {
   border: ["left" as const, "right" as const],
   customBorderChars: {
     ...EmptyBorder,
-    vertical: "┃",
+    vertical: process.env.HELIX_ASCII === "1" || process.env.TERM === "dumb" ? "|" : "│",
   },
 }

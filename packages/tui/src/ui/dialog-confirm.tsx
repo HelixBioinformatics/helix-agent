@@ -1,6 +1,6 @@
 import { TextAttributes } from "@opentui/core"
 import { useTheme } from "../context/theme"
-import { useDialog, type DialogContext } from "./dialog"
+import { DialogHeader, useDialog, type DialogContext } from "./dialog"
 import { createStore } from "solid-js/store"
 import { For } from "solid-js"
 import { Locale } from "../util/locale"
@@ -55,14 +55,7 @@ export function DialogConfirm(props: DialogConfirmProps) {
   }))
   return (
     <box paddingLeft={2} paddingRight={2} gap={1}>
-      <box flexDirection="row" justifyContent="space-between">
-        <text attributes={TextAttributes.BOLD} fg={theme.text}>
-          {props.title}
-        </text>
-        <text fg={theme.textMuted} onMouseUp={() => dialog.clear()}>
-          esc
-        </text>
-      </box>
+      <DialogHeader title={props.title} />
       <box paddingBottom={1}>
         <text fg={theme.textMuted}>{props.message}</text>
       </box>
@@ -72,6 +65,8 @@ export function DialogConfirm(props: DialogConfirmProps) {
             <box
               paddingLeft={1}
               paddingRight={1}
+              flexDirection="row"
+              gap={1}
               backgroundColor={key === store.active ? theme.primary : undefined}
               onMouseUp={() => {
                 if (key === "confirm") props.onConfirm?.()
@@ -79,7 +74,13 @@ export function DialogConfirm(props: DialogConfirmProps) {
                 dialog.clear()
               }}
             >
-              <text fg={key === store.active ? theme.selectedListItemText : theme.textMuted}>
+              <text width={1} fg={key === store.active ? theme.selectedListItemText : theme.textMuted}>
+                {key === store.active ? ">" : " "}
+              </text>
+              <text
+                fg={key === store.active ? theme.selectedListItemText : theme.textMuted}
+                attributes={key === store.active ? TextAttributes.BOLD : undefined}
+              >
                 {Locale.titlecase(key === "cancel" ? (props.label ?? key) : key)}
               </text>
             </box>

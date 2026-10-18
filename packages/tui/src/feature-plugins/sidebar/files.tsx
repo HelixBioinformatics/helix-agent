@@ -2,6 +2,7 @@ import type { TuiPlugin, TuiPluginApi } from "@helix/plugin/tui"
 import type { BuiltinTuiPlugin } from "../builtins"
 import { createMemo, For, Show, createSignal } from "solid-js"
 import { Locale } from "../../util/locale"
+import { identityBorder } from "../../ui/identity"
 
 const id = "internal:sidebar-files"
 
@@ -18,7 +19,7 @@ function View(props: { api: TuiPluginApi; session_id: string }) {
 
   return (
     <Show when={list().length > 0}>
-      <box>
+      <box border={["top"]} borderColor={theme().borderSubtle} customBorderChars={identityBorder()}>
         <box flexDirection="row" gap={1} onMouseDown={() => list().length > 2 && setOpen((x) => !x)}>
           <Show when={list().length > 2}>
             <text fg={theme().text}>{open() ? "▼" : "▶"}</text>

@@ -145,7 +145,9 @@ export function PermissionPrompt(props: { request: PermissionRequest; directory?
               </Match>
               <Match when={true}>
                 <box paddingLeft={1} gap={1}>
-                  <text fg={theme.textMuted}>This will allow the following patterns until Helix Agent is restarted</text>
+                  <text fg={theme.textMuted}>
+                    This will allow the following patterns until Helix Agent is restarted
+                  </text>
                   <box>
                     <For each={props.request.always}>
                       {(pattern) => (
@@ -445,7 +447,7 @@ function RejectPrompt(props: { onConfirm: (message: string) => void; onCancel: (
   const { theme } = useTheme()
   const tuiConfig = useTuiConfig()
   const dimensions = useTerminalDimensions()
-  const narrow = createMemo(() => dimensions().width < 80)
+  const narrow = createMemo(() => dimensions().width < 96)
   useBindings(() => ({
     mode: HELIX_BASE_MODE,
     commands: [
@@ -538,7 +540,7 @@ function Prompt<const T extends Record<string, string>>(props: {
     selected: keys[0],
     expanded: false,
   })
-  const narrow = createMemo(() => dimensions().width < 80)
+  const narrow = createMemo(() => dimensions().width < 96)
   const fullscreenHint = useCommandShortcut("permission.prompt.fullscreen")
 
   useBindings(() => ({

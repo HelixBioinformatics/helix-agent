@@ -40,7 +40,7 @@ import type { AssistantMessage, FilePart, UserMessage } from "@helix/sdk/v2"
 import { Locale } from "../../util/locale"
 import { errorMessage } from "../../util/error"
 import { formatDuration } from "../../util/format"
-import { createColors, createFrames } from "../../ui/spinner"
+import { identityBorder, TRANSCRIPT_INSET } from "../../ui/identity"
 import { useDialog } from "../../ui/dialog"
 import { DialogProvider as DialogProviderConnect } from "../dialog-provider"
 import { DialogAlert } from "../../ui/dialog-alert"
@@ -50,13 +50,7 @@ import { createFadeIn } from "../../util/signal"
 import { DialogSkill } from "../dialog-skill"
 import { DialogWorkspaceUnavailable } from "../dialog-workspace-unavailable"
 import { useArgs } from "../../context/args"
-import {
-  HELIX_BASE_MODE,
-  useBindings,
-  useCommandShortcut,
-  useLeaderActive,
-  useHelixKeymap,
-} from "../../keymap"
+import { HELIX_BASE_MODE, useBindings, useCommandShortcut, useLeaderActive, useHelixKeymap } from "../../keymap"
 import { useTuiConfig } from "../../config"
 import { usePromptWorkspace } from "./workspace"
 import { usePromptMove } from "./move"
@@ -1319,29 +1313,6 @@ export function Prompt(props: PromptProps) {
     return `Ask anything... "${list()[store.placeholder % list().length]}"`
   })
 
-  const spinnerDef = createMemo(() => {
-    const agent =
-      status().type !== "idle"
-        ? (local.agent.list().find((a) => a.name === lastUserMessage()?.agent) ?? local.agent.current())
-        : local.agent.current()
-    const color = agent ? local.agent.color(agent.name) : theme.border
-    return {
-      frames: createFrames({
-        color,
-        style: "blocks",
-        inactiveFactor: 0.6,
-        // enableFading: false,
-        minAlpha: 0.3,
-      }),
-      color: createColors({
-        color,
-        style: "blocks",
-        inactiveFactor: 0.6,
-        // enableFading: false,
-        minAlpha: 0.3,
-      }),
-    }
-  })
   const maxHeight = createMemo(() => tuiConfig.prompt?.max_height ?? Math.max(6, Math.floor(dimensions().height / 3)))
   const moveLabelWidth = createMemo(() => Math.max(12, Math.min(44, dimensions().width - 48)))
 
@@ -1349,11 +1320,19 @@ export function Prompt(props: PromptProps) {
     <>
       <box ref={(r: BoxRenderable) => (anchor = r)} visible={props.visible !== false} width="100%">
         <box width="100%">
-          {/* The frame is gone, but its indent is not: the prompt has to sit on
-              the same column as the transcript above it, which the border plus
-              its padding used to provide. One number, and it moves to PAGE.body
-              when the record grows its margin. */}
-          <box paddingLeft={3} paddingRight={2} paddingTop={1} flexShrink={0} flexGrow={1} width="100%">
+          <text position="absolute" left={0} top={1} fg={highlight()} selectable={false}>
+            {store.mode === "shell" ? "$" : ">"}
+          </text>
+          <box
+            paddingLeft={TRANSCRIPT_INSET}
+            paddingRight={1}
+            border={["top"]}
+            customBorderChars={identityBorder()}
+            borderColor={props.disabled ? theme.border : highlight()}
+            flexShrink={0}
+            flexGrow={1}
+            width="100%"
+          >
             <textarea
               width="100%"
               placeholder={placeholderText()}
@@ -1426,7 +1405,13 @@ export function Prompt(props: PromptProps) {
               cursorColor={props.disabled ? theme.background : theme.text}
               syntaxStyle={syntax()}
             />
-            <box flexDirection="row" flexShrink={0} paddingTop={1} gap={1} justifyContent="space-between">
+            <box
+              flexDirection="row"
+              flexShrink={0}
+              paddingTop={dimensions().height < 22 ? 0 : 1}
+              gap={1}
+              justifyContent="space-between"
+            >
               <box flexDirection="row" gap={1}>
                 <Show when={local.agent.current()} fallback={<box height={1} />}>
                   {(agent) => (
@@ -1479,10 +1464,8 @@ export function Prompt(props: PromptProps) {
                 justifyContent={status().type === "retry" ? "space-between" : "flex-start"}
               >
                 <box flexShrink={0} flexDirection="row" gap={1}>
-                  <box marginLeft={1}>
-                    <Show when={kv.get("animations_enabled", true)} fallback={<text fg={theme.textMuted}>[⋯]</text>}>
-                      <spinner color={spinnerDef().color} frames={spinnerDef().frames} interval={40} />
-                    </Show>
+                  <box marginLeft={TRANSCRIPT_INSET}>
+                    <Spinner color={highlight()} />
                   </box>
                   <box flexDirection="row" gap={1} flexShrink={0}>
                     {(() => {

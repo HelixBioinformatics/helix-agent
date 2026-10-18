@@ -1,0 +1,131 @@
+<div id="helix-tui-directions" aria-label="Bocetos de identidad TUI de Helix">
+  <style>
+    #helix-tui-directions { color-scheme: dark; }
+    #helix-tui-directions .hx-terminal { --hx-bg:#0a0c10; --hx-panel:#11141a; --hx-text:#eceeed; --hx-sub:#b3babd; --hx-muted:#858c92; --hx-rule:#3c444b; --hx-accent:#b9e27f; --hx-soft:#dcebb5; background:var(--hx-bg); color:var(--hx-text); font:13px/1.65 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; padding:24px; min-height:620px; box-sizing:border-box; }
+    #helix-tui-directions .hx-terminal[data-theme="light"] { --hx-bg:#fafbf8; --hx-panel:#f0f3eb; --hx-text:#243c32; --hx-sub:#4b5450; --hx-muted:#60705f; --hx-rule:#a9b4a4; --hx-accent:#244d3e; --hx-soft:#385940; color-scheme:light; }
+    #helix-tui-directions .hx-terminal * { box-sizing:border-box; }
+    #helix-tui-directions .hx-top { display:flex; gap:2ch; align-items:baseline; flex-wrap:wrap; padding-right:70px; }
+    #helix-tui-directions .hx-brand { color:var(--hx-text); font-weight:600; white-space:nowrap; }
+    #helix-tui-directions .hx-accent { color:var(--hx-accent); }
+    #helix-tui-directions .hx-sub { color:var(--hx-sub); }
+    #helix-tui-directions .hx-muted { color:var(--hx-muted); }
+    #helix-tui-directions .hx-title { margin:0; font:inherit; color:var(--hx-sub); }
+    #helix-tui-directions .hx-rule { border:0; border-top:1px solid var(--hx-rule); margin:14px 0 22px; }
+    #helix-tui-directions .hx-layout { display:grid; grid-template-columns:minmax(0,1fr) 22ch; gap:4ch; }
+    #helix-tui-directions .hx-transcript { min-width:0; }
+    #helix-tui-directions .hx-entry { display:grid; grid-template-columns:6ch minmax(0,1fr); column-gap:2ch; margin-bottom:24px; }
+    #helix-tui-directions .hx-role { color:var(--hx-muted); text-align:right; }
+    #helix-tui-directions .hx-copy { margin:0; overflow-wrap:anywhere; }
+    #helix-tui-directions .hx-tool { display:flex; gap:1ch; flex-wrap:wrap; margin:12px 0; color:var(--hx-sub); }
+    #helix-tui-directions .hx-tool-name { color:var(--hx-text); }
+    #helix-tui-directions .hx-aside { min-width:0; border-top:1px solid var(--hx-rule); padding-top:8px; }
+    #helix-tui-directions .hx-aside h3 { margin:0 0 8px; font:inherit; color:var(--hx-soft); }
+    #helix-tui-directions .hx-aside p { margin:0 0 18px; color:var(--hx-sub); overflow-wrap:anywhere; }
+    #helix-tui-directions .hx-aside small { display:block; font:inherit; color:var(--hx-muted); }
+    #helix-tui-directions .hx-compose { display:grid; grid-template-columns:6ch minmax(0,1fr); gap:2ch; margin-top:36px; }
+    #helix-tui-directions .hx-compose-line { border-top:1px solid var(--hx-rule); padding-top:10px; min-height:43px; color:var(--hx-sub); }
+    #helix-tui-directions .hx-cursor { background:var(--hx-accent); color:var(--hx-bg); }
+    #helix-tui-directions .hx-meta { margin-top:12px; color:var(--hx-muted); display:flex; gap:2ch; flex-wrap:wrap; }
+    #helix-tui-directions .hx-bottom { display:flex; gap:2ch; justify-content:space-between; flex-wrap:wrap; color:var(--hx-muted); margin-top:28px; }
+    #helix-tui-directions .hx-home { padding-top:26px; }
+    #helix-tui-directions .hx-logo-block { display:grid; grid-template-columns:10ch minmax(0,1fr); column-gap:3ch; align-items:center; position:relative; margin:0 0 26px; }
+    #helix-tui-directions .hx-mark { white-space:pre; font:inherit; margin:0; color:var(--hx-accent); }
+    #helix-tui-directions .hx-logo-name { margin:0; font:inherit; font-weight:600; }
+    #helix-tui-directions .hx-logo-sub { margin:0; color:var(--hx-muted); }
+    #helix-tui-directions .hx-kmer { font:inherit; white-space:pre; color:var(--hx-muted); margin:0 0 18px; padding-left:2ch; }
+    #helix-tui-directions .hx-home-copy { max-width:65ch; margin:0; color:var(--hx-sub); }
+    #helix-tui-directions .hx-terminal [hidden] { display:none !important; }
+    #helix-tui-directions .hx-instrument .hx-top { border-bottom:1px solid var(--hx-rule); padding-bottom:12px; }
+    #helix-tui-directions .hx-instrument .hx-rule { display:none; }
+    #helix-tui-directions .hx-instrument .hx-layout { margin-top:24px; gap:3ch; }
+    #helix-tui-directions .hx-instrument .hx-entry { display:block; padding-left:2ch; margin-bottom:20px; border-left:1px solid var(--hx-rule); }
+    #helix-tui-directions .hx-instrument .hx-role { text-align:left; color:var(--hx-soft); margin-bottom:6px; }
+    #helix-tui-directions .hx-instrument .hx-aside { border:0; padding:12px 2ch; background:var(--hx-panel); }
+    #helix-tui-directions .hx-instrument .hx-compose { display:block; margin-top:24px; padding:10px 2ch; background:var(--hx-panel); }
+    #helix-tui-directions .hx-instrument .hx-compose > .hx-role { display:none; }
+    #helix-tui-directions .hx-instrument .hx-compose-line { border:0; padding:0; min-height:32px; }
+    #helix-tui-directions .hx-instrument .hx-home .hx-logo-block { margin-top:20px; }
+    @media(max-width:760px) { #helix-tui-directions .hx-layout { grid-template-columns:minmax(0,1fr); } #helix-tui-directions .hx-aside { display:none; } }
+    @media(max-width:460px) { #helix-tui-directions .hx-terminal { padding:16px 12px; min-height:760px; } #helix-tui-directions .hx-top { padding-right:55px; } #helix-tui-directions .hx-entry, #helix-tui-directions .hx-compose { grid-template-columns:4ch minmax(0,1fr); gap:1ch; } #helix-tui-directions .hx-logo-block { gap:1ch; } #helix-tui-directions .hx-kmer { padding:0; } }
+  </style>
+  <div class="viz-carousel" aria-label="Direcciones visuales de Helix" data-previous-label="Anterior" data-next-label="Siguiente">
+    <section data-variant="Cuaderno molecular" aria-label="Cuaderno molecular">
+      <div class="hx-terminal" data-theme="dark" aria-label="Boceto Cuaderno molecular">
+        <div class="hx-top"><span class="hx-brand">helix<span class="hx-accent">.</span></span><h2 class="hx-title">Samplesheet review</h2></div>
+        <hr class="hx-rule" />
+        <div class="hx-session">
+          <div class="hx-layout">
+            <div class="hx-transcript">
+              <div class="hx-entry"><div class="hx-role">You</div><p class="hx-copy">Which of my samples made it to the end of the run?</p></div>
+              <div class="hx-entry"><div class="hx-role">Helix</div><div><p class="hx-copy">I'll inspect the run files and compare them with the samplesheet.</p><div class="hx-tool"><span class="hx-accent">●</span><span class="hx-tool-name">Read</span><span>samplesheet.csv</span></div><p class="hx-copy hx-sub">The samplesheet lists the inputs. I still need the execution records to check which samples completed.</p></div></div>
+              <div class="hx-compose"><div class="hx-role hx-accent">›</div><div><div class="hx-compose-line"><span class="hx-cursor"> </span></div><div class="hx-meta"><span>Build</span><span>Selected model</span></div></div></div>
+            </div>
+            <aside class="hx-aside"><h3>Session</h3><p>Samplesheet review</p><h3>Context</h3><p>—<small>No usage in this preview</small></p><h3>LSP</h3><p>LSPs are disabled</p><h3>Directory</h3><p>~/research/rnaseq</p></aside>
+          </div>
+        </div>
+        <div class="hx-home" hidden>
+          <pre class="hx-kmer" aria-hidden="true">     AC<span class="hx-accent">GTCA</span>
+     TG<span class="hx-accent">CAGT</span></pre>
+          <div class="hx-logo-block"><pre class="hx-mark" aria-label="Hélice de Helix">●       ◦
+  ●───◦
+    ●
+  ◦───●
+◦       ●</pre><div><h2 class="hx-logo-name">Helix Agent</h2><p class="hx-logo-sub">bioinformatics co-scientist</p></div></div>
+          <p class="hx-home-copy">No command runs without your signature. Every campaign leaves four artefacts a third party can check without the agent, without a model and without a network.</p>
+          <div class="hx-compose"><div class="hx-role hx-accent">›</div><div><div class="hx-compose-line">Describe your data<span class="hx-cursor"> </span></div><div class="hx-meta"><span>Build</span><span>Selected model</span></div></div></div>
+        </div>
+        <div class="hx-bottom"><span>~/research/rnaseq</span><span>tab agents&nbsp; ctrl+p commands</span></div>
+      </div>
+    </section>
+    <section data-variant="Bancada instrumental" aria-label="Bancada instrumental" hidden>
+      <div class="hx-terminal hx-instrument" data-theme="dark" aria-label="Boceto Bancada instrumental">
+        <div class="hx-top"><span class="hx-brand">helix<span class="hx-accent">.</span></span><h2 class="hx-title">Samplesheet review</h2></div>
+        <hr class="hx-rule" />
+        <div class="hx-session">
+          <div class="hx-layout">
+            <div class="hx-transcript">
+              <div class="hx-entry"><div class="hx-role">You</div><p class="hx-copy">Which of my samples made it to the end of the run?</p></div>
+              <div class="hx-entry"><div class="hx-role">Helix</div><div><p class="hx-copy">I'll inspect the run files and compare them with the samplesheet.</p><div class="hx-tool"><span class="hx-accent">●</span><span class="hx-tool-name">Read</span><span>samplesheet.csv</span></div><p class="hx-copy hx-sub">The samplesheet lists the inputs. I still need the execution records to check which samples completed.</p></div></div>
+              <div class="hx-compose"><div class="hx-role">›</div><div><div class="hx-compose-line"><span class="hx-accent">›</span> <span class="hx-cursor"> </span></div><div class="hx-meta"><span>Build</span><span>Selected model</span></div></div></div>
+            </div>
+            <aside class="hx-aside"><h3>Session</h3><p>Samplesheet review</p><h3>Context</h3><p>—<small>No usage in this preview</small></p><h3>LSP</h3><p>LSPs are disabled</p><h3>Directory</h3><p>~/research/rnaseq</p></aside>
+          </div>
+        </div>
+        <div class="hx-home" hidden>
+          <div class="hx-logo-block"><pre class="hx-mark" aria-label="Hélice de Helix">●       ◦
+  ●───◦
+    ●
+  ◦───●
+◦       ●</pre><div><h2 class="hx-logo-name">Helix Agent</h2><p class="hx-logo-sub">bioinformatics co-scientist</p></div></div>
+          <pre class="hx-kmer" aria-hidden="true">ACGTCA  <span class="hx-accent">TGCA</span>  GATC
+TGCAGT  <span class="hx-accent">ACGT</span>  CTAG</pre>
+          <p class="hx-home-copy">No command runs without your signature. Every campaign leaves four artefacts a third party can check without the agent, without a model and without a network.</p>
+          <div class="hx-compose"><div class="hx-role">›</div><div><div class="hx-compose-line"><span class="hx-accent">›</span> Describe your data<span class="hx-cursor"> </span></div><div class="hx-meta"><span>Build</span><span>Selected model</span></div></div></div>
+        </div>
+        <div class="hx-bottom"><span>~/research/rnaseq</span><span>tab agents&nbsp; ctrl+p commands</span></div>
+      </div>
+    </section>
+  </div>
+  <script>
+    (() => {
+      const root = document.getElementById('helix-tui-directions');
+      const surfaces = root.querySelectorAll('.hx-terminal');
+      const view = { scene: 'Sesión', theme: 'Oscuro' };
+      const render = () => {
+        surfaces.forEach(surface => {
+          const home = view.scene === 'Bienvenida';
+          surface.dataset.theme = view.theme === 'Claro' ? 'light' : 'dark';
+          surface.querySelector('.hx-session').hidden = home;
+          surface.querySelector('.hx-home').hidden = !home;
+          surface.querySelector('.hx-title').textContent = home ? 'Bioinformatics co-scientist' : 'Samplesheet review';
+        });
+      };
+      render();
+      if (globalThis.Tweak) {
+        const tweak = new Tweak({ container: root, onChange: render });
+        tweak.addSelect(view, 'scene', { label: 'Pantalla', options: ['Sesión', 'Bienvenida'] });
+        tweak.addSelect(view, 'theme', { label: 'Tema', options: ['Oscuro', 'Claro'] });
+      }
+    })();
+  </script>
+</div>

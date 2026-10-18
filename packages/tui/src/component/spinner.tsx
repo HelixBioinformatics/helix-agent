@@ -63,13 +63,15 @@ export function Spinner(props: {
   color?: RGBA
   /** When the work started, if known, so the ring can slow down as it ages. */
   since?: number
+  /** A single mark in a caller-owned icon cell; the footer keeps the full ring. */
+  compact?: boolean
 }) {
   const { theme } = useTheme()
   const kv = useKV()
   const pulse = usePulse()
   const color = () => props.color ?? theme.textMuted
 
-  const tick = pulse.follow()
+  const tick = pulse.follow(() => kv.get("animations_enabled", true))
   const frame = createMemo(() => {
     const age = props.since ? Date.now() - props.since : 0
     return ring(Math.floor(tick() / ringStep(age)) % RING_CELLS)
@@ -80,12 +82,12 @@ export function Spinner(props: {
       when={kv.get("animations_enabled", true)}
       fallback={
         <text fg={color()}>
-          {RING_STILL} {props.children}
+          {props.compact ? MARK_OUTER : RING_STILL} {props.children}
         </text>
       }
     >
       <box flexDirection="row" gap={1}>
-        <text fg={color()}>{frame()}</text>
+        <text fg={color()}>{props.compact ? (tick() % 2 ? MARK_INNER : MARK_OUTER) : frame()}</text>
         <Show when={props.children}>
           <text fg={color()}>{props.children}</text>
         </Show>

@@ -2,6 +2,7 @@ import type { AssistantMessage } from "@helix/sdk/v2"
 import type { TuiPlugin, TuiPluginApi } from "@helix/plugin/tui"
 import type { BuiltinTuiPlugin } from "../builtins"
 import { createMemo } from "solid-js"
+import { identityBorder } from "../../ui/identity"
 
 const id = "internal:sidebar-context"
 
@@ -35,13 +36,28 @@ function View(props: { api: TuiPluginApi; session_id: string }) {
   })
 
   return (
-    <box>
+    <box border={["top"]} borderColor={theme().borderSubtle} customBorderChars={identityBorder()}>
       <text fg={theme().text}>
         <b>Context</b>
       </text>
-      <text fg={theme().textMuted}>{state().tokens.toLocaleString()} tokens</text>
-      <text fg={theme().textMuted}>{state().percent ?? 0}% used</text>
-      <text fg={theme().textMuted}>{money.format(cost())} spent</text>
+      <box flexDirection="row" gap={1}>
+        <text width={12} fg={theme().text}>
+          {state().tokens.toLocaleString().padStart(12)}
+        </text>
+        <text fg={theme().textMuted}>tokens</text>
+      </box>
+      <box flexDirection="row" gap={1}>
+        <text width={12} fg={theme().text}>
+          {`${state().percent ?? 0}%`.padStart(12)}
+        </text>
+        <text fg={theme().textMuted}>used</text>
+      </box>
+      <box flexDirection="row" gap={1}>
+        <text width={12} fg={theme().text}>
+          {money.format(cost()).padStart(12)}
+        </text>
+        <text fg={theme().textMuted}>spent</text>
+      </box>
     </box>
   )
 }

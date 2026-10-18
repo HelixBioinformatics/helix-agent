@@ -1,0 +1,86 @@
+{
+  "scenario": "home",
+  "width": 60,
+  "height": 20,
+  "base": "/Users/marlow/Desktop/projects/helix-agent/packages/tui",
+  "calls": [
+    "/path",
+    "/project/current",
+    "/config/providers",
+    "/provider",
+    "/experimental/capabilities",
+    "/experimental/console",
+    "/agent",
+    "/config",
+    "/project/proj_test/directories",
+    "/session",
+    "/api/location",
+    "/api/agent",
+    "/api/integration",
+    "/api/model",
+    "/api/provider",
+    "/api/reference",
+    "/api/command",
+    "/api/skill",
+    "/command",
+    "/lsp",
+    "/mcp",
+    "/experimental/resource",
+    "/formatter",
+    "/session/status",
+    "/provider/auth",
+    "/vcs",
+    "/experimental/workspace",
+    "/experimental/workspace/status"
+  ],
+  "capabilities": {
+    "kitty_keyboard": false,
+    "kitty_graphics": false,
+    "rgb": true,
+    "ansi256": true,
+    "unicode": "unicode",
+    "sgr_pixels": false,
+    "color_scheme_updates": false,
+    "explicit_width": false,
+    "scaled_text": false,
+    "sixel": false,
+    "focus_tracking": false,
+    "sync": false,
+    "bracketed_paste": true,
+    "hyperlinks": false,
+    "osc52": false,
+    "osc52_support": "unknown",
+    "notifications": false,
+    "explicit_cursor_positioning": false,
+    "remote": false,
+    "multiplexer": "none",
+    "terminal": {
+      "name": "",
+      "version": "",
+      "from_xtversion": false
+    }
+  },
+  "terminal": {
+    "TERM": "xterm-256color",
+    "COLORTERM": "truecolor",
+    "HELIX_ASCII": "0"
+  },
+  "options": {
+    "optionalPlugins": true,
+    "paste": "one: inspect paired FASTQ inputs\ntwo: preserve the current reference\nthree: summarize input filenames\nfour: do not run a pipeline\nfive: report missing pairs\nsix: wait for approval",
+    "from": [
+      null,
+      null
+    ]
+  },
+  "nativeStats": {
+    "nativeLastFrameTime": 30186,
+    "nativeAverageFrameTime": 28468.566666666666,
+    "nativeFrameCount": 35,
+    "cellsUpdated": 0,
+    "averageCellsUpdated": 17,
+    "nativeRenderTime": 16,
+    "nativeStdoutWriteTime": 0
+  },
+  "meaningful": "Helix Agent / bioinformatics co-scientist               \n    No command runs without your signature. Every           \n    campaign leaves four artefacts a third party can        \n    check without the agent, without a model and without    \n    a network.                                              \n  ────────────────────────────────────────────────────────  \n  > one: inspect paired FASTQ inputs                        \n    two: preserve the current reference                     \n    three: summarize input filenames                        \n    four: do not run a pipeline                             \n    five: report missing pairs                              \n    six: wait for approval                                  \n    Build · Fixture Model Local fixture                     \n                               tab agents  ctrl+p commands  \n  ● Tip Press ctrl+x b in a session to show or hide the     \n        sidebar panel                                       \n                                                            \n          Show keyboard shortcuts with ctrl+alt+k           \n────────────────────────────────────────────────────────────\n  /tmp/helix/packages/tui:main  ⊙ 1 MCP /status      local"
+}

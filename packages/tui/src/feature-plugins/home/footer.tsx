@@ -4,6 +4,8 @@ import { createMemo, Match, Show, Switch } from "solid-js"
 import { abbreviateHome } from "../../runtime"
 import { useTuiPaths } from "../../context/runtime"
 import { useHomeSessionDestination } from "../../routes/home/session-destination"
+import { identityBorder } from "../../ui/identity"
+import { useTerminalDimensions } from "@opentui/solid"
 
 const id = "internal:home-footer"
 
@@ -21,7 +23,15 @@ function Directory(props: { api: TuiPluginApi }) {
     return out
   })
 
-  return <Show when={dir()}>{(value) => <text fg={theme().textMuted}>{value()}</text>}</Show>
+  return (
+    <Show when={dir()}>
+      {(value) => (
+        <text minWidth={0} flexShrink={1} wrapMode="word" fg={theme().textMuted}>
+          {value()}
+        </text>
+      )}
+    </Show>
+  )
 }
 
 function Mcp(props: { api: TuiPluginApi }) {
@@ -62,13 +72,18 @@ function Version(props: { api: TuiPluginApi }) {
 }
 
 function View(props: { api: TuiPluginApi }) {
+  const theme = () => props.api.theme.current
+  const dimensions = useTerminalDimensions()
   return (
     <box
       width="100%"
-      paddingTop={1}
-      paddingBottom={1}
+      paddingTop={0}
+      paddingBottom={dimensions().height < 22 ? 0 : 1}
       paddingLeft={2}
       paddingRight={2}
+      border={["top"]}
+      borderColor={theme().borderSubtle}
+      customBorderChars={identityBorder()}
       flexDirection="row"
       flexShrink={0}
       gap={2}

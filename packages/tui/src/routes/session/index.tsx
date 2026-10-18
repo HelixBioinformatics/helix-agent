@@ -26,15 +26,7 @@ import { Spinner } from "../../component/spinner"
 import { createSyntaxStyleMemo, generateSubtleSyntax, selectedForeground, useTheme } from "../../context/theme"
 import { BoxRenderable, ScrollBoxRenderable, addDefaultParsers, TextAttributes, RGBA } from "@opentui/core"
 import { Prompt, type PromptRef } from "../../component/prompt"
-import type {
-  AssistantMessage,
-  Part,
-  Provider,
-  ToolPart,
-  UserMessage,
-  TextPart,
-  ReasoningPart,
-} from "@helix/sdk/v2"
+import type { AssistantMessage, Part, Provider, ToolPart, UserMessage, TextPart, ReasoningPart } from "@helix/sdk/v2"
 import { useLocal } from "../../context/local"
 import { Locale } from "../../util/locale"
 import { webSearchProviderLabel } from "../../util/tool-display"
@@ -79,6 +71,7 @@ import { getRevertDiffFiles } from "../../util/revert-diff"
 import { HELIX_BASE_MODE, useBindings, useCommandShortcut, useHelixKeymap } from "../../keymap"
 import { usePathFormatter } from "../../context/path-format"
 import { LocationProvider } from "../../context/location"
+import { Identity, identityBorder, TRANSCRIPT_INSET } from "../../ui/identity"
 
 addDefaultParsers(parsers.parsers)
 
@@ -1116,6 +1109,20 @@ export function Session() {
         <box flexDirection="row" flexGrow={1} minHeight={0}>
           <box flexGrow={1} minHeight={0} paddingBottom={1} paddingLeft={2} paddingRight={2} gap={1}>
             <Show when={session()}>
+              <box
+                flexDirection="row"
+                gap={2}
+                flexShrink={0}
+                border={["bottom"]}
+                customBorderChars={identityBorder()}
+                borderColor={theme.border}
+                paddingLeft={TRANSCRIPT_INSET}
+              >
+                <Identity />
+                <text fg={theme.textMuted} flexGrow={1} minWidth={0} wrapMode="none" truncate>
+                  {session()!.title}
+                </text>
+              </box>
               <scrollbox
                 ref={(r) => (scroll = r)}
                 viewportOptions={{
@@ -1333,8 +1340,6 @@ function UserMessage(props: {
         <box
           id={props.message.id}
           ref={(el: BoxRenderable) => alwaysSeparate.add(el)}
-          border={["left"]}
-          borderColor={theme.border}
           marginTop={props.index === 0 ? 0 : 1}
         >
           <box
@@ -1345,12 +1350,15 @@ function UserMessage(props: {
               setHover(false)
             }}
             onMouseUp={props.onMouseUp}
-            paddingTop={1}
+            paddingTop={0}
             paddingBottom={1}
-            paddingLeft={2}
+            paddingLeft={TRANSCRIPT_INSET}
             backgroundColor={hover() ? theme.backgroundPanel : undefined}
             flexShrink={0}
           >
+            <text fg={theme.textMuted} selectable={false}>
+              You
+            </text>
             <text fg={theme.text}>{text()}</text>
             <Show when={files().length}>
               <box flexDirection="row" paddingBottom={metadataVisible() ? 1 : 0} paddingTop={1} gap={1} flexWrap="wrap">
@@ -1420,6 +1428,13 @@ function AssistantMessage(props: { message: AssistantMessage; parts: Part[]; las
 
   return (
     <>
+      <Show when={props.parts.some((part) => part.type === "text" && part.text.trim())}>
+        <box paddingLeft={TRANSCRIPT_INSET} marginTop={1}>
+          <text fg={theme.textMuted} selectable={false}>
+            Helix
+          </text>
+        </box>
+      </Show>
       <For each={props.parts}>
         {(part, index) => {
           const component = createMemo(() => PART_MAPPING[part.type as keyof typeof PART_MAPPING])
@@ -1436,7 +1451,7 @@ function AssistantMessage(props: { message: AssistantMessage; parts: Part[]; las
         }}
       </For>
       <Show when={props.parts.some((x) => x.type === "tool" && x.tool === "task")}>
-        <box paddingTop={1} paddingLeft={3}>
+        <box paddingTop={1} paddingLeft={TRANSCRIPT_INSET}>
           <text fg={theme.text}>
             {childShortcut()}
             <span style={{ fg: theme.textMuted }}> view subagents</span>
@@ -1469,12 +1484,12 @@ function AssistantMessage(props: { message: AssistantMessage; parts: Part[]; las
           marginTop={1}
           borderColor={theme.border}
         >
-          <text fg={theme.textMuted}>{errorMessage(props.message.error)}</text>
+          <text fg={theme.error}>{errorMessage(props.message.error)}</text>
         </box>
       </Show>
       <Switch>
         <Match when={props.last || final() || props.message.error?.name === "MessageAbortedError"}>
-          <box ref={(el: BoxRenderable) => alwaysSeparate.add(el)} paddingLeft={3}>
+          <box ref={(el: BoxRenderable) => alwaysSeparate.add(el)} paddingLeft={TRANSCRIPT_INSET}>
             <text marginTop={1}>
               <span
                 style={{
@@ -1541,7 +1556,7 @@ function ReasoningPart(props: { last: boolean; part: ReasoningPart; message: Ass
     <Show when={content()}>
       <box
         ref={(el: BoxRenderable) => alwaysSeparate.add(el)}
-        paddingLeft={3}
+        paddingLeft={TRANSCRIPT_INSET}
         marginTop={1}
         flexDirection="column"
         flexShrink={0}
@@ -1622,7 +1637,12 @@ function TextPart(props: { last: boolean; part: TextPart; message: AssistantMess
   const { theme, syntax } = useTheme()
   return (
     <Show when={props.part.text.trim()}>
-      <box ref={(el: BoxRenderable) => alwaysSeparate.add(el)} paddingLeft={3} marginTop={1} flexShrink={0}>
+      <box
+        ref={(el: BoxRenderable) => alwaysSeparate.add(el)}
+        paddingLeft={TRANSCRIPT_INSET}
+        marginTop={0}
+        flexShrink={0}
+      >
         <markdown
           syntaxStyle={syntax()}
           streaming={true}
@@ -1866,7 +1886,7 @@ export function InlineToolRow(props: {
 }) {
   return (
     <box
-      paddingLeft={3}
+      paddingLeft={0}
       onMouseOver={props.onMouseOver}
       onMouseOut={props.onMouseOut}
       onMouseUp={props.onMouseUp}
@@ -1882,7 +1902,14 @@ export function InlineToolRow(props: {
     >
       <Switch>
         <Match when={props.spinner}>
-          <Spinner color={props.color} children={props.children} />
+          <box flexDirection="row">
+            <box width={INLINE_TOOL_ICON_WIDTH} flexShrink={0}>
+              <Spinner color={props.color} compact />
+            </box>
+            <text fg={props.color} flexGrow={1}>
+              {props.children}
+            </text>
+          </box>
         </Match>
         <Match when={true}>
           <Show
@@ -1951,10 +1978,11 @@ function BlockTool(props: {
   return (
     <box
       ref={(el: BoxRenderable) => alwaysSeparate.add(el)}
-      border={["left"]}
+      border={["top"]}
+      customBorderChars={identityBorder()}
       paddingTop={1}
       paddingBottom={1}
-      paddingLeft={2}
+      paddingLeft={TRANSCRIPT_INSET}
       marginTop={1}
       gap={1}
       backgroundColor={hover() ? theme.backgroundPanel : undefined}
@@ -1968,14 +1996,7 @@ function BlockTool(props: {
     >
       <Show when={props.title}>
         {(title) => (
-          <Show
-            when={props.spinner}
-            fallback={
-              <text paddingLeft={3} fg={theme.textMuted}>
-                {title()}
-              </text>
-            }
-          >
+          <Show when={props.spinner} fallback={<text fg={theme.textMuted}>{title()}</text>}>
             <Spinner color={theme.textMuted}>{title().replace(/^# /, "")}</Spinner>
           </Show>
         )}

@@ -1,0 +1,189 @@
+[
+  {
+    "case": "ascii-home",
+    "exit": 0,
+    "options": {
+      "HELIX_ASCII": "1",
+      "TERM": "dumb",
+      "COLORTERM": "",
+      "CAPTURE_COLOR": "16"
+    },
+    "evidence": "ascii-home.log"
+  },
+  {
+    "case": "ascii-session",
+    "exit": 0,
+    "options": {
+      "HELIX_ASCII": "1",
+      "TERM": "dumb",
+      "COLORTERM": "",
+      "CAPTURE_COLOR": "16",
+      "CAPTURE_SCENARIO": "session"
+    },
+    "evidence": "ascii-session.log"
+  },
+  {
+    "case": "limited256",
+    "exit": 0,
+    "options": {
+      "CAPTURE_COLOR": "256",
+      "COLORTERM": "",
+      "CAPTURE_SCENARIO": "session",
+      "CAPTURE_WIDTH": "120",
+      "CAPTURE_HEIGHT": "40"
+    },
+    "evidence": "limited256.log"
+  },
+  {
+    "case": "limited16",
+    "exit": 0,
+    "options": {
+      "CAPTURE_COLOR": "16",
+      "COLORTERM": "",
+      "CAPTURE_SCENARIO": "session",
+      "CAPTURE_WIDTH": "120",
+      "CAPTURE_HEIGHT": "40"
+    },
+    "evidence": "limited16.log"
+  },
+  {
+    "case": "wcwidth",
+    "exit": 0,
+    "options": {
+      "CAPTURE_WIDTH_METHOD": "wcwidth"
+    },
+    "evidence": "wcwidth.log"
+  },
+  {
+    "case": "system-home",
+    "exit": 0,
+    "options": {
+      "CAPTURE_THEME_NAME": "system"
+    },
+    "evidence": "system-home.log"
+  },
+  {
+    "case": "system-session",
+    "exit": 0,
+    "options": {
+      "CAPTURE_THEME_NAME": "system",
+      "CAPTURE_SCENARIO": "session",
+      "CAPTURE_WIDTH": "120",
+      "CAPTURE_HEIGHT": "40"
+    },
+    "evidence": "system-session.log"
+  },
+  {
+    "case": "resize-home",
+    "exit": 0,
+    "options": {
+      "CAPTURE_FROM_WIDTH": "160",
+      "CAPTURE_FROM_HEIGHT": "48",
+      "CAPTURE_WIDTH": "60",
+      "CAPTURE_HEIGHT": "20"
+    },
+    "evidence": "resize-home.log"
+  },
+  {
+    "case": "resize-session",
+    "exit": 0,
+    "options": {
+      "CAPTURE_FROM_WIDTH": "160",
+      "CAPTURE_FROM_HEIGHT": "48",
+      "CAPTURE_SCENARIO": "session"
+    },
+    "evidence": "resize-session.log"
+  },
+  {
+    "case": "unicode",
+    "exit": 0,
+    "options": {
+      "CAPTURE_INPUT": "Inspect h\u00edgado \u0394 RNA sample_01 \ud83e\uddec"
+    },
+    "evidence": "unicode.log"
+  },
+  {
+    "case": "paste",
+    "exit": 0,
+    "options": {
+      "CAPTURE_PASTE": "Compare h\u00edgado \u0394 RNA\npaired sample_01 \ud83e\uddec\nNo pipeline execution"
+    },
+    "evidence": "paste.log"
+  },
+  {
+    "case": "motion",
+    "exit": 0,
+    "options": {
+      "CAPTURE_ANIMATIONS": "1",
+      "CAPTURE_MOTION_SECONDS": "11"
+    },
+    "evidence": "motion.log"
+  },
+  {
+    "case": "quiet-typing",
+    "exit": 0,
+    "options": {
+      "CAPTURE_ANIMATIONS": "1",
+      "CAPTURE_INPUT": "Inspect paired inputs",
+      "CAPTURE_MOTION_SECONDS": "11"
+    },
+    "evidence": "quiet-typing.log"
+  },
+  {
+    "case": "draft-six-lines",
+    "exit": 0,
+    "options": {
+      "CAPTURE_WIDTH": "60",
+      "CAPTURE_HEIGHT": "20",
+      "CAPTURE_PASTE_SUMMARY": "0",
+      "CAPTURE_PASTE": "one: inspect paired FASTQ inputs\ntwo: preserve the current reference\nthree: summarize input filenames\nfour: do not run a pipeline\nfive: report missing pairs\nsix: wait for approval"
+    },
+    "evidence": "draft-six-lines.log"
+  },
+  {
+    "case": "permission80-final",
+    "exit": 0,
+    "options": {
+      "CAPTURE_SCENARIO": "permission"
+    },
+    "evidence": "permission80-final.log"
+  },
+  {
+    "case": "idle-home",
+    "exit": 0,
+    "options": {
+      "CAPTURE_IDLE_PROBE": "1"
+    },
+    "evidence": "idle-home.log"
+  },
+  {
+    "case": "idle-session",
+    "exit": 0,
+    "options": {
+      "CAPTURE_IDLE_PROBE": "1",
+      "CAPTURE_SCENARIO": "session",
+      "CAPTURE_WIDTH": "120",
+      "CAPTURE_HEIGHT": "40"
+    },
+    "evidence": "idle-session.log"
+  },
+  {
+    "case": "before-idle-home",
+    "exit": 0,
+    "options": {
+      "CAPTURE_SOURCE": "baseline/source",
+      "CAPTURE_IDLE_PROBE": "1"
+    }
+  },
+  {
+    "case": "before-idle-session",
+    "exit": 0,
+    "options": {
+      "CAPTURE_SOURCE": "baseline/source",
+      "CAPTURE_IDLE_PROBE": "1",
+      "CAPTURE_SCENARIO": "session",
+      "CAPTURE_WIDTH": "120",
+      "CAPTURE_HEIGHT": "40"
+    }
+  }
+]

@@ -14,7 +14,7 @@ import { createStore } from "solid-js/store"
 import { useTerminalDimensions } from "@opentui/solid"
 import * as fuzzysort from "fuzzysort"
 import { isDeepEqual } from "remeda"
-import { useDialog, type DialogContext } from "./dialog"
+import { DialogHeader, useDialog, type DialogContext } from "./dialog"
 import { Locale } from "../util/locale"
 import { getScrollAcceleration } from "../util/scroll"
 import { useTuiConfig } from "../config"
@@ -543,6 +543,9 @@ export function DialogSelect<T>(props: DialogSelectProps<T>) {
         backgroundColor={active() ? theme.primary : RGBA.fromInts(0, 0, 0, 0)}
         onMouseUp={() => triggerAction(item)}
       >
+        <text width={1} marginRight={1} fg={disabled() ? theme.textMuted : active() ? fg : theme.textMuted}>
+          {active() ? ">" : " "}
+        </text>
         <text
           fg={disabled() ? theme.textMuted : active() ? fg : theme.text}
           attributes={active() ? TextAttributes.BOLD : undefined}
@@ -556,17 +559,8 @@ export function DialogSelect<T>(props: DialogSelectProps<T>) {
 
   return (
     <box gap={1} paddingBottom={1} flexGrow={1}>
-      <box paddingLeft={4} paddingRight={4}>
-        <box flexDirection="row" justifyContent="space-between">
-          {props.titleView ?? (
-            <text fg={theme.text} attributes={TextAttributes.BOLD}>
-              {props.title}
-            </text>
-          )}
-          <text fg={theme.textMuted} onMouseUp={() => dialog.clear()}>
-            esc
-          </text>
-        </box>
+      <box paddingLeft={2} paddingRight={2}>
+        <DialogHeader title={props.title} titleView={props.titleView} />
         <Show when={props.renderFilter !== false}>
           <box paddingTop={1}>
             <input
@@ -579,7 +573,7 @@ export function DialogSelect<T>(props: DialogSelectProps<T>) {
               }}
               focusedBackgroundColor={theme.backgroundPanel}
               cursorColor={theme.primary}
-              focusedTextColor={theme.textMuted}
+              focusedTextColor={theme.text}
               ref={(r) => {
                 input = r
                 input.traits = { status: "FILTER" }
@@ -600,15 +594,15 @@ export function DialogSelect<T>(props: DialogSelectProps<T>) {
           when={grouped().length > 0}
           fallback={
             props.emptyView ?? (
-              <box paddingLeft={4} paddingRight={4} paddingTop={1}>
+              <box paddingLeft={2} paddingRight={2} paddingTop={1}>
                 <text fg={theme.textMuted}>No results found</text>
               </box>
             )
           }
         >
           <scrollbox
-            paddingLeft={1}
-            paddingRight={1}
+            paddingLeft={0}
+            paddingRight={0}
             scrollbarOptions={{ visible: false }}
             scrollAcceleration={scrollAcceleration()}
             ref={(r: ScrollBoxRenderable) => (scroll = r)}
@@ -618,11 +612,11 @@ export function DialogSelect<T>(props: DialogSelectProps<T>) {
               {([category, options], index) => (
                 <>
                   <Show when={category}>
-                    <box paddingTop={index() > 0 ? 1 : 0} paddingLeft={3}>
+                    <box paddingTop={index() > 0 ? 1 : 0} paddingLeft={2}>
                       <Show
                         when={options[0]?.categoryView}
                         fallback={
-                          <text fg={theme.accent} attributes={TextAttributes.BOLD}>
+                          <text fg={theme.textMuted} attributes={TextAttributes.BOLD}>
                             {category}
                           </text>
                         }
@@ -665,8 +659,8 @@ export function DialogSelect<T>(props: DialogSelectProps<T>) {
                         >
                           <box
                             flexDirection="row"
-                            paddingLeft={current() || option.gutter ? 1 : 3}
-                            paddingRight={3}
+                            paddingLeft={0}
+                            paddingRight={2}
                             gap={1}
                             backgroundColor={
                               active()
@@ -696,7 +690,7 @@ export function DialogSelect<T>(props: DialogSelectProps<T>) {
                           </box>
                           <For each={option.details}>
                             {(detail) => (
-                              <box paddingLeft={3} paddingRight={3}>
+                              <box paddingLeft={2} paddingRight={2}>
                                 <text fg={theme.textMuted} wrapMode="none">
                                   {Locale.truncateMiddle(detail, Math.max(1, Math.min(76, dimensions().width - 12)))}
                                 </text>
@@ -714,7 +708,7 @@ export function DialogSelect<T>(props: DialogSelectProps<T>) {
         </Show>
       </box>
       <Show when={props.footer || visibleActions().length} fallback={<box flexShrink={0} />}>
-        <box paddingRight={2} paddingLeft={4} flexDirection="row" justifyContent="space-between" flexShrink={0}>
+        <box paddingRight={2} paddingLeft={2} flexDirection="row" justifyContent="space-between" flexShrink={0}>
           <box flexDirection="row" gap={2}>
             {props.footer}
             <For each={left()}>{(item) => <FooterAction item={item} />}</For>
@@ -752,13 +746,15 @@ function Option(props: {
 
   return (
     <>
-      <Show when={props.current && !props.gutter}>
-        <text flexShrink={0} fg={text()} marginRight={0}>
-          ●
-        </text>
-      </Show>
-      <Show when={props.gutter}>
-        <box flexShrink={0} marginRight={0}>
+      <Show
+        when={props.gutter}
+        fallback={
+          <text width={1} flexShrink={0} fg={text()}>
+            {props.current ? "●" : props.active && !props.muted ? ">" : " "}
+          </text>
+        }
+      >
+        <box minWidth={1} flexShrink={0}>
           {props.gutter?.()}
         </box>
       </Show>
@@ -768,7 +764,6 @@ function Option(props: {
         attributes={props.active && !props.muted ? TextAttributes.BOLD : undefined}
         overflow="hidden"
         wrapMode="none"
-        paddingLeft={3}
       >
         {props.titleView ??
           (props.truncateTitle === false

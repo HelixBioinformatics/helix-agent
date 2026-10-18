@@ -1,12 +1,13 @@
 import { useRenderer, useTerminalDimensions } from "@opentui/solid"
 import { batch, createContext, createEffect, onCleanup, Show, useContext, type JSX, type ParentProps } from "solid-js"
 import { useTheme } from "../context/theme"
-import { MouseButton, Renderable, RGBA } from "@opentui/core"
+import { MouseButton, Renderable, RGBA, TextAttributes } from "@opentui/core"
 import { createStore } from "solid-js/store"
 import { useToast } from "./toast"
 import { Flag } from "@helix/core/flag/flag"
 import { useBindings, useHelixModeStack } from "../keymap"
 import { useClipboard } from "../context/clipboard"
+import { identityBorder } from "./identity"
 
 export function Dialog(
   props: ParentProps<{
@@ -42,7 +43,7 @@ export function Dialog(
       alignItems="center"
       position="absolute"
       zIndex={3000}
-      paddingTop={dimensions().height / 4}
+      paddingTop={Math.max(1, Math.floor(dimensions().height / 4))}
       left={0}
       top={0}
       backgroundColor={RGBA.fromInts(0, 0, 0, 150)}
@@ -58,10 +59,34 @@ export function Dialog(
         width={width()}
         maxWidth={dimensions().width - 2}
         backgroundColor={theme.backgroundPanel}
-        paddingTop={1}
+        border={["top", "bottom"]}
+        borderStyle="single"
+        borderColor={theme.border}
+        customBorderChars={identityBorder()}
       >
         {props.children}
       </box>
+    </box>
+  )
+}
+
+/** The same title origin and close affordance on every built-in dialog. */
+export function DialogHeader(props: { title: string; titleView?: JSX.Element; closeLabel?: string }) {
+  const { theme } = useTheme()
+  const dialog = useDialog()
+
+  return (
+    <box flexDirection="row" justifyContent="space-between" gap={1}>
+      <box flexGrow={1} minWidth={0}>
+        {props.titleView ?? (
+          <text attributes={TextAttributes.BOLD} fg={theme.text}>
+            {props.title}
+          </text>
+        )}
+      </box>
+      <text flexShrink={0} fg={theme.textMuted} onMouseUp={() => dialog.clear()}>
+        {props.closeLabel ?? "esc"}
+      </text>
     </box>
   )
 }

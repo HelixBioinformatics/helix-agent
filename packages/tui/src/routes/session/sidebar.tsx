@@ -8,6 +8,7 @@ import { usePluginRuntime } from "../../plugin/runtime"
 
 import { getScrollAcceleration } from "../../util/scroll"
 import { WorkspaceLabel } from "../../component/workspace-label"
+import { identityBorder } from "../../ui/identity"
 
 export function Sidebar(props: { sessionID: string; overlay?: boolean }) {
   const pluginRuntime = usePluginRuntime()
@@ -31,7 +32,11 @@ export function Sidebar(props: { sessionID: string; overlay?: boolean }) {
         height="100%"
         paddingTop={1}
         paddingBottom={1}
-        paddingLeft={2}
+        border={["left"]}
+        borderStyle="single"
+        borderColor={theme.borderSubtle}
+        customBorderChars={identityBorder()}
+        paddingLeft={1}
         paddingRight={2}
         position={props.overlay ? "absolute" : "relative"}
       >
@@ -45,7 +50,7 @@ export function Sidebar(props: { sessionID: string; overlay?: boolean }) {
             },
           }}
         >
-          <box flexShrink={0} gap={1} paddingRight={1}>
+          <box flexShrink={0} paddingRight={1}>
             <pluginRuntime.Slot
               name="sidebar_title"
               mode="single_winner"
@@ -86,10 +91,10 @@ export function Sidebar(props: { sessionID: string; overlay?: boolean }) {
           </box>
         </scrollbox>
 
-        <box flexShrink={0} gap={1} paddingTop={1}>
+        <box flexShrink={0} border={["top"]} borderColor={theme.borderSubtle} customBorderChars={identityBorder()}>
           <pluginRuntime.Slot name="sidebar_footer" mode="single_winner" session_id={props.sessionID}>
             <text fg={theme.textMuted}>
-              <span style={{ fg: theme.success }}>•</span> <b>Helix Agent</b>
+              <span style={{ fg: theme.primary }}>•</span> <b>Helix Agent</b>
             </text>
           </pluginRuntime.Slot>
         </box>

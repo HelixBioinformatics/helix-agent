@@ -1,0 +1,89 @@
+{
+  "scenario": "error",
+  "width": 80,
+  "height": 24,
+  "base": "/Users/marlow/Desktop/projects/helix-agent/packages/tui",
+  "calls": [
+    "/path",
+    "/project/current",
+    "/config/providers",
+    "/provider",
+    "/experimental/capabilities",
+    "/experimental/console",
+    "/agent",
+    "/config",
+    "/project/proj_test/directories",
+    "/session",
+    "/api/location",
+    "/api/agent",
+    "/api/integration",
+    "/api/model",
+    "/api/provider",
+    "/api/reference",
+    "/api/command",
+    "/api/skill",
+    "/command",
+    "/lsp",
+    "/mcp",
+    "/experimental/resource",
+    "/formatter",
+    "/session/status",
+    "/provider/auth",
+    "/vcs",
+    "/experimental/workspace",
+    "/experimental/workspace/status",
+    "/session/ses_fixture_molecular",
+    "/session/ses_fixture_molecular",
+    "/session/ses_fixture_molecular/message",
+    "/session/ses_fixture_molecular/todo",
+    "/session/ses_fixture_molecular/diff"
+  ],
+  "capabilities": {
+    "kitty_keyboard": false,
+    "kitty_graphics": false,
+    "rgb": true,
+    "ansi256": true,
+    "unicode": "unicode",
+    "sgr_pixels": false,
+    "color_scheme_updates": false,
+    "explicit_width": false,
+    "scaled_text": false,
+    "sixel": false,
+    "focus_tracking": false,
+    "sync": false,
+    "bracketed_paste": true,
+    "hyperlinks": false,
+    "osc52": false,
+    "osc52_support": "unknown",
+    "notifications": false,
+    "explicit_cursor_positioning": false,
+    "remote": false,
+    "multiplexer": "none",
+    "terminal": {
+      "name": "",
+      "version": "",
+      "from_xtversion": false
+    }
+  },
+  "terminal": {
+    "TERM": "xterm-256color",
+    "COLORTERM": "truecolor",
+    "HELIX_ASCII": "0"
+  },
+  "options": {
+    "from": [
+      null,
+      null
+    ]
+  },
+  "nativeStats": {
+    "nativeLastFrameTime": 26584,
+    "nativeAverageFrameTime": 25492.466666666667,
+    "nativeFrameCount": 62,
+    "cellsUpdated": 0,
+    "averageCellsUpdated": 8,
+    "nativeRenderTime": 24,
+    "nativeStdoutWriteTime": 0
+  },
+  "meaningful": "helix.  Inspect paired RNA-seq inputs                                       \n  ────────────────────────────────────────────────────────────────────────────  \n                  │                                                          │  \n    data/liver_01_│  Fixture: input directory is unavailable. Check the      │  \n    data/liver_01_│  path and try again.                                     │  \n    data/liver_02_│                                                          │  \n    data/liver_02_R2.fastq.gz                                                   \n                                                                                \n    Found 2 paired samples in ./data:                                           \n                                                                                \n    - liver_01 — R1 and R2 present                                              \n    - liver_02 — R1 and R2 present                                              \n                                                                                \n    The filenames form complete pairs. File contents and quality have not       \n    been checked. No pipeline was run.                                          \n                                                                                \n    ▣  Build · Fixture Model · 40.0s                                            \n                                                                                \n  ────────────────────────────────────────────────────────────────────────────  \n  >                                                                             \n                                                                                \n    Build · Fixture Model Local fixture                                         \n                                            1.8K (1%) · $0.03  ctrl+p commands"
+}

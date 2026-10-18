@@ -1,15 +1,11 @@
-import { createSignal, onCleanup } from "solid-js"
+import { createEffect, createSignal, onCleanup, type Accessor } from "solid-js"
 import { useRenderer } from "@opentui/solid"
 import { createSimpleContext } from "./helper"
 
 /**
- * The pulse: the application's only clock.
+ * Shared, low-frequency clock for the molecular mark and activity ring.
  *
- * Everything that moves in this interface moves against this counter rather
- * than against a timer of its own. There used to be two independent animation
- * machines (the braille cycle of `<spinner>` at 80ms and the Knight Rider sweep
- * of `ui/spinner.ts` at 40ms), and neither of them said anything: both were
- * identical at minute one and at hour four of a run.
+ * These animations share a counter rather than running their own timers.
  *
  * It beats once a second, and only while someone is watching. Every consumer
  * asks for a subscription when it mounts and drops it when it unmounts; with no
@@ -52,12 +48,15 @@ export const { use: usePulse, provider: PulseProvider } = createSimpleContext({
        * Keeps the clock alive for as long as the calling component stays
        * mounted. Returns the same counter, for convenience at the call site.
        */
-      follow() {
-        subscribers++
-        start()
-        onCleanup(() => {
-          subscribers--
-          if (subscribers <= 0) stop()
+      follow(enabled: Accessor<boolean> = () => true) {
+        createEffect(() => {
+          if (!enabled()) return
+          subscribers++
+          start()
+          onCleanup(() => {
+            subscribers--
+            if (subscribers <= 0) stop()
+          })
         })
         return pulse
       },

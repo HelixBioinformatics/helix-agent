@@ -13,6 +13,9 @@ import { useTerminalDimensions } from "@opentui/solid"
 import { useTuiConfig } from "../config"
 import { useTheme } from "../context/theme"
 import { HomeSessionDestinationProvider } from "./home/session-destination"
+import { useDialog } from "../ui/dialog"
+import { useKV } from "../context/kv"
+import { useGenomeField } from "../ui/genome-field"
 
 let once = false
 const placeholder = {
@@ -36,6 +39,13 @@ export function Home() {
   const dimensions = useTerminalDimensions()
   const tuiConfig = useTuiConfig()
   const { theme } = useTheme()
+  const dialog = useDialog()
+  const kv = useKV()
+  const quiet = createMemo(() => Boolean(ref()?.current.input) || dialog.stack.length > 0)
+  const field = useGenomeField({
+    enabled: () => !quiet() && kv.get("animations_enabled", true),
+    colors: () => ({ background: theme.background, textMuted: theme.textMuted, primary: theme.primary }),
+  })
   const promptMaxWidth = createMemo(() => {
     const configured = tuiConfig.prompt?.max_width
     if (configured === "auto") return Math.max(75, Math.floor(dimensions().width * 0.7))
@@ -75,31 +85,39 @@ export function Home() {
 
   return (
     <HomeSessionDestinationProvider>
-      <box flexGrow={1} paddingLeft={2} paddingRight={2}>
-        <box height={2} minHeight={0} flexShrink={1} />
-        <box flexShrink={0}>
+      <box flexGrow={1} paddingLeft={2} paddingRight={2} renderBefore={field}>
+        <box
+          id="home-top-space"
+          height={dimensions().height < 22 ? 0 : dimensions().height >= 32 ? 3 : 1}
+          minHeight={0}
+          flexShrink={1}
+        />
+        <box flexShrink={0} width="100%" paddingLeft={2}>
           <pluginRuntime.Slot name="home_logo" mode="replace">
-            <Logo />
+            <box width="100%" maxWidth={promptMaxWidth()}>
+              <Logo compact={dimensions().height < 22 && Boolean(ref()?.current.input)} />
+            </box>
           </pluginRuntime.Slot>
         </box>
-        <box flexShrink={1} minHeight={0} paddingTop={1}>
+        <box flexShrink={0} paddingTop={dimensions().height < 22 ? 0 : 1} paddingLeft={2} maxWidth={promptMaxWidth()}>
           <text fg={theme.textMuted} selectable={false}>
-            No command runs without your signature. Every campaign leaves four
-          </text>
-          <text fg={theme.textMuted} selectable={false}>
-            artefacts a third party can check without the agent, without a model
-          </text>
-          <text fg={theme.textMuted} selectable={false}>
-            and without a network.
+            No command runs without your signature. Every campaign leaves four artefacts a third party can check without
+            the agent, without a model and without a network.
           </text>
         </box>
-        <box width="100%" maxWidth={promptMaxWidth()} zIndex={1000} paddingTop={2} flexShrink={0}>
+        <box
+          width="100%"
+          maxWidth={promptMaxWidth()}
+          zIndex={1000}
+          paddingTop={dimensions().height < 22 ? 0 : 1}
+          flexShrink={0}
+        >
           <pluginRuntime.Slot name="home_prompt" mode="replace" ref={bind}>
             <Prompt ref={bind} right={<pluginRuntime.Slot name="home_prompt_right" />} placeholders={placeholder} />
           </pluginRuntime.Slot>
         </box>
         <pluginRuntime.Slot name="home_bottom" />
-        <box flexGrow={1} minHeight={0} />
+        <box id="home-open-space" flexGrow={1} minHeight={0} />
         <Toast />
       </box>
       <box width="100%" flexShrink={0}>

@@ -1,0 +1,1184 @@
+{
+  "generatedAt": "2026-10-18T02:24:40.598Z",
+  "baseline": "tmp/tui-identity/baseline/source/src",
+  "baselineRevision": "1de7c76718b19125b3d8598f73c11f25305714b6",
+  "scope": "AST evidence for SDK calls, useBindings registrations and JSX event attributes in TS/TSX files differing between frozen source and active source; works after commits and does not prove runtime equivalence alone.",
+  "sdkCallsAllEqual": true,
+  "bindingsAllEqual": true,
+  "files": [
+    {
+      "path": "packages/tui/src/component/error-component.tsx",
+      "sdkCallsEqual": true,
+      "bindingsEqual": true,
+      "handlersEqual": true,
+      "before": {
+        "exists": true,
+        "sdkCalls": [],
+        "bindings": [],
+        "handlers": [
+          {
+            "name": "onMouseDown",
+            "code": "{() => setSelected(index())}"
+          },
+          {
+            "name": "onMouseUp",
+            "code": "{() => action.onUse()}"
+          }
+        ]
+      },
+      "after": {
+        "exists": true,
+        "sdkCalls": [],
+        "bindings": [],
+        "handlers": [
+          {
+            "name": "onMouseDown",
+            "code": "{() => setSelected(index())}"
+          },
+          {
+            "name": "onMouseUp",
+            "code": "{() => action.onUse()}"
+          }
+        ]
+      }
+    },
+    {
+      "path": "packages/tui/src/component/logo.tsx",
+      "sdkCallsEqual": true,
+      "bindingsEqual": true,
+      "handlersEqual": true,
+      "before": {
+        "exists": true,
+        "sdkCalls": [],
+        "bindings": [],
+        "handlers": []
+      },
+      "after": {
+        "exists": true,
+        "sdkCalls": [],
+        "bindings": [],
+        "handlers": []
+      }
+    },
+    {
+      "path": "packages/tui/src/component/prompt/index.tsx",
+      "sdkCallsEqual": true,
+      "bindingsEqual": true,
+      "handlersEqual": true,
+      "before": {
+        "exists": true,
+        "sdkCalls": [
+          "sdk.client.session.abort({\n    sessionID: props.sessionID,\n})",
+          "sdk.client.session.create({\n    directory,\n    workspace: workspaceID,\n    agent: agent.name,\n    model: {\n        providerID: selectedModel.providerID,\n        id: selectedModel.modelID,\n        variant,\n    },\n})",
+          "sdk.client.session.shell({\n    sessionID,\n    agent: agent.name,\n    model: {\n        providerID: selectedModel.providerID,\n        modelID: selectedModel.modelID,\n    },\n    command: inputText,\n})",
+          "sdk.client.session.command({\n    sessionID,\n    command: command.slice(1),\n    arguments: args,\n    agent: agent.name,\n    model: `${selectedModel.providerID}/${selectedModel.modelID}`,\n    variant,\n    parts: nonTextParts.filter((x) => x.type === \"file\"),\n})",
+          "sdk.client.session\n    .prompt({\n    sessionID,\n    ...selectedModel,\n    agent: agent.name,\n    model: selectedModel,\n    variant,\n    parts: [\n        ...editorParts,\n        {\n            type: \"text\",\n            text: inputText,\n        },\n        ...nonTextParts,\n    ],\n}, { throwOnError: true })\n    .catch((error) => {\n    toast.show({\n        title: \"Failed to send prompt\",\n        message: errorMessage(error),\n        variant: \"error\",\n    });\n})",
+          "sdk.client.session\n    .prompt({\n    sessionID,\n    ...selectedModel,\n    agent: agent.name,\n    model: selectedModel,\n    variant,\n    parts: [\n        ...editorParts,\n        {\n            type: \"text\",\n            text: inputText,\n        },\n        ...nonTextParts,\n    ],\n}, { throwOnError: true })"
+        ],
+        "bindings": [
+          "useBindings(() => ({\n    commands: promptCommands(),\n}))",
+          "useBindings(() => ({\n    mode: HELIX_BASE_MODE,\n    bindings: tuiConfig.keybinds.gather(\"prompt.palette\", [\n        \"prompt.submit\",\n        \"prompt.editor\",\n        \"prompt.editor_context.clear\",\n        \"prompt.stash\",\n        \"prompt.stash.pop\",\n        \"prompt.stash.list\",\n        \"prompt.skills\",\n        \"session.interrupt\",\n        \"workspace.set\",\n        \"session.move\",\n    ]),\n}))",
+          "useBindings(() => ({\n    commands: stashCommands(),\n}))",
+          "useBindings(() => {\n    return {\n        target: inputTarget,\n        enabled: inputTarget() !== undefined && !props.disabled,\n        bindings: tuiConfig.keybinds.get(\"prompt.paste\"),\n    };\n})",
+          "useBindings(() => {\n    return {\n        target: inputTarget,\n        enabled: inputTarget() !== undefined && !props.disabled && store.prompt.input !== \"\",\n        bindings: tuiConfig.keybinds.get(\"prompt.clear\"),\n    };\n})",
+          "useBindings(() => {\n    return {\n        target: inputTarget,\n        enabled: (() => {\n            cursorVersion();\n            return (inputTarget() !== undefined &&\n                !props.disabled &&\n                store.mode === \"normal\" &&\n                !auto()?.visible &&\n                input?.visualCursor.offset === 0);\n        })(),\n        bindings: [\n            {\n                key: \"!\",\n                desc: \"Shell mode\",\n                group: \"Prompt\",\n                cmd: () => {\n                    setStore(\"placeholder\", randomIndex(shell().length));\n                    setStore(\"mode\", \"shell\");\n                },\n            },\n        ],\n    };\n})",
+          "useBindings(() => {\n    return {\n        target: inputTarget,\n        enabled: inputTarget() !== undefined && store.mode === \"shell\",\n        bindings: [{ key: \"escape\", desc: \"Exit shell mode\", group: \"Prompt\", cmd: () => setStore(\"mode\", \"normal\") }],\n    };\n})",
+          "useBindings(() => {\n    return {\n        target: inputTarget,\n        enabled: (() => {\n            cursorVersion();\n            return inputTarget() !== undefined && store.mode === \"shell\" && input?.visualCursor.offset === 0;\n        })(),\n        bindings: [{ key: \"backspace\", desc: \"Exit shell mode\", group: \"Prompt\", cmd: () => setStore(\"mode\", \"normal\") }],\n    };\n})",
+          "useBindings(() => {\n    return {\n        target: inputTarget,\n        enabled: (() => {\n            cursorVersion();\n            return inputTarget() !== undefined && !props.disabled && !auto()?.visible && input !== undefined;\n        })(),\n        commands: [\n            {\n                name: \"prompt.history.previous\",\n                title: \"Previous prompt history\",\n                category: \"Prompt\",\n                run() {\n                    if (input.cursorOffset !== 0) {\n                        if (input.scrollY + input.visualCursor.visualRow === 0)\n                            input.cursorOffset = 0;\n                        return false;\n                    }\n                    const item = history.move(-1, input.plainText);\n                    if (!item)\n                        return false;\n                    input.setText(item.input);\n                    setStore(\"prompt\", item);\n                    setStore(\"mode\", item.mode ?? \"normal\");\n                    restoreExtmarksFromParts(item.parts);\n                    input.cursorOffset = 0;\n                },\n            },\n        ],\n        bindings: tuiConfig.keybinds.get(\"prompt.history.previous\"),\n    };\n})",
+          "useBindings(() => {\n    return {\n        target: inputTarget,\n        enabled: (() => {\n            cursorVersion();\n            return inputTarget() !== undefined && !props.disabled && !auto()?.visible && input !== undefined;\n        })(),\n        commands: [\n            {\n                name: \"prompt.history.next\",\n                title: \"Next prompt history\",\n                category: \"Prompt\",\n                run() {\n                    if (input.cursorOffset !== input.plainText.length) {\n                        if (input.scrollY + input.visualCursor.visualRow ===\n                            Math.max(0, input.editorView.getTotalVirtualLineCount() - 1))\n                            input.cursorOffset = input.plainText.length;\n                        return false;\n                    }\n                    const item = history.move(1, input.plainText);\n                    if (!item)\n                        return false;\n                    input.setText(item.input);\n                    setStore(\"prompt\", item);\n                    setStore(\"mode\", item.mode ?? \"normal\");\n                    restoreExtmarksFromParts(item.parts);\n                    input.cursorOffset = input.plainText.length;\n                },\n            },\n        ],\n        bindings: tuiConfig.keybinds.get(\"prompt.history.next\"),\n    };\n})"
+        ],
+        "handlers": [
+          {
+            "name": "onSelect",
+            "code": "    {(skill) => {\n        input.setText(`/${skill} `);\n        setStore(\"prompt\", {\n            input: `/${skill} `,\n            parts: [],\n        });\n        input.gotoBufferEnd();\n    }}"
+          },
+          {
+            "name": "onSelect",
+            "code": "    {(entry) => {\n        input.setText(entry.input);\n        setStore(\"prompt\", { input: entry.input, parts: entry.parts });\n        restoreExtmarksFromParts(entry.parts);\n        input.gotoBufferEnd();\n    }}"
+          },
+          {
+            "name": "onRestore",
+            "code": "    {() => {\n        workspace.open();\n        return false;\n    }}"
+          },
+          {
+            "name": "onContentChange",
+            "code": "    {() => {\n        const value = input.plainText;\n        setStore(\"prompt\", \"input\", value);\n        auto()?.onInput(value);\n        syncExtmarksWithPromptParts();\n        setCursorVersion((value) => value + 1);\n    }}"
+          },
+          {
+            "name": "onCursorChange",
+            "code": "{() => setCursorVersion((value) => value + 1)}"
+          },
+          {
+            "name": "onKeyDown",
+            "code": "    {(e: {\n        preventDefault(): void;\n    }) => {\n        if (props.disabled) {\n            e.preventDefault();\n            return;\n        }\n    }}"
+          },
+          {
+            "name": "onSubmit",
+            "code": "    {() => {\n        setTimeout(() => setTimeout(() => submit(), 0), 0);\n    }}"
+          },
+          {
+            "name": "onPaste",
+            "code": "    {async (event: PasteEvent) => {\n        if (props.disabled) {\n            event.preventDefault();\n            return;\n        }\n        const normalizedText = decodePasteBytes(event.bytes).replace(/\\r\\n/g, \"\\n\").replace(/\\r/g, \"\\n\");\n        const pastedContent = normalizedText.trim();\n        if (!pastedContent) {\n            keymap.dispatchCommand(\"prompt.paste\");\n            return;\n        }\n        event.preventDefault();\n        await pasteInputText(normalizedText);\n    }}"
+          },
+          {
+            "name": "onMouseDown",
+            "code": "{(r: MouseEvent) => r.target?.focus()}"
+          },
+          {
+            "name": "onMouseUp",
+            "code": "{handleMessageClick}"
+          }
+        ]
+      },
+      "after": {
+        "exists": true,
+        "sdkCalls": [
+          "sdk.client.session.abort({\n    sessionID: props.sessionID,\n})",
+          "sdk.client.session.create({\n    directory,\n    workspace: workspaceID,\n    agent: agent.name,\n    model: {\n        providerID: selectedModel.providerID,\n        id: selectedModel.modelID,\n        variant,\n    },\n})",
+          "sdk.client.session.shell({\n    sessionID,\n    agent: agent.name,\n    model: {\n        providerID: selectedModel.providerID,\n        modelID: selectedModel.modelID,\n    },\n    command: inputText,\n})",
+          "sdk.client.session.command({\n    sessionID,\n    command: command.slice(1),\n    arguments: args,\n    agent: agent.name,\n    model: `${selectedModel.providerID}/${selectedModel.modelID}`,\n    variant,\n    parts: nonTextParts.filter((x) => x.type === \"file\"),\n})",
+          "sdk.client.session\n    .prompt({\n    sessionID,\n    ...selectedModel,\n    agent: agent.name,\n    model: selectedModel,\n    variant,\n    parts: [\n        ...editorParts,\n        {\n            type: \"text\",\n            text: inputText,\n        },\n        ...nonTextParts,\n    ],\n}, { throwOnError: true })\n    .catch((error) => {\n    toast.show({\n        title: \"Failed to send prompt\",\n        message: errorMessage(error),\n        variant: \"error\",\n    });\n})",
+          "sdk.client.session\n    .prompt({\n    sessionID,\n    ...selectedModel,\n    agent: agent.name,\n    model: selectedModel,\n    variant,\n    parts: [\n        ...editorParts,\n        {\n            type: \"text\",\n            text: inputText,\n        },\n        ...nonTextParts,\n    ],\n}, { throwOnError: true })"
+        ],
+        "bindings": [
+          "useBindings(() => ({\n    commands: promptCommands(),\n}))",
+          "useBindings(() => ({\n    mode: HELIX_BASE_MODE,\n    bindings: tuiConfig.keybinds.gather(\"prompt.palette\", [\n        \"prompt.submit\",\n        \"prompt.editor\",\n        \"prompt.editor_context.clear\",\n        \"prompt.stash\",\n        \"prompt.stash.pop\",\n        \"prompt.stash.list\",\n        \"prompt.skills\",\n        \"session.interrupt\",\n        \"workspace.set\",\n        \"session.move\",\n    ]),\n}))",
+          "useBindings(() => ({\n    commands: stashCommands(),\n}))",
+          "useBindings(() => {\n    return {\n        target: inputTarget,\n        enabled: inputTarget() !== undefined && !props.disabled,\n        bindings: tuiConfig.keybinds.get(\"prompt.paste\"),\n    };\n})",
+          "useBindings(() => {\n    return {\n        target: inputTarget,\n        enabled: inputTarget() !== undefined && !props.disabled && store.prompt.input !== \"\",\n        bindings: tuiConfig.keybinds.get(\"prompt.clear\"),\n    };\n})",
+          "useBindings(() => {\n    return {\n        target: inputTarget,\n        enabled: (() => {\n            cursorVersion();\n            return (inputTarget() !== undefined &&\n                !props.disabled &&\n                store.mode === \"normal\" &&\n                !auto()?.visible &&\n                input?.visualCursor.offset === 0);\n        })(),\n        bindings: [\n            {\n                key: \"!\",\n                desc: \"Shell mode\",\n                group: \"Prompt\",\n                cmd: () => {\n                    setStore(\"placeholder\", randomIndex(shell().length));\n                    setStore(\"mode\", \"shell\");\n                },\n            },\n        ],\n    };\n})",
+          "useBindings(() => {\n    return {\n        target: inputTarget,\n        enabled: inputTarget() !== undefined && store.mode === \"shell\",\n        bindings: [{ key: \"escape\", desc: \"Exit shell mode\", group: \"Prompt\", cmd: () => setStore(\"mode\", \"normal\") }],\n    };\n})",
+          "useBindings(() => {\n    return {\n        target: inputTarget,\n        enabled: (() => {\n            cursorVersion();\n            return inputTarget() !== undefined && store.mode === \"shell\" && input?.visualCursor.offset === 0;\n        })(),\n        bindings: [{ key: \"backspace\", desc: \"Exit shell mode\", group: \"Prompt\", cmd: () => setStore(\"mode\", \"normal\") }],\n    };\n})",
+          "useBindings(() => {\n    return {\n        target: inputTarget,\n        enabled: (() => {\n            cursorVersion();\n            return inputTarget() !== undefined && !props.disabled && !auto()?.visible && input !== undefined;\n        })(),\n        commands: [\n            {\n                name: \"prompt.history.previous\",\n                title: \"Previous prompt history\",\n                category: \"Prompt\",\n                run() {\n                    if (input.cursorOffset !== 0) {\n                        if (input.scrollY + input.visualCursor.visualRow === 0)\n                            input.cursorOffset = 0;\n                        return false;\n                    }\n                    const item = history.move(-1, input.plainText);\n                    if (!item)\n                        return false;\n                    input.setText(item.input);\n                    setStore(\"prompt\", item);\n                    setStore(\"mode\", item.mode ?? \"normal\");\n                    restoreExtmarksFromParts(item.parts);\n                    input.cursorOffset = 0;\n                },\n            },\n        ],\n        bindings: tuiConfig.keybinds.get(\"prompt.history.previous\"),\n    };\n})",
+          "useBindings(() => {\n    return {\n        target: inputTarget,\n        enabled: (() => {\n            cursorVersion();\n            return inputTarget() !== undefined && !props.disabled && !auto()?.visible && input !== undefined;\n        })(),\n        commands: [\n            {\n                name: \"prompt.history.next\",\n                title: \"Next prompt history\",\n                category: \"Prompt\",\n                run() {\n                    if (input.cursorOffset !== input.plainText.length) {\n                        if (input.scrollY + input.visualCursor.visualRow ===\n                            Math.max(0, input.editorView.getTotalVirtualLineCount() - 1))\n                            input.cursorOffset = input.plainText.length;\n                        return false;\n                    }\n                    const item = history.move(1, input.plainText);\n                    if (!item)\n                        return false;\n                    input.setText(item.input);\n                    setStore(\"prompt\", item);\n                    setStore(\"mode\", item.mode ?? \"normal\");\n                    restoreExtmarksFromParts(item.parts);\n                    input.cursorOffset = input.plainText.length;\n                },\n            },\n        ],\n        bindings: tuiConfig.keybinds.get(\"prompt.history.next\"),\n    };\n})"
+        ],
+        "handlers": [
+          {
+            "name": "onSelect",
+            "code": "    {(skill) => {\n        input.setText(`/${skill} `);\n        setStore(\"prompt\", {\n            input: `/${skill} `,\n            parts: [],\n        });\n        input.gotoBufferEnd();\n    }}"
+          },
+          {
+            "name": "onSelect",
+            "code": "    {(entry) => {\n        input.setText(entry.input);\n        setStore(\"prompt\", { input: entry.input, parts: entry.parts });\n        restoreExtmarksFromParts(entry.parts);\n        input.gotoBufferEnd();\n    }}"
+          },
+          {
+            "name": "onRestore",
+            "code": "    {() => {\n        workspace.open();\n        return false;\n    }}"
+          },
+          {
+            "name": "onContentChange",
+            "code": "    {() => {\n        const value = input.plainText;\n        setStore(\"prompt\", \"input\", value);\n        auto()?.onInput(value);\n        syncExtmarksWithPromptParts();\n        setCursorVersion((value) => value + 1);\n    }}"
+          },
+          {
+            "name": "onCursorChange",
+            "code": "{() => setCursorVersion((value) => value + 1)}"
+          },
+          {
+            "name": "onKeyDown",
+            "code": "    {(e: {\n        preventDefault(): void;\n    }) => {\n        if (props.disabled) {\n            e.preventDefault();\n            return;\n        }\n    }}"
+          },
+          {
+            "name": "onSubmit",
+            "code": "    {() => {\n        setTimeout(() => setTimeout(() => submit(), 0), 0);\n    }}"
+          },
+          {
+            "name": "onPaste",
+            "code": "    {async (event: PasteEvent) => {\n        if (props.disabled) {\n            event.preventDefault();\n            return;\n        }\n        const normalizedText = decodePasteBytes(event.bytes).replace(/\\r\\n/g, \"\\n\").replace(/\\r/g, \"\\n\");\n        const pastedContent = normalizedText.trim();\n        if (!pastedContent) {\n            keymap.dispatchCommand(\"prompt.paste\");\n            return;\n        }\n        event.preventDefault();\n        await pasteInputText(normalizedText);\n    }}"
+          },
+          {
+            "name": "onMouseDown",
+            "code": "{(r: MouseEvent) => r.target?.focus()}"
+          },
+          {
+            "name": "onMouseUp",
+            "code": "{handleMessageClick}"
+          }
+        ]
+      }
+    },
+    {
+      "path": "packages/tui/src/component/spinner.tsx",
+      "sdkCallsEqual": true,
+      "bindingsEqual": true,
+      "handlersEqual": true,
+      "before": {
+        "exists": true,
+        "sdkCalls": [],
+        "bindings": [],
+        "handlers": []
+      },
+      "after": {
+        "exists": true,
+        "sdkCalls": [],
+        "bindings": [],
+        "handlers": []
+      }
+    },
+    {
+      "path": "packages/tui/src/context/pulse.tsx",
+      "sdkCallsEqual": true,
+      "bindingsEqual": true,
+      "handlersEqual": true,
+      "before": {
+        "exists": true,
+        "sdkCalls": [],
+        "bindings": [],
+        "handlers": []
+      },
+      "after": {
+        "exists": true,
+        "sdkCalls": [],
+        "bindings": [],
+        "handlers": []
+      }
+    },
+    {
+      "path": "packages/tui/src/feature-plugins/home/footer.tsx",
+      "sdkCallsEqual": true,
+      "bindingsEqual": true,
+      "handlersEqual": true,
+      "before": {
+        "exists": true,
+        "sdkCalls": [],
+        "bindings": [],
+        "handlers": []
+      },
+      "after": {
+        "exists": true,
+        "sdkCalls": [],
+        "bindings": [],
+        "handlers": []
+      }
+    },
+    {
+      "path": "packages/tui/src/feature-plugins/home/tips.tsx",
+      "sdkCallsEqual": true,
+      "bindingsEqual": true,
+      "handlersEqual": true,
+      "before": {
+        "exists": true,
+        "sdkCalls": [],
+        "bindings": [
+          "useBindings(() => ({\n    commands: [\n        {\n            name: \"tips.toggle\",\n            title: props.hidden ? \"Show tips\" : \"Hide tips\",\n            category: \"System\",\n            namespace: \"palette\",\n            run() {\n                props.api.kv.set(\"tips_hidden\", !props.api.kv.get(\"tips_hidden\", false));\n                props.api.ui.dialog.clear();\n            },\n        },\n    ],\n    bindings: props.api.tuiConfig.keybinds.get(\"tips.toggle\"),\n}))"
+        ],
+        "handlers": []
+      },
+      "after": {
+        "exists": true,
+        "sdkCalls": [],
+        "bindings": [
+          "useBindings(() => ({\n    commands: [\n        {\n            name: \"tips.toggle\",\n            title: props.hidden ? \"Show tips\" : \"Hide tips\",\n            category: \"System\",\n            namespace: \"palette\",\n            run() {\n                props.api.kv.set(\"tips_hidden\", !props.api.kv.get(\"tips_hidden\", false));\n                props.api.ui.dialog.clear();\n            },\n        },\n    ],\n    bindings: props.api.tuiConfig.keybinds.get(\"tips.toggle\"),\n}))"
+        ],
+        "handlers": []
+      }
+    },
+    {
+      "path": "packages/tui/src/feature-plugins/sidebar/context.tsx",
+      "sdkCallsEqual": true,
+      "bindingsEqual": true,
+      "handlersEqual": true,
+      "before": {
+        "exists": true,
+        "sdkCalls": [],
+        "bindings": [],
+        "handlers": []
+      },
+      "after": {
+        "exists": true,
+        "sdkCalls": [],
+        "bindings": [],
+        "handlers": []
+      }
+    },
+    {
+      "path": "packages/tui/src/feature-plugins/sidebar/files.tsx",
+      "sdkCallsEqual": true,
+      "bindingsEqual": true,
+      "handlersEqual": true,
+      "before": {
+        "exists": true,
+        "sdkCalls": [],
+        "bindings": [],
+        "handlers": [
+          {
+            "name": "onMouseDown",
+            "code": "{() => list().length > 2 && setOpen((x) => !x)}"
+          }
+        ]
+      },
+      "after": {
+        "exists": true,
+        "sdkCalls": [],
+        "bindings": [],
+        "handlers": [
+          {
+            "name": "onMouseDown",
+            "code": "{() => list().length > 2 && setOpen((x) => !x)}"
+          }
+        ]
+      }
+    },
+    {
+      "path": "packages/tui/src/feature-plugins/sidebar/footer.tsx",
+      "sdkCallsEqual": true,
+      "bindingsEqual": true,
+      "handlersEqual": true,
+      "before": {
+        "exists": true,
+        "sdkCalls": [],
+        "bindings": [],
+        "handlers": [
+          {
+            "name": "onMouseDown",
+            "code": "{() => props.api.kv.set(\"dismissed_getting_started\", true)}"
+          }
+        ]
+      },
+      "after": {
+        "exists": true,
+        "sdkCalls": [],
+        "bindings": [],
+        "handlers": [
+          {
+            "name": "onMouseDown",
+            "code": "{() => props.api.kv.set(\"dismissed_getting_started\", true)}"
+          }
+        ]
+      }
+    },
+    {
+      "path": "packages/tui/src/feature-plugins/sidebar/lsp.tsx",
+      "sdkCallsEqual": true,
+      "bindingsEqual": true,
+      "handlersEqual": true,
+      "before": {
+        "exists": true,
+        "sdkCalls": [],
+        "bindings": [],
+        "handlers": [
+          {
+            "name": "onMouseDown",
+            "code": "{() => list().length > 2 && setOpen((x) => !x)}"
+          }
+        ]
+      },
+      "after": {
+        "exists": true,
+        "sdkCalls": [],
+        "bindings": [],
+        "handlers": [
+          {
+            "name": "onMouseDown",
+            "code": "{() => list().length > 2 && setOpen((x) => !x)}"
+          }
+        ]
+      }
+    },
+    {
+      "path": "packages/tui/src/feature-plugins/sidebar/mcp.tsx",
+      "sdkCallsEqual": true,
+      "bindingsEqual": true,
+      "handlersEqual": true,
+      "before": {
+        "exists": true,
+        "sdkCalls": [],
+        "bindings": [],
+        "handlers": [
+          {
+            "name": "onMouseDown",
+            "code": "{() => list().length > 2 && setOpen((x) => !x)}"
+          }
+        ]
+      },
+      "after": {
+        "exists": true,
+        "sdkCalls": [],
+        "bindings": [],
+        "handlers": [
+          {
+            "name": "onMouseDown",
+            "code": "{() => list().length > 2 && setOpen((x) => !x)}"
+          }
+        ]
+      }
+    },
+    {
+      "path": "packages/tui/src/feature-plugins/sidebar/todo.tsx",
+      "sdkCallsEqual": true,
+      "bindingsEqual": true,
+      "handlersEqual": true,
+      "before": {
+        "exists": true,
+        "sdkCalls": [],
+        "bindings": [],
+        "handlers": [
+          {
+            "name": "onMouseDown",
+            "code": "{() => list().length > 2 && setOpen((x) => !x)}"
+          }
+        ]
+      },
+      "after": {
+        "exists": true,
+        "sdkCalls": [],
+        "bindings": [],
+        "handlers": [
+          {
+            "name": "onMouseDown",
+            "code": "{() => list().length > 2 && setOpen((x) => !x)}"
+          }
+        ]
+      }
+    },
+    {
+      "path": "packages/tui/src/routes/home.tsx",
+      "sdkCallsEqual": true,
+      "bindingsEqual": true,
+      "handlersEqual": true,
+      "before": {
+        "exists": true,
+        "sdkCalls": [],
+        "bindings": [],
+        "handlers": []
+      },
+      "after": {
+        "exists": true,
+        "sdkCalls": [],
+        "bindings": [],
+        "handlers": []
+      }
+    },
+    {
+      "path": "packages/tui/src/routes/session/index.tsx",
+      "sdkCallsEqual": true,
+      "bindingsEqual": true,
+      "handlersEqual": true,
+      "before": {
+        "exists": true,
+        "sdkCalls": [
+          "sdk.client.session.get({ sessionID }, { throwOnError: true })",
+          "sdk.client.session\n    .share({\n    sessionID: route.sessionID,\n})\n    .then((res) => copy(res.data!.share!.url))\n    .catch((error) => {\n    toast.show({\n        message: error instanceof Error ? error.message : \"Failed to share session\",\n        variant: \"error\",\n    });\n})",
+          "sdk.client.session\n    .share({\n    sessionID: route.sessionID,\n})\n    .then((res) => copy(res.data!.share!.url))",
+          "sdk.client.session\n    .share({\n    sessionID: route.sessionID,\n})",
+          "sdk.client.session.summarize({\n    sessionID: route.sessionID,\n    modelID: selectedModel.modelID,\n    providerID: selectedModel.providerID,\n})",
+          "sdk.client.session\n    .unshare({\n    sessionID: route.sessionID,\n})\n    .then(() => toast.show({ message: \"Session unshared successfully\", variant: \"success\" }))\n    .catch((error) => {\n    toast.show({\n        message: error instanceof Error ? error.message : \"Failed to unshare session\",\n        variant: \"error\",\n    });\n})",
+          "sdk.client.session\n    .unshare({\n    sessionID: route.sessionID,\n})\n    .then(() => toast.show({ message: \"Session unshared successfully\", variant: \"success\" }))",
+          "sdk.client.session\n    .unshare({\n    sessionID: route.sessionID,\n})",
+          "sdk.client.session.abort({ sessionID: route.sessionID }).catch(() => { })",
+          "sdk.client.session.abort({ sessionID: route.sessionID })",
+          "sdk.client.session\n    .revert({\n    sessionID: route.sessionID,\n    messageID: message.id,\n})\n    .then(() => {\n    toBottom();\n})",
+          "sdk.client.session\n    .revert({\n    sessionID: route.sessionID,\n    messageID: message.id,\n})",
+          "sdk.client.session.unrevert({\n    sessionID: route.sessionID,\n})",
+          "sdk.client.session.revert({\n    sessionID: route.sessionID,\n    messageID: message.id,\n})",
+          "sdk.client.experimental.session.background({\n    sessionID: route.sessionID,\n    workspace: project.workspace.current(),\n})"
+        ],
+        "bindings": [
+          "useBindings(() => ({\n    commands: sessionCommands(),\n}))",
+          "useBindings(() => ({\n    bindings: tuiConfig.keybinds.gather(\"session.global\", sessionGlobalBindingCommands),\n}))",
+          "useBindings(() => ({\n    enabled: () => renderer.currentFocusedEditor === null,\n    bindings: tuiConfig.keybinds.gather(\"session.global.unfocused\", sessionGlobalUnfocusedBindingCommands),\n}))",
+          "useBindings(() => ({\n    mode: HELIX_BASE_MODE,\n    bindings: tuiConfig.keybinds.gather(\"session\", sessionBindingCommands),\n}))",
+          "useBindings(() => ({\n    mode: HELIX_BASE_MODE,\n    enabled: foregroundTasks().length > 0,\n    priority: 1,\n    bindings: tuiConfig.keybinds.get(\"session.background\"),\n}))"
+        ],
+        "handlers": [
+          {
+            "name": "onMove",
+            "code": "    {(messageID) => {\n        const child = scroll.getChildren().find((child) => {\n            return child.id === messageID;\n        });\n        if (child)\n            scroll.scrollBy(child.y - scroll.y - 1);\n    }}"
+          },
+          {
+            "name": "onMove",
+            "code": "    {(messageID) => {\n        if (!messageID)\n            return;\n        const child = scroll.getChildren().find((child) => {\n            return child.id === messageID;\n        });\n        if (child)\n            scroll.scrollBy(child.y - scroll.y - 1);\n    }}"
+          },
+          {
+            "name": "onMouseOver",
+            "code": "{() => setHover(true)}"
+          },
+          {
+            "name": "onMouseOut",
+            "code": "{() => setHover(false)}"
+          },
+          {
+            "name": "onMouseUp",
+            "code": "{handleUnrevert}"
+          },
+          {
+            "name": "onMouseUp",
+            "code": "    {() => {\n        if (renderer.getSelection()?.getSelectedText())\n            return;\n        dialog.replace(() => (<DialogMessage messageID={message.id} sessionID={route.sessionID} setPrompt={(promptInfo) => prompt?.set(promptInfo)}/>));\n    }}"
+          },
+          {
+            "name": "onSubmit",
+            "code": "    {() => {\n        toBottom();\n    }}"
+          },
+          {
+            "name": "onMouseOver",
+            "code": "    {() => {\n        setHover(true);\n    }}"
+          },
+          {
+            "name": "onMouseOut",
+            "code": "    {() => {\n        setHover(false);\n    }}"
+          },
+          {
+            "name": "onMouseUp",
+            "code": "{props.onMouseUp}"
+          },
+          {
+            "name": "onMouseUp",
+            "code": "{toggle}"
+          },
+          {
+            "name": "onClick",
+            "code": "{collapsed().overflow ? () => setExpanded((prev) => !prev) : undefined}"
+          },
+          {
+            "name": "onMouseOver",
+            "code": "{() => clickable() && setHover(true)}"
+          },
+          {
+            "name": "onMouseOut",
+            "code": "{() => setHover(false)}"
+          },
+          {
+            "name": "onMouseUp",
+            "code": "    {() => {\n        if (renderer.getSelection()?.getSelectedText())\n            return;\n        if (failed()) {\n            setErrorExpanded((value) => !value);\n            return;\n        }\n        props.onClick?.();\n    }}"
+          },
+          {
+            "name": "onMouseOver",
+            "code": "{props.onMouseOver}"
+          },
+          {
+            "name": "onMouseOut",
+            "code": "{props.onMouseOut}"
+          },
+          {
+            "name": "onMouseUp",
+            "code": "{props.onMouseUp}"
+          },
+          {
+            "name": "onMouseOver",
+            "code": "{() => props.onClick && setHover(true)}"
+          },
+          {
+            "name": "onMouseOut",
+            "code": "{() => setHover(false)}"
+          },
+          {
+            "name": "onMouseUp",
+            "code": "    {() => {\n        if (renderer.getSelection()?.getSelectedText())\n            return;\n        props.onClick?.();\n    }}"
+          },
+          {
+            "name": "onClick",
+            "code": "{collapsed().overflow ? () => setExpanded((prev) => !prev) : undefined}"
+          },
+          {
+            "name": "onClick",
+            "code": "    {() => {\n        if (sessionID()) {\n            navigate({ type: \"session\", sessionID: sessionID()! });\n        }\n        const status = retry();\n        if (status)\n            void DialogAlert.show(dialog, \"Retry Error\", status.message);\n    }}"
+          }
+        ]
+      },
+      "after": {
+        "exists": true,
+        "sdkCalls": [
+          "sdk.client.session.get({ sessionID }, { throwOnError: true })",
+          "sdk.client.session\n    .share({\n    sessionID: route.sessionID,\n})\n    .then((res) => copy(res.data!.share!.url))\n    .catch((error) => {\n    toast.show({\n        message: error instanceof Error ? error.message : \"Failed to share session\",\n        variant: \"error\",\n    });\n})",
+          "sdk.client.session\n    .share({\n    sessionID: route.sessionID,\n})\n    .then((res) => copy(res.data!.share!.url))",
+          "sdk.client.session\n    .share({\n    sessionID: route.sessionID,\n})",
+          "sdk.client.session.summarize({\n    sessionID: route.sessionID,\n    modelID: selectedModel.modelID,\n    providerID: selectedModel.providerID,\n})",
+          "sdk.client.session\n    .unshare({\n    sessionID: route.sessionID,\n})\n    .then(() => toast.show({ message: \"Session unshared successfully\", variant: \"success\" }))\n    .catch((error) => {\n    toast.show({\n        message: error instanceof Error ? error.message : \"Failed to unshare session\",\n        variant: \"error\",\n    });\n})",
+          "sdk.client.session\n    .unshare({\n    sessionID: route.sessionID,\n})\n    .then(() => toast.show({ message: \"Session unshared successfully\", variant: \"success\" }))",
+          "sdk.client.session\n    .unshare({\n    sessionID: route.sessionID,\n})",
+          "sdk.client.session.abort({ sessionID: route.sessionID }).catch(() => { })",
+          "sdk.client.session.abort({ sessionID: route.sessionID })",
+          "sdk.client.session\n    .revert({\n    sessionID: route.sessionID,\n    messageID: message.id,\n})\n    .then(() => {\n    toBottom();\n})",
+          "sdk.client.session\n    .revert({\n    sessionID: route.sessionID,\n    messageID: message.id,\n})",
+          "sdk.client.session.unrevert({\n    sessionID: route.sessionID,\n})",
+          "sdk.client.session.revert({\n    sessionID: route.sessionID,\n    messageID: message.id,\n})",
+          "sdk.client.experimental.session.background({\n    sessionID: route.sessionID,\n    workspace: project.workspace.current(),\n})"
+        ],
+        "bindings": [
+          "useBindings(() => ({\n    commands: sessionCommands(),\n}))",
+          "useBindings(() => ({\n    bindings: tuiConfig.keybinds.gather(\"session.global\", sessionGlobalBindingCommands),\n}))",
+          "useBindings(() => ({\n    enabled: () => renderer.currentFocusedEditor === null,\n    bindings: tuiConfig.keybinds.gather(\"session.global.unfocused\", sessionGlobalUnfocusedBindingCommands),\n}))",
+          "useBindings(() => ({\n    mode: HELIX_BASE_MODE,\n    bindings: tuiConfig.keybinds.gather(\"session\", sessionBindingCommands),\n}))",
+          "useBindings(() => ({\n    mode: HELIX_BASE_MODE,\n    enabled: foregroundTasks().length > 0,\n    priority: 1,\n    bindings: tuiConfig.keybinds.get(\"session.background\"),\n}))"
+        ],
+        "handlers": [
+          {
+            "name": "onMove",
+            "code": "    {(messageID) => {\n        const child = scroll.getChildren().find((child) => {\n            return child.id === messageID;\n        });\n        if (child)\n            scroll.scrollBy(child.y - scroll.y - 1);\n    }}"
+          },
+          {
+            "name": "onMove",
+            "code": "    {(messageID) => {\n        if (!messageID)\n            return;\n        const child = scroll.getChildren().find((child) => {\n            return child.id === messageID;\n        });\n        if (child)\n            scroll.scrollBy(child.y - scroll.y - 1);\n    }}"
+          },
+          {
+            "name": "onMouseOver",
+            "code": "{() => setHover(true)}"
+          },
+          {
+            "name": "onMouseOut",
+            "code": "{() => setHover(false)}"
+          },
+          {
+            "name": "onMouseUp",
+            "code": "{handleUnrevert}"
+          },
+          {
+            "name": "onMouseUp",
+            "code": "    {() => {\n        if (renderer.getSelection()?.getSelectedText())\n            return;\n        dialog.replace(() => (<DialogMessage messageID={message.id} sessionID={route.sessionID} setPrompt={(promptInfo) => prompt?.set(promptInfo)}/>));\n    }}"
+          },
+          {
+            "name": "onSubmit",
+            "code": "    {() => {\n        toBottom();\n    }}"
+          },
+          {
+            "name": "onMouseOver",
+            "code": "    {() => {\n        setHover(true);\n    }}"
+          },
+          {
+            "name": "onMouseOut",
+            "code": "    {() => {\n        setHover(false);\n    }}"
+          },
+          {
+            "name": "onMouseUp",
+            "code": "{props.onMouseUp}"
+          },
+          {
+            "name": "onMouseUp",
+            "code": "{toggle}"
+          },
+          {
+            "name": "onClick",
+            "code": "{collapsed().overflow ? () => setExpanded((prev) => !prev) : undefined}"
+          },
+          {
+            "name": "onMouseOver",
+            "code": "{() => clickable() && setHover(true)}"
+          },
+          {
+            "name": "onMouseOut",
+            "code": "{() => setHover(false)}"
+          },
+          {
+            "name": "onMouseUp",
+            "code": "    {() => {\n        if (renderer.getSelection()?.getSelectedText())\n            return;\n        if (failed()) {\n            setErrorExpanded((value) => !value);\n            return;\n        }\n        props.onClick?.();\n    }}"
+          },
+          {
+            "name": "onMouseOver",
+            "code": "{props.onMouseOver}"
+          },
+          {
+            "name": "onMouseOut",
+            "code": "{props.onMouseOut}"
+          },
+          {
+            "name": "onMouseUp",
+            "code": "{props.onMouseUp}"
+          },
+          {
+            "name": "onMouseOver",
+            "code": "{() => props.onClick && setHover(true)}"
+          },
+          {
+            "name": "onMouseOut",
+            "code": "{() => setHover(false)}"
+          },
+          {
+            "name": "onMouseUp",
+            "code": "    {() => {\n        if (renderer.getSelection()?.getSelectedText())\n            return;\n        props.onClick?.();\n    }}"
+          },
+          {
+            "name": "onClick",
+            "code": "{collapsed().overflow ? () => setExpanded((prev) => !prev) : undefined}"
+          },
+          {
+            "name": "onClick",
+            "code": "    {() => {\n        if (sessionID()) {\n            navigate({ type: \"session\", sessionID: sessionID()! });\n        }\n        const status = retry();\n        if (status)\n            void DialogAlert.show(dialog, \"Retry Error\", status.message);\n    }}"
+          }
+        ]
+      }
+    },
+    {
+      "path": "packages/tui/src/routes/session/permission.tsx",
+      "sdkCallsEqual": true,
+      "bindingsEqual": true,
+      "handlersEqual": true,
+      "before": {
+        "exists": true,
+        "sdkCalls": [
+          "sdk.client.permission.reply({\n    reply: \"always\",\n    requestID: props.request.id,\n    directory: props.directory,\n    workspace: project.workspace.current(),\n})",
+          "sdk.client.permission.reply({\n    reply: \"reject\",\n    requestID: props.request.id,\n    directory: props.directory,\n    message: message || undefined,\n    workspace: project.workspace.current(),\n})",
+          "sdk.client.permission.reply({\n    reply: \"reject\",\n    requestID: props.request.id,\n    directory: props.directory,\n    workspace: project.workspace.current(),\n})",
+          "sdk.client.permission.reply({\n    reply: \"once\",\n    requestID: props.request.id,\n    directory: props.directory,\n    workspace: project.workspace.current(),\n})"
+        ],
+        "bindings": [
+          "useBindings(() => ({\n    mode: HELIX_BASE_MODE,\n    commands: [\n        {\n            name: \"app.exit\",\n            title: \"Cancel permission rejection\",\n            category: \"Permission\",\n            run() {\n                props.onCancel();\n            },\n        },\n    ],\n    bindings: [\n        { key: \"escape\", desc: \"Cancel permission rejection\", group: \"Permission\", cmd: () => props.onCancel() },\n        ...tuiConfig.keybinds.get(\"app.exit\"),\n        {\n            key: \"return\",\n            desc: \"Confirm permission rejection\",\n            group: \"Permission\",\n            cmd: () => props.onConfirm(input.plainText),\n        },\n    ],\n}))",
+          "useBindings(() => ({\n    mode: HELIX_BASE_MODE,\n    commands: [\n        {\n            name: \"app.exit\",\n            title: \"Reject permission\",\n            category: \"Permission\",\n            run() {\n                if (!props.escapeKey)\n                    return;\n                props.onSelect(props.escapeKey);\n            },\n        },\n        {\n            name: \"permission.prompt.fullscreen\",\n            title: \"Toggle permission fullscreen\",\n            category: \"Permission\",\n            run() {\n                if (!props.fullscreen)\n                    return;\n                setStore(\"expanded\", (v) => !v);\n            },\n        },\n    ],\n    bindings: [\n        {\n            key: \"left\",\n            desc: \"Previous permission option\",\n            group: \"Permission\",\n            cmd: () => {\n                const idx = keys.indexOf(store.selected);\n                const next = keys[(idx - 1 + keys.length) % keys.length];\n                setStore(\"selected\", next);\n            },\n        },\n        {\n            key: \"h\",\n            desc: \"Previous permission option\",\n            group: \"Permission\",\n            cmd: () => {\n                const idx = keys.indexOf(store.selected);\n                const next = keys[(idx - 1 + keys.length) % keys.length];\n                setStore(\"selected\", next);\n            },\n        },\n        {\n            key: \"right\",\n            desc: \"Next permission option\",\n            group: \"Permission\",\n            cmd: () => {\n                const idx = keys.indexOf(store.selected);\n                const next = keys[(idx + 1) % keys.length];\n                setStore(\"selected\", next);\n            },\n        },\n        {\n            key: \"l\",\n            desc: \"Next permission option\",\n            group: \"Permission\",\n            cmd: () => {\n                const idx = keys.indexOf(store.selected);\n                const next = keys[(idx + 1) % keys.length];\n                setStore(\"selected\", next);\n            },\n        },\n        {\n            key: \"return\",\n            desc: \"Select permission option\",\n            group: \"Permission\",\n            cmd: () => props.onSelect(store.selected),\n        },\n        ...(props.escapeKey\n            ? [\n                {\n                    key: \"escape\",\n                    desc: \"Reject permission\",\n                    group: \"Permission\",\n                    cmd: () => props.onSelect(props.escapeKey!),\n                },\n            ]\n            : []),\n        ...(props.escapeKey ? tuiConfig.keybinds.get(\"app.exit\") : []),\n        ...(props.fullscreen ? tuiConfig.keybinds.get(\"permission.prompt.fullscreen\") : []),\n    ],\n}))"
+        ],
+        "handlers": [
+          {
+            "name": "onSelect",
+            "code": "    {(option) => {\n        setStore(\"stage\", \"permission\");\n        if (option === \"cancel\")\n            return;\n        void sdk.client.permission.reply({\n            reply: \"always\",\n            requestID: props.request.id,\n            directory: props.directory,\n            workspace: project.workspace.current(),\n        });\n    }}"
+          },
+          {
+            "name": "onConfirm",
+            "code": "    {(message) => {\n        void sdk.client.permission.reply({\n            reply: \"reject\",\n            requestID: props.request.id,\n            directory: props.directory,\n            message: message || undefined,\n            workspace: project.workspace.current(),\n        });\n    }}"
+          },
+          {
+            "name": "onCancel",
+            "code": "    {() => {\n        setStore(\"stage\", \"permission\");\n    }}"
+          },
+          {
+            "name": "onSelect",
+            "code": "    {(option) => {\n        if (option === \"always\") {\n            setStore(\"stage\", \"always\");\n            return;\n        }\n        if (option === \"reject\") {\n            if (session()?.parentID) {\n                setStore(\"stage\", \"reject\");\n                return;\n            }\n            void sdk.client.permission.reply({\n                reply: \"reject\",\n                requestID: props.request.id,\n                directory: props.directory,\n                workspace: project.workspace.current(),\n            });\n            return;\n        }\n        void sdk.client.permission.reply({\n            reply: \"once\",\n            requestID: props.request.id,\n            directory: props.directory,\n            workspace: project.workspace.current(),\n        });\n    }}"
+          },
+          {
+            "name": "onMouseOver",
+            "code": "{() => setStore(\"selected\", option)}"
+          },
+          {
+            "name": "onMouseUp",
+            "code": "    {() => {\n        setStore(\"selected\", option);\n        props.onSelect(option);\n    }}"
+          }
+        ]
+      },
+      "after": {
+        "exists": true,
+        "sdkCalls": [
+          "sdk.client.permission.reply({\n    reply: \"always\",\n    requestID: props.request.id,\n    directory: props.directory,\n    workspace: project.workspace.current(),\n})",
+          "sdk.client.permission.reply({\n    reply: \"reject\",\n    requestID: props.request.id,\n    directory: props.directory,\n    message: message || undefined,\n    workspace: project.workspace.current(),\n})",
+          "sdk.client.permission.reply({\n    reply: \"reject\",\n    requestID: props.request.id,\n    directory: props.directory,\n    workspace: project.workspace.current(),\n})",
+          "sdk.client.permission.reply({\n    reply: \"once\",\n    requestID: props.request.id,\n    directory: props.directory,\n    workspace: project.workspace.current(),\n})"
+        ],
+        "bindings": [
+          "useBindings(() => ({\n    mode: HELIX_BASE_MODE,\n    commands: [\n        {\n            name: \"app.exit\",\n            title: \"Cancel permission rejection\",\n            category: \"Permission\",\n            run() {\n                props.onCancel();\n            },\n        },\n    ],\n    bindings: [\n        { key: \"escape\", desc: \"Cancel permission rejection\", group: \"Permission\", cmd: () => props.onCancel() },\n        ...tuiConfig.keybinds.get(\"app.exit\"),\n        {\n            key: \"return\",\n            desc: \"Confirm permission rejection\",\n            group: \"Permission\",\n            cmd: () => props.onConfirm(input.plainText),\n        },\n    ],\n}))",
+          "useBindings(() => ({\n    mode: HELIX_BASE_MODE,\n    commands: [\n        {\n            name: \"app.exit\",\n            title: \"Reject permission\",\n            category: \"Permission\",\n            run() {\n                if (!props.escapeKey)\n                    return;\n                props.onSelect(props.escapeKey);\n            },\n        },\n        {\n            name: \"permission.prompt.fullscreen\",\n            title: \"Toggle permission fullscreen\",\n            category: \"Permission\",\n            run() {\n                if (!props.fullscreen)\n                    return;\n                setStore(\"expanded\", (v) => !v);\n            },\n        },\n    ],\n    bindings: [\n        {\n            key: \"left\",\n            desc: \"Previous permission option\",\n            group: \"Permission\",\n            cmd: () => {\n                const idx = keys.indexOf(store.selected);\n                const next = keys[(idx - 1 + keys.length) % keys.length];\n                setStore(\"selected\", next);\n            },\n        },\n        {\n            key: \"h\",\n            desc: \"Previous permission option\",\n            group: \"Permission\",\n            cmd: () => {\n                const idx = keys.indexOf(store.selected);\n                const next = keys[(idx - 1 + keys.length) % keys.length];\n                setStore(\"selected\", next);\n            },\n        },\n        {\n            key: \"right\",\n            desc: \"Next permission option\",\n            group: \"Permission\",\n            cmd: () => {\n                const idx = keys.indexOf(store.selected);\n                const next = keys[(idx + 1) % keys.length];\n                setStore(\"selected\", next);\n            },\n        },\n        {\n            key: \"l\",\n            desc: \"Next permission option\",\n            group: \"Permission\",\n            cmd: () => {\n                const idx = keys.indexOf(store.selected);\n                const next = keys[(idx + 1) % keys.length];\n                setStore(\"selected\", next);\n            },\n        },\n        {\n            key: \"return\",\n            desc: \"Select permission option\",\n            group: \"Permission\",\n            cmd: () => props.onSelect(store.selected),\n        },\n        ...(props.escapeKey\n            ? [\n                {\n                    key: \"escape\",\n                    desc: \"Reject permission\",\n                    group: \"Permission\",\n                    cmd: () => props.onSelect(props.escapeKey!),\n                },\n            ]\n            : []),\n        ...(props.escapeKey ? tuiConfig.keybinds.get(\"app.exit\") : []),\n        ...(props.fullscreen ? tuiConfig.keybinds.get(\"permission.prompt.fullscreen\") : []),\n    ],\n}))"
+        ],
+        "handlers": [
+          {
+            "name": "onSelect",
+            "code": "    {(option) => {\n        setStore(\"stage\", \"permission\");\n        if (option === \"cancel\")\n            return;\n        void sdk.client.permission.reply({\n            reply: \"always\",\n            requestID: props.request.id,\n            directory: props.directory,\n            workspace: project.workspace.current(),\n        });\n    }}"
+          },
+          {
+            "name": "onConfirm",
+            "code": "    {(message) => {\n        void sdk.client.permission.reply({\n            reply: \"reject\",\n            requestID: props.request.id,\n            directory: props.directory,\n            message: message || undefined,\n            workspace: project.workspace.current(),\n        });\n    }}"
+          },
+          {
+            "name": "onCancel",
+            "code": "    {() => {\n        setStore(\"stage\", \"permission\");\n    }}"
+          },
+          {
+            "name": "onSelect",
+            "code": "    {(option) => {\n        if (option === \"always\") {\n            setStore(\"stage\", \"always\");\n            return;\n        }\n        if (option === \"reject\") {\n            if (session()?.parentID) {\n                setStore(\"stage\", \"reject\");\n                return;\n            }\n            void sdk.client.permission.reply({\n                reply: \"reject\",\n                requestID: props.request.id,\n                directory: props.directory,\n                workspace: project.workspace.current(),\n            });\n            return;\n        }\n        void sdk.client.permission.reply({\n            reply: \"once\",\n            requestID: props.request.id,\n            directory: props.directory,\n            workspace: project.workspace.current(),\n        });\n    }}"
+          },
+          {
+            "name": "onMouseOver",
+            "code": "{() => setStore(\"selected\", option)}"
+          },
+          {
+            "name": "onMouseUp",
+            "code": "    {() => {\n        setStore(\"selected\", option);\n        props.onSelect(option);\n    }}"
+          }
+        ]
+      }
+    },
+    {
+      "path": "packages/tui/src/routes/session/sidebar.tsx",
+      "sdkCallsEqual": true,
+      "bindingsEqual": true,
+      "handlersEqual": true,
+      "before": {
+        "exists": true,
+        "sdkCalls": [],
+        "bindings": [],
+        "handlers": []
+      },
+      "after": {
+        "exists": true,
+        "sdkCalls": [],
+        "bindings": [],
+        "handlers": []
+      }
+    },
+    {
+      "path": "packages/tui/src/ui/border.ts",
+      "sdkCallsEqual": true,
+      "bindingsEqual": true,
+      "handlersEqual": true,
+      "before": {
+        "exists": true,
+        "sdkCalls": [],
+        "bindings": [],
+        "handlers": []
+      },
+      "after": {
+        "exists": true,
+        "sdkCalls": [],
+        "bindings": [],
+        "handlers": []
+      }
+    },
+    {
+      "path": "packages/tui/src/ui/dialog-alert.tsx",
+      "sdkCallsEqual": true,
+      "bindingsEqual": true,
+      "handlersEqual": false,
+      "before": {
+        "exists": true,
+        "sdkCalls": [],
+        "bindings": [
+          "useBindings(() => ({\n    bindings: [\n        {\n            key: \"return\",\n            desc: \"Confirm alert\",\n            group: \"Dialog\",\n            cmd: () => {\n                props.onConfirm?.();\n                dialog.clear();\n            },\n        },\n    ],\n}))"
+        ],
+        "handlers": [
+          {
+            "name": "onMouseUp",
+            "code": "{() => dialog.clear()}"
+          },
+          {
+            "name": "onMouseUp",
+            "code": "    {() => {\n        props.onConfirm?.();\n        dialog.clear();\n    }}"
+          },
+          {
+            "name": "onConfirm",
+            "code": "{() => resolve()}"
+          }
+        ]
+      },
+      "after": {
+        "exists": true,
+        "sdkCalls": [],
+        "bindings": [
+          "useBindings(() => ({\n    bindings: [\n        {\n            key: \"return\",\n            desc: \"Confirm alert\",\n            group: \"Dialog\",\n            cmd: () => {\n                props.onConfirm?.();\n                dialog.clear();\n            },\n        },\n    ],\n}))"
+        ],
+        "handlers": [
+          {
+            "name": "onMouseUp",
+            "code": "    {() => {\n        props.onConfirm?.();\n        dialog.clear();\n    }}"
+          },
+          {
+            "name": "onConfirm",
+            "code": "{() => resolve()}"
+          }
+        ]
+      }
+    },
+    {
+      "path": "packages/tui/src/ui/dialog-confirm.tsx",
+      "sdkCallsEqual": true,
+      "bindingsEqual": true,
+      "handlersEqual": false,
+      "before": {
+        "exists": true,
+        "sdkCalls": [],
+        "bindings": [
+          "useBindings(() => ({\n    bindings: [\n        {\n            key: \"return\",\n            desc: \"Confirm dialog selection\",\n            group: \"Dialog\",\n            cmd: () => {\n                if (store.active === \"confirm\")\n                    props.onConfirm?.();\n                if (store.active === \"cancel\")\n                    props.onCancel?.();\n                dialog.clear();\n            },\n        },\n        {\n            key: \"left\",\n            desc: \"Previous dialog option\",\n            group: \"Dialog\",\n            cmd: () => {\n                setStore(\"active\", store.active === \"confirm\" ? \"cancel\" : \"confirm\");\n            },\n        },\n        {\n            key: \"right\",\n            desc: \"Next dialog option\",\n            group: \"Dialog\",\n            cmd: () => {\n                setStore(\"active\", store.active === \"confirm\" ? \"cancel\" : \"confirm\");\n            },\n        },\n    ],\n}))"
+        ],
+        "handlers": [
+          {
+            "name": "onMouseUp",
+            "code": "{() => dialog.clear()}"
+          },
+          {
+            "name": "onMouseUp",
+            "code": "    {() => {\n        if (key === \"confirm\")\n            props.onConfirm?.();\n        if (key === \"cancel\")\n            props.onCancel?.();\n        dialog.clear();\n    }}"
+          },
+          {
+            "name": "onConfirm",
+            "code": "{() => resolve(true)}"
+          },
+          {
+            "name": "onCancel",
+            "code": "{() => resolve(false)}"
+          }
+        ]
+      },
+      "after": {
+        "exists": true,
+        "sdkCalls": [],
+        "bindings": [
+          "useBindings(() => ({\n    bindings: [\n        {\n            key: \"return\",\n            desc: \"Confirm dialog selection\",\n            group: \"Dialog\",\n            cmd: () => {\n                if (store.active === \"confirm\")\n                    props.onConfirm?.();\n                if (store.active === \"cancel\")\n                    props.onCancel?.();\n                dialog.clear();\n            },\n        },\n        {\n            key: \"left\",\n            desc: \"Previous dialog option\",\n            group: \"Dialog\",\n            cmd: () => {\n                setStore(\"active\", store.active === \"confirm\" ? \"cancel\" : \"confirm\");\n            },\n        },\n        {\n            key: \"right\",\n            desc: \"Next dialog option\",\n            group: \"Dialog\",\n            cmd: () => {\n                setStore(\"active\", store.active === \"confirm\" ? \"cancel\" : \"confirm\");\n            },\n        },\n    ],\n}))"
+        ],
+        "handlers": [
+          {
+            "name": "onMouseUp",
+            "code": "    {() => {\n        if (key === \"confirm\")\n            props.onConfirm?.();\n        if (key === \"cancel\")\n            props.onCancel?.();\n        dialog.clear();\n    }}"
+          },
+          {
+            "name": "onConfirm",
+            "code": "{() => resolve(true)}"
+          },
+          {
+            "name": "onCancel",
+            "code": "{() => resolve(false)}"
+          }
+        ]
+      }
+    },
+    {
+      "path": "packages/tui/src/ui/dialog-help.tsx",
+      "sdkCallsEqual": true,
+      "bindingsEqual": true,
+      "handlersEqual": false,
+      "before": {
+        "exists": true,
+        "sdkCalls": [],
+        "bindings": [
+          "useBindings(() => ({\n    bindings: [\n        { key: \"return\", desc: \"Close help\", group: \"Dialog\", cmd: () => dialog.clear() },\n        { key: \"escape\", desc: \"Close help\", group: \"Dialog\", cmd: () => dialog.clear() },\n    ],\n}))"
+        ],
+        "handlers": [
+          {
+            "name": "onMouseUp",
+            "code": "{() => dialog.clear()}"
+          },
+          {
+            "name": "onMouseUp",
+            "code": "{() => dialog.clear()}"
+          }
+        ]
+      },
+      "after": {
+        "exists": true,
+        "sdkCalls": [],
+        "bindings": [
+          "useBindings(() => ({\n    bindings: [\n        { key: \"return\", desc: \"Close help\", group: \"Dialog\", cmd: () => dialog.clear() },\n        { key: \"escape\", desc: \"Close help\", group: \"Dialog\", cmd: () => dialog.clear() },\n    ],\n}))"
+        ],
+        "handlers": [
+          {
+            "name": "onMouseUp",
+            "code": "{() => dialog.clear()}"
+          }
+        ]
+      }
+    },
+    {
+      "path": "packages/tui/src/ui/dialog-prompt.tsx",
+      "sdkCallsEqual": true,
+      "bindingsEqual": true,
+      "handlersEqual": false,
+      "before": {
+        "exists": true,
+        "sdkCalls": [],
+        "bindings": [
+          "useBindings(() => ({\n    target: textareaTarget,\n    enabled: textareaTarget() !== undefined && !props.busy,\n    priority: 1,\n    commands: [\n        {\n            name: \"dialog.prompt.submit\",\n            title: \"Submit dialog prompt\",\n            category: \"Dialog\",\n            run: confirm,\n        },\n    ],\n    bindings: tuiConfig.keybinds.gather(\"dialog.prompt\", [\"dialog.prompt.submit\"]),\n}))"
+        ],
+        "handlers": [
+          {
+            "name": "onMouseUp",
+            "code": "{() => dialog.clear()}"
+          },
+          {
+            "name": "onConfirm",
+            "code": "{(value) => resolve(value)}"
+          },
+          {
+            "name": "onCancel",
+            "code": "{() => resolve(null)}"
+          }
+        ]
+      },
+      "after": {
+        "exists": true,
+        "sdkCalls": [],
+        "bindings": [
+          "useBindings(() => ({\n    target: textareaTarget,\n    enabled: textareaTarget() !== undefined && !props.busy,\n    priority: 1,\n    commands: [\n        {\n            name: \"dialog.prompt.submit\",\n            title: \"Submit dialog prompt\",\n            category: \"Dialog\",\n            run: confirm,\n        },\n    ],\n    bindings: tuiConfig.keybinds.gather(\"dialog.prompt\", [\"dialog.prompt.submit\"]),\n}))"
+        ],
+        "handlers": [
+          {
+            "name": "onConfirm",
+            "code": "{(value) => resolve(value)}"
+          },
+          {
+            "name": "onCancel",
+            "code": "{() => resolve(null)}"
+          }
+        ]
+      }
+    },
+    {
+      "path": "packages/tui/src/ui/dialog-select.tsx",
+      "sdkCallsEqual": true,
+      "bindingsEqual": true,
+      "handlersEqual": false,
+      "before": {
+        "exists": true,
+        "sdkCalls": [],
+        "bindings": [
+          "useBindings(() => {\n    const visible = shownActions();\n    return {\n        commands: [\n            {\n                name: \"dialog.select.prev\",\n                title: \"Previous item\",\n                category: \"Dialog\",\n                run() {\n                    setStore(\"input\", \"keyboard\");\n                    move(-1);\n                },\n            },\n            {\n                name: \"dialog.select.next\",\n                title: \"Next item\",\n                category: \"Dialog\",\n                run() {\n                    setStore(\"input\", \"keyboard\");\n                    move(1);\n                },\n            },\n            {\n                name: \"dialog.select.page_up\",\n                title: \"Page up\",\n                category: \"Dialog\",\n                run() {\n                    setStore(\"input\", \"keyboard\");\n                    move(-10);\n                },\n            },\n            {\n                name: \"dialog.select.page_down\",\n                title: \"Page down\",\n                category: \"Dialog\",\n                run() {\n                    setStore(\"input\", \"keyboard\");\n                    move(10);\n                },\n            },\n            {\n                name: \"dialog.select.home\",\n                title: \"First item\",\n                category: \"Dialog\",\n                run() {\n                    if (props.locked)\n                        return;\n                    setStore(\"input\", \"keyboard\");\n                    moveTo(0);\n                },\n            },\n            {\n                name: \"dialog.select.end\",\n                title: \"Last item\",\n                category: \"Dialog\",\n                run() {\n                    if (props.locked)\n                        return;\n                    setStore(\"input\", \"keyboard\");\n                    moveTo(flat().length - 1);\n                },\n            },\n            {\n                name: \"dialog.select.submit\",\n                title: \"Select item\",\n                category: \"Dialog\",\n                run: submit,\n            },\n            ...visible.map((item) => ({\n                name: item.command,\n                title: item.title,\n                category: \"Dialog\",\n                run() {\n                    if (props.locked)\n                        return;\n                    if (isActionDisabled(item))\n                        return;\n                    setStore(\"input\", \"keyboard\");\n                    const option = selected();\n                    if (!option)\n                        return;\n                    item.onTrigger(option);\n                },\n            })),\n        ],\n        bindings: [\n            ...tuiConfig.keybinds.gather(\"dialog.select\", [\n                \"dialog.select.prev\",\n                \"dialog.select.next\",\n                \"dialog.select.page_up\",\n                \"dialog.select.page_down\",\n                \"dialog.select.home\",\n                \"dialog.select.end\",\n                \"dialog.select.submit\",\n            ]),\n            ...visible.flatMap((item) => tuiConfig.keybinds.get(item.command)),\n            ...(visible.length\n                ? [\n                    {\n                        key: \"tab\",\n                        desc: \"Next dialog action\",\n                        group: \"Dialog\",\n                        cmd: () => moveAction(1),\n                    },\n                    {\n                        key: \"shift+tab\",\n                        desc: \"Previous dialog action\",\n                        group: \"Dialog\",\n                        cmd: () => moveAction(-1),\n                    },\n                ]\n                : []),\n            ...(props.bindings ?? []).filter((binding) => {\n                if (typeof binding.cmd !== \"string\")\n                    return true;\n                return visible.some((item) => item.command === binding.cmd);\n            }),\n        ],\n    };\n})"
+        ],
+        "handlers": [
+          {
+            "name": "onMouseUp",
+            "code": "{() => triggerAction(item)}"
+          },
+          {
+            "name": "onMouseUp",
+            "code": "{() => dialog.clear()}"
+          },
+          {
+            "name": "onInput",
+            "code": "    {(e) => {\n        if (props.locked)\n            return;\n        batch(() => {\n            setStore(\"filter\", e);\n            props.onFilter?.(e);\n        });\n    }}"
+          },
+          {
+            "name": "onMouseMove",
+            "code": "    {() => {\n        if (props.locked)\n            return;\n        setStore(\"input\", \"mouse\");\n        setFocusedAction(undefined);\n    }}"
+          },
+          {
+            "name": "onMouseUp",
+            "code": "    {() => {\n        if (props.locked)\n            return;\n        option.onSelect?.(dialog);\n        props.onSelect?.(option);\n    }}"
+          },
+          {
+            "name": "onMouseOver",
+            "code": "    {() => {\n        if (props.locked)\n            return;\n        if (store.input !== \"mouse\")\n            return;\n        const index = flat().findIndex((x) => isDeepEqual(x.value, option.value));\n        if (index === -1)\n            return;\n        moveTo(index);\n    }}"
+          },
+          {
+            "name": "onMouseDown",
+            "code": "    {() => {\n        if (props.locked)\n            return;\n        const index = flat().findIndex((x) => isDeepEqual(x.value, option.value));\n        if (index === -1)\n            return;\n        moveTo(index);\n    }}"
+          }
+        ]
+      },
+      "after": {
+        "exists": true,
+        "sdkCalls": [],
+        "bindings": [
+          "useBindings(() => {\n    const visible = shownActions();\n    return {\n        commands: [\n            {\n                name: \"dialog.select.prev\",\n                title: \"Previous item\",\n                category: \"Dialog\",\n                run() {\n                    setStore(\"input\", \"keyboard\");\n                    move(-1);\n                },\n            },\n            {\n                name: \"dialog.select.next\",\n                title: \"Next item\",\n                category: \"Dialog\",\n                run() {\n                    setStore(\"input\", \"keyboard\");\n                    move(1);\n                },\n            },\n            {\n                name: \"dialog.select.page_up\",\n                title: \"Page up\",\n                category: \"Dialog\",\n                run() {\n                    setStore(\"input\", \"keyboard\");\n                    move(-10);\n                },\n            },\n            {\n                name: \"dialog.select.page_down\",\n                title: \"Page down\",\n                category: \"Dialog\",\n                run() {\n                    setStore(\"input\", \"keyboard\");\n                    move(10);\n                },\n            },\n            {\n                name: \"dialog.select.home\",\n                title: \"First item\",\n                category: \"Dialog\",\n                run() {\n                    if (props.locked)\n                        return;\n                    setStore(\"input\", \"keyboard\");\n                    moveTo(0);\n                },\n            },\n            {\n                name: \"dialog.select.end\",\n                title: \"Last item\",\n                category: \"Dialog\",\n                run() {\n                    if (props.locked)\n                        return;\n                    setStore(\"input\", \"keyboard\");\n                    moveTo(flat().length - 1);\n                },\n            },\n            {\n                name: \"dialog.select.submit\",\n                title: \"Select item\",\n                category: \"Dialog\",\n                run: submit,\n            },\n            ...visible.map((item) => ({\n                name: item.command,\n                title: item.title,\n                category: \"Dialog\",\n                run() {\n                    if (props.locked)\n                        return;\n                    if (isActionDisabled(item))\n                        return;\n                    setStore(\"input\", \"keyboard\");\n                    const option = selected();\n                    if (!option)\n                        return;\n                    item.onTrigger(option);\n                },\n            })),\n        ],\n        bindings: [\n            ...tuiConfig.keybinds.gather(\"dialog.select\", [\n                \"dialog.select.prev\",\n                \"dialog.select.next\",\n                \"dialog.select.page_up\",\n                \"dialog.select.page_down\",\n                \"dialog.select.home\",\n                \"dialog.select.end\",\n                \"dialog.select.submit\",\n            ]),\n            ...visible.flatMap((item) => tuiConfig.keybinds.get(item.command)),\n            ...(visible.length\n                ? [\n                    {\n                        key: \"tab\",\n                        desc: \"Next dialog action\",\n                        group: \"Dialog\",\n                        cmd: () => moveAction(1),\n                    },\n                    {\n                        key: \"shift+tab\",\n                        desc: \"Previous dialog action\",\n                        group: \"Dialog\",\n                        cmd: () => moveAction(-1),\n                    },\n                ]\n                : []),\n            ...(props.bindings ?? []).filter((binding) => {\n                if (typeof binding.cmd !== \"string\")\n                    return true;\n                return visible.some((item) => item.command === binding.cmd);\n            }),\n        ],\n    };\n})"
+        ],
+        "handlers": [
+          {
+            "name": "onMouseUp",
+            "code": "{() => triggerAction(item)}"
+          },
+          {
+            "name": "onInput",
+            "code": "    {(e) => {\n        if (props.locked)\n            return;\n        batch(() => {\n            setStore(\"filter\", e);\n            props.onFilter?.(e);\n        });\n    }}"
+          },
+          {
+            "name": "onMouseMove",
+            "code": "    {() => {\n        if (props.locked)\n            return;\n        setStore(\"input\", \"mouse\");\n        setFocusedAction(undefined);\n    }}"
+          },
+          {
+            "name": "onMouseUp",
+            "code": "    {() => {\n        if (props.locked)\n            return;\n        option.onSelect?.(dialog);\n        props.onSelect?.(option);\n    }}"
+          },
+          {
+            "name": "onMouseOver",
+            "code": "    {() => {\n        if (props.locked)\n            return;\n        if (store.input !== \"mouse\")\n            return;\n        const index = flat().findIndex((x) => isDeepEqual(x.value, option.value));\n        if (index === -1)\n            return;\n        moveTo(index);\n    }}"
+          },
+          {
+            "name": "onMouseDown",
+            "code": "    {() => {\n        if (props.locked)\n            return;\n        const index = flat().findIndex((x) => isDeepEqual(x.value, option.value));\n        if (index === -1)\n            return;\n        moveTo(index);\n    }}"
+          }
+        ]
+      }
+    },
+    {
+      "path": "packages/tui/src/ui/dialog.tsx",
+      "sdkCallsEqual": true,
+      "bindingsEqual": true,
+      "handlersEqual": false,
+      "before": {
+        "exists": true,
+        "sdkCalls": [],
+        "bindings": [
+          "useBindings(() => ({\n    enabled: store.stack.length > 0 && !renderer.getSelection()?.getSelectedText(),\n    bindings: [\n        {\n            key: \"escape\",\n            desc: \"Close dialog\",\n            group: \"Dialog\",\n            cmd: () => {\n                if (renderer.getSelection()) {\n                    renderer.clearSelection();\n                }\n                const current = store.stack.at(-1);\n                current?.onClose?.();\n                setStore(\"stack\", store.stack.slice(0, -1));\n                refocus();\n            },\n        },\n        {\n            key: \"ctrl+c\",\n            desc: \"Close dialog\",\n            group: \"Dialog\",\n            cmd: () => {\n                if (renderer.getSelection()) {\n                    renderer.clearSelection();\n                }\n                const current = store.stack.at(-1);\n                current?.onClose?.();\n                setStore(\"stack\", store.stack.slice(0, -1));\n                refocus();\n            },\n        },\n    ],\n}))"
+        ],
+        "handlers": [
+          {
+            "name": "onMouseDown",
+            "code": "    {() => {\n        dismiss = !!renderer.getSelection();\n    }}"
+          },
+          {
+            "name": "onMouseUp",
+            "code": "    {() => {\n        if (dismiss) {\n            dismiss = false;\n            return;\n        }\n        props.onClose?.();\n    }}"
+          },
+          {
+            "name": "onMouseUp",
+            "code": "    {(e: {\n        stopPropagation(): void;\n    }) => {\n        if (renderer.getSelection()?.getSelectedText())\n            return;\n        dismiss = false;\n        e.stopPropagation();\n    }}"
+          },
+          {
+            "name": "onMouseDown",
+            "code": "    {(evt: {\n        button: number;\n        preventDefault(): void;\n        stopPropagation(): void;\n    }) => {\n        if (!Flag.HELIX_EXPERIMENTAL_DISABLE_COPY_ON_SELECT)\n            return;\n        if (evt.button !== MouseButton.RIGHT)\n            return;\n        if (!copySelection())\n            return;\n        evt.preventDefault();\n        evt.stopPropagation();\n    }}"
+          },
+          {
+            "name": "onMouseUp",
+            "code": "{!Flag.HELIX_EXPERIMENTAL_DISABLE_COPY_ON_SELECT ? copySelection : undefined}"
+          },
+          {
+            "name": "onClose",
+            "code": "{() => value.clear()}"
+          }
+        ]
+      },
+      "after": {
+        "exists": true,
+        "sdkCalls": [],
+        "bindings": [
+          "useBindings(() => ({\n    enabled: store.stack.length > 0 && !renderer.getSelection()?.getSelectedText(),\n    bindings: [\n        {\n            key: \"escape\",\n            desc: \"Close dialog\",\n            group: \"Dialog\",\n            cmd: () => {\n                if (renderer.getSelection()) {\n                    renderer.clearSelection();\n                }\n                const current = store.stack.at(-1);\n                current?.onClose?.();\n                setStore(\"stack\", store.stack.slice(0, -1));\n                refocus();\n            },\n        },\n        {\n            key: \"ctrl+c\",\n            desc: \"Close dialog\",\n            group: \"Dialog\",\n            cmd: () => {\n                if (renderer.getSelection()) {\n                    renderer.clearSelection();\n                }\n                const current = store.stack.at(-1);\n                current?.onClose?.();\n                setStore(\"stack\", store.stack.slice(0, -1));\n                refocus();\n            },\n        },\n    ],\n}))"
+        ],
+        "handlers": [
+          {
+            "name": "onMouseDown",
+            "code": "    {() => {\n        dismiss = !!renderer.getSelection();\n    }}"
+          },
+          {
+            "name": "onMouseUp",
+            "code": "    {() => {\n        if (dismiss) {\n            dismiss = false;\n            return;\n        }\n        props.onClose?.();\n    }}"
+          },
+          {
+            "name": "onMouseUp",
+            "code": "    {(e: {\n        stopPropagation(): void;\n    }) => {\n        if (renderer.getSelection()?.getSelectedText())\n            return;\n        dismiss = false;\n        e.stopPropagation();\n    }}"
+          },
+          {
+            "name": "onMouseUp",
+            "code": "{() => dialog.clear()}"
+          },
+          {
+            "name": "onMouseDown",
+            "code": "    {(evt: {\n        button: number;\n        preventDefault(): void;\n        stopPropagation(): void;\n    }) => {\n        if (!Flag.HELIX_EXPERIMENTAL_DISABLE_COPY_ON_SELECT)\n            return;\n        if (evt.button !== MouseButton.RIGHT)\n            return;\n        if (!copySelection())\n            return;\n        evt.preventDefault();\n        evt.stopPropagation();\n    }}"
+          },
+          {
+            "name": "onMouseUp",
+            "code": "{!Flag.HELIX_EXPERIMENTAL_DISABLE_COPY_ON_SELECT ? copySelection : undefined}"
+          },
+          {
+            "name": "onClose",
+            "code": "{() => value.clear()}"
+          }
+        ]
+      }
+    },
+    {
+      "path": "packages/tui/src/ui/genome-field.ts",
+      "sdkCallsEqual": true,
+      "bindingsEqual": true,
+      "handlersEqual": true,
+      "before": {
+        "exists": false,
+        "sdkCalls": [],
+        "bindings": [],
+        "handlers": []
+      },
+      "after": {
+        "exists": true,
+        "sdkCalls": [],
+        "bindings": [],
+        "handlers": []
+      }
+    },
+    {
+      "path": "packages/tui/src/ui/identity.tsx",
+      "sdkCallsEqual": true,
+      "bindingsEqual": true,
+      "handlersEqual": true,
+      "before": {
+        "exists": false,
+        "sdkCalls": [],
+        "bindings": [],
+        "handlers": []
+      },
+      "after": {
+        "exists": true,
+        "sdkCalls": [],
+        "bindings": [],
+        "handlers": []
+      }
+    }
+  ]
+}

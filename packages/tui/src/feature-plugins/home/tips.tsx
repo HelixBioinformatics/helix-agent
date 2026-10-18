@@ -3,10 +3,12 @@ import type { BuiltinTuiPlugin } from "../builtins"
 import { createMemo, Show } from "solid-js"
 import { Tips } from "./tips-view"
 import { useBindings } from "../../keymap"
+import { useTerminalDimensions } from "@opentui/solid"
 
 const id = "internal:home-tips"
 
 function View(props: { api: TuiPluginApi; hidden: boolean; show: boolean; connected: boolean }) {
+  const dimensions = useTerminalDimensions()
   useBindings(() => ({
     commands: [
       {
@@ -24,7 +26,7 @@ function View(props: { api: TuiPluginApi; hidden: boolean; show: boolean; connec
   }))
 
   return (
-    <box width="100%" maxWidth={75} alignItems="center" paddingTop={3} flexShrink={1}>
+    <box width="100%" maxWidth={75} alignItems="center" paddingTop={dimensions().height < 22 ? 0 : 1} flexShrink={0}>
       <Show when={props.show}>
         <Tips api={props.api} connected={props.connected} />
       </Show>

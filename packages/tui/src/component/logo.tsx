@@ -1,36 +1,60 @@
-import { TextAttributes } from "@opentui/core"
-import { For } from "solid-js"
+import { CliRenderEvents, TextAttributes } from "@opentui/core"
+import { useRenderer } from "@opentui/solid"
+import { createSignal, For, onCleanup, Show } from "solid-js"
 import { useTheme } from "../context/theme"
-import { MARK_INNER, MARK_OUTER, home } from "../logo"
+import { MARK_INNER, MARK_OUTER, mark } from "../logo"
+import { identityAlphabet } from "../ui/identity"
 
-/** Split a line into runs that share a colour, so a line can carry more than one. */
-function segments(line: string) {
-  const out: { text: string; kind: "outer" | "inner" | "text" }[] = []
-  for (const char of line) {
-    const kind = char === MARK_OUTER ? "outer" : char === MARK_INNER ? "inner" : "text"
-    const last = out[out.length - 1]
-    if (last && last.kind === kind) last.text += char
-    else out.push({ text: char, kind })
-  }
-  return out
-}
-
-export function Logo() {
+export function Logo(props: { compact?: boolean }) {
   const { theme } = useTheme()
-
-  // Paint the two DNA strands separately; keep the wordmark in the text colour.
-  const colour = (kind: "outer" | "inner" | "text") =>
-    kind === "outer" ? theme.primary : kind === "inner" ? theme.textMuted : theme.text
+  const renderer = useRenderer()
+  const alphabet = identityAlphabet()
+  const [cell, setCell] = createSignal(renderer.widthMethod === "wcwidth" ? 2 : 1)
+  const updateWidth = () => setCell(renderer.widthMethod === "wcwidth" ? 2 : 1)
+  renderer.on(CliRenderEvents.CAPABILITIES, updateWidth)
+  onCleanup(() => renderer.off(CliRenderEvents.CAPABILITIES, updateWidth))
+  const glyph = (char: string) =>
+    char === MARK_OUTER ? alphabet.outer : char === MARK_INNER ? alphabet.inner : char === "─" ? alphabet.rung : char
 
   return (
-    <box>
-      <For each={home.word}>
-        {(line) => (
-          <text attributes={TextAttributes.BOLD} selectable={false}>
-            <For each={segments(line)}>{(seg) => <span style={{ fg: colour(seg.kind) }}>{seg.text}</span>}</For>
-          </text>
-        )}
-      </For>
-    </box>
+    <Show
+      when={props.compact}
+      fallback={
+        <box flexDirection="row" gap={3} flexShrink={0}>
+          <box width={9 * cell()} flexShrink={0}>
+            <For each={mark}>
+              {(line) => (
+                <box flexDirection="row" height={1}>
+                  <For each={Array.from(line.padEnd(9))}>
+                    {(char) => (
+                      <text
+                        width={cell()}
+                        selectable={false}
+                        fg={char === MARK_OUTER ? theme.primary : char === MARK_INNER ? theme.textMuted : theme.border}
+                      >
+                        {glyph(char)}
+                      </text>
+                    )}
+                  </For>
+                </box>
+              )}
+            </For>
+          </box>
+          <box flexGrow={1} minWidth={0} paddingTop={1}>
+            <text fg={theme.text} attributes={TextAttributes.BOLD} selectable={false}>
+              Helix Agent
+            </text>
+            <text fg={theme.textMuted} selectable={false}>
+              bioinformatics co-scientist
+            </text>
+          </box>
+        </box>
+      }
+    >
+      <text fg={theme.text} selectable={false}>
+        <b>Helix Agent</b>
+        <span style={{ fg: theme.textMuted }}> / bioinformatics co-scientist</span>
+      </text>
+    </Show>
   )
 }

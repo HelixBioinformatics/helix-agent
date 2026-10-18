@@ -1,0 +1,751 @@
+{
+  "generatedAt": "2026-10-18T02:24:40.718Z",
+  "scope": "15 full-app mocked-SDK input flows at 120×40, 60×20, comparing same fixtures against frozen source and active source. No external provider or pipeline calls.",
+  "cases": 30,
+  "allPassed": true,
+  "sdkCallsAllEqual": true,
+  "bindingsAllEqual": true,
+  "limitations": [
+    "OS-level IME composition is not modeled by this renderer test API. A real Textarea late-flush path is exercised separately: double Enter, next-tick composed Hangul tail insertion, one final-text submission.",
+    "Typed Unicode uses pressKeys(Array.from(text)) and NFC because OpenTUI0.4.3 mockInput.typeText splits surrogate pairs; decomposed combining text and emoji are additionally exercised through bracketed paste.",
+    "Clipboard writes are intercepted after native mouse selection; the fixtures compare copied text and selection cleanup without modifying the OS clipboard.",
+    "These assertions prove exercised actions/payloads, not the absence of every possible behavioral difference; AST review provides separate evidence for unchanged SDK calls and binding registrations."
+  ],
+  "sourceHashes": {
+    "packages/tui/src/ui/dialog-alert.tsx": "09e82ac08974bec79b8049a5e1ccd4b638ce16e91c681d4b0ffa6b985d327666",
+    "packages/tui/src/ui/border.ts": "9f0f00b590ed082b1157d10b35c95a98532931bfdbd96d264e3e87bbbf44517e",
+    "packages/tui/src/ui/dialog-help.tsx": "1f17fc13f05f8ea469ee202f8996e7307e93a08ceb6d28aaac58272c52caacbe",
+    "packages/tui/src/ui/dialog-prompt.tsx": "2d486919df168654cdc18f68ffc96b79290d84a961957350f52b59156be7cc55",
+    "packages/tui/src/ui/dialog-select.tsx": "179eef7b011f71422e04ab082982b0cbda25fab0d51eb585478c5e635b5ee4e4",
+    "packages/tui/src/ui/identity.tsx": "188601ce08e2ec768866f719fd8ffc839fe3763f4c34731a0ce45fb9218a3baf",
+    "packages/tui/src/ui/dialog-confirm.tsx": "79f09d634e1bbac7f66ed9ee885fef12a076370ac63a8dc72e7d5dc876e49765",
+    "packages/tui/src/ui/dialog.tsx": "5e4eed9e98b768ca020fa804a0a718c41b2764852ad07d01a2d467f2f4ae34f4",
+    "packages/tui/src/ui/genome-field.ts": "d5153b06615ac0c1b9b9e9d0d46e25c48633e10bc567f23dc3acad2faa16eef0",
+    "packages/tui/src/feature-plugins/sidebar/todo.tsx": "f80bb7e5002a54139d7d9263f15367e3abadba95983a74f9325ea70b15dfec45",
+    "packages/tui/src/feature-plugins/sidebar/lsp.tsx": "d06180e1f2d275e4b6a0afefe4d20c45c8aed41f19ea56202e12da94736b8d6b",
+    "packages/tui/src/feature-plugins/sidebar/files.tsx": "f15b94f838edf4644973ad0ca1027a5f84e5e9b786144cc2a1983fea0619138e",
+    "packages/tui/src/feature-plugins/sidebar/footer.tsx": "ce71a526292b3980b37e7cf50bd7e48d66cc9847af99b806770463a2f7f6ef50",
+    "packages/tui/src/feature-plugins/sidebar/mcp.tsx": "99fe9a9c346221cbc4182287f3a2b70eb0099ed6e5ca83c35280d83dff27c5b9",
+    "packages/tui/src/feature-plugins/sidebar/context.tsx": "46b286ea8eefd00b00138d54ffe9c0674950dfa4adf6cf1962ff648fbb5eeec7",
+    "packages/tui/src/feature-plugins/home/footer.tsx": "01d6ee2ff06b01080370fd9766df5fb65e6d1cc67f367155fa08700082d228c0",
+    "packages/tui/src/feature-plugins/home/tips.tsx": "71a8562b3e1bd9c4db467dce9addbf726c17054f7c329bb1954979b1240f2dbd",
+    "packages/tui/src/context/pulse.tsx": "39f169f62a321c9e1c16dbe210dc2a957935413c0a23b6c7cd1eb27ed290168f",
+    "packages/tui/src/component/prompt/index.tsx": "051199c4633f1e5042abc16f2aecdf2579b1424f985a611c065d31fc6bef4b28",
+    "packages/tui/src/component/logo.tsx": "b8b7cf636ea330461f523c7be68bcd4d915ce7395b893698c37f56c37f1380ae",
+    "packages/tui/src/component/error-component.tsx": "baa7c98879a70bb2a215292929de02bfa6e2bb940bb1f8f363a0bf80bc2a2edd",
+    "packages/tui/src/component/spinner.tsx": "82d293f6c4160211095ee51ae745ebfeb426afe6872e723d5b7de58268689b16",
+    "packages/tui/src/theme/assets/helix.json": "566e83fb89c2c7935036d167aa48d05c449b7b0d7c2e8b320a2e77c118e9c1cb",
+    "packages/tui/src/routes/home.tsx": "91563957ee211160c47d36bb0622987cd210e132a13797102b0892e27a19dcd2",
+    "packages/tui/src/routes/session/index.tsx": "f1dc6ad0cd2fc5b9d9b131c4a408c8a30ed7ec4cff24bb52d11068d2d0defa5f",
+    "packages/tui/src/routes/session/permission.tsx": "4e822663714921e168b7f972ec52dce4ac2a51a80ec41298999430e58b28504a",
+    "packages/tui/src/routes/session/sidebar.tsx": "7398d76c450a321a22e51274c90fa6fec65fe70074e938f150f5d5d148fb2d1f"
+  },
+  "results": [
+    {
+      "flow": "permission-once",
+      "width": 120,
+      "height": 40,
+      "beforePassed": true,
+      "afterPassed": true,
+      "effectsEqual": true,
+      "callbacksEqual": true,
+      "effects": [
+        {
+          "method": "POST",
+          "path": "/permission/per_fixture/reply",
+          "query": [
+            [
+              "directory",
+              "/tmp/helix/packages/tui"
+            ]
+          ],
+          "body": {
+            "reply": "once"
+          }
+        }
+      ],
+      "callbacks": []
+    },
+    {
+      "flow": "permission-once",
+      "width": 60,
+      "height": 20,
+      "beforePassed": true,
+      "afterPassed": true,
+      "effectsEqual": true,
+      "callbacksEqual": true,
+      "effects": [
+        {
+          "method": "POST",
+          "path": "/permission/per_fixture/reply",
+          "query": [
+            [
+              "directory",
+              "/tmp/helix/packages/tui"
+            ]
+          ],
+          "body": {
+            "reply": "once"
+          }
+        }
+      ],
+      "callbacks": []
+    },
+    {
+      "flow": "permission-always",
+      "width": 120,
+      "height": 40,
+      "beforePassed": true,
+      "afterPassed": true,
+      "effectsEqual": true,
+      "callbacksEqual": true,
+      "effects": [
+        {
+          "method": "POST",
+          "path": "/permission/per_fixture/reply",
+          "query": [
+            [
+              "directory",
+              "/tmp/helix/packages/tui"
+            ]
+          ],
+          "body": {
+            "reply": "always"
+          }
+        }
+      ],
+      "callbacks": []
+    },
+    {
+      "flow": "permission-always",
+      "width": 60,
+      "height": 20,
+      "beforePassed": true,
+      "afterPassed": true,
+      "effectsEqual": true,
+      "callbacksEqual": true,
+      "effects": [
+        {
+          "method": "POST",
+          "path": "/permission/per_fixture/reply",
+          "query": [
+            [
+              "directory",
+              "/tmp/helix/packages/tui"
+            ]
+          ],
+          "body": {
+            "reply": "always"
+          }
+        }
+      ],
+      "callbacks": []
+    },
+    {
+      "flow": "permission-reject",
+      "width": 120,
+      "height": 40,
+      "beforePassed": true,
+      "afterPassed": true,
+      "effectsEqual": true,
+      "callbacksEqual": true,
+      "effects": [
+        {
+          "method": "POST",
+          "path": "/permission/per_fixture/reply",
+          "query": [
+            [
+              "directory",
+              "/tmp/helix/packages/tui"
+            ]
+          ],
+          "body": {
+            "reply": "reject"
+          }
+        }
+      ],
+      "callbacks": []
+    },
+    {
+      "flow": "permission-reject",
+      "width": 60,
+      "height": 20,
+      "beforePassed": true,
+      "afterPassed": true,
+      "effectsEqual": true,
+      "callbacksEqual": true,
+      "effects": [
+        {
+          "method": "POST",
+          "path": "/permission/per_fixture/reply",
+          "query": [
+            [
+              "directory",
+              "/tmp/helix/packages/tui"
+            ]
+          ],
+          "body": {
+            "reply": "reject"
+          }
+        }
+      ],
+      "callbacks": []
+    },
+    {
+      "flow": "permission-mouse",
+      "width": 120,
+      "height": 40,
+      "beforePassed": true,
+      "afterPassed": true,
+      "effectsEqual": true,
+      "callbacksEqual": true,
+      "effects": [
+        {
+          "method": "POST",
+          "path": "/permission/per_fixture/reply",
+          "query": [
+            [
+              "directory",
+              "/tmp/helix/packages/tui"
+            ]
+          ],
+          "body": {
+            "reply": "once"
+          }
+        }
+      ],
+      "callbacks": []
+    },
+    {
+      "flow": "permission-mouse",
+      "width": 60,
+      "height": 20,
+      "beforePassed": true,
+      "afterPassed": true,
+      "effectsEqual": true,
+      "callbacksEqual": true,
+      "effects": [
+        {
+          "method": "POST",
+          "path": "/permission/per_fixture/reply",
+          "query": [
+            [
+              "directory",
+              "/tmp/helix/packages/tui"
+            ]
+          ],
+          "body": {
+            "reply": "once"
+          }
+        }
+      ],
+      "callbacks": []
+    },
+    {
+      "flow": "question-select",
+      "width": 120,
+      "height": 40,
+      "beforePassed": true,
+      "afterPassed": true,
+      "effectsEqual": true,
+      "callbacksEqual": true,
+      "effects": [
+        {
+          "method": "POST",
+          "path": "/question/q_fixture/reply",
+          "query": [
+            [
+              "directory",
+              "/tmp/helix/packages/tui"
+            ]
+          ],
+          "body": {
+            "answers": [
+              [
+                "GRCm38"
+              ]
+            ]
+          }
+        }
+      ],
+      "callbacks": []
+    },
+    {
+      "flow": "question-select",
+      "width": 60,
+      "height": 20,
+      "beforePassed": true,
+      "afterPassed": true,
+      "effectsEqual": true,
+      "callbacksEqual": true,
+      "effects": [
+        {
+          "method": "POST",
+          "path": "/question/q_fixture/reply",
+          "query": [
+            [
+              "directory",
+              "/tmp/helix/packages/tui"
+            ]
+          ],
+          "body": {
+            "answers": [
+              [
+                "GRCm38"
+              ]
+            ]
+          }
+        }
+      ],
+      "callbacks": []
+    },
+    {
+      "flow": "question-custom",
+      "width": 120,
+      "height": 40,
+      "beforePassed": true,
+      "afterPassed": true,
+      "effectsEqual": true,
+      "callbacksEqual": true,
+      "effects": [
+        {
+          "method": "POST",
+          "path": "/question/q_fixture/reply",
+          "query": [
+            [
+              "directory",
+              "/tmp/helix/packages/tui"
+            ]
+          ],
+          "body": {
+            "answers": [
+              [
+                "ref_α_日本語"
+              ]
+            ]
+          }
+        }
+      ],
+      "callbacks": []
+    },
+    {
+      "flow": "question-custom",
+      "width": 60,
+      "height": 20,
+      "beforePassed": true,
+      "afterPassed": true,
+      "effectsEqual": true,
+      "callbacksEqual": true,
+      "effects": [
+        {
+          "method": "POST",
+          "path": "/question/q_fixture/reply",
+          "query": [
+            [
+              "directory",
+              "/tmp/helix/packages/tui"
+            ]
+          ],
+          "body": {
+            "answers": [
+              [
+                "ref_α_日本語"
+              ]
+            ]
+          }
+        }
+      ],
+      "callbacks": []
+    },
+    {
+      "flow": "question-reject",
+      "width": 120,
+      "height": 40,
+      "beforePassed": true,
+      "afterPassed": true,
+      "effectsEqual": true,
+      "callbacksEqual": true,
+      "effects": [
+        {
+          "method": "POST",
+          "path": "/question/q_fixture/reject",
+          "query": [
+            [
+              "directory",
+              "/tmp/helix/packages/tui"
+            ]
+          ],
+          "body": null
+        }
+      ],
+      "callbacks": []
+    },
+    {
+      "flow": "question-reject",
+      "width": 60,
+      "height": 20,
+      "beforePassed": true,
+      "afterPassed": true,
+      "effectsEqual": true,
+      "callbacksEqual": true,
+      "effects": [
+        {
+          "method": "POST",
+          "path": "/question/q_fixture/reject",
+          "query": [
+            [
+              "directory",
+              "/tmp/helix/packages/tui"
+            ]
+          ],
+          "body": null
+        }
+      ],
+      "callbacks": []
+    },
+    {
+      "flow": "dialog-select",
+      "width": 120,
+      "height": 40,
+      "beforePassed": true,
+      "afterPassed": true,
+      "effectsEqual": true,
+      "callbacksEqual": true,
+      "effects": [],
+      "callbacks": [
+        {
+          "selected": "GRCm38"
+        }
+      ]
+    },
+    {
+      "flow": "dialog-select",
+      "width": 60,
+      "height": 20,
+      "beforePassed": true,
+      "afterPassed": true,
+      "effectsEqual": true,
+      "callbacksEqual": true,
+      "effects": [],
+      "callbacks": [
+        {
+          "selected": "GRCm38"
+        }
+      ]
+    },
+    {
+      "flow": "dialog-mouse",
+      "width": 120,
+      "height": 40,
+      "beforePassed": true,
+      "afterPassed": true,
+      "effectsEqual": true,
+      "callbacksEqual": true,
+      "effects": [],
+      "callbacks": [
+        {
+          "selected": "GRCm38"
+        }
+      ]
+    },
+    {
+      "flow": "dialog-mouse",
+      "width": 60,
+      "height": 20,
+      "beforePassed": true,
+      "afterPassed": true,
+      "effectsEqual": true,
+      "callbacksEqual": true,
+      "effects": [],
+      "callbacks": [
+        {
+          "selected": "GRCm38"
+        }
+      ]
+    },
+    {
+      "flow": "dialog-prompt",
+      "width": 120,
+      "height": 40,
+      "beforePassed": true,
+      "afterPassed": true,
+      "effectsEqual": true,
+      "callbacksEqual": true,
+      "effects": [],
+      "callbacks": [
+        {
+          "value": "RNA-seq α"
+        }
+      ]
+    },
+    {
+      "flow": "dialog-prompt",
+      "width": 60,
+      "height": 20,
+      "beforePassed": true,
+      "afterPassed": true,
+      "effectsEqual": true,
+      "callbacksEqual": true,
+      "effects": [],
+      "callbacks": [
+        {
+          "value": "RNA-seq α"
+        }
+      ]
+    },
+    {
+      "flow": "prompt-unicode",
+      "width": 120,
+      "height": 40,
+      "beforePassed": true,
+      "afterPassed": true,
+      "effectsEqual": true,
+      "callbacksEqual": true,
+      "effects": [
+        {
+          "method": "POST",
+          "path": "/session/ses_fixture_molecular/message",
+          "query": [],
+          "body": {
+            "agent": "build",
+            "model": {
+              "providerID": "fixture",
+              "modelID": "fixture-model"
+            },
+            "parts": [
+              {
+                "type": "text",
+                "text": "Inspect α 日本語 é 🧬 ./data"
+              }
+            ]
+          }
+        }
+      ],
+      "callbacks": []
+    },
+    {
+      "flow": "prompt-unicode",
+      "width": 60,
+      "height": 20,
+      "beforePassed": true,
+      "afterPassed": true,
+      "effectsEqual": true,
+      "callbacksEqual": true,
+      "effects": [
+        {
+          "method": "POST",
+          "path": "/session/ses_fixture_molecular/message",
+          "query": [],
+          "body": {
+            "agent": "build",
+            "model": {
+              "providerID": "fixture",
+              "modelID": "fixture-model"
+            },
+            "parts": [
+              {
+                "type": "text",
+                "text": "Inspect α 日本語 é 🧬 ./data"
+              }
+            ]
+          }
+        }
+      ],
+      "callbacks": []
+    },
+    {
+      "flow": "prompt-paste",
+      "width": 120,
+      "height": 40,
+      "beforePassed": true,
+      "afterPassed": true,
+      "effectsEqual": true,
+      "callbacksEqual": true,
+      "effects": [
+        {
+          "method": "POST",
+          "path": "/session/ses_fixture_molecular/message",
+          "query": [],
+          "body": {
+            "agent": "build",
+            "model": {
+              "providerID": "fixture",
+              "modelID": "fixture-model"
+            },
+            "parts": [
+              {
+                "type": "text",
+                "text": "Inspect α 日本語 é 🧬 ./data"
+              }
+            ]
+          }
+        }
+      ],
+      "callbacks": []
+    },
+    {
+      "flow": "prompt-paste",
+      "width": 60,
+      "height": 20,
+      "beforePassed": true,
+      "afterPassed": true,
+      "effectsEqual": true,
+      "callbacksEqual": true,
+      "effects": [
+        {
+          "method": "POST",
+          "path": "/session/ses_fixture_molecular/message",
+          "query": [],
+          "body": {
+            "agent": "build",
+            "model": {
+              "providerID": "fixture",
+              "modelID": "fixture-model"
+            },
+            "parts": [
+              {
+                "type": "text",
+                "text": "Inspect α 日本語 é 🧬 ./data"
+              }
+            ]
+          }
+        }
+      ],
+      "callbacks": []
+    },
+    {
+      "flow": "prompt-ime-flush",
+      "width": 120,
+      "height": 40,
+      "beforePassed": true,
+      "afterPassed": true,
+      "effectsEqual": true,
+      "callbacksEqual": true,
+      "effects": [
+        {
+          "method": "POST",
+          "path": "/session/ses_fixture_molecular/message",
+          "query": [],
+          "body": {
+            "agent": "build",
+            "model": {
+              "providerID": "fixture",
+              "modelID": "fixture-model"
+            },
+            "parts": [
+              {
+                "type": "text",
+                "text": "Inspect 한글"
+              }
+            ]
+          }
+        }
+      ],
+      "callbacks": [
+        {
+          "lateFlush": "글"
+        }
+      ]
+    },
+    {
+      "flow": "prompt-ime-flush",
+      "width": 60,
+      "height": 20,
+      "beforePassed": true,
+      "afterPassed": true,
+      "effectsEqual": true,
+      "callbacksEqual": true,
+      "effects": [
+        {
+          "method": "POST",
+          "path": "/session/ses_fixture_molecular/message",
+          "query": [],
+          "body": {
+            "agent": "build",
+            "model": {
+              "providerID": "fixture",
+              "modelID": "fixture-model"
+            },
+            "parts": [
+              {
+                "type": "text",
+                "text": "Inspect 한글"
+              }
+            ]
+          }
+        }
+      ],
+      "callbacks": [
+        {
+          "lateFlush": "글"
+        }
+      ]
+    },
+    {
+      "flow": "copy-selection",
+      "width": 120,
+      "height": 40,
+      "beforePassed": true,
+      "afterPassed": true,
+      "effectsEqual": true,
+      "callbacksEqual": true,
+      "effects": [],
+      "callbacks": [
+        {
+          "clipboard": "liver_01"
+        }
+      ]
+    },
+    {
+      "flow": "copy-selection",
+      "width": 60,
+      "height": 20,
+      "beforePassed": true,
+      "afterPassed": true,
+      "effectsEqual": true,
+      "callbacksEqual": true,
+      "effects": [],
+      "callbacks": [
+        {
+          "clipboard": "liver_01"
+        }
+      ]
+    },
+    {
+      "flow": "interrupt",
+      "width": 120,
+      "height": 40,
+      "beforePassed": true,
+      "afterPassed": true,
+      "effectsEqual": true,
+      "callbacksEqual": true,
+      "effects": [
+        {
+          "method": "POST",
+          "path": "/session/ses_fixture_molecular/abort",
+          "query": [],
+          "body": null
+        }
+      ],
+      "callbacks": []
+    },
+    {
+      "flow": "interrupt",
+      "width": 60,
+      "height": 20,
+      "beforePassed": true,
+      "afterPassed": true,
+      "effectsEqual": true,
+      "callbacksEqual": true,
+      "effects": [
+        {
+          "method": "POST",
+          "path": "/session/ses_fixture_molecular/abort",
+          "query": [],
+          "body": null
+        }
+      ],
+      "callbacks": []
+    }
+  ]
+}

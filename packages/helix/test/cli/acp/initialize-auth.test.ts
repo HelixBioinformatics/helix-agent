@@ -21,7 +21,7 @@ describe("helix acp initialize/auth subprocess", () => {
         expect(initialized.agentCapabilities?.sessionCapabilities?.fork).toEqual({})
         expect(initialized.agentCapabilities?.sessionCapabilities?.list).toEqual({})
         expect(initialized.agentCapabilities?.sessionCapabilities?.resume).toEqual({})
-        expect(initialized.agentInfo?.name).toBe("Helix")
+        expect(initialized.agentInfo?.name).toBe("Helix Agent")
       }),
     60_000,
   )

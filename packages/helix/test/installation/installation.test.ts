@@ -9,8 +9,11 @@ import { Installation } from "../../src/installation"
 import { InstallationVersion } from "@helix/core/installation/version"
 import { CrossSpawnSpawner } from "@helix/core/cross-spawn-spawner"
 import { testEffect } from "../lib/effect"
+import os from "os"
+import path from "path"
 
 const encoder = new TextEncoder()
+const installedBinary = path.join(os.homedir(), ".helix", "bin", "helix")
 
 function mockHttpClient(handler: (request: HttpClientRequest.HttpClientRequest) => Response) {
   const client = HttpClient.make((request) => Effect.succeed(HttpClientResponse.fromWeb(request, handler(request))))
@@ -118,15 +121,17 @@ testEffect(
     },
     (cmd, args) => {
       launches.push({ cmd, args })
-      return cmd.endsWith("/helix") ? "0.3.1\n" : ""
+      return cmd === installedBinary ? "0.3.1\n" : ""
     },
   ),
 ).effect("pins installer to release tag, selects version explicitly and verifies installed binary", () =>
   Effect.gen(function* () {
     yield* Installation.use.upgrade("curl", "v0.3.1")
-    expect(installerRequests).toEqual(["https://raw.githubusercontent.com/HelixBioinformatics/helix-agent/v0.3.1/install"])
+    expect(installerRequests).toEqual([
+      "https://raw.githubusercontent.com/HelixBioinformatics/helix-agent/v0.3.1/install",
+    ])
     expect(launches[0]).toEqual({ cmd: "bash", args: ["-s", "--", "--version", "0.3.1", "--no-modify-path"] })
-    expect(launches[1].cmd).toEndWith("/.helix/bin/helix")
+    expect(launches[1].cmd).toBe(installedBinary)
   }),
 )
 
@@ -158,7 +163,7 @@ testEffect(
 testEffect(
   testLayer(
     () => new Response("#!/usr/bin/env bash\nexit 0\n"),
-    (cmd) => (cmd.endsWith("/helix") ? "0.2.0\n" : ""),
+    (cmd) => (cmd === installedBinary ? "0.2.0\n" : ""),
   ),
 ).effect("fails if installer exits zero but replacement version is wrong", () =>
   Effect.gen(function* () {
@@ -168,8 +173,9 @@ testEffect(
 )
 
 test("installation detection never mistakes a package-manager or source executable for official Helix", () => {
-  expect(Installation.detectMethod("/home/test/.helix/bin/helix", "/home/test")).toBe("curl")
-  expect(Installation.detectMethod("/home/test/.local/bin/helix", "/home/test")).toBe("unknown")
-  expect(Installation.detectMethod("/home/test/.bun/bin/bun", "/home/test")).toBe("unknown")
+  const home = path.resolve(os.tmpdir(), "helix-installation-home")
+  expect(Installation.detectMethod(path.join(home, ".helix", "bin", "helix"), home)).toBe("curl")
+  expect(Installation.detectMethod(path.join(home, ".local", "bin", "helix"), home)).toBe("unknown")
+  expect(Installation.detectMethod(path.join(home, ".bun", "bin", "bun"), home)).toBe("unknown")
   expect(Installation.automaticUpdatesEnabled).toBe(false)
 })

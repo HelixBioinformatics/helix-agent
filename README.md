@@ -135,6 +135,11 @@ bun dev -- --help              # el CLI desde las fuentes
 bun dev -- /ruta/al/proyecto   # la TUI interactiva en ese directorio
 ```
 
+CI ejecuta la suite completa del agente y los contratos científicos en Linux.
+En Windows nativo valida la TUI, las bibliotecas compartidas y pruebas de
+portabilidad de instalación, Handcount y acceso a archivos. Esto corresponde al
+soporte documentado: el agente completo se ejecuta en WSL.
+
 ## Primeros pasos
 
 Sitúate en el directorio del análisis y arranca la interfaz interactiva:

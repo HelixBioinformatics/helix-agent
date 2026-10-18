@@ -1,16 +1,16 @@
 import { describe, expect, test } from "bun:test"
 import { HandCount } from "../../src/nfcore/handcount"
-import { Effect } from "effect"
+import { Effect, Layer, PlatformError } from "effect"
 import { LayerNode } from "@helix/core/effect/layer-node"
+import { FSUtil } from "@helix/core/fs-util"
 import { HandCount as HandCountNs } from "@/nfcore/handcount"
 import { TestInstance } from "../fixture/fixture"
 import { testEffect } from "../lib/effect"
-import fsNode from "fs/promises"
+import os from "os"
 import path from "path"
 
 const svcEnv = LayerNode.compile(LayerNode.group([HandCountNs.node]))
 const itSvc = testEffect(svcEnv)
-
 
 // Hand-labelled turns. These are the ground truth for the classifier: the labels were
 // assigned by reading each turn, not by running the classifier and writing down what it
@@ -25,7 +25,10 @@ const LABELLED: readonly { text: string; expected: HandCount.Class }[] = [
   // --- factual-correction ---
   { text: "That's wrong — nf-core/rnaseq 3.14.0 came out in 2024, not 2022.", expected: "factual-correction" },
   { text: "There is no such pipeline as nf-core/repeatfinder; you made that up.", expected: "factual-correction" },
-  { text: "You misremembered the paper: Kajava 2012 is a review, not a database release.", expected: "factual-correction" },
+  {
+    text: "You misremembered the paper: Kajava 2012 is a review, not a database release.",
+    expected: "factual-correction",
+  },
   { text: "The correct accession is P02751, not P02749.", expected: "factual-correction" },
   { text: "Incorrect. RepeatsDB does not annotate predicted models.", expected: "factual-correction" },
   { text: "I don't think that's right — salmon does not need a GTF to quantify.", expected: "factual-correction" },
@@ -251,7 +254,7 @@ describe("nfcore.handcount methods paragraph", () => {
   })
 
   test("points at the per-turn ledger", () => {
-    expect(HandCount.methods(t)).toContain(".helix/handcount.json")
+    expect(HandCount.methods(t)).toContain(path.join(".helix", "handcount.json"))
     expect(HandCount.methods(t, { ledger: "audit/handcount.json" })).toContain("audit/handcount.json")
   })
 
@@ -266,7 +269,11 @@ describe("nfcore.handcount methods paragraph", () => {
   test("optional context is stated when given and omitted when not", () => {
     const bare = HandCount.methods(t)
     expect(bare).not.toContain("taken from")
-    const rich = HandCount.methods(t, { agent: "Helix 0.1.0", objective: "Find uncatalogued repeat proteins.", source: "session ses_7f2a" })
+    const rich = HandCount.methods(t, {
+      agent: "Helix 0.1.0",
+      objective: "Find uncatalogued repeat proteins.",
+      source: "session ses_7f2a",
+    })
     expect(rich).toContain("Helix 0.1.0")
     expect(rich).toContain("Find uncatalogued repeat proteins")
     expect(rich).toContain("taken from session ses_7f2a")
@@ -345,11 +352,11 @@ describe("nfcore.handcount ledger record", () => {
   })
 
   test("the ledger is project-local and keyed on the directory", () => {
-    expect(HandCount.file("/work/proj")).toBe("/work/proj/.helix/handcount.json")
-    expect(HandCount.file("/work/a")).not.toBe(HandCount.file("/work/b"))
+    const root = path.resolve(os.tmpdir(), "helix-handcount-projects")
+    expect(HandCount.file(path.join(root, "proj"))).toBe(path.join(root, "proj", ".helix", "handcount.json"))
+    expect(HandCount.file(path.join(root, "a"))).not.toBe(HandCount.file(path.join(root, "b")))
   })
 })
-
 
 // B4 from the review: the pure layer was well covered, the PERSISTENCE layer was not —
 // so `.helix/handcount.json` had never been written by a test, and the ReadResult union
@@ -373,27 +380,55 @@ describe("nfcore.handcount persistence", () => {
     }),
   )
 
-  itSvc.instance("a ledger that exists but cannot be stat'd is NOT reported as missing", () =>
+  itSvc.instance("an existing ledger with a permission failure is NOT reported as missing", () =>
     Effect.gen(function* () {
       const instance = yield* TestInstance
       const svc = yield* HandCountNs.Service
       yield* svc.count({ turns: ["go ahead"] })
+      expect((yield* svc.read()).status).toBe("ok")
 
       // The bug this guards against is specific: FSUtil.existsSafe turns ANY stat failure
       // into `false`, so a pre-check would report `missing` — which readers take as "no
       // interventions were recorded" — for a ledger that is merely unreachable.
       //
-      // Corrupting the file's CONTENT does not exercise it: the file still stats fine and
-      // the JSON parse fails either way. What does exercise it is making the PARENT
-      // directory non-searchable, so stat itself fails while the file is still there.
-      const dir = path.join(instance.directory, ".helix")
-      yield* Effect.promise(() => fsNode.chmod(dir, 0o000))
-      const result = yield* (yield* HandCountNs.Service)
+      // Inject the permission failure rather than relying on Unix directory permissions,
+      // which Windows does not enforce and privileged Unix users can bypass.
+      const ledger = HandCount.file(instance.directory)
+      const reads: string[] = []
+      const deniedFilesystem = Layer.effect(
+        FSUtil.Service,
+        Effect.gen(function* () {
+          const fs = yield* FSUtil.Service
+          return FSUtil.Service.of({
+            ...fs,
+            existsSafe: (file) => (file === ledger ? Effect.succeed(false) : fs.existsSafe(file)),
+            readJson: (file) => {
+              if (file !== ledger) return fs.readJson(file)
+              reads.push(file)
+              return Effect.fail(
+                PlatformError.systemError({
+                  _tag: "PermissionDenied",
+                  module: "FileSystem",
+                  method: "readFileString",
+                  pathOrDescriptor: file,
+                  description: "EACCES: permission denied",
+                }),
+              )
+            },
+          })
+        }),
+      ).pipe(Layer.provide(LayerNode.compile(FSUtil.node)))
+      const result = yield* HandCountNs.use
         .read()
-        .pipe(Effect.ensuring(Effect.promise(() => fsNode.chmod(dir, 0o755))))
+        .pipe(Effect.provide(Layer.fresh(LayerNode.compile(HandCountNs.node, [[FSUtil.node, deniedFilesystem]]))))
 
       expect(result.status).not.toBe("missing")
       expect(result.status).toBe("unreadable")
+      expect(reads).toEqual([ledger])
+      if (result.status === "unreadable") {
+        expect(result.path).toBe(ledger)
+        expect(result.reason).toContain("EACCES")
+      }
     }),
   )
 })

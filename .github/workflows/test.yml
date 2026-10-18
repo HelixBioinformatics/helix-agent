@@ -31,9 +31,11 @@ jobs:
       run:
         shell: bash
     steps:
-      - name: Enable long paths on Windows
+      - name: Configure Git on Windows
         if: runner.os == 'Windows'
-        run: git config --global core.longpaths true
+        run: |
+          git config --global core.longpaths true
+          git config --global core.autocrlf false
 
       - name: Checkout repository
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
@@ -68,13 +70,9 @@ jobs:
           bun -e 'const rg = Bun.which("rg.exe"); if (!rg) throw new Error("ripgrep missing from test PATH"); console.log(rg); const result = Bun.spawnSync([rg, "--version"]); console.log(result.stdout.toString()); process.exit(result.exitCode)'
 
       - name: Prepare structural test dependencies
+        if: runner.os != 'Windows'
         run: |
-          if [ "$RUNNER_OS" = "Windows" ]; then
-            trp_python=python
-          else
-            trp_python=python3
-          fi
-          "$trp_python" - <<'PY'
+          python3 - <<'PY'
           import os
           from pathlib import Path
           import subprocess
@@ -105,6 +103,21 @@ jobs:
 
       - name: Run unit tests
         timeout-minutes: 20
-        run: GITHUB_ACTIONS=false bun turbo test --continue=dependencies-successful --log-order=stream
+        # The Windows installer runs the complete agent inside WSL (see README).
+        # Keep the scientific/agent suite on Linux and validate portable packages natively.
+        run: |
+          if [ "$RUNNER_OS" = "Windows" ]; then
+            GITHUB_ACTIONS=false bun turbo test --filter=@helix/core --filter=@helix/tui --filter=@helix/ui --continue=dependencies-successful --log-order=stream
+          else
+            GITHUB_ACTIONS=false bun turbo test --continue=dependencies-successful --log-order=stream
+          fi
         env:
           HELIX_EXPERIMENTAL_DISABLE_FILEWATCHER: ${{ runner.os == 'Windows' && 'true' || 'false' }}
+
+      - name: Run Windows portability tests
+        if: runner.os == 'Windows'
+        working-directory: packages/helix
+        timeout-minutes: 5
+        run: GITHUB_ACTIONS=false bun test --timeout 30000 --only-failures test/installation/installation.test.ts test/nfcore/handcount.test.ts test/tool/external-directory.test.ts test/tool/read.test.ts
+        env:
+          HELIX_EXPERIMENTAL_DISABLE_FILEWATCHER: "true"
